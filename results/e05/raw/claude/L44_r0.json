@@ -1,0 +1,301 @@
+{
+ "raw": "{\"items\": [{\"category\": \"domain_extent\", \"entity\": \"design domain physical size Lx \\u00d7 Ly\", \"issue\": \"missing\", \"description\": \"Eq. 1 makes the physical sizes Lx and Ly part of the problem spec. Sec. 5.1/Table 3 and Sec. 4.1 never give them for cantilever_basic; only a 60\\u00d730 mesh is implied. Other problems hint at a unit-height domain (L-bracket '2\\u00d72' on 60\\u00d760, 3-D demo '2\\u00d71\\u00d70.5'). The sample spec is only in Fig. 2, which is not visible. With square elements, a point load and r_min in element widths, the absolute size does not change the 2-D result.\", \"readings\": [\"Lx \\u00d7 Ly = 2 \\u00d7 1 (square elements, h = 1/30)\", \"Lx \\u00d7 Ly = 60 \\u00d7 30 (unit-size elements)\", \"Lx \\u00d7 Ly = 1 \\u00d7 0.5\"], \"effect\": \"scale_only\"}, {\"category\": \"mesh\", \"entity\": \"mesh resolution of cantilever_basic\", \"issue\": \"missing\", \"description\": \"Sec. 5.1/Table 3 give no mesh for cantilever_basic. 60\\u00d730 is only inferred from the configurator default (Alg. 2) and from GT C = 63.69 matching Table 5's cantilever_60\\u00d730 LLM value. Sec. 4.1 promises 'three mesh resolutions (60\\u00d730, 120\\u00d740)' but lists only two. cantilever_shear is also 60\\u00d730 (C = 63.60). The element type (Q4 assumed) is not stated.\", \"readings\": [\"60 \\u00d7 30 elements\", \"120 \\u00d7 40 elements\"], \"effect\": \"layout\"}, {\"category\": \"volume_fraction\", \"entity\": \"target volume fraction of cantilever_basic\", \"issue\": \"missing\", \"description\": \"No V_f is stated for cantilever_basic. The default in Alg. 2 is 0.5, and the cantilever example prompt (Sec. 1.3/4.1) says '50% material'. The standard-cantilever variants use 0.3/0.4/0.6 (Sec. 4.1, Table 5), and their compliances bracket 63.69. The 3-D cantilever uses 0.4.\", \"readings\": [\"0.5\", \"0.4\"], \"effect\": \"layout\"}, {\"category\": \"load_position\", \"entity\": \"tip load on the right (free) edge\", \"issue\": \"vague\", \"description\": \"Alg. 2 only says 'cantilever -> left edge fixed + tip load'. A mid-right load (F_y at node (nelx, nely/2)) is stated only for the cantilever-with-hole example in Sec. 1.3/4.1. Classic cantilever codes put the tip load at a corner.\", \"readings\": [\"right edge at mid-height: x = Lx, y = 0.5\\u00b7Ly (node (60,15))\", \"bottom-right corner: x = Lx, y = 0\", \"top-right corner: x = Lx, y = Ly\"], \"effect\": \"layout\"}, {\"category\": \"load_extent_distribution\", \"entity\": \"tip load\", \"issue\": \"vague\", \"description\": \"The text does not say whether cantilever_basic uses a single-node point load (nearest node, Eq. 2) or a load spread over the tip face (edge load with trapezoidal weights, Eq. 3). Table 5 also has an undefined 'cantilever_shear (60\\u00d730)' variant with almost the same compliance (63.60).\", \"readings\": [\"concentrated force on a single node\", \"uniform shear traction over the full right edge (trapezoidal nodal weights)\"], \"effect\": \"layout\"}, {\"category\": \"load_direction\", \"entity\": \"tip load direction\", \"issue\": \"missing\", \"description\": \"No load direction is given for cantilever_basic. 'Downward' / F_y = -1 appears only in the hole example (Sec. 1.3, 4.1). An upward load gives a mirrored layout with the same compliance.\", \"readings\": [\"-y (downward)\", \"+y (upward)\"], \"effect\": \"layout\"}, {\"category\": \"load_magnitude\", \"entity\": \"tip load magnitude\", \"issue\": \"missing\", \"description\": \"No load magnitude is given for cantilever_basic. Only the code-style example 'F_y = -1' in Sec. 4.1 hints at a unit load. Compliance scales with F^2.\", \"readings\": [\"|F| = 1\", \"|F| = 1000 (physical units, e.g. N)\"], \"effect\": \"scale_only\"}, {\"category\": \"material\", \"entity\": \"Young's modulus E0\", \"issue\": \"missing\", \"description\": \"Sec. 1.3 lists 'material' as part of the problem spec, but no modulus is given anywhere. Eq. 1 and the Sec. 4.4 list of 6 fields also leave material out. Compliance scales with 1/E0.\", \"readings\": [\"E0 = 1 (normalized)\", \"E0 = 210 GPa (steel)\"], \"effect\": \"scale_only\"}, {\"category\": \"material\", \"entity\": \"Poisson's ratio\", \"issue\": \"missing\", \"description\": \"Poisson's ratio is not given anywhere in the text.\", \"readings\": [\"0.3\", \"0.25\", \"1/3\"], \"effect\": \"layout\"}, {\"category\": \"material\", \"entity\": \"2-D stress state, thickness and element formulation\", \"issue\": \"missing\", \"description\": \"Plane stress vs. plane strain, out-of-plane thickness and the element formulation are not stated (Sec. 3.3 only gives K(\\u03c1\\u0303)U = F). Thickness only scales compliance; plane strain changes the effective Poisson's ratio.\", \"readings\": [\"plane stress, unit thickness\", \"plane strain, unit thickness\"], \"effect\": \"layout\"}, {\"category\": \"material\", \"entity\": \"SIMP interpolation and void stiffness\", \"issue\": \"vague\", \"description\": \"Sec. 3.3 only says stiffness 'follows the SIMP interpolation [1]' with \\u03c1 in [\\u03c1_min, 1]. \\u03c1_min = 1e-3 is stated only for frozen void elements (Sec. 3.2). It is not said whether classic or modified SIMP is used, or what Emin is. After projection, \\u03c1\\u0303 can drop below 1e-3.\", \"readings\": [\"E = \\u03c1\\u0303^p\\u00b7E0 with design variables bounded below by 1e-3\", \"E = Emin + \\u03c1\\u0303^p(E0 - Emin), Emin = 1e-9\\u00b7E0\", \"E = Emin + \\u03c1\\u0303^p(E0 - Emin), Emin = 1e-3\\u00b7E0\"], \"effect\": \"unsure\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"continuation controller used for the Table 3 runs\", \"issue\": \"conflicting\", \"description\": \"The Table 3 caption and Sec. 4.4 say both the GT and LLM-configured solves used the LLM agent controller (300 iterations), and 63.69 matches Table 5's LLM column. The Fig. 5 caption says both were solved with the schedule controller at 300 iterations; Table 5 gives the schedule controller 64.46 for this problem.\", \"readings\": [\"LLM agent controller (gemini-3.1-flash-lite-preview, Direct Numeric Control interface)\", \"deterministic schedule controller\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"penalization p and Heaviside \\u03b2 schedule before the tail (incl. starting values)\", \"issue\": \"missing\", \"description\": \"Only the shared 40-iteration tail is specified (p = 4.5, \\u03b2 = 32, r_min = 1.2, \\u03b4 = 0.05). Starting values and the earlier path are set by the LLM every k iterations; k, the prompt, the grayness gate and any restarts are not reported, and results depend on the API. The schedule controller's 'pre-computed values' (Sec. 4.2) are never listed.\", \"readings\": [\"re-run the LLM agent (gemini-3.1-flash-lite-preview, T = 0, control prompt of [20]); exact path not reproducible\", \"four-phase schedule with assumed values, e.g. p 1 -> 3 -> 4.5, \\u03b2 1 -> 32 by doubling\", \"three-field baseline: p linear 1 -> 4.5 over 30 iterations, \\u03b2 doubled every 10 iterations from 1\", \"constant p = 3, \\u03b2 = 1 until the tail\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"density-filter radius r_min before the tail, and its unit\", \"issue\": \"missing\", \"description\": \"r_min is given only for the tail (1.20). Its unit is not stated, but it only makes sense in element widths. The starting value and its controller-driven or 'late tightening' path (Sec. 4.2) are not given.\", \"readings\": [\"1.5 element widths, reduced to 1.2 in the tail\", \"2.4 element widths (0.04\\u00b7nelx), reduced to 1.2 in the tail\", \"1.2 element widths throughout\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"density-filter weights w_ej\", \"issue\": \"vague\", \"description\": \"Eq. 5 only says the w_ej are filter weights 'within radius r_min'. The kernel shape and edge handling are not stated. With a hat kernel and r_min = 1.2, only the 4 edge neighbours contribute.\", \"readings\": [\"linear hat w = max(0, r_min - d)\", \"uniform weights for d < r_min\", \"Gaussian weights truncated at r_min\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Heaviside projection H_\\u03b2 and threshold\", \"issue\": \"missing\", \"description\": \"The projection is only cited to Wang et al. [3] (Sec. 3.3). Neither the formula nor the threshold \\u03b7 is given.\", \"readings\": [\"tanh projection with \\u03b7 = 0.5\", \"Guest smooth Heaviside 1 - exp(-\\u03b2\\u03c1\\u0304) + \\u03c1\\u0304\\u00b7exp(-\\u03b2)\", \"tanh projection with volume-preserving adaptive \\u03b7\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"OC update (move limit before tail, damping exponent, bisection)\", \"issue\": \"missing\", \"description\": \"Only \\u03b4 = 0.05 for the tail is given. The earlier move limit (set by the controller), the OC damping exponent and the bisection bounds/tolerance (Sec. 3.3) are not stated.\", \"readings\": [\"\\u03b4 = 0.2, damping exponent 0.5\", \"\\u03b4 = 0.1, damping exponent 0.5\", \"\\u03b4 varied by the controller between 0.05 and 0.2\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"iteration budget and tail placement\", \"issue\": \"conflicting\", \"description\": \"Table 3 says '300 iterations'. Sec. 5.2 describes a '300-iteration exploration phase' followed by the 40-iteration tail (340 in total). The Fig. 7 caption instead puts exploration at iterations 0-120, and Sec. 5.2 says controllers are already similar by iteration 150. It is unclear whether the tail is inside the 300 or whether an early exit can shorten the main loop.\", \"readings\": [\"300 main-loop + 40 tail = 340 iterations\", \"300 total (260 main-loop + 40 tail)\", \"main loop exits early (~120-150 iterations) on convergence, then 40 tail iterations\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"solver stopping / early-exit criterion\", \"issue\": \"missing\", \"description\": \"Sec. 4.3 mentions 'early exit, compliance stability (relative range < 0.005), or functional convergence' only as a pass/fail check in the evaluator. The solver's own stopping tolerance and averaging window are not specified.\", \"readings\": [\"no early exit; run the full budget\", \"stop when max |\\u0394\\u03c1| < 0.01\", \"stop when relative compliance range over the last 10 iterations < 0.005\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"best-valid snapshot used to restart the tail\", \"issue\": \"vague\", \"description\": \"Sec. 3.3/Eq. 6: the tail restarts from the 'best' saved design with p >= 3.0 and the volume constraint met. Three things are not specified: what 'best' means, the volume tolerance, and whether the design variables are set to \\u03c1\\u0303* (as Eq. 6 literally says) or to the stored \\u03c1.\", \"readings\": [\"lowest-compliance valid iterate; set design variables \\u03c1 = \\u03c1\\u0303*\", \"lowest-compliance valid iterate; restore its own design variables \\u03c1\", \"last iterate that satisfies the gate\"], \"effect\": \"layout\"}, {\"category\": \"other\", \"entity\": \"reported compliance value (63.69)\", \"issue\": \"vague\", \"description\": \"Table 3 does not say whether C is the final or the best value of the run. It also does not say whether C is computed with the tail p = 4.5 on the projected field or on a thresholded design, or whether the Table 3 solves were single runs or ran inside the retry loop (R = 2, N <- 1.3N).\", \"readings\": [\"final-iterate C = F^T U with p = 4.5 on projected \\u03c1\\u0303, single run\", \"best C over the run (C_best)\", \"C of the design thresholded at 0.5\"], \"effect\": \"unsure\"}]}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "design domain physical size Lx \u00d7 Ly",
+    "issue": "missing",
+    "description": "Eq. 1 makes the physical sizes Lx and Ly part of the problem spec. Sec. 5.1/Table 3 and Sec. 4.1 never give them for cantilever_basic; only a 60\u00d730 mesh is implied. Other problems hint at a unit-height domain (L-bracket '2\u00d72' on 60\u00d760, 3-D demo '2\u00d71\u00d70.5'). The sample spec is only in Fig. 2, which is not visible. With square elements, a point load and r_min in element widths, the absolute size does not change the 2-D result.",
+    "readings": [
+     "Lx \u00d7 Ly = 2 \u00d7 1 (square elements, h = 1/30)",
+     "Lx \u00d7 Ly = 60 \u00d7 30 (unit-size elements)",
+     "Lx \u00d7 Ly = 1 \u00d7 0.5"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "mesh",
+    "entity": "mesh resolution of cantilever_basic",
+    "issue": "missing",
+    "description": "Sec. 5.1/Table 3 give no mesh for cantilever_basic. 60\u00d730 is only inferred from the configurator default (Alg. 2) and from GT C = 63.69 matching Table 5's cantilever_60\u00d730 LLM value. Sec. 4.1 promises 'three mesh resolutions (60\u00d730, 120\u00d740)' but lists only two. cantilever_shear is also 60\u00d730 (C = 63.60). The element type (Q4 assumed) is not stated.",
+    "readings": [
+     "60 \u00d7 30 elements",
+     "120 \u00d7 40 elements"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "target volume fraction of cantilever_basic",
+    "issue": "missing",
+    "description": "No V_f is stated for cantilever_basic. The default in Alg. 2 is 0.5, and the cantilever example prompt (Sec. 1.3/4.1) says '50% material'. The standard-cantilever variants use 0.3/0.4/0.6 (Sec. 4.1, Table 5), and their compliances bracket 63.69. The 3-D cantilever uses 0.4.",
+    "readings": [
+     "0.5",
+     "0.4"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "tip load on the right (free) edge",
+    "issue": "vague",
+    "description": "Alg. 2 only says 'cantilever -> left edge fixed + tip load'. A mid-right load (F_y at node (nelx, nely/2)) is stated only for the cantilever-with-hole example in Sec. 1.3/4.1. Classic cantilever codes put the tip load at a corner.",
+    "readings": [
+     "right edge at mid-height: x = Lx, y = 0.5\u00b7Ly (node (60,15))",
+     "bottom-right corner: x = Lx, y = 0",
+     "top-right corner: x = Lx, y = Ly"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "tip load",
+    "issue": "vague",
+    "description": "The text does not say whether cantilever_basic uses a single-node point load (nearest node, Eq. 2) or a load spread over the tip face (edge load with trapezoidal weights, Eq. 3). Table 5 also has an undefined 'cantilever_shear (60\u00d730)' variant with almost the same compliance (63.60).",
+    "readings": [
+     "concentrated force on a single node",
+     "uniform shear traction over the full right edge (trapezoidal nodal weights)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "tip load direction",
+    "issue": "missing",
+    "description": "No load direction is given for cantilever_basic. 'Downward' / F_y = -1 appears only in the hole example (Sec. 1.3, 4.1). An upward load gives a mirrored layout with the same compliance.",
+    "readings": [
+     "-y (downward)",
+     "+y (upward)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "tip load magnitude",
+    "issue": "missing",
+    "description": "No load magnitude is given for cantilever_basic. Only the code-style example 'F_y = -1' in Sec. 4.1 hints at a unit load. Compliance scales with F^2.",
+    "readings": [
+     "|F| = 1",
+     "|F| = 1000 (physical units, e.g. N)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Young's modulus E0",
+    "issue": "missing",
+    "description": "Sec. 1.3 lists 'material' as part of the problem spec, but no modulus is given anywhere. Eq. 1 and the Sec. 4.4 list of 6 fields also leave material out. Compliance scales with 1/E0.",
+    "readings": [
+     "E0 = 1 (normalized)",
+     "E0 = 210 GPa (steel)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson's ratio",
+    "issue": "missing",
+    "description": "Poisson's ratio is not given anywhere in the text.",
+    "readings": [
+     "0.3",
+     "0.25",
+     "1/3"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "2-D stress state, thickness and element formulation",
+    "issue": "missing",
+    "description": "Plane stress vs. plane strain, out-of-plane thickness and the element formulation are not stated (Sec. 3.3 only gives K(\u03c1\u0303)U = F). Thickness only scales compliance; plane strain changes the effective Poisson's ratio.",
+    "readings": [
+     "plane stress, unit thickness",
+     "plane strain, unit thickness"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "SIMP interpolation and void stiffness",
+    "issue": "vague",
+    "description": "Sec. 3.3 only says stiffness 'follows the SIMP interpolation [1]' with \u03c1 in [\u03c1_min, 1]. \u03c1_min = 1e-3 is stated only for frozen void elements (Sec. 3.2). It is not said whether classic or modified SIMP is used, or what Emin is. After projection, \u03c1\u0303 can drop below 1e-3.",
+    "readings": [
+     "E = \u03c1\u0303^p\u00b7E0 with design variables bounded below by 1e-3",
+     "E = Emin + \u03c1\u0303^p(E0 - Emin), Emin = 1e-9\u00b7E0",
+     "E = Emin + \u03c1\u0303^p(E0 - Emin), Emin = 1e-3\u00b7E0"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "continuation controller used for the Table 3 runs",
+    "issue": "conflicting",
+    "description": "The Table 3 caption and Sec. 4.4 say both the GT and LLM-configured solves used the LLM agent controller (300 iterations), and 63.69 matches Table 5's LLM column. The Fig. 5 caption says both were solved with the schedule controller at 300 iterations; Table 5 gives the schedule controller 64.46 for this problem.",
+    "readings": [
+     "LLM agent controller (gemini-3.1-flash-lite-preview, Direct Numeric Control interface)",
+     "deterministic schedule controller"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "penalization p and Heaviside \u03b2 schedule before the tail (incl. starting values)",
+    "issue": "missing",
+    "description": "Only the shared 40-iteration tail is specified (p = 4.5, \u03b2 = 32, r_min = 1.2, \u03b4 = 0.05). Starting values and the earlier path are set by the LLM every k iterations; k, the prompt, the grayness gate and any restarts are not reported, and results depend on the API. The schedule controller's 'pre-computed values' (Sec. 4.2) are never listed.",
+    "readings": [
+     "re-run the LLM agent (gemini-3.1-flash-lite-preview, T = 0, control prompt of [20]); exact path not reproducible",
+     "four-phase schedule with assumed values, e.g. p 1 -> 3 -> 4.5, \u03b2 1 -> 32 by doubling",
+     "three-field baseline: p linear 1 -> 4.5 over 30 iterations, \u03b2 doubled every 10 iterations from 1",
+     "constant p = 3, \u03b2 = 1 until the tail"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "density-filter radius r_min before the tail, and its unit",
+    "issue": "missing",
+    "description": "r_min is given only for the tail (1.20). Its unit is not stated, but it only makes sense in element widths. The starting value and its controller-driven or 'late tightening' path (Sec. 4.2) are not given.",
+    "readings": [
+     "1.5 element widths, reduced to 1.2 in the tail",
+     "2.4 element widths (0.04\u00b7nelx), reduced to 1.2 in the tail",
+     "1.2 element widths throughout"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "density-filter weights w_ej",
+    "issue": "vague",
+    "description": "Eq. 5 only says the w_ej are filter weights 'within radius r_min'. The kernel shape and edge handling are not stated. With a hat kernel and r_min = 1.2, only the 4 edge neighbours contribute.",
+    "readings": [
+     "linear hat w = max(0, r_min - d)",
+     "uniform weights for d < r_min",
+     "Gaussian weights truncated at r_min"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Heaviside projection H_\u03b2 and threshold",
+    "issue": "missing",
+    "description": "The projection is only cited to Wang et al. [3] (Sec. 3.3). Neither the formula nor the threshold \u03b7 is given.",
+    "readings": [
+     "tanh projection with \u03b7 = 0.5",
+     "Guest smooth Heaviside 1 - exp(-\u03b2\u03c1\u0304) + \u03c1\u0304\u00b7exp(-\u03b2)",
+     "tanh projection with volume-preserving adaptive \u03b7"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "OC update (move limit before tail, damping exponent, bisection)",
+    "issue": "missing",
+    "description": "Only \u03b4 = 0.05 for the tail is given. The earlier move limit (set by the controller), the OC damping exponent and the bisection bounds/tolerance (Sec. 3.3) are not stated.",
+    "readings": [
+     "\u03b4 = 0.2, damping exponent 0.5",
+     "\u03b4 = 0.1, damping exponent 0.5",
+     "\u03b4 varied by the controller between 0.05 and 0.2"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "iteration budget and tail placement",
+    "issue": "conflicting",
+    "description": "Table 3 says '300 iterations'. Sec. 5.2 describes a '300-iteration exploration phase' followed by the 40-iteration tail (340 in total). The Fig. 7 caption instead puts exploration at iterations 0-120, and Sec. 5.2 says controllers are already similar by iteration 150. It is unclear whether the tail is inside the 300 or whether an early exit can shorten the main loop.",
+    "readings": [
+     "300 main-loop + 40 tail = 340 iterations",
+     "300 total (260 main-loop + 40 tail)",
+     "main loop exits early (~120-150 iterations) on convergence, then 40 tail iterations"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "solver stopping / early-exit criterion",
+    "issue": "missing",
+    "description": "Sec. 4.3 mentions 'early exit, compliance stability (relative range < 0.005), or functional convergence' only as a pass/fail check in the evaluator. The solver's own stopping tolerance and averaging window are not specified.",
+    "readings": [
+     "no early exit; run the full budget",
+     "stop when max |\u0394\u03c1| < 0.01",
+     "stop when relative compliance range over the last 10 iterations < 0.005"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "best-valid snapshot used to restart the tail",
+    "issue": "vague",
+    "description": "Sec. 3.3/Eq. 6: the tail restarts from the 'best' saved design with p >= 3.0 and the volume constraint met. Three things are not specified: what 'best' means, the volume tolerance, and whether the design variables are set to \u03c1\u0303* (as Eq. 6 literally says) or to the stored \u03c1.",
+    "readings": [
+     "lowest-compliance valid iterate; set design variables \u03c1 = \u03c1\u0303*",
+     "lowest-compliance valid iterate; restore its own design variables \u03c1",
+     "last iterate that satisfies the gate"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "reported compliance value (63.69)",
+    "issue": "vague",
+    "description": "Table 3 does not say whether C is the final or the best value of the run. It also does not say whether C is computed with the tail p = 4.5 on the projected field or on a thresholded design, or whether the Table 3 solves were single runs or ran inside the retry loop (R = 2, N <- 1.3N).",
+    "readings": [
+     "final-iterate C = F^T U with p = 4.5 on projected \u03c1\u0303, single run",
+     "best C over the run (C_best)",
+     "C of the design thresholded at 0.5"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 454.51571583747864,
+ "returncode": 0,
+ "meta": {
+  "model": null,
+  "num_turns": 2,
+  "is_error": false,
+  "total_cost_usd": 1.2455588,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 28052,
+   "cache_read_input_tokens": 774,
+   "output_tokens": 51049,
+   "output_tokens_details": {
+    "thinking_tokens": 46488
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 28052,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 51049,
+     "cache_read_input_tokens": 774,
+     "cache_creation_input_tokens": 28052,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 28052
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard",
+   "fallback_credit": null
+  }
+ },
+ "stderr_tail": "",
+ "task": "L44",
+ "model": "claude",
+ "model_id": "claude-opus-5-5",
+ "rep": 0,
+ "locator": "Sec. 5.1, Table 3, row cantilever_basic",
+ "finished": "2026-10-22T19:36:33"
+}

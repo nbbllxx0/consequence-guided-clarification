@@ -1,0 +1,332 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Physical domain size\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 specifies 64\u00d764 square elements but no physical side length L or element pitch h=L/64. Uniform rescaling is considered with normalized filter lengths held fixed.\",\n      \"readings\": [\n        \"Unit square: L=1, h=1/64\",\n        \"Square with unit-size elements: L=64, h=1\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"Support configuration in Fig. 5, row 1\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 permits 1\u20134 selections from 16 support conditions, but neither the text nor Fig. 5's caption identifies this row's selections. Coordinates below are normalized by the square side length.\",\n      \"readings\": [\n        \"One condition: lower half of the left edge fixed\",\n        \"Two conditions: corner nodes (0,0) and (0,1) fixed\",\n        \"Three conditions: corner nodes (0,0), (1,0), and (0,1) fixed\",\n        \"Four conditions: all four corner nodes fixed\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"Endpoints of any selected half-edge support set\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.1 describes node sets 'between corners and midpoints' without specifying endpoint membership.\",\n      \"readings\": [\n        \"Include both the corner and midpoint nodes\",\n        \"Exclude both endpoint nodes\",\n        \"Include the corner but exclude the midpoint\",\n        \"Exclude the corner but include the midpoint\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"Loaded boundary element in Fig. 5, row 1\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 gives a random boundary-element sampling rule without identifying this row's selected element. Indices below are one-based columns and rows counted from the lower left.\",\n      \"readings\": [\n        \"Right-edge element (64,32)\",\n        \"Right-edge element (64,16)\",\n        \"Top-edge element (32,64)\",\n        \"Left-edge element (1,48)\",\n        \"Bottom-edge element (48,1)\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"Force direction in Fig. 5, row 1\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 describes six-angle sampling and rotation/mirroring augmentation, but supplies no direction for this row.\",\n      \"readings\": [\n        \"Along +x\",\n        \"60\u00b0 counterclockwise from +x\",\n        \"Along \u2212x\",\n        \"Along \u2212y after a 90\u00b0 rotation of an eligible sample\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Application of the unit force within the selected boundary element\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.1 locates the load by element, and Eq. 24 uses element-indexed forces, but neither defines the corresponding finite-element load vector.\",\n      \"readings\": [\n        \"Unit point force at one exterior corner node of the selected element\",\n        \"Uniform traction over its exterior face, with unit resultant\",\n        \"Point force at the element centroid, mapped to its nodes through shape functions\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Target volume fraction in Fig. 5, row 1\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 supplies only the dataset range of 30%\u201350%; Fig. 5's caption gives no row-specific target.\",\n      \"readings\": [\n        \"f=0.30\",\n        \"f=0.40\",\n        \"f=0.50\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Non-design material near loads and supports\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 4.1 and 4.3 do not identify a passive-density mask or say whether load/support cells are protected from removal.\",\n      \"readings\": [\n        \"All 4096 elements are designable; no passive cells\",\n        \"The loaded boundary element is fixed solid\",\n        \"The loaded element and all elements incident to constrained nodes are fixed solid\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Two-dimensional constitutive assumption\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 gives elastic modulus and Poisson's ratio but does not specify plane stress or plane strain.\",\n      \"readings\": [\n        \"Plane stress\",\n        \"Plane strain\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Uniform out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"The 2D formulation and Sec. 4.1 give no thickness or explicit per-unit-thickness convention.\",\n      \"readings\": [\n        \"Unit thickness t=1\",\n        \"Uniform thickness t=0.1\",\n        \"Report compliance per unit thickness\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Ersatz void stiffness\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. 5 introduces E_min but supplies no value or ratio E_min/E_0 for the dataset.\",\n      \"readings\": [\n        \"E_min/E_0=10^-3\",\n        \"E_min/E_0=10^-6\",\n        \"E_min/E_0=10^-9\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"SIMP penalization\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2.1 says p is 'commonly set to 3', without prescribing the value or continuation used for the ground truth.\",\n      \"readings\": [\n        \"Constant p=3\",\n        \"Constant p=2\",\n        \"p=1 for 50 updates, p=2 for the next 50, then p=3\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Spatial filtering method and kernel\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 names a Heaviside filter but gives no additional spatial averaging or sensitivity-filter specification.\",\n      \"readings\": [\n        \"No spatial averaging; Heaviside operation only\",\n        \"Density filter with conical distance weights\",\n        \"Sensitivity filter with conical distance weights\",\n        \"Density filter with uniform neighborhood weights\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Spatial filter radius, if used\",\n      \"issue\": \"missing\",\n      \"description\": \"No spatial filter radius or minimum feature length is supplied in Secs. 2.1 or 4.1; h denotes the element pitch.\",\n      \"readings\": [\n        \"Radius r=1.5h\",\n        \"Radius r=2h\",\n        \"Radius r=3h\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Spatial filter treatment at domain boundaries\",\n      \"issue\": \"missing\",\n      \"description\": \"The text gives no boundary extension or normalization rule for any spatial filter.\",\n      \"readings\": [\n        \"Truncate neighborhoods at the boundary and renormalize surviving weights\",\n        \"Pad outside the square with zero density and retain the full-kernel denominator\",\n        \"Reflect densities across domain boundaries\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Placement and form of the Heaviside operation\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.1's statement about converged densities 'with a Heaviside filter' does not establish whether projection participates in optimization or only creates the final binary image.\",\n      \"readings\": [\n        \"Optimize continuous densities, then apply a hard threshold once\",\n        \"Use a differentiable Heaviside projection during optimization, then hard-threshold the final result\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Heaviside threshold\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 does not supply the threshold separating material and void.\",\n      \"readings\": [\n        \"Threshold eta=0.3\",\n        \"Threshold eta=0.5\",\n        \"Threshold eta=0.7\",\n        \"Choose the threshold adaptively to attain the target binary volume fraction\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Smooth Heaviside steepness and continuation, if used\",\n      \"issue\": \"missing\",\n      \"description\": \"No projection steepness or continuation schedule is given for a possible differentiable Heaviside implementation.\",\n      \"readings\": [\n        \"Fixed beta=1, followed by final hard thresholding\",\n        \"Fixed beta=8, followed by final hard thresholding\",\n        \"Double beta from 1 to 64 every 50 updates, followed by final hard thresholding\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Density field used for stiffness and volume\",\n      \"issue\": \"vague\",\n      \"description\": \"Eqs. 3 and 5 use rho without distinguishing design, filtered, and projected densities introduced by the unspecified filtering implementation.\",\n      \"readings\": [\n        \"Use raw design densities for stiffness and volume; binarize only after optimization\",\n        \"Use filtered/projected physical densities for both stiffness and volume\",\n        \"Use filtered/projected densities for stiffness but raw design densities for volume\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initial optimization density field\",\n      \"issue\": \"missing\",\n      \"description\": \"The paper discusses sensitivity to initialization but never specifies the starting densities used to generate Fig. 5's ground truth.\",\n      \"readings\": [\n        \"Uniform rho=f\",\n        \"Uniform rho=1\",\n        \"Checkerboard perturbation rho_ij=f+0.01(-1)^(i+j)\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Density-update algorithm\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2.1 presents MMA as an example rather than identifying the optimizer actually used for dataset generation.\",\n      \"readings\": [\n        \"Method of Moving Asymptotes\",\n        \"Optimality-criteria updates\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Optimization update parameters\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 gives no move limits, damping, or MMA asymptote settings.\",\n      \"readings\": [\n        \"MMA: density move limit 0.1; initial asymptote half-width 0.5; expansion 1.2; contraction 0.7\",\n        \"MMA: density move limit 0.2; initial asymptote half-width 0.5; expansion 1.2; contraction 0.7\",\n        \"Optimality criteria: density move limit 0.2 and damping exponent 0.5\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Stopping rule and numerical thresholds\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2.1 gives Eq. 7 and iteration limits as possible stopping mechanisms, but specifies neither epsilon nor an iteration cap for this example.\",\n      \"readings\": [\n        \"Stop when Eq. 7 falls below 10^-3 or after 200 updates\",\n        \"Stop when Eq. 7 falls below 10^-5 or after 1000 updates\",\n        \"Run exactly 200 updates\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Finite-element interpolation within each square\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 fixes the 64\u00d764 square-element grid but does not identify element order or nodal interpolation.\",\n      \"readings\": [\n        \"Four-node bilinear quadrilaterals\",\n        \"Eight-node serendipity quadrilaterals\",\n        \"Nine-node biquadratic quadrilaterals\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Element integration and stabilization\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Sec. 2.1 nor Sec. 4.1 supplies quadrature or reduced-integration stabilization choices.\",\n      \"readings\": [\n        \"Bilinear quadrilaterals with full 2\u00d72 Gauss integration\",\n        \"Bilinear quadrilaterals with one-point integration and hourglass stabilization\",\n        \"Quadratic quadrilaterals with full 3\u00d73 Gauss integration\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Equilibrium solution accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. 1 specifies equilibrium but gives no linear-solver method or residual tolerance for its numerical solution.\",\n      \"readings\": [\n        \"Direct factorization to numerical precision\",\n        \"Iterative solution with relative force-residual tolerance 10^-6\",\n        \"Iterative solution with relative force-residual tolerance 10^-10\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "Physical domain size",
+    "issue": "missing",
+    "description": "Sec. 4.1 specifies 64\u00d764 square elements but no physical side length L or element pitch h=L/64. Uniform rescaling is considered with normalized filter lengths held fixed.",
+    "readings": [
+     "Unit square: L=1, h=1/64",
+     "Square with unit-size elements: L=64, h=1"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "Support configuration in Fig. 5, row 1",
+    "issue": "missing",
+    "description": "Sec. 4.1 permits 1\u20134 selections from 16 support conditions, but neither the text nor Fig. 5's caption identifies this row's selections. Coordinates below are normalized by the square side length.",
+    "readings": [
+     "One condition: lower half of the left edge fixed",
+     "Two conditions: corner nodes (0,0) and (0,1) fixed",
+     "Three conditions: corner nodes (0,0), (1,0), and (0,1) fixed",
+     "Four conditions: all four corner nodes fixed"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "Endpoints of any selected half-edge support set",
+    "issue": "vague",
+    "description": "Sec. 4.1 describes node sets 'between corners and midpoints' without specifying endpoint membership.",
+    "readings": [
+     "Include both the corner and midpoint nodes",
+     "Exclude both endpoint nodes",
+     "Include the corner but exclude the midpoint",
+     "Exclude the corner but include the midpoint"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "Loaded boundary element in Fig. 5, row 1",
+    "issue": "missing",
+    "description": "Sec. 4.1 gives a random boundary-element sampling rule without identifying this row's selected element. Indices below are one-based columns and rows counted from the lower left.",
+    "readings": [
+     "Right-edge element (64,32)",
+     "Right-edge element (64,16)",
+     "Top-edge element (32,64)",
+     "Left-edge element (1,48)",
+     "Bottom-edge element (48,1)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Force direction in Fig. 5, row 1",
+    "issue": "missing",
+    "description": "Sec. 4.1 describes six-angle sampling and rotation/mirroring augmentation, but supplies no direction for this row.",
+    "readings": [
+     "Along +x",
+     "60\u00b0 counterclockwise from +x",
+     "Along \u2212x",
+     "Along \u2212y after a 90\u00b0 rotation of an eligible sample"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Application of the unit force within the selected boundary element",
+    "issue": "vague",
+    "description": "Sec. 4.1 locates the load by element, and Eq. 24 uses element-indexed forces, but neither defines the corresponding finite-element load vector.",
+    "readings": [
+     "Unit point force at one exterior corner node of the selected element",
+     "Uniform traction over its exterior face, with unit resultant",
+     "Point force at the element centroid, mapped to its nodes through shape functions"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Target volume fraction in Fig. 5, row 1",
+    "issue": "missing",
+    "description": "Sec. 4.1 supplies only the dataset range of 30%\u201350%; Fig. 5's caption gives no row-specific target.",
+    "readings": [
+     "f=0.30",
+     "f=0.40",
+     "f=0.50"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Non-design material near loads and supports",
+    "issue": "missing",
+    "description": "Secs. 4.1 and 4.3 do not identify a passive-density mask or say whether load/support cells are protected from removal.",
+    "readings": [
+     "All 4096 elements are designable; no passive cells",
+     "The loaded boundary element is fixed solid",
+     "The loaded element and all elements incident to constrained nodes are fixed solid"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Two-dimensional constitutive assumption",
+    "issue": "missing",
+    "description": "Sec. 4.1 gives elastic modulus and Poisson's ratio but does not specify plane stress or plane strain.",
+    "readings": [
+     "Plane stress",
+     "Plane strain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Uniform out-of-plane thickness",
+    "issue": "missing",
+    "description": "The 2D formulation and Sec. 4.1 give no thickness or explicit per-unit-thickness convention.",
+    "readings": [
+     "Unit thickness t=1",
+     "Uniform thickness t=0.1",
+     "Report compliance per unit thickness"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Ersatz void stiffness",
+    "issue": "missing",
+    "description": "Eq. 5 introduces E_min but supplies no value or ratio E_min/E_0 for the dataset.",
+    "readings": [
+     "E_min/E_0=10^-3",
+     "E_min/E_0=10^-6",
+     "E_min/E_0=10^-9"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "SIMP penalization",
+    "issue": "vague",
+    "description": "Sec. 2.1 says p is 'commonly set to 3', without prescribing the value or continuation used for the ground truth.",
+    "readings": [
+     "Constant p=3",
+     "Constant p=2",
+     "p=1 for 50 updates, p=2 for the next 50, then p=3"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Spatial filtering method and kernel",
+    "issue": "missing",
+    "description": "Sec. 4.1 names a Heaviside filter but gives no additional spatial averaging or sensitivity-filter specification.",
+    "readings": [
+     "No spatial averaging; Heaviside operation only",
+     "Density filter with conical distance weights",
+     "Sensitivity filter with conical distance weights",
+     "Density filter with uniform neighborhood weights"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Spatial filter radius, if used",
+    "issue": "missing",
+    "description": "No spatial filter radius or minimum feature length is supplied in Secs. 2.1 or 4.1; h denotes the element pitch.",
+    "readings": [
+     "Radius r=1.5h",
+     "Radius r=2h",
+     "Radius r=3h"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Spatial filter treatment at domain boundaries",
+    "issue": "missing",
+    "description": "The text gives no boundary extension or normalization rule for any spatial filter.",
+    "readings": [
+     "Truncate neighborhoods at the boundary and renormalize surviving weights",
+     "Pad outside the square with zero density and retain the full-kernel denominator",
+     "Reflect densities across domain boundaries"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Placement and form of the Heaviside operation",
+    "issue": "vague",
+    "description": "Sec. 4.1's statement about converged densities 'with a Heaviside filter' does not establish whether projection participates in optimization or only creates the final binary image.",
+    "readings": [
+     "Optimize continuous densities, then apply a hard threshold once",
+     "Use a differentiable Heaviside projection during optimization, then hard-threshold the final result"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Heaviside threshold",
+    "issue": "missing",
+    "description": "Sec. 4.1 does not supply the threshold separating material and void.",
+    "readings": [
+     "Threshold eta=0.3",
+     "Threshold eta=0.5",
+     "Threshold eta=0.7",
+     "Choose the threshold adaptively to attain the target binary volume fraction"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Smooth Heaviside steepness and continuation, if used",
+    "issue": "missing",
+    "description": "No projection steepness or continuation schedule is given for a possible differentiable Heaviside implementation.",
+    "readings": [
+     "Fixed beta=1, followed by final hard thresholding",
+     "Fixed beta=8, followed by final hard thresholding",
+     "Double beta from 1 to 64 every 50 updates, followed by final hard thresholding"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Density field used for stiffness and volume",
+    "issue": "vague",
+    "description": "Eqs. 3 and 5 use rho without distinguishing design, filtered, and projected densities introduced by the unspecified filtering implementation.",
+    "readings": [
+     "Use raw design densities for stiffness and volume; binarize only after optimization",
+     "Use filtered/projected physical densities for both stiffness and volume",
+     "Use filtered/projected densities for stiffness but raw design densities for volume"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial optimization density field",
+    "issue": "missing",
+    "description": "The paper discusses sensitivity to initialization but never specifies the starting densities used to generate Fig. 5's ground truth.",
+    "readings": [
+     "Uniform rho=f",
+     "Uniform rho=1",
+     "Checkerboard perturbation rho_ij=f+0.01(-1)^(i+j)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Density-update algorithm",
+    "issue": "vague",
+    "description": "Sec. 2.1 presents MMA as an example rather than identifying the optimizer actually used for dataset generation.",
+    "readings": [
+     "Method of Moving Asymptotes",
+     "Optimality-criteria updates"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Optimization update parameters",
+    "issue": "missing",
+    "description": "Sec. 2.1 gives no move limits, damping, or MMA asymptote settings.",
+    "readings": [
+     "MMA: density move limit 0.1; initial asymptote half-width 0.5; expansion 1.2; contraction 0.7",
+     "MMA: density move limit 0.2; initial asymptote half-width 0.5; expansion 1.2; contraction 0.7",
+     "Optimality criteria: density move limit 0.2 and damping exponent 0.5"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Stopping rule and numerical thresholds",
+    "issue": "vague",
+    "description": "Sec. 2.1 gives Eq. 7 and iteration limits as possible stopping mechanisms, but specifies neither epsilon nor an iteration cap for this example.",
+    "readings": [
+     "Stop when Eq. 7 falls below 10^-3 or after 200 updates",
+     "Stop when Eq. 7 falls below 10^-5 or after 1000 updates",
+     "Run exactly 200 updates"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Finite-element interpolation within each square",
+    "issue": "missing",
+    "description": "Sec. 4.1 fixes the 64\u00d764 square-element grid but does not identify element order or nodal interpolation.",
+    "readings": [
+     "Four-node bilinear quadrilaterals",
+     "Eight-node serendipity quadrilaterals",
+     "Nine-node biquadratic quadrilaterals"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Element integration and stabilization",
+    "issue": "missing",
+    "description": "Neither Sec. 2.1 nor Sec. 4.1 supplies quadrature or reduced-integration stabilization choices.",
+    "readings": [
+     "Bilinear quadrilaterals with full 2\u00d72 Gauss integration",
+     "Bilinear quadrilaterals with one-point integration and hourglass stabilization",
+     "Quadratic quadrilaterals with full 3\u00d73 Gauss integration"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Equilibrium solution accuracy",
+    "issue": "missing",
+    "description": "Eq. 1 specifies equilibrium but gives no linear-solver method or residual tolerance for its numerical solution.",
+    "readings": [
+     "Direct factorization to numerical precision",
+     "Iterative solution with relative force-residual tolerance 10^-6",
+     "Iterative solution with relative force-residual tolerance 10^-10"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 788.9450025558472,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L43",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 2,
+ "locator": "Sec. 4.3, Fig. 5, row 1",
+ "finished": "2026-10-22T23:43:24"
+}

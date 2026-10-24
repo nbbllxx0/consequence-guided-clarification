@@ -1,0 +1,338 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"cantilever design-domain dimensions and grid spacing\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.5 and Table 4 give a 120 x 60 mesh but no physical dimensions or cell pitches. A 2:1 domain aspect ratio requires an unstated square-cell assumption.\",\n      \"readings\": [\n        \"Rectangle [0,120] x [0,60], with square unit cells.\",\n        \"Rectangle [0,2] x [0,1], with square cells of side 1/60.\",\n        \"Rectangle [0,1] x [0,1], with rectangular cells of width 1/120 and height 1/60.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"finite-element formulation on the structured grid\",\n      \"issue\": \"missing\",\n      \"description\": \"Table 4 specifies resolution, but neither Sec. 3.1 nor Sec. 3.5 specifies element interpolation, integration, or stabilization.\",\n      \"readings\": [\n        \"Four-node bilinear quadrilaterals with full 2 x 2 Gauss integration.\",\n        \"Four-node quadrilaterals with one-point integration and hourglass stabilization.\",\n        \"Eight-node quadratic quadrilaterals with 3 x 3 Gauss integration.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"tip load on the free right edge\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 3.5 says only 'tip load'; its position through the beam height is not specified. Let L and H denote domain length and height.\",\n      \"readings\": [\n        \"Right-edge midpoint: (L,H/2).\",\n        \"Lower-right corner: (L,0).\",\n        \"Upper-right corner: (L,H).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"discrete application of the tip load\",\n      \"issue\": \"vague\",\n      \"description\": \"The 'tip load' in Sec. 3.5 has no stated application width or nodal-force distribution.\",\n      \"readings\": [\n        \"Apply the entire resultant to one right-edge node.\",\n        \"For a centered load, distribute the resultant over two adjacent right-edge elements, with three nodal weights 1/4, 1/2, 1/4.\",\n        \"Apply uniform traction over the right edge, with the same total resultant.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"cantilever tip-force vector\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.5 names a tip load without giving its direction or components.\",\n      \"readings\": [\n        \"Transverse downward force: F = (0,-P).\",\n        \"Axial force: F = (P,0).\",\n        \"Oblique force: F = (P/sqrt(2),-P/sqrt(2)).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"total tip-force magnitude\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Sec. 3.5 nor the cantilever results in Table 5 gives the force magnitude or its units.\",\n      \"readings\": [\n        \"Resultant magnitude P = 1 in normalized force units.\",\n        \"Resultant magnitude P = 100 in the same force units.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"passive solid or void masks\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.5 does not specify whether every cell is designable or whether clamp and load attachment regions are protected. The Fig. 6 caption does not define such masks.\",\n      \"readings\": [\n        \"All cells are designable; no passive solid or void regions.\",\n        \"The leftmost element column is forced solid; all remaining cells are designable.\",\n        \"A 2 x 2 element pad around a centered tip load is forced solid; all remaining cells are designable.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"mathematical definition of the 40% volume constraint\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.5 fixes Vf = 0.40, but no volume equation identifies the density field being constrained or how any passive regions enter the budget.\",\n      \"readings\": [\n        \"Constrain physical density over the entire domain: sum(Ve * rho_physical,e) <= 0.40 * sum(Ve), counting passive solids.\",\n        \"Constrain raw design density over the entire domain.\",\n        \"Constrain filtered density over the entire domain.\",\n        \"Constrain physical density to 40% of the designable region, excluding passive regions from the budget.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"absolute solid Young's modulus\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (5) and Sec. 3.5 specify Emin/E0 = 1e-9 but never assign an absolute E0.\",\n      \"readings\": [\n        \"E0 = 1 and Emin = 1e-9 in normalized stiffness units.\",\n        \"E0 = 210 GPa and Emin = 210 Pa, with consistent physical units.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"two-dimensional constitutive assumption\",\n      \"issue\": \"missing\",\n      \"description\": \"The benchmark is called 2-D and nu = 0.3 is given, but plane stress versus plane strain is not specified.\",\n      \"readings\": [\n        \"Isotropic plane stress with nu = 0.3.\",\n        \"Isotropic plane strain with nu = 0.3.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"uniform out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.5 supplies no thickness or explicit per-unit-thickness convention for the 2-D model. With a fixed total tip force, uniform thickness scales stiffness.\",\n      \"readings\": [\n        \"Unit thickness in the chosen length units.\",\n        \"Uniform thickness 0.1 in the same length units.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"coordinate units and metric for filter radius\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (3) uses distances between element coordinates, while Tables 1\u20132 and the tail give numerical radii without stating their units or conversion from mesh spacing.\",\n      \"readings\": [\n        \"Use element-index coordinates, so r_min = 1.5 means 1.5 cell pitches.\",\n        \"Use physical element-centroid coordinates, so r_min = 1.5 means 1.5 physical length units.\",\n        \"Use physical distances divided by the smaller cell pitch, so the physical radius is r_min * min(hx,hy).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"initial density field for the primary cantilever runs\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 3.5 and 4.1 do not define initialization. Sec. 4.5 mentions uniform density only for the separate tail-only experiment.\",\n      \"readings\": [\n        \"Initialize every designable raw density to 0.40.\",\n        \"Initialize uniformly so that projected physical density equals 0.40; at beta = 1 and eta = 0.5, raw density is approximately 0.4073.\",\n        \"Initialize with a small deterministic spatial perturbation around mean raw density 0.40.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"five primary-run seeds and their scope\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.5 specifies five independent seeds, and Sec. 4.1 discusses stochastic LLM runs, but neither gives seed values or identifies all seeded operations.\",\n      \"readings\": [\n        \"Use seeds 0\u20134 for LLM/run randomness with identical initial densities across runs.\",\n        \"Use seeds 1\u20135 for LLM randomness and a zero-mean initial-density perturbation of amplitude 0.01 in LLM runs, while keeping deterministic baselines unchanged.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"OC update formula and damping\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.1 names the OC method and its move limit but does not give the update equation or damping exponent.\",\n      \"readings\": [\n        \"Multiplicative OC update proportional to rho * (-dC/(lambda*dV))^0.5, clipped by the stated bounds and move limit.\",\n        \"The same multiplicative update with damping exponent 0.3.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"OC volume-multiplier search accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.1 does not specify the multiplier-search stopping tolerance or numerical volume-feasibility tolerance.\",\n      \"readings\": [\n        \"Stop multiplier bisection at relative bracket width 1e-3 and accept relative volume excess up to 1e-3.\",\n        \"Stop at relative bracket width 1e-8 and accept relative volume excess up to 1e-8.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"LLM controller parameters before its first call\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.2 sets a five-iteration call period, but does not state the initial solver parameter tuple. Table 1 is advisory, and Table 6 starts at iteration 5.\",\n      \"readings\": [\n        \"Start with (p,beta,r_min,delta) = (1,1,1.5,0.20).\",\n        \"Start with (p,beta,r_min,delta) = (2,1,2.0,0.15), then apply the first LLM action at iteration 5.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"complete three-field continuation schedule\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 3.4 gives the p ramp and beta doubling period, but not the initial beta, beta ceiling, exact late-stage radius changes, or move-limit history.\",\n      \"readings\": [\n        \"Start beta at 1 and cap at 32; change r_min from 1.5 to 1.2 at iteration 150; keep delta = 0.20 throughout the main loop.\",\n        \"Start beta at 2 and cap at 64; change r_min from 1.5 to 1.2 at iteration 225; change delta from 0.20 to 0.05 at iteration 225.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"complete expert-heuristic schedule\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 3.4 specifies p increments, eligibility for beta increases, and the 12% restart threshold, but omits initial and maximum p, beta progression, and radius and move-limit histories.\",\n      \"readings\": [\n        \"Start p at 1 and cap at 4.5; double beta every 10 iterations after p reaches 3, capped at 32; change r_min from 1.5 to 1.2 and delta from 0.20 to 0.05 at iteration 150.\",\n        \"Start p at 1.5 and cap at 5; double beta every 20 iterations after p reaches 3, capped at 64; keep r_min = 1.5 and delta = 0.15.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"schedule-only phase boundaries for N = 300\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Secs. 3.4 and 4.3 say schedule-only uses Table 1's budget breakpoints, which place beta = 32 at 75% of 300 iterations. Sec. 4.3 instead says it reaches beta = 32 by iteration 80.\",\n      \"readings\": [\n        \"Scale Table 1 by N = 300: phase boundaries at iterations 24, 150, and 225; beta = 32 from approximately iteration 225.\",\n        \"Use fixed iteration boundaries 8, 50, and 75, reaching beta = 32 by iteration 80 even for the Long preset.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"schedule-only progression within each phase\",\n      \"issue\": \"vague\",\n      \"description\": \"Table 1 gives ranges for p and beta, while Sec. 3.4 calls the schedule deterministic without defining interpolation or intermediate steps.\",\n      \"readings\": [\n        \"Interpolate p linearly and beta geometrically across each phase's stated range.\",\n        \"Use the upper endpoint of each phase's p and beta ranges as a constant value throughout that phase.\",\n        \"Hold the lower endpoint initially and jump to the upper endpoint halfway through each phase.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"verbatim LLM prompt and observation serialization\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.2 summarizes prompt content rather than reproducing it. Sec. 5.5 and Data and Code Availability defer exact prompts to a future release.\",\n      \"readings\": [\n        \"Reconstruct the described system instructions and serialize observations as a compact JSON object.\",\n        \"Reconstruct the same described instructions with different wording and serialize observations as named plain-text lines.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"checkerboard index and objective-slope inputs\",\n      \"issue\": \"vague\",\n      \"description\": \"The Sec. 3.2 observation vector names a checkerboard index and objective slope but supplies neither calculation.\",\n      \"readings\": [\n        \"Measure checkerboarding using raw-density 2 x 2 alternation; use an absolute five-step compliance finite difference for objective slope.\",\n        \"Measure checkerboarding using a physical-density discrete Laplacian; use a relative least-squares compliance slope over five iterations.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"representative LLM parameter history between reported calls\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 4.1 refers to Fig. 9 for full parameter trajectories. Its caption is qualitative, and Table 6 supplies only selected calls, leaving intervening actions unrecoverable from the supplied text.\",\n      \"readings\": [\n        \"At the unreported iteration-10 call, retain the iteration-5 tuple (1.2,1,1.5,0.20) until the reported iteration-15 action.\",\n        \"At iteration 10, set (p,beta,r_min,delta) = (1.4,1,1.5,0.20), then apply the reported iteration-15 action.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"ordering of controller actions, OC updates, and snapshot checks\",\n      \"issue\": \"vague\",\n      \"description\": \"Secs. 3.2 and 3.5 do not define whether a call numbered t changes update t or update t+1, or when snapshot eligibility is checked relative to those operations.\",\n      \"readings\": [\n        \"Solve and check the current density, call the controller, then apply its parameters to OC update t.\",\n        \"Complete OC update t and its solve before calling the controller; apply the returned parameters starting at update t+1.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"state restored by a main-loop snapshot restart\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 3.2 describes a snapshot reload but does not specify whether it restores only density or also parameters and controller history.\",\n      \"readings\": [\n        \"Reload raw density only; retain current parameters, histories, and iteration count.\",\n        \"Reload density and saved p, beta, delta, and stagnation history; retain the iteration count and enforce r_min = min(current radius, saved radius).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"best-snapshot eligibility for the Long 2-D cantilever\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 3.5 describes validity through volume feasibility. The Table 7 footnote adds p >= 3 and grayness < 0.25, while Sec. 4.5 invokes p >= 3 for the separate fast 2-D ablation. Their applicability to this preset is not explicitly consolidated.\",\n      \"readings\": [\n        \"A snapshot is eligible whenever it satisfies the chosen volume constraint.\",\n        \"A snapshot must satisfy volume feasibility and p >= 3.\",\n        \"A snapshot must satisfy volume feasibility, p >= 3, and physical-density grayness < 0.25.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"2-D sparse-factorization implementation and ordering\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 3.5 specifies direct sparse factorization through SciPy but not the routine or matrix-ordering settings needed to reproduce numerical paths exactly.\",\n      \"readings\": [\n        \"Use sparse LU with COLAMD ordering.\",\n        \"Use sparse LU with MMD_AT_PLUS_A ordering.\",\n        \"Use sparse LU with natural ordering.\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "cantilever design-domain dimensions and grid spacing",
+    "issue": "missing",
+    "description": "Sec. 3.5 and Table 4 give a 120 x 60 mesh but no physical dimensions or cell pitches. A 2:1 domain aspect ratio requires an unstated square-cell assumption.",
+    "readings": [
+     "Rectangle [0,120] x [0,60], with square unit cells.",
+     "Rectangle [0,2] x [0,1], with square cells of side 1/60.",
+     "Rectangle [0,1] x [0,1], with rectangular cells of width 1/120 and height 1/60."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "finite-element formulation on the structured grid",
+    "issue": "missing",
+    "description": "Table 4 specifies resolution, but neither Sec. 3.1 nor Sec. 3.5 specifies element interpolation, integration, or stabilization.",
+    "readings": [
+     "Four-node bilinear quadrilaterals with full 2 x 2 Gauss integration.",
+     "Four-node quadrilaterals with one-point integration and hourglass stabilization.",
+     "Eight-node quadratic quadrilaterals with 3 x 3 Gauss integration."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "tip load on the free right edge",
+    "issue": "vague",
+    "description": "Sec. 3.5 says only 'tip load'; its position through the beam height is not specified. Let L and H denote domain length and height.",
+    "readings": [
+     "Right-edge midpoint: (L,H/2).",
+     "Lower-right corner: (L,0).",
+     "Upper-right corner: (L,H)."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "discrete application of the tip load",
+    "issue": "vague",
+    "description": "The 'tip load' in Sec. 3.5 has no stated application width or nodal-force distribution.",
+    "readings": [
+     "Apply the entire resultant to one right-edge node.",
+     "For a centered load, distribute the resultant over two adjacent right-edge elements, with three nodal weights 1/4, 1/2, 1/4.",
+     "Apply uniform traction over the right edge, with the same total resultant."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "cantilever tip-force vector",
+    "issue": "missing",
+    "description": "Sec. 3.5 names a tip load without giving its direction or components.",
+    "readings": [
+     "Transverse downward force: F = (0,-P).",
+     "Axial force: F = (P,0).",
+     "Oblique force: F = (P/sqrt(2),-P/sqrt(2))."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "total tip-force magnitude",
+    "issue": "missing",
+    "description": "Neither Sec. 3.5 nor the cantilever results in Table 5 gives the force magnitude or its units.",
+    "readings": [
+     "Resultant magnitude P = 1 in normalized force units.",
+     "Resultant magnitude P = 100 in the same force units."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "passive solid or void masks",
+    "issue": "missing",
+    "description": "Sec. 3.5 does not specify whether every cell is designable or whether clamp and load attachment regions are protected. The Fig. 6 caption does not define such masks.",
+    "readings": [
+     "All cells are designable; no passive solid or void regions.",
+     "The leftmost element column is forced solid; all remaining cells are designable.",
+     "A 2 x 2 element pad around a centered tip load is forced solid; all remaining cells are designable."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "mathematical definition of the 40% volume constraint",
+    "issue": "missing",
+    "description": "Sec. 3.5 fixes Vf = 0.40, but no volume equation identifies the density field being constrained or how any passive regions enter the budget.",
+    "readings": [
+     "Constrain physical density over the entire domain: sum(Ve * rho_physical,e) <= 0.40 * sum(Ve), counting passive solids.",
+     "Constrain raw design density over the entire domain.",
+     "Constrain filtered density over the entire domain.",
+     "Constrain physical density to 40% of the designable region, excluding passive regions from the budget."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "absolute solid Young's modulus",
+    "issue": "missing",
+    "description": "Eq. (5) and Sec. 3.5 specify Emin/E0 = 1e-9 but never assign an absolute E0.",
+    "readings": [
+     "E0 = 1 and Emin = 1e-9 in normalized stiffness units.",
+     "E0 = 210 GPa and Emin = 210 Pa, with consistent physical units."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "two-dimensional constitutive assumption",
+    "issue": "missing",
+    "description": "The benchmark is called 2-D and nu = 0.3 is given, but plane stress versus plane strain is not specified.",
+    "readings": [
+     "Isotropic plane stress with nu = 0.3.",
+     "Isotropic plane strain with nu = 0.3."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "uniform out-of-plane thickness",
+    "issue": "missing",
+    "description": "Sec. 3.5 supplies no thickness or explicit per-unit-thickness convention for the 2-D model. With a fixed total tip force, uniform thickness scales stiffness.",
+    "readings": [
+     "Unit thickness in the chosen length units.",
+     "Uniform thickness 0.1 in the same length units."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "coordinate units and metric for filter radius",
+    "issue": "missing",
+    "description": "Eq. (3) uses distances between element coordinates, while Tables 1\u20132 and the tail give numerical radii without stating their units or conversion from mesh spacing.",
+    "readings": [
+     "Use element-index coordinates, so r_min = 1.5 means 1.5 cell pitches.",
+     "Use physical element-centroid coordinates, so r_min = 1.5 means 1.5 physical length units.",
+     "Use physical distances divided by the smaller cell pitch, so the physical radius is r_min * min(hx,hy)."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "initial density field for the primary cantilever runs",
+    "issue": "missing",
+    "description": "Secs. 3.5 and 4.1 do not define initialization. Sec. 4.5 mentions uniform density only for the separate tail-only experiment.",
+    "readings": [
+     "Initialize every designable raw density to 0.40.",
+     "Initialize uniformly so that projected physical density equals 0.40; at beta = 1 and eta = 0.5, raw density is approximately 0.4073.",
+     "Initialize with a small deterministic spatial perturbation around mean raw density 0.40."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "five primary-run seeds and their scope",
+    "issue": "missing",
+    "description": "Sec. 3.5 specifies five independent seeds, and Sec. 4.1 discusses stochastic LLM runs, but neither gives seed values or identifies all seeded operations.",
+    "readings": [
+     "Use seeds 0\u20134 for LLM/run randomness with identical initial densities across runs.",
+     "Use seeds 1\u20135 for LLM randomness and a zero-mean initial-density perturbation of amplitude 0.01 in LLM runs, while keeping deterministic baselines unchanged."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "OC update formula and damping",
+    "issue": "missing",
+    "description": "Sec. 3.1 names the OC method and its move limit but does not give the update equation or damping exponent.",
+    "readings": [
+     "Multiplicative OC update proportional to rho * (-dC/(lambda*dV))^0.5, clipped by the stated bounds and move limit.",
+     "The same multiplicative update with damping exponent 0.3."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "OC volume-multiplier search accuracy",
+    "issue": "missing",
+    "description": "Sec. 3.1 does not specify the multiplier-search stopping tolerance or numerical volume-feasibility tolerance.",
+    "readings": [
+     "Stop multiplier bisection at relative bracket width 1e-3 and accept relative volume excess up to 1e-3.",
+     "Stop at relative bracket width 1e-8 and accept relative volume excess up to 1e-8."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "LLM controller parameters before its first call",
+    "issue": "missing",
+    "description": "Sec. 3.2 sets a five-iteration call period, but does not state the initial solver parameter tuple. Table 1 is advisory, and Table 6 starts at iteration 5.",
+    "readings": [
+     "Start with (p,beta,r_min,delta) = (1,1,1.5,0.20).",
+     "Start with (p,beta,r_min,delta) = (2,1,2.0,0.15), then apply the first LLM action at iteration 5."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "complete three-field continuation schedule",
+    "issue": "vague",
+    "description": "Sec. 3.4 gives the p ramp and beta doubling period, but not the initial beta, beta ceiling, exact late-stage radius changes, or move-limit history.",
+    "readings": [
+     "Start beta at 1 and cap at 32; change r_min from 1.5 to 1.2 at iteration 150; keep delta = 0.20 throughout the main loop.",
+     "Start beta at 2 and cap at 64; change r_min from 1.5 to 1.2 at iteration 225; change delta from 0.20 to 0.05 at iteration 225."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "complete expert-heuristic schedule",
+    "issue": "vague",
+    "description": "Sec. 3.4 specifies p increments, eligibility for beta increases, and the 12% restart threshold, but omits initial and maximum p, beta progression, and radius and move-limit histories.",
+    "readings": [
+     "Start p at 1 and cap at 4.5; double beta every 10 iterations after p reaches 3, capped at 32; change r_min from 1.5 to 1.2 and delta from 0.20 to 0.05 at iteration 150.",
+     "Start p at 1.5 and cap at 5; double beta every 20 iterations after p reaches 3, capped at 64; keep r_min = 1.5 and delta = 0.15."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "schedule-only phase boundaries for N = 300",
+    "issue": "conflicting",
+    "description": "Secs. 3.4 and 4.3 say schedule-only uses Table 1's budget breakpoints, which place beta = 32 at 75% of 300 iterations. Sec. 4.3 instead says it reaches beta = 32 by iteration 80.",
+    "readings": [
+     "Scale Table 1 by N = 300: phase boundaries at iterations 24, 150, and 225; beta = 32 from approximately iteration 225.",
+     "Use fixed iteration boundaries 8, 50, and 75, reaching beta = 32 by iteration 80 even for the Long preset."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "schedule-only progression within each phase",
+    "issue": "vague",
+    "description": "Table 1 gives ranges for p and beta, while Sec. 3.4 calls the schedule deterministic without defining interpolation or intermediate steps.",
+    "readings": [
+     "Interpolate p linearly and beta geometrically across each phase's stated range.",
+     "Use the upper endpoint of each phase's p and beta ranges as a constant value throughout that phase.",
+     "Hold the lower endpoint initially and jump to the upper endpoint halfway through each phase."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "verbatim LLM prompt and observation serialization",
+    "issue": "missing",
+    "description": "Sec. 3.2 summarizes prompt content rather than reproducing it. Sec. 5.5 and Data and Code Availability defer exact prompts to a future release.",
+    "readings": [
+     "Reconstruct the described system instructions and serialize observations as a compact JSON object.",
+     "Reconstruct the same described instructions with different wording and serialize observations as named plain-text lines."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "checkerboard index and objective-slope inputs",
+    "issue": "vague",
+    "description": "The Sec. 3.2 observation vector names a checkerboard index and objective slope but supplies neither calculation.",
+    "readings": [
+     "Measure checkerboarding using raw-density 2 x 2 alternation; use an absolute five-step compliance finite difference for objective slope.",
+     "Measure checkerboarding using a physical-density discrete Laplacian; use a relative least-squares compliance slope over five iterations."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "representative LLM parameter history between reported calls",
+    "issue": "figure_only",
+    "description": "Sec. 4.1 refers to Fig. 9 for full parameter trajectories. Its caption is qualitative, and Table 6 supplies only selected calls, leaving intervening actions unrecoverable from the supplied text.",
+    "readings": [
+     "At the unreported iteration-10 call, retain the iteration-5 tuple (1.2,1,1.5,0.20) until the reported iteration-15 action.",
+     "At iteration 10, set (p,beta,r_min,delta) = (1.4,1,1.5,0.20), then apply the reported iteration-15 action."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "ordering of controller actions, OC updates, and snapshot checks",
+    "issue": "vague",
+    "description": "Secs. 3.2 and 3.5 do not define whether a call numbered t changes update t or update t+1, or when snapshot eligibility is checked relative to those operations.",
+    "readings": [
+     "Solve and check the current density, call the controller, then apply its parameters to OC update t.",
+     "Complete OC update t and its solve before calling the controller; apply the returned parameters starting at update t+1."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "state restored by a main-loop snapshot restart",
+    "issue": "vague",
+    "description": "Sec. 3.2 describes a snapshot reload but does not specify whether it restores only density or also parameters and controller history.",
+    "readings": [
+     "Reload raw density only; retain current parameters, histories, and iteration count.",
+     "Reload density and saved p, beta, delta, and stagnation history; retain the iteration count and enforce r_min = min(current radius, saved radius)."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "best-snapshot eligibility for the Long 2-D cantilever",
+    "issue": "vague",
+    "description": "Sec. 3.5 describes validity through volume feasibility. The Table 7 footnote adds p >= 3 and grayness < 0.25, while Sec. 4.5 invokes p >= 3 for the separate fast 2-D ablation. Their applicability to this preset is not explicitly consolidated.",
+    "readings": [
+     "A snapshot is eligible whenever it satisfies the chosen volume constraint.",
+     "A snapshot must satisfy volume feasibility and p >= 3.",
+     "A snapshot must satisfy volume feasibility, p >= 3, and physical-density grayness < 0.25."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "2-D sparse-factorization implementation and ordering",
+    "issue": "vague",
+    "description": "Sec. 3.5 specifies direct sparse factorization through SciPy but not the routine or matrix-ordering settings needed to reproduce numerical paths exactly.",
+    "readings": [
+     "Use sparse LU with COLAMD ordering.",
+     "Use sparse LU with MMD_AT_PLUS_A ordering.",
+     "Use sparse LU with natural ordering."
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 702.2533695697784,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L15",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 2,
+ "locator": "Sec. 3.5 'Benchmark problems' and Sec. 4.1, the cantilever beam, 120 x 60 'Long' preset",
+ "finished": "2026-10-22T22:23:40"
+}

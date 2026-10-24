@@ -1,0 +1,125 @@
+{
+ "task": "L20",
+ "source": {
+  "arxiv": "2607.07682",
+  "position": 73
+ },
+ "dim": 2,
+ "slots": {
+  "extent": [
+   "full",
+   "half"
+  ],
+  "sup": [
+   "node",
+   "block"
+  ]
+ },
+ "nominal": {
+  "extent": "half",
+  "sup": "node"
+ },
+ "mandatory": [],
+ "reasons": {
+  "extent": "192x64 with half-symmetry; half or full beam not stated (Sec. V-A; Fig. 2B; Fig. S11)",
+  "sup": "'both lower corners supported', drawn as small blocks; size not stated (Fig. 2B)"
+ },
+ "recon": [
+  "L-BFGS in source; OC",
+  "block support = 4-element segment ending at the corner"
+ ],
+ "keys": [
+  "extent=full|sup=node",
+  "extent=full|sup=block",
+  "extent=half|sup=node",
+  "extent=half|sup=block"
+ ],
+ "C": [
+  [
+   53.41044388645199,
+   45.94573791394208,
+   33197430.641908925,
+   25319141.616288714
+  ],
+  [
+   57.25893706072406,
+   44.61044434412151,
+   33685244.819569916,
+   25779738.931086905
+  ],
+  [
+   Infinity,
+   Infinity,
+   226.06046095586078,
+   214.65475901491365
+  ],
+  [
+   Infinity,
+   Infinity,
+   250.3158244447414,
+   207.04799195297366
+  ]
+ ],
+ "ref": {
+  "extent=full|sup=node": 53.41044388645199,
+  "extent=full|sup=block": 44.61044434412151,
+  "extent=half|sup=node": 226.06046095586078,
+  "extent=half|sup=block": 207.04799195297366
+ },
+ "ref_gap_beaten": {
+  "extent=full|sup=node": 0.0,
+  "extent=full|sup=block": 0.0,
+  "extent=half|sup=node": 0.0,
+  "extent=half|sup=block": 0.0
+ },
+ "noise": {
+  "extent=full|sup=node": 0.0005163250208478175,
+  "extent=full|sup=block": 0.003369850304073865,
+  "extent=half|sup=node": 0.0018713504384173132,
+  "extent=half|sup=block": 0.004718703015314486
+ },
+ "meta": {
+  "extent=full|sup=node": {
+   "accepted": true,
+   "kkt": 0.1442262121022203,
+   "wall_s": 52.7244896000484,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "extent=full|sup=block": {
+   "accepted": true,
+   "kkt": 0.17319518805728315,
+   "wall_s": 55.40987910004333,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "extent=half|sup=node": {
+   "accepted": true,
+   "kkt": 0.2717892127588728,
+   "wall_s": 134.58491430000868,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "extent=half|sup=block": {
+   "accepted": true,
+   "kkt": 0.602080558268252,
+   "wall_s": 122.64229849993717,
+   "n_iter": [
+    201,
+    201
+   ]
+  }
+ },
+ "counter": {
+  "optimizations": 0,
+  "factorizations": 16,
+  "backsubs": 16,
+  "opt_wall_s": 0.0
+ }
+}

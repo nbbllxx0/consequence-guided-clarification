@@ -1,0 +1,81 @@
+{
+ "task": "L34",
+ "arxiv": "1904.06556",
+ "locator": "Sec. 7.1, example CANT-16-2-2-5 (Fig. 2(a), Table 1)",
+ "figures": [
+  "fig_mesh2.png"
+ ],
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Absolute domain scale\",\n      \"issue\": \"missing\",\n      \"description\": \"The box proportions are fixed at 16:2:2, but the physical side length of a coarse-grid cube is not given.\",\n      \"readings\": [\n        \"Coarse cube side 1: domain 16 \u00d7 2 \u00d7 2.\",\n        \"Coarse cube side 0.5: domain 8 \u00d7 1 \u00d7 1.\"\n      ],\n      \"effect\": \"scale_only\",\n      \"evidence\": \"Section 7 defines the domain using equal-sized coarse cubes; Section 7.1 identifies CANT-16-2-2-5. Neither specifies a physical length.\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"Magnitude of the central cantilever load\",\n      \"issue\": \"missing\",\n      \"description\": \"The load position and direction are specified, but its magnitude is absent.\",\n      \"readings\": [\n        \"Total force magnitude 1 in consistent units.\",\n        \"Total force magnitude 10 in the same units.\"\n      ],\n      \"effect\": \"scale_only\",\n      \"evidence\": \"Section 7 specifies a z-directed load at the middle of the right face; Fig. 2(a) shows an unlabeled downward arrow.\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Prescribed material volume fraction\",\n      \"issue\": \"missing\",\n      \"description\": \"The volume constraint is defined symbolically, but no numerical volume fraction is supplied for this example.\",\n      \"readings\": [\n        \"Volume fraction 0.1.\",\n        \"Volume fraction 0.3.\",\n        \"Volume fraction 0.5.\"\n      ],\n      \"effect\": \"layout\",\n      \"evidence\": \"Equation (1) states sum_i rho_i = V. Section 7.1 and Table 1 provide no numerical V or equivalent fraction of solid volume.\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Young's modulus\",\n      \"issue\": \"missing\",\n      \"description\": \"No numerical Young's modulus is specified for the elastic material.\",\n      \"readings\": [\n        \"Young's modulus E = 1 in consistent units.\",\n        \"Young's modulus E = 2 in the same units.\"\n      ],\n      \"effect\": \"scale_only\",\n      \"evidence\": \"Equation (1) introduces element stiffness matrices K_i, and Section 6.2 specifies the finite elements; neither gives Young's modulus.\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Poisson's ratio\",\n      \"issue\": \"missing\",\n      \"description\": \"The Poisson's ratio needed for the isotropic elastic reconstruction is not specified.\",\n      \"readings\": [\n        \"Poisson's ratio nu = 0.25.\",\n        \"Poisson's ratio nu = 0.30.\",\n        \"Poisson's ratio nu = 0.35.\"\n      ],\n      \"effect\": \"layout\",\n      \"evidence\": \"Sections 6.2 and 7.1 describe the discretization and example settings without specifying Poisson's ratio.\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "Absolute domain scale",
+    "issue": "missing",
+    "description": "The box proportions are fixed at 16:2:2, but the physical side length of a coarse-grid cube is not given.",
+    "readings": [
+     "Coarse cube side 1: domain 16 \u00d7 2 \u00d7 2.",
+     "Coarse cube side 0.5: domain 8 \u00d7 1 \u00d7 1."
+    ],
+    "effect": "scale_only",
+    "evidence": "Section 7 defines the domain using equal-sized coarse cubes; Section 7.1 identifies CANT-16-2-2-5. Neither specifies a physical length."
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Magnitude of the central cantilever load",
+    "issue": "missing",
+    "description": "The load position and direction are specified, but its magnitude is absent.",
+    "readings": [
+     "Total force magnitude 1 in consistent units.",
+     "Total force magnitude 10 in the same units."
+    ],
+    "effect": "scale_only",
+    "evidence": "Section 7 specifies a z-directed load at the middle of the right face; Fig. 2(a) shows an unlabeled downward arrow."
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Prescribed material volume fraction",
+    "issue": "missing",
+    "description": "The volume constraint is defined symbolically, but no numerical volume fraction is supplied for this example.",
+    "readings": [
+     "Volume fraction 0.1.",
+     "Volume fraction 0.3.",
+     "Volume fraction 0.5."
+    ],
+    "effect": "layout",
+    "evidence": "Equation (1) states sum_i rho_i = V. Section 7.1 and Table 1 provide no numerical V or equivalent fraction of solid volume."
+   },
+   {
+    "category": "material",
+    "entity": "Young's modulus",
+    "issue": "missing",
+    "description": "No numerical Young's modulus is specified for the elastic material.",
+    "readings": [
+     "Young's modulus E = 1 in consistent units.",
+     "Young's modulus E = 2 in the same units."
+    ],
+    "effect": "scale_only",
+    "evidence": "Equation (1) introduces element stiffness matrices K_i, and Section 6.2 specifies the finite elements; neither gives Young's modulus."
+   },
+   {
+    "category": "material",
+    "entity": "Poisson's ratio",
+    "issue": "missing",
+    "description": "The Poisson's ratio needed for the isotropic elastic reconstruction is not specified.",
+    "readings": [
+     "Poisson's ratio nu = 0.25.",
+     "Poisson's ratio nu = 0.30.",
+     "Poisson's ratio nu = 0.35."
+    ],
+    "effect": "layout",
+    "evidence": "Sections 6.2 and 7.1 describe the discretization and example settings without specifying Poisson's ratio."
+   }
+  ]
+ },
+ "wall_s": 136.08655643463135,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "Reading prompt from stdin...\n",
+ "model_id": "gpt-6.1-sol",
+ "finished": "2026-10-22T18:34:26"
+}

@@ -1,0 +1,328 @@
+{
+ "raw": "{\"items\": [{\"category\": \"load_position\", \"entity\": \"Single unit point load for the Fig. 5 row-1 sample\", \"issue\": \"figure_only\", \"description\": \"Sec. 4.1 only says the load is 'randomly sampled from an element along the boundary of the domain'. The text never gives the edge or element used for this sample. The Fig. 5 caption mentions only the ground-truth, output and difference images and does not say the load is marked. At best the position could be guessed from the ground-truth topology image.\", \"readings\": [\"Top edge, element k (k=0..63): load at x=(k+0.5)/64 of the width\", \"Bottom edge, element k: load at x=(k+0.5)/64 of the width\", \"Left edge, element k: load at y=(k+0.5)/64 of the height\", \"Right edge, element k: load at y=(k+0.5)/64 of the height\"], \"effect\": \"layout\"}, {\"category\": \"load_extent_distribution\", \"entity\": \"How the element-based load is applied to FE nodes\", \"issue\": \"vague\", \"description\": \"Sec. 4.1 samples the load at a boundary element, and Eq. 24 stores it as an element load vector F_e. Supports, however, are defined on nodes, and FE forces act on nodes. The text does not say which node(s) carry the unit force, or which edge is used for a corner element.\", \"readings\": [\"Full unit force at one node of the element's outer edge (position k/64)\", \"Full unit force at the other outer-edge node (position (k+1)/64)\", \"Split equally between the two outer-edge nodes (uniform traction over one element edge)\", \"Split equally among all four element nodes\", \"Corner element: force applied at the corner node\"], \"effect\": \"layout\"}, {\"category\": \"load_direction\", \"entity\": \"Load angle for the Fig. 5 row-1 sample\", \"issue\": \"figure_only\", \"description\": \"Sec. 4.1 says the direction is 'sampled from an angle of 0 to 360\\u00b0 from 6 evenly distributed angles'. The angle used for this sample is not in the text, and the caption does not say it is drawn in Fig. 5.\", \"readings\": [\"0\\u00b0\", \"60\\u00b0\", \"120\\u00b0\", \"180\\u00b0\", \"240\\u00b0\", \"300\\u00b0\", \"72\\u00b0, 144\\u00b0, 216\\u00b0 or 288\\u00b0 (if the angles are spaced 72\\u00b0 apart)\", \"30\\u00b0, 90\\u00b0, 150\\u00b0, 210\\u00b0, 270\\u00b0 or 330\\u00b0 (offset grid, or a sample rotated 90\\u00b0 during augmentation)\"], \"effect\": \"layout\"}, {\"category\": \"load_direction\", \"entity\": \"Set of 6 'evenly distributed' admissible angles\", \"issue\": \"vague\", \"description\": \"In Sec. 4.1, 'from an angle of 0 to 360\\u00b0 from 6 evenly distributed angles' can be read as 60\\u00b0 steps with 360\\u00b0 excluded, or as linspace(0,360,6) (72\\u00b0 steps, with 0\\u00b0\\u2261360\\u00b0, giving only 5 distinct directions). Sec. 4.1 also says the data were augmented by rotation and mirroring, which can move the displayed sample's angle outside the original set.\", \"readings\": [\"{0,60,120,180,240,300}\\u00b0\", \"linspace(0,360,6) = {0,72,144,216,288,360\\u22610}\\u00b0\", \"{30,90,150,210,270,330}\\u00b0 (offset by half a step)\", \"Original set enlarged by 90\\u00b0 rotations and mirroring (e.g., all multiples of 30\\u00b0)\"], \"effect\": \"layout\"}, {\"category\": \"load_direction\", \"entity\": \"Reference axis and sense of the load angle; mapping from image to FE axes\", \"issue\": \"missing\", \"description\": \"The text does not say which axis the angle is measured from, in which direction, or how the image rows and columns in Figs. 1 and 5 map to FE x/y (y up or y down in image indexing). If this is misread, the load is mirrored relative to the supports.\", \"readings\": [\"Counter-clockwise from +x, with y pointing up (Cartesian)\", \"From +x with y pointing down (image row index), i.e., clockwise as displayed\", \"Measured from the +y (vertical) axis\"], \"effect\": \"layout\"}, {\"category\": \"support_location_extent\", \"entity\": \"Fixed supports (number and identity) for the Fig. 5 row-1 sample\", \"issue\": \"figure_only\", \"description\": \"Sec. 4.1 says each sample has 1\\u20134 boundary conditions chosen from 16 candidates: 4 corner nodes, 4 edge-midpoint nodes and 8 corner-to-midpoint half-edge node sets, all fixed in x and y. The number and choice for this sample are not in the text, and the caption does not say supports are drawn.\", \"readings\": [\"One half-edge node set clamped (e.g., left edge, y in [0, 0.5])\", \"One whole edge clamped (both half-edge sets, e.g., entire left edge)\", \"Two corner nodes pinned (e.g., (0,0) and (1,0))\", \"Corner node(s) plus edge-midpoint node(s) pinned (e.g., (0,0) and (1,0.5))\", \"Any other combination of 1\\u20134 of the 16 candidates\"], \"effect\": \"layout\"}, {\"category\": \"support_location_extent\", \"entity\": \"Extent of the half-edge (corner-to-midpoint) node sets\", \"issue\": \"vague\", \"description\": \"Sec. 4.1 says 'The sets of nodes between corners and midpoints' but does not say whether the end nodes (the corner node and the midpoint node 32 of 0..64) belong to the set.\", \"readings\": [\"Both end nodes included (33 nodes)\", \"Both end nodes excluded (31 interior nodes)\", \"Corner included, midpoint excluded (32 nodes)\", \"Midpoint included, corner excluded (32 nodes)\"], \"effect\": \"layout\"}, {\"category\": \"support_type\", \"entity\": \"Configurations with a single point support\", \"issue\": \"conflicting\", \"description\": \"Sec. 4.1 allows a single boundary condition and lists single node points as candidates. One node fixed in x and y still lets the body rotate freely, so K is singular. This contradicts Sec. 2.1, which says E_min keeps the equilibrium problem 'well defined for any valid structure'. The text does not say how such samples were handled.\", \"readings\": [\"The sample has at least 2 point supports or at least 1 half-edge set (well-posed; nothing to add)\", \"Single pinned node plus an unstated extra restraint (e.g., a roller) to stop rotation\", \"Samples with a single point support were discarded\", \"Solver regularization (e.g., weak springs) used to make K non-singular\"], \"effect\": \"layout\"}, {\"category\": \"volume_fraction\", \"entity\": \"Target volume fraction f for the Fig. 5 row-1 sample\", \"issue\": \"figure_only\", \"description\": \"Sec. 4.1 gives only the range 'from 30% to 50%' and does not say whether sampling is continuous or discrete. The value for this sample is not stated. It could only be estimated from the solid-pixel fraction of the binarized ground-truth image, which may differ from f after Heaviside thresholding.\", \"readings\": [\"0.30\", \"0.35\", \"0.40\", \"0.45\", \"0.50\", \"Solid-pixel fraction measured from the ground-truth image\"], \"effect\": \"layout\"}, {\"category\": \"material\", \"entity\": \"Young's modulus E0 used in the optimization\", \"issue\": \"vague\", \"description\": \"Sec. 4.1 gives a unit elastic modulus for the pre-processing FEA (stress and strain-energy fields on the initial domain). The text does not separately state the E0 used by the optimizer that produced the ground truth.\", \"readings\": [\"E0 = 1 (same as the pre-processing FEA)\", \"Another E0 (e.g., 200e9 Pa)\"], \"effect\": \"scale_only\"}, {\"category\": \"material\", \"entity\": \"2D stress state and Poisson's ratio in the optimization\", \"issue\": \"missing\", \"description\": \"The text never says whether plane stress or plane strain is used. \\u03bd = 0.3 is stated only for the pre-processing FEA (Sec. 4.1). Plane strain with \\u03bd = 0.3 behaves like plane stress with \\u03bd \\u2248 0.43.\", \"readings\": [\"Plane stress, \\u03bd = 0.3\", \"Plane strain, \\u03bd = 0.3\", \"Plane stress with a different \\u03bd in the optimizer\"], \"effect\": \"layout\"}, {\"category\": \"material\", \"entity\": \"Void stiffness E_min (Eq. 5)\", \"issue\": \"missing\", \"description\": \"Eq. 5 and the text after it introduce E_min but give no value.\", \"readings\": [\"E_min = 1e-9\\u00b7E0\", \"E_min = 1e-6\\u00b7E0\", \"E_min = 1e-3\\u00b7E0\"], \"effect\": \"unsure\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"SIMP penalty p\", \"issue\": \"vague\", \"description\": \"Sec. 2.1 says p is 'commonly set to 3' but does not confirm the value used for the dataset. Sec. 1 mentions continuation schemes in general without saying whether one was used.\", \"readings\": [\"p = 3, constant\", \"Continuation from p = 1 to 3\", \"Another constant p (e.g., 4)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Density or sensitivity filter type and radius\", \"issue\": \"missing\", \"description\": \"No density or sensitivity filter type or radius is given anywhere. Sec. 4.1 mentions only a Heaviside filter.\", \"readings\": [\"Density filter, r_min = 1.5 elements\", \"Density filter, r_min = 2 elements\", \"Density filter, r_min \\u2248 2.5\\u20133 elements\", \"Sensitivity filter, r_min = 1.5 elements\", \"No density or sensitivity filter (Heaviside only)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Heaviside filter / binarization of the ground truth\", \"issue\": \"vague\", \"description\": \"Sec. 4.1 says only 'with a Heaviside filter to ensure binary output images'. It does not say whether this is a projection inside the optimization or a threshold applied after convergence. \\u03b2, \\u03b7, any continuation, and whether the volume constraint uses the projected densities are all unstated.\", \"readings\": [\"Threshold at \\u03c1 = 0.5 applied after convergence\", \"Volume-preserving threshold after convergence (the f\\u00b74096 densest elements set solid)\", \"Heaviside projection during optimization, \\u03b7 = 0.5, \\u03b2 continuation (e.g., doubling from 1 to 64)\", \"Heaviside projection during optimization with fixed \\u03b2 (e.g., 8\\u201316)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Optimization method and update scheme used for the ground truth\", \"issue\": \"vague\", \"description\": \"Sec. 2.1 describes SIMP with 'an optimization algorithm such as MMA'. Sec. 4.1 refers only to 'the topology optimization method'. The method actually used and its parameters (move limits, asymptote settings) are not given.\", \"readings\": [\"SIMP + MMA with standard Svanberg settings\", \"SIMP + optimality criteria (move 0.2, damping 0.5)\", \"SIMP + GCMMA or another gradient-based optimizer\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Stopping criterion\", \"issue\": \"missing\", \"description\": \"Sec. 2.1 (Eq. 7) allows either a relative-compliance tolerance \\u03b5 or 'iteration count limits', but gives neither \\u03b5 nor an iteration limit.\", \"readings\": [\"Relative compliance change < 1e-2\", \"Relative compliance change < 1e-3\", \"Relative compliance change < 1e-4\", \"Fixed iteration cap (e.g., 100, 200 or 500)\", \"Maximum density change < 0.01\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Initial density field\", \"issue\": \"missing\", \"description\": \"No starting design is given. Sec. 1 itself notes that iterative schemes are sensitive to the initial guess.\", \"readings\": [\"Uniform \\u03c1 = f\", \"Uniform \\u03c1 = 1\", \"Random initial field\"], \"effect\": \"layout\"}, {\"category\": \"mesh\", \"entity\": \"Finite-element type on the 64\\u00d764 grid\", \"issue\": \"missing\", \"description\": \"Sec. 4.1 says only '64\\u00d764 domain of square elements'. The element formulation and integration rule are not stated.\", \"readings\": [\"4-node bilinear Q4, 2\\u00d72 Gauss integration\", \"Q4 with incompatible modes or reduced integration\", \"8-node quadratic quadrilaterals\"], \"effect\": \"unsure\"}, {\"category\": \"domain_extent\", \"entity\": \"Physical element size and out-of-plane thickness\", \"issue\": \"missing\", \"description\": \"Only the element counts (64\\u00d764) are given (Sec. 4.1); physical dimensions and thickness are not. For square 2D elements under nodal loads, compliance does not depend on element side length, and it scales as 1/t with thickness t.\", \"readings\": [\"Element side 1, thickness 1 (domain 64\\u00d764 units)\", \"Unit-square domain (element side 1/64), thickness 1\", \"Other thickness t\"], \"effect\": \"scale_only\"}, {\"category\": \"passive_region\", \"entity\": \"Passive (fixed solid or void) elements\", \"issue\": \"missing\", \"description\": \"No passive regions are mentioned. The load-discrepancy metric (Sec. 4.3, Eq. 24) expects material at the loaded element, but the text does not say whether that element was forced solid in the ground-truth optimization.\", \"readings\": [\"No passive elements\", \"Loaded boundary element forced solid (\\u03c1 = 1)\", \"Loaded and supported elements forced solid\"], \"effect\": \"unsure\"}]}",
+ "parsed": {
+  "items": [
+   {
+    "category": "load_position",
+    "entity": "Single unit point load for the Fig. 5 row-1 sample",
+    "issue": "figure_only",
+    "description": "Sec. 4.1 only says the load is 'randomly sampled from an element along the boundary of the domain'. The text never gives the edge or element used for this sample. The Fig. 5 caption mentions only the ground-truth, output and difference images and does not say the load is marked. At best the position could be guessed from the ground-truth topology image.",
+    "readings": [
+     "Top edge, element k (k=0..63): load at x=(k+0.5)/64 of the width",
+     "Bottom edge, element k: load at x=(k+0.5)/64 of the width",
+     "Left edge, element k: load at y=(k+0.5)/64 of the height",
+     "Right edge, element k: load at y=(k+0.5)/64 of the height"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "How the element-based load is applied to FE nodes",
+    "issue": "vague",
+    "description": "Sec. 4.1 samples the load at a boundary element, and Eq. 24 stores it as an element load vector F_e. Supports, however, are defined on nodes, and FE forces act on nodes. The text does not say which node(s) carry the unit force, or which edge is used for a corner element.",
+    "readings": [
+     "Full unit force at one node of the element's outer edge (position k/64)",
+     "Full unit force at the other outer-edge node (position (k+1)/64)",
+     "Split equally between the two outer-edge nodes (uniform traction over one element edge)",
+     "Split equally among all four element nodes",
+     "Corner element: force applied at the corner node"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Load angle for the Fig. 5 row-1 sample",
+    "issue": "figure_only",
+    "description": "Sec. 4.1 says the direction is 'sampled from an angle of 0 to 360\u00b0 from 6 evenly distributed angles'. The angle used for this sample is not in the text, and the caption does not say it is drawn in Fig. 5.",
+    "readings": [
+     "0\u00b0",
+     "60\u00b0",
+     "120\u00b0",
+     "180\u00b0",
+     "240\u00b0",
+     "300\u00b0",
+     "72\u00b0, 144\u00b0, 216\u00b0 or 288\u00b0 (if the angles are spaced 72\u00b0 apart)",
+     "30\u00b0, 90\u00b0, 150\u00b0, 210\u00b0, 270\u00b0 or 330\u00b0 (offset grid, or a sample rotated 90\u00b0 during augmentation)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Set of 6 'evenly distributed' admissible angles",
+    "issue": "vague",
+    "description": "In Sec. 4.1, 'from an angle of 0 to 360\u00b0 from 6 evenly distributed angles' can be read as 60\u00b0 steps with 360\u00b0 excluded, or as linspace(0,360,6) (72\u00b0 steps, with 0\u00b0\u2261360\u00b0, giving only 5 distinct directions). Sec. 4.1 also says the data were augmented by rotation and mirroring, which can move the displayed sample's angle outside the original set.",
+    "readings": [
+     "{0,60,120,180,240,300}\u00b0",
+     "linspace(0,360,6) = {0,72,144,216,288,360\u22610}\u00b0",
+     "{30,90,150,210,270,330}\u00b0 (offset by half a step)",
+     "Original set enlarged by 90\u00b0 rotations and mirroring (e.g., all multiples of 30\u00b0)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Reference axis and sense of the load angle; mapping from image to FE axes",
+    "issue": "missing",
+    "description": "The text does not say which axis the angle is measured from, in which direction, or how the image rows and columns in Figs. 1 and 5 map to FE x/y (y up or y down in image indexing). If this is misread, the load is mirrored relative to the supports.",
+    "readings": [
+     "Counter-clockwise from +x, with y pointing up (Cartesian)",
+     "From +x with y pointing down (image row index), i.e., clockwise as displayed",
+     "Measured from the +y (vertical) axis"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "Fixed supports (number and identity) for the Fig. 5 row-1 sample",
+    "issue": "figure_only",
+    "description": "Sec. 4.1 says each sample has 1\u20134 boundary conditions chosen from 16 candidates: 4 corner nodes, 4 edge-midpoint nodes and 8 corner-to-midpoint half-edge node sets, all fixed in x and y. The number and choice for this sample are not in the text, and the caption does not say supports are drawn.",
+    "readings": [
+     "One half-edge node set clamped (e.g., left edge, y in [0, 0.5])",
+     "One whole edge clamped (both half-edge sets, e.g., entire left edge)",
+     "Two corner nodes pinned (e.g., (0,0) and (1,0))",
+     "Corner node(s) plus edge-midpoint node(s) pinned (e.g., (0,0) and (1,0.5))",
+     "Any other combination of 1\u20134 of the 16 candidates"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "Extent of the half-edge (corner-to-midpoint) node sets",
+    "issue": "vague",
+    "description": "Sec. 4.1 says 'The sets of nodes between corners and midpoints' but does not say whether the end nodes (the corner node and the midpoint node 32 of 0..64) belong to the set.",
+    "readings": [
+     "Both end nodes included (33 nodes)",
+     "Both end nodes excluded (31 interior nodes)",
+     "Corner included, midpoint excluded (32 nodes)",
+     "Midpoint included, corner excluded (32 nodes)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_type",
+    "entity": "Configurations with a single point support",
+    "issue": "conflicting",
+    "description": "Sec. 4.1 allows a single boundary condition and lists single node points as candidates. One node fixed in x and y still lets the body rotate freely, so K is singular. This contradicts Sec. 2.1, which says E_min keeps the equilibrium problem 'well defined for any valid structure'. The text does not say how such samples were handled.",
+    "readings": [
+     "The sample has at least 2 point supports or at least 1 half-edge set (well-posed; nothing to add)",
+     "Single pinned node plus an unstated extra restraint (e.g., a roller) to stop rotation",
+     "Samples with a single point support were discarded",
+     "Solver regularization (e.g., weak springs) used to make K non-singular"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Target volume fraction f for the Fig. 5 row-1 sample",
+    "issue": "figure_only",
+    "description": "Sec. 4.1 gives only the range 'from 30% to 50%' and does not say whether sampling is continuous or discrete. The value for this sample is not stated. It could only be estimated from the solid-pixel fraction of the binarized ground-truth image, which may differ from f after Heaviside thresholding.",
+    "readings": [
+     "0.30",
+     "0.35",
+     "0.40",
+     "0.45",
+     "0.50",
+     "Solid-pixel fraction measured from the ground-truth image"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Young's modulus E0 used in the optimization",
+    "issue": "vague",
+    "description": "Sec. 4.1 gives a unit elastic modulus for the pre-processing FEA (stress and strain-energy fields on the initial domain). The text does not separately state the E0 used by the optimizer that produced the ground truth.",
+    "readings": [
+     "E0 = 1 (same as the pre-processing FEA)",
+     "Another E0 (e.g., 200e9 Pa)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "2D stress state and Poisson's ratio in the optimization",
+    "issue": "missing",
+    "description": "The text never says whether plane stress or plane strain is used. \u03bd = 0.3 is stated only for the pre-processing FEA (Sec. 4.1). Plane strain with \u03bd = 0.3 behaves like plane stress with \u03bd \u2248 0.43.",
+    "readings": [
+     "Plane stress, \u03bd = 0.3",
+     "Plane strain, \u03bd = 0.3",
+     "Plane stress with a different \u03bd in the optimizer"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Void stiffness E_min (Eq. 5)",
+    "issue": "missing",
+    "description": "Eq. 5 and the text after it introduce E_min but give no value.",
+    "readings": [
+     "E_min = 1e-9\u00b7E0",
+     "E_min = 1e-6\u00b7E0",
+     "E_min = 1e-3\u00b7E0"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "SIMP penalty p",
+    "issue": "vague",
+    "description": "Sec. 2.1 says p is 'commonly set to 3' but does not confirm the value used for the dataset. Sec. 1 mentions continuation schemes in general without saying whether one was used.",
+    "readings": [
+     "p = 3, constant",
+     "Continuation from p = 1 to 3",
+     "Another constant p (e.g., 4)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Density or sensitivity filter type and radius",
+    "issue": "missing",
+    "description": "No density or sensitivity filter type or radius is given anywhere. Sec. 4.1 mentions only a Heaviside filter.",
+    "readings": [
+     "Density filter, r_min = 1.5 elements",
+     "Density filter, r_min = 2 elements",
+     "Density filter, r_min \u2248 2.5\u20133 elements",
+     "Sensitivity filter, r_min = 1.5 elements",
+     "No density or sensitivity filter (Heaviside only)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Heaviside filter / binarization of the ground truth",
+    "issue": "vague",
+    "description": "Sec. 4.1 says only 'with a Heaviside filter to ensure binary output images'. It does not say whether this is a projection inside the optimization or a threshold applied after convergence. \u03b2, \u03b7, any continuation, and whether the volume constraint uses the projected densities are all unstated.",
+    "readings": [
+     "Threshold at \u03c1 = 0.5 applied after convergence",
+     "Volume-preserving threshold after convergence (the f\u00b74096 densest elements set solid)",
+     "Heaviside projection during optimization, \u03b7 = 0.5, \u03b2 continuation (e.g., doubling from 1 to 64)",
+     "Heaviside projection during optimization with fixed \u03b2 (e.g., 8\u201316)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Optimization method and update scheme used for the ground truth",
+    "issue": "vague",
+    "description": "Sec. 2.1 describes SIMP with 'an optimization algorithm such as MMA'. Sec. 4.1 refers only to 'the topology optimization method'. The method actually used and its parameters (move limits, asymptote settings) are not given.",
+    "readings": [
+     "SIMP + MMA with standard Svanberg settings",
+     "SIMP + optimality criteria (move 0.2, damping 0.5)",
+     "SIMP + GCMMA or another gradient-based optimizer"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Stopping criterion",
+    "issue": "missing",
+    "description": "Sec. 2.1 (Eq. 7) allows either a relative-compliance tolerance \u03b5 or 'iteration count limits', but gives neither \u03b5 nor an iteration limit.",
+    "readings": [
+     "Relative compliance change < 1e-2",
+     "Relative compliance change < 1e-3",
+     "Relative compliance change < 1e-4",
+     "Fixed iteration cap (e.g., 100, 200 or 500)",
+     "Maximum density change < 0.01"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial density field",
+    "issue": "missing",
+    "description": "No starting design is given. Sec. 1 itself notes that iterative schemes are sensitive to the initial guess.",
+    "readings": [
+     "Uniform \u03c1 = f",
+     "Uniform \u03c1 = 1",
+     "Random initial field"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Finite-element type on the 64\u00d764 grid",
+    "issue": "missing",
+    "description": "Sec. 4.1 says only '64\u00d764 domain of square elements'. The element formulation and integration rule are not stated.",
+    "readings": [
+     "4-node bilinear Q4, 2\u00d72 Gauss integration",
+     "Q4 with incompatible modes or reduced integration",
+     "8-node quadratic quadrilaterals"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "Physical element size and out-of-plane thickness",
+    "issue": "missing",
+    "description": "Only the element counts (64\u00d764) are given (Sec. 4.1); physical dimensions and thickness are not. For square 2D elements under nodal loads, compliance does not depend on element side length, and it scales as 1/t with thickness t.",
+    "readings": [
+     "Element side 1, thickness 1 (domain 64\u00d764 units)",
+     "Unit-square domain (element side 1/64), thickness 1",
+     "Other thickness t"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Passive (fixed solid or void) elements",
+    "issue": "missing",
+    "description": "No passive regions are mentioned. The load-discrepancy metric (Sec. 4.3, Eq. 24) expects material at the loaded element, but the text does not say whether that element was forced solid in the ground-truth optimization.",
+    "readings": [
+     "No passive elements",
+     "Loaded boundary element forced solid (\u03c1 = 1)",
+     "Loaded and supported elements forced solid"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 342.795610666275,
+ "returncode": 0,
+ "meta": {
+  "model": null,
+  "num_turns": 2,
+  "is_error": false,
+  "total_cost_usd": 0.8971188000000001,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 16712,
+   "cache_read_input_tokens": 774,
+   "output_tokens": 38163,
+   "output_tokens_details": {
+    "thinking_tokens": 33690
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 16712,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 38163,
+     "cache_read_input_tokens": 774,
+     "cache_creation_input_tokens": 16712,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 16712
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard",
+   "fallback_credit": null
+  }
+ },
+ "stderr_tail": "",
+ "task": "L43",
+ "model": "claude",
+ "model_id": "claude-opus-5-5",
+ "rep": 0,
+ "locator": "Sec. 4.3, Fig. 5, row 1",
+ "finished": "2026-10-22T19:28:58"
+}

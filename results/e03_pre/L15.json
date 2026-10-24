@@ -1,0 +1,84 @@
+{
+ "task": "L15",
+ "source": {
+  "arxiv": "2603.25099",
+  "position": 79
+ },
+ "dim": 2,
+ "slots": {
+  "pos": [
+   "corner",
+   "mid"
+  ],
+  "dir": [
+   "down"
+  ]
+ },
+ "nominal": {
+  "pos": "mid",
+  "dir": "down"
+ },
+ "mandatory": [
+  "dir"
+ ],
+ "reasons": {
+  "pos": "'tip load' only; corner vs mid-height not stated (Sec. 3.5; Fig. 6 symmetric designs)",
+  "dir": "load direction not stated: mandatory"
+ },
+ "recon": [
+  "square elements assumed (only 120x60 stated)",
+  "point force as 4-element patch"
+ ],
+ "keys": [
+  "dir=down|pos=corner",
+  "dir=down|pos=mid"
+ ],
+ "C": [
+  [
+   79.89933562261467,
+   2000686.0653687876
+  ],
+  [
+   4979618.287957967,
+   75.3010257688659
+  ]
+ ],
+ "ref": {
+  "dir=down|pos=corner": 79.89933562261466,
+  "dir=down|pos=mid": 75.3010257688659
+ },
+ "ref_gap_beaten": {
+  "dir=down|pos=corner": 0.0,
+  "dir=down|pos=mid": 0.0
+ },
+ "noise": {
+  "dir=down|pos=corner": 0.005527152080341323,
+  "dir=down|pos=mid": 0.003179965137101274
+ },
+ "meta": {
+  "dir=down|pos=corner": {
+   "accepted": true,
+   "kkt": 0.09818575661791186,
+   "wall_s": 66.68234759999905,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "dir=down|pos=mid": {
+   "accepted": true,
+   "kkt": 0.04869174678659413,
+   "wall_s": 60.030297499964945,
+   "n_iter": [
+    201,
+    201
+   ]
+  }
+ },
+ "counter": {
+  "optimizations": 0,
+  "factorizations": 2,
+  "backsubs": 4,
+  "opt_wall_s": 0.0
+ }
+}

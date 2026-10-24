@@ -1,0 +1,262 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"beam length, height, and aspect ratio\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 2.1 and 4 give no physical dimensions or length-to-height ratio. Counts of 120 by 60 hexagonal elements do not independently determine these dimensions.\",\n      \"readings\": [\n        \"Rectangular domain with L=2 and H=1.\",\n        \"Rectangular domain with L=4 and H=1.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 specifies a two-dimensional problem without a thickness or per-unit-thickness convention.\",\n      \"readings\": [\n        \"Uniform thickness t=1 in consistent length units.\",\n        \"Uniform thickness t=0.1 in the same units.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"concentrated load at the lower-right corner\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 2.1 refers to Fig. 1 for loading. Its caption determines the lower-right corner, but neither prose nor caption supplies the force direction.\",\n      \"readings\": [\n        \"Vertically downward: F=(0,-P).\",\n        \"Horizontally outward: F=(P,0).\",\n        \"Diagonally downward and outward: F=(P/sqrt(2),-P/sqrt(2)).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"concentrated load at the lower-right corner\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1, the Fig. 1 caption, and Sec. 4 give no load magnitude or force normalization.\",\n      \"readings\": [\n        \"P=1 in consistent solver force units.\",\n        \"P=10 in the same force units.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"nondesign regions near the support and load\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 2.1 and 4 do not specify whether any cells are fixed solid or void, including support and load pads, or how fixed-solid volume would be counted.\",\n      \"readings\": [\n        \"Every domain cell is designable; there are no passive regions.\",\n        \"Fix a one-cell-wide strip along the left edge and the load-corner cell solid; include their volume in the whole-domain volume budget.\",\n        \"Use the same fixed-solid cells, but apply the prescribed fraction only to the remaining designable cells.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"single-material volume-fraction limit\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (1) introduces V_fm, but no numerical value is supplied for the M=1 extended SIMP result in Sec. 4 or Table 2.\",\n      \"readings\": [\n        \"V_f1=0.3.\",\n        \"V_f1=0.4.\",\n        \"V_f1=0.5.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"density field used to evaluate material volume\",\n      \"issue\": \"vague\",\n      \"description\": \"Eq. (1) leaves V(x) undefined. Sec. 2.2.1 explicitly sends projected densities into stiffness interpolation, but does not identify the density field used in the volume constraint.\",\n      \"readings\": [\n        \"Constrain the volume-weighted mean of raw design variables x_e.\",\n        \"Constrain the volume-weighted mean of filtered variables tilde{x}_e.\",\n        \"Constrain the volume-weighted mean of projected physical variables x_e^phys.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Poisson's ratio\",\n      \"issue\": \"missing\",\n      \"description\": \"The material descriptions and Sec. 4 provide Young's moduli but no Poisson's ratio for constructing the elastic constitutive matrix.\",\n      \"readings\": [\n        \"Use constant nu=0.3 throughout the domain.\",\n        \"Use constant nu=0.25 throughout the domain.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"two-dimensional constitutive assumption\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 calls the beam two-dimensional without specifying plane stress or plane strain.\",\n      \"readings\": [\n        \"Plane stress.\",\n        \"Plane strain.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"phase counting, modulus assignment, and void stiffness\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Table 1 gives phase 1 modulus 1 and void modulus 10^-9, while Eq. (14) generates a zero-modulus phase with ascending numbering. It does not explain whether N_MP includes void; using N_MP=1 makes Eq. (14) undefined. Eq. (4) separately requires nonzero void stiffness.\",\n      \"readings\": [\n        \"Follow Table 1 and Eq. (4): E_1=1 and E_min=10^-9; interpret Eq. (14)'s zero as nominal void before regularization.\",\n        \"Follow Eq. (14) literally with two phases including void: solid modulus 1 and void modulus 0, with zero-stiffness degrees of freedom handled explicitly.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"SIMP penalization exponent\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.0.1 introduces p in Eq. (4), but neither its value nor a continuation policy is given.\",\n      \"readings\": [\n        \"Keep p=3 throughout optimization.\",\n        \"Keep p=4 throughout optimization.\",\n        \"Start at p=1 and increase by 0.5 every 50 iterations until p=3.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"density-filter weights\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (2) normalizes weights W_ej but never defines their functional form.\",\n      \"readings\": [\n        \"Cone weights: W_ej=max(0,r-d_ej).\",\n        \"Uniform weights: W_ej=1 for d_ej<r and zero otherwise.\",\n        \"Truncated Gaussian weights: W_ej=exp(-d_ej^2/(2(r/2)^2)) for d_ej<r and zero otherwise.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"filter distance and neighborhood\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2.2.1 says the neighborhood is determined by a radius without specifying the distance metric or how hexagonal neighbors are selected.\",\n      \"readings\": [\n        \"Use Euclidean distance between physical element centroids.\",\n        \"Use Euclidean distance between row and column indices.\",\n        \"Use shortest-path distance on the hexagonal element-adjacency graph.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"physical interpretation of filter radius 4\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4 specifies r_fill=4 without units or a conversion from the hexagonal mesh to a structured grid.\",\n      \"readings\": [\n        \"Radius equals four Cartesian cell widths.\",\n        \"Radius equals four original hexagon side lengths.\",\n        \"Radius equals four original nearest-neighbor centroid spacings.\",\n        \"Radius equals 4 in the coordinates used for the domain geometry.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"projection continuation schedule\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 fixes beta's initial value at 1 and maximum at 32, but gives no intermediate sequence, update interval, or advancement criterion.\",\n      \"readings\": [\n        \"Double beta through 1,2,4,8,16,32 every 50 iterations.\",\n        \"Double beta through 1,2,4,8,16,32 every 100 iterations.\",\n        \"Double beta whenever the maximum design-variable change falls below 0.01.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"initial design\",\n      \"issue\": \"missing\",\n      \"description\": \"No initial density field is specified for the M=1 SIMP optimization.\",\n      \"readings\": [\n        \"Initialize every raw design variable to V_f1.\",\n        \"Initialize every raw design variable to 0.5.\",\n        \"Initialize every raw design variable to 1.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"MMA update parameters\",\n      \"issue\": \"missing\",\n      \"description\": \"The abstract and introduction name MMA, but do not provide move limits, initial asymptotes, asymptote adaptation factors, or subproblem parameters.\",\n      \"readings\": [\n        \"Use move limit 0.2, initial asymptote distance 0.5, expansion factor 1.2, contraction factor 0.7, and MMA parameters a0=1, a=0, c=1000, d=0.\",\n        \"Use move limit 0.1, initial asymptote distance 0.25, expansion factor 1.05, contraction factor 0.5, and MMA parameters a0=1, a=0, c=10000, d=0.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"optimization termination\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 gives no maximum iteration count, convergence tolerance, feasibility tolerance, or final-stage stopping criterion.\",\n      \"readings\": [\n        \"At beta=32, stop when maximum design-variable change is below 10^-3 and volume violation is below 10^-6; cap at 1000 iterations.\",\n        \"At beta=32, stop when relative compliance change stays below 10^-5 for five iterations and volume violation is below 10^-4; cap at 500 iterations.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"hexagonal mesh geometry and boundary construction\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4 supplies HoneyMesher's nominal horizontal and vertical counts, but not element pitch, orientation, staggering, node coordinates, or boundary trimming. The Fig. 1 image is unavailable.\",\n      \"readings\": [\n        \"Flat-top hexagons with staggered columns and complete boundary hexagons.\",\n        \"Pointy-top hexagons with staggered rows and complete boundary hexagons.\",\n        \"A hexagonal interior mesh trimmed to an exact rectangular boundary.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"structured-grid replacement and element formulation\",\n      \"issue\": \"missing\",\n      \"description\": \"The stated 120-by-60 counts apply to hexagonal FEs. No equivalent Cartesian resolution, element stiffness formulation, or integration rule is prescribed. A structured-grid replacement therefore cannot be assumed numerically identical to the paper's discretization.\",\n      \"readings\": [\n        \"Use 120 by 60 bilinear quadrilateral elements with full 2-by-2 Gauss integration.\",\n        \"Use 240 by 120 bilinear quadrilateral elements with full integration on the same physical domain.\",\n        \"Use 120 by 60 bilinear quadrilateral elements with stabilized reduced integration.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"equilibrium-solve accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (1) states equilibrium, but no numerical solution method or residual tolerance is reported for evaluating compliance and sensitivities.\",\n      \"readings\": [\n        \"Use a sparse direct solve in double precision.\",\n        \"Use an iterative solve with relative residual tolerance 10^-6.\",\n        \"Use an iterative solve with relative residual tolerance 10^-10.\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "beam length, height, and aspect ratio",
+    "issue": "missing",
+    "description": "Secs. 2.1 and 4 give no physical dimensions or length-to-height ratio. Counts of 120 by 60 hexagonal elements do not independently determine these dimensions.",
+    "readings": [
+     "Rectangular domain with L=2 and H=1.",
+     "Rectangular domain with L=4 and H=1."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "out-of-plane thickness",
+    "issue": "missing",
+    "description": "Sec. 2.1 specifies a two-dimensional problem without a thickness or per-unit-thickness convention.",
+    "readings": [
+     "Uniform thickness t=1 in consistent length units.",
+     "Uniform thickness t=0.1 in the same units."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "load_direction",
+    "entity": "concentrated load at the lower-right corner",
+    "issue": "figure_only",
+    "description": "Sec. 2.1 refers to Fig. 1 for loading. Its caption determines the lower-right corner, but neither prose nor caption supplies the force direction.",
+    "readings": [
+     "Vertically downward: F=(0,-P).",
+     "Horizontally outward: F=(P,0).",
+     "Diagonally downward and outward: F=(P/sqrt(2),-P/sqrt(2))."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "concentrated load at the lower-right corner",
+    "issue": "missing",
+    "description": "Sec. 2.1, the Fig. 1 caption, and Sec. 4 give no load magnitude or force normalization.",
+    "readings": [
+     "P=1 in consistent solver force units.",
+     "P=10 in the same force units."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "nondesign regions near the support and load",
+    "issue": "missing",
+    "description": "Secs. 2.1 and 4 do not specify whether any cells are fixed solid or void, including support and load pads, or how fixed-solid volume would be counted.",
+    "readings": [
+     "Every domain cell is designable; there are no passive regions.",
+     "Fix a one-cell-wide strip along the left edge and the load-corner cell solid; include their volume in the whole-domain volume budget.",
+     "Use the same fixed-solid cells, but apply the prescribed fraction only to the remaining designable cells."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "single-material volume-fraction limit",
+    "issue": "missing",
+    "description": "Eq. (1) introduces V_fm, but no numerical value is supplied for the M=1 extended SIMP result in Sec. 4 or Table 2.",
+    "readings": [
+     "V_f1=0.3.",
+     "V_f1=0.4.",
+     "V_f1=0.5."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "density field used to evaluate material volume",
+    "issue": "vague",
+    "description": "Eq. (1) leaves V(x) undefined. Sec. 2.2.1 explicitly sends projected densities into stiffness interpolation, but does not identify the density field used in the volume constraint.",
+    "readings": [
+     "Constrain the volume-weighted mean of raw design variables x_e.",
+     "Constrain the volume-weighted mean of filtered variables tilde{x}_e.",
+     "Constrain the volume-weighted mean of projected physical variables x_e^phys."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson's ratio",
+    "issue": "missing",
+    "description": "The material descriptions and Sec. 4 provide Young's moduli but no Poisson's ratio for constructing the elastic constitutive matrix.",
+    "readings": [
+     "Use constant nu=0.3 throughout the domain.",
+     "Use constant nu=0.25 throughout the domain."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "two-dimensional constitutive assumption",
+    "issue": "missing",
+    "description": "Sec. 2.1 calls the beam two-dimensional without specifying plane stress or plane strain.",
+    "readings": [
+     "Plane stress.",
+     "Plane strain."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "phase counting, modulus assignment, and void stiffness",
+    "issue": "conflicting",
+    "description": "Table 1 gives phase 1 modulus 1 and void modulus 10^-9, while Eq. (14) generates a zero-modulus phase with ascending numbering. It does not explain whether N_MP includes void; using N_MP=1 makes Eq. (14) undefined. Eq. (4) separately requires nonzero void stiffness.",
+    "readings": [
+     "Follow Table 1 and Eq. (4): E_1=1 and E_min=10^-9; interpret Eq. (14)'s zero as nominal void before regularization.",
+     "Follow Eq. (14) literally with two phases including void: solid modulus 1 and void modulus 0, with zero-stiffness degrees of freedom handled explicitly."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "SIMP penalization exponent",
+    "issue": "missing",
+    "description": "Sec. 3.0.1 introduces p in Eq. (4), but neither its value nor a continuation policy is given.",
+    "readings": [
+     "Keep p=3 throughout optimization.",
+     "Keep p=4 throughout optimization.",
+     "Start at p=1 and increase by 0.5 every 50 iterations until p=3."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "density-filter weights",
+    "issue": "missing",
+    "description": "Eq. (2) normalizes weights W_ej but never defines their functional form.",
+    "readings": [
+     "Cone weights: W_ej=max(0,r-d_ej).",
+     "Uniform weights: W_ej=1 for d_ej<r and zero otherwise.",
+     "Truncated Gaussian weights: W_ej=exp(-d_ej^2/(2(r/2)^2)) for d_ej<r and zero otherwise."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "filter distance and neighborhood",
+    "issue": "vague",
+    "description": "Sec. 2.2.1 says the neighborhood is determined by a radius without specifying the distance metric or how hexagonal neighbors are selected.",
+    "readings": [
+     "Use Euclidean distance between physical element centroids.",
+     "Use Euclidean distance between row and column indices.",
+     "Use shortest-path distance on the hexagonal element-adjacency graph."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "physical interpretation of filter radius 4",
+    "issue": "vague",
+    "description": "Sec. 4 specifies r_fill=4 without units or a conversion from the hexagonal mesh to a structured grid.",
+    "readings": [
+     "Radius equals four Cartesian cell widths.",
+     "Radius equals four original hexagon side lengths.",
+     "Radius equals four original nearest-neighbor centroid spacings.",
+     "Radius equals 4 in the coordinates used for the domain geometry."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "projection continuation schedule",
+    "issue": "missing",
+    "description": "Sec. 4 fixes beta's initial value at 1 and maximum at 32, but gives no intermediate sequence, update interval, or advancement criterion.",
+    "readings": [
+     "Double beta through 1,2,4,8,16,32 every 50 iterations.",
+     "Double beta through 1,2,4,8,16,32 every 100 iterations.",
+     "Double beta whenever the maximum design-variable change falls below 0.01."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "initial design",
+    "issue": "missing",
+    "description": "No initial density field is specified for the M=1 SIMP optimization.",
+    "readings": [
+     "Initialize every raw design variable to V_f1.",
+     "Initialize every raw design variable to 0.5.",
+     "Initialize every raw design variable to 1."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "MMA update parameters",
+    "issue": "missing",
+    "description": "The abstract and introduction name MMA, but do not provide move limits, initial asymptotes, asymptote adaptation factors, or subproblem parameters.",
+    "readings": [
+     "Use move limit 0.2, initial asymptote distance 0.5, expansion factor 1.2, contraction factor 0.7, and MMA parameters a0=1, a=0, c=1000, d=0.",
+     "Use move limit 0.1, initial asymptote distance 0.25, expansion factor 1.05, contraction factor 0.5, and MMA parameters a0=1, a=0, c=10000, d=0."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "optimization termination",
+    "issue": "missing",
+    "description": "Sec. 4 gives no maximum iteration count, convergence tolerance, feasibility tolerance, or final-stage stopping criterion.",
+    "readings": [
+     "At beta=32, stop when maximum design-variable change is below 10^-3 and volume violation is below 10^-6; cap at 1000 iterations.",
+     "At beta=32, stop when relative compliance change stays below 10^-5 for five iterations and volume violation is below 10^-4; cap at 500 iterations."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "hexagonal mesh geometry and boundary construction",
+    "issue": "vague",
+    "description": "Sec. 4 supplies HoneyMesher's nominal horizontal and vertical counts, but not element pitch, orientation, staggering, node coordinates, or boundary trimming. The Fig. 1 image is unavailable.",
+    "readings": [
+     "Flat-top hexagons with staggered columns and complete boundary hexagons.",
+     "Pointy-top hexagons with staggered rows and complete boundary hexagons.",
+     "A hexagonal interior mesh trimmed to an exact rectangular boundary."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "structured-grid replacement and element formulation",
+    "issue": "missing",
+    "description": "The stated 120-by-60 counts apply to hexagonal FEs. No equivalent Cartesian resolution, element stiffness formulation, or integration rule is prescribed. A structured-grid replacement therefore cannot be assumed numerically identical to the paper's discretization.",
+    "readings": [
+     "Use 120 by 60 bilinear quadrilateral elements with full 2-by-2 Gauss integration.",
+     "Use 240 by 120 bilinear quadrilateral elements with full integration on the same physical domain.",
+     "Use 120 by 60 bilinear quadrilateral elements with stabilized reduced integration."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "equilibrium-solve accuracy",
+    "issue": "missing",
+    "description": "Eq. (1) states equilibrium, but no numerical solution method or residual tolerance is reported for evaluating compliance and sensitivities.",
+    "readings": [
+     "Use a sparse direct solve in double precision.",
+     "Use an iterative solve with relative residual tolerance 10^-6.",
+     "Use an iterative solve with relative residual tolerance 10^-10."
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 637.7870538234711,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L28",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 2,
+ "locator": "Sec. 2.1 / Sec. 4, the cantilever beam of Fig. 1, single-material extended SIMP case",
+ "finished": "2026-10-22T22:54:27"
+}

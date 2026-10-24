@@ -1,0 +1,126 @@
+{
+ "task": "L05",
+ "source": {
+  "arxiv": "1708.07364",
+  "position": 38
+ },
+ "dim": 2,
+ "slots": {
+  "dir": [
+   "down",
+   "up"
+  ],
+  "rmin": [
+   1.5,
+   2.0
+  ]
+ },
+ "nominal": {
+  "dir": "down",
+  "rmin": 1.5
+ },
+ "mandatory": [
+  "dir"
+ ],
+ "reasons": {
+  "dir": "downward only in figure: mandatory (compliance is sign-invariant)",
+  "rmin": "Sec. 4 default 2 vs Fig. 7 caption 1.5 (conflict)"
+ },
+ "recon": [
+  "point force as 4-element patch"
+ ],
+ "keys": [
+  "dir=down|rmin=1.5",
+  "dir=down|rmin=2.0",
+  "dir=up|rmin=1.5",
+  "dir=up|rmin=2.0"
+ ],
+ "C": [
+  [
+   92.46292978051649,
+   Infinity,
+   92.46292978051649,
+   Infinity
+  ],
+  [
+   92.68550451222652,
+   92.68550451222652,
+   92.68550451222652,
+   92.68550451222652
+  ],
+  [
+   92.46292978051649,
+   Infinity,
+   92.46292978051649,
+   Infinity
+  ],
+  [
+   92.68550451222652,
+   92.68550451222652,
+   92.68550451222652,
+   92.68550451222652
+  ]
+ ],
+ "ref": {
+  "dir=down|rmin=1.5": 92.46292978051649,
+  "dir=down|rmin=2.0": 92.68550451222649,
+  "dir=up|rmin=1.5": 92.46292978051649,
+  "dir=up|rmin=2.0": 92.68550451222649
+ },
+ "ref_gap_beaten": {
+  "dir=down|rmin=1.5": 4.440892098500626e-16,
+  "dir=down|rmin=2.0": 0.0,
+  "dir=up|rmin=1.5": 4.440892098500626e-16,
+  "dir=up|rmin=2.0": 0.0
+ },
+ "noise": {
+  "dir=down|rmin=1.5": 9.135372652355673e-05,
+  "dir=down|rmin=2.0": 0.0003244053573373491,
+  "dir=up|rmin=1.5": 9.135372652355673e-05,
+  "dir=up|rmin=2.0": 0.0003244053573373491
+ },
+ "meta": {
+  "dir=down|rmin=1.5": {
+   "accepted": true,
+   "kkt": 0.07391734549472573,
+   "wall_s": 63.69870249996893,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "dir=down|rmin=2.0": {
+   "accepted": true,
+   "kkt": 0.12321714684926546,
+   "wall_s": 70.94270580005832,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "dir=up|rmin=1.5": {
+   "accepted": true,
+   "kkt": 0.07391734549472573,
+   "wall_s": 68.18195130000822,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "dir=up|rmin=2.0": {
+   "accepted": true,
+   "kkt": 0.12321714684926546,
+   "wall_s": 68.48341830004938,
+   "n_iter": [
+    201,
+    201
+   ]
+  }
+ },
+ "counter": {
+  "optimizations": 0,
+  "factorizations": 4,
+  "backsubs": 16,
+  "opt_wall_s": 0.0
+ }
+}

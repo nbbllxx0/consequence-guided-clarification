@@ -1,0 +1,125 @@
+{
+ "task": "L42",
+ "source": {
+  "arxiv": "2503.16211",
+  "position": 202
+ },
+ "dim": 2,
+ "slots": {
+  "sup": [
+   "pins",
+   "clamp"
+  ],
+  "ar": [
+   "2.5",
+   "3.0"
+  ]
+ },
+ "nominal": {
+  "sup": "clamp",
+  "ar": "2.5"
+ },
+ "mandatory": [],
+ "reasons": {
+  "sup": "'Fixed Nodes' drawn only at the two left corners; two pins vs clamped edge (Fig. 1(a))",
+  "ar": "drawn 20x8 grid (2.5:1) vs near-square cells of Fig. 1(d) (3:1) (adjudicator B)"
+ },
+ "recon": [
+  "20x8 drawn grid refined 3x to 60x24",
+  "filter radius not stated: rmin 1.5"
+ ],
+ "keys": [
+  "ar=2.5|sup=pins",
+  "ar=3.0|sup=pins",
+  "ar=2.5|sup=clamp",
+  "ar=3.0|sup=clamp"
+ ],
+ "C": [
+  [
+   149.63910013690548,
+   4288466.920596007,
+   116.98852537103876,
+   4288404.240229851
+  ],
+  [
+   Infinity,
+   239.09000115306117,
+   Infinity,
+   188.2016639285665
+  ],
+  [
+   153.6577969256624,
+   4351039.012933105,
+   108.05680305163234,
+   4350962.773987759
+  ],
+  [
+   Infinity,
+   248.9404105681944,
+   Infinity,
+   174.01104676980864
+  ]
+ ],
+ "ref": {
+  "ar=2.5|sup=pins": 149.63910013690548,
+  "ar=3.0|sup=pins": 239.09000115306117,
+  "ar=2.5|sup=clamp": 108.05680305163234,
+  "ar=3.0|sup=clamp": 174.01104676980864
+ },
+ "ref_gap_beaten": {
+  "ar=2.5|sup=pins": 0.0,
+  "ar=3.0|sup=pins": 0.0,
+  "ar=2.5|sup=clamp": 0.0,
+  "ar=3.0|sup=clamp": 0.0
+ },
+ "noise": {
+  "ar=2.5|sup=pins": 8.527479537125846e-05,
+  "ar=3.0|sup=pins": 0.0009623487671611649,
+  "ar=2.5|sup=clamp": 0.0013559941266428036,
+  "ar=3.0|sup=clamp": 0.0025769003413765577
+ },
+ "meta": {
+  "ar=2.5|sup=pins": {
+   "accepted": true,
+   "kkt": 0.022551090963760023,
+   "wall_s": 8.107074399944395,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "ar=3.0|sup=pins": {
+   "accepted": true,
+   "kkt": 0.0664740367401341,
+   "wall_s": 9.635782800032757,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "ar=2.5|sup=clamp": {
+   "accepted": true,
+   "kkt": 0.0471078708696734,
+   "wall_s": 6.871322599938139,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "ar=3.0|sup=clamp": {
+   "accepted": true,
+   "kkt": 0.0522410378585314,
+   "wall_s": 8.495120399980806,
+   "n_iter": [
+    201,
+    201
+   ]
+  }
+ },
+ "counter": {
+  "optimizations": 0,
+  "factorizations": 16,
+  "backsubs": 16,
+  "opt_wall_s": 0.0
+ }
+}

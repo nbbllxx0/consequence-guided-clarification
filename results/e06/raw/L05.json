@@ -1,0 +1,43 @@
+{
+ "task": "L05",
+ "arxiv": "1708.07364",
+ "locator": "Sec. 4.1, Fig. 7, the rectangular cantilever",
+ "figures": [
+  "long-beam-domain.png"
+ ],
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"Right-edge midpoint force\",\n      \"issue\": \"missing\",\n      \"description\": \"The single downward point force has no stated numerical magnitude.\",\n      \"readings\": [\n        \"Unit downward force, F_y = -1.\",\n        \"Downward force with another dimensionless normalization, for example F_y = -2.\"\n      ],\n      \"effect\": \"scale_only\",\n      \"evidence\": \"Sec. 4 states that load data are dimensionless. Sec. 4.1 specifies the force location, and Fig. 7(a) shows its downward direction, but neither supplies a magnitude.\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Two-dimensional constitutive assumption\",\n      \"issue\": \"missing\",\n      \"description\": \"The paper does not specify whether the rectangular cantilever uses plane stress or plane strain.\",\n      \"readings\": [\n        \"Plane stress with E = 1 and Poisson's ratio = 0.3.\",\n        \"Plane strain with E = 1 and Poisson's ratio = 0.3.\"\n      ],\n      \"effect\": \"layout\",\n      \"evidence\": \"Sec. 4 specifies E = 1 and Poisson's ratio = 0.3. Sec. 4.1 and Fig. 7(a) define the two-dimensional domain without specifying the constitutive reduction.\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "load_magnitude",
+    "entity": "Right-edge midpoint force",
+    "issue": "missing",
+    "description": "The single downward point force has no stated numerical magnitude.",
+    "readings": [
+     "Unit downward force, F_y = -1.",
+     "Downward force with another dimensionless normalization, for example F_y = -2."
+    ],
+    "effect": "scale_only",
+    "evidence": "Sec. 4 states that load data are dimensionless. Sec. 4.1 specifies the force location, and Fig. 7(a) shows its downward direction, but neither supplies a magnitude."
+   },
+   {
+    "category": "material",
+    "entity": "Two-dimensional constitutive assumption",
+    "issue": "missing",
+    "description": "The paper does not specify whether the rectangular cantilever uses plane stress or plane strain.",
+    "readings": [
+     "Plane stress with E = 1 and Poisson's ratio = 0.3.",
+     "Plane strain with E = 1 and Poisson's ratio = 0.3."
+    ],
+    "effect": "layout",
+    "evidence": "Sec. 4 specifies E = 1 and Poisson's ratio = 0.3. Sec. 4.1 and Fig. 7(a) define the two-dimensional domain without specifying the constitutive reduction."
+   }
+  ]
+ },
+ "wall_s": 104.75618028640747,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "Reading prompt from stdin...\n",
+ "model_id": "gpt-6.1-sol",
+ "finished": "2026-10-22T17:56:05"
+}

@@ -1,0 +1,311 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Fig. 1 design-domain geometry and dimensions\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 2 and the Fig. 1 caption give no domain outline, aspect ratio, dimensions, or length units. Sec. 5.1 describes square dataset domains but does not identify Fig. 1 as a dataset sample.\",\n      \"readings\": [\n        \"Square domain [0,1] \u00d7 [0,1].\",\n        \"Rectangular domain [0,2] \u00d7 [0,1].\",\n        \"Square domain [0,64] \u00d7 [0,64], with unit-width dataset elements.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"Constrained boundary set \u2202\u03a9_D\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 2 names a fixed boundary without locating its points or segments. Sec. 5.1 supplies possible support sets, but no selection is assigned to Fig. 1.\",\n      \"readings\": [\n        \"Fix every node on the entire left edge.\",\n        \"Fix only the bottom-left and top-left corner nodes.\",\n        \"Fix nodes on the lower half of the left edge, including both endpoints.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"Application location of P\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Neither Sec. 2 nor the Fig. 1 caption specifies the loaded location. Sec. 5.1 describes random boundary-element selection without identifying this example's selection.\",\n      \"readings\": [\n        \"Right edge at y/H = 1/2.\",\n        \"Right edge at y/H = 1/4.\",\n        \"Top edge at x/W = 1/2.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Spatial distribution and finite-element assembly of P\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2 specifies only a force vector. Sec. 5.1's boundary-element load location does not explain how that location becomes nodal forces or a traction.\",\n      \"readings\": [\n        \"Apply the entire resultant P to one boundary node.\",\n        \"Apply P/2 to each endpoint of one boundary-element edge.\",\n        \"Distribute resultant P uniformly over three adjacent boundary-element edges.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"Direction of P\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 2 gives no components or angle for P. Sec. 5.1's six sampled directions do not identify the direction used in Fig. 1.\",\n      \"readings\": [\n        \"\u03b8 = 0 measured counterclockwise from +x.\",\n        \"\u03b8 = \u03c0/3 measured counterclockwise from +x.\",\n        \"\u03b8 = 5\u03c0/3 measured counterclockwise from +x.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"Resultant magnitude of P in Fig. 1\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2 leaves P symbolic. Sec. 5.1 prescribes unit loads for dataset samples, but their applicability to this illustrative example is unstated.\",\n      \"readings\": [\n        \"Use |P| = 1 in consistent solver units, adopting the dataset convention.\",\n        \"Use |P| = 100 in the same units for an independently scaled illustration.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Prescribed maximum volume fraction f\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2 and Eq. (4) leave f symbolic. Sec. 5.1 supplies only a dataset range of 30%\u201350%, not this example's value.\",\n      \"readings\": [\n        \"f = 0.30.\",\n        \"f = 0.40.\",\n        \"f = 0.50.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Fixed-density regions near loads and supports\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2 supplies no passive-region mask or statement that all elements remain designable, including elements carrying loads or touching supports.\",\n      \"readings\": [\n        \"No passive elements; every element is designable.\",\n        \"Keep the loaded boundary element permanently solid.\",\n        \"Keep the loaded element and every element touching a constrained node permanently solid.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Solid-material Young's modulus E_0\",\n      \"issue\": \"vague\",\n      \"description\": \"Eq. (1) leaves E_0 symbolic. Sec. 5.1 assigns unit modulus specifically to preprocessing fields, without explicitly assigning it to Fig. 1's optimization.\",\n      \"readings\": [\n        \"E_0 = 1 in consistent solver units.\",\n        \"E_0 = 100 in the same units, keeping E_min/E_0 fixed.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Poisson's ratio used during optimization\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2 gives no Poisson's ratio. Sec. 5.1 specifies 0.3 for preprocessing fields, without explicitly fixing the optimization material for Fig. 1.\",\n      \"readings\": [\n        \"Use \u03bd = 0.3 for both preprocessing and optimization.\",\n        \"Use \u03bd = 0.25 for the independent Fig. 1 optimization while retaining 0.3 for dataset preprocessing.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Two-dimensional elastic constitutive reduction\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 2 and 5.1 do not state whether the planar finite-element model uses plane stress or plane strain.\",\n      \"readings\": [\n        \"Isotropic plane stress.\",\n        \"Isotropic plane strain.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Uniform out-of-plane thickness or representative depth\",\n      \"issue\": \"missing\",\n      \"description\": \"No thickness is supplied for assembling planar stiffness and volume. For a uniform thickness and fixed resultant forces, this changes compliance scaling.\",\n      \"readings\": [\n        \"Unit thickness in the chosen length units.\",\n        \"Uniform thickness t = 0.01W.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Exact minimum-to-solid stiffness ratio E_min/E_0\",\n      \"issue\": \"vague\",\n      \"description\": \"The explanation of Eq. (1) gives only an approximate ratio, '~0.001E_0', rather than an exact stiffness floor.\",\n      \"readings\": [\n        \"E_min/E_0 = 0.001 exactly.\",\n        \"E_min/E_0 = 0.0009.\",\n        \"E_min/E_0 = 0.0011.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Fig. 1 grid resolution\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2 gives no element counts. Sec. 5.1's 64 \u00d7 64 grid is specified for dataset generation, without explicitly linking Fig. 1 to that grid.\",\n      \"readings\": [\n        \"64 \u00d7 64 elements, adopting the dataset resolution.\",\n        \"32 \u00d7 32 elements for a separate illustration.\",\n        \"128 \u00d7 128 elements for a separate illustration.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Finite-element interpolation and quadrature\",\n      \"issue\": \"missing\",\n      \"description\": \"The text specifies elements and FEA but does not identify the displacement element, interpolation order, or integration rule.\",\n      \"readings\": [\n        \"Four-node bilinear quadrilaterals with 2 \u00d7 2 Gauss integration.\",\n        \"Four-node bilinear quadrilaterals with stabilized reduced integration.\",\n        \"Eight-node quadratic quadrilaterals with 3 \u00d7 3 Gauss integration.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"SIMP exponent p for Fig. 1\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2 leaves p symbolic. Sec. 5.1 specifies p = 3 for the dataset, but does not establish that Fig. 1 uses those dataset settings.\",\n      \"readings\": [\n        \"Use p = 3, adopting the dataset setting.\",\n        \"Use p = 2 for a separately parameterized illustration.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Filter radius and its units\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2 leaves r_min symbolic. Sec. 5.1 gives 2.0 for the dataset without length units or an explicit assignment to Fig. 1.\",\n      \"readings\": [\n        \"r_min = 2h, where h is the square-element pitch.\",\n        \"r_min = 2 physical length units on a domain normalized to W = 1.\",\n        \"r_min = 1.5h for an independently parameterized illustration.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Meaning of the filter-weight distance\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Eq. (6) subtracts x_i and x_e, previously defined as densities, whereas the surrounding discussion describes a spatial neighborhood filter. The text does not resolve whether these symbols denote densities or positions in Eq. (6).\",\n      \"readings\": [\n        \"Use literal density-dependent weights w_ei = r_min - |x_i - x_e| within N_e.\",\n        \"Interpret the difference as Euclidean distance between element centers and use a spatial conical kernel.\",\n        \"Interpret the difference as Manhattan distance between element centers and use a spatial conical kernel.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Filter-neighborhood membership and boundary treatment\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2 does not define N_e, self-inclusion, or treatment of a filter neighborhood extending beyond the domain.\",\n      \"readings\": [\n        \"Include the central element and existing elements within the radius; truncate at boundaries and renormalize using Eq. (7).\",\n        \"Exclude the central element, truncate at boundaries, and renormalize using Eq. (7).\",\n        \"Include the central element and reflect densities outside the domain before averaging.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Use of design versus filtered densities in stiffness and volume\",\n      \"issue\": \"vague\",\n      \"description\": \"Eqs. (1) and (4) use x, while Eq. (7) introduces physical density x\u0303. Their connection is unstated. The claim that filtering maintains volume does not resolve boundary-dependent differences between raw and filtered volume.\",\n      \"readings\": [\n        \"Use x\u0303 in both SIMP stiffness and the volume constraint.\",\n        \"Use x\u0303 in SIMP stiffness but raw x in the volume constraint.\",\n        \"Filter the iterates directly, then use the resulting field as x in both stiffness and volume.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initial optimization density field\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 2 and 5.1 do not give the optimizer's starting densities. The initial unoptimized domain mentioned in Sec. 5.1 concerns preprocessing fields.\",\n      \"readings\": [\n        \"Initialize every designable element to x_e = f.\",\n        \"Initialize every designable element to x_e = 1.\",\n        \"Initialize alternating columns to f - 0.01 and f + 0.01, preserving mean f.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Constrained density-update algorithm\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 5.1 specifies gradient descent, but neither it nor Sec. 2 explains how the volume constraint and density bounds enter each update.\",\n      \"readings\": [\n        \"Projected gradient descent onto the volume-feasible set and density bounds.\",\n        \"Gradient descent with a volume Lagrange multiplier selected each iteration and bound clipping.\",\n        \"Augmented-Lagrangian minimization using gradient descent and multiplier updates.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Optimization step size, line search, and move limits\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 2 and 5.1 give no step-control parameters for topology optimization. Sec. 6.1's learning rate describes autoencoder training.\",\n      \"readings\": [\n        \"Fixed gradient step size 0.01 with no additional move limit.\",\n        \"Armijo backtracking starting at step size 1, contraction factor 0.5, and sufficient-decrease constant 0.0001.\",\n        \"The same backtracking rule with an additional per-iteration density-change limit of 0.2.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Convergence and iteration limits\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2 says optimization continues until convergence, without a stopping measure, tolerance, or iteration cap.\",\n      \"readings\": [\n        \"Stop when max_e |\u0394x_e| < 0.01 or after 200 iterations.\",\n        \"Stop when max_e |\u0394x_e| < 0.001 or after 1000 iterations.\",\n        \"Stop after relative compliance changes remain below 0.000001 for five iterations, with a 1000-iteration cap.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Equilibrium-solve method and numerical accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (3) specifies equilibrium but no linear-system solver or residual tolerance. These settings can affect numerical reproducibility without changing the formal optimization problem.\",\n      \"readings\": [\n        \"Sparse direct factorization to working precision.\",\n        \"Conjugate gradients with relative residual tolerance 0.00000001.\",\n        \"Conjugate gradients with relative residual tolerance 0.0001.\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "Fig. 1 design-domain geometry and dimensions",
+    "issue": "figure_only",
+    "description": "Sec. 2 and the Fig. 1 caption give no domain outline, aspect ratio, dimensions, or length units. Sec. 5.1 describes square dataset domains but does not identify Fig. 1 as a dataset sample.",
+    "readings": [
+     "Square domain [0,1] \u00d7 [0,1].",
+     "Rectangular domain [0,2] \u00d7 [0,1].",
+     "Square domain [0,64] \u00d7 [0,64], with unit-width dataset elements."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "Constrained boundary set \u2202\u03a9_D",
+    "issue": "figure_only",
+    "description": "Sec. 2 names a fixed boundary without locating its points or segments. Sec. 5.1 supplies possible support sets, but no selection is assigned to Fig. 1.",
+    "readings": [
+     "Fix every node on the entire left edge.",
+     "Fix only the bottom-left and top-left corner nodes.",
+     "Fix nodes on the lower half of the left edge, including both endpoints."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "Application location of P",
+    "issue": "figure_only",
+    "description": "Neither Sec. 2 nor the Fig. 1 caption specifies the loaded location. Sec. 5.1 describes random boundary-element selection without identifying this example's selection.",
+    "readings": [
+     "Right edge at y/H = 1/2.",
+     "Right edge at y/H = 1/4.",
+     "Top edge at x/W = 1/2."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Spatial distribution and finite-element assembly of P",
+    "issue": "missing",
+    "description": "Sec. 2 specifies only a force vector. Sec. 5.1's boundary-element load location does not explain how that location becomes nodal forces or a traction.",
+    "readings": [
+     "Apply the entire resultant P to one boundary node.",
+     "Apply P/2 to each endpoint of one boundary-element edge.",
+     "Distribute resultant P uniformly over three adjacent boundary-element edges."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Direction of P",
+    "issue": "figure_only",
+    "description": "Sec. 2 gives no components or angle for P. Sec. 5.1's six sampled directions do not identify the direction used in Fig. 1.",
+    "readings": [
+     "\u03b8 = 0 measured counterclockwise from +x.",
+     "\u03b8 = \u03c0/3 measured counterclockwise from +x.",
+     "\u03b8 = 5\u03c0/3 measured counterclockwise from +x."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Resultant magnitude of P in Fig. 1",
+    "issue": "vague",
+    "description": "Sec. 2 leaves P symbolic. Sec. 5.1 prescribes unit loads for dataset samples, but their applicability to this illustrative example is unstated.",
+    "readings": [
+     "Use |P| = 1 in consistent solver units, adopting the dataset convention.",
+     "Use |P| = 100 in the same units for an independently scaled illustration."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Prescribed maximum volume fraction f",
+    "issue": "missing",
+    "description": "Sec. 2 and Eq. (4) leave f symbolic. Sec. 5.1 supplies only a dataset range of 30%\u201350%, not this example's value.",
+    "readings": [
+     "f = 0.30.",
+     "f = 0.40.",
+     "f = 0.50."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Fixed-density regions near loads and supports",
+    "issue": "missing",
+    "description": "Sec. 2 supplies no passive-region mask or statement that all elements remain designable, including elements carrying loads or touching supports.",
+    "readings": [
+     "No passive elements; every element is designable.",
+     "Keep the loaded boundary element permanently solid.",
+     "Keep the loaded element and every element touching a constrained node permanently solid."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Solid-material Young's modulus E_0",
+    "issue": "vague",
+    "description": "Eq. (1) leaves E_0 symbolic. Sec. 5.1 assigns unit modulus specifically to preprocessing fields, without explicitly assigning it to Fig. 1's optimization.",
+    "readings": [
+     "E_0 = 1 in consistent solver units.",
+     "E_0 = 100 in the same units, keeping E_min/E_0 fixed."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson's ratio used during optimization",
+    "issue": "vague",
+    "description": "Sec. 2 gives no Poisson's ratio. Sec. 5.1 specifies 0.3 for preprocessing fields, without explicitly fixing the optimization material for Fig. 1.",
+    "readings": [
+     "Use \u03bd = 0.3 for both preprocessing and optimization.",
+     "Use \u03bd = 0.25 for the independent Fig. 1 optimization while retaining 0.3 for dataset preprocessing."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Two-dimensional elastic constitutive reduction",
+    "issue": "missing",
+    "description": "Secs. 2 and 5.1 do not state whether the planar finite-element model uses plane stress or plane strain.",
+    "readings": [
+     "Isotropic plane stress.",
+     "Isotropic plane strain."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "Uniform out-of-plane thickness or representative depth",
+    "issue": "missing",
+    "description": "No thickness is supplied for assembling planar stiffness and volume. For a uniform thickness and fixed resultant forces, this changes compliance scaling.",
+    "readings": [
+     "Unit thickness in the chosen length units.",
+     "Uniform thickness t = 0.01W."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Exact minimum-to-solid stiffness ratio E_min/E_0",
+    "issue": "vague",
+    "description": "The explanation of Eq. (1) gives only an approximate ratio, '~0.001E_0', rather than an exact stiffness floor.",
+    "readings": [
+     "E_min/E_0 = 0.001 exactly.",
+     "E_min/E_0 = 0.0009.",
+     "E_min/E_0 = 0.0011."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Fig. 1 grid resolution",
+    "issue": "vague",
+    "description": "Sec. 2 gives no element counts. Sec. 5.1's 64 \u00d7 64 grid is specified for dataset generation, without explicitly linking Fig. 1 to that grid.",
+    "readings": [
+     "64 \u00d7 64 elements, adopting the dataset resolution.",
+     "32 \u00d7 32 elements for a separate illustration.",
+     "128 \u00d7 128 elements for a separate illustration."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Finite-element interpolation and quadrature",
+    "issue": "missing",
+    "description": "The text specifies elements and FEA but does not identify the displacement element, interpolation order, or integration rule.",
+    "readings": [
+     "Four-node bilinear quadrilaterals with 2 \u00d7 2 Gauss integration.",
+     "Four-node bilinear quadrilaterals with stabilized reduced integration.",
+     "Eight-node quadratic quadrilaterals with 3 \u00d7 3 Gauss integration."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "SIMP exponent p for Fig. 1",
+    "issue": "vague",
+    "description": "Sec. 2 leaves p symbolic. Sec. 5.1 specifies p = 3 for the dataset, but does not establish that Fig. 1 uses those dataset settings.",
+    "readings": [
+     "Use p = 3, adopting the dataset setting.",
+     "Use p = 2 for a separately parameterized illustration."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Filter radius and its units",
+    "issue": "vague",
+    "description": "Sec. 2 leaves r_min symbolic. Sec. 5.1 gives 2.0 for the dataset without length units or an explicit assignment to Fig. 1.",
+    "readings": [
+     "r_min = 2h, where h is the square-element pitch.",
+     "r_min = 2 physical length units on a domain normalized to W = 1.",
+     "r_min = 1.5h for an independently parameterized illustration."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Meaning of the filter-weight distance",
+    "issue": "conflicting",
+    "description": "Eq. (6) subtracts x_i and x_e, previously defined as densities, whereas the surrounding discussion describes a spatial neighborhood filter. The text does not resolve whether these symbols denote densities or positions in Eq. (6).",
+    "readings": [
+     "Use literal density-dependent weights w_ei = r_min - |x_i - x_e| within N_e.",
+     "Interpret the difference as Euclidean distance between element centers and use a spatial conical kernel.",
+     "Interpret the difference as Manhattan distance between element centers and use a spatial conical kernel."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Filter-neighborhood membership and boundary treatment",
+    "issue": "missing",
+    "description": "Sec. 2 does not define N_e, self-inclusion, or treatment of a filter neighborhood extending beyond the domain.",
+    "readings": [
+     "Include the central element and existing elements within the radius; truncate at boundaries and renormalize using Eq. (7).",
+     "Exclude the central element, truncate at boundaries, and renormalize using Eq. (7).",
+     "Include the central element and reflect densities outside the domain before averaging."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Use of design versus filtered densities in stiffness and volume",
+    "issue": "vague",
+    "description": "Eqs. (1) and (4) use x, while Eq. (7) introduces physical density x\u0303. Their connection is unstated. The claim that filtering maintains volume does not resolve boundary-dependent differences between raw and filtered volume.",
+    "readings": [
+     "Use x\u0303 in both SIMP stiffness and the volume constraint.",
+     "Use x\u0303 in SIMP stiffness but raw x in the volume constraint.",
+     "Filter the iterates directly, then use the resulting field as x in both stiffness and volume."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial optimization density field",
+    "issue": "missing",
+    "description": "Secs. 2 and 5.1 do not give the optimizer's starting densities. The initial unoptimized domain mentioned in Sec. 5.1 concerns preprocessing fields.",
+    "readings": [
+     "Initialize every designable element to x_e = f.",
+     "Initialize every designable element to x_e = 1.",
+     "Initialize alternating columns to f - 0.01 and f + 0.01, preserving mean f."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Constrained density-update algorithm",
+    "issue": "missing",
+    "description": "Sec. 5.1 specifies gradient descent, but neither it nor Sec. 2 explains how the volume constraint and density bounds enter each update.",
+    "readings": [
+     "Projected gradient descent onto the volume-feasible set and density bounds.",
+     "Gradient descent with a volume Lagrange multiplier selected each iteration and bound clipping.",
+     "Augmented-Lagrangian minimization using gradient descent and multiplier updates."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Optimization step size, line search, and move limits",
+    "issue": "missing",
+    "description": "Secs. 2 and 5.1 give no step-control parameters for topology optimization. Sec. 6.1's learning rate describes autoencoder training.",
+    "readings": [
+     "Fixed gradient step size 0.01 with no additional move limit.",
+     "Armijo backtracking starting at step size 1, contraction factor 0.5, and sufficient-decrease constant 0.0001.",
+     "The same backtracking rule with an additional per-iteration density-change limit of 0.2."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Convergence and iteration limits",
+    "issue": "vague",
+    "description": "Sec. 2 says optimization continues until convergence, without a stopping measure, tolerance, or iteration cap.",
+    "readings": [
+     "Stop when max_e |\u0394x_e| < 0.01 or after 200 iterations.",
+     "Stop when max_e |\u0394x_e| < 0.001 or after 1000 iterations.",
+     "Stop after relative compliance changes remain below 0.000001 for five iterations, with a 1000-iteration cap."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Equilibrium-solve method and numerical accuracy",
+    "issue": "missing",
+    "description": "Eq. (3) specifies equilibrium but no linear-system solver or residual tolerance. These settings can affect numerical reproducibility without changing the formal optimization problem.",
+    "readings": [
+     "Sparse direct factorization to working precision.",
+     "Conjugate gradients with relative residual tolerance 0.00000001.",
+     "Conjugate gradients with relative residual tolerance 0.0001."
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 747.1227147579193,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L30",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 1,
+ "locator": "Sec. 2, Fig. 1",
+ "finished": "2026-10-22T21:01:11"
+}

@@ -1,0 +1,290 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"computational beam domain and physical scaling\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 5.4 delegates the design domain to Fig. 9(a). The 120 x 48 x 48 mm dimensions explicitly describe manufactured specimens; their relationship to the optimization domain is not stated. Here x denotes length L, y width W, and z height H.\",\n      \"readings\": [\n        \"Optimize a rectangular prism with L = 120 mm and W = H = 48 mm.\",\n        \"Optimize a geometrically similar normalized prism with L = 2.5 and W = H = 1.\",\n        \"Optimize the unit cube discussed in Sec. 2.2, then stretch the resulting design to 120 x 48 x 48 mm.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"longitudinal positions of the two bottom supports\",\n      \"issue\": \"vague\",\n      \"description\": \"The Fig. 9 caption says the 'bottom sides are fixed' but supplies no support coordinates, end offsets, or support span.\",\n      \"readings\": [\n        \"Support sections at x = 0 and x = L.\",\n        \"Support sections at x = 0.05L and x = 0.95L.\",\n        \"Support sections at x = 0.10L and x = 0.90L.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"footprints of the fixed bottom regions\",\n      \"issue\": \"vague\",\n      \"description\": \"The Fig. 9 caption does not define whether each 'bottom side' is a transverse edge, a strip, or a localized pad, nor its transverse coverage.\",\n      \"readings\": [\n        \"Fix a full-width bottom line at each support section.\",\n        \"Fix full-width bottom strips of longitudinal width 0.05L.\",\n        \"Fix bottom pads of longitudinal width 0.05L and transverse width 0.20W, centered at y = W/2.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"central top loading footprint\",\n      \"issue\": \"vague\",\n      \"description\": \"The Fig. 9 caption specifies uniform application at the center of the beam top, but gives no dimensions or topology of the loaded region.\",\n      \"readings\": [\n        \"Uniform line load across the full width at x = L/2 and z = H.\",\n        \"Uniform pressure on a full-width top strip with 0.475L <= x <= 0.525L.\",\n        \"Uniform pressure on a centered top patch with 0.475L <= x <= 0.525L and 0.40W <= y <= 0.60W.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"conversion of the uniform load into the discrete load vector\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.3 introduces F, but Sec. 5.4 does not give its entries or explain how uniform loading is assigned to the analysis degrees of freedom.\",\n      \"readings\": [\n        \"Integrate a uniform line or surface traction consistently against the displacement basis.\",\n        \"Assign equal forces to selected top nodes and normalize their sum to the prescribed resultant.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"force applied at the beam top\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 5.4 and the Fig. 9 caption do not state force components. Three-point bending suggests normal loading, but the actual vector is not supplied.\",\n      \"readings\": [\n        \"Pure downward force in the negative z direction.\",\n        \"Force inclined 10 degrees from negative z toward negative y.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"resultant central force\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Sec. 5.4 nor the Fig. 9 caption supplies a numerical force or traction magnitude.\",\n      \"readings\": [\n        \"Total resultant force of 1 in normalized units.\",\n        \"Total resultant force of 1 N.\",\n        \"Total resultant force of 100 N.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"load and support contact regions\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 5.4 does not explicitly identify non-design regions or state whether contact regions remain designable throughout optimization.\",\n      \"readings\": [\n        \"No passive regions; contact-region densities remain design variables.\",\n        \"Hold one layer of contact elements at the initial relative density of 0.4.\",\n        \"Hold one layer of contact elements at rho_max.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"overall base-material stiffness scale\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.3 names the base-material tensor C*, but no Young's modulus or equivalent global stiffness scale is supplied for the beam.\",\n      \"readings\": [\n        \"E = 1 in normalized units.\",\n        \"E = 1000 MPa.\",\n        \"E = 200000 MPa.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"base-material elastic symmetry and stiffness ratios\",\n      \"issue\": \"missing\",\n      \"description\": \"The tensor C* in Sec. 4.3 is not numerically specified. In particular, the text does not give Poisson's ratio or explicitly establish an isotropic base material.\",\n      \"readings\": [\n        \"Isotropic base material with Poisson's ratio 0.30.\",\n        \"Isotropic base material with Poisson's ratio 0.45.\",\n        \"Orthotropic base material with longitudinal Young's modulus twice the two transverse moduli.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"density-dependent homogenized stiffness for each beam material\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.3 gives the exponential form in Eq. 26, but no componentwise a1 and a2 values for either Table 2 unit. Sec. 5.4 provides neither numerical tensor functions nor unit geometry sufficient to calculate them.\",\n      \"readings\": [\n        \"For every nonzero component, use c_ij(rho)/c*_ij = (exp(rho) - 1)/(exp(1) - 1).\",\n        \"For every nonzero component, use c_ij(rho)/c*_ij = (exp(3rho) - 1)/(exp(3) - 1).\",\n        \"Use the first curve for c_11 and the second curve for the remaining nonzero components, producing direction-dependent density scaling.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"orientation of the homogenized material axes\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.3 permits a nine-component orthotropic effective tensor. Sec. 5.4 does not specify how either unit's material axes are aligned with the beam.\",\n      \"readings\": [\n        \"Align the unit u, v, w axes with beam x, y, z.\",\n        \"Rotate the unit 90 degrees about z, exchanging its longitudinal and transverse alignment.\",\n        \"Rotate the unit 90 degrees about y, exchanging its longitudinal and vertical alignment.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"admissible relative-density interval\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. 27 introduces rho_min and rho_max, but Sec. 5.4 gives neither bound. These bounds determine the available porous densities and minimum stiffness.\",\n      \"readings\": [\n        \"rho_min = 0.001 and rho_max = 1.\",\n        \"rho_min = 0.10 and rho_max = 0.90.\",\n        \"rho_min = 0.20 and rho_max = 0.60.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"degree of the optimized B-spline density field\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.3 specifies a B-spline density field but gives no degree for the beam. Degrees reported for fitting implicit units in other subsections do not specify this field.\",\n      \"readings\": [\n        \"Trilinear density basis with degree (1,1,1).\",\n        \"Triquadratic density basis with degree (2,2,2).\",\n        \"Tricubic density basis with degree (3,3,3).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"control-lattice resolution of the optimized density field\",\n      \"issue\": \"missing\",\n      \"description\": \"The beam values of N_u, N_v, and N_w in Sec. 4.3 are absent. The unit-fitting control counts elsewhere are not beam density-field counts.\",\n      \"readings\": [\n        \"Density control lattice of 13 x 7 x 7 coefficients.\",\n        \"Density control lattice of 23 x 11 x 11 coefficients.\",\n        \"Density control lattice of 43 x 19 x 19 coefficients.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"density-field knot vectors and continuity\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.3 does not give the density-field knot positions, multiplicities, or endpoint treatment. These determine its smoothing and local design freedom.\",\n      \"readings\": [\n        \"Open-clamped uniform knots with simple interior knots.\",\n        \"Open-clamped knots with interior multiplicities giving C0 continuity.\",\n        \"Open-clamped nonuniform knots concentrated near the supports and central load.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"additional grid filtering\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.3 attributes smoothing to the B-spline density representation, but reports no separate sensitivity-filter specification or equivalent filter for the requested structured-grid solver.\",\n      \"readings\": [\n        \"Use the B-spline parameterization alone, with no additional filter.\",\n        \"Additionally apply a cone sensitivity filter with radius 1.5 grid-cell widths.\",\n        \"Additionally apply a cone sensitivity filter with radius 3 grid-cell widths.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"beam analysis-grid resolution\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 5.4 supplies no analysis-element or knot-span counts. The manufactured dimensions are lengths, and voxel/control counts in other examples do not determine this mesh.\",\n      \"readings\": [\n        \"For a 120 x 48 x 48 mm domain, use 60 x 24 x 24 uniform cells.\",\n        \"For that domain, use 120 x 48 x 48 uniform cells.\",\n        \"For that domain, use 240 x 96 x 96 uniform cells.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"displacement approximation and continuity\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.3 specifies IGA but does not give the beam's displacement-basis degrees, knot multiplicities, or continuity. Linear elasticity does not determine approximation order.\",\n      \"readings\": [\n        \"Degree-one tensor-product basis with C0 continuity.\",\n        \"Degree-two tensor-product basis with C1 interior continuity.\",\n        \"Degree-three tensor-product basis with C2 interior continuity.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"sampling and numerical integration of density and stiffness\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. 27 contains integrals of rho and C^H(rho), but gives no quadrature or rule for translating the continuous density field onto structured-grid elements.\",\n      \"readings\": [\n        \"Sample density at each cell center and use a constant constitutive tensor and density within that cell.\",\n        \"Evaluate density and constitutive response at 2 x 2 x 2 Gauss points per cell.\",\n        \"Evaluate density and constitutive response at 4 x 4 x 4 Gauss points per cell.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Optimality Criteria update parameters\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.3 names OC but supplies no update formula, move limit, damping exponent, or multiplier-search tolerance for the beam.\",\n      \"readings\": [\n        \"Multiplicative OC with exponent 0.5, absolute density move limit 0.20, and multiplier-search tolerance 1e-6.\",\n        \"Multiplicative OC with exponent 0.3, absolute density move limit 0.05, and multiplier-search tolerance 1e-8.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"optimization termination\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Sec. 4.3 nor Sec. 5.4 gives a beam optimization convergence criterion or iteration cap.\",\n      \"readings\": [\n        \"Stop when the maximum density-coefficient change falls below 1e-3.\",\n        \"Stop when relative compliance change stays below 1e-5 for five iterations.\",\n        \"Stop after 100 OC iterations.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"equilibrium-solve accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.3 specifies KU = F but does not identify the linear solver or residual tolerance used to obtain displacements and sensitivities.\",\n      \"readings\": [\n        \"Direct factorization to numerical precision.\",\n        \"Preconditioned conjugate gradients with relative residual tolerance 1e-8.\",\n        \"Preconditioned conjugate gradients with relative residual tolerance 1e-4.\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "computational beam domain and physical scaling",
+    "issue": "figure_only",
+    "description": "Sec. 5.4 delegates the design domain to Fig. 9(a). The 120 x 48 x 48 mm dimensions explicitly describe manufactured specimens; their relationship to the optimization domain is not stated. Here x denotes length L, y width W, and z height H.",
+    "readings": [
+     "Optimize a rectangular prism with L = 120 mm and W = H = 48 mm.",
+     "Optimize a geometrically similar normalized prism with L = 2.5 and W = H = 1.",
+     "Optimize the unit cube discussed in Sec. 2.2, then stretch the resulting design to 120 x 48 x 48 mm."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "longitudinal positions of the two bottom supports",
+    "issue": "vague",
+    "description": "The Fig. 9 caption says the 'bottom sides are fixed' but supplies no support coordinates, end offsets, or support span.",
+    "readings": [
+     "Support sections at x = 0 and x = L.",
+     "Support sections at x = 0.05L and x = 0.95L.",
+     "Support sections at x = 0.10L and x = 0.90L."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "footprints of the fixed bottom regions",
+    "issue": "vague",
+    "description": "The Fig. 9 caption does not define whether each 'bottom side' is a transverse edge, a strip, or a localized pad, nor its transverse coverage.",
+    "readings": [
+     "Fix a full-width bottom line at each support section.",
+     "Fix full-width bottom strips of longitudinal width 0.05L.",
+     "Fix bottom pads of longitudinal width 0.05L and transverse width 0.20W, centered at y = W/2."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "central top loading footprint",
+    "issue": "vague",
+    "description": "The Fig. 9 caption specifies uniform application at the center of the beam top, but gives no dimensions or topology of the loaded region.",
+    "readings": [
+     "Uniform line load across the full width at x = L/2 and z = H.",
+     "Uniform pressure on a full-width top strip with 0.475L <= x <= 0.525L.",
+     "Uniform pressure on a centered top patch with 0.475L <= x <= 0.525L and 0.40W <= y <= 0.60W."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "conversion of the uniform load into the discrete load vector",
+    "issue": "missing",
+    "description": "Sec. 4.3 introduces F, but Sec. 5.4 does not give its entries or explain how uniform loading is assigned to the analysis degrees of freedom.",
+    "readings": [
+     "Integrate a uniform line or surface traction consistently against the displacement basis.",
+     "Assign equal forces to selected top nodes and normalize their sum to the prescribed resultant."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "force applied at the beam top",
+    "issue": "missing",
+    "description": "Sec. 5.4 and the Fig. 9 caption do not state force components. Three-point bending suggests normal loading, but the actual vector is not supplied.",
+    "readings": [
+     "Pure downward force in the negative z direction.",
+     "Force inclined 10 degrees from negative z toward negative y."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "resultant central force",
+    "issue": "missing",
+    "description": "Neither Sec. 5.4 nor the Fig. 9 caption supplies a numerical force or traction magnitude.",
+    "readings": [
+     "Total resultant force of 1 in normalized units.",
+     "Total resultant force of 1 N.",
+     "Total resultant force of 100 N."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "load and support contact regions",
+    "issue": "missing",
+    "description": "Sec. 5.4 does not explicitly identify non-design regions or state whether contact regions remain designable throughout optimization.",
+    "readings": [
+     "No passive regions; contact-region densities remain design variables.",
+     "Hold one layer of contact elements at the initial relative density of 0.4.",
+     "Hold one layer of contact elements at rho_max."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "overall base-material stiffness scale",
+    "issue": "missing",
+    "description": "Sec. 4.3 names the base-material tensor C*, but no Young's modulus or equivalent global stiffness scale is supplied for the beam.",
+    "readings": [
+     "E = 1 in normalized units.",
+     "E = 1000 MPa.",
+     "E = 200000 MPa."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "base-material elastic symmetry and stiffness ratios",
+    "issue": "missing",
+    "description": "The tensor C* in Sec. 4.3 is not numerically specified. In particular, the text does not give Poisson's ratio or explicitly establish an isotropic base material.",
+    "readings": [
+     "Isotropic base material with Poisson's ratio 0.30.",
+     "Isotropic base material with Poisson's ratio 0.45.",
+     "Orthotropic base material with longitudinal Young's modulus twice the two transverse moduli."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "density-dependent homogenized stiffness for each beam material",
+    "issue": "missing",
+    "description": "Sec. 4.3 gives the exponential form in Eq. 26, but no componentwise a1 and a2 values for either Table 2 unit. Sec. 5.4 provides neither numerical tensor functions nor unit geometry sufficient to calculate them.",
+    "readings": [
+     "For every nonzero component, use c_ij(rho)/c*_ij = (exp(rho) - 1)/(exp(1) - 1).",
+     "For every nonzero component, use c_ij(rho)/c*_ij = (exp(3rho) - 1)/(exp(3) - 1).",
+     "Use the first curve for c_11 and the second curve for the remaining nonzero components, producing direction-dependent density scaling."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "orientation of the homogenized material axes",
+    "issue": "missing",
+    "description": "Sec. 4.3 permits a nine-component orthotropic effective tensor. Sec. 5.4 does not specify how either unit's material axes are aligned with the beam.",
+    "readings": [
+     "Align the unit u, v, w axes with beam x, y, z.",
+     "Rotate the unit 90 degrees about z, exchanging its longitudinal and transverse alignment.",
+     "Rotate the unit 90 degrees about y, exchanging its longitudinal and vertical alignment."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "admissible relative-density interval",
+    "issue": "missing",
+    "description": "Eq. 27 introduces rho_min and rho_max, but Sec. 5.4 gives neither bound. These bounds determine the available porous densities and minimum stiffness.",
+    "readings": [
+     "rho_min = 0.001 and rho_max = 1.",
+     "rho_min = 0.10 and rho_max = 0.90.",
+     "rho_min = 0.20 and rho_max = 0.60."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "degree of the optimized B-spline density field",
+    "issue": "missing",
+    "description": "Sec. 4.3 specifies a B-spline density field but gives no degree for the beam. Degrees reported for fitting implicit units in other subsections do not specify this field.",
+    "readings": [
+     "Trilinear density basis with degree (1,1,1).",
+     "Triquadratic density basis with degree (2,2,2).",
+     "Tricubic density basis with degree (3,3,3)."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "control-lattice resolution of the optimized density field",
+    "issue": "missing",
+    "description": "The beam values of N_u, N_v, and N_w in Sec. 4.3 are absent. The unit-fitting control counts elsewhere are not beam density-field counts.",
+    "readings": [
+     "Density control lattice of 13 x 7 x 7 coefficients.",
+     "Density control lattice of 23 x 11 x 11 coefficients.",
+     "Density control lattice of 43 x 19 x 19 coefficients."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "density-field knot vectors and continuity",
+    "issue": "missing",
+    "description": "Sec. 4.3 does not give the density-field knot positions, multiplicities, or endpoint treatment. These determine its smoothing and local design freedom.",
+    "readings": [
+     "Open-clamped uniform knots with simple interior knots.",
+     "Open-clamped knots with interior multiplicities giving C0 continuity.",
+     "Open-clamped nonuniform knots concentrated near the supports and central load."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "additional grid filtering",
+    "issue": "missing",
+    "description": "Sec. 4.3 attributes smoothing to the B-spline density representation, but reports no separate sensitivity-filter specification or equivalent filter for the requested structured-grid solver.",
+    "readings": [
+     "Use the B-spline parameterization alone, with no additional filter.",
+     "Additionally apply a cone sensitivity filter with radius 1.5 grid-cell widths.",
+     "Additionally apply a cone sensitivity filter with radius 3 grid-cell widths."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "beam analysis-grid resolution",
+    "issue": "missing",
+    "description": "Sec. 5.4 supplies no analysis-element or knot-span counts. The manufactured dimensions are lengths, and voxel/control counts in other examples do not determine this mesh.",
+    "readings": [
+     "For a 120 x 48 x 48 mm domain, use 60 x 24 x 24 uniform cells.",
+     "For that domain, use 120 x 48 x 48 uniform cells.",
+     "For that domain, use 240 x 96 x 96 uniform cells."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "displacement approximation and continuity",
+    "issue": "missing",
+    "description": "Sec. 4.3 specifies IGA but does not give the beam's displacement-basis degrees, knot multiplicities, or continuity. Linear elasticity does not determine approximation order.",
+    "readings": [
+     "Degree-one tensor-product basis with C0 continuity.",
+     "Degree-two tensor-product basis with C1 interior continuity.",
+     "Degree-three tensor-product basis with C2 interior continuity."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "sampling and numerical integration of density and stiffness",
+    "issue": "missing",
+    "description": "Eq. 27 contains integrals of rho and C^H(rho), but gives no quadrature or rule for translating the continuous density field onto structured-grid elements.",
+    "readings": [
+     "Sample density at each cell center and use a constant constitutive tensor and density within that cell.",
+     "Evaluate density and constitutive response at 2 x 2 x 2 Gauss points per cell.",
+     "Evaluate density and constitutive response at 4 x 4 x 4 Gauss points per cell."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Optimality Criteria update parameters",
+    "issue": "missing",
+    "description": "Sec. 4.3 names OC but supplies no update formula, move limit, damping exponent, or multiplier-search tolerance for the beam.",
+    "readings": [
+     "Multiplicative OC with exponent 0.5, absolute density move limit 0.20, and multiplier-search tolerance 1e-6.",
+     "Multiplicative OC with exponent 0.3, absolute density move limit 0.05, and multiplier-search tolerance 1e-8."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "optimization termination",
+    "issue": "missing",
+    "description": "Neither Sec. 4.3 nor Sec. 5.4 gives a beam optimization convergence criterion or iteration cap.",
+    "readings": [
+     "Stop when the maximum density-coefficient change falls below 1e-3.",
+     "Stop when relative compliance change stays below 1e-5 for five iterations.",
+     "Stop after 100 OC iterations."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "equilibrium-solve accuracy",
+    "issue": "missing",
+    "description": "Sec. 4.3 specifies KU = F but does not identify the linear solver or residual tolerance used to obtain displacements and sensitivities.",
+    "readings": [
+     "Direct factorization to numerical precision.",
+     "Preconditioned conjugate gradients with relative residual tolerance 1e-8.",
+     "Preconditioned conjugate gradients with relative residual tolerance 1e-4."
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 728.1627295017242,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L24",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 0,
+ "locator": "Sec. 5.4, the 3-D beam (Fig. 9)",
+ "finished": "2026-10-22T18:59:40"
+}

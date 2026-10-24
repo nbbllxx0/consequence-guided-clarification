@@ -1,0 +1,79 @@
+{
+ "task": "L33",
+ "source": {
+  "arxiv": "2604.03276",
+  "position": 146,
+  "note": "borderline eligible: supplementary FEM baseline"
+ },
+ "dim": 3,
+ "slots": {
+  "load": [
+   "node",
+   "patch"
+  ]
+ },
+ "nominal": {
+  "load": "node"
+ },
+ "mandatory": [],
+ "reasons": {
+  "load": "'center of the top surface'; single node vs patch not stated (Suppl. Note A.14)"
+ },
+ "recon": [
+  "40x40x100 in source; 16x40x16",
+  "force reading only: the prescribed-displacement reading is not representable in the force-loaded compliance solver",
+  "rmin 1.5 (2.549 at source resolution)"
+ ],
+ "keys": [
+  "load=node",
+  "load=patch"
+ ],
+ "C": [
+  [
+   1.320212238949038,
+   3.7435188918938644
+  ],
+  [
+   1.3257219663590916,
+   0.9844859585054251
+  ]
+ ],
+ "ref": {
+  "load=node": 1.320212238949038,
+  "load=patch": 0.9844859585054251
+ },
+ "ref_gap_beaten": {
+  "load=node": 3.1086244689504383e-15,
+  "load=patch": 1.1102230246251565e-14
+ },
+ "noise": {
+  "load=node": 0.003009458914533382,
+  "load=patch": 0.005918572841168414
+ },
+ "meta": {
+  "load=node": {
+   "accepted": true,
+   "kkt": 0.1844484155745681,
+   "wall_s": 549.0335047999397,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "load=patch": {
+   "accepted": true,
+   "kkt": 0.5018071854163855,
+   "wall_s": 463.45467929996084,
+   "n_iter": [
+    201,
+    201
+   ]
+  }
+ },
+ "counter": {
+  "optimizations": 0,
+  "factorizations": 2,
+  "backsubs": 4,
+  "opt_wall_s": 0.0
+ }
+}

@@ -1,0 +1,292 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Physical side length of the square domain\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 specifies 64 by 64 square elements but no physical element size. Let L denote the domain side length and h=L/64; these alternatives assume all dimensionless geometry and filter ratios are preserved.\",\n      \"readings\": [\n        \"L=1 length unit, h=1/64\",\n        \"L=64 length units, h=1\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Uniform out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 2.1 and 4.1 do not specify thickness or a unit-depth convention for the two-dimensional analysis.\",\n      \"readings\": [\n        \"Uniform thickness t=1 length unit\",\n        \"Uniform thickness t=0.01 length unit\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"Support groups selected for Fig. 5, row 1\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 permits one to four selections from sixteen support groups, but neither Sec. 4.3 nor the Fig. 5 caption identifies this row's selections. Each selected node is fixed in both directions.\",\n      \"readings\": [\n        \"One group: the upper half of the left edge\",\n        \"Two groups: both halves of the left edge\",\n        \"Two point groups: the bottom-left and bottom-right corners\",\n        \"Four point groups: all four corners\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"Endpoint membership of half-edge support sets\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.1 describes node sets 'between corners and midpoints' without stating whether their endpoint nodes belong to those sets. This matters if row 1 uses a node-set support.\",\n      \"readings\": [\n        \"Include both the corner and midpoint nodes\",\n        \"Exclude both endpoints; constrain them only when their point groups are selected\",\n        \"Include the corner but exclude the midpoint\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"Boundary element carrying the row 1 load\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 specifies a randomly selected boundary element, but the text and Fig. 5 caption do not identify the element for row 1.\",\n      \"readings\": [\n        \"Right-edge element spanning y/L from 31/64 to 32/64\",\n        \"Bottom-edge element spanning x/L from 15/64 to 16/64\",\n        \"Top-edge element spanning x/L from 47/64 to 48/64\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Application of the unit load within its selected boundary element\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.1 locates the load by element, and Eq. 24 also uses element load components; neither specifies the physical footprint or conversion to the nodal force vector in Eq. 1.\",\n      \"readings\": [\n        \"Apply the entire unit resultant at the lower-coordinate outer corner node of the selected element\",\n        \"Apply uniform traction over its outer face, giving half the unit resultant to each endpoint for a Q4 element\",\n        \"Apply a point force at the element center, giving one quarter of the unit resultant to each corner for a Q4 element\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"Final force direction for Fig. 5, row 1\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 gives six sampled directions and mentions rotation and mirroring augmentation, but provides no final force vector for this row. Angles below are counterclockwise from +x.\",\n      \"readings\": [\n        \"Unit force at 0 degrees\",\n        \"Unit force at 60 degrees\",\n        \"Unit force at 120 degrees\",\n        \"Unit force at 90 degrees after a 90-degree rotation of a 0-degree sample\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Target volume fraction for Fig. 5, row 1\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 gives a sampling range of 30% to 50%; Sec. 4.3 and the Fig. 5 caption supply no row-specific target.\",\n      \"readings\": [\n        \"f=0.30\",\n        \"f=0.40\",\n        \"f=0.50\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Prescribed solid or void masks\",\n      \"issue\": \"missing\",\n      \"description\": \"The dataset description does not specify whether any elements are excluded from optimization or forced solid, including elements carrying loads or adjoining supports. The auxiliary load loss does not define such a ground-truth constraint.\",\n      \"readings\": [\n        \"No passive elements; all 4096 element densities are design variables\",\n        \"Fix the selected loaded element solid; leave all other elements designable\",\n        \"Fix the loaded element and all elements adjoining supported nodes solid; leave the remainder designable\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Two-dimensional elastic constitutive assumption\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 gives elastic modulus and Poisson's ratio for the initial-domain FEA but does not identify its planar constitutive reduction.\",\n      \"readings\": [\n        \"Plane stress\",\n        \"Plane strain\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Ersatz void stiffness\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. 5 introduces E_min but supplies no numerical stiffness contrast for generating the ground truth.\",\n      \"readings\": [\n        \"E_min/E_0=0.001\",\n        \"E_min/E_0=0.000001\",\n        \"E_min/E_0=0.000000001\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Finite-element interpolation and integration\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 fixes the element count and square geometry but does not specify element order, node arrangement, or quadrature.\",\n      \"readings\": [\n        \"Four-node bilinear quadrilaterals with 2 by 2 Gauss integration\",\n        \"Eight-node serendipity quadrilaterals with 3 by 3 Gauss integration\",\n        \"Nine-node biquadratic quadrilaterals with 3 by 3 Gauss integration\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"SIMP penalization exponent and continuation\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2.1 says p is 'commonly set to 3'; it does not state the value or continuation schedule actually used for the dataset.\",\n      \"readings\": [\n        \"Constant p=3\",\n        \"Constant p=4\",\n        \"Start at p=1, increase to 2 after 50 updates, then to 3 after 100 updates\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Spatial filtering scheme\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 mentions a Heaviside filter but does not specify whether neighborhood averaging of densities or sensitivities is also used.\",\n      \"readings\": [\n        \"No spatial averaging; use only the Heaviside operation\",\n        \"Cone-weighted density filtering\",\n        \"Cone-weighted sensitivity filtering\",\n        \"Gaussian-weighted density filtering\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Spatial filter radius\",\n      \"issue\": \"missing\",\n      \"description\": \"No neighborhood radius or length scale is reported in Secs. 2.1 or 4.1. This setting is needed if a spatial filter is used.\",\n      \"readings\": [\n        \"Filter support radius r=1.5h\",\n        \"Filter support radius r=2h\",\n        \"Filter support radius r=3h\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Spatial filter treatment at domain boundaries\",\n      \"issue\": \"missing\",\n      \"description\": \"The text gives no boundary extension or normalization rule for any neighborhood filter, although loads and supports occur on the boundary.\",\n      \"readings\": [\n        \"Truncate the neighborhood at the domain boundary and renormalize the surviving weights\",\n        \"Extend densities by zero outside the domain and retain full-kernel normalization\",\n        \"Extend densities by reflection and retain full-kernel normalization\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Heaviside operation and its placement in optimization\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.1 mentions a Heaviside filter for binary images without defining its form or whether it participates in equilibrium, sensitivities, and volume enforcement.\",\n      \"readings\": [\n        \"Optimize continuous SIMP densities and their volume; apply a hard step only when storing the final image\",\n        \"Use a smooth tanh Heaviside projection inside equilibrium, sensitivity, and physical-volume evaluations; apply a final hard step for image storage\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Heaviside threshold and final binary volume handling\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 does not give the projection or binarization threshold, or state whether final thresholding is adjusted to preserve the volume budget.\",\n      \"readings\": [\n        \"Use a fixed threshold eta=0.5 without volume repair\",\n        \"Use a fixed threshold eta=0.3 without volume repair\",\n        \"Choose the final threshold by density ranking to retain floor(4096f) solid elements\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Smooth Heaviside steepness and continuation\",\n      \"issue\": \"missing\",\n      \"description\": \"If the Heaviside operation is implemented as a smooth projection during optimization, Sec. 4.1 supplies no steepness parameter or update schedule.\",\n      \"readings\": [\n        \"Constant tanh-projection steepness beta=8\",\n        \"Constant tanh-projection steepness beta=32\",\n        \"Start beta=1 and double it every 50 updates until beta=64\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initial optimization density field\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 refers to an initial unoptimized domain for field calculation but does not specify the density initialization used by the ground-truth optimizer.\",\n      \"readings\": [\n        \"Initialize every designable element at rho=f\",\n        \"Initialize every designable element at rho=1\",\n        \"Initialize with seeded random perturbations of amplitude 0.01 about f, then normalize to mean f\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Optimization update algorithm and parameters\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2.1 offers MMA as an example rather than identifying the dataset's optimizer; move limits, damping, and asymptote settings are unreported.\",\n      \"readings\": [\n        \"Optimality-criteria updates with density move limit 0.2 and damping exponent 0.5\",\n        \"MMA with density move limit 0.1, initial asymptote distance 0.5, expansion factor 1.2, and contraction factor 0.7\",\n        \"MMA with density move limit 0.2, initial asymptote distance 0.5, expansion factor 1.2, and contraction factor 0.7\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Optimization termination rule\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2.1 describes relative compliance convergence or iteration limits, but gives neither the actual criterion nor numerical tolerances and limits used for this sample.\",\n      \"readings\": [\n        \"Stop when Eq. 7 falls below 0.001, with a maximum of 200 updates\",\n        \"Stop when Eq. 7 falls below 0.00001, with a maximum of 1000 updates\",\n        \"Run exactly 300 updates\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Numerical equilibrium solver and accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. 1 defines equilibrium, but the text does not report the linear solution method or residual tolerance used during optimization.\",\n      \"readings\": [\n        \"Double-precision sparse direct factorization\",\n        \"Preconditioned conjugate gradients with relative residual tolerance 0.00000001\",\n        \"Preconditioned conjugate gradients with relative residual tolerance 0.0001\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "Physical side length of the square domain",
+    "issue": "missing",
+    "description": "Sec. 4.1 specifies 64 by 64 square elements but no physical element size. Let L denote the domain side length and h=L/64; these alternatives assume all dimensionless geometry and filter ratios are preserved.",
+    "readings": [
+     "L=1 length unit, h=1/64",
+     "L=64 length units, h=1"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "Uniform out-of-plane thickness",
+    "issue": "missing",
+    "description": "Secs. 2.1 and 4.1 do not specify thickness or a unit-depth convention for the two-dimensional analysis.",
+    "readings": [
+     "Uniform thickness t=1 length unit",
+     "Uniform thickness t=0.01 length unit"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "Support groups selected for Fig. 5, row 1",
+    "issue": "missing",
+    "description": "Sec. 4.1 permits one to four selections from sixteen support groups, but neither Sec. 4.3 nor the Fig. 5 caption identifies this row's selections. Each selected node is fixed in both directions.",
+    "readings": [
+     "One group: the upper half of the left edge",
+     "Two groups: both halves of the left edge",
+     "Two point groups: the bottom-left and bottom-right corners",
+     "Four point groups: all four corners"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "Endpoint membership of half-edge support sets",
+    "issue": "vague",
+    "description": "Sec. 4.1 describes node sets 'between corners and midpoints' without stating whether their endpoint nodes belong to those sets. This matters if row 1 uses a node-set support.",
+    "readings": [
+     "Include both the corner and midpoint nodes",
+     "Exclude both endpoints; constrain them only when their point groups are selected",
+     "Include the corner but exclude the midpoint"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "Boundary element carrying the row 1 load",
+    "issue": "missing",
+    "description": "Sec. 4.1 specifies a randomly selected boundary element, but the text and Fig. 5 caption do not identify the element for row 1.",
+    "readings": [
+     "Right-edge element spanning y/L from 31/64 to 32/64",
+     "Bottom-edge element spanning x/L from 15/64 to 16/64",
+     "Top-edge element spanning x/L from 47/64 to 48/64"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Application of the unit load within its selected boundary element",
+    "issue": "vague",
+    "description": "Sec. 4.1 locates the load by element, and Eq. 24 also uses element load components; neither specifies the physical footprint or conversion to the nodal force vector in Eq. 1.",
+    "readings": [
+     "Apply the entire unit resultant at the lower-coordinate outer corner node of the selected element",
+     "Apply uniform traction over its outer face, giving half the unit resultant to each endpoint for a Q4 element",
+     "Apply a point force at the element center, giving one quarter of the unit resultant to each corner for a Q4 element"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Final force direction for Fig. 5, row 1",
+    "issue": "missing",
+    "description": "Sec. 4.1 gives six sampled directions and mentions rotation and mirroring augmentation, but provides no final force vector for this row. Angles below are counterclockwise from +x.",
+    "readings": [
+     "Unit force at 0 degrees",
+     "Unit force at 60 degrees",
+     "Unit force at 120 degrees",
+     "Unit force at 90 degrees after a 90-degree rotation of a 0-degree sample"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Target volume fraction for Fig. 5, row 1",
+    "issue": "missing",
+    "description": "Sec. 4.1 gives a sampling range of 30% to 50%; Sec. 4.3 and the Fig. 5 caption supply no row-specific target.",
+    "readings": [
+     "f=0.30",
+     "f=0.40",
+     "f=0.50"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Prescribed solid or void masks",
+    "issue": "missing",
+    "description": "The dataset description does not specify whether any elements are excluded from optimization or forced solid, including elements carrying loads or adjoining supports. The auxiliary load loss does not define such a ground-truth constraint.",
+    "readings": [
+     "No passive elements; all 4096 element densities are design variables",
+     "Fix the selected loaded element solid; leave all other elements designable",
+     "Fix the loaded element and all elements adjoining supported nodes solid; leave the remainder designable"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Two-dimensional elastic constitutive assumption",
+    "issue": "missing",
+    "description": "Sec. 4.1 gives elastic modulus and Poisson's ratio for the initial-domain FEA but does not identify its planar constitutive reduction.",
+    "readings": [
+     "Plane stress",
+     "Plane strain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Ersatz void stiffness",
+    "issue": "missing",
+    "description": "Eq. 5 introduces E_min but supplies no numerical stiffness contrast for generating the ground truth.",
+    "readings": [
+     "E_min/E_0=0.001",
+     "E_min/E_0=0.000001",
+     "E_min/E_0=0.000000001"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Finite-element interpolation and integration",
+    "issue": "missing",
+    "description": "Sec. 4.1 fixes the element count and square geometry but does not specify element order, node arrangement, or quadrature.",
+    "readings": [
+     "Four-node bilinear quadrilaterals with 2 by 2 Gauss integration",
+     "Eight-node serendipity quadrilaterals with 3 by 3 Gauss integration",
+     "Nine-node biquadratic quadrilaterals with 3 by 3 Gauss integration"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "SIMP penalization exponent and continuation",
+    "issue": "vague",
+    "description": "Sec. 2.1 says p is 'commonly set to 3'; it does not state the value or continuation schedule actually used for the dataset.",
+    "readings": [
+     "Constant p=3",
+     "Constant p=4",
+     "Start at p=1, increase to 2 after 50 updates, then to 3 after 100 updates"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Spatial filtering scheme",
+    "issue": "missing",
+    "description": "Sec. 4.1 mentions a Heaviside filter but does not specify whether neighborhood averaging of densities or sensitivities is also used.",
+    "readings": [
+     "No spatial averaging; use only the Heaviside operation",
+     "Cone-weighted density filtering",
+     "Cone-weighted sensitivity filtering",
+     "Gaussian-weighted density filtering"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Spatial filter radius",
+    "issue": "missing",
+    "description": "No neighborhood radius or length scale is reported in Secs. 2.1 or 4.1. This setting is needed if a spatial filter is used.",
+    "readings": [
+     "Filter support radius r=1.5h",
+     "Filter support radius r=2h",
+     "Filter support radius r=3h"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Spatial filter treatment at domain boundaries",
+    "issue": "missing",
+    "description": "The text gives no boundary extension or normalization rule for any neighborhood filter, although loads and supports occur on the boundary.",
+    "readings": [
+     "Truncate the neighborhood at the domain boundary and renormalize the surviving weights",
+     "Extend densities by zero outside the domain and retain full-kernel normalization",
+     "Extend densities by reflection and retain full-kernel normalization"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Heaviside operation and its placement in optimization",
+    "issue": "vague",
+    "description": "Sec. 4.1 mentions a Heaviside filter for binary images without defining its form or whether it participates in equilibrium, sensitivities, and volume enforcement.",
+    "readings": [
+     "Optimize continuous SIMP densities and their volume; apply a hard step only when storing the final image",
+     "Use a smooth tanh Heaviside projection inside equilibrium, sensitivity, and physical-volume evaluations; apply a final hard step for image storage"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Heaviside threshold and final binary volume handling",
+    "issue": "missing",
+    "description": "Sec. 4.1 does not give the projection or binarization threshold, or state whether final thresholding is adjusted to preserve the volume budget.",
+    "readings": [
+     "Use a fixed threshold eta=0.5 without volume repair",
+     "Use a fixed threshold eta=0.3 without volume repair",
+     "Choose the final threshold by density ranking to retain floor(4096f) solid elements"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Smooth Heaviside steepness and continuation",
+    "issue": "missing",
+    "description": "If the Heaviside operation is implemented as a smooth projection during optimization, Sec. 4.1 supplies no steepness parameter or update schedule.",
+    "readings": [
+     "Constant tanh-projection steepness beta=8",
+     "Constant tanh-projection steepness beta=32",
+     "Start beta=1 and double it every 50 updates until beta=64"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial optimization density field",
+    "issue": "missing",
+    "description": "Sec. 4.1 refers to an initial unoptimized domain for field calculation but does not specify the density initialization used by the ground-truth optimizer.",
+    "readings": [
+     "Initialize every designable element at rho=f",
+     "Initialize every designable element at rho=1",
+     "Initialize with seeded random perturbations of amplitude 0.01 about f, then normalize to mean f"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Optimization update algorithm and parameters",
+    "issue": "vague",
+    "description": "Sec. 2.1 offers MMA as an example rather than identifying the dataset's optimizer; move limits, damping, and asymptote settings are unreported.",
+    "readings": [
+     "Optimality-criteria updates with density move limit 0.2 and damping exponent 0.5",
+     "MMA with density move limit 0.1, initial asymptote distance 0.5, expansion factor 1.2, and contraction factor 0.7",
+     "MMA with density move limit 0.2, initial asymptote distance 0.5, expansion factor 1.2, and contraction factor 0.7"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Optimization termination rule",
+    "issue": "vague",
+    "description": "Sec. 2.1 describes relative compliance convergence or iteration limits, but gives neither the actual criterion nor numerical tolerances and limits used for this sample.",
+    "readings": [
+     "Stop when Eq. 7 falls below 0.001, with a maximum of 200 updates",
+     "Stop when Eq. 7 falls below 0.00001, with a maximum of 1000 updates",
+     "Run exactly 300 updates"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Numerical equilibrium solver and accuracy",
+    "issue": "missing",
+    "description": "Eq. 1 defines equilibrium, but the text does not report the linear solution method or residual tolerance used during optimization.",
+    "readings": [
+     "Double-precision sparse direct factorization",
+     "Preconditioned conjugate gradients with relative residual tolerance 0.00000001",
+     "Preconditioned conjugate gradients with relative residual tolerance 0.0001"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 768.8742234706879,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L43",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 0,
+ "locator": "Sec. 4.3, Fig. 5, row 1",
+ "finished": "2026-10-22T19:35:40"
+}

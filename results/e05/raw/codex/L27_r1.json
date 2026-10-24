@@ -1,0 +1,283 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"In-plane design domain\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 7.1.1 delegates the domain to Fig. 6(a). Sec. 5 specifies 100 by 100 elements, but not physical dimensions or aspect ratio. Below, W and H denote computational width and height, with coordinates measured from the lower-left corner.\",\n      \"readings\": [\n        \"Square: W=H=1 in consistent length units\",\n        \"Rectangle: W=2, H=1\",\n        \"Square: W=H=100 in consistent length units\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Full structure versus symmetry-reduced domain\",\n      \"issue\": \"figure_only\",\n      \"description\": \"The Fig. 6(a) referral in Sec. 7.1.1 does not establish whether the computational grid represents the complete beam or a symmetric portion.\",\n      \"readings\": [\n        \"The 100 by 100 grid represents the complete structure\",\n        \"The grid represents half of a beam of physical width 2W, with a symmetry boundary at x=0\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Uniform out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 4 and 7.1.1 supply no thickness or per-unit-thickness convention. For prescribed in-plane force resultants, uniform thickness scales compliance.\",\n      \"readings\": [\n        \"Unit thickness in the chosen length units\",\n        \"Uniform thickness t=0.01W\",\n        \"Uniform thickness t=0.1W\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"Support count, positions, and spatial extent\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 7.1.1 places the boundary conditions in unavailable Fig. 6(a); no supported nodes, edges, or pad dimensions are described.\",\n      \"readings\": [\n        \"Point supports at the two lower corners, (0,0) and (W,0)\",\n        \"Support pads on y=0 spanning x/W in [0,0.05] and [0.95,1]\",\n        \"The entire left edge plus the lower-right corner\",\n        \"The entire left edge only\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"support_type\",\n      \"entity\": \"Constrained displacement components\",\n      \"issue\": \"figure_only\",\n      \"description\": \"The Fig. 6(a) referral does not identify which displacement components are restrained at each support or symmetry boundary.\",\n      \"readings\": [\n        \"Left point pinned: ux=uy=0; right point roller: uy=0\",\n        \"Both displacement components fixed at both support regions\",\n        \"Both displacement components fixed along a supported edge\",\n        \"Symmetry condition ux=0 along the left edge, with uy=0 at the lower-right corner\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"Mid-load application position\",\n      \"issue\": \"figure_only\",\n      \"description\": \"The name 'mid-load' and the Fig. 6(a) referral in Sec. 7.1.1 do not identify the loaded edge or exact coordinates.\",\n      \"readings\": [\n        \"Top-edge midpoint: (x/W,y/H)=(0.5,1)\",\n        \"Bottom-edge midpoint: (0.5,0)\",\n        \"Interior center: (0.5,0.5)\",\n        \"Top of the symmetry edge in a half-domain model: (0,1)\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Spatial distribution of the mid-load\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Secs. 4.1 and 7.1.1 establish a constant load but do not specify whether it is concentrated, spread over several nodes, or applied as traction.\",\n      \"readings\": [\n        \"One concentrated nodal force\",\n        \"Uniform traction over the central 10% of the loaded edge, with a prescribed total resultant\",\n        \"Two equal nodal forces at the ends of the central 10% of the loaded edge\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"Direction of the mid-load\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 7.1.1 refers the applied load to Fig. 6(a), without giving its direction in words or components.\",\n      \"readings\": [\n        \"Vertical downward: F=(0,-P)\",\n        \"Horizontal: F=(P,0)\",\n        \"Inclined downward at 45 degrees: F=(P/sqrt(2),-P/sqrt(2))\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"Total force resultant\",\n      \"issue\": \"figure_only\",\n      \"description\": \"The applied load is referred to Fig. 6(a), and no force magnitude or units appear in the text. Uniform scaling of this constant load scales compliance quadratically.\",\n      \"readings\": [\n        \"P=1 in consistent nondimensional units\",\n        \"P=100 N\",\n        \"P=1000 N\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Fixed-solid and fixed-void element masks\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 4.1, 5, and 7.1.1 do not identify passive regions, establish that none exist, or explain any passive-material volume accounting.\",\n      \"readings\": [\n        \"No passive elements; all 10000 elements are designable\",\n        \"One-element-thick fixed-solid attachment pads at loads and supports, counted within the total volume budget\",\n        \"The same attachment pads excluded from the designable-volume budget\",\n        \"A fixed-void central rectangle spanning x/W and y/H in [0.4,0.6], with the remainder designable\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Absolute Young's-modulus scale\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (3) defines E1 and E0 but supplies no absolute modulus. Scaling both together at a fixed E0/E1 ratio only rescales compliance.\",\n      \"readings\": [\n        \"E1=1 in consistent nondimensional units\",\n        \"E1=70 GPa, with the same E0/E1 ratio\",\n        \"E1=210 GPa, with the same E0/E1 ratio\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Void-to-solid stiffness ratio\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (3) introduces the void modulus E0 without assigning E0/E1. This changes the relative stiffness of low-density regions.\",\n      \"readings\": [\n        \"E0/E1=1e-9\",\n        \"E0/E1=1e-6\",\n        \"E0/E1=1e-3\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Poisson's ratio\",\n      \"issue\": \"missing\",\n      \"description\": \"The material discussion in Sec. 4 specifies Young's-modulus interpolation but gives no Poisson's ratio.\",\n      \"readings\": [\n        \"Constant nu=0.3\",\n        \"Constant nu=0.25\",\n        \"Constant nu=0.33\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Two-dimensional constitutive assumption\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 specifies bilinear quadrilateral elements without stating plane stress or plane strain.\",\n      \"readings\": [\n        \"Plane stress\",\n        \"Plane strain\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Operation represented by ft=1\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 5 explicitly gives ft=1 for top88, but the supplied text does not define that code-specific selector, its density weighting, or its denominator regularization for implementation in another solver.\",\n      \"readings\": [\n        \"Density-weighted sensitivity filtering, dividing by max(rho_i,0.001) times the sum of neighborhood weights\",\n        \"Density-weighted sensitivity filtering with a denominator floor of 1e-6\",\n        \"Density filtering before SIMP, using filtered density for stiffness and volume and applying chain-rule sensitivities\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Units and distance metric of rmin=2.4\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 5 supplies rmin=2.4 without defining its units or how distance is measured when physical element widths and heights differ.\",\n      \"readings\": [\n        \"Radius 2.4 in element-index coordinates, using Euclidean distance between element centers\",\n        \"Radius 2.4 in physical length units\",\n        \"Physical radius 2.4 times the horizontal element width, using physical Euclidean distances\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Filter kernel and boundary treatment\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 5 gives filter arguments but no kernel formula, neighborhood normalization, or handling of outer and symmetry boundaries.\",\n      \"readings\": [\n        \"Conical weights max(0,rmin-distance), truncated to existing elements and renormalized\",\n        \"Uniform weights inside the radius, truncated and renormalized\",\n        \"Conical weights with zero extension outside the domain and normalization over the complete neighborhood\",\n        \"Conical weights with mirrored extension across symmetry boundaries\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Quadrature and stabilization of bilinear quadrilateral elements\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 determines the element family, but the supplied text does not provide its stiffness formulation, integration rule, or stabilization.\",\n      \"readings\": [\n        \"Standard bilinear quadrilateral with full 2 by 2 Gauss integration\",\n        \"One-point reduced integration with hourglass stabilization\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Design update algorithm and numerical parameters\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 cites top88, but its update rule is not reproduced. Sec. 5 does not specify move limits, damping, or inner optimization tolerances.\",\n      \"readings\": [\n        \"Optimality-criteria update with exponent 0.5, move limit 0.2, and relative multiplier-bracket tolerance 1e-3\",\n        \"Optimality-criteria update with exponent 0.5, move limit 0.1, and relative multiplier-bracket tolerance 1e-6\",\n        \"MMA update with move limit 0.2 and subproblem tolerance 1e-6\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initial design and independence of volume-fraction runs\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 5 and 7.1.1 describe varying volume fraction but do not specify initialization or whether successive optimizations reuse earlier solutions.\",\n      \"readings\": [\n        \"Start the 0.25 case independently with uniform rho=0.25\",\n        \"Start from a small spatial perturbation about rho=0.25, adjusted to preserve the prescribed volume\",\n        \"Warm-start the 0.25 case from the optimized 0.24 design\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Topology-optimization stopping criterion and iteration cap\",\n      \"issue\": \"missing\",\n      \"description\": \"No top88 convergence criterion or iteration cap is supplied. Sec. 5 assigns maxit=100 to TOPress, while the 2000 epochs in Sec. 7.1.1 describe CNN training.\",\n      \"readings\": [\n        \"Stop when maximum element-density change is at most 0.01\",\n        \"Stop when maximum element-density change is at most 0.001, with a 1000-iteration cap\",\n        \"Stop after 100 topology-optimization iterations\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Finite-element equilibrium solve accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (4) specifies equilibrium but not the numerical linear solver or residual tolerance used to compute displacements and sensitivities.\",\n      \"readings\": [\n        \"Sparse direct solve to floating-point accuracy\",\n        \"Iterative solve with relative residual tolerance 1e-6\",\n        \"Iterative solve with relative residual tolerance 1e-10\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "In-plane design domain",
+    "issue": "figure_only",
+    "description": "Sec. 7.1.1 delegates the domain to Fig. 6(a). Sec. 5 specifies 100 by 100 elements, but not physical dimensions or aspect ratio. Below, W and H denote computational width and height, with coordinates measured from the lower-left corner.",
+    "readings": [
+     "Square: W=H=1 in consistent length units",
+     "Rectangle: W=2, H=1",
+     "Square: W=H=100 in consistent length units"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "Full structure versus symmetry-reduced domain",
+    "issue": "figure_only",
+    "description": "The Fig. 6(a) referral in Sec. 7.1.1 does not establish whether the computational grid represents the complete beam or a symmetric portion.",
+    "readings": [
+     "The 100 by 100 grid represents the complete structure",
+     "The grid represents half of a beam of physical width 2W, with a symmetry boundary at x=0"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "Uniform out-of-plane thickness",
+    "issue": "missing",
+    "description": "Secs. 4 and 7.1.1 supply no thickness or per-unit-thickness convention. For prescribed in-plane force resultants, uniform thickness scales compliance.",
+    "readings": [
+     "Unit thickness in the chosen length units",
+     "Uniform thickness t=0.01W",
+     "Uniform thickness t=0.1W"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "Support count, positions, and spatial extent",
+    "issue": "figure_only",
+    "description": "Sec. 7.1.1 places the boundary conditions in unavailable Fig. 6(a); no supported nodes, edges, or pad dimensions are described.",
+    "readings": [
+     "Point supports at the two lower corners, (0,0) and (W,0)",
+     "Support pads on y=0 spanning x/W in [0,0.05] and [0.95,1]",
+     "The entire left edge plus the lower-right corner",
+     "The entire left edge only"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_type",
+    "entity": "Constrained displacement components",
+    "issue": "figure_only",
+    "description": "The Fig. 6(a) referral does not identify which displacement components are restrained at each support or symmetry boundary.",
+    "readings": [
+     "Left point pinned: ux=uy=0; right point roller: uy=0",
+     "Both displacement components fixed at both support regions",
+     "Both displacement components fixed along a supported edge",
+     "Symmetry condition ux=0 along the left edge, with uy=0 at the lower-right corner"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "Mid-load application position",
+    "issue": "figure_only",
+    "description": "The name 'mid-load' and the Fig. 6(a) referral in Sec. 7.1.1 do not identify the loaded edge or exact coordinates.",
+    "readings": [
+     "Top-edge midpoint: (x/W,y/H)=(0.5,1)",
+     "Bottom-edge midpoint: (0.5,0)",
+     "Interior center: (0.5,0.5)",
+     "Top of the symmetry edge in a half-domain model: (0,1)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Spatial distribution of the mid-load",
+    "issue": "figure_only",
+    "description": "Secs. 4.1 and 7.1.1 establish a constant load but do not specify whether it is concentrated, spread over several nodes, or applied as traction.",
+    "readings": [
+     "One concentrated nodal force",
+     "Uniform traction over the central 10% of the loaded edge, with a prescribed total resultant",
+     "Two equal nodal forces at the ends of the central 10% of the loaded edge"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Direction of the mid-load",
+    "issue": "figure_only",
+    "description": "Sec. 7.1.1 refers the applied load to Fig. 6(a), without giving its direction in words or components.",
+    "readings": [
+     "Vertical downward: F=(0,-P)",
+     "Horizontal: F=(P,0)",
+     "Inclined downward at 45 degrees: F=(P/sqrt(2),-P/sqrt(2))"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Total force resultant",
+    "issue": "figure_only",
+    "description": "The applied load is referred to Fig. 6(a), and no force magnitude or units appear in the text. Uniform scaling of this constant load scales compliance quadratically.",
+    "readings": [
+     "P=1 in consistent nondimensional units",
+     "P=100 N",
+     "P=1000 N"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Fixed-solid and fixed-void element masks",
+    "issue": "missing",
+    "description": "Secs. 4.1, 5, and 7.1.1 do not identify passive regions, establish that none exist, or explain any passive-material volume accounting.",
+    "readings": [
+     "No passive elements; all 10000 elements are designable",
+     "One-element-thick fixed-solid attachment pads at loads and supports, counted within the total volume budget",
+     "The same attachment pads excluded from the designable-volume budget",
+     "A fixed-void central rectangle spanning x/W and y/H in [0.4,0.6], with the remainder designable"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Absolute Young's-modulus scale",
+    "issue": "missing",
+    "description": "Eq. (3) defines E1 and E0 but supplies no absolute modulus. Scaling both together at a fixed E0/E1 ratio only rescales compliance.",
+    "readings": [
+     "E1=1 in consistent nondimensional units",
+     "E1=70 GPa, with the same E0/E1 ratio",
+     "E1=210 GPa, with the same E0/E1 ratio"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Void-to-solid stiffness ratio",
+    "issue": "missing",
+    "description": "Eq. (3) introduces the void modulus E0 without assigning E0/E1. This changes the relative stiffness of low-density regions.",
+    "readings": [
+     "E0/E1=1e-9",
+     "E0/E1=1e-6",
+     "E0/E1=1e-3"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson's ratio",
+    "issue": "missing",
+    "description": "The material discussion in Sec. 4 specifies Young's-modulus interpolation but gives no Poisson's ratio.",
+    "readings": [
+     "Constant nu=0.3",
+     "Constant nu=0.25",
+     "Constant nu=0.33"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Two-dimensional constitutive assumption",
+    "issue": "missing",
+    "description": "Sec. 4 specifies bilinear quadrilateral elements without stating plane stress or plane strain.",
+    "readings": [
+     "Plane stress",
+     "Plane strain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Operation represented by ft=1",
+    "issue": "vague",
+    "description": "Sec. 5 explicitly gives ft=1 for top88, but the supplied text does not define that code-specific selector, its density weighting, or its denominator regularization for implementation in another solver.",
+    "readings": [
+     "Density-weighted sensitivity filtering, dividing by max(rho_i,0.001) times the sum of neighborhood weights",
+     "Density-weighted sensitivity filtering with a denominator floor of 1e-6",
+     "Density filtering before SIMP, using filtered density for stiffness and volume and applying chain-rule sensitivities"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Units and distance metric of rmin=2.4",
+    "issue": "vague",
+    "description": "Sec. 5 supplies rmin=2.4 without defining its units or how distance is measured when physical element widths and heights differ.",
+    "readings": [
+     "Radius 2.4 in element-index coordinates, using Euclidean distance between element centers",
+     "Radius 2.4 in physical length units",
+     "Physical radius 2.4 times the horizontal element width, using physical Euclidean distances"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Filter kernel and boundary treatment",
+    "issue": "missing",
+    "description": "Sec. 5 gives filter arguments but no kernel formula, neighborhood normalization, or handling of outer and symmetry boundaries.",
+    "readings": [
+     "Conical weights max(0,rmin-distance), truncated to existing elements and renormalized",
+     "Uniform weights inside the radius, truncated and renormalized",
+     "Conical weights with zero extension outside the domain and normalization over the complete neighborhood",
+     "Conical weights with mirrored extension across symmetry boundaries"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Quadrature and stabilization of bilinear quadrilateral elements",
+    "issue": "missing",
+    "description": "Sec. 4 determines the element family, but the supplied text does not provide its stiffness formulation, integration rule, or stabilization.",
+    "readings": [
+     "Standard bilinear quadrilateral with full 2 by 2 Gauss integration",
+     "One-point reduced integration with hourglass stabilization"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Design update algorithm and numerical parameters",
+    "issue": "missing",
+    "description": "Sec. 4.1 cites top88, but its update rule is not reproduced. Sec. 5 does not specify move limits, damping, or inner optimization tolerances.",
+    "readings": [
+     "Optimality-criteria update with exponent 0.5, move limit 0.2, and relative multiplier-bracket tolerance 1e-3",
+     "Optimality-criteria update with exponent 0.5, move limit 0.1, and relative multiplier-bracket tolerance 1e-6",
+     "MMA update with move limit 0.2 and subproblem tolerance 1e-6"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial design and independence of volume-fraction runs",
+    "issue": "missing",
+    "description": "Secs. 5 and 7.1.1 describe varying volume fraction but do not specify initialization or whether successive optimizations reuse earlier solutions.",
+    "readings": [
+     "Start the 0.25 case independently with uniform rho=0.25",
+     "Start from a small spatial perturbation about rho=0.25, adjusted to preserve the prescribed volume",
+     "Warm-start the 0.25 case from the optimized 0.24 design"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Topology-optimization stopping criterion and iteration cap",
+    "issue": "missing",
+    "description": "No top88 convergence criterion or iteration cap is supplied. Sec. 5 assigns maxit=100 to TOPress, while the 2000 epochs in Sec. 7.1.1 describe CNN training.",
+    "readings": [
+     "Stop when maximum element-density change is at most 0.01",
+     "Stop when maximum element-density change is at most 0.001, with a 1000-iteration cap",
+     "Stop after 100 topology-optimization iterations"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Finite-element equilibrium solve accuracy",
+    "issue": "missing",
+    "description": "Eq. (4) specifies equilibrium but not the numerical linear solver or residual tolerance used to compute displacements and sensitivities.",
+    "readings": [
+     "Sparse direct solve to floating-point accuracy",
+     "Iterative solve with relative residual tolerance 1e-6",
+     "Iterative solve with relative residual tolerance 1e-10"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 567.9855887889862,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L27",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 1,
+ "locator": "Sec. 7.1.1, the mid-load problem (Fig. 6(a), Fig. 8)",
+ "finished": "2026-10-22T20:49:31"
+}

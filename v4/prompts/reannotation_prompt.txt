@@ -1,0 +1,23 @@
+Annotation rules (identical to the first annotator's screening protocol):
+- The example is rebuilt on a structured-grid, single-material, isotropic linear-elastic minimum-compliance
+  solver with a volume constraint: rectangle/box domain (optionally with element-removed holes, notches or
+  L-cuts and fixed solid/void element sets), supports on nodes, edges or faces, design-independent point, line
+  or patch loads. The design parametrisation of the paper (SIMP, level set, neural, ...) does not matter.
+- An ambiguity slot is one quantity of the boundary-value problem or volume constraint that text plus figures
+  leave underdetermined: missing, vague, conflicting between places, or readable only approximately from a
+  figure. For each slot give a finite set of admissible readings an engineer could reasonably adopt.
+- Quantities that only scale the compliance value (a single load's magnitude, Young's modulus) are tagged
+  effect = 'scale_only'.
+- Do not list quantities that text or figures determine unambiguously.
+- Give the evidence location (section, figure, table, equation) for each slot.
+
+You are an independent annotator of a literature benchmark for structural topology optimization.
+{rules}
+
+Example to annotate: {loc}.
+The paper's figure images are attached (file names follow the paper's figure order where known); the figure
+captions are in the text. Use only the attached figures and the text below; do not run commands, browse, or
+read any files. Answer with JSON that matches the provided schema.
+
+=== PAPER TEXT ===
+{text}

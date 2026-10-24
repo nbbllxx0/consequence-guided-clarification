@@ -1,0 +1,92 @@
+{
+ "task": "L31",
+ "source": {
+  "arxiv": "1807.10787",
+  "position": 108
+ },
+ "dim": 2,
+ "slots": {
+  "dir": [
+   "down"
+  ],
+  "volfrac": [
+   0.4
+  ],
+  "sup": [
+   "edge",
+   "pins"
+  ]
+ },
+ "nominal": {
+  "dir": "down",
+  "volfrac": 0.4,
+  "sup": "edge"
+ },
+ "mandatory": [
+  "dir",
+  "volfrac"
+ ],
+ "reasons": {
+  "dir": "sampled angle continuous in [0, pi]: no finite admissible set, one representative value: mandatory",
+  "volfrac": "threshold alpha not stated: mandatory",
+  "sup": "no support markings in Fig. 1(a): clamped edge or two corner pins (adjudicator B)"
+ },
+ "recon": [
+  "local p-norm density constraint omitted",
+  "filter radius r_e not stated: rmin 1.5 (solver setting)",
+  "angle fixed to vertical after asking",
+  "vf fixed to 0.4 after asking"
+ ],
+ "keys": [
+  "dir=down|sup=edge|volfrac=0.4",
+  "dir=down|sup=pins|volfrac=0.4"
+ ],
+ "C": [
+  [
+   206.9331962742285,
+   299.0572844773312
+  ],
+  [
+   224.52028065010586,
+   285.3007122824828
+  ]
+ ],
+ "ref": {
+  "dir=down|sup=edge|volfrac=0.4": 206.9331962742285,
+  "dir=down|sup=pins|volfrac=0.4": 285.3007122824828
+ },
+ "ref_gap_beaten": {
+  "dir=down|sup=edge|volfrac=0.4": 0.0,
+  "dir=down|sup=pins|volfrac=0.4": 0.0
+ },
+ "noise": {
+  "dir=down|sup=edge|volfrac=0.4": 0.0015292277057722262,
+  "dir=down|sup=pins|volfrac=0.4": 0.00040974065465372914
+ },
+ "meta": {
+  "dir=down|sup=edge|volfrac=0.4": {
+   "accepted": true,
+   "kkt": 0.48392878251723026,
+   "wall_s": 30.58794640004635,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "dir=down|sup=pins|volfrac=0.4": {
+   "accepted": true,
+   "kkt": 0.14805200136652308,
+   "wall_s": 83.6481330000097,
+   "n_iter": [
+    201,
+    201
+   ]
+  }
+ },
+ "counter": {
+  "optimizations": 0,
+  "factorizations": 4,
+  "backsubs": 4,
+  "opt_wall_s": 0.0
+ }
+}

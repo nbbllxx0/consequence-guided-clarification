@@ -1,0 +1,253 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"point force at the right-edge midpoint\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 specifies the force location but not its direction. The downward force in Sec. 4.2 belongs to a different example.\",\n      \"readings\": [\n        \"Vertical downward.\",\n        \"Horizontal outward.\",\n        \"Diagonal downward and outward at 45 degrees.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"point force at the right-edge midpoint\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Sec. 4.1 nor the Fig. 7 caption gives the force magnitude. Dimensionless data do not establish a unit force.\",\n      \"readings\": [\n        \"Force magnitude 1.\",\n        \"Force magnitude 0.1.\",\n        \"Force magnitude 10.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"2D elastic constitutive model\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 gives Young's modulus and Poisson's ratio but does not specify the 2D constitutive assumption.\",\n      \"readings\": [\n        \"Plane stress.\",\n        \"Plane strain.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"uniform out-of-plane thickness used by the 2D model\",\n      \"issue\": \"missing\",\n      \"description\": \"The in-plane rectangle is specified, but no thickness or per-unit-depth convention is stated for stiffness and compliance.\",\n      \"readings\": [\n        \"Uniform thickness 1.\",\n        \"Uniform thickness 2, with the same total point-force convention.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"displacement finite elements on the square grid\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 2.1 and 4.1 and Table 3 establish square cells and the element count, but not displacement interpolation, quadrature, or stabilization.\",\n      \"readings\": [\n        \"Four-node bilinear quadrilaterals with 2-by-2 Gauss integration.\",\n        \"Eight-node quadratic quadrilaterals with 3-by-3 Gauss integration.\",\n        \"Four-node quadrilaterals with one-point integration and hourglass stabilization.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"prescribed-solid cells near the clamp and load\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 states mechanical boundary conditions but does not explicitly identify any passive solid cells or declare that none are used.\",\n      \"readings\": [\n        \"All 9000 cells are designable; no passive solid cells.\",\n        \"Keep the first column next to the clamp solid.\",\n        \"Keep the two rightmost cells immediately above and below the loaded midpoint solid.\",\n        \"Use both the clamp strip and the load pad.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"numerical lower density bound and void treatment\",\n      \"issue\": \"vague\",\n      \"description\": \"Eq. (4) requires positive density without a numerical lower bound, while Sec. 2.3 describes exact binary zeros and element removal. Their numerical treatment is not specified.\",\n      \"readings\": [\n        \"Use a density floor of 0.001 with the stated cubic stiffness interpolation during optimization.\",\n        \"Use a density floor of 0.000001 with the stated cubic stiffness interpolation during optimization.\",\n        \"Allow zero density and remove inactive void degrees of freedom when assembling the final binary model.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"meaning of the minimum-thickness parameter\",\n      \"issue\": \"vague\",\n      \"description\": \"The Fig. 7 caption specifies 1.5, and Sec. 4.1.2 labels the corresponding quantity r_min, but no relation between this parameter and actual member width is defined.\",\n      \"readings\": [\n        \"Interpret 1.5 as the density-filter neighborhood radius in cell widths.\",\n        \"Interpret 1.5 as the required full solid-member width and calibrate the filter to that width.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"density-filter weighting\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1.2 names a density filter for thickness control but gives no weighting formula.\",\n      \"readings\": [\n        \"Normalized linearly decreasing weights: max(0, r_min minus center distance).\",\n        \"Uniform weights for cell centers inside the filter radius.\",\n        \"Gaussian weights truncated at the filter radius.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"density-filter treatment at domain boundaries\",\n      \"issue\": \"missing\",\n      \"description\": \"No boundary extension or normalization is given for the thickness-control filter. Sec. 3.2 specifies void padding for unsupported-element detection, which does not establish the density-filter convention.\",\n      \"readings\": [\n        \"Truncate the filter neighborhood at the rectangle and renormalize over existing cells.\",\n        \"Pad outside the rectangle with zero density and retain the full-stencil denominator.\",\n        \"Mirror the density field across each boundary before filtering.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"density fields used in stiffness, volume, and support calculations\",\n      \"issue\": \"vague\",\n      \"description\": \"Eq. (4) uses one density symbol; later sections introduce density filtering and projection without distinguishing design, filtered, and projected densities in the governing calculations.\",\n      \"readings\": [\n        \"Use projected filtered density for stiffness, volume, and unsupported-element calculations.\",\n        \"Use projected filtered density for stiffness and support calculations, but raw design density for volume.\",\n        \"Use filtered density for stiffness and volume, and a separately binarized field for support detection.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Heaviside projection and final binarization\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.3 names a Guest Heaviside projection but supplies no formula, threshold, steepness values, or final rounding rule.\",\n      \"readings\": [\n        \"Tanh projection centered at density 0.5, final steepness 64, followed by rounding projected densities at 0.5.\",\n        \"Tanh projection centered at density 0.3, final steepness 128, followed by rounding projected densities at 0.5.\",\n        \"Exponential projection P(x)=1-exp(-64*x)+x*exp(-64), followed by rounding at 0.5.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"projection activation and continuation schedule\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2.3 describes projection in the last few steps, whereas Sec. 4.1.1 shows a binary state at step 45 followed by optimization through step 166. The complete switching and continuation rule is absent.\",\n      \"readings\": [\n        \"Switch projection on at iteration 45 and retain a fixed steepness afterward.\",\n        \"Start a smooth projection earlier and increase its steepness to obtain the binary state by iteration 45.\",\n        \"Increase projection steepness adaptively when compliance or density changes stagnate.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"initial density field for the unconstrained coarse optimization\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.3 explains how the coarse result initializes self-supporting optimization, but does not specify the density field used to start the coarse run.\",\n      \"readings\": [\n        \"Uniform initial density 0.6.\",\n        \"Uniform initial density 1.\",\n        \"Initial density 0.61 in alternating cells and 0.59 in the remaining cells.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"MMA numerical parameters and scaling\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.3 identifies MMA but gives no move limits, asymptote parameters, numerical scaling, or subproblem tolerances.\",\n      \"readings\": [\n        \"Move limit 0.2; initial asymptote distance 0.5; expansion/contraction factors 1.2/0.7; unscaled objective and constraints; subproblem tolerance 1e-8.\",\n        \"Move limit 0.05; initial asymptote distance 0.1; expansion/contraction factors 1.1/0.5; normalize compliance by its initial value and constraints by their bounds; subproblem tolerance 1e-6.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"final optimization stopping criteria\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1.1 describes stable compliance and volume and shows a final state at step 166, but gives no stopping tolerances or iteration cap.\",\n      \"readings\": [\n        \"Stop when maximum density change is below 0.01 and constraints are satisfied; cap at 500 iterations.\",\n        \"Stop when relative compliance change stays below 0.0001 for ten iterations and constraints are satisfied; cap at 1000 iterations.\",\n        \"Run exactly 166 iterations for the self-supporting result.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"self-supporting constraint tolerance schedule\",\n      \"issue\": \"missing\",\n      \"description\": \"For the self-supporting run, Sec. 2.3 prescribes decreasing epsilon from a relatively large value to epsilon_0, but supplies neither endpoint nor the decrease law.\",\n      \"readings\": [\n        \"Start epsilon at 100, multiply by 0.8 each iteration, and stop decreasing at 0.000001.\",\n        \"Start epsilon at 10 and decrease linearly to 0.001 over 100 iterations.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"support-detection threshold for gray densities\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.2 explicitly says a practical value must replace zero in the sign test for continuous densities, but does not give that value.\",\n      \"readings\": [\n        \"Declare support when the sum of supporting-cell densities exceeds 0.000001.\",\n        \"Declare support when that sum exceeds 0.1.\",\n        \"Declare support when that sum exceeds 0.5.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"final removal of unsupported cells\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2.3 says to remove remaining unsupported cells when their number stops decreasing, but does not define stagnation, deletion order, permanent fixing, or subsequent optimization.\",\n      \"readings\": [\n        \"After five stagnant iterations, repeatedly delete all currently unsupported cells until none remain, then only recompute equilibrium.\",\n        \"After twenty stagnant iterations, delete unsupported cells sequentially, fix them permanently to zero, and resume MMA.\",\n        \"During the terminal iterations, set currently unsupported cells to zero at every step while allowing later optimization to change them.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"linear equilibrium solution accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"The text identifies the implementation language but not the equilibrium solver or its accuracy requirements.\",\n      \"readings\": [\n        \"Sparse direct factorization in double precision.\",\n        \"Preconditioned conjugate gradients with relative residual tolerance 1e-8.\",\n        \"Preconditioned conjugate gradients with relative residual tolerance 1e-4.\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "load_direction",
+    "entity": "point force at the right-edge midpoint",
+    "issue": "missing",
+    "description": "Sec. 4.1 specifies the force location but not its direction. The downward force in Sec. 4.2 belongs to a different example.",
+    "readings": [
+     "Vertical downward.",
+     "Horizontal outward.",
+     "Diagonal downward and outward at 45 degrees."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "point force at the right-edge midpoint",
+    "issue": "missing",
+    "description": "Neither Sec. 4.1 nor the Fig. 7 caption gives the force magnitude. Dimensionless data do not establish a unit force.",
+    "readings": [
+     "Force magnitude 1.",
+     "Force magnitude 0.1.",
+     "Force magnitude 10."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "2D elastic constitutive model",
+    "issue": "missing",
+    "description": "Sec. 4 gives Young's modulus and Poisson's ratio but does not specify the 2D constitutive assumption.",
+    "readings": [
+     "Plane stress.",
+     "Plane strain."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "uniform out-of-plane thickness used by the 2D model",
+    "issue": "missing",
+    "description": "The in-plane rectangle is specified, but no thickness or per-unit-depth convention is stated for stiffness and compliance.",
+    "readings": [
+     "Uniform thickness 1.",
+     "Uniform thickness 2, with the same total point-force convention."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "mesh",
+    "entity": "displacement finite elements on the square grid",
+    "issue": "missing",
+    "description": "Secs. 2.1 and 4.1 and Table 3 establish square cells and the element count, but not displacement interpolation, quadrature, or stabilization.",
+    "readings": [
+     "Four-node bilinear quadrilaterals with 2-by-2 Gauss integration.",
+     "Eight-node quadratic quadrilaterals with 3-by-3 Gauss integration.",
+     "Four-node quadrilaterals with one-point integration and hourglass stabilization."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "prescribed-solid cells near the clamp and load",
+    "issue": "missing",
+    "description": "Sec. 4.1 states mechanical boundary conditions but does not explicitly identify any passive solid cells or declare that none are used.",
+    "readings": [
+     "All 9000 cells are designable; no passive solid cells.",
+     "Keep the first column next to the clamp solid.",
+     "Keep the two rightmost cells immediately above and below the loaded midpoint solid.",
+     "Use both the clamp strip and the load pad."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "numerical lower density bound and void treatment",
+    "issue": "vague",
+    "description": "Eq. (4) requires positive density without a numerical lower bound, while Sec. 2.3 describes exact binary zeros and element removal. Their numerical treatment is not specified.",
+    "readings": [
+     "Use a density floor of 0.001 with the stated cubic stiffness interpolation during optimization.",
+     "Use a density floor of 0.000001 with the stated cubic stiffness interpolation during optimization.",
+     "Allow zero density and remove inactive void degrees of freedom when assembling the final binary model."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "meaning of the minimum-thickness parameter",
+    "issue": "vague",
+    "description": "The Fig. 7 caption specifies 1.5, and Sec. 4.1.2 labels the corresponding quantity r_min, but no relation between this parameter and actual member width is defined.",
+    "readings": [
+     "Interpret 1.5 as the density-filter neighborhood radius in cell widths.",
+     "Interpret 1.5 as the required full solid-member width and calibrate the filter to that width."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "density-filter weighting",
+    "issue": "missing",
+    "description": "Sec. 4.1.2 names a density filter for thickness control but gives no weighting formula.",
+    "readings": [
+     "Normalized linearly decreasing weights: max(0, r_min minus center distance).",
+     "Uniform weights for cell centers inside the filter radius.",
+     "Gaussian weights truncated at the filter radius."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "density-filter treatment at domain boundaries",
+    "issue": "missing",
+    "description": "No boundary extension or normalization is given for the thickness-control filter. Sec. 3.2 specifies void padding for unsupported-element detection, which does not establish the density-filter convention.",
+    "readings": [
+     "Truncate the filter neighborhood at the rectangle and renormalize over existing cells.",
+     "Pad outside the rectangle with zero density and retain the full-stencil denominator.",
+     "Mirror the density field across each boundary before filtering."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "density fields used in stiffness, volume, and support calculations",
+    "issue": "vague",
+    "description": "Eq. (4) uses one density symbol; later sections introduce density filtering and projection without distinguishing design, filtered, and projected densities in the governing calculations.",
+    "readings": [
+     "Use projected filtered density for stiffness, volume, and unsupported-element calculations.",
+     "Use projected filtered density for stiffness and support calculations, but raw design density for volume.",
+     "Use filtered density for stiffness and volume, and a separately binarized field for support detection."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Heaviside projection and final binarization",
+    "issue": "missing",
+    "description": "Sec. 2.3 names a Guest Heaviside projection but supplies no formula, threshold, steepness values, or final rounding rule.",
+    "readings": [
+     "Tanh projection centered at density 0.5, final steepness 64, followed by rounding projected densities at 0.5.",
+     "Tanh projection centered at density 0.3, final steepness 128, followed by rounding projected densities at 0.5.",
+     "Exponential projection P(x)=1-exp(-64*x)+x*exp(-64), followed by rounding at 0.5."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "projection activation and continuation schedule",
+    "issue": "vague",
+    "description": "Sec. 2.3 describes projection in the last few steps, whereas Sec. 4.1.1 shows a binary state at step 45 followed by optimization through step 166. The complete switching and continuation rule is absent.",
+    "readings": [
+     "Switch projection on at iteration 45 and retain a fixed steepness afterward.",
+     "Start a smooth projection earlier and increase its steepness to obtain the binary state by iteration 45.",
+     "Increase projection steepness adaptively when compliance or density changes stagnate."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "initial density field for the unconstrained coarse optimization",
+    "issue": "missing",
+    "description": "Sec. 2.3 explains how the coarse result initializes self-supporting optimization, but does not specify the density field used to start the coarse run.",
+    "readings": [
+     "Uniform initial density 0.6.",
+     "Uniform initial density 1.",
+     "Initial density 0.61 in alternating cells and 0.59 in the remaining cells."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "MMA numerical parameters and scaling",
+    "issue": "missing",
+    "description": "Sec. 2.3 identifies MMA but gives no move limits, asymptote parameters, numerical scaling, or subproblem tolerances.",
+    "readings": [
+     "Move limit 0.2; initial asymptote distance 0.5; expansion/contraction factors 1.2/0.7; unscaled objective and constraints; subproblem tolerance 1e-8.",
+     "Move limit 0.05; initial asymptote distance 0.1; expansion/contraction factors 1.1/0.5; normalize compliance by its initial value and constraints by their bounds; subproblem tolerance 1e-6."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "final optimization stopping criteria",
+    "issue": "missing",
+    "description": "Sec. 4.1.1 describes stable compliance and volume and shows a final state at step 166, but gives no stopping tolerances or iteration cap.",
+    "readings": [
+     "Stop when maximum density change is below 0.01 and constraints are satisfied; cap at 500 iterations.",
+     "Stop when relative compliance change stays below 0.0001 for ten iterations and constraints are satisfied; cap at 1000 iterations.",
+     "Run exactly 166 iterations for the self-supporting result."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "self-supporting constraint tolerance schedule",
+    "issue": "missing",
+    "description": "For the self-supporting run, Sec. 2.3 prescribes decreasing epsilon from a relatively large value to epsilon_0, but supplies neither endpoint nor the decrease law.",
+    "readings": [
+     "Start epsilon at 100, multiply by 0.8 each iteration, and stop decreasing at 0.000001.",
+     "Start epsilon at 10 and decrease linearly to 0.001 over 100 iterations."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "support-detection threshold for gray densities",
+    "issue": "missing",
+    "description": "Sec. 3.2 explicitly says a practical value must replace zero in the sign test for continuous densities, but does not give that value.",
+    "readings": [
+     "Declare support when the sum of supporting-cell densities exceeds 0.000001.",
+     "Declare support when that sum exceeds 0.1.",
+     "Declare support when that sum exceeds 0.5."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "final removal of unsupported cells",
+    "issue": "vague",
+    "description": "Sec. 2.3 says to remove remaining unsupported cells when their number stops decreasing, but does not define stagnation, deletion order, permanent fixing, or subsequent optimization.",
+    "readings": [
+     "After five stagnant iterations, repeatedly delete all currently unsupported cells until none remain, then only recompute equilibrium.",
+     "After twenty stagnant iterations, delete unsupported cells sequentially, fix them permanently to zero, and resume MMA.",
+     "During the terminal iterations, set currently unsupported cells to zero at every step while allowing later optimization to change them."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "linear equilibrium solution accuracy",
+    "issue": "missing",
+    "description": "The text identifies the implementation language but not the equilibrium solver or its accuracy requirements.",
+    "readings": [
+     "Sparse direct factorization in double precision.",
+     "Preconditioned conjugate gradients with relative residual tolerance 1e-8.",
+     "Preconditioned conjugate gradients with relative residual tolerance 1e-4."
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 498.64363050460815,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L05",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 2,
+ "locator": "Sec. 4.1, Fig. 7, the rectangular cantilever",
+ "finished": "2026-10-22T21:51:20"
+}

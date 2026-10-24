@@ -1,0 +1,289 @@
+{
+ "raw": "{\"items\": [{\"category\": \"domain_extent\", \"entity\": \"square plate design domain (Fig. 6a)\", \"issue\": \"figure_only\", \"description\": \"Sec. 4.1.1 only says 'square plate'; Sec. 4.1 says 'The length is fixed at L = 1.0 m' for all three problems of Fig. 6, but which dimension of Fig. 6a is labelled L is visible only in the figure. Because \\u2113 = 0.008 and h_min/h_max are absolute lengths, the side length changes the effective regularization scale.\", \"readings\": [\"side = L: 1.0 m \\u00d7 1.0 m\", \"side = 2L: 2.0 m \\u00d7 2.0 m\"], \"effect\": \"layout\"}, {\"category\": \"support_location_extent\", \"entity\": \"clamped boundary \\u0393_u\", \"issue\": \"figure_only\", \"description\": \"Sec. 4.1.1: 'being fixed at \\u0393_u as shown in Fig. (6a)'. Which edge(s), and which part of them, is clamped appears only in the figure. Eq. 39 does state the support type (u = 0, both components). Coordinates: x from the left edge, y from the bottom edge, as fractions of the side L.\", \"readings\": [\"entire left edge (x = 0, 0 \\u2264 y \\u2264 L) clamped\", \"entire top edge (y = L, 0 \\u2264 x \\u2264 L) clamped\", \"entire bottom edge (y = 0) clamped\", \"only the central part of the left edge (0.25L \\u2264 y \\u2264 0.75L) clamped\", \"two short segments (\\u22480.05L) at the bottom-left and bottom-right corners clamped\"], \"effect\": \"layout\"}, {\"category\": \"load_position\", \"entity\": \"traction boundary \\u0393_t (asymmetric load)\", \"issue\": \"figure_only\", \"description\": \"The Fig. 6 caption and Sec. 4.1.1 only say 'asymmetrically loaded'. Which edge carries \\u0393_t, and where along it (off the symmetry axis of the support), is shown only in Fig. 6a. Positions use x from the left edge and y from the bottom edge, as fractions of L.\", \"readings\": [\"bottom-right corner (x = L, y = 0)\", \"right edge at y = 0.25L\", \"right edge at y = 0.75L\", \"bottom edge at x = 0.75L\", \"top edge at x = 0.75L\"], \"effect\": \"layout\"}, {\"category\": \"load_direction\", \"entity\": \"traction vector t\", \"issue\": \"figure_only\", \"description\": \"Sec. 4.1 gives only the magnitude |t| = 1.0\\u00d710^3 N/m. The direction of t in problem (a) is only drawn in Fig. 6a; an inclined load could itself be the source of the 'asymmetry'.\", \"readings\": [\"vertical, downward (\\u2212y)\", \"horizontal (+x or \\u2212x)\", \"inclined at 45\\u00b0 to the loaded edge\"], \"effect\": \"layout\"}, {\"category\": \"load_extent_distribution\", \"entity\": \"length/distribution of the loaded segment \\u0393_t\", \"issue\": \"missing\", \"description\": \"The load is a boundary traction on a segment \\u0393_t (Eq. 39, units N/m), and \\u03c6 = 1 is also imposed there, but the segment length is never stated (it may only be drawn in Fig. 6a). On a structured grid one must choose between a point load and a uniform traction over some number of element edges.\", \"readings\": [\"concentrated force at a single node\", \"uniform traction over a segment of length 0.02L\", \"uniform traction over a segment of length 0.05L\", \"uniform traction over a segment of length 0.1L\"], \"effect\": \"layout\"}, {\"category\": \"load_magnitude\", \"entity\": \"resultant load\", \"issue\": \"vague\", \"description\": \"Sec. 4.1: '|t| = 1.0\\u00d710^3 N/m'. In a 2-D model a traction given in N/m produces a resultant that depends on the unknown length of \\u0393_t (and on thickness). The value can also be read as the total force per unit depth.\", \"readings\": [\"uniform traction of 1.0e3 (N/m) over \\u0393_t, so the resultant = 1.0e3 \\u00d7 |\\u0393_t| per unit depth\", \"resultant force of 1.0e3 N per unit depth applied at/over \\u0393_t\"], \"effect\": \"scale_only\"}, {\"category\": \"other\", \"entity\": \"out-of-plane thickness of the plate\", \"issue\": \"missing\", \"description\": \"No thickness is given for the 2-D 'plate' (Sec. 4.1/4.1.1). Under plane strain the model is per unit depth; under plane stress the thickness scales the stiffness.\", \"readings\": [\"unit thickness (1 m, i.e. per unit depth)\", \"thin plate, e.g. 0.01 m, under plane stress\"], \"effect\": \"scale_only\"}, {\"category\": \"material\", \"entity\": \"2-D constitutive assumption (plane strain vs plane stress)\", \"issue\": \"vague\", \"description\": \"Sec. 2.1 defines the Lam\\u00e9 constants 'in plane strain assumption', and Sec. 4.3 explicitly switches to plane stress for the L-bracket. Sec. 4.1/4.1.1 restate neither, and the structure is called a 'plate'. Plane strain is the default reading but is not confirmed for this example.\", \"readings\": [\"plane strain: \\u03bb = E\\u03bd/((1+\\u03bd)(1\\u22122\\u03bd)), \\u03bc = E/(2(1+\\u03bd)) (Sec. 2.1)\", \"plane stress: \\u03bb* = E\\u03bd/(1\\u2212\\u03bd\\u00b2), \\u03bc = E/(2(1+\\u03bd))\"], \"effect\": \"layout\"}, {\"category\": \"passive_region\", \"entity\": \"forced-solid region at the load (level-set Dirichlet condition on \\ud835\\udca2_t)\", \"issue\": \"conflicting\", \"description\": \"The evolution problem (Sec. 2.2, Sec. 3, A.2\\u2013A.5) imposes \\u03c6 = 1 on \\ud835\\udca2_t, which keeps the loaded boundary solid. But Appendix A.1, the standard wave equation used in Sec. 4.1.1, writes \\u03c6_{v+1} = 0 on \\ud835\\udca2_t in its weak form. \\ud835\\udca2_t is never defined explicitly (presumably the image of \\u0393_t), and the depth of the resulting non-design region on an element grid is not specified. No passive region is mentioned at \\u0393_u.\", \"readings\": [\"\\u03c6 = 1 on \\u0393_t, realized as one row of solid passive elements along the loaded segment\", \"\\u03c6 = 1 on \\u0393_t, realized as a small solid patch (e.g. 0.02L \\u00d7 0.02L) around the load\", \"\\u03c6 = 0 on \\u0393_t (Appendix A.1): loaded edge kept on the material/void interface, no passive solid\", \"no passive region at all\"], \"effect\": \"layout\"}, {\"category\": \"mesh\", \"entity\": \"element size / structured-grid resolution\", \"issue\": \"vague\", \"description\": \"Sec. 4.1 gives only an adaptive FreeFEM++/mmg size range, h_min = 5\\u00d710^-4 to h_max = 1.0\\u00d710^-2 (no units, presumably m), with no adaptation metric or frequency. A uniform grid size is therefore undetermined. Because \\u2113 = 0.008 < h_max, the resolution relative to \\u2113 matters.\", \"readings\": [\"100 \\u00d7 100 elements (h = 0.01 = h_max)\", \"200 \\u00d7 200 elements (h = 0.005)\", \"500 \\u00d7 500 elements (h = 0.002)\", \"2000 \\u00d7 2000 elements (h = 5\\u00d710^-4 = h_min)\"], \"effect\": \"layout\"}, {\"category\": \"mesh\", \"entity\": \"element type / interpolation order for u and \\u03c6\", \"issue\": \"missing\", \"description\": \"Sec. 3 only says FreeFEM++ finite elements are used. The text gives neither the interpolation order of the displacement and level-set fields (P1/P2) nor how \\u0398(\\u03c6) enters the element stiffness. A structured-grid solver must choose, e.g., Q4 elements with element-wise \\u0398.\", \"readings\": [\"P1 triangles for both u and \\u03c6\", \"P2 for u, P1 for \\u03c6\", \"bilinear Q4, \\u0398 evaluated per element from the element-centre \\u03c6\", \"bilinear Q4, \\u0398 evaluated at Gauss points from nodal \\u03c6\"], \"effect\": \"unsure\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"regularization length / equivalent filter\", \"issue\": \"missing\", \"description\": \"No density or sensitivity filter is used. The only length scale is \\u2113 = 0.008 (stated to have length units, presumably m) in the wave-equation update with \\u0394v = 1 (Sec. 3, A.1, Sec. 4.1.1). A conventional structured-grid compliance solver needs either this update or an equivalent filter, whose radius is not given.\", \"readings\": [\"implement the paper's update \\u03c6_{v+1} \\u2212 \\u2113\\u00b2\\u2207\\u00b2\\u03c6_{v+1} = \\u2212S_v + 2\\u03c6_v \\u2212 \\u03c6_{v\\u22121} with \\u2113 = 0.008 m\", \"Helmholtz/PDE filter with length parameter \\u2113 = 0.008 m\", \"density/sensitivity filter radius R = 2\\u221a3\\u00b7\\u2113 \\u2248 0.028 m\", \"density/sensitivity filter radius R = \\u2113 = 0.008 m\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"set of \\u03b2 values in the study\", \"issue\": \"vague\", \"description\": \"Sec. 4.1.1 says \\u03b2 is 'varied between \\u03b2 = 2.0 and \\u03b2 = 8.0' but does not list the intermediate values (presumably labelled only in Fig. 7). The text says the topologies remain almost identical, though Sec. 4.1.5 shows \\u03b2 can alter the layout.\", \"readings\": [\"\\u03b2 \\u2208 {2.0, 8.0}\", \"\\u03b2 \\u2208 {2.0, 4.0, 6.0, 8.0}\", \"\\u03b2 \\u2208 {2.0, 5.0, 8.0}\", \"\\u03b2 \\u2208 {2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0}\"], \"effect\": \"unsure\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"augmented-Lagrangian volume-constraint parameters\", \"issue\": \"missing\", \"description\": \"Sec. 4.1 (Eq. 42 ff.) says the penalty r 'is increased in each iteration until it reaches a limit value r_max'. The initial multiplier \\u03bb, the initial r, the increase rule and r_max are never given.\", \"readings\": [\"\\u03bb0 = 0, r0 = 1, r \\u2190 1.1\\u00b7r, r_max = 100\", \"\\u03bb0 = 0, r0 = 0.1, r \\u2190 r + 0.1, r_max = 10\", \"\\u03bb0 = 0, r0 = 10, r \\u2190 1.05\\u00b7r, r_max = 1000\"], \"effect\": \"unsure\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"termination criterion / iteration count\", \"issue\": \"missing\", \"description\": \"Sec. 3 (Fig. 5 flowchart): the loop ends 'if convergence to a minimum is achieved, or a predefined number of iterations is reached'. Neither the tolerance nor the maximum number of iterations is stated; at most the iteration axis of Fig. 7 might show it.\", \"readings\": [\"fixed 200 iterations\", \"fixed 500 iterations\", \"stop when the relative change of J < 1e-4 over 5 iterations and G \\u2264 1e-3\"], \"effect\": \"unsure\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"bounds on \\u03c6 during the update\", \"issue\": \"missing\", \"description\": \"\\u03c6 is defined to take values in [\\u22121, 1] (Sec. 2.1), but the update (Eq. 32 / A.1) contains no truncation. The text never says whether \\u03c6 is clipped after each step, as is done in reaction\\u2013diffusion level-set codes.\", \"readings\": [\"clip \\u03c6 to [\\u22121, 1] after every update\", \"no clipping (\\u03c6 evolves freely)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"normalization factor C_v (Eq. 44)\", \"issue\": \"vague\", \"description\": \"Eq. 44 writes C_v = (1/(c_f V0)) \\u222b_D |\\u2202R/\\u2202\\u0398|_{L\\u00b2(D)} d\\u03a9, i.e. it integrates an L\\u00b2 norm over D. It is unclear whether C_v is the L\\u00b2 norm or the mean absolute value of the strain-energy sensitivity, and whether it is recomputed each iteration. With c_f = 1, C_v sets the step size of S_v = f_v \\u03b2 / C_v.\", \"readings\": [\"C_v = \\u2016\\u03b5(u):\\u2202\\u03c4/\\u2202\\u0398 C:\\u03b5(u)\\u2016_{L\\u00b2(D)} / c_f, recomputed every iteration\", \"C_v = (1/(c_f V0)) \\u222b_D |\\u03b5(u):\\u2202\\u03c4/\\u2202\\u0398 C:\\u03b5(u)| d\\u03a9 (mean absolute value), recomputed every iteration\", \"either of the above, computed once at the first iteration and then kept fixed\"], \"effect\": \"unsure\"}, {\"category\": \"material\", \"entity\": \"ersatz stiffness interpolation \\u03c4(\\u0398) and its derivative\", \"issue\": \"conflicting\", \"description\": \"Eq. 40 uses \\u03c4 = (1\\u2212e)\\u0398^q + e (q = 3, e = 10^-3) with the smooth tanh Heaviside of Eq. 23. Eq. 41 then uses \\u0398^q \\u2261 \\u0398, which holds only for binary \\u0398, to get \\u2202\\u03c4/\\u2202\\u0398 = q(1\\u2212e)\\u0398. With a smooth \\u0398, the stiffness law and its sensitivity are inconsistent.\", \"readings\": [\"\\u03c4 = (1\\u2212e)\\u0398\\u00b3 + e with the exact derivative 3(1\\u2212e)\\u0398\\u00b2\", \"\\u03c4 = (1\\u2212e)\\u0398\\u00b3 + e with the paper's derivative 3(1\\u2212e)\\u0398 (Eq. 41)\", \"\\u03c4 = (1\\u2212e)\\u0398 + e (identity also applied to the stiffness) with derivative 3(1\\u2212e)\\u0398\"], \"effect\": \"unsure\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"initial level-set values \\u03c60 and \\u03c6\\u22121\", \"issue\": \"vague\", \"description\": \"Sec. 4.1 says 'a completely filled design domain serves as the initial configuration for both \\u03c60 and \\u03c6\\u22121'. It does not give the actual value of \\u03c6, and any positive constant counts as 'filled'. The value affects how quickly the undamped wave update reaches the zero level.\", \"readings\": [\"\\u03c60 = \\u03c6\\u22121 = 1 everywhere\", \"\\u03c60 = \\u03c6\\u22121 = 0.5 everywhere\", \"\\u03c60 = \\u03c6\\u22121 = 0.1 everywhere\"], \"effect\": \"unsure\"}]}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "square plate design domain (Fig. 6a)",
+    "issue": "figure_only",
+    "description": "Sec. 4.1.1 only says 'square plate'; Sec. 4.1 says 'The length is fixed at L = 1.0 m' for all three problems of Fig. 6, but which dimension of Fig. 6a is labelled L is visible only in the figure. Because \u2113 = 0.008 and h_min/h_max are absolute lengths, the side length changes the effective regularization scale.",
+    "readings": [
+     "side = L: 1.0 m \u00d7 1.0 m",
+     "side = 2L: 2.0 m \u00d7 2.0 m"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "clamped boundary \u0393_u",
+    "issue": "figure_only",
+    "description": "Sec. 4.1.1: 'being fixed at \u0393_u as shown in Fig. (6a)'. Which edge(s), and which part of them, is clamped appears only in the figure. Eq. 39 does state the support type (u = 0, both components). Coordinates: x from the left edge, y from the bottom edge, as fractions of the side L.",
+    "readings": [
+     "entire left edge (x = 0, 0 \u2264 y \u2264 L) clamped",
+     "entire top edge (y = L, 0 \u2264 x \u2264 L) clamped",
+     "entire bottom edge (y = 0) clamped",
+     "only the central part of the left edge (0.25L \u2264 y \u2264 0.75L) clamped",
+     "two short segments (\u22480.05L) at the bottom-left and bottom-right corners clamped"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "traction boundary \u0393_t (asymmetric load)",
+    "issue": "figure_only",
+    "description": "The Fig. 6 caption and Sec. 4.1.1 only say 'asymmetrically loaded'. Which edge carries \u0393_t, and where along it (off the symmetry axis of the support), is shown only in Fig. 6a. Positions use x from the left edge and y from the bottom edge, as fractions of L.",
+    "readings": [
+     "bottom-right corner (x = L, y = 0)",
+     "right edge at y = 0.25L",
+     "right edge at y = 0.75L",
+     "bottom edge at x = 0.75L",
+     "top edge at x = 0.75L"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "traction vector t",
+    "issue": "figure_only",
+    "description": "Sec. 4.1 gives only the magnitude |t| = 1.0\u00d710^3 N/m. The direction of t in problem (a) is only drawn in Fig. 6a; an inclined load could itself be the source of the 'asymmetry'.",
+    "readings": [
+     "vertical, downward (\u2212y)",
+     "horizontal (+x or \u2212x)",
+     "inclined at 45\u00b0 to the loaded edge"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "length/distribution of the loaded segment \u0393_t",
+    "issue": "missing",
+    "description": "The load is a boundary traction on a segment \u0393_t (Eq. 39, units N/m), and \u03c6 = 1 is also imposed there, but the segment length is never stated (it may only be drawn in Fig. 6a). On a structured grid one must choose between a point load and a uniform traction over some number of element edges.",
+    "readings": [
+     "concentrated force at a single node",
+     "uniform traction over a segment of length 0.02L",
+     "uniform traction over a segment of length 0.05L",
+     "uniform traction over a segment of length 0.1L"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "resultant load",
+    "issue": "vague",
+    "description": "Sec. 4.1: '|t| = 1.0\u00d710^3 N/m'. In a 2-D model a traction given in N/m produces a resultant that depends on the unknown length of \u0393_t (and on thickness). The value can also be read as the total force per unit depth.",
+    "readings": [
+     "uniform traction of 1.0e3 (N/m) over \u0393_t, so the resultant = 1.0e3 \u00d7 |\u0393_t| per unit depth",
+     "resultant force of 1.0e3 N per unit depth applied at/over \u0393_t"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "other",
+    "entity": "out-of-plane thickness of the plate",
+    "issue": "missing",
+    "description": "No thickness is given for the 2-D 'plate' (Sec. 4.1/4.1.1). Under plane strain the model is per unit depth; under plane stress the thickness scales the stiffness.",
+    "readings": [
+     "unit thickness (1 m, i.e. per unit depth)",
+     "thin plate, e.g. 0.01 m, under plane stress"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "2-D constitutive assumption (plane strain vs plane stress)",
+    "issue": "vague",
+    "description": "Sec. 2.1 defines the Lam\u00e9 constants 'in plane strain assumption', and Sec. 4.3 explicitly switches to plane stress for the L-bracket. Sec. 4.1/4.1.1 restate neither, and the structure is called a 'plate'. Plane strain is the default reading but is not confirmed for this example.",
+    "readings": [
+     "plane strain: \u03bb = E\u03bd/((1+\u03bd)(1\u22122\u03bd)), \u03bc = E/(2(1+\u03bd)) (Sec. 2.1)",
+     "plane stress: \u03bb* = E\u03bd/(1\u2212\u03bd\u00b2), \u03bc = E/(2(1+\u03bd))"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "forced-solid region at the load (level-set Dirichlet condition on \ud835\udca2_t)",
+    "issue": "conflicting",
+    "description": "The evolution problem (Sec. 2.2, Sec. 3, A.2\u2013A.5) imposes \u03c6 = 1 on \ud835\udca2_t, which keeps the loaded boundary solid. But Appendix A.1, the standard wave equation used in Sec. 4.1.1, writes \u03c6_{v+1} = 0 on \ud835\udca2_t in its weak form. \ud835\udca2_t is never defined explicitly (presumably the image of \u0393_t), and the depth of the resulting non-design region on an element grid is not specified. No passive region is mentioned at \u0393_u.",
+    "readings": [
+     "\u03c6 = 1 on \u0393_t, realized as one row of solid passive elements along the loaded segment",
+     "\u03c6 = 1 on \u0393_t, realized as a small solid patch (e.g. 0.02L \u00d7 0.02L) around the load",
+     "\u03c6 = 0 on \u0393_t (Appendix A.1): loaded edge kept on the material/void interface, no passive solid",
+     "no passive region at all"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "element size / structured-grid resolution",
+    "issue": "vague",
+    "description": "Sec. 4.1 gives only an adaptive FreeFEM++/mmg size range, h_min = 5\u00d710^-4 to h_max = 1.0\u00d710^-2 (no units, presumably m), with no adaptation metric or frequency. A uniform grid size is therefore undetermined. Because \u2113 = 0.008 < h_max, the resolution relative to \u2113 matters.",
+    "readings": [
+     "100 \u00d7 100 elements (h = 0.01 = h_max)",
+     "200 \u00d7 200 elements (h = 0.005)",
+     "500 \u00d7 500 elements (h = 0.002)",
+     "2000 \u00d7 2000 elements (h = 5\u00d710^-4 = h_min)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "element type / interpolation order for u and \u03c6",
+    "issue": "missing",
+    "description": "Sec. 3 only says FreeFEM++ finite elements are used. The text gives neither the interpolation order of the displacement and level-set fields (P1/P2) nor how \u0398(\u03c6) enters the element stiffness. A structured-grid solver must choose, e.g., Q4 elements with element-wise \u0398.",
+    "readings": [
+     "P1 triangles for both u and \u03c6",
+     "P2 for u, P1 for \u03c6",
+     "bilinear Q4, \u0398 evaluated per element from the element-centre \u03c6",
+     "bilinear Q4, \u0398 evaluated at Gauss points from nodal \u03c6"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "regularization length / equivalent filter",
+    "issue": "missing",
+    "description": "No density or sensitivity filter is used. The only length scale is \u2113 = 0.008 (stated to have length units, presumably m) in the wave-equation update with \u0394v = 1 (Sec. 3, A.1, Sec. 4.1.1). A conventional structured-grid compliance solver needs either this update or an equivalent filter, whose radius is not given.",
+    "readings": [
+     "implement the paper's update \u03c6_{v+1} \u2212 \u2113\u00b2\u2207\u00b2\u03c6_{v+1} = \u2212S_v + 2\u03c6_v \u2212 \u03c6_{v\u22121} with \u2113 = 0.008 m",
+     "Helmholtz/PDE filter with length parameter \u2113 = 0.008 m",
+     "density/sensitivity filter radius R = 2\u221a3\u00b7\u2113 \u2248 0.028 m",
+     "density/sensitivity filter radius R = \u2113 = 0.008 m"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "set of \u03b2 values in the study",
+    "issue": "vague",
+    "description": "Sec. 4.1.1 says \u03b2 is 'varied between \u03b2 = 2.0 and \u03b2 = 8.0' but does not list the intermediate values (presumably labelled only in Fig. 7). The text says the topologies remain almost identical, though Sec. 4.1.5 shows \u03b2 can alter the layout.",
+    "readings": [
+     "\u03b2 \u2208 {2.0, 8.0}",
+     "\u03b2 \u2208 {2.0, 4.0, 6.0, 8.0}",
+     "\u03b2 \u2208 {2.0, 5.0, 8.0}",
+     "\u03b2 \u2208 {2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0}"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "augmented-Lagrangian volume-constraint parameters",
+    "issue": "missing",
+    "description": "Sec. 4.1 (Eq. 42 ff.) says the penalty r 'is increased in each iteration until it reaches a limit value r_max'. The initial multiplier \u03bb, the initial r, the increase rule and r_max are never given.",
+    "readings": [
+     "\u03bb0 = 0, r0 = 1, r \u2190 1.1\u00b7r, r_max = 100",
+     "\u03bb0 = 0, r0 = 0.1, r \u2190 r + 0.1, r_max = 10",
+     "\u03bb0 = 0, r0 = 10, r \u2190 1.05\u00b7r, r_max = 1000"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "termination criterion / iteration count",
+    "issue": "missing",
+    "description": "Sec. 3 (Fig. 5 flowchart): the loop ends 'if convergence to a minimum is achieved, or a predefined number of iterations is reached'. Neither the tolerance nor the maximum number of iterations is stated; at most the iteration axis of Fig. 7 might show it.",
+    "readings": [
+     "fixed 200 iterations",
+     "fixed 500 iterations",
+     "stop when the relative change of J < 1e-4 over 5 iterations and G \u2264 1e-3"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "bounds on \u03c6 during the update",
+    "issue": "missing",
+    "description": "\u03c6 is defined to take values in [\u22121, 1] (Sec. 2.1), but the update (Eq. 32 / A.1) contains no truncation. The text never says whether \u03c6 is clipped after each step, as is done in reaction\u2013diffusion level-set codes.",
+    "readings": [
+     "clip \u03c6 to [\u22121, 1] after every update",
+     "no clipping (\u03c6 evolves freely)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "normalization factor C_v (Eq. 44)",
+    "issue": "vague",
+    "description": "Eq. 44 writes C_v = (1/(c_f V0)) \u222b_D |\u2202R/\u2202\u0398|_{L\u00b2(D)} d\u03a9, i.e. it integrates an L\u00b2 norm over D. It is unclear whether C_v is the L\u00b2 norm or the mean absolute value of the strain-energy sensitivity, and whether it is recomputed each iteration. With c_f = 1, C_v sets the step size of S_v = f_v \u03b2 / C_v.",
+    "readings": [
+     "C_v = \u2016\u03b5(u):\u2202\u03c4/\u2202\u0398 C:\u03b5(u)\u2016_{L\u00b2(D)} / c_f, recomputed every iteration",
+     "C_v = (1/(c_f V0)) \u222b_D |\u03b5(u):\u2202\u03c4/\u2202\u0398 C:\u03b5(u)| d\u03a9 (mean absolute value), recomputed every iteration",
+     "either of the above, computed once at the first iteration and then kept fixed"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "material",
+    "entity": "ersatz stiffness interpolation \u03c4(\u0398) and its derivative",
+    "issue": "conflicting",
+    "description": "Eq. 40 uses \u03c4 = (1\u2212e)\u0398^q + e (q = 3, e = 10^-3) with the smooth tanh Heaviside of Eq. 23. Eq. 41 then uses \u0398^q \u2261 \u0398, which holds only for binary \u0398, to get \u2202\u03c4/\u2202\u0398 = q(1\u2212e)\u0398. With a smooth \u0398, the stiffness law and its sensitivity are inconsistent.",
+    "readings": [
+     "\u03c4 = (1\u2212e)\u0398\u00b3 + e with the exact derivative 3(1\u2212e)\u0398\u00b2",
+     "\u03c4 = (1\u2212e)\u0398\u00b3 + e with the paper's derivative 3(1\u2212e)\u0398 (Eq. 41)",
+     "\u03c4 = (1\u2212e)\u0398 + e (identity also applied to the stiffness) with derivative 3(1\u2212e)\u0398"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "initial level-set values \u03c60 and \u03c6\u22121",
+    "issue": "vague",
+    "description": "Sec. 4.1 says 'a completely filled design domain serves as the initial configuration for both \u03c60 and \u03c6\u22121'. It does not give the actual value of \u03c6, and any positive constant counts as 'filled'. The value affects how quickly the undamped wave update reaches the zero level.",
+    "readings": [
+     "\u03c60 = \u03c6\u22121 = 1 everywhere",
+     "\u03c60 = \u03c6\u22121 = 0.5 everywhere",
+     "\u03c60 = \u03c6\u22121 = 0.1 everywhere"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 437.36441683769226,
+ "returncode": 0,
+ "meta": {
+  "model": null,
+  "num_turns": 2,
+  "is_error": false,
+  "total_cost_usd": 1.4337388,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 57882,
+   "cache_read_input_tokens": 774,
+   "output_tokens": 48526,
+   "output_tokens_details": {
+    "thinking_tokens": 43309
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 57882,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 48526,
+     "cache_read_input_tokens": 774,
+     "cache_creation_input_tokens": 57882,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 57882
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard",
+   "fallback_credit": null
+  }
+ },
+ "stderr_tail": "",
+ "task": "L16",
+ "model": "claude",
+ "model_id": "claude-opus-5-5",
+ "rep": 0,
+ "locator": "Sec. 4.1.1, Fig. 6",
+ "finished": "2026-10-22T18:16:08"
+}

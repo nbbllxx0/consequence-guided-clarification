@@ -1,0 +1,84 @@
+{
+ "task": "L21",
+ "source": {
+  "arxiv": "2608.22606",
+  "position": 77
+ },
+ "dim": 2,
+ "slots": {
+  "load": [
+   "corner",
+   "upper"
+  ],
+  "volfrac": [
+   0.469
+  ]
+ },
+ "nominal": {
+  "load": "corner",
+  "volfrac": 0.469
+ },
+ "mandatory": [
+  "volfrac"
+ ],
+ "reasons": {
+  "load": "drawn at the upper end of the right edge; node not stated (Fig. 5(c))",
+  "volfrac": "only the initialization label V = 0.469: mandatory"
+ },
+ "recon": [
+  "sensitivity filter in source, radius not stated: density filter rmin 1.5 (solver setting)",
+  "unit nodal load as 2-element patch"
+ ],
+ "keys": [
+  "load=corner|volfrac=0.469",
+  "load=upper|volfrac=0.469"
+ ],
+ "C": [
+  [
+   189.58371848281655,
+   190.18601441827883
+  ],
+  [
+   1979230.0133498332,
+   188.13081581144868
+  ]
+ ],
+ "ref": {
+  "load=corner|volfrac=0.469": 189.58371848281644,
+  "load=upper|volfrac=0.469": 188.13081581144868
+ },
+ "ref_gap_beaten": {
+  "load=corner|volfrac=0.469": 0.0,
+  "load=upper|volfrac=0.469": 2.220446049250313e-16
+ },
+ "noise": {
+  "load=corner|volfrac=0.469": 0.0015000252377893035,
+  "load=upper|volfrac=0.469": 8.062869166289443e-05
+ },
+ "meta": {
+  "load=corner|volfrac=0.469": {
+   "accepted": true,
+   "kkt": 0.40808430903297815,
+   "wall_s": 7.859098199987784,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "load=upper|volfrac=0.469": {
+   "accepted": true,
+   "kkt": 0.2378519045445846,
+   "wall_s": 8.10419370001182,
+   "n_iter": [
+    201,
+    201
+   ]
+  }
+ },
+ "counter": {
+  "optimizations": 0,
+  "factorizations": 2,
+  "backsubs": 4,
+  "opt_wall_s": 0.0
+ }
+}

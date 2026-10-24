@@ -1,0 +1,330 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"four corner supports\",\n      \"issue\": \"vague\",\n      \"description\": \"Results specifies support at the four base corners, but gives no finite support footprints or corresponding FEM node sets.\",\n      \"readings\": [\n        \"Fix all three displacement components at the four corner nodes only.\",\n        \"Fix all three displacement components on four square bottom-face patches, each of side 0.05 times the base width.\",\n        \"Fix all three displacement components on four square bottom-face patches, each of side 0.10 times the base width.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"passive base and resulting designable extent\",\n      \"issue\": \"vague\",\n      \"description\": \"Results gives 12,800 passive base atoms, and Methods says they remain solid and fixed. Their spatial mask, thickness, and translation into FEM elements are not supplied. The count alone does not determine that mask.\",\n      \"readings\": [\n        \"Four corner anchor blocks, each 40.50 by 40.50 by 32.40 \u00c5.\",\n        \"Four corner anchor blocks, each 32.40 by 40.50 by 40.50 \u00c5.\",\n        \"Represent the anchors through constrained boundary nodes, without explicit passive base elements in the FEM mesh.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"solid protection around the top loading contact\",\n      \"issue\": \"missing\",\n      \"description\": \"The atomistic description identifies passive base atoms, but the FEM benchmark paragraph supplies no rule protecting material around its loaded top contact.\",\n      \"readings\": [\n        \"No additional passive solid region at the load.\",\n        \"A one-element-thick solid pad beneath the loading footprint.\",\n        \"A one-element-thick solid sheet over the entire top face.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"top-center loading footprint\",\n      \"issue\": \"vague\",\n      \"description\": \"Results and Methods locate loading at the center of the top surface, but do not specify the contact shape or area.\",\n      \"readings\": [\n        \"A single node at the top-face center.\",\n        \"A centered square patch of side 0.05 times the base width.\",\n        \"A centered circular patch of radius 0.05 times the base width.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"load distribution and displacement-to-force conversion\",\n      \"issue\": \"missing\",\n      \"description\": \"Methods prescribes atomistic vertical displacement; the FEM benchmark does not explain its implementation or the equivalent fixed load for minimum compliance. A resultant alone does not determine loading over a finite contact.\",\n      \"readings\": [\n        \"Apply a concentrated vertical force at the center node.\",\n        \"Apply uniform vertical traction over the contact patch.\",\n        \"Distribute the resultant equally among contact nodes.\",\n        \"Apply a generalized vertical force through a rigid platen whose contact nodes share vertical displacement.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"other\",\n      \"entity\": \"lateral kinematic conditions at the top contact\",\n      \"issue\": \"missing\",\n      \"description\": \"Methods specifies vertical displacement at the contact but does not state whether the loaded region can move laterally or how a loading platen is constrained.\",\n      \"readings\": [\n        \"Leave both lateral displacement components free.\",\n        \"Set both lateral displacement components to zero at every contact node.\",\n        \"Couple the contact to a rigid platen with free lateral translation.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"reference force for FEM minimum compliance\",\n      \"issue\": \"missing\",\n      \"description\": \"The stated 1%-height displacement determines the atomistic displacement amplitude, but no FEM force normalization or resultant is reported.\",\n      \"readings\": [\n        \"Use a vertical resultant of magnitude 1 in consistent solver units.\",\n        \"Use a vertical resultant of magnitude 10 in the same units.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"20.25% target and passive-material accounting\",\n      \"issue\": \"vague\",\n      \"description\": \"Results specifies an atomistic mass ratio of 20.25%, but does not define its denominator or how passive material enters the FEM volume constraint.\",\n      \"readings\": [\n        \"Constrain active solid volume to 20.25% of the active domain; exclude passive material from the budget.\",\n        \"Constrain active plus passive solid volume to 20.25% of the entire domain. Using the supplied atom counts as volume weights gives an active occupancy of 18.655%.\",\n        \"Use 20.25% of the entire FEM box, with supports represented only by constrained nodes.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"continuum constitutive symmetry\",\n      \"issue\": \"missing\",\n      \"description\": \"The paper identifies aluminum and an atomistic EAM potential, and calls bulk aluminum nearly isotropic. It does not state the FEM constitutive model.\",\n      \"readings\": [\n        \"Homogeneous isotropic three-dimensional elasticity.\",\n        \"Homogeneous cubic elasticity aligned with the stated simulation-cell axes, using bulk tangent constants from the EAM potential.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"overall continuum elastic-modulus scale\",\n      \"issue\": \"missing\",\n      \"description\": \"No FEM Young's modulus or overall stiffness-tensor scale is reported. The EAM specification does not establish which continuum modulus was used.\",\n      \"readings\": [\n        \"Use unit Young's modulus in normalized solver units.\",\n        \"Use a dimensional bulk modulus scale obtained by linearizing the specified EAM potential at 0 K.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Poisson ratio and relative elastic constants\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither an isotropic Poisson ratio nor the independent ratios of a cubic FEM stiffness tensor are supplied.\",\n      \"readings\": [\n        \"Isotropic elasticity with Poisson ratio 0.30.\",\n        \"Isotropic elasticity with Poisson ratio 0.35.\",\n        \"Use the cubic stiffness ratios obtained from the specified EAM potential at 0 K.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"structured FEM grid resolution\",\n      \"issue\": \"missing\",\n      \"description\": \"The domain dimensions, lattice parameter, and atom counts do not specify an FEM element count. The FEM benchmark paragraph reports no mesh.\",\n      \"readings\": [\n        \"Mesh the full box with 40 by 40 by 102 equal cubic elements, with spacing 4.05 \u00c5.\",\n        \"Mesh the full box with 80 by 80 by 204 equal cubic elements, with spacing 2.025 \u00c5.\",\n        \"Mesh the full box with 160 by 160 by 408 equal cubic elements, with spacing 1.0125 \u00c5.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"finite-element formulation and quadrature\",\n      \"issue\": \"missing\",\n      \"description\": \"No element order, integration rule, or stabilization scheme is given for FEM-TO.\",\n      \"readings\": [\n        \"Eight-node trilinear hexahedra with full 2 by 2 by 2 integration.\",\n        \"Eight-node hexahedra with reduced integration and hourglass stabilization.\",\n        \"Twenty-seven-node quadratic hexahedra with full integration.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"design-variable grid relative to the analysis grid\",\n      \"issue\": \"missing\",\n      \"description\": \"The FEM description does not identify where design variables live or whether the design and displacement grids coincide.\",\n      \"readings\": [\n        \"One constant density variable per analysis element.\",\n        \"Nodal density variables interpolated within analysis elements.\",\n        \"One design voxel spanning 2 by 2 by 2 analysis elements.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"material interpolation and penalization\",\n      \"issue\": \"missing\",\n      \"description\": \"The benchmark is called FEM-based TO, but its density-to-stiffness law, penalty parameters, and continuation are not reported.\",\n      \"readings\": [\n        \"SIMP with fixed exponent p=3.\",\n        \"SIMP with fixed exponent p=4.\",\n        \"SIMP with p continued from 1 to 3.\",\n        \"RAMP interpolation with q=5.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"void stiffness and minimum design density\",\n      \"issue\": \"missing\",\n      \"description\": \"No FEM ersatz stiffness or density lower bound is supplied; the atomistic real/virtual definition does not specify FEM regularization.\",\n      \"readings\": [\n        \"Minimum density 0 and void-to-solid stiffness ratio 0.001.\",\n        \"Minimum density 0 and void-to-solid stiffness ratio 0.000001.\",\n        \"Minimum density 0.001 and void-to-solid stiffness ratio 0.000000001.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"FEM regularization operator\",\n      \"issue\": \"missing\",\n      \"description\": \"Methods defines an atom-based sensitivity filter. No statement identifies the filter used for the FEM benchmark cited as A.14/Fig. S18.\",\n      \"readings\": [\n        \"No filter.\",\n        \"Distance-weighted sensitivity filter.\",\n        \"Distance-weighted density filter.\",\n        \"Helmholtz density filter.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"FEM filter radius or minimum feature size\",\n      \"issue\": \"missing\",\n      \"description\": \"The 10.325 \u00c5 radius is stated for the FCC atom-neighborhood filter; the text does not establish a FEM filter radius or an element-based equivalent.\",\n      \"readings\": [\n        \"Use a physical radius of 10.325 \u00c5.\",\n        \"Use a radius of 1.5 element widths.\",\n        \"Use a radius of 3 element widths.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"filter treatment at boundaries and passive regions\",\n      \"issue\": \"missing\",\n      \"description\": \"No FEM rule is given for filter neighborhoods crossing the outer boundary or the active/passive interface.\",\n      \"readings\": [\n        \"Truncate neighborhoods at the domain boundary and renormalize, including passive solid values.\",\n        \"Filter active variables only and renormalize over active neighbors.\",\n        \"Extend the field outside the box with zero density before filtering.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"density projection and continuation\",\n      \"issue\": \"missing\",\n      \"description\": \"The text does not state whether FEM densities are projected toward a binary design, or provide projection thresholds and sharpness schedules.\",\n      \"readings\": [\n        \"No density projection.\",\n        \"Heaviside projection with threshold 0.5 and sharpness continued from 1 to 8.\",\n        \"Heaviside projection with threshold 0.5 and sharpness continued from 1 to 32.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"density field on which the volume budget is enforced\",\n      \"issue\": \"missing\",\n      \"description\": \"If FEM filtering or projection is used, the text does not identify which density field must satisfy the target volume, or whether the budget is imposed after binarization.\",\n      \"readings\": [\n        \"Enforce the budget on raw design densities.\",\n        \"Enforce the budget on filtered and projected physical densities.\",\n        \"Enforce the target on the final binary occupancy by rank thresholding.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"FEM optimizer and update controls\",\n      \"issue\": \"missing\",\n      \"description\": \"Methods specifies atom-swap updates for Nano-TO, but gives no FEM optimization algorithm, move limit, or equivalent update controls.\",\n      \"readings\": [\n        \"Optimality-criteria updates with a density move limit of 0.2 per iteration.\",\n        \"Optimality-criteria updates with a density move limit of 0.1 per iteration.\",\n        \"MMA updates with a density move limit of 0.1 per iteration.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"FEM initialization and volume-reduction history\",\n      \"issue\": \"missing\",\n      \"description\": \"Results specifies a target-mass prismatic initialization for Nano-TO, but does not state the FEM initialization, randomization, or volume schedule.\",\n      \"readings\": [\n        \"Start with uniform fractional density at the target volume.\",\n        \"Start fully dense and gradually reduce the allowed volume.\",\n        \"Start from a centered binary square prism; if the active-volume fraction is 20.25%, use a cross-section of width 0.45 times the domain width.\",\n        \"Start with a seeded random perturbation of the uniform fractional-density field.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"pillar design symmetry constraints\",\n      \"issue\": \"missing\",\n      \"description\": \"Mirror symmetry is explicitly discussed for cantilevers, but no symmetry constraint is specified for the FEM nanopillar.\",\n      \"readings\": [\n        \"Optimize the full domain without enforced symmetry.\",\n        \"Enforce reflection symmetry across both vertical mid-planes.\",\n        \"Enforce both vertical reflections and 90-degree rotational symmetry about the pillar axis.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"FEM stopping criterion and iteration budget\",\n      \"issue\": \"missing\",\n      \"description\": \"The period-two criterion and 3,000-iteration budget concern Nano-TO. No FEM convergence tolerance or iteration limit is reported.\",\n      \"readings\": [\n        \"Stop when the maximum density change is below 0.01, with a 300-iteration cap.\",\n        \"Stop when relative compliance change stays below 0.001 for ten iterations.\",\n        \"Run a fixed 1,000 optimization iterations.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"FEM equilibrium-solve accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"The reported conjugate-gradient tolerances apply to atomistic relaxation, not the FEM linear equilibrium solve. Its solver and accuracy requirements are absent.\",\n      \"readings\": [\n        \"Use a sparse direct linear solver.\",\n        \"Use an iterative solver with relative residual tolerance 0.000001.\",\n        \"Use an iterative solver with relative residual tolerance 0.0000000001.\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "support_location_extent",
+    "entity": "four corner supports",
+    "issue": "vague",
+    "description": "Results specifies support at the four base corners, but gives no finite support footprints or corresponding FEM node sets.",
+    "readings": [
+     "Fix all three displacement components at the four corner nodes only.",
+     "Fix all three displacement components on four square bottom-face patches, each of side 0.05 times the base width.",
+     "Fix all three displacement components on four square bottom-face patches, each of side 0.10 times the base width."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "passive base and resulting designable extent",
+    "issue": "vague",
+    "description": "Results gives 12,800 passive base atoms, and Methods says they remain solid and fixed. Their spatial mask, thickness, and translation into FEM elements are not supplied. The count alone does not determine that mask.",
+    "readings": [
+     "Four corner anchor blocks, each 40.50 by 40.50 by 32.40 \u00c5.",
+     "Four corner anchor blocks, each 32.40 by 40.50 by 40.50 \u00c5.",
+     "Represent the anchors through constrained boundary nodes, without explicit passive base elements in the FEM mesh."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "solid protection around the top loading contact",
+    "issue": "missing",
+    "description": "The atomistic description identifies passive base atoms, but the FEM benchmark paragraph supplies no rule protecting material around its loaded top contact.",
+    "readings": [
+     "No additional passive solid region at the load.",
+     "A one-element-thick solid pad beneath the loading footprint.",
+     "A one-element-thick solid sheet over the entire top face."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "top-center loading footprint",
+    "issue": "vague",
+    "description": "Results and Methods locate loading at the center of the top surface, but do not specify the contact shape or area.",
+    "readings": [
+     "A single node at the top-face center.",
+     "A centered square patch of side 0.05 times the base width.",
+     "A centered circular patch of radius 0.05 times the base width."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "load distribution and displacement-to-force conversion",
+    "issue": "missing",
+    "description": "Methods prescribes atomistic vertical displacement; the FEM benchmark does not explain its implementation or the equivalent fixed load for minimum compliance. A resultant alone does not determine loading over a finite contact.",
+    "readings": [
+     "Apply a concentrated vertical force at the center node.",
+     "Apply uniform vertical traction over the contact patch.",
+     "Distribute the resultant equally among contact nodes.",
+     "Apply a generalized vertical force through a rigid platen whose contact nodes share vertical displacement."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "lateral kinematic conditions at the top contact",
+    "issue": "missing",
+    "description": "Methods specifies vertical displacement at the contact but does not state whether the loaded region can move laterally or how a loading platen is constrained.",
+    "readings": [
+     "Leave both lateral displacement components free.",
+     "Set both lateral displacement components to zero at every contact node.",
+     "Couple the contact to a rigid platen with free lateral translation."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "reference force for FEM minimum compliance",
+    "issue": "missing",
+    "description": "The stated 1%-height displacement determines the atomistic displacement amplitude, but no FEM force normalization or resultant is reported.",
+    "readings": [
+     "Use a vertical resultant of magnitude 1 in consistent solver units.",
+     "Use a vertical resultant of magnitude 10 in the same units."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "20.25% target and passive-material accounting",
+    "issue": "vague",
+    "description": "Results specifies an atomistic mass ratio of 20.25%, but does not define its denominator or how passive material enters the FEM volume constraint.",
+    "readings": [
+     "Constrain active solid volume to 20.25% of the active domain; exclude passive material from the budget.",
+     "Constrain active plus passive solid volume to 20.25% of the entire domain. Using the supplied atom counts as volume weights gives an active occupancy of 18.655%.",
+     "Use 20.25% of the entire FEM box, with supports represented only by constrained nodes."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "continuum constitutive symmetry",
+    "issue": "missing",
+    "description": "The paper identifies aluminum and an atomistic EAM potential, and calls bulk aluminum nearly isotropic. It does not state the FEM constitutive model.",
+    "readings": [
+     "Homogeneous isotropic three-dimensional elasticity.",
+     "Homogeneous cubic elasticity aligned with the stated simulation-cell axes, using bulk tangent constants from the EAM potential."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "overall continuum elastic-modulus scale",
+    "issue": "missing",
+    "description": "No FEM Young's modulus or overall stiffness-tensor scale is reported. The EAM specification does not establish which continuum modulus was used.",
+    "readings": [
+     "Use unit Young's modulus in normalized solver units.",
+     "Use a dimensional bulk modulus scale obtained by linearizing the specified EAM potential at 0 K."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson ratio and relative elastic constants",
+    "issue": "missing",
+    "description": "Neither an isotropic Poisson ratio nor the independent ratios of a cubic FEM stiffness tensor are supplied.",
+    "readings": [
+     "Isotropic elasticity with Poisson ratio 0.30.",
+     "Isotropic elasticity with Poisson ratio 0.35.",
+     "Use the cubic stiffness ratios obtained from the specified EAM potential at 0 K."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "structured FEM grid resolution",
+    "issue": "missing",
+    "description": "The domain dimensions, lattice parameter, and atom counts do not specify an FEM element count. The FEM benchmark paragraph reports no mesh.",
+    "readings": [
+     "Mesh the full box with 40 by 40 by 102 equal cubic elements, with spacing 4.05 \u00c5.",
+     "Mesh the full box with 80 by 80 by 204 equal cubic elements, with spacing 2.025 \u00c5.",
+     "Mesh the full box with 160 by 160 by 408 equal cubic elements, with spacing 1.0125 \u00c5."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "finite-element formulation and quadrature",
+    "issue": "missing",
+    "description": "No element order, integration rule, or stabilization scheme is given for FEM-TO.",
+    "readings": [
+     "Eight-node trilinear hexahedra with full 2 by 2 by 2 integration.",
+     "Eight-node hexahedra with reduced integration and hourglass stabilization.",
+     "Twenty-seven-node quadratic hexahedra with full integration."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "design-variable grid relative to the analysis grid",
+    "issue": "missing",
+    "description": "The FEM description does not identify where design variables live or whether the design and displacement grids coincide.",
+    "readings": [
+     "One constant density variable per analysis element.",
+     "Nodal density variables interpolated within analysis elements.",
+     "One design voxel spanning 2 by 2 by 2 analysis elements."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "material interpolation and penalization",
+    "issue": "missing",
+    "description": "The benchmark is called FEM-based TO, but its density-to-stiffness law, penalty parameters, and continuation are not reported.",
+    "readings": [
+     "SIMP with fixed exponent p=3.",
+     "SIMP with fixed exponent p=4.",
+     "SIMP with p continued from 1 to 3.",
+     "RAMP interpolation with q=5."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "void stiffness and minimum design density",
+    "issue": "missing",
+    "description": "No FEM ersatz stiffness or density lower bound is supplied; the atomistic real/virtual definition does not specify FEM regularization.",
+    "readings": [
+     "Minimum density 0 and void-to-solid stiffness ratio 0.001.",
+     "Minimum density 0 and void-to-solid stiffness ratio 0.000001.",
+     "Minimum density 0.001 and void-to-solid stiffness ratio 0.000000001."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "FEM regularization operator",
+    "issue": "missing",
+    "description": "Methods defines an atom-based sensitivity filter. No statement identifies the filter used for the FEM benchmark cited as A.14/Fig. S18.",
+    "readings": [
+     "No filter.",
+     "Distance-weighted sensitivity filter.",
+     "Distance-weighted density filter.",
+     "Helmholtz density filter."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "FEM filter radius or minimum feature size",
+    "issue": "missing",
+    "description": "The 10.325 \u00c5 radius is stated for the FCC atom-neighborhood filter; the text does not establish a FEM filter radius or an element-based equivalent.",
+    "readings": [
+     "Use a physical radius of 10.325 \u00c5.",
+     "Use a radius of 1.5 element widths.",
+     "Use a radius of 3 element widths."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "filter treatment at boundaries and passive regions",
+    "issue": "missing",
+    "description": "No FEM rule is given for filter neighborhoods crossing the outer boundary or the active/passive interface.",
+    "readings": [
+     "Truncate neighborhoods at the domain boundary and renormalize, including passive solid values.",
+     "Filter active variables only and renormalize over active neighbors.",
+     "Extend the field outside the box with zero density before filtering."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "density projection and continuation",
+    "issue": "missing",
+    "description": "The text does not state whether FEM densities are projected toward a binary design, or provide projection thresholds and sharpness schedules.",
+    "readings": [
+     "No density projection.",
+     "Heaviside projection with threshold 0.5 and sharpness continued from 1 to 8.",
+     "Heaviside projection with threshold 0.5 and sharpness continued from 1 to 32."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "density field on which the volume budget is enforced",
+    "issue": "missing",
+    "description": "If FEM filtering or projection is used, the text does not identify which density field must satisfy the target volume, or whether the budget is imposed after binarization.",
+    "readings": [
+     "Enforce the budget on raw design densities.",
+     "Enforce the budget on filtered and projected physical densities.",
+     "Enforce the target on the final binary occupancy by rank thresholding."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "FEM optimizer and update controls",
+    "issue": "missing",
+    "description": "Methods specifies atom-swap updates for Nano-TO, but gives no FEM optimization algorithm, move limit, or equivalent update controls.",
+    "readings": [
+     "Optimality-criteria updates with a density move limit of 0.2 per iteration.",
+     "Optimality-criteria updates with a density move limit of 0.1 per iteration.",
+     "MMA updates with a density move limit of 0.1 per iteration."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "FEM initialization and volume-reduction history",
+    "issue": "missing",
+    "description": "Results specifies a target-mass prismatic initialization for Nano-TO, but does not state the FEM initialization, randomization, or volume schedule.",
+    "readings": [
+     "Start with uniform fractional density at the target volume.",
+     "Start fully dense and gradually reduce the allowed volume.",
+     "Start from a centered binary square prism; if the active-volume fraction is 20.25%, use a cross-section of width 0.45 times the domain width.",
+     "Start with a seeded random perturbation of the uniform fractional-density field."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "pillar design symmetry constraints",
+    "issue": "missing",
+    "description": "Mirror symmetry is explicitly discussed for cantilevers, but no symmetry constraint is specified for the FEM nanopillar.",
+    "readings": [
+     "Optimize the full domain without enforced symmetry.",
+     "Enforce reflection symmetry across both vertical mid-planes.",
+     "Enforce both vertical reflections and 90-degree rotational symmetry about the pillar axis."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "FEM stopping criterion and iteration budget",
+    "issue": "missing",
+    "description": "The period-two criterion and 3,000-iteration budget concern Nano-TO. No FEM convergence tolerance or iteration limit is reported.",
+    "readings": [
+     "Stop when the maximum density change is below 0.01, with a 300-iteration cap.",
+     "Stop when relative compliance change stays below 0.001 for ten iterations.",
+     "Run a fixed 1,000 optimization iterations."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "FEM equilibrium-solve accuracy",
+    "issue": "missing",
+    "description": "The reported conjugate-gradient tolerances apply to atomistic relaxation, not the FEM linear equilibrium solve. Its solver and accuracy requirements are absent.",
+    "readings": [
+     "Use a sparse direct linear solver.",
+     "Use an iterative solver with relative residual tolerance 0.000001.",
+     "Use an iterative solver with relative residual tolerance 0.0000000001."
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 681.6792991161346,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L33",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 2,
+ "locator": "Supplementary Note A.14, the nanopillar designed by FEM-TO (Fig. S18)",
+ "finished": "2026-10-22T23:09:53"
+}

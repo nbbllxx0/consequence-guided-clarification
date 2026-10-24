@@ -1,0 +1,112 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"Cantilever root support\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 4.1 calls the structure a cantilever and mentions fixed-boundary corners, but never specifies the exact clamped node set. The setup is assigned to unavailable Fig. 3.\",\n      \"readings\": [\n        \"Clamp both displacement components at every node on the left edge.\",\n        \"Clamp both displacement components only at the two left corner nodes.\",\n        \"Clamp upper and lower left-edge segments spanning y/H in [0,0.05] and [0.95,1].\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Right-edge traction footprint\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.1 specifies traction on the right edge; Sec. 4.4 describes the same cantilever's traction as applied at the center of that edge. Neither specifies the loaded span or resolves full-edge loading versus a localized central load.\",\n      \"readings\": [\n        \"Uniform traction over the entire right edge, y/H in [0,1].\",\n        \"Uniform traction over a centered patch, y/H in [0.45,0.55].\",\n        \"Uniform traction over the two central boundary facets, y/H in [0.49,0.51].\",\n        \"A center-node force representing 100 MPa over a one-element tributary area of 1 mm by 1 mm, giving 100 N.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"Right-edge traction vector\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 4.1 supplies the traction magnitude but no direction or vector components. Fig. 3 contains the unavailable setup. The downward traction in Sec. 4.3 belongs to a different support and loading configuration.\",\n      \"readings\": [\n        \"Vertical downward traction: (0,-100) MPa.\",\n        \"Horizontal outward traction: (100,0) MPa.\",\n        \"Traction directed 45 degrees downward and outward: (100/sqrt(2),-100/sqrt(2)) MPa.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Non-design material near supports and loads\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 does not identify passive masks or state whether attachment and loading cells must remain solid. No pad dimensions or filtering treatment for such cells are supplied.\",\n      \"readings\": [\n        \"No passive regions; all elements remain designable.\",\n        \"Keep a one-element-thick solid pad adjacent to the loaded boundary facets by fixing its raw densities to 1 before filtering.\",\n        \"Keep one-element-thick solid regions adjacent to both the clamped boundary and loaded facets, enforcing physical density 1 after filtering.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initial topology density field\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 3.4, 3.5 and 4.1 do not specify the initial densities for the elastic baseline. The uniform compositional initialization in Sec. 4.5 concerns a different problem.\",\n      \"readings\": [\n        \"Initialize every raw density to 0.5.\",\n        \"Initialize every raw density to 1 and allow MMA to restore volume feasibility.\",\n        \"Initialize with small spatial perturbations about 0.5, adjusted to retain mean density 0.5.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Unreported MMA parameters\",\n      \"issue\": \"vague\",\n      \"description\": \"Secs. 3.4 and 4 defer remaining MMA settings to Deetman (2025) defaults without identifying a software revision or giving numerical asymptote constants, slack penalties and subproblem tolerances.\",\n      \"readings\": [\n        \"Use asymptote initialization factor 0.5, expansion factor 1.2, contraction factor 0.7, slack penalty c=1000, d=0, and subproblem tolerance 1e-7.\",\n        \"Use the same asymptote factors with slack penalty c=10000, d=0, and subproblem tolerance 1e-9.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Additional objective convergence criterion\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Sec. 3.5 says termination requires both design and objective changes below a tolerance. Sec. 4 instead specifies a 250-iteration cap or maximum density change at most 1e-5, without an objective-change test.\",\n      \"readings\": [\n        \"Follow Sec. 4: stop at 250 iterations or maximum raw-density change at most 1e-5, regardless of objective change.\",\n        \"Also require relative elastic-compliance change at most 1e-5 for early termination, retaining the 250-iteration cap.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Elastic equilibrium and sensitivity linear-solve accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"The text names JAX and JAX-FEM but does not specify the linear solver, numerical precision or residual tolerances used to compute the baseline elastic displacement and associated sensitivities.\",\n      \"readings\": [\n        \"Use float64 sparse direct solves to approximately machine precision.\",\n        \"Use float64 preconditioned conjugate-gradient solves with relative residual tolerance 1e-8.\",\n        \"Use float32 preconditioned conjugate-gradient solves with relative residual tolerance 1e-5.\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "support_location_extent",
+    "entity": "Cantilever root support",
+    "issue": "figure_only",
+    "description": "Sec. 4.1 calls the structure a cantilever and mentions fixed-boundary corners, but never specifies the exact clamped node set. The setup is assigned to unavailable Fig. 3.",
+    "readings": [
+     "Clamp both displacement components at every node on the left edge.",
+     "Clamp both displacement components only at the two left corner nodes.",
+     "Clamp upper and lower left-edge segments spanning y/H in [0,0.05] and [0.95,1]."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Right-edge traction footprint",
+    "issue": "vague",
+    "description": "Sec. 4.1 specifies traction on the right edge; Sec. 4.4 describes the same cantilever's traction as applied at the center of that edge. Neither specifies the loaded span or resolves full-edge loading versus a localized central load.",
+    "readings": [
+     "Uniform traction over the entire right edge, y/H in [0,1].",
+     "Uniform traction over a centered patch, y/H in [0.45,0.55].",
+     "Uniform traction over the two central boundary facets, y/H in [0.49,0.51].",
+     "A center-node force representing 100 MPa over a one-element tributary area of 1 mm by 1 mm, giving 100 N."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Right-edge traction vector",
+    "issue": "figure_only",
+    "description": "Sec. 4.1 supplies the traction magnitude but no direction or vector components. Fig. 3 contains the unavailable setup. The downward traction in Sec. 4.3 belongs to a different support and loading configuration.",
+    "readings": [
+     "Vertical downward traction: (0,-100) MPa.",
+     "Horizontal outward traction: (100,0) MPa.",
+     "Traction directed 45 degrees downward and outward: (100/sqrt(2),-100/sqrt(2)) MPa."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Non-design material near supports and loads",
+    "issue": "missing",
+    "description": "Sec. 4.1 does not identify passive masks or state whether attachment and loading cells must remain solid. No pad dimensions or filtering treatment for such cells are supplied.",
+    "readings": [
+     "No passive regions; all elements remain designable.",
+     "Keep a one-element-thick solid pad adjacent to the loaded boundary facets by fixing its raw densities to 1 before filtering.",
+     "Keep one-element-thick solid regions adjacent to both the clamped boundary and loaded facets, enforcing physical density 1 after filtering."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial topology density field",
+    "issue": "missing",
+    "description": "Secs. 3.4, 3.5 and 4.1 do not specify the initial densities for the elastic baseline. The uniform compositional initialization in Sec. 4.5 concerns a different problem.",
+    "readings": [
+     "Initialize every raw density to 0.5.",
+     "Initialize every raw density to 1 and allow MMA to restore volume feasibility.",
+     "Initialize with small spatial perturbations about 0.5, adjusted to retain mean density 0.5."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Unreported MMA parameters",
+    "issue": "vague",
+    "description": "Secs. 3.4 and 4 defer remaining MMA settings to Deetman (2025) defaults without identifying a software revision or giving numerical asymptote constants, slack penalties and subproblem tolerances.",
+    "readings": [
+     "Use asymptote initialization factor 0.5, expansion factor 1.2, contraction factor 0.7, slack penalty c=1000, d=0, and subproblem tolerance 1e-7.",
+     "Use the same asymptote factors with slack penalty c=10000, d=0, and subproblem tolerance 1e-9."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Additional objective convergence criterion",
+    "issue": "conflicting",
+    "description": "Sec. 3.5 says termination requires both design and objective changes below a tolerance. Sec. 4 instead specifies a 250-iteration cap or maximum density change at most 1e-5, without an objective-change test.",
+    "readings": [
+     "Follow Sec. 4: stop at 250 iterations or maximum raw-density change at most 1e-5, regardless of objective change.",
+     "Also require relative elastic-compliance change at most 1e-5 for early termination, retaining the 250-iteration cap."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Elastic equilibrium and sensitivity linear-solve accuracy",
+    "issue": "missing",
+    "description": "The text names JAX and JAX-FEM but does not specify the linear solver, numerical precision or residual tolerances used to compute the baseline elastic displacement and associated sensitivities.",
+    "readings": [
+     "Use float64 sparse direct solves to approximately machine precision.",
+     "Use float64 preconditioned conjugate-gradient solves with relative residual tolerance 1e-8.",
+     "Use float32 preconditioned conjugate-gradient solves with relative residual tolerance 1e-5."
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 425.6929678916931,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L17",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 2,
+ "locator": "Sec. 4.1, the structural cantilever baseline design minimizing elastic compliance (Fig. 3)",
+ "finished": "2026-10-22T22:24:42"
+}

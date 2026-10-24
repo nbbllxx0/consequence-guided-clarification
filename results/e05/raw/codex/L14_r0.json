@@ -1,0 +1,249 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"clamped boundary\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 2 delegates the support arrangement to unavailable Fig. 1. The supported edge and its supported fraction are not written. Here L=20 and H=10 follow from the stated initial grid and cell size.\",\n      \"readings\": [\n        \"Clamp the entire left edge: x=0, 0\u2264y\u2264H.\",\n        \"Clamp the entire right edge: x=L, 0\u2264y\u2264H.\",\n        \"Clamp only the central half of the left edge: x=0, H/4\u2264y\u22643H/4.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"cantilever load\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Neither Sec. 2 nor Fig. 1's caption gives load coordinates. For a left-clamped domain, several free-end positions remain possible.\",\n      \"readings\": [\n        \"Free-end midpoint: (x,y)=(L,H/2).\",\n        \"Lower free-end corner: (x,y)=(L,0).\",\n        \"Upper free-end corner: (x,y)=(L,H).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"spatial distribution of applied force\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Eq. 1 introduces a boundary traction, but Sec. 2 does not specify whether the benchmark uses a concentrated force, a loaded patch, or an extended traction.\",\n      \"readings\": [\n        \"One concentrated nodal force.\",\n        \"Uniform traction over a free-edge segment of length H/10.\",\n        \"Uniform traction over the entire free edge.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"applied load vector\",\n      \"issue\": \"figure_only\",\n      \"description\": \"The components or angle of the traction vector in Eq. 1 are not supplied in Sec. 2, Table 1, or Fig. 1's caption.\",\n      \"readings\": [\n        \"Vertical downward load: (Fx,Fy)=(0,-F).\",\n        \"Horizontal outward load: (Fx,Fy)=(F,0), for a left clamp.\",\n        \"Oblique load: (Fx,Fy)=(F/\u221a2,-F/\u221a2).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"overall load amplitude\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. 1 names the prescribed traction, but Sec. 2 and Table 1 provide no numerical traction or resultant-force magnitude.\",\n      \"readings\": [\n        \"Total resultant force F=1 in consistent units.\",\n        \"Total resultant force F=10^-3 in consistent units.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"prescribed material at supports or load application\",\n      \"issue\": \"missing\",\n      \"description\": \"No text specifies whether support or loading pads are excluded from optimization, or gives their dimensions and prescribed densities.\",\n      \"readings\": [\n        \"No passive regions; all cells are designable.\",\n        \"Prescribe density 1 in a 0.25-wide strip adjoining the clamp.\",\n        \"Prescribe density 1 in a 0.25\u00d70.25 pad adjoining the load.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"reference volume and passive-material accounting\",\n      \"issue\": \"vague\",\n      \"description\": \"Table 1 fixes the fraction at 0.3, but Eq. 1 does not explicitly define V0 or explain accounting if non-design regions exist.\",\n      \"readings\": [\n        \"Apply 0.3 to the full reference-domain volume, counting passive solid material against the budget.\",\n        \"Apply 0.3 only to the designable-region volume, excluding passive material from the budget and normalization.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"density field used in the volume constraint\",\n      \"issue\": \"vague\",\n      \"description\": \"Eq. 1 writes volume in terms of rho, while Sec. 2 introduces PDE regularization without rewriting the constraint to distinguish design and filtered densities.\",\n      \"readings\": [\n        \"Constrain the volume of the raw element design densities.\",\n        \"Constrain the volume of the filtered physical densities used for stiffness.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"two-dimensional constitutive model\",\n      \"issue\": \"missing\",\n      \"description\": \"Table 1 gives linear elasticity, E=1, and \u03bc=0.3, but does not state the in-plane constitutive reduction.\",\n      \"readings\": [\n        \"Isotropic plane stress with Poisson's ratio 0.3.\",\n        \"Isotropic plane strain with Poisson's ratio 0.3.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"reference out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2 interprets density as thickness but does not specify the reference thickness used in finite-element stiffness and volume calculations.\",\n      \"readings\": [\n        \"Uniform reference thickness t_ref=1.\",\n        \"Uniform reference thickness t_ref=0.1.\",\n        \"Uniform reference thickness t_ref=10.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Helmholtz filter equation and radius convention\",\n      \"issue\": \"missing\",\n      \"description\": \"Table 1 fixes the radius at 0.375, but Sec. 2 supplies no PDE defining how that radius enters the Helmholtz operator.\",\n      \"readings\": [\n        \"Solve filtered_rho - r\u00b2 Laplacian(filtered_rho) = rho, with r=0.375.\",\n        \"Solve filtered_rho - (r\u00b2/12) Laplacian(filtered_rho) = rho, with r=0.375.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"filter boundary treatment\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2 names a Helmholtz-type PDE filter but gives no boundary conditions or exterior-padding rule.\",\n      \"readings\": [\n        \"Zero normal derivative on every exterior boundary.\",\n        \"Zero filtered density on every exterior boundary.\",\n        \"Pad the domain with fixed void over a width r and impose zero normal derivative at the padding boundary.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"discrete filter and transfer between density representations\",\n      \"issue\": \"missing\",\n      \"description\": \"The PDE filter's approximation space, mass treatment, and transfer between element densities and filter unknowns are not specified.\",\n      \"readings\": [\n        \"Q1 Galerkin filter with a consistent mass matrix, cellwise-constant input, and element-average output.\",\n        \"Q1 filter with nodal averaging, mass lumping, and nodal-to-cell averaging.\",\n        \"Cell-centered finite-volume Helmholtz filter acting directly on cell densities.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"GOCM exponential update and sensitivity normalization\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2 names GOCM and Table 1 specifies an exponential update, but no update equation or sensitivity normalization is provided to define how the stated step length acts.\",\n      \"readings\": [\n        \"Drive the exponential update with unscaled Lagrangian sensitivities.\",\n        \"Normalize compliance sensitivities by the current compliance before the exponential update.\",\n        \"Normalize sensitivities by their maximum absolute magnitude before the exponential update.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"volume-multiplier solution accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"The GOCM description does not specify the numerical accuracy used to enforce the volume constraint during each update.\",\n      \"readings\": [\n        \"Solve the multiplier until the absolute volume-fraction residual is at most 10^-6.\",\n        \"Solve the multiplier until the absolute volume-fraction residual is at most 10^-10.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"meaning of density change in the stopping criterion\",\n      \"issue\": \"vague\",\n      \"description\": \"Eq. 2 does not define whether \u0394rho_e is an absolute or signed change. These interpretations behave differently when the volume constraint is active.\",\n      \"readings\": [\n        \"Use the volume-weighted mean of |rho_e(new)-rho_e(old)|.\",\n        \"Use the absolute value of the volume-weighted mean signed change.\",\n        \"Use the volume-weighted signed change directly, as a literal reading of Eq. 2.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"displacement finite-element approximation\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2 gives cell sizes and counts and names deal.II, but does not give the displacement element's polynomial degree.\",\n      \"readings\": [\n        \"Bilinear Q1 quadrilateral displacement elements.\",\n        \"Biquadratic Q2 quadrilateral displacement elements.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"stiffness integration\",\n      \"issue\": \"missing\",\n      \"description\": \"No quadrature or reduced-integration treatment is specified for the elasticity assembly.\",\n      \"readings\": [\n        \"Full integration: 2\u00d72 Gauss points for Q1 elements.\",\n        \"Reduced integration: one Gauss point for Q1 elements with hourglass stabilization.\",\n        \"Full integration: 3\u00d73 Gauss points for Q2 elements.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"elasticity and filter linear-system accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither the state-equation nor filter-equation linear solver and residual tolerances are reported.\",\n      \"readings\": [\n        \"Sparse direct solves to numerical precision.\",\n        \"Iterative solves with relative residual tolerance 10^-6.\",\n        \"Iterative solves with relative residual tolerance 10^-10.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"finest cell size\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Sec. 2 prints h4=1\u00d70.5^4=0.06125, but the expression equals 0.0625. Remark 1's 320\u00d7160 grid over the inferred 20\u00d710 domain also requires 0.0625.\",\n      \"readings\": [\n        \"Use h4=0.0625, following the refinement formula and 320\u00d7160 fixed grid.\",\n        \"Treat the printed h4=0.06125 as the intended spacing, requiring revised grid counts or domain dimensions.\"\n      ],\n      \"effect\": \"layout\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "support_location_extent",
+    "entity": "clamped boundary",
+    "issue": "figure_only",
+    "description": "Sec. 2 delegates the support arrangement to unavailable Fig. 1. The supported edge and its supported fraction are not written. Here L=20 and H=10 follow from the stated initial grid and cell size.",
+    "readings": [
+     "Clamp the entire left edge: x=0, 0\u2264y\u2264H.",
+     "Clamp the entire right edge: x=L, 0\u2264y\u2264H.",
+     "Clamp only the central half of the left edge: x=0, H/4\u2264y\u22643H/4."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "cantilever load",
+    "issue": "figure_only",
+    "description": "Neither Sec. 2 nor Fig. 1's caption gives load coordinates. For a left-clamped domain, several free-end positions remain possible.",
+    "readings": [
+     "Free-end midpoint: (x,y)=(L,H/2).",
+     "Lower free-end corner: (x,y)=(L,0).",
+     "Upper free-end corner: (x,y)=(L,H)."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "spatial distribution of applied force",
+    "issue": "figure_only",
+    "description": "Eq. 1 introduces a boundary traction, but Sec. 2 does not specify whether the benchmark uses a concentrated force, a loaded patch, or an extended traction.",
+    "readings": [
+     "One concentrated nodal force.",
+     "Uniform traction over a free-edge segment of length H/10.",
+     "Uniform traction over the entire free edge."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "applied load vector",
+    "issue": "figure_only",
+    "description": "The components or angle of the traction vector in Eq. 1 are not supplied in Sec. 2, Table 1, or Fig. 1's caption.",
+    "readings": [
+     "Vertical downward load: (Fx,Fy)=(0,-F).",
+     "Horizontal outward load: (Fx,Fy)=(F,0), for a left clamp.",
+     "Oblique load: (Fx,Fy)=(F/\u221a2,-F/\u221a2)."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "overall load amplitude",
+    "issue": "missing",
+    "description": "Eq. 1 names the prescribed traction, but Sec. 2 and Table 1 provide no numerical traction or resultant-force magnitude.",
+    "readings": [
+     "Total resultant force F=1 in consistent units.",
+     "Total resultant force F=10^-3 in consistent units."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "prescribed material at supports or load application",
+    "issue": "missing",
+    "description": "No text specifies whether support or loading pads are excluded from optimization, or gives their dimensions and prescribed densities.",
+    "readings": [
+     "No passive regions; all cells are designable.",
+     "Prescribe density 1 in a 0.25-wide strip adjoining the clamp.",
+     "Prescribe density 1 in a 0.25\u00d70.25 pad adjoining the load."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "reference volume and passive-material accounting",
+    "issue": "vague",
+    "description": "Table 1 fixes the fraction at 0.3, but Eq. 1 does not explicitly define V0 or explain accounting if non-design regions exist.",
+    "readings": [
+     "Apply 0.3 to the full reference-domain volume, counting passive solid material against the budget.",
+     "Apply 0.3 only to the designable-region volume, excluding passive material from the budget and normalization."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "density field used in the volume constraint",
+    "issue": "vague",
+    "description": "Eq. 1 writes volume in terms of rho, while Sec. 2 introduces PDE regularization without rewriting the constraint to distinguish design and filtered densities.",
+    "readings": [
+     "Constrain the volume of the raw element design densities.",
+     "Constrain the volume of the filtered physical densities used for stiffness."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "two-dimensional constitutive model",
+    "issue": "missing",
+    "description": "Table 1 gives linear elasticity, E=1, and \u03bc=0.3, but does not state the in-plane constitutive reduction.",
+    "readings": [
+     "Isotropic plane stress with Poisson's ratio 0.3.",
+     "Isotropic plane strain with Poisson's ratio 0.3."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "reference out-of-plane thickness",
+    "issue": "missing",
+    "description": "Sec. 2 interprets density as thickness but does not specify the reference thickness used in finite-element stiffness and volume calculations.",
+    "readings": [
+     "Uniform reference thickness t_ref=1.",
+     "Uniform reference thickness t_ref=0.1.",
+     "Uniform reference thickness t_ref=10."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Helmholtz filter equation and radius convention",
+    "issue": "missing",
+    "description": "Table 1 fixes the radius at 0.375, but Sec. 2 supplies no PDE defining how that radius enters the Helmholtz operator.",
+    "readings": [
+     "Solve filtered_rho - r\u00b2 Laplacian(filtered_rho) = rho, with r=0.375.",
+     "Solve filtered_rho - (r\u00b2/12) Laplacian(filtered_rho) = rho, with r=0.375."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "filter boundary treatment",
+    "issue": "missing",
+    "description": "Sec. 2 names a Helmholtz-type PDE filter but gives no boundary conditions or exterior-padding rule.",
+    "readings": [
+     "Zero normal derivative on every exterior boundary.",
+     "Zero filtered density on every exterior boundary.",
+     "Pad the domain with fixed void over a width r and impose zero normal derivative at the padding boundary."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "discrete filter and transfer between density representations",
+    "issue": "missing",
+    "description": "The PDE filter's approximation space, mass treatment, and transfer between element densities and filter unknowns are not specified.",
+    "readings": [
+     "Q1 Galerkin filter with a consistent mass matrix, cellwise-constant input, and element-average output.",
+     "Q1 filter with nodal averaging, mass lumping, and nodal-to-cell averaging.",
+     "Cell-centered finite-volume Helmholtz filter acting directly on cell densities."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "GOCM exponential update and sensitivity normalization",
+    "issue": "vague",
+    "description": "Sec. 2 names GOCM and Table 1 specifies an exponential update, but no update equation or sensitivity normalization is provided to define how the stated step length acts.",
+    "readings": [
+     "Drive the exponential update with unscaled Lagrangian sensitivities.",
+     "Normalize compliance sensitivities by the current compliance before the exponential update.",
+     "Normalize sensitivities by their maximum absolute magnitude before the exponential update."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "volume-multiplier solution accuracy",
+    "issue": "missing",
+    "description": "The GOCM description does not specify the numerical accuracy used to enforce the volume constraint during each update.",
+    "readings": [
+     "Solve the multiplier until the absolute volume-fraction residual is at most 10^-6.",
+     "Solve the multiplier until the absolute volume-fraction residual is at most 10^-10."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "meaning of density change in the stopping criterion",
+    "issue": "vague",
+    "description": "Eq. 2 does not define whether \u0394rho_e is an absolute or signed change. These interpretations behave differently when the volume constraint is active.",
+    "readings": [
+     "Use the volume-weighted mean of |rho_e(new)-rho_e(old)|.",
+     "Use the absolute value of the volume-weighted mean signed change.",
+     "Use the volume-weighted signed change directly, as a literal reading of Eq. 2."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "mesh",
+    "entity": "displacement finite-element approximation",
+    "issue": "missing",
+    "description": "Sec. 2 gives cell sizes and counts and names deal.II, but does not give the displacement element's polynomial degree.",
+    "readings": [
+     "Bilinear Q1 quadrilateral displacement elements.",
+     "Biquadratic Q2 quadrilateral displacement elements."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "stiffness integration",
+    "issue": "missing",
+    "description": "No quadrature or reduced-integration treatment is specified for the elasticity assembly.",
+    "readings": [
+     "Full integration: 2\u00d72 Gauss points for Q1 elements.",
+     "Reduced integration: one Gauss point for Q1 elements with hourglass stabilization.",
+     "Full integration: 3\u00d73 Gauss points for Q2 elements."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "elasticity and filter linear-system accuracy",
+    "issue": "missing",
+    "description": "Neither the state-equation nor filter-equation linear solver and residual tolerances are reported.",
+    "readings": [
+     "Sparse direct solves to numerical precision.",
+     "Iterative solves with relative residual tolerance 10^-6.",
+     "Iterative solves with relative residual tolerance 10^-10."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "mesh",
+    "entity": "finest cell size",
+    "issue": "conflicting",
+    "description": "Sec. 2 prints h4=1\u00d70.5^4=0.06125, but the expression equals 0.0625. Remark 1's 320\u00d7160 grid over the inferred 20\u00d710 domain also requires 0.0625.",
+    "readings": [
+     "Use h4=0.0625, following the refinement formula and 320\u00d7160 fixed grid.",
+     "Treat the printed h4=0.06125 as the intended spacing, requiring revised grid counts or domain dimensions."
+    ],
+    "effect": "layout"
+   }
+  ]
+ },
+ "wall_s": 587.234938621521,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L14",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 0,
+ "locator": "Sec. 2, the cantilever benchmark of Fig. 1 and Table 1",
+ "finished": "2026-10-22T18:11:31"
+}

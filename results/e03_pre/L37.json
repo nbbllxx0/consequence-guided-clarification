@@ -1,0 +1,134 @@
+{
+ "task": "L37",
+ "source": {
+  "arxiv": "2510.08830",
+  "position": 171
+ },
+ "dim": 2,
+ "slots": {
+  "strip": [
+   1.0,
+   3.0
+  ],
+  "patch": [
+   2.0,
+   6.0
+  ],
+  "volfrac": [
+   0.35
+  ]
+ },
+ "nominal": {
+  "strip": 1.0,
+  "patch": 2.0,
+  "volfrac": 0.35
+ },
+ "mandatory": [
+  "volfrac"
+ ],
+ "reasons": {
+  "strip": "solid strips at the clamped edges drawn only (Fig. 8(a) legend); convention 1-3 elements",
+  "patch": "load patch width at top centre drawn only (Fig. 8(a)); convention 2-6 elements",
+  "volfrac": "V0 swept over 160 values; value of the shown design not stated: mandatory"
+ },
+ "recon": [
+  "homogenization multiscale model in source; single-scale SIMP",
+  "mesh not stated: 150x40 (1 mm)",
+  "rmin 1.5 (L_min bar-width bound not modelled)",
+  "vf fixed to 0.35 after asking"
+ ],
+ "keys": [
+  "patch=2.0|strip=1.0|volfrac=0.35",
+  "patch=6.0|strip=1.0|volfrac=0.35",
+  "patch=2.0|strip=3.0|volfrac=0.35",
+  "patch=6.0|strip=3.0|volfrac=0.35"
+ ],
+ "C": [
+  [
+   19.931809650837124,
+   19.329672414797827,
+   Infinity,
+   Infinity
+  ],
+  [
+   19.94381418188036,
+   19.34090227619481,
+   Infinity,
+   Infinity
+  ],
+  [
+   20.811367420517847,
+   20.20201343171748,
+   20.811367420517847,
+   20.20201343171748
+  ],
+  [
+   20.78979789907175,
+   20.17720314519339,
+   20.78979789907175,
+   20.17720314519339
+  ]
+ ],
+ "ref": {
+  "patch=2.0|strip=1.0|volfrac=0.35": 19.931809650837124,
+  "patch=6.0|strip=1.0|volfrac=0.35": 19.329672414797827,
+  "patch=2.0|strip=3.0|volfrac=0.35": 20.78979789907175,
+  "patch=6.0|strip=3.0|volfrac=0.35": 20.17720314519339
+ },
+ "ref_gap_beaten": {
+  "patch=2.0|strip=1.0|volfrac=0.35": 0.0,
+  "patch=6.0|strip=1.0|volfrac=0.35": 0.0005809649101133907,
+  "patch=2.0|strip=3.0|volfrac=0.35": 0.0010375051047062378,
+  "patch=6.0|strip=3.0|volfrac=0.35": 0.0
+ },
+ "noise": {
+  "patch=2.0|strip=1.0|volfrac=0.35": 0.0012808393637023178,
+  "patch=6.0|strip=1.0|volfrac=0.35": 0.0009481347094313096,
+  "patch=2.0|strip=3.0|volfrac=0.35": 1.7281698998870463e-05,
+  "patch=6.0|strip=3.0|volfrac=0.35": 0.00013813131767436763
+ },
+ "meta": {
+  "patch=2.0|strip=1.0|volfrac=0.35": {
+   "accepted": true,
+   "kkt": 0.028094417337427235,
+   "wall_s": 42.82698730006814,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "patch=6.0|strip=1.0|volfrac=0.35": {
+   "accepted": true,
+   "kkt": 0.015915904357408195,
+   "wall_s": 44.993550800019875,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "patch=2.0|strip=3.0|volfrac=0.35": {
+   "accepted": true,
+   "kkt": 0.047045918844918606,
+   "wall_s": 44.670008399989456,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "patch=6.0|strip=3.0|volfrac=0.35": {
+   "accepted": true,
+   "kkt": 0.02417118539435703,
+   "wall_s": 41.438602100126445,
+   "n_iter": [
+    201,
+    201
+   ]
+  }
+ },
+ "counter": {
+  "optimizations": 0,
+  "factorizations": 16,
+  "backsubs": 16,
+  "opt_wall_s": 0.0
+ }
+}

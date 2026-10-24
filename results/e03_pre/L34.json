@@ -1,0 +1,86 @@
+{
+ "task": "L34",
+ "source": {
+  "arxiv": "1904.06556",
+  "position": 156
+ },
+ "dim": 3,
+ "slots": {
+  "load": [
+   "node",
+   "patch"
+  ],
+  "volfrac": [
+   0.2
+  ]
+ },
+ "nominal": {
+  "load": "node",
+  "volfrac": 0.2
+ },
+ "mandatory": [
+  "volfrac"
+ ],
+ "reasons": {
+  "load": "'applied in the middle of the right-hand face'; node vs patch not stated (Sec. 7; Fig. 2(a))",
+  "volfrac": "material volume V a symbol only: mandatory"
+ },
+ "recon": [
+  "variable-thickness-sheet (linear) model in source; SIMP p=3",
+  "density upper bound rho_bar not representable (bound 1)",
+  "262k elements in source; 96x12x12",
+  "vf fixed to 0.2 after asking"
+ ],
+ "keys": [
+  "load=node|volfrac=0.2",
+  "load=patch|volfrac=0.2"
+ ],
+ "C": [
+  [
+   414.8756449669323,
+   9079.027052012934
+  ],
+  [
+   416.28756872622347,
+   416.14836155037244
+  ]
+ ],
+ "ref": {
+  "load=node|volfrac=0.2": 414.8756449667564,
+  "load=patch|volfrac=0.2": 416.1483615498257
+ },
+ "ref_gap_beaten": {
+  "load=node|volfrac=0.2": 0.0,
+  "load=patch|volfrac=0.2": 0.0
+ },
+ "noise": {
+  "load=node|volfrac=0.2": 0.002697695533853533,
+  "load=patch|volfrac=0.2": 0.003087686577138162
+ },
+ "meta": {
+  "load=node|volfrac=0.2": {
+   "accepted": true,
+   "kkt": 0.241202688844383,
+   "wall_s": 578.806932699983,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "load=patch|volfrac=0.2": {
+   "accepted": true,
+   "kkt": 0.4293467414841346,
+   "wall_s": 593.2629450999666,
+   "n_iter": [
+    201,
+    222
+   ]
+  }
+ },
+ "counter": {
+  "optimizations": 0,
+  "factorizations": 2,
+  "backsubs": 4,
+  "opt_wall_s": 0.0
+ }
+}

@@ -1,0 +1,278 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"MBB design-domain dimensions\",\n      \"issue\": \"missing\",\n      \"description\": \"Appendix C specifies 144 x 48 elements but gives no side lengths or element spacings. The domain aspect ratio therefore requires an unstated square-element assumption.\",\n      \"readings\": [\n        \"Domain [0,3] x [0,1], with square elements of side 1/48.\",\n        \"Domain [0,6] x [0,1], with element spacings 1/24 horizontally and 1/48 vertically.\",\n        \"Domain [0,144] x [0,48], with unit square elements.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Full versus symmetry-reduced beam\",\n      \"issue\": \"vague\",\n      \"description\": \"Appendix C invokes 'standard MBB beam boundary conditions' without defining whether the stated mesh represents the entire beam or a symmetry-reduced portion.\",\n      \"readings\": [\n        \"The 144 x 48 mesh represents one half of a beam reconstructed by reflection.\",\n        \"The 144 x 48 mesh represents the entire computational beam, without symmetry reduction.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Uniform out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"Appendix C specifies plane stress but does not specify the thickness used to assemble stiffness.\",\n      \"readings\": [\n        \"Uniform thickness t=1 with the stated unit nodal force.\",\n        \"Uniform thickness t=0.1 with the stated unit nodal force.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"MBB support and symmetry locations\",\n      \"issue\": \"vague\",\n      \"description\": \"The 'standard MBB' reference in Appendix C does not explicitly identify constrained nodes, edges, or support-patch extents.\",\n      \"readings\": [\n        \"Constrain the entire left edge for symmetry and support the single bottom-right node.\",\n        \"Constrain the entire left edge for symmetry and support the bottom boundary over the rightmost element width.\",\n        \"Support the bottom-left and bottom-right corner nodes, with no whole-edge symmetry condition.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"support_type\",\n      \"entity\": \"Displacement components restrained at MBB supports\",\n      \"issue\": \"vague\",\n      \"description\": \"Appendix C does not translate 'standard MBB beam boundary conditions' into displacement-component constraints.\",\n      \"readings\": [\n        \"Left-edge symmetry restrains ux only; the bottom-right support restrains uy only.\",\n        \"A bottom-left pin restrains ux and uy; a bottom-right roller restrains uy only.\",\n        \"Left-edge symmetry restrains ux only; the bottom-right support restrains both ux and uy.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"Unit force at the top-left node\",\n      \"issue\": \"missing\",\n      \"description\": \"Appendix C specifies the force magnitude and node but gives no explicit force vector.\",\n      \"readings\": [\n        \"Vertical downward force: (fx,fy)=(0,-1).\",\n        \"Vertical upward force: (fx,fy)=(0,1).\",\n        \"Inclined downward-right force: (fx,fy)=(1/sqrt(2),-1/sqrt(2)).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Elements adjoining the MBB load and supports\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Sec. 5 nor Appendix C specifies whether load or support neighborhoods contain prescribed solid material or how such material would enter the volume budget.\",\n      \"readings\": [\n        \"All 144 x 48 elements are designable; no passive solid regions.\",\n        \"Fix one element adjoining each load or support location to solid and count these elements within the 30% budget.\",\n        \"Use the same fixed solid elements but apply the 30% budget only to the remaining designable elements.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Q4 element stiffness integration\",\n      \"issue\": \"missing\",\n      \"description\": \"Appendix C identifies bilinear Q4 plane-stress elements but does not specify their integration or stabilization.\",\n      \"readings\": [\n        \"Fully integrated Q4 elements using 2 x 2 Gauss quadrature.\",\n        \"One-point reduced-integration Q4 elements with hourglass stabilization.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Units and metric for the density-filter radius\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (16), Appendix C, and Table 1 give numerical radii without specifying whether distances use physical coordinates or element-index coordinates.\",\n      \"readings\": [\n        \"Measure distance in element-index coordinates; r_min=2 spans two grid spacings.\",\n        \"Measure distance in physical coordinates; r_min=2 means two domain-length units.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Lower bound on r_min in the Fig. 5 experiment\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Sec. 5.1 states that the lower bound is 2.0, whereas Table 1 gives 1.5 for the four-hyperparameter experiment.\",\n      \"readings\": [\n        \"Constrain r_min to [2.0,10.0].\",\n        \"Constrain r_min to [1.5,10.0].\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Volume enforcement through filtering and Heaviside projection\",\n      \"issue\": \"vague\",\n      \"description\": \"The 30% target is explicit, but Eq. (14) constrains pre-filter densities. Sec. 5 allows either fixed or adaptive eta_h without selecting the MBB policy; Eq. (16) need not preserve the global density sum.\",\n      \"readings\": [\n        \"Enforce 30% on tilde_rho and use eta_h=0.5; accept the resulting physical volume.\",\n        \"Enforce 30% on tilde_rho and choose eta_h to preserve the filtered-field volume across Heaviside projection.\",\n        \"Enforce 30% on tilde_rho and choose eta_h so the final physical density also occupies exactly 30%.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Sigmoidal volume projection Phi\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 5 describes a shifted parametric sigmoid but does not give its functional form or steepness.\",\n      \"readings\": [\n        \"Phi_e=1/(1+exp(-(z_e+b))), with b chosen for the volume constraint.\",\n        \"Phi_e=(1+tanh(z_e+b))/2, with b chosen for the volume constraint.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Adaptive projection-root implementation\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 5 specifies bisection for Phi and optionally eta_h, but omits stopping accuracy and how threshold dependence enters design gradients.\",\n      \"readings\": [\n        \"Solve to a volume-fraction residual below 1e-8 and differentiate the volume equation implicitly.\",\n        \"Use 40 bisection iterations and automatic differentiation through the implemented iterations.\",\n        \"Solve to a volume-fraction residual below 1e-6 and hold the solved threshold constant during differentiation.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initial beta, p, and r_min for Fig. 5\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 5.1 mentions four initial beta values without listing them and gives no initial p or r_min. Appendix C's fixed p=3 and r_min=2 apply to the separate two-dimensional landscape experiment.\",\n      \"readings\": [\n        \"Use beta initializations {0.05,0.5,1,5}, with p_initial=3 and r_min_initial=2.\",\n        \"Use beta initializations {0.1,1,5,10}, with p_initial=1 and r_min_initial=4.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"CNN spatial upsampling sequence\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Appendix C.1 starts at Nx/8 by Ny/8, describes five layers each doubling resolution, and also requires the output to match Nx by Ny. Three doublings reach 144 x 48; five reach 576 x 192.\",\n      \"readings\": [\n        \"Use three doubling blocks: 18 x 6 to 36 x 12 to 72 x 24 to 144 x 48.\",\n        \"Use five hidden blocks, with three doubling blocks and two blocks that retain spatial resolution.\",\n        \"Use five doubling blocks followed by resizing to 144 x 48.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Remaining CNN layer specifications\",\n      \"issue\": \"missing\",\n      \"description\": \"Appendix C.1 refers externally for full details and omits convolution widths, kernels, padding, output mapping, and layer-normalization axes and epsilon.\",\n      \"readings\": [\n        \"Use 32 channels throughout hidden layers, 3 x 3 same-padded convolutions, a linear one-channel output, and whole-feature-map normalization with epsilon=1e-5.\",\n        \"Use hidden widths 32,16,8,4,4, 5 x 5 same-padded convolutions, a tanh one-channel output, and per-pixel channel normalization with epsilon=1e-6.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"CNN and latent-vector initialization\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 5.1 and Appendix C do not identify initialization distributions, scales, or seeds for Fig. 5. The uniform 0.3 initialization in C.2 applies to the standard parameterization.\",\n      \"readings\": [\n        \"Glorot-uniform weights, zero biases, standard-normal latent entries, and seeds 0 through 4.\",\n        \"Glorot-normal weights, zero biases, standard-normal latent entries, and seeds 5 through 9.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Shared UL normalization constants\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (18) and Appendix C specify fixed c_ref and d_ref obtained from a random network initialization but supply neither their values nor the identified reference initialization.\",\n      \"readings\": [\n        \"Compute both reference values from a separate fixed reference network with seed 0.\",\n        \"Compute both reference values from a separate fixed reference network with seed 1.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Adam moment coefficients\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3 specifies Adam, numerical safeguards, and LL state resets, but not the first- and second-moment decay coefficients used at either level.\",\n      \"readings\": [\n        \"Use moment coefficients (0.9,0.999) at both levels.\",\n        \"Use (0.9,0.99) at the LL and (0.9,0.999) at the UL.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initial LL unrolling horizon\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 3 permits t_start=1 or 2, but Appendix C assigns no MBB-specific value. Appendix A's reserve for t=1 does not explicitly settle the choice.\",\n      \"readings\": [\n        \"Start with t_start=1.\",\n        \"Start with t_start=2.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Total computational budget for Fig. 5\",\n      \"issue\": \"missing\",\n      \"description\": \"Algorithm 1 requires B_max, but Sec. 5 and Appendix C provide no numerical total budget for this example.\",\n      \"readings\": [\n        \"Terminate at 10000 linear solves.\",\n        \"Terminate at 20000 linear solves.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Computational-budget accounting unit\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Sec. 3 and Appendix A.1 call the budget cumulative LL iterations, whereas Algorithm 1 increments it by 4t+2 and Appendix C.3 compares linear solves.\",\n      \"readings\": [\n        \"Count actual LL optimizer updates, adding t per BOTH UL iteration.\",\n        \"Count linear solves, adding 4t+2 per BOTH UL iteration.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initial-learning-rate probe grid\",\n      \"issue\": \"missing\",\n      \"description\": \"Appendix A.4 introduces N geometric candidates without assigning N; 'at most 20 trials' is only a cost bound. Appendix C gives the resulting learning rate approximately.\",\n      \"readings\": [\n        \"Use 10 geometric candidates over [1e-8,1].\",\n        \"Use 20 geometric candidates over [1e-8,1].\"\n      ],\n      \"effect\": \"layout\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "MBB design-domain dimensions",
+    "issue": "missing",
+    "description": "Appendix C specifies 144 x 48 elements but gives no side lengths or element spacings. The domain aspect ratio therefore requires an unstated square-element assumption.",
+    "readings": [
+     "Domain [0,3] x [0,1], with square elements of side 1/48.",
+     "Domain [0,6] x [0,1], with element spacings 1/24 horizontally and 1/48 vertically.",
+     "Domain [0,144] x [0,48], with unit square elements."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "Full versus symmetry-reduced beam",
+    "issue": "vague",
+    "description": "Appendix C invokes 'standard MBB beam boundary conditions' without defining whether the stated mesh represents the entire beam or a symmetry-reduced portion.",
+    "readings": [
+     "The 144 x 48 mesh represents one half of a beam reconstructed by reflection.",
+     "The 144 x 48 mesh represents the entire computational beam, without symmetry reduction."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "Uniform out-of-plane thickness",
+    "issue": "missing",
+    "description": "Appendix C specifies plane stress but does not specify the thickness used to assemble stiffness.",
+    "readings": [
+     "Uniform thickness t=1 with the stated unit nodal force.",
+     "Uniform thickness t=0.1 with the stated unit nodal force."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "MBB support and symmetry locations",
+    "issue": "vague",
+    "description": "The 'standard MBB' reference in Appendix C does not explicitly identify constrained nodes, edges, or support-patch extents.",
+    "readings": [
+     "Constrain the entire left edge for symmetry and support the single bottom-right node.",
+     "Constrain the entire left edge for symmetry and support the bottom boundary over the rightmost element width.",
+     "Support the bottom-left and bottom-right corner nodes, with no whole-edge symmetry condition."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_type",
+    "entity": "Displacement components restrained at MBB supports",
+    "issue": "vague",
+    "description": "Appendix C does not translate 'standard MBB beam boundary conditions' into displacement-component constraints.",
+    "readings": [
+     "Left-edge symmetry restrains ux only; the bottom-right support restrains uy only.",
+     "A bottom-left pin restrains ux and uy; a bottom-right roller restrains uy only.",
+     "Left-edge symmetry restrains ux only; the bottom-right support restrains both ux and uy."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Unit force at the top-left node",
+    "issue": "missing",
+    "description": "Appendix C specifies the force magnitude and node but gives no explicit force vector.",
+    "readings": [
+     "Vertical downward force: (fx,fy)=(0,-1).",
+     "Vertical upward force: (fx,fy)=(0,1).",
+     "Inclined downward-right force: (fx,fy)=(1/sqrt(2),-1/sqrt(2))."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Elements adjoining the MBB load and supports",
+    "issue": "missing",
+    "description": "Neither Sec. 5 nor Appendix C specifies whether load or support neighborhoods contain prescribed solid material or how such material would enter the volume budget.",
+    "readings": [
+     "All 144 x 48 elements are designable; no passive solid regions.",
+     "Fix one element adjoining each load or support location to solid and count these elements within the 30% budget.",
+     "Use the same fixed solid elements but apply the 30% budget only to the remaining designable elements."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Q4 element stiffness integration",
+    "issue": "missing",
+    "description": "Appendix C identifies bilinear Q4 plane-stress elements but does not specify their integration or stabilization.",
+    "readings": [
+     "Fully integrated Q4 elements using 2 x 2 Gauss quadrature.",
+     "One-point reduced-integration Q4 elements with hourglass stabilization."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Units and metric for the density-filter radius",
+    "issue": "missing",
+    "description": "Eq. (16), Appendix C, and Table 1 give numerical radii without specifying whether distances use physical coordinates or element-index coordinates.",
+    "readings": [
+     "Measure distance in element-index coordinates; r_min=2 spans two grid spacings.",
+     "Measure distance in physical coordinates; r_min=2 means two domain-length units."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Lower bound on r_min in the Fig. 5 experiment",
+    "issue": "conflicting",
+    "description": "Sec. 5.1 states that the lower bound is 2.0, whereas Table 1 gives 1.5 for the four-hyperparameter experiment.",
+    "readings": [
+     "Constrain r_min to [2.0,10.0].",
+     "Constrain r_min to [1.5,10.0]."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Volume enforcement through filtering and Heaviside projection",
+    "issue": "vague",
+    "description": "The 30% target is explicit, but Eq. (14) constrains pre-filter densities. Sec. 5 allows either fixed or adaptive eta_h without selecting the MBB policy; Eq. (16) need not preserve the global density sum.",
+    "readings": [
+     "Enforce 30% on tilde_rho and use eta_h=0.5; accept the resulting physical volume.",
+     "Enforce 30% on tilde_rho and choose eta_h to preserve the filtered-field volume across Heaviside projection.",
+     "Enforce 30% on tilde_rho and choose eta_h so the final physical density also occupies exactly 30%."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Sigmoidal volume projection Phi",
+    "issue": "missing",
+    "description": "Sec. 5 describes a shifted parametric sigmoid but does not give its functional form or steepness.",
+    "readings": [
+     "Phi_e=1/(1+exp(-(z_e+b))), with b chosen for the volume constraint.",
+     "Phi_e=(1+tanh(z_e+b))/2, with b chosen for the volume constraint."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Adaptive projection-root implementation",
+    "issue": "missing",
+    "description": "Sec. 5 specifies bisection for Phi and optionally eta_h, but omits stopping accuracy and how threshold dependence enters design gradients.",
+    "readings": [
+     "Solve to a volume-fraction residual below 1e-8 and differentiate the volume equation implicitly.",
+     "Use 40 bisection iterations and automatic differentiation through the implemented iterations.",
+     "Solve to a volume-fraction residual below 1e-6 and hold the solved threshold constant during differentiation."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial beta, p, and r_min for Fig. 5",
+    "issue": "missing",
+    "description": "Sec. 5.1 mentions four initial beta values without listing them and gives no initial p or r_min. Appendix C's fixed p=3 and r_min=2 apply to the separate two-dimensional landscape experiment.",
+    "readings": [
+     "Use beta initializations {0.05,0.5,1,5}, with p_initial=3 and r_min_initial=2.",
+     "Use beta initializations {0.1,1,5,10}, with p_initial=1 and r_min_initial=4."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "CNN spatial upsampling sequence",
+    "issue": "conflicting",
+    "description": "Appendix C.1 starts at Nx/8 by Ny/8, describes five layers each doubling resolution, and also requires the output to match Nx by Ny. Three doublings reach 144 x 48; five reach 576 x 192.",
+    "readings": [
+     "Use three doubling blocks: 18 x 6 to 36 x 12 to 72 x 24 to 144 x 48.",
+     "Use five hidden blocks, with three doubling blocks and two blocks that retain spatial resolution.",
+     "Use five doubling blocks followed by resizing to 144 x 48."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Remaining CNN layer specifications",
+    "issue": "missing",
+    "description": "Appendix C.1 refers externally for full details and omits convolution widths, kernels, padding, output mapping, and layer-normalization axes and epsilon.",
+    "readings": [
+     "Use 32 channels throughout hidden layers, 3 x 3 same-padded convolutions, a linear one-channel output, and whole-feature-map normalization with epsilon=1e-5.",
+     "Use hidden widths 32,16,8,4,4, 5 x 5 same-padded convolutions, a tanh one-channel output, and per-pixel channel normalization with epsilon=1e-6."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "CNN and latent-vector initialization",
+    "issue": "missing",
+    "description": "Sec. 5.1 and Appendix C do not identify initialization distributions, scales, or seeds for Fig. 5. The uniform 0.3 initialization in C.2 applies to the standard parameterization.",
+    "readings": [
+     "Glorot-uniform weights, zero biases, standard-normal latent entries, and seeds 0 through 4.",
+     "Glorot-normal weights, zero biases, standard-normal latent entries, and seeds 5 through 9."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Shared UL normalization constants",
+    "issue": "missing",
+    "description": "Eq. (18) and Appendix C specify fixed c_ref and d_ref obtained from a random network initialization but supply neither their values nor the identified reference initialization.",
+    "readings": [
+     "Compute both reference values from a separate fixed reference network with seed 0.",
+     "Compute both reference values from a separate fixed reference network with seed 1."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Adam moment coefficients",
+    "issue": "missing",
+    "description": "Sec. 3 specifies Adam, numerical safeguards, and LL state resets, but not the first- and second-moment decay coefficients used at either level.",
+    "readings": [
+     "Use moment coefficients (0.9,0.999) at both levels.",
+     "Use (0.9,0.99) at the LL and (0.9,0.999) at the UL."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial LL unrolling horizon",
+    "issue": "vague",
+    "description": "Sec. 3 permits t_start=1 or 2, but Appendix C assigns no MBB-specific value. Appendix A's reserve for t=1 does not explicitly settle the choice.",
+    "readings": [
+     "Start with t_start=1.",
+     "Start with t_start=2."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Total computational budget for Fig. 5",
+    "issue": "missing",
+    "description": "Algorithm 1 requires B_max, but Sec. 5 and Appendix C provide no numerical total budget for this example.",
+    "readings": [
+     "Terminate at 10000 linear solves.",
+     "Terminate at 20000 linear solves."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Computational-budget accounting unit",
+    "issue": "conflicting",
+    "description": "Sec. 3 and Appendix A.1 call the budget cumulative LL iterations, whereas Algorithm 1 increments it by 4t+2 and Appendix C.3 compares linear solves.",
+    "readings": [
+     "Count actual LL optimizer updates, adding t per BOTH UL iteration.",
+     "Count linear solves, adding 4t+2 per BOTH UL iteration."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial-learning-rate probe grid",
+    "issue": "missing",
+    "description": "Appendix A.4 introduces N geometric candidates without assigning N; 'at most 20 trials' is only a cost bound. Appendix C gives the resulting learning rate approximately.",
+    "readings": [
+     "Use 10 geometric candidates over [1e-8,1].",
+     "Use 20 geometric candidates over [1e-8,1]."
+    ],
+    "effect": "layout"
+   }
+  ]
+ },
+ "wall_s": 451.85807728767395,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L40",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 0,
+ "locator": "Sec. 5, the MBB beam (Appendix C, Fig. 5)",
+ "finished": "2026-10-22T19:23:15"
+}

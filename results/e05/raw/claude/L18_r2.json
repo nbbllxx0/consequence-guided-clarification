@@ -1,0 +1,274 @@
+{
+ "raw": "{\"items\": [{\"category\": \"domain_extent\", \"entity\": \"design domain orientation / aspect ratio (30\\u00d760 elements)\", \"issue\": \"vague\", \"description\": \"Fig. 1(a) and Fig. 2 captions give only '30\\u00d760 elements' and never say which count lies along the span (horizontal). 'Left boundary fixed' and 'load at lower-right corner' work for either orientation, and the figure isn't available. A cantilever is usually longer than it is tall, but the text doesn't confirm that.\", \"readings\": [\"60 elements horizontal (span) \\u00d7 30 vertical (height): 2:1 domain\", \"30 elements horizontal (span) \\u00d7 60 vertical (height): 1:2 tall domain\"], \"effect\": \"layout\"}, {\"category\": \"domain_extent\", \"entity\": \"physical element size / domain dimensions\", \"issue\": \"missing\", \"description\": \"No physical lengths are given for the 2-D cantilever, only element counts (Fig. 1 caption, Sec. 3.1). The filter radius is given in element sizes, which implies square elements, but their absolute size is never stated.\", \"readings\": [\"unit square elements (domain 60 \\u00d7 30 length units)\", \"1 mm square elements (60 mm \\u00d7 30 mm)\", \"domain length normalized to 1 (element size 1/60)\"], \"effect\": \"scale_only\"}, {\"category\": \"domain_extent\", \"entity\": \"out-of-plane thickness of the 2-D model\", \"issue\": \"missing\", \"description\": \"The thickness of the plane model is not specified anywhere (Fig. 1 caption, Sec. 3.1, App. A).\", \"readings\": [\"unit thickness t = 1\", \"t = 1 mm\", \"t = 0.1\"], \"effect\": \"scale_only\"}, {\"category\": \"load_position\", \"entity\": \"which boundary carries the downward load at the lower-right corner\", \"issue\": \"vague\", \"description\": \"Fig. 1(a) caption: 'a downward distributed load of 1 N is applied at the lower-right corner'. A distributed load can't sit exactly at a corner, and the text doesn't say whether it runs up the right edge, along the bottom edge, or around the corner node. Only the unavailable figure would show this.\", \"readings\": [\"on the right (free) edge, starting at the bottom-right corner and extending upward\", \"on the bottom edge, starting at the bottom-right corner and extending leftward\", \"centred on the bottom-right corner node, shared by both edges\"], \"effect\": \"layout\"}, {\"category\": \"load_extent_distribution\", \"entity\": \"length and nodal weighting of the 'distributed' corner load\", \"issue\": \"figure_only\", \"description\": \"Fig. 1(a) caption calls the load 'distributed' but gives neither the loaded length (number of nodes or element edges) nor the profile (uniform with consistent nodal weights vs. equal nodal shares). This is only shown in the unavailable Fig. 1(a).\", \"readings\": [\"single node (effectively a point load)\", \"1 element edge (2 nodes, 0.5 N each)\", \"2 element edges (3 nodes; consistent weights 1/4-1/2-1/4 or equal thirds)\", \"about 3\\u20136 element edges (\\u224810\\u201320% of the 30-element edge)\"], \"effect\": \"layout\"}, {\"category\": \"load_magnitude\", \"entity\": \"meaning of the '1 N' value of the distributed load\", \"issue\": \"vague\", \"description\": \"Fig. 1(a) caption gives '1 N' for a distributed load but doesn't say whether that is the resultant, the force per loaded node, or an intensity per element length.\", \"readings\": [\"1 N total resultant shared by the loaded nodes\", \"1 N applied to each loaded node\", \"1 N per unit length (per element edge)\"], \"effect\": \"scale_only\"}, {\"category\": \"passive_region\", \"entity\": \"non-design (passive solid/void) elements, e.g. a pad at the loaded corner\", \"issue\": \"figure_only\", \"description\": \"Fig. 1(a) caption only calls the design domain 'dark gray'. Elsewhere (Figs. 14, 17) light gray marks non-design regions, and the text never says whether the cantilever has any passive elements, such as a solid pad under the load.\", \"readings\": [\"none: all 30\\u00d760 elements are design variables\", \"small passive solid pad (e.g. 2\\u00d72 to 3\\u00d73 elements) at the loaded lower-right corner\", \"non-design light-gray block outside the 30\\u00d760 grid that carries the load\"], \"effect\": \"layout\"}, {\"category\": \"material\", \"entity\": \"Young's modulus of the solid phase\", \"issue\": \"missing\", \"description\": \"No elastic modulus is given anywhere (Fig. 1 caption, Sec. 2, Sec. 3.1, App. A).\", \"readings\": [\"E = 1 (normalized)\", \"E = 1 MPa\", \"E = 210 GPa\", \"E = 70 GPa\"], \"effect\": \"scale_only\"}, {\"category\": \"material\", \"entity\": \"Poisson's ratio\", \"issue\": \"missing\", \"description\": \"Poisson's ratio is not stated anywhere in the paper.\", \"readings\": [\"\\u03bd = 0.3\", \"\\u03bd = 0.25\", \"\\u03bd = 1/3\"], \"effect\": \"layout\"}, {\"category\": \"material\", \"entity\": \"2-D stress state (plane stress vs plane strain)\", \"issue\": \"missing\", \"description\": \"Sec. 2 and Sec. 3.1 only say 'linear elasticity'. Plane stress vs. plane strain is not stated.\", \"readings\": [\"plane stress\", \"plane strain\"], \"effect\": \"layout\"}, {\"category\": \"material\", \"entity\": \"density-to-stiffness interpolation and penalty exponent\", \"issue\": \"missing\", \"description\": \"SIMP comes up only as 'common practice' in the Introduction. Neither the interpolation actually used nor its penalty exponent (or any continuation) is given for Fig. 1.\", \"readings\": [\"SIMP, p = 3 fixed\", \"SIMP, p continued from 1 to 3\", \"SIMP, p = 4 or 5 fixed\", \"RAMP, q = 8\"], \"effect\": \"layout\"}, {\"category\": \"material\", \"entity\": \"minimum density / void stiffness\", \"issue\": \"vague\", \"description\": \"Sec. 2 sets \\u03c1_min = \\u03b5 with 'e.g., \\u03b5 \\u2248 10^-6', which is only an example. It also doesn't say whether this is a bound on the design variables with E = \\u03c1^p E0 or a modified-SIMP E_min.\", \"readings\": [\"\\u03c1_min = 1e-6 bound on design variables, E = \\u03c1^p E0\", \"\\u03c1_min = 1e-3 bound, E = \\u03c1^p E0\", \"\\u03c1 in [0,1] with E = E_min + \\u03c1^p (E0 \\u2212 E_min), E_min = 1e-9 E0\"], \"effect\": \"unsure\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"density-filter kernel and boundary treatment\", \"issue\": \"missing\", \"description\": \"Fig. 1/2 captions and Sec. 3.1 give only 'density-filter radius 2.5 (element size)'. They don't specify the weighting function, how the radius is measured, or what happens at the domain edges.\", \"readings\": [\"linear cone (hat) weights max(0, 2.5 \\u2212 d) on centre-to-centre distance, no padding (top88-style)\", \"linear cone weights with padded/mirrored boundary\", \"Helmholtz PDE filter equivalent to R = 2.5 (r = R/(2\\u221a3))\", \"Gaussian weights truncated at radius 2.5\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"MMA move limit \\u03b7_max (value and schedule) for the Fig. 1 run\", \"issue\": \"missing\", \"description\": \"The Fig. 1 caption doesn't give the MMA move limit. The Fig. 3 caption says its setup 'follows Fig. 1(a), except that \\u03b7_max is reduced to 0.01 after the fifth iteration' (which causes 'minor differences in the optimal material distribution'), implying a constant value for Fig. 1. However, 0.2 is stated only for the Fig. 10/14 runs and Fig. 21. Sec. 3.1 also says the optimal solutions 'use the same numerical settings as in Fig. 3', which blurs things further.\", \"readings\": [\"constant 0.2\", \"constant 0.5\", \"constant 0.1\", \"0.2, reduced to 0.01 after iteration 5\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"remaining MMA parameters and objective scaling\", \"issue\": \"missing\", \"description\": \"Sec. 3 and App. A only cite 'the original MMA code by Svanberg'. Asymptote parameters, the a0/a/c/d constants, and any scaling of the compliance objective (MMA is not scale-invariant) aren't given.\", \"readings\": [\"Svanberg defaults (a0=1, a=0, c=1000, d=0; asyinit 0.5, asyincr 1.2, asydecr 0.7) with compliance normalized by its initial value\", \"same defaults with unscaled compliance\", \"same defaults with d=1 and compliance multiplied by a fixed factor (e.g. 100)\"], \"effect\": \"unsure\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"termination criterion\", \"issue\": \"missing\", \"description\": \"The Fig. 1 caption gives only 'maximum iterations, 100'. It's not stated whether a design-change or objective tolerance can stop the run earlier.\", \"readings\": [\"always run exactly 100 iterations\", \"stop when max |\\u0394\\u03c1| < 0.01, capped at 100 iterations\", \"stop when relative compliance change < 1e-4, capped at 100 iterations\"], \"effect\": \"layout\"}, {\"category\": \"volume_fraction\", \"entity\": \"density field on which the 0.5 volume constraint is imposed\", \"issue\": \"vague\", \"description\": \"Eq. (13) writes the volume constraint on the design variables \\u03c1_e. Sec. 3, however, says the density filter is applied to the design variables in the standard runs (Figs. 1, 2). So it isn't explicit whether 0.5 constrains filtered or raw densities, which differ near the boundaries with an unpadded filter.\", \"readings\": [\"constraint on filtered (physical) densities\", \"constraint on raw (unfiltered) design variables\"], \"effect\": \"unsure\"}, {\"category\": \"mesh\", \"entity\": \"finite element formulation\", \"issue\": \"missing\", \"description\": \"Only '30\\u00d760 elements' is given (Fig. 1/2 captions). The element formulation and integration rule aren't stated, and App. A only says the codes are 'informed by' open-source codes.\", \"readings\": [\"4-node bilinear square quadrilateral (Q4), 2\\u00d72 Gauss integration\", \"8-node quadratic quadrilateral (Q8)\", \"Q4 with incompatible modes\"], \"effect\": \"unsure\"}]}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "design domain orientation / aspect ratio (30\u00d760 elements)",
+    "issue": "vague",
+    "description": "Fig. 1(a) and Fig. 2 captions give only '30\u00d760 elements' and never say which count lies along the span (horizontal). 'Left boundary fixed' and 'load at lower-right corner' work for either orientation, and the figure isn't available. A cantilever is usually longer than it is tall, but the text doesn't confirm that.",
+    "readings": [
+     "60 elements horizontal (span) \u00d7 30 vertical (height): 2:1 domain",
+     "30 elements horizontal (span) \u00d7 60 vertical (height): 1:2 tall domain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "physical element size / domain dimensions",
+    "issue": "missing",
+    "description": "No physical lengths are given for the 2-D cantilever, only element counts (Fig. 1 caption, Sec. 3.1). The filter radius is given in element sizes, which implies square elements, but their absolute size is never stated.",
+    "readings": [
+     "unit square elements (domain 60 \u00d7 30 length units)",
+     "1 mm square elements (60 mm \u00d7 30 mm)",
+     "domain length normalized to 1 (element size 1/60)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "out-of-plane thickness of the 2-D model",
+    "issue": "missing",
+    "description": "The thickness of the plane model is not specified anywhere (Fig. 1 caption, Sec. 3.1, App. A).",
+    "readings": [
+     "unit thickness t = 1",
+     "t = 1 mm",
+     "t = 0.1"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "load_position",
+    "entity": "which boundary carries the downward load at the lower-right corner",
+    "issue": "vague",
+    "description": "Fig. 1(a) caption: 'a downward distributed load of 1 N is applied at the lower-right corner'. A distributed load can't sit exactly at a corner, and the text doesn't say whether it runs up the right edge, along the bottom edge, or around the corner node. Only the unavailable figure would show this.",
+    "readings": [
+     "on the right (free) edge, starting at the bottom-right corner and extending upward",
+     "on the bottom edge, starting at the bottom-right corner and extending leftward",
+     "centred on the bottom-right corner node, shared by both edges"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "length and nodal weighting of the 'distributed' corner load",
+    "issue": "figure_only",
+    "description": "Fig. 1(a) caption calls the load 'distributed' but gives neither the loaded length (number of nodes or element edges) nor the profile (uniform with consistent nodal weights vs. equal nodal shares). This is only shown in the unavailable Fig. 1(a).",
+    "readings": [
+     "single node (effectively a point load)",
+     "1 element edge (2 nodes, 0.5 N each)",
+     "2 element edges (3 nodes; consistent weights 1/4-1/2-1/4 or equal thirds)",
+     "about 3\u20136 element edges (\u224810\u201320% of the 30-element edge)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "meaning of the '1 N' value of the distributed load",
+    "issue": "vague",
+    "description": "Fig. 1(a) caption gives '1 N' for a distributed load but doesn't say whether that is the resultant, the force per loaded node, or an intensity per element length.",
+    "readings": [
+     "1 N total resultant shared by the loaded nodes",
+     "1 N applied to each loaded node",
+     "1 N per unit length (per element edge)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "non-design (passive solid/void) elements, e.g. a pad at the loaded corner",
+    "issue": "figure_only",
+    "description": "Fig. 1(a) caption only calls the design domain 'dark gray'. Elsewhere (Figs. 14, 17) light gray marks non-design regions, and the text never says whether the cantilever has any passive elements, such as a solid pad under the load.",
+    "readings": [
+     "none: all 30\u00d760 elements are design variables",
+     "small passive solid pad (e.g. 2\u00d72 to 3\u00d73 elements) at the loaded lower-right corner",
+     "non-design light-gray block outside the 30\u00d760 grid that carries the load"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Young's modulus of the solid phase",
+    "issue": "missing",
+    "description": "No elastic modulus is given anywhere (Fig. 1 caption, Sec. 2, Sec. 3.1, App. A).",
+    "readings": [
+     "E = 1 (normalized)",
+     "E = 1 MPa",
+     "E = 210 GPa",
+     "E = 70 GPa"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson's ratio",
+    "issue": "missing",
+    "description": "Poisson's ratio is not stated anywhere in the paper.",
+    "readings": [
+     "\u03bd = 0.3",
+     "\u03bd = 0.25",
+     "\u03bd = 1/3"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "2-D stress state (plane stress vs plane strain)",
+    "issue": "missing",
+    "description": "Sec. 2 and Sec. 3.1 only say 'linear elasticity'. Plane stress vs. plane strain is not stated.",
+    "readings": [
+     "plane stress",
+     "plane strain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "density-to-stiffness interpolation and penalty exponent",
+    "issue": "missing",
+    "description": "SIMP comes up only as 'common practice' in the Introduction. Neither the interpolation actually used nor its penalty exponent (or any continuation) is given for Fig. 1.",
+    "readings": [
+     "SIMP, p = 3 fixed",
+     "SIMP, p continued from 1 to 3",
+     "SIMP, p = 4 or 5 fixed",
+     "RAMP, q = 8"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "minimum density / void stiffness",
+    "issue": "vague",
+    "description": "Sec. 2 sets \u03c1_min = \u03b5 with 'e.g., \u03b5 \u2248 10^-6', which is only an example. It also doesn't say whether this is a bound on the design variables with E = \u03c1^p E0 or a modified-SIMP E_min.",
+    "readings": [
+     "\u03c1_min = 1e-6 bound on design variables, E = \u03c1^p E0",
+     "\u03c1_min = 1e-3 bound, E = \u03c1^p E0",
+     "\u03c1 in [0,1] with E = E_min + \u03c1^p (E0 \u2212 E_min), E_min = 1e-9 E0"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "density-filter kernel and boundary treatment",
+    "issue": "missing",
+    "description": "Fig. 1/2 captions and Sec. 3.1 give only 'density-filter radius 2.5 (element size)'. They don't specify the weighting function, how the radius is measured, or what happens at the domain edges.",
+    "readings": [
+     "linear cone (hat) weights max(0, 2.5 \u2212 d) on centre-to-centre distance, no padding (top88-style)",
+     "linear cone weights with padded/mirrored boundary",
+     "Helmholtz PDE filter equivalent to R = 2.5 (r = R/(2\u221a3))",
+     "Gaussian weights truncated at radius 2.5"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "MMA move limit \u03b7_max (value and schedule) for the Fig. 1 run",
+    "issue": "missing",
+    "description": "The Fig. 1 caption doesn't give the MMA move limit. The Fig. 3 caption says its setup 'follows Fig. 1(a), except that \u03b7_max is reduced to 0.01 after the fifth iteration' (which causes 'minor differences in the optimal material distribution'), implying a constant value for Fig. 1. However, 0.2 is stated only for the Fig. 10/14 runs and Fig. 21. Sec. 3.1 also says the optimal solutions 'use the same numerical settings as in Fig. 3', which blurs things further.",
+    "readings": [
+     "constant 0.2",
+     "constant 0.5",
+     "constant 0.1",
+     "0.2, reduced to 0.01 after iteration 5"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "remaining MMA parameters and objective scaling",
+    "issue": "missing",
+    "description": "Sec. 3 and App. A only cite 'the original MMA code by Svanberg'. Asymptote parameters, the a0/a/c/d constants, and any scaling of the compliance objective (MMA is not scale-invariant) aren't given.",
+    "readings": [
+     "Svanberg defaults (a0=1, a=0, c=1000, d=0; asyinit 0.5, asyincr 1.2, asydecr 0.7) with compliance normalized by its initial value",
+     "same defaults with unscaled compliance",
+     "same defaults with d=1 and compliance multiplied by a fixed factor (e.g. 100)"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "termination criterion",
+    "issue": "missing",
+    "description": "The Fig. 1 caption gives only 'maximum iterations, 100'. It's not stated whether a design-change or objective tolerance can stop the run earlier.",
+    "readings": [
+     "always run exactly 100 iterations",
+     "stop when max |\u0394\u03c1| < 0.01, capped at 100 iterations",
+     "stop when relative compliance change < 1e-4, capped at 100 iterations"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "density field on which the 0.5 volume constraint is imposed",
+    "issue": "vague",
+    "description": "Eq. (13) writes the volume constraint on the design variables \u03c1_e. Sec. 3, however, says the density filter is applied to the design variables in the standard runs (Figs. 1, 2). So it isn't explicit whether 0.5 constrains filtered or raw densities, which differ near the boundaries with an unpadded filter.",
+    "readings": [
+     "constraint on filtered (physical) densities",
+     "constraint on raw (unfiltered) design variables"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "mesh",
+    "entity": "finite element formulation",
+    "issue": "missing",
+    "description": "Only '30\u00d760 elements' is given (Fig. 1/2 captions). The element formulation and integration rule aren't stated, and App. A only says the codes are 'informed by' open-source codes.",
+    "readings": [
+     "4-node bilinear square quadrilateral (Q4), 2\u00d72 Gauss integration",
+     "8-node quadratic quadrilateral (Q8)",
+     "Q4 with incompatible modes"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 343.1856722831726,
+ "returncode": 0,
+ "meta": {
+  "model": null,
+  "num_turns": 2,
+  "is_error": false,
+  "total_cost_usd": 0.9991947999999999,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 29034,
+   "cache_read_input_tokens": 774,
+   "output_tokens": 38338,
+   "output_tokens_details": {
+    "thinking_tokens": 34478
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 29034,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 38338,
+     "cache_read_input_tokens": 774,
+     "cache_creation_input_tokens": 29034,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 29034
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard",
+   "fallback_credit": null
+  }
+ },
+ "stderr_tail": "",
+ "task": "L18",
+ "model": "claude",
+ "model_id": "claude-opus-5-5",
+ "rep": 2,
+ "locator": "Introduction, the 2-D cantilever of Fig. 1",
+ "finished": "2026-10-22T22:29:23"
+}

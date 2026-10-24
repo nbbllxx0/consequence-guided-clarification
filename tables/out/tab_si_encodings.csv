@@ -1,0 +1,97 @@
+Task,arXiv (encoded version),Published version DOI,Slot,Admissible values,Default,Reason / evidence
+L01,2403.04937,10.1007/s00466-024-02565-2,arm,"0.4, 0.5",0.4,"cut-out size not stated; only a schematic (screen #1, figure)"
+L01,2403.04937,10.1007/s00466-024-02565-2,load,"0.1, 0.5, 0.9",0.5,'point load at the right edge'; position not stated (figure)
+L01,2403.04937,10.1007/s00466-024-02565-2,volfrac (mandatory),0.4,0.4,not stated for this instance (dataset range 0.12-0.5): mandatory
+L01,2403.04937,10.1007/s00466-024-02565-2,set-up,,,64x64 stated; 60x60 used; point load as 4-element patch; vf fixed to 0.4 after asking; vf defined on the unmasked L region (adjudicator B)
+L04,2105.04232,10.1016/j.cma.2021.114197,c,"0.4, 0.45, 0.5, 0.55, 0.6",0.5,line load of length L/10 drawn 'around mid-height'; exact height not stated (figure); annotation convention: +-0.1 L
+L04,2105.04232,10.1016/j.cma.2021.114197,set-up,,,"60x30 homogenization mesh in source; 120x60 used; loaded line 1/10 L = 6 elements: Fig. 9(a) labels the height L (an L = span reading, proposed by both adjudicators, contradicts the figure and is not encoded)"
+L05,1708.07364,,dir (mandatory),"down, up",down,downward only in figure: mandatory (compliance is sign-invariant)
+L05,1708.07364,,set-up,,,point force as 4-element patch; rmin 1.5: Sec. 4 default 2 applies 'if not explicitly specified'; the Fig. 7 caption specifies 1.5 (adjudicator A)
+L07,2511.14623,,volfrac (mandatory),0.5,0.5,"volume penalty beta=0.5, no constraint value: mandatory"
+L07,2511.14623,,set-up,,,"mesh-free in source; 120x60 grid; traction segment (-0.05,0.05) as 6-element patch; vf fixed to 0.5 after asking; clamp on the left edge x = -1: prose 'left boundary is clamped'; Gamma_D = {0} x (-0.5, 0.5) read as a typo (adjudicator A)"
+L08,2305.04107,10.1007/s00366-023-01904-w,ar,"2.5, 3.0, 3.5",3.0,rectangle drawn about 3:1; dimensions not stated (figure); convention +-0.5
+L08,2305.04107,10.1007/s00366-023-01904-w,set-up,,,"common 140x40 grid, domain truncated at x = ar*40 (removed elements); corner point load as 4-element patch at the bottom of the right end"
+L09,2605.02158,10.1007/s00158-026-04429-0,load,"0.1, 0.25, 0.4",0.25,load 'on lower part of left edge'; position not given (figure)
+L09,2605.02158,10.1007/s00158-026-04429-0,volfrac (mandatory),0.4,0.4,not stated for this sample (0.3-0.5): mandatory
+L09,2605.02158,10.1007/s00158-026-04429-0,set-up,,,"64x64 stated; vf fixed to 0.4 after asking; right-edge support taken as full edge; left-edge support from the midpoint to the top corner: the source allows supports only at corners or edge midpoints, or segments connecting them (Sec. 4.1), so the 0.75 reading is inadmissible (evidence correction, authors 2026-10-23)"
+L11,2605.19110,,voids,"horizontal, vertical, diagonal",horizontal,'2 voids' table descriptor only; positions and sizes not stated
+L11,2605.19110,,dir (mandatory),down,down,"'mid-right load', direction not stated: mandatory; down and outward (axial) readings both admissible (adjudicator B)"
+L11,2605.19110,,set-up,,,void radius 6 elements assumed for all layouts
+L02,1909.11320,,strip,"line, quarter, half",line,load drawn along the bottom edge of the end face with traction units; loaded height (edge line vs strip) not stated (figure)
+L02,1909.11320,,set-up,,,"36x12x12 mesh (source 3,000-192,000 variables); full-width strip, raised-cosine in height; mass bound 0.5 read as 0.5 m^3 of the 3 m^3 box (Eq. 1 sums mu_i v_i): vf = 1/6 (both adjudicators)"
+L06,1612.04082,,h,"0.4, 0.5, 0.6",0.5,line drawn 'at about mid-height' (figure); convention +-0.1
+L06,1612.04082,,width,"line, strip",line,line vs strip traction not stated
+L06,1612.04082,,set-up,,,64^3 voxels in source; 24^3 used
+L12,2410.23295,10.1002/aidi.202400015,sup,"corners, full",corners,'points at the base fixed' (Fig. 6 'Ground'); which points not stated
+L12,2410.23295,10.1002/aidi.202400015,load,"full, central",full,compressive load through a thin top shell; distribution not stated
+L12,2410.23295,10.1002/aidi.202400015,set-up,,,40^3 voxels in source; 24^3 used; vf 0.3 = first of five stated targets
+L13,2310.02069,10.1007/978-981-96-1158-4_43,load,"corner, lower, mid",mid,Fig. 1(a) arrow on the lower part of the right edge near the corner vs Fig. 3(b) design converging to mid-height (Fig. 1(a); Fig. 3(b))
+L13,2310.02069,10.1007/978-981-96-1158-4_43,volfrac (mandatory),0.2,0.2,0.20 only from the image file name; caption gives no value: mandatory
+L13,2310.02069,10.1007/978-981-96-1158-4_43,set-up,,,point force as 4-element patch; vf fixed to 0.2 after asking
+L14,2603.09780,10.1007/s00158-026-04343-5,c,"0.4, 0.5, 0.6",0.5,unit-length segment drawn centred near mid-height; position not stated (Fig. 1); annotation convention: +-0.1 height
+L14,2603.09780,10.1007/s00158-026-04343-5,set-up,,,adaptive mesh in source; fixed 80x40 grid (level 2); PDE filter radius 0.375 = 1.5 elements
+L15,2603.25099,10.1016/j.advengsoft.2026.104304,pos,"corner, mid",mid,'tip load' only; corner vs mid-height not stated (Sec. 3.5; Fig. 6 symmetric designs)
+L15,2603.25099,10.1016/j.advengsoft.2026.104304,dir (mandatory),down,down,load direction not stated ('tip load'): mandatory; transverse and axial readings both admissible (adjudicator B)
+L15,2603.25099,10.1016/j.advengsoft.2026.104304,set-up,,,square elements assumed (only 120x60 stated); point force as 4-element patch
+L16,2504.14892,10.1002/nme.70120,sup,"0.05, 0.1, 0.2",0.1,support segment length and position only drawn (Fig. 6(a)); convention 0.05-0.2 L
+L16,2504.14892,10.1002/nme.70120,load,"0.05, 0.1, 0.2",0.1,"traction segment length only drawn, ending at the corners (Fig. 6(a)); convention 0.05-0.2 L"
+L16,2504.14892,10.1002/nme.70120,set-up,,,level-set evolution in source; density SIMP on 80x80; rmin 1.5 (no filter in source)
+L18,2603.22889,,patch,"corner, right6, bottom6",corner,'distributed load' at the lower-right corner drawn as a single arrow; extent and edge not stated (Fig. 1 caption; Fig. 1(a)); convention: up to 6 elements on either edge
+L18,2603.22889,,set-up,,,MMA in source; OC
+L20,2607.07682,10.1109/tevc.2026.3708401,sup,"node, block",node,"'both lower corners supported', drawn as small blocks; size not stated (Fig. 2B)"
+L20,2607.07682,10.1109/tevc.2026.3708401,set-up,,,"L-BFGS in source; OC; block support = 4-element segment ending at the corner; volume constraint on the filtered density (source: prefilter field, Eq. 12); 192x64 is the optimized half (Fig. 2B 'only half of the domain is optimized'; adjudicator A); outer lower corner restrains both components (adjudicator A; within B's set)"
+L21,2608.22606,,load,"corner, upper",corner,drawn at the upper end of the right edge; node not stated (Fig. 5(c))
+L21,2608.22606,,volfrac (mandatory),0.469,0.469,only the initialization label V = 0.469: mandatory
+L21,2608.22606,,set-up,,,"sensitivity filter in source, radius not stated: density filter rmin 1.5 (solver setting); unit nodal load as 2-element patch"
+L22,2009.06245,10.1007/s00158-020-02770-6,pos,"1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18",9,"load position index 1-18 not stated for Fig. 7, only 'same loading condition' (Fig. 7 caption; Sec. 4.1); nominal 9 from the resemblance to Table 1"
+L22,2009.06245,10.1007/s00158-020-02770-6,set-up,,,sensitivity filter r=4 px in source; density filter r=2 (r=4 on 36x36 blurs the 2-element load); 2x2 area load as a 2-element edge patch
+L23,2210.11477,10.1016/j.cma.2023.115969,solid,"load, double",load,"passive region width 0.025 stated, height only drawn (about the 0.04 load width) (Sec. 3.1; Fig. 5); convention: 1x or 2x the load width"
+L23,2210.11477,10.1016/j.cma.2023.115969,set-up,,,200x200 in source; 100x100; robust eroded/dilated formulation replaced by nominal SIMP
+L25,2002.01927,10.1038/s41467-021-27713-7,sup,"elem, node",elem,'bottom left edge' read as one source element edge only from Fig. 2a
+L25,2002.01927,10.1038/s41467-021-27713-7,load,"elem, corner",elem,'top right edge' read as one source element edge only from Fig. 2a
+L25,2002.01927,10.1038/s41467-021-27713-7,set-up,,,4x4 COMSOL elements in source; 40x40 grid (one source edge = 10 elements); rmin 1.5
+L28,2609.25976,,ar,"2.0, 2.2, 2.31",2.2,"only 120x60 hexagonal elements stated, drawn about 2.2:1; regular hexagons give 2.31, square cells 2.0 (Sec. 4; Fig. 1)"
+L28,2609.25976,,volfrac (mandatory),0.5,0.5,V_fm appears only as a symbol: mandatory
+L28,2609.25976,,set-up,,,hexagonal mesh replaced by square grid 139x60 truncated at xmax; r_fill = 4 without units; rmin 2.0 elements; vf fixed to 0.5 after asking
+L29,2308.06734,10.1016/j.compstruc.2024.107474,strip,"none, solid",none,"vertical line about 1 cm inside the right edge drawn, meaning not stated (Fig. 2(a))"
+L29,2308.06734,10.1016/j.compstruc.2024.107474,set-up,,,filter R = 1.2 without units; rmin 1.5 elements; point force as 4-element patch
+L30,2508.05624,,volfrac (mandatory),0.4,0.4,symbol f only; dataset range 30-50%: mandatory
+L30,2508.05624,,set-up,,,dataset mesh 64x64 and filter 2.0 assumed for this instance; vf fixed to 0.4 after asking; standard spatial density filter; Eq. (6) weights 2 - |x_i - x_e| read literally as a density metric (adjudicator A) or as a misprinted spatial metric (adjudicator B): not representable / not used
+L31,1807.10787,10.1016/j.cad.2018.12.008,dir (mandatory),down,down,"sampled angle continuous in [0, pi]: no finite admissible set, one representative value: mandatory"
+L31,1807.10787,10.1016/j.cad.2018.12.008,volfrac (mandatory),0.4,0.4,threshold alpha not stated: mandatory
+L31,1807.10787,10.1016/j.cad.2018.12.008,set-up,,,local p-norm density constraint omitted; filter radius r_e not stated: rmin 1.5 (solver setting); angle fixed to vertical after asking; vf fixed to 0.4 after asking
+L24,2402.12076,10.1016/j.cad.2024.103703,sup,"1, 2, 4",2,"'bottom sides are fixed', strips drawn at both ends, width not stated (Fig. 9 caption; Fig. 9(a)); convention 1-4 elements of 40"
+L24,2402.12076,10.1016/j.cad.2024.103703,load,"line, strip",line,"'uniformly applied at the center of the beam top', drawn as a line across the depth; line vs strip not stated (Fig. 9 caption; Fig. 9(a))"
+L24,2402.12076,10.1016/j.cad.2024.103703,set-up,,,"IGA porous-unit model in source; solid SIMP on 40x16x16 (3 mm voxels); FE domain taken as the manufactured size; colour scale 0.2-0.8 of Fig. 9 is display only; densities in [0, 1]"
+L33,2604.03276,10.1039/d6mh00986g,load,"node, patch",node,'center of the top surface'; single node vs patch not stated (Suppl. Note A.14)
+L33,2604.03276,10.1039/d6mh00986g,set-up,,,40x40x100 in source; 16x40x16; force reading only: the prescribed-displacement reading is not representable in the force-loaded compliance solver; rmin 1.5 (2.549 at source resolution); vf 20.25% on the designable region; the source's passive share is 1.96% of the box
+L34,1904.06556,10.1137/19m1254490,load,"node, patch",node,'applied in the middle of the right-hand face'; node vs patch not stated (Sec. 7; Fig. 2(a))
+L34,1904.06556,10.1137/19m1254490,volfrac (mandatory),0.2,0.2,material volume V a symbol only: mandatory
+L34,1904.06556,10.1137/19m1254490,set-up,,,variable-thickness-sheet (linear) model in source; SIMP p=3; density upper bound rho_bar not representable (bound 1); 262k elements in source; 96x12x12; vf fixed to 0.2 after asking
+L35,2210.01315,10.1115/1.4062663,load,"line, corners",line,two arrows at the bottom corners of the end face; line load vs two corner point loads (Fig. 3(a))
+L35,2210.01315,10.1115/1.4062663,volfrac (mandatory),0.3,0.3,V* a symbol only: mandatory
+L35,2210.01315,10.1115/1.4062663,set-up,,,neural density field in source; SIMP; line load as raised-cosine strip across the depth; penalty p not stated: p=3 (solver setting); vf fixed to 0.3 after asking
+L36,2208.09591,10.1609/aaai.v37i8.26093,roller,"full, lower60",full,"rollers along the whole left edge in the input panel, lower ~60% in the output panel (Fig. 1)"
+L36,2208.09591,10.1609/aaai.v37i8.26093,load,"0.12, 0.15, 0.18",0.15,arrow at about 0.15 of the width; node not stated (Fig. 1); convention +-0.03 W
+L36,2208.09591,10.1609/aaai.v37i8.26093,set-up,,,"ToPy filter/penalty not stated: rmin 1.5, p=3 (solver settings); direction taken as drawn (up)"
+L37,2510.08830,,strip,"1.0, 3.0",1.0,solid strips at the clamped edges drawn only (Fig. 8(a) legend); convention 1-3 elements
+L37,2510.08830,,patch,"2.0, 6.0",2.0,load patch width at top centre drawn only (Fig. 8(a)); convention 2-6 elements
+L37,2510.08830,,volfrac (mandatory),0.35,0.35,V0 swept over 160 values; value of the shown design not stated: mandatory
+L37,2510.08830,,set-up,,,homogenization multiscale model in source; single-scale SIMP; mesh not stated: 150x40 (1 mm); rmin 1.5 (L_min bar-width bound not modelled); vf fixed to 0.35 after asking
+L38,2001.00635,,orient,"wide, tall",wide,"text '16 x 32 square elements', figures 32 wide x 16 high (Sec. 4; Figs. 10-11)"
+L38,2001.00635,,load,"corner, mid",corner,"only 'cantilever'; designs suggest a bottom-right corner load, mid-height admissible (Sec. 4; Fig. 11)"
+L38,2001.00635,,set-up,,,"common 32x32 grid truncated at (xmax, ymax); clamped left edge (implied by 'cantilever'); no filter in source (threshold post-filter): rmin 1.5; Poisson's ratio printed as 1.0: 0.3 used; source prints Poisson's ratio 1.0 (erratum); 0.3 used"
+L39,2310.01968,10.1007/978-981-96-1158-4_35,ar,"3.0, 3.46",3.46,"only 60x20 hexagons stated; maximum length 60 sqrt(3) implied, height not stated (Sec. 3.4; Fig. 1(a))"
+L39,2310.01968,10.1007/978-981-96-1158-4_35,set-up,,,hexagonal mesh replaced by a square grid 69x20 truncated at xmax; ft = 0 (no filter) in source; square grids need a filter: rmin 1.5
+L41,2607.07233,10.1016/j.asoc.2026.115899,load,"0.4, 0.45, 0.5",0.45,arrow at about 0.45 L on the top edge; node not stated (Fig. 6(a)); convention +-0.05 L
+L41,2607.07233,10.1016/j.asoc.2026.115899,set-up,,,"grid not stated: 64x64; filter/penalty not stated: rmin 1.5, p=3; x-only roller reading excluded (mechanism)"
+L43,2509.05800,,pos,"0.75, 0.8, 0.85",0.8,drawn at about 0.8 of the height from the top; element not stated (Fig. 5 row 1); convention +-0.05
+L43,2509.05800,,angle,"210, 240",240,Sec. 4.1 samples 6 angles; the drawn arrow restricts the shown one to the down-left half-plane: 210 or 240 deg
+L43,2509.05800,,set-up,,,support node sets as read from the green marks; filter not stated: rmin 1.5
+L44,2603.27000,,pos,"mid, corner",mid,"'tip load' only; mid-height inferred from the symmetric design, corner admissible (Alg. 2; Sec. 1.3; Fig. 5)"
+L44,2603.27000,,volfrac (mandatory),0.5,0.5,Table 3 leaves the row blank; the suite lists 0.3/0.4/0.5/0.6 for the cantilever family: mandatory
+L44,2603.27000,,set-up,,,r_min schedule not stated: rmin 1.5; vf fixed to 0.5 after asking
+L45,2609.07149,,pos,"corner, mid",corner,text 'loaded at the bottom right' vs Fig. 6 block at mid-height (Sec. 4.1; Fig. 6)
+L45,2609.07149,,b,"0.05, 0.1",0.1,"solid b x b load block drawn, b not stated (Fig. 6; Sec. 3.1); convention 0.05-0.1 H"
+L45,2609.07149,,volfrac (mandatory),0.4,0.4,swept along the nondominated curves; no single value: mandatory
+L45,2609.07149,,set-up,,,200x100 in source; 100x50 with the filter radius halved (R = 25 -> 12.5 elements); robust eroded/dilated projection replaced by nominal SIMP; vf fixed to 0.4 after asking; final move limit 0.01 (0.02 gives a 0.1% period-2 oscillation that fails the convergence window); Poisson's ratio stated as 1/3 (Sec. 3.3) and 0.3 (Appendix A): 0.3 used

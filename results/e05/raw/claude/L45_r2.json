@@ -1,0 +1,268 @@
+{
+ "raw": "{\"items\": [{\"category\": \"domain_extent\", \"entity\": \"Absolute dimensions and out-of-plane thickness of the 2 x 1 domain\", \"issue\": \"missing\", \"description\": \"'2 x 1' cantilever with a 200 x 100 mesh (Sec. 3.1, 4.1, Table 1) fixes only the aspect ratio. The text gives no units, no absolute l_x and l_y, and no out-of-plane thickness. The Fig. 8 caption (length scale 0.095 for R = 15 elements, about 0.63R) fits h = 0.01, i.e. l_x = 2 and l_y = 1. Because R is given in element widths and c and v are normalised by the solid design, these choices only scale absolute values.\", \"readings\": [\"l_x = 2, l_y = 1 (h = 0.01), unit thickness\", \"l_x = 200, l_y = 100 (h = 1), unit thickness\"], \"effect\": \"scale_only\"}, {\"category\": \"support_location_extent\", \"entity\": \"Clamped support on left edge\", \"issue\": \"figure_only\", \"description\": \"The supports are defined only in Fig. 6, which is not available. The text says only 'fixed left edge' and 'loaded and fixed regions' (Sec. 4.1) and 'fixed boundary' (App. B). It never states how much of the left edge is restrained or which DOFs. The two-bar truss anchored at the top and bottom of the left edge suggests the whole edge is clamped.\", \"readings\": [\"Entire left edge (x = 0, all 101 nodes) clamped: u_x = u_y = 0\", \"Only a partial (e.g. central) segment of the left edge clamped, u_x = u_y = 0\", \"Left edge restrained in x only, plus a single node pinned in y\"], \"effect\": \"layout\"}, {\"category\": \"load_extent_distribution\", \"entity\": \"Load at bottom-right corner\", \"issue\": \"figure_only\", \"description\": \"Sec. 4 and the Fig. 10 caption say 'loaded at the bottom right'; Sec. 4.2 and Fig. 11a say 'force at the bottom right corner'. But Sec. 4.1 speaks of a 'loaded region' and App. B of a 'loaded boundary', which also sets where the filter Robin BCs apply. 'Distributed load' is used only for the mid-edge variant. Whether this load is a nodal point force or a traction over a short segment, and that segment's length and which edge it lies on, is shown only in Fig. 6.\", \"readings\": [\"Single nodal force at the bottom-right corner node (x = l_x, y = 0)\", \"Uniform traction on the right edge over the bottom 0.1*l_y (10 elements)\", \"Uniform traction on the right edge over the bottom R = 25 elements (0.25*l_y)\", \"Traction on the bottom edge over a few elements ending at the right corner\"], \"effect\": \"layout\"}, {\"category\": \"load_direction\", \"entity\": \"Load at bottom-right corner\", \"issue\": \"figure_only\", \"description\": \"The text never gives the load direction; it appears only in Fig. 6. A transverse (vertical) load is the usual cantilever convention. Up versus down gives identical designs and compliance because the problem is linear, but a non-vertical load would change the layout.\", \"readings\": [\"Vertical, downward (-y)\", \"Vertical, upward (+y), which gives the same result as downward\", \"Horizontal or inclined (atypical for a cantilever)\"], \"effect\": \"layout\"}, {\"category\": \"load_magnitude\", \"entity\": \"Load at bottom-right corner\", \"issue\": \"missing\", \"description\": \"No force magnitude is given anywhere. If the load is distributed, it is also unclear whether the value is a total force or a traction per unit length. Compliance is normalised by the fully solid compliance (Sec. 3.1), so the value cancels in c.\", \"readings\": [\"Unit total force F = 1 N\", \"Unit traction (1 N/m) over the loaded segment\", \"Any other magnitude\"], \"effect\": \"scale_only\"}, {\"category\": \"passive_region\", \"entity\": \"Non-design regions at load/support\", \"issue\": \"missing\", \"description\": \"No passive solid or void elements are mentioned for Sec. 4.1. Still, App. B speaks of puncturing only 'active elements' and Sec. 4.1 of 'loaded and fixed regions', so some elements may be held fixed.\", \"readings\": [\"None: all 200 x 100 elements are designable\", \"Small passive solid pad at the loaded corner\", \"Passive solid pads at the loaded corner and along the clamped edge\"], \"effect\": \"layout\"}, {\"category\": \"volume_fraction\", \"entity\": \"Volume bounds eps_v (volume fractions swept)\", \"issue\": \"vague\", \"description\": \"This example has no single volume fraction. Sec. 3.2 and App. C divide [0,1] into n_v = 100 'equispaced' values (Table 1), and v_{n_v} = 1 is later replaced by v_1^V, the volume of the first optimised design. Where the grid points sit (for example, whether 0 is included) is not specified.\", \"readings\": [\"v_i = (i-1)/99, i = 1..100 (linspace(0,1,100)), last value replaced by v_1^V\", \"v_i = i/100, i = 1..100, last value replaced by v_1^V\"], \"effect\": \"unsure\"}, {\"category\": \"material\", \"entity\": \"Poisson's ratio\", \"issue\": \"conflicting\", \"description\": \"Sec. 3.3 states 'the material's Poisson ratio is nu = 1/3', which it uses to justify strain energy as the topological derivative. App. A states 'Poisson ratio of 0.3'.\", \"readings\": [\"nu = 0.3 (App. A)\", \"nu = 1/3 (Sec. 3.3)\"], \"effect\": \"layout\"}, {\"category\": \"material\", \"entity\": \"2D elasticity model\", \"issue\": \"missing\", \"description\": \"Sec. 3.1 and App. A mention only linear elasticity on square first-order elements. Plane stress versus plane strain is never stated. The Sec. 3.3 argument (nu = 1/3 makes the topological derivative proportional to strain energy density) holds for plane stress, which hints at it.\", \"readings\": [\"Plane stress\", \"Plane strain\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Projection steepness beta vs. filter radius R\", \"issue\": \"conflicting\", \"description\": \"App. A says 'beta = 10 for all examples and R varies s.t. beta = R/3h or beta = R/5h (see D)'. Table 1 gives R = 25 element widths for Sec. 4.1, so the literal formula gives beta = 5 (or 8.33), not 10. The explicit numbers fit beta = 2R/(5h), so the formula is probably a typo. No beta continuation is mentioned, which implies beta is fixed from the start.\", \"readings\": [\"beta = 10 fixed, R = 25h (explicit values; consistent with beta = 2R/(5h))\", \"beta = 5, R = 25h (literal beta = R/(5h))\", \"beta = 10, R = 50h (literal formula with R adjusted)\", \"beta = 8.33, R = 25h (literal beta = R/(3h))\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"PDE filter length parameter\", \"issue\": \"vague\", \"description\": \"App. A says the PDE filter radius R is 'rescaled with a sqrt(3) factor' to match a hat filter. The standard Lazarov-Sigmund equivalence is r_PDE = R/(2*sqrt(3)), but the text can also be read as R/sqrt(3).\", \"readings\": [\"r_PDE = R/(2*sqrt(3)), about 7.2 element widths for R = 25\", \"r_PDE = R/sqrt(3), about 14.4 element widths for R = 25\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Smoothed Heaviside projection function\", \"issue\": \"vague\", \"description\": \"Sec. 3.1 says only 'smoothed Heaviside projection [21] with steepness beta and threshold eta' (eta = 0.6/0.5/0.4) and gives no formula. At the low beta = 10, the choice of form noticeably changes the grey layers and the effective thresholds.\", \"readings\": [\"tanh threshold projection (Wang et al. 2011 form)\", \"Exponential smoothed-Heaviside with threshold (Guest/Sigmund/Xu-type)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"PDE-filter boundary conditions (Wallin et al. consistent BCs)\", \"issue\": \"vague\", \"description\": \"Sec. 3.1 cites the 'consistent boundary conditions from Wallin et al. [45]'. App. B only says Robin BCs act on boundaries within distance R of the loaded and fixed boundaries (treated as solid-padded for genus counting), with the other edges treated as void-padded. The exact BC form and coefficients per edge segment are not given. Sec. 4.1 and 5.2 attribute the branch-1 inflection near (v_d, c_e) = (0.7, 2.2) to this BC.\", \"readings\": [\"Solid-emulating Robin BC on edge parts within R of the clamped edge and the load; void-emulating Robin BC on all other edges\", \"Solid-emulating Robin BC near support/load; homogeneous Neumann elsewhere\", \"Explicit 2R-wide padding: passive solid near support/load, passive void elsewhere\", \"Homogeneous Neumann on all edges (standard PDE filter)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Compliance bounds eps_c grid\", \"issue\": \"conflicting\", \"description\": \"Sec. 3.2 divides [1, c_max] = [1, 5] into n_c = 100 equispaced values; App. C then sets c_1 = 1.05. It is unclear whether the grid is rebuilt on [1.05, 5] or only c_1 is replaced (in which case c_1 = 1.05 > c_2 = 1.040).\", \"readings\": [\"linspace(1.05, 5, 100)\", \"linspace(1, 5, 100) with only c_1 replaced by 1.05\", \"c_i = 1 + 4i/100 (i = 1..100) with c_1 = 1.04 replaced by 1.05\"], \"effect\": \"unsure\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"GCMMA iteration limits and inner parameters\", \"issue\": \"missing\", \"description\": \"App. A gives the MMA constants, the move limit 0.05 and the convergence tests. It gives no maximum number of outer or inner GCMMA iterations per eps-constrained run and no GCMMA-specific values (raa0, raa, epsimin).\", \"readings\": [\"No iteration cap (run until the stated convergence test), Svanberg default GCMMA parameters\", \"Cap of a few hundred (e.g. 500) outer iterations per eps-run\", \"Cap of 1000 or more outer iterations per eps-run\"], \"effect\": \"unsure\"}, {\"category\": \"other\", \"entity\": \"Third (gap-closing) subcontinuation\", \"issue\": \"conflicting\", \"description\": \"Sec. 3.2 starts it 'from x_1^V' with eps_c = smallest c_i >= c_1^V and increases eps_c 'until c_{i+1} = c_1^V'. That contradicts itself, and also conflicts with the stated aim of closing the gap between (c_1^C, v_1^C) and (c_1^V, v_1^V).\", \"readings\": [\"Start from x_1^C; volume-minimise with eps_c rising from the smallest c_i >= c(x_1^C) up to c_1^V\", \"Start from x_1^V as written (duplicates the 2nd subcontinuation)\", \"Skip the third subcontinuation\"], \"effect\": \"unsure\"}, {\"category\": \"other\", \"entity\": \"Size of nucleated holes\", \"issue\": \"conflicting\", \"description\": \"Sec. 3.3 says holes have 'a diameter at the minimum length scale b_min'. App. B zeroes elements 'within a radius of r_min' (the Qian-Sigmund length scale), and the candidate spacing 2r_min + 4h also treats r_min as the radius. The formula is not written out and no value is given for R = 25; Fig. 8 gives 0.095 (about 0.63R) only for R = 15.\", \"readings\": [\"Hole radius = 0.632R, about 15.8 element widths (App. B reading)\", \"Hole diameter = 0.632R, i.e. radius about 7.9 element widths (Sec. 3.3 reading)\"], \"effect\": \"layout\"}, {\"category\": \"other\", \"entity\": \"Hole-candidate grid\", \"issue\": \"vague\", \"description\": \"Sec. 3.3 says candidates 'depend on the design domain, length scale and boundary conditions'. App. B describes a greedy element scan 'from the center left' with spacing > 2r_min + 4h, but does not specify the exact order or how edges are handled (Sec. 4.1 nucleates a hole on the fixed left edge). The grid is shown only for R = 15 in Fig. 8.\", \"readings\": [\"Greedy scan from the mid-height left-edge element, sweeping right, then rows alternately above/below the mid-line; edge-centred (semicircular) candidates allowed\", \"Same scan but only interior centres\", \"Same scan, excluding candidates within R of the load/support\"], \"effect\": \"unsure\"}]}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "Absolute dimensions and out-of-plane thickness of the 2 x 1 domain",
+    "issue": "missing",
+    "description": "'2 x 1' cantilever with a 200 x 100 mesh (Sec. 3.1, 4.1, Table 1) fixes only the aspect ratio. The text gives no units, no absolute l_x and l_y, and no out-of-plane thickness. The Fig. 8 caption (length scale 0.095 for R = 15 elements, about 0.63R) fits h = 0.01, i.e. l_x = 2 and l_y = 1. Because R is given in element widths and c and v are normalised by the solid design, these choices only scale absolute values.",
+    "readings": [
+     "l_x = 2, l_y = 1 (h = 0.01), unit thickness",
+     "l_x = 200, l_y = 100 (h = 1), unit thickness"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "Clamped support on left edge",
+    "issue": "figure_only",
+    "description": "The supports are defined only in Fig. 6, which is not available. The text says only 'fixed left edge' and 'loaded and fixed regions' (Sec. 4.1) and 'fixed boundary' (App. B). It never states how much of the left edge is restrained or which DOFs. The two-bar truss anchored at the top and bottom of the left edge suggests the whole edge is clamped.",
+    "readings": [
+     "Entire left edge (x = 0, all 101 nodes) clamped: u_x = u_y = 0",
+     "Only a partial (e.g. central) segment of the left edge clamped, u_x = u_y = 0",
+     "Left edge restrained in x only, plus a single node pinned in y"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Load at bottom-right corner",
+    "issue": "figure_only",
+    "description": "Sec. 4 and the Fig. 10 caption say 'loaded at the bottom right'; Sec. 4.2 and Fig. 11a say 'force at the bottom right corner'. But Sec. 4.1 speaks of a 'loaded region' and App. B of a 'loaded boundary', which also sets where the filter Robin BCs apply. 'Distributed load' is used only for the mid-edge variant. Whether this load is a nodal point force or a traction over a short segment, and that segment's length and which edge it lies on, is shown only in Fig. 6.",
+    "readings": [
+     "Single nodal force at the bottom-right corner node (x = l_x, y = 0)",
+     "Uniform traction on the right edge over the bottom 0.1*l_y (10 elements)",
+     "Uniform traction on the right edge over the bottom R = 25 elements (0.25*l_y)",
+     "Traction on the bottom edge over a few elements ending at the right corner"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Load at bottom-right corner",
+    "issue": "figure_only",
+    "description": "The text never gives the load direction; it appears only in Fig. 6. A transverse (vertical) load is the usual cantilever convention. Up versus down gives identical designs and compliance because the problem is linear, but a non-vertical load would change the layout.",
+    "readings": [
+     "Vertical, downward (-y)",
+     "Vertical, upward (+y), which gives the same result as downward",
+     "Horizontal or inclined (atypical for a cantilever)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Load at bottom-right corner",
+    "issue": "missing",
+    "description": "No force magnitude is given anywhere. If the load is distributed, it is also unclear whether the value is a total force or a traction per unit length. Compliance is normalised by the fully solid compliance (Sec. 3.1), so the value cancels in c.",
+    "readings": [
+     "Unit total force F = 1 N",
+     "Unit traction (1 N/m) over the loaded segment",
+     "Any other magnitude"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Non-design regions at load/support",
+    "issue": "missing",
+    "description": "No passive solid or void elements are mentioned for Sec. 4.1. Still, App. B speaks of puncturing only 'active elements' and Sec. 4.1 of 'loaded and fixed regions', so some elements may be held fixed.",
+    "readings": [
+     "None: all 200 x 100 elements are designable",
+     "Small passive solid pad at the loaded corner",
+     "Passive solid pads at the loaded corner and along the clamped edge"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Volume bounds eps_v (volume fractions swept)",
+    "issue": "vague",
+    "description": "This example has no single volume fraction. Sec. 3.2 and App. C divide [0,1] into n_v = 100 'equispaced' values (Table 1), and v_{n_v} = 1 is later replaced by v_1^V, the volume of the first optimised design. Where the grid points sit (for example, whether 0 is included) is not specified.",
+    "readings": [
+     "v_i = (i-1)/99, i = 1..100 (linspace(0,1,100)), last value replaced by v_1^V",
+     "v_i = i/100, i = 1..100, last value replaced by v_1^V"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson's ratio",
+    "issue": "conflicting",
+    "description": "Sec. 3.3 states 'the material's Poisson ratio is nu = 1/3', which it uses to justify strain energy as the topological derivative. App. A states 'Poisson ratio of 0.3'.",
+    "readings": [
+     "nu = 0.3 (App. A)",
+     "nu = 1/3 (Sec. 3.3)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "2D elasticity model",
+    "issue": "missing",
+    "description": "Sec. 3.1 and App. A mention only linear elasticity on square first-order elements. Plane stress versus plane strain is never stated. The Sec. 3.3 argument (nu = 1/3 makes the topological derivative proportional to strain energy density) holds for plane stress, which hints at it.",
+    "readings": [
+     "Plane stress",
+     "Plane strain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Projection steepness beta vs. filter radius R",
+    "issue": "conflicting",
+    "description": "App. A says 'beta = 10 for all examples and R varies s.t. beta = R/3h or beta = R/5h (see D)'. Table 1 gives R = 25 element widths for Sec. 4.1, so the literal formula gives beta = 5 (or 8.33), not 10. The explicit numbers fit beta = 2R/(5h), so the formula is probably a typo. No beta continuation is mentioned, which implies beta is fixed from the start.",
+    "readings": [
+     "beta = 10 fixed, R = 25h (explicit values; consistent with beta = 2R/(5h))",
+     "beta = 5, R = 25h (literal beta = R/(5h))",
+     "beta = 10, R = 50h (literal formula with R adjusted)",
+     "beta = 8.33, R = 25h (literal beta = R/(3h))"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "PDE filter length parameter",
+    "issue": "vague",
+    "description": "App. A says the PDE filter radius R is 'rescaled with a sqrt(3) factor' to match a hat filter. The standard Lazarov-Sigmund equivalence is r_PDE = R/(2*sqrt(3)), but the text can also be read as R/sqrt(3).",
+    "readings": [
+     "r_PDE = R/(2*sqrt(3)), about 7.2 element widths for R = 25",
+     "r_PDE = R/sqrt(3), about 14.4 element widths for R = 25"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Smoothed Heaviside projection function",
+    "issue": "vague",
+    "description": "Sec. 3.1 says only 'smoothed Heaviside projection [21] with steepness beta and threshold eta' (eta = 0.6/0.5/0.4) and gives no formula. At the low beta = 10, the choice of form noticeably changes the grey layers and the effective thresholds.",
+    "readings": [
+     "tanh threshold projection (Wang et al. 2011 form)",
+     "Exponential smoothed-Heaviside with threshold (Guest/Sigmund/Xu-type)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "PDE-filter boundary conditions (Wallin et al. consistent BCs)",
+    "issue": "vague",
+    "description": "Sec. 3.1 cites the 'consistent boundary conditions from Wallin et al. [45]'. App. B only says Robin BCs act on boundaries within distance R of the loaded and fixed boundaries (treated as solid-padded for genus counting), with the other edges treated as void-padded. The exact BC form and coefficients per edge segment are not given. Sec. 4.1 and 5.2 attribute the branch-1 inflection near (v_d, c_e) = (0.7, 2.2) to this BC.",
+    "readings": [
+     "Solid-emulating Robin BC on edge parts within R of the clamped edge and the load; void-emulating Robin BC on all other edges",
+     "Solid-emulating Robin BC near support/load; homogeneous Neumann elsewhere",
+     "Explicit 2R-wide padding: passive solid near support/load, passive void elsewhere",
+     "Homogeneous Neumann on all edges (standard PDE filter)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Compliance bounds eps_c grid",
+    "issue": "conflicting",
+    "description": "Sec. 3.2 divides [1, c_max] = [1, 5] into n_c = 100 equispaced values; App. C then sets c_1 = 1.05. It is unclear whether the grid is rebuilt on [1.05, 5] or only c_1 is replaced (in which case c_1 = 1.05 > c_2 = 1.040).",
+    "readings": [
+     "linspace(1.05, 5, 100)",
+     "linspace(1, 5, 100) with only c_1 replaced by 1.05",
+     "c_i = 1 + 4i/100 (i = 1..100) with c_1 = 1.04 replaced by 1.05"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "GCMMA iteration limits and inner parameters",
+    "issue": "missing",
+    "description": "App. A gives the MMA constants, the move limit 0.05 and the convergence tests. It gives no maximum number of outer or inner GCMMA iterations per eps-constrained run and no GCMMA-specific values (raa0, raa, epsimin).",
+    "readings": [
+     "No iteration cap (run until the stated convergence test), Svanberg default GCMMA parameters",
+     "Cap of a few hundred (e.g. 500) outer iterations per eps-run",
+     "Cap of 1000 or more outer iterations per eps-run"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "other",
+    "entity": "Third (gap-closing) subcontinuation",
+    "issue": "conflicting",
+    "description": "Sec. 3.2 starts it 'from x_1^V' with eps_c = smallest c_i >= c_1^V and increases eps_c 'until c_{i+1} = c_1^V'. That contradicts itself, and also conflicts with the stated aim of closing the gap between (c_1^C, v_1^C) and (c_1^V, v_1^V).",
+    "readings": [
+     "Start from x_1^C; volume-minimise with eps_c rising from the smallest c_i >= c(x_1^C) up to c_1^V",
+     "Start from x_1^V as written (duplicates the 2nd subcontinuation)",
+     "Skip the third subcontinuation"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "other",
+    "entity": "Size of nucleated holes",
+    "issue": "conflicting",
+    "description": "Sec. 3.3 says holes have 'a diameter at the minimum length scale b_min'. App. B zeroes elements 'within a radius of r_min' (the Qian-Sigmund length scale), and the candidate spacing 2r_min + 4h also treats r_min as the radius. The formula is not written out and no value is given for R = 25; Fig. 8 gives 0.095 (about 0.63R) only for R = 15.",
+    "readings": [
+     "Hole radius = 0.632R, about 15.8 element widths (App. B reading)",
+     "Hole diameter = 0.632R, i.e. radius about 7.9 element widths (Sec. 3.3 reading)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "Hole-candidate grid",
+    "issue": "vague",
+    "description": "Sec. 3.3 says candidates 'depend on the design domain, length scale and boundary conditions'. App. B describes a greedy element scan 'from the center left' with spacing > 2r_min + 4h, but does not specify the exact order or how edges are handled (Sec. 4.1 nucleates a hole on the fixed left edge). The grid is shown only for R = 15 in Fig. 8.",
+    "readings": [
+     "Greedy scan from the mid-height left-edge element, sweeping right, then rows alternately above/below the mid-line; edge-centred (semicircular) candidates allowed",
+     "Same scan but only interior centres",
+     "Same scan, excluding candidates within R of the load/support"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 604.9333171844482,
+ "returncode": 0,
+ "meta": {
+  "model": null,
+  "num_turns": 2,
+  "is_error": false,
+  "total_cost_usd": 1.6504428,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 36725,
+   "cache_read_input_tokens": 774,
+   "output_tokens": 67824,
+   "output_tokens_details": {
+    "thinking_tokens": 63144
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 36725,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 67824,
+     "cache_read_input_tokens": 774,
+     "cache_creation_input_tokens": 36725,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 36725
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard",
+   "fallback_credit": null
+  }
+ },
+ "stderr_tail": "",
+ "task": "L45",
+ "model": "claude",
+ "model_id": "claude-opus-5-5",
+ "rep": 2,
+ "locator": "Sec. 4.1, the cantilever beam (Fig. 6, Table 1)",
+ "finished": "2026-10-22T23:48:01"
+}

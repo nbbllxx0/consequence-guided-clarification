@@ -1,0 +1,347 @@
+{
+ "raw": "{\"items\": [{\"category\": \"domain_extent\", \"entity\": \"design domain orientation (16 \\u00d7 32 elements)\", \"issue\": \"vague\", \"description\": \"Sec. 4 (and Abstract) give only '16 \\u00d7 32 square elements' for a cantilever; which count runs along the beam axis (length) and which through the depth is not stated. The domain shape is visible only in Figs. 10\\u201312, which are unavailable.\", \"readings\": [\"32 elements along the cantilever axis \\u00d7 16 elements deep (length:height = 2:1)\", \"16 elements along the cantilever axis \\u00d7 32 elements deep (length:height = 1:2)\"], \"effect\": \"layout\"}, {\"category\": \"domain_extent\", \"entity\": \"physical element size and out-of-plane thickness\", \"issue\": \"missing\", \"description\": \"Only element counts are given; element edge length and plate thickness are never stated (Sec. 4 says units were omitted). In a 2-D model with nodal loads, element size does not change compliance and thickness scales it as 1/t.\", \"readings\": [\"unit square elements (edge 1) and unit thickness\", \"other edge length and/or thickness t \\u2260 1\"], \"effect\": \"scale_only\"}, {\"category\": \"support_location_extent\", \"entity\": \"cantilever support (fixed edge)\", \"issue\": \"vague\", \"description\": \"Sec. 4 says only 'As the boundary condition, we choose the cantilever' (Conclusion: 'a cantilever beam'). It does not say which edge is fixed, or whether all of its nodes or only discrete points are restrained (Sec. 3.2.1 mentions 'the support point'). Any sketch would be in the unavailable figures.\", \"readings\": [\"entire left short edge (all nodes) fixed, free end at the opposite right edge\", \"only discrete nodes of the left edge fixed (e.g., its two end nodes)\", \"entire 32-element side fixed (if the domain is read as 16 long \\u00d7 32 deep)\"], \"effect\": \"layout\"}, {\"category\": \"support_type\", \"entity\": \"restraint at the fixed edge\", \"issue\": \"vague\", \"description\": \"'Cantilever' suggests clamping, but the text never says which displacement components are restrained at the support nodes.\", \"readings\": [\"clamped: ux = uy = 0 at every support node\", \"ux = 0 at all support nodes, uy = 0 at a single node only\"], \"effect\": \"layout\"}, {\"category\": \"load_position\", \"entity\": \"point of load application at the free end\", \"issue\": \"vague\", \"description\": \"No load location is given anywhere (Sec. 4, Conclusion). 'Cantilever' implies a load on the free edge but not where along it.\", \"readings\": [\"mid-height node of the free (right) edge\", \"bottom corner node of the free edge (top corner is the mirror-equivalent)\"], \"effect\": \"layout\"}, {\"category\": \"load_extent_distribution\", \"entity\": \"free-end load\", \"issue\": \"missing\", \"description\": \"The text does not say whether the load is a single nodal force or spread over several nodes or the whole edge.\", \"readings\": [\"single nodal point force\", \"force shared by a few adjacent nodes around the load point\", \"uniform shear traction over the whole free edge\"], \"effect\": \"layout\"}, {\"category\": \"load_direction\", \"entity\": \"free-end load\", \"issue\": \"missing\", \"description\": \"Load direction is never stated; 'cantilever' implies a transverse load. In this linear problem the sign alone does not matter, but a component along the beam axis would change the result.\", \"readings\": [\"vertical (transverse) downward\", \"vertical (transverse) upward \\u2014 identical layout and compliance\", \"inclined, with a component along the beam axis\"], \"effect\": \"layout\"}, {\"category\": \"load_magnitude\", \"entity\": \"free-end load\", \"issue\": \"missing\", \"description\": \"No load value is given. The 'dimensionless' compliances in Table 3 (initial 5,974, SIMP 1,294, proposed 1,287) scale with F\\u00b2, so they cannot be matched without it.\", \"readings\": [\"F = 1 (unit load)\", \"F scaled so that the uniform initial design gives C = 5,974\"], \"effect\": \"scale_only\"}, {\"category\": \"material\", \"entity\": \"Poisson's ratio\", \"issue\": \"conflicting\", \"description\": \"Sec. 4 states \\u03bd = 1.0, which is not valid for isotropic linear elasticity: the plane-stress factor E/(1\\u2212\\u03bd\\u00b2) is singular at \\u03bd = 1, and plane strain or 3-D needs \\u03bd < 0.5. This is almost certainly a typo or text-extraction error.\", \"readings\": [\"\\u03bd = 0.3\", \"\\u03bd = 1/3\", \"\\u03bd = 0.25\"], \"effect\": \"layout\"}, {\"category\": \"material\", \"entity\": \"2-D constitutive assumption\", \"issue\": \"missing\", \"description\": \"Plane stress vs. plane strain is not stated; the text mentions only FEM with square elements.\", \"readings\": [\"plane stress\", \"plane strain\"], \"effect\": \"layout\"}, {\"category\": \"mesh\", \"entity\": \"finite element type\", \"issue\": \"missing\", \"description\": \"Element formulation and integration are not given. Sec. 3.2.4 blames checkerboards on shear locking, which suggests low-order quadrilaterals.\", \"readings\": [\"4-node bilinear quad (Q4), full 2\\u00d72 Gauss integration\", \"Q4 with reduced/selective integration or incompatible modes\", \"8-node quadratic quad\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"lower density bound xmin / void stiffness\", \"issue\": \"missing\", \"description\": \"Eqs. (3)\\u2013(4) introduce xmin 'to eliminate numerical instability' but give no value. The text also does not say what stiffness the 0-elements from Eq. (7) receive when the compliances of the filtered designs (Table 3) are evaluated.\", \"readings\": [\"xmin = 0.001 (thresholded voids also set to xmin)\", \"xmin = 0.01\", \"near-zero void stiffness (e.g., 1e-9\\u00b7E0)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"OC move limit m\", \"issue\": \"missing\", \"description\": \"The move limit m appears in the OC update Eq. (5) and in the Nomenclature, but its value is not given.\", \"readings\": [\"m = 0.2\", \"m = 0.1\", \"m = 0.05\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"OC damping coefficient \\u03b7\", \"issue\": \"missing\", \"description\": \"The damping coefficient \\u03b7 (Nomenclature; exponent in the OC update, Eqs. (5)\\u2013(6)) is not given.\", \"readings\": [\"\\u03b7 = 0.5\", \"\\u03b7 = 0.3\", \"\\u03b7 = 1.0\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"sensitivity/density filter in the SIMP-OC loop (previous method)\", \"issue\": \"missing\", \"description\": \"For the previous method, Sec. 2.3 describes only post-processing (threshold Eq. (7) and floating-island removal). No mesh-independence or anti-checkerboard sensitivity/density filter, and no radius, is mentioned. Fig. 12(a) is called raw OC data 'without filtering'.\", \"readings\": [\"no sensitivity or density filter\", \"sensitivity filter with rmin = 1.5 elements\", \"sensitivity or density filter with rmin = 2 elements\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"stopping criterion / iteration count\", \"issue\": \"conflicting\", \"description\": \"Sec. 2.4 step 5 iterates until the change in x falls below 'a certain value', which is not given. The Fig. 11 caption and Table 2, however, report results after a fixed 40 density updates. It is unclear whether 40 was a cap or the point of convergence.\", \"readings\": [\"exactly 40 OC updates\", \"until max|x_new \\u2212 x| < 0.01\", \"until max|x_new \\u2212 x| < 0.001\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"intermediate-density threshold in Eq. (7) (previous method)\", \"issue\": \"vague\", \"description\": \"The threshold has no numerical value. Sec. 2.3 defines it only as the value that makes the SIMP volume after filtering close to the volume of the filtered CNN-TO result, and that volume is not reported.\", \"readings\": [\"threshold = 0.5\", \"threshold giving 50% solid elements (256 of 512)\", \"threshold matching the unreported post-filter volume of the CNN-TO design\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"timing of post-processing filters\", \"issue\": \"conflicting\", \"description\": \"Sec. 2.4 step 6 and Sec. 3.2 step 6 apply filtering once, after convergence. But Sec. 5.2.1 blames a compliance rise near update 30 in Fig. 13(b) on the filtering, which implies filters act during the iterations. Sec. 3.2.3 also speaks of filtering 'with the optimum structure generated by the CNN as the initial structure'.\", \"readings\": [\"filters applied once to the final (40th-update) design only\", \"filters applied after every OC update and fed back into the loop\", \"filters applied at an intermediate stage (e.g., \\u2248 update 30), then OC continued from the filtered design\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"floating-island elimination rule\", \"issue\": \"vague\", \"description\": \"Floating islands are elements 'not connected to any other elements regarded as material' (Sec. 3.2.4.1, also used for the previous method per Sec. 2.3). The text does not specify: edge vs. corner connectivity; whether whole clusters cut off from the supported body are removed; or the order relative to thresholding.\", \"readings\": [\"remove only single solid elements with no solid neighbour among their 8 neighbours\", \"remove every solid cluster not edge-connected (4-connectivity) to the support-connected main body\", \"as above but with 8-connectivity (corner contact counts as connected)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"initial uniform density\", \"issue\": \"figure_only\", \"description\": \"Sec. 4 describes the initial design as 'an evenly distributed density over the design area (see Fig. 10)'. Its numerical value appears only in the unavailable figure. Table 3's initial-to-optimal compliance ratio (\\u22484.6) is plausible for 0.5 with p = 3.\", \"readings\": [\"uniform x = 0.5 (equal to the volume fraction)\", \"another uniform value (e.g., 0.4 or 0.6)\"], \"effect\": \"layout\"}, {\"category\": \"volume_fraction\", \"entity\": \"volume of the final filtered designs (Fig. 11(b),(d), Table 3)\", \"issue\": \"vague\", \"description\": \"The 50% upper limit (Sec. 4) governs the OC iterations. However, the threshold is tuned to match the two methods' volumes rather than 50% (Sec. 2.3), and hole filling may violate the mass constraint (Sec. 3.2.4). The volumes of the filtered designs compared in Table 3 are not reported.\", \"readings\": [\"filtered designs re-adjusted to exactly 50% (256 of 512 elements solid)\", \"filtered designs left at whatever volume filtering produces (unreported, possibly \\u2260 50%)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"small-hole filling size limit (proposed method)\", \"issue\": \"missing\", \"description\": \"Sec. 3.2.4.2 fills holes smaller than 'a certain size', which is never given. Sec. 3.2.4 also says one 'should check' for checkerboards before filling, but gives no rule for this.\", \"readings\": [\"fill only single-element holes\", \"fill holes up to 4 elements (2\\u00d72)\", \"fill holes up to 9 elements (3\\u00d73)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"peninsula elimination details (proposed method)\", \"issue\": \"vague\", \"description\": \"The criterion is given (\\u2264 2 solid among 8 neighbours, Sec. 3.2.4.3). Unspecified: how edge/corner elements with fewer than 8 neighbours are treated; single vs. repeated passes; and order relative to island removal and hole filling.\", \"readings\": [\"single pass, out-of-domain neighbours counted as void\", \"repeat until no element qualifies, out-of-domain neighbours counted as void\", \"out-of-domain neighbours counted as solid or ignored\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"solid/void classification before CNN-TO filtering (Fig. 11(c)\\u2192(d))\", \"issue\": \"missing\", \"description\": \"The island, hole and peninsula filters of Sec. 3.2.4 require classifying the continuous OC densities as solid or void. No threshold is given for the proposed method; Eq. (7) is attributed only to the previous method (Appendix 1).\", \"readings\": [\"threshold 0.5\", \"same threshold as Eq. (7)\", \"only elements at the upper bound x = 1 counted as material\"], \"effect\": \"layout\"}, {\"category\": \"other\", \"entity\": \"CNN sensitivity surrogate (proposed method, Fig. 11(c),(d))\", \"issue\": \"missing\", \"description\": \"Fig. 11(c),(d) rely on sensitivities estimated by a CNN, but Table 1 lists only strides and channel counts. Missing: kernel sizes, padding, activations, loss, size of the final fully connected layer, training-set size, bar-system parameters, epochs, batch size and output normalization. Random initial weights also give different optima (CNN 1 vs. CNN 2, Sec. 5.3.2). This part cannot be reproduced with a standard FE-based solver.\", \"readings\": [\"reproduce only the SIMP/OC reference (Fig. 11(a),(b)) with exact FE adjoint sensitivities\", \"train a Table-1-type CNN with assumed settings (e.g., 3\\u00d73 kernels, ReLU, MSE loss, Adam lr 5e-5) on bar-system samples for this cantilever and use it in the OC loop\"], \"effect\": \"layout\"}]}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "design domain orientation (16 \u00d7 32 elements)",
+    "issue": "vague",
+    "description": "Sec. 4 (and Abstract) give only '16 \u00d7 32 square elements' for a cantilever; which count runs along the beam axis (length) and which through the depth is not stated. The domain shape is visible only in Figs. 10\u201312, which are unavailable.",
+    "readings": [
+     "32 elements along the cantilever axis \u00d7 16 elements deep (length:height = 2:1)",
+     "16 elements along the cantilever axis \u00d7 32 elements deep (length:height = 1:2)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "physical element size and out-of-plane thickness",
+    "issue": "missing",
+    "description": "Only element counts are given; element edge length and plate thickness are never stated (Sec. 4 says units were omitted). In a 2-D model with nodal loads, element size does not change compliance and thickness scales it as 1/t.",
+    "readings": [
+     "unit square elements (edge 1) and unit thickness",
+     "other edge length and/or thickness t \u2260 1"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "cantilever support (fixed edge)",
+    "issue": "vague",
+    "description": "Sec. 4 says only 'As the boundary condition, we choose the cantilever' (Conclusion: 'a cantilever beam'). It does not say which edge is fixed, or whether all of its nodes or only discrete points are restrained (Sec. 3.2.1 mentions 'the support point'). Any sketch would be in the unavailable figures.",
+    "readings": [
+     "entire left short edge (all nodes) fixed, free end at the opposite right edge",
+     "only discrete nodes of the left edge fixed (e.g., its two end nodes)",
+     "entire 32-element side fixed (if the domain is read as 16 long \u00d7 32 deep)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_type",
+    "entity": "restraint at the fixed edge",
+    "issue": "vague",
+    "description": "'Cantilever' suggests clamping, but the text never says which displacement components are restrained at the support nodes.",
+    "readings": [
+     "clamped: ux = uy = 0 at every support node",
+     "ux = 0 at all support nodes, uy = 0 at a single node only"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "point of load application at the free end",
+    "issue": "vague",
+    "description": "No load location is given anywhere (Sec. 4, Conclusion). 'Cantilever' implies a load on the free edge but not where along it.",
+    "readings": [
+     "mid-height node of the free (right) edge",
+     "bottom corner node of the free edge (top corner is the mirror-equivalent)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "free-end load",
+    "issue": "missing",
+    "description": "The text does not say whether the load is a single nodal force or spread over several nodes or the whole edge.",
+    "readings": [
+     "single nodal point force",
+     "force shared by a few adjacent nodes around the load point",
+     "uniform shear traction over the whole free edge"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "free-end load",
+    "issue": "missing",
+    "description": "Load direction is never stated; 'cantilever' implies a transverse load. In this linear problem the sign alone does not matter, but a component along the beam axis would change the result.",
+    "readings": [
+     "vertical (transverse) downward",
+     "vertical (transverse) upward \u2014 identical layout and compliance",
+     "inclined, with a component along the beam axis"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "free-end load",
+    "issue": "missing",
+    "description": "No load value is given. The 'dimensionless' compliances in Table 3 (initial 5,974, SIMP 1,294, proposed 1,287) scale with F\u00b2, so they cannot be matched without it.",
+    "readings": [
+     "F = 1 (unit load)",
+     "F scaled so that the uniform initial design gives C = 5,974"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson's ratio",
+    "issue": "conflicting",
+    "description": "Sec. 4 states \u03bd = 1.0, which is not valid for isotropic linear elasticity: the plane-stress factor E/(1\u2212\u03bd\u00b2) is singular at \u03bd = 1, and plane strain or 3-D needs \u03bd < 0.5. This is almost certainly a typo or text-extraction error.",
+    "readings": [
+     "\u03bd = 0.3",
+     "\u03bd = 1/3",
+     "\u03bd = 0.25"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "2-D constitutive assumption",
+    "issue": "missing",
+    "description": "Plane stress vs. plane strain is not stated; the text mentions only FEM with square elements.",
+    "readings": [
+     "plane stress",
+     "plane strain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "finite element type",
+    "issue": "missing",
+    "description": "Element formulation and integration are not given. Sec. 3.2.4 blames checkerboards on shear locking, which suggests low-order quadrilaterals.",
+    "readings": [
+     "4-node bilinear quad (Q4), full 2\u00d72 Gauss integration",
+     "Q4 with reduced/selective integration or incompatible modes",
+     "8-node quadratic quad"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "lower density bound xmin / void stiffness",
+    "issue": "missing",
+    "description": "Eqs. (3)\u2013(4) introduce xmin 'to eliminate numerical instability' but give no value. The text also does not say what stiffness the 0-elements from Eq. (7) receive when the compliances of the filtered designs (Table 3) are evaluated.",
+    "readings": [
+     "xmin = 0.001 (thresholded voids also set to xmin)",
+     "xmin = 0.01",
+     "near-zero void stiffness (e.g., 1e-9\u00b7E0)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "OC move limit m",
+    "issue": "missing",
+    "description": "The move limit m appears in the OC update Eq. (5) and in the Nomenclature, but its value is not given.",
+    "readings": [
+     "m = 0.2",
+     "m = 0.1",
+     "m = 0.05"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "OC damping coefficient \u03b7",
+    "issue": "missing",
+    "description": "The damping coefficient \u03b7 (Nomenclature; exponent in the OC update, Eqs. (5)\u2013(6)) is not given.",
+    "readings": [
+     "\u03b7 = 0.5",
+     "\u03b7 = 0.3",
+     "\u03b7 = 1.0"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "sensitivity/density filter in the SIMP-OC loop (previous method)",
+    "issue": "missing",
+    "description": "For the previous method, Sec. 2.3 describes only post-processing (threshold Eq. (7) and floating-island removal). No mesh-independence or anti-checkerboard sensitivity/density filter, and no radius, is mentioned. Fig. 12(a) is called raw OC data 'without filtering'.",
+    "readings": [
+     "no sensitivity or density filter",
+     "sensitivity filter with rmin = 1.5 elements",
+     "sensitivity or density filter with rmin = 2 elements"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "stopping criterion / iteration count",
+    "issue": "conflicting",
+    "description": "Sec. 2.4 step 5 iterates until the change in x falls below 'a certain value', which is not given. The Fig. 11 caption and Table 2, however, report results after a fixed 40 density updates. It is unclear whether 40 was a cap or the point of convergence.",
+    "readings": [
+     "exactly 40 OC updates",
+     "until max|x_new \u2212 x| < 0.01",
+     "until max|x_new \u2212 x| < 0.001"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "intermediate-density threshold in Eq. (7) (previous method)",
+    "issue": "vague",
+    "description": "The threshold has no numerical value. Sec. 2.3 defines it only as the value that makes the SIMP volume after filtering close to the volume of the filtered CNN-TO result, and that volume is not reported.",
+    "readings": [
+     "threshold = 0.5",
+     "threshold giving 50% solid elements (256 of 512)",
+     "threshold matching the unreported post-filter volume of the CNN-TO design"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "timing of post-processing filters",
+    "issue": "conflicting",
+    "description": "Sec. 2.4 step 6 and Sec. 3.2 step 6 apply filtering once, after convergence. But Sec. 5.2.1 blames a compliance rise near update 30 in Fig. 13(b) on the filtering, which implies filters act during the iterations. Sec. 3.2.3 also speaks of filtering 'with the optimum structure generated by the CNN as the initial structure'.",
+    "readings": [
+     "filters applied once to the final (40th-update) design only",
+     "filters applied after every OC update and fed back into the loop",
+     "filters applied at an intermediate stage (e.g., \u2248 update 30), then OC continued from the filtered design"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "floating-island elimination rule",
+    "issue": "vague",
+    "description": "Floating islands are elements 'not connected to any other elements regarded as material' (Sec. 3.2.4.1, also used for the previous method per Sec. 2.3). The text does not specify: edge vs. corner connectivity; whether whole clusters cut off from the supported body are removed; or the order relative to thresholding.",
+    "readings": [
+     "remove only single solid elements with no solid neighbour among their 8 neighbours",
+     "remove every solid cluster not edge-connected (4-connectivity) to the support-connected main body",
+     "as above but with 8-connectivity (corner contact counts as connected)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "initial uniform density",
+    "issue": "figure_only",
+    "description": "Sec. 4 describes the initial design as 'an evenly distributed density over the design area (see Fig. 10)'. Its numerical value appears only in the unavailable figure. Table 3's initial-to-optimal compliance ratio (\u22484.6) is plausible for 0.5 with p = 3.",
+    "readings": [
+     "uniform x = 0.5 (equal to the volume fraction)",
+     "another uniform value (e.g., 0.4 or 0.6)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "volume of the final filtered designs (Fig. 11(b),(d), Table 3)",
+    "issue": "vague",
+    "description": "The 50% upper limit (Sec. 4) governs the OC iterations. However, the threshold is tuned to match the two methods' volumes rather than 50% (Sec. 2.3), and hole filling may violate the mass constraint (Sec. 3.2.4). The volumes of the filtered designs compared in Table 3 are not reported.",
+    "readings": [
+     "filtered designs re-adjusted to exactly 50% (256 of 512 elements solid)",
+     "filtered designs left at whatever volume filtering produces (unreported, possibly \u2260 50%)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "small-hole filling size limit (proposed method)",
+    "issue": "missing",
+    "description": "Sec. 3.2.4.2 fills holes smaller than 'a certain size', which is never given. Sec. 3.2.4 also says one 'should check' for checkerboards before filling, but gives no rule for this.",
+    "readings": [
+     "fill only single-element holes",
+     "fill holes up to 4 elements (2\u00d72)",
+     "fill holes up to 9 elements (3\u00d73)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "peninsula elimination details (proposed method)",
+    "issue": "vague",
+    "description": "The criterion is given (\u2264 2 solid among 8 neighbours, Sec. 3.2.4.3). Unspecified: how edge/corner elements with fewer than 8 neighbours are treated; single vs. repeated passes; and order relative to island removal and hole filling.",
+    "readings": [
+     "single pass, out-of-domain neighbours counted as void",
+     "repeat until no element qualifies, out-of-domain neighbours counted as void",
+     "out-of-domain neighbours counted as solid or ignored"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "solid/void classification before CNN-TO filtering (Fig. 11(c)\u2192(d))",
+    "issue": "missing",
+    "description": "The island, hole and peninsula filters of Sec. 3.2.4 require classifying the continuous OC densities as solid or void. No threshold is given for the proposed method; Eq. (7) is attributed only to the previous method (Appendix 1).",
+    "readings": [
+     "threshold 0.5",
+     "same threshold as Eq. (7)",
+     "only elements at the upper bound x = 1 counted as material"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "CNN sensitivity surrogate (proposed method, Fig. 11(c),(d))",
+    "issue": "missing",
+    "description": "Fig. 11(c),(d) rely on sensitivities estimated by a CNN, but Table 1 lists only strides and channel counts. Missing: kernel sizes, padding, activations, loss, size of the final fully connected layer, training-set size, bar-system parameters, epochs, batch size and output normalization. Random initial weights also give different optima (CNN 1 vs. CNN 2, Sec. 5.3.2). This part cannot be reproduced with a standard FE-based solver.",
+    "readings": [
+     "reproduce only the SIMP/OC reference (Fig. 11(a),(b)) with exact FE adjoint sensitivities",
+     "train a Table-1-type CNN with assumed settings (e.g., 3\u00d73 kernels, ReLU, MSE loss, Adam lr 5e-5) on bar-system samples for this cantilever and use it in the OC loop"
+    ],
+    "effect": "layout"
+   }
+  ]
+ },
+ "wall_s": 508.2627513408661,
+ "returncode": 0,
+ "meta": {
+  "model": null,
+  "num_turns": 2,
+  "is_error": false,
+  "total_cost_usd": 1.2309268,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 17133,
+   "cache_read_input_tokens": 774,
+   "output_tokens": 54685,
+   "output_tokens_details": {
+    "thinking_tokens": 49660
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 17133,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 54685,
+     "cache_read_input_tokens": 774,
+     "cache_creation_input_tokens": 17133,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 17133
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard",
+   "fallback_credit": null
+  }
+ },
+ "stderr_tail": "",
+ "task": "L38",
+ "model": "claude",
+ "model_id": "claude-opus-5-5",
+ "rep": 0,
+ "locator": "Sec. 4, the example for performance verification (Fig. 11)",
+ "finished": "2026-10-22T19:16:08"
+}

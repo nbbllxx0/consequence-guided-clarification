@@ -1,0 +1,339 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Cantilever span and depth\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4 specifies 16 \u00d7 32 square elements without assigning either count to the cantilever span. Let a be the element side, L the span, and H the transverse depth.\",\n      \"readings\": [\n        \"L = 32a and H = 16a\",\n        \"L = 16a and H = 32a\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Absolute in-plane dimensions\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 gives element counts but no element side length or length normalization.\",\n      \"readings\": [\n        \"a = 1, giving side lengths 16 and 32\",\n        \"a = 1/16, giving side lengths 1 and 2\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"No thickness or unit-depth convention is specified for the square-element FEM model.\",\n      \"readings\": [\n        \"Uniform unit thickness\",\n        \"Uniform thickness t = a\",\n        \"Uniform thickness t = 0.1a\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"Location of the built-in boundary\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4 identifies a cantilever but does not locate its clamped boundary in the rectangular grid.\",\n      \"readings\": [\n        \"Clamp the left boundary\",\n        \"Clamp the right boundary\",\n        \"Clamp the bottom boundary\",\n        \"Clamp the top boundary\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"Extent of the clamp\",\n      \"issue\": \"vague\",\n      \"description\": \"The cantilever description in Sec. 4 does not explicitly identify the constrained node set along the built-in boundary.\",\n      \"readings\": [\n        \"Fix both displacement components at every node on the selected boundary\",\n        \"Fix both displacement components only over the central half of that boundary\",\n        \"Fix both displacement components at the two corner nodes of that boundary\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"Applied load location\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 supplies no load coordinates. Generic load points mentioned in Sec. 3.2.1 do not locate the verification load. Here x runs from the clamp at 0 to the free end at L.\",\n      \"readings\": [\n        \"Free-end midpoint: (L, H/2)\",\n        \"Lower free-end corner: (L, 0)\",\n        \"Upper free-end corner: (L, H)\",\n        \"Midspan upper boundary: (L/2, H)\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Spatial load pattern\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Sec. 4 nor the Fig. 11 caption specifies the nonzero entries of the load vector, including whether loading is concentrated or distributed.\",\n      \"readings\": [\n        \"One concentrated nodal force\",\n        \"Uniform traction over a patch two element edges long\",\n        \"Uniform traction over the entire free-end boundary\",\n        \"Two equal simultaneous nodal forces at the free-end corners\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"Applied force or traction direction\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 states no load direction. A cantilever boundary condition alone does not determine it.\",\n      \"readings\": [\n        \"Transverse loading: direction (0, -1)\",\n        \"Axial loading: direction (1, 0)\",\n        \"Oblique loading: direction (1, -1)/sqrt(2)\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"Overall applied load scale\",\n      \"issue\": \"missing\",\n      \"description\": \"No total force, traction magnitude, or load normalization is supplied for the Sec. 4 example.\",\n      \"readings\": [\n        \"Normalize the resultant force magnitude to 1\",\n        \"Normalize the resultant force magnitude to 10\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Prescribed solid or void cells\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 does not explicitly specify passive regions or whether attachment cells remain designable.\",\n      \"readings\": [\n        \"All 512 cells are design variables; no passive regions\",\n        \"Keep only the cells adjoining load application nodes permanently solid\",\n        \"Keep a one-element-thick clamp strip and the load attachment cells permanently solid\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Two-dimensional constitutive assumption\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 supplies elastic constants but does not state the constitutive reduction used for its square-element model.\",\n      \"readings\": [\n        \"Plane stress\",\n        \"Plane strain\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Finite-element interpolation and integration\",\n      \"issue\": \"missing\",\n      \"description\": \"The 16 \u00d7 32 square-cell resolution in Sec. 4 does not specify element order, quadrature, or stabilization.\",\n      \"readings\": [\n        \"Bilinear four-node quadrilaterals with 2 \u00d7 2 Gauss integration\",\n        \"Four-node quadrilaterals with one-point integration and hourglass stabilization\",\n        \"Quadratic eight-node quadrilaterals with 3 \u00d7 3 Gauss integration\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Minimum density and nominal-void stiffness\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.2 introduces xmin without a value. Eq. (7) subsequently creates zero-density cells without specifying whether their FEM stiffness is zero or regularized.\",\n      \"readings\": [\n        \"xmin = 0.001; use its penalized stiffness for all nominal voids\",\n        \"xmin = 0.000001; use its penalized stiffness for all nominal voids\",\n        \"xmin = 0.001 during optimization; remove zero-density cells and inactive degrees of freedom for final filtered analysis\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initial uniform density value\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4 and the Fig. 10 caption establish spatial uniformity but do not give the initial density level.\",\n      \"readings\": [\n        \"Every cell starts at x = 0.5\",\n        \"Every cell starts at x = 0.25\",\n        \"Every cell starts at x = 1, with the volume constraint enforced during subsequent updates\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"OC move limit\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (5) uses a move limit, identified as m in the nomenclature, but no numerical value is supplied for Sec. 4.\",\n      \"readings\": [\n        \"m = 0.1 per density update\",\n        \"m = 0.2 per density update\",\n        \"m = 0.5 per density update\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"OC damping coefficient\",\n      \"issue\": \"missing\",\n      \"description\": \"The OC formulation and nomenclature refer to damping, but its numerical value is not specified.\",\n      \"readings\": [\n        \"Use exponent 0.5 in the multiplicative OC update\",\n        \"Use exponent 1 in the multiplicative OC update\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"OC multiplier bisection accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.2.2 specifies bisection for the volume multiplier without a stopping tolerance.\",\n      \"readings\": [\n        \"Stop when the relative multiplier bracket width is below 0.001\",\n        \"Stop when the relative multiplier bracket width is below 0.000001\",\n        \"Stop when the volume error is below 0.000001 times the domain volume\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Filtering schedule\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Secs. 2.4 and 3.2 place filtering after convergence, whereas Sec. 5.2.1 attributes a compliance increase around update 30 to filtering. Fig. 11 reports 40 updates.\",\n      \"readings\": [\n        \"Perform 40 density updates and filter once afterward\",\n        \"Filter after every density update before the next analysis\",\n        \"Apply an intermediate filtering stage around update 30, continue updating, and filter again after update 40\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"SIMP binary threshold selection\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2.3 chooses the Eq. (7) threshold to make the filtered SIMP volume close to the proposed-method volume, without a threshold value or definition of closeness.\",\n      \"readings\": [\n        \"Choose a threshold matching the filtered CNN solid-cell count exactly when attainable\",\n        \"Choose a threshold retaining one fewer solid cell than the filtered CNN result\",\n        \"Choose a threshold retaining one more solid cell than the filtered CNN result\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Density exactly equal to the binary threshold\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.3 describes densities above and below the threshold; the supplied Eq. (7) does not resolve equality legibly.\",\n      \"readings\": [\n        \"Assign material when x is greater than or equal to the threshold\",\n        \"Assign material only when x is strictly greater than the threshold\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Material classification before CNN morphology\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.2.4 operates on material and void cells but does not specify how continuous CNN-TO densities are converted into that classification.\",\n      \"readings\": [\n        \"Classify x >= 0.5 as material\",\n        \"Classify x >= 0.1 as material\",\n        \"Classify the 256 highest-density cells as material\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Connectivity used for islands and holes\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 3.2.4.1\u20133.2.4.2 do not define connectivity for islands or holes. The explicit eight-neighbor peninsula rule does not settle these other operations.\",\n      \"readings\": [\n        \"Use four-neighbor connectivity through shared edges\",\n        \"Use eight-neighbor connectivity through shared edges or corners\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Floating-island identification and retention\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 3.2.4.1 describes islands as material not connected to other material, without defining which connected components must be retained or how this interacts with SIMP thresholding.\",\n      \"readings\": [\n        \"After binarization, remove every component not connected to a support\",\n        \"After binarization, retain only the largest material component\",\n        \"Remove only isolated individual material cells\",\n        \"Before final SIMP thresholding, remove unsupported components identified using an auxiliary x >= 0.5 mask\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Maximum hole size to fill\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 3.2.4.2 excludes holes larger than a certain size without defining that size or its measurement.\",\n      \"readings\": [\n        \"Fill enclosed void components of one cell only\",\n        \"Fill enclosed void components containing at most four cells\",\n        \"Fill enclosed void components containing at most nine cells\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Morphological update and repetition rules\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.2.4 lists island removal, hole filling, and peninsula removal but does not specify synchronous versus sequential edits or the number of passes.\",\n      \"readings\": [\n        \"One synchronous pass for each operation in the listed order\",\n        \"Five complete passes through the listed operations\",\n        \"Repeat the listed operations until no cells change\",\n        \"Update cells sequentially within each operation and repeat until unchanged\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Volume treatment after filtering\",\n      \"issue\": \"vague\",\n      \"description\": \"The optimization limit is explicitly 50%, but Sec. 3.2.4 acknowledges filtering can change mass without specifying a correction. Sec. 2.3 only matches SIMP volume approximately to CNN volume.\",\n      \"readings\": [\n        \"Accept the filtered volume even if it exceeds 50%\",\n        \"Reject hole-filling edits that would exceed 256 solid cells\",\n        \"Compensate additions by removing material elsewhere to finish with exactly 256 solid cells\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"CNN sensitivity operator for Fig. 11(c,d)\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 3.2.1\u20133.2.3 give an architecture outline and training approach but no trained weights or fully reproducible training specification. Sec. 5.3.2 demonstrates different layouts from different trained realizations without identifying the Fig. 11 realization.\",\n      \"readings\": [\n        \"Use the CNN 1 realization discussed in Sec. 5.3.2\",\n        \"Use the CNN 2 realization discussed in Sec. 5.3.2\",\n        \"Train another realization using the reported architecture and Adam parameters\"\n      ],\n      \"effect\": \"layout\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "Cantilever span and depth",
+    "issue": "vague",
+    "description": "Sec. 4 specifies 16 \u00d7 32 square elements without assigning either count to the cantilever span. Let a be the element side, L the span, and H the transverse depth.",
+    "readings": [
+     "L = 32a and H = 16a",
+     "L = 16a and H = 32a"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "Absolute in-plane dimensions",
+    "issue": "missing",
+    "description": "Sec. 4 gives element counts but no element side length or length normalization.",
+    "readings": [
+     "a = 1, giving side lengths 16 and 32",
+     "a = 1/16, giving side lengths 1 and 2"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "Out-of-plane thickness",
+    "issue": "missing",
+    "description": "No thickness or unit-depth convention is specified for the square-element FEM model.",
+    "readings": [
+     "Uniform unit thickness",
+     "Uniform thickness t = a",
+     "Uniform thickness t = 0.1a"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "Location of the built-in boundary",
+    "issue": "vague",
+    "description": "Sec. 4 identifies a cantilever but does not locate its clamped boundary in the rectangular grid.",
+    "readings": [
+     "Clamp the left boundary",
+     "Clamp the right boundary",
+     "Clamp the bottom boundary",
+     "Clamp the top boundary"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "Extent of the clamp",
+    "issue": "vague",
+    "description": "The cantilever description in Sec. 4 does not explicitly identify the constrained node set along the built-in boundary.",
+    "readings": [
+     "Fix both displacement components at every node on the selected boundary",
+     "Fix both displacement components only over the central half of that boundary",
+     "Fix both displacement components at the two corner nodes of that boundary"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "Applied load location",
+    "issue": "missing",
+    "description": "Sec. 4 supplies no load coordinates. Generic load points mentioned in Sec. 3.2.1 do not locate the verification load. Here x runs from the clamp at 0 to the free end at L.",
+    "readings": [
+     "Free-end midpoint: (L, H/2)",
+     "Lower free-end corner: (L, 0)",
+     "Upper free-end corner: (L, H)",
+     "Midspan upper boundary: (L/2, H)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Spatial load pattern",
+    "issue": "missing",
+    "description": "Neither Sec. 4 nor the Fig. 11 caption specifies the nonzero entries of the load vector, including whether loading is concentrated or distributed.",
+    "readings": [
+     "One concentrated nodal force",
+     "Uniform traction over a patch two element edges long",
+     "Uniform traction over the entire free-end boundary",
+     "Two equal simultaneous nodal forces at the free-end corners"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Applied force or traction direction",
+    "issue": "missing",
+    "description": "Sec. 4 states no load direction. A cantilever boundary condition alone does not determine it.",
+    "readings": [
+     "Transverse loading: direction (0, -1)",
+     "Axial loading: direction (1, 0)",
+     "Oblique loading: direction (1, -1)/sqrt(2)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Overall applied load scale",
+    "issue": "missing",
+    "description": "No total force, traction magnitude, or load normalization is supplied for the Sec. 4 example.",
+    "readings": [
+     "Normalize the resultant force magnitude to 1",
+     "Normalize the resultant force magnitude to 10"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Prescribed solid or void cells",
+    "issue": "missing",
+    "description": "Sec. 4 does not explicitly specify passive regions or whether attachment cells remain designable.",
+    "readings": [
+     "All 512 cells are design variables; no passive regions",
+     "Keep only the cells adjoining load application nodes permanently solid",
+     "Keep a one-element-thick clamp strip and the load attachment cells permanently solid"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Two-dimensional constitutive assumption",
+    "issue": "missing",
+    "description": "Sec. 4 supplies elastic constants but does not state the constitutive reduction used for its square-element model.",
+    "readings": [
+     "Plane stress",
+     "Plane strain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Finite-element interpolation and integration",
+    "issue": "missing",
+    "description": "The 16 \u00d7 32 square-cell resolution in Sec. 4 does not specify element order, quadrature, or stabilization.",
+    "readings": [
+     "Bilinear four-node quadrilaterals with 2 \u00d7 2 Gauss integration",
+     "Four-node quadrilaterals with one-point integration and hourglass stabilization",
+     "Quadratic eight-node quadrilaterals with 3 \u00d7 3 Gauss integration"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Minimum density and nominal-void stiffness",
+    "issue": "missing",
+    "description": "Sec. 2.2 introduces xmin without a value. Eq. (7) subsequently creates zero-density cells without specifying whether their FEM stiffness is zero or regularized.",
+    "readings": [
+     "xmin = 0.001; use its penalized stiffness for all nominal voids",
+     "xmin = 0.000001; use its penalized stiffness for all nominal voids",
+     "xmin = 0.001 during optimization; remove zero-density cells and inactive degrees of freedom for final filtered analysis"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial uniform density value",
+    "issue": "vague",
+    "description": "Sec. 4 and the Fig. 10 caption establish spatial uniformity but do not give the initial density level.",
+    "readings": [
+     "Every cell starts at x = 0.5",
+     "Every cell starts at x = 0.25",
+     "Every cell starts at x = 1, with the volume constraint enforced during subsequent updates"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "OC move limit",
+    "issue": "missing",
+    "description": "Eq. (5) uses a move limit, identified as m in the nomenclature, but no numerical value is supplied for Sec. 4.",
+    "readings": [
+     "m = 0.1 per density update",
+     "m = 0.2 per density update",
+     "m = 0.5 per density update"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "OC damping coefficient",
+    "issue": "missing",
+    "description": "The OC formulation and nomenclature refer to damping, but its numerical value is not specified.",
+    "readings": [
+     "Use exponent 0.5 in the multiplicative OC update",
+     "Use exponent 1 in the multiplicative OC update"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "OC multiplier bisection accuracy",
+    "issue": "missing",
+    "description": "Sec. 2.2.2 specifies bisection for the volume multiplier without a stopping tolerance.",
+    "readings": [
+     "Stop when the relative multiplier bracket width is below 0.001",
+     "Stop when the relative multiplier bracket width is below 0.000001",
+     "Stop when the volume error is below 0.000001 times the domain volume"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Filtering schedule",
+    "issue": "conflicting",
+    "description": "Secs. 2.4 and 3.2 place filtering after convergence, whereas Sec. 5.2.1 attributes a compliance increase around update 30 to filtering. Fig. 11 reports 40 updates.",
+    "readings": [
+     "Perform 40 density updates and filter once afterward",
+     "Filter after every density update before the next analysis",
+     "Apply an intermediate filtering stage around update 30, continue updating, and filter again after update 40"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "SIMP binary threshold selection",
+    "issue": "vague",
+    "description": "Sec. 2.3 chooses the Eq. (7) threshold to make the filtered SIMP volume close to the proposed-method volume, without a threshold value or definition of closeness.",
+    "readings": [
+     "Choose a threshold matching the filtered CNN solid-cell count exactly when attainable",
+     "Choose a threshold retaining one fewer solid cell than the filtered CNN result",
+     "Choose a threshold retaining one more solid cell than the filtered CNN result"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Density exactly equal to the binary threshold",
+    "issue": "missing",
+    "description": "Sec. 2.3 describes densities above and below the threshold; the supplied Eq. (7) does not resolve equality legibly.",
+    "readings": [
+     "Assign material when x is greater than or equal to the threshold",
+     "Assign material only when x is strictly greater than the threshold"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Material classification before CNN morphology",
+    "issue": "missing",
+    "description": "Sec. 3.2.4 operates on material and void cells but does not specify how continuous CNN-TO densities are converted into that classification.",
+    "readings": [
+     "Classify x >= 0.5 as material",
+     "Classify x >= 0.1 as material",
+     "Classify the 256 highest-density cells as material"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Connectivity used for islands and holes",
+    "issue": "missing",
+    "description": "Secs. 3.2.4.1\u20133.2.4.2 do not define connectivity for islands or holes. The explicit eight-neighbor peninsula rule does not settle these other operations.",
+    "readings": [
+     "Use four-neighbor connectivity through shared edges",
+     "Use eight-neighbor connectivity through shared edges or corners"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Floating-island identification and retention",
+    "issue": "vague",
+    "description": "Sec. 3.2.4.1 describes islands as material not connected to other material, without defining which connected components must be retained or how this interacts with SIMP thresholding.",
+    "readings": [
+     "After binarization, remove every component not connected to a support",
+     "After binarization, retain only the largest material component",
+     "Remove only isolated individual material cells",
+     "Before final SIMP thresholding, remove unsupported components identified using an auxiliary x >= 0.5 mask"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Maximum hole size to fill",
+    "issue": "vague",
+    "description": "Sec. 3.2.4.2 excludes holes larger than a certain size without defining that size or its measurement.",
+    "readings": [
+     "Fill enclosed void components of one cell only",
+     "Fill enclosed void components containing at most four cells",
+     "Fill enclosed void components containing at most nine cells"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Morphological update and repetition rules",
+    "issue": "missing",
+    "description": "Sec. 3.2.4 lists island removal, hole filling, and peninsula removal but does not specify synchronous versus sequential edits or the number of passes.",
+    "readings": [
+     "One synchronous pass for each operation in the listed order",
+     "Five complete passes through the listed operations",
+     "Repeat the listed operations until no cells change",
+     "Update cells sequentially within each operation and repeat until unchanged"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Volume treatment after filtering",
+    "issue": "vague",
+    "description": "The optimization limit is explicitly 50%, but Sec. 3.2.4 acknowledges filtering can change mass without specifying a correction. Sec. 2.3 only matches SIMP volume approximately to CNN volume.",
+    "readings": [
+     "Accept the filtered volume even if it exceeds 50%",
+     "Reject hole-filling edits that would exceed 256 solid cells",
+     "Compensate additions by removing material elsewhere to finish with exactly 256 solid cells"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "CNN sensitivity operator for Fig. 11(c,d)",
+    "issue": "missing",
+    "description": "Secs. 3.2.1\u20133.2.3 give an architecture outline and training approach but no trained weights or fully reproducible training specification. Sec. 5.3.2 demonstrates different layouts from different trained realizations without identifying the Fig. 11 realization.",
+    "readings": [
+     "Use the CNN 1 realization discussed in Sec. 5.3.2",
+     "Use the CNN 2 realization discussed in Sec. 5.3.2",
+     "Train another realization using the reported architecture and Adam parameters"
+    ],
+    "effect": "layout"
+   }
+  ]
+ },
+ "wall_s": 861.6650283336639,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L38",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 0,
+ "locator": "Sec. 4, the example for performance verification (Fig. 11)",
+ "finished": "2026-10-22T19:21:18"
+}

@@ -1,0 +1,343 @@
+{
+ "raw": "{\"items\": [{\"category\": \"domain_extent\", \"entity\": \"design domain physical size, orientation and element size\", \"issue\": \"missing\", \"description\": \"Table 3 gives only 'Mesh 80\\u00d740, n_e=3200'. The paper never states the physical lengths L_x and L_y, even though Sec. 3.4 asks for LLM coordinates in [0,L_x]\\u00d7[0,L_y]. Element size, aspect ratio and plane-stress thickness are also missing, and 80-along-x is only implied. For a 2D compliance solve this has no effect if elements are square and r_min and region coordinates are in element units. It does matter if they are physical lengths.\", \"readings\": [\"L_x \\u00d7 L_y = 80 \\u00d7 40 with unit square elements (nelx=80 horizontal, nely=40 vertical), unit thickness\", \"normalized 2 \\u00d7 1 domain (element size 0.025), filter radius still in element units\", \"normalized 1 \\u00d7 0.5 domain (element size 0.0125)\"], \"effect\": \"unsure\"}, {\"category\": \"load_direction\", \"entity\": \"mid-right load\", \"issue\": \"missing\", \"description\": \"Table 3 (ID 3) says only 'mid-right load' and gives no direction anywhere. Because the void placement is unknown, the problem may not be symmetric about mid-height, so flipping the sign may do more than mirror the layout.\", \"readings\": [\"vertical, downward (\\u2212y)\", \"vertical, upward (+y)\"], \"effect\": \"layout\"}, {\"category\": \"load_magnitude\", \"entity\": \"mid-right load\", \"issue\": \"missing\", \"description\": \"No magnitude is given. Sec. 4.3 only says quantities are nondimensionalized with E0=1. The reported C\\u224891.5/115.2 look consistent with a unit load. In a fixed minimum-compliance rerun, the magnitude only scales C by F\\u00b2. In the original loop it would also shift results against the absolute \\u03c3_yield=120.3 gate, which changes the controller's actions.\", \"readings\": [\"F = 1 (unit load)\", \"F = 10\", \"F = 100\"], \"effect\": \"scale_only\"}, {\"category\": \"load_extent_distribution\", \"entity\": \"mid-right load\", \"issue\": \"vague\", \"description\": \"Table 3 does not say whether 'mid-right load' is a point load or a distributed load. Other rows say 'point' or 'distributed' explicitly, and the Table 2 load-outside-void check refers to point loads. With nely=40 there is a node exactly at mid-height.\", \"readings\": [\"single nodal point load at the right-edge node at y = 0.5 L_y\", \"load spread over 3 nodes (\\u22480.05 L_y patch) centred at y = 0.5 L_y on the right edge\"], \"effect\": \"layout\"}, {\"category\": \"material\", \"entity\": \"Poisson's ratio\", \"issue\": \"missing\", \"description\": \"Only E0=1 (Sec. 4.3) and plane stress (Table 3, Sec. 3.3) are given. \\u03bd is never stated.\", \"readings\": [\"\\u03bd = 0.3\", \"\\u03bd = 0.25\", \"\\u03bd = 1/3\"], \"effect\": \"layout\"}, {\"category\": \"material\", \"entity\": \"void stiffness / minimum density in the compliance solve\", \"issue\": \"missing\", \"description\": \"The solver uses K_e = \\u03c1_e^p K_e^0 with an OC lower bound \\u03c1_min, and voids are locked at \\u03c1_min (Sec. 3.2, 3.5, Eq. 6), but \\u03c1_min is never given. The only stated floor is E_min = 1e-9 E0 in Eq. 2, which is used for the stress pass, not the solver.\", \"readings\": [\"pure SIMP with \\u03c1_min = 1e-3\", \"modified SIMP E = E_min + \\u03c1^p(E0\\u2212E_min), E_min = 1e-9 E0\", \"pure SIMP with \\u03c1_min = 1e-9\"], \"effect\": \"unsure\"}, {\"category\": \"passive_region\", \"entity\": \"the two benchmark passive voids\", \"issue\": \"figure_only\", \"description\": \"Table 3 only says '2 voids', and Sec. 3.5 allows circular or rectangular regions. The text never gives their shape, size or centre positions; they are visible only in Fig. 2.\", \"readings\": [\"two equal circles, radius \\u22480.125 L_y (5 elements), centred at (1/3 L_x, 1/2 L_y) and (2/3 L_x, 1/2 L_y)\", \"two equal circles, radius \\u22480.15 L_y, stacked at x = 1/2 L_x, y = 1/4 L_y and 3/4 L_y\", \"two circles, radius \\u22480.125 L_y, staggered at (1/3 L_x, 0.3 L_y) and (2/3 L_x, 0.7 L_y)\", \"two rectangles \\u22480.1 L_x \\u00d7 0.25 L_y centred at (1/3 L_x, 1/2 L_y) and (2/3 L_x, 1/2 L_y)\"], \"effect\": \"layout\"}, {\"category\": \"volume_fraction\", \"entity\": \"reference volume of the volume constraint when passive voids are present\", \"issue\": \"missing\", \"description\": \"Sec. 3.2 states V(\\u03c1) \\u2264 v_f V0, and Sec. 3.5 locks voids at \\u03c1_min and excludes them from OC. The text does not say whether v_f is taken over all 3200 elements or only over the designable (non-void) elements.\", \"readings\": [\"v_f relative to all 3200 elements (void elements count as empty)\", \"v_f relative to the non-void designable elements only\"], \"effect\": \"layout\"}, {\"category\": \"volume_fraction\", \"entity\": \"volume fraction of the soft-seed state (Fig. 2 right, C=115.2)\", \"issue\": \"conflicting\", \"description\": \"Table 3 gives v_f=0.25 as the initial target. Table 14 reports a soft-seed final target of 0.28 for this problem in all repeats. The fixed-volume run at v_f=0.25 (Table 6) gives C=134.64, not 115.2. Sec. 3.5 and Fig. 2 do not say which v_f the shown state uses.\", \"readings\": [\"0.28\", \"0.25\"], \"effect\": \"layout\"}, {\"category\": \"volume_fraction\", \"entity\": \"volume fraction of the passive-solid state (Fig. 2 left, C=91.5)\", \"issue\": \"missing\", \"description\": \"No final volume target is reported for the passive-solid condition; Table 14 covers only the soft-seed and rule-based runs, and the controller can change v_f. If C scales roughly as 1/v_f, going from C=115.2 at 0.28 to C=91.5 implies v_f\\u22480.35.\", \"readings\": [\"0.25\", \"0.28\", \"\\u22480.35 (controller-raised target)\"], \"effect\": \"layout\"}, {\"category\": \"volume_fraction\", \"entity\": \"frozen-solid elements in the volume constraint (Fig. 2 left)\", \"issue\": \"vague\", \"description\": \"Sec. 3.5 says frozen elements 'are counted in the reported physical volume-fraction check, but they are not redistributed by the OC bisection'. It is unclear whether the frozen volume is subtracted from the free elements' target or added on top of v_f.\", \"readings\": [\"total (free + frozen) volume = v_f\\u00b7N; OC bisection on free elements targets v_f\\u00b7N \\u2212 N_frozen\", \"OC bisection enforces v_f on free elements only; frozen material is extra (total > v_f)\"], \"effect\": \"layout\"}, {\"category\": \"passive_region\", \"entity\": \"LLM-placed frozen solid regions (Fig. 2 left)\", \"issue\": \"missing\", \"description\": \"Per Sec. 3.5 and the Fig. 2 caption, the passive-solid panel comes from a trace whose action sequence differs from the soft-seed trace. The text never gives the number, action type (hotspot circle, widen-member circle chain, redistribute), radius or centre of the frozen regions, and Table 1 gives no region sizes.\", \"readings\": [\"single circle, radius \\u22483 elements (\\u22480.075 L_y), centred on the peak-stress solid element at a clamped root corner (x\\u22480, y\\u22480 or y\\u2248L_y)\", \"single circle, radius \\u22483 elements, at the load-introduction zone near (L_x, 0.5 L_y)\", \"overlapping chain of circles (radius \\u22482 elements) along a stressed upper or lower chord from root to load (widen-member action)\", \"circle or rectangle at a member\\u2013void junction next to a benchmark void, paired with a void in a low-stress zone (redistribute action)\", \"two to four such regions accumulated over up to 5 design steps\"], \"effect\": \"layout\"}, {\"category\": \"other\", \"entity\": \"LLM-placed soft-seed regions / initial density field (Fig. 2 right)\", \"issue\": \"missing\", \"description\": \"Sec. 3.5 does not report which spatial actions were applied in the soft-seed trace, or the seed shapes, radii and centres. Fig. 2 shows only the retained-best result, so seeds that the optimizer eroded cannot be recovered from it.\", \"readings\": [\"single hotspot circle, radius \\u22483 elements, at a clamped root corner (x\\u22480, y\\u22480 or y\\u2248L_y)\", \"single hotspot circle near the load point (L_x, 0.5 L_y)\", \"overlapping circle chain (radius \\u22482 elements) along a stressed chord (widen-member action)\", \"seed circle at a member\\u2013void junction plus a void in a low-stress zone (redistribute action)\", \"several seed regions accumulated over up to 5 design steps\"], \"effect\": \"layout\"}, {\"category\": \"other\", \"entity\": \"seed density \\u03c1\\u0304_seed used in the soft-seed trace\", \"issue\": \"vague\", \"description\": \"The defaults are 0.85 for hotspot/redistribute and 0.80 for widen-member. However, the LLM may set this value, and realized values span 0.80\\u20130.95 (Table 1; Sec. 3.5 'Choice of \\u03c1\\u0304_seed'). The value used in this trace is not reported.\", \"readings\": [\"0.80\", \"0.85\", \"0.90\", \"0.95\"], \"effect\": \"layout\"}, {\"category\": \"other\", \"entity\": \"persistence of seed/frozen regions from earlier design steps\", \"issue\": \"vague\", \"description\": \"Eq. (5) re-initializes only S^(t), the 'seed elements proposed at step t'. However, the Modifier accumulates regions in P^(t+1), and Sec. 3.2 applies seeds 'before the first OC update of each solver call'. It is unclear which regions were active in the solve that produced the retained-best state.\", \"readings\": [\"only the latest step's regions are applied\", \"all regions accumulated in the specification are applied at every later solve\"], \"effect\": \"layout\"}, {\"category\": \"passive_region\", \"entity\": \"controller-inserted voids (redistribute / insert-passive-void actions)\", \"issue\": \"missing\", \"description\": \"In Table 1, 'Redistribute material' voids a low-stress region and 'Insert passive void' is available. The text does not say whether either Fig. 2 trace added voids beyond the two benchmark voids, or where.\", \"readings\": [\"none (only the two benchmark voids)\", \"one extra circular void in a low-stress zone near a free right-hand corner (x\\u22480.9 L_x, y\\u22480.1 L_y or 0.9 L_y)\", \"one extra void in the interior between the upper and lower load paths\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"controller-changed filter radius / penalization in the retained steps\", \"issue\": \"conflicting\", \"description\": \"Table 1 and Sec. 3.4 let the controller tighten or loosen r_min and adjust p, possibly combined with spatial actions. Sec. 3.2 and 4.2, however, describe a standardized tail common to all conditions (p=4.5, r_min=1.2). The global actions realized in the two Fig. 2 traces are not reported, and neither is whether they persist into the tail.\", \"readings\": [\"no r_min/p changes; standard schedule ending at p=4.5, r_min=1.2\", \"controller changes affect only the main loop; the tail reverts to p=4.5, r_min=1.2\", \"controller-set values persist into the retained state (e.g., r_min=1.5\\u20132.0, p=3.0\\u20134.0)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"density-filter radius schedule\", \"issue\": \"missing\", \"description\": \"Sec. 3.1/3.2 say r_min is 'tightened from its initial value toward r_min=1.2 during the late main loop'. The initial value, the timing of the tightening and the filter kernel are not given; the text says only 'three-field density filtering'.\", \"readings\": [\"r_min,0 = 1.5 elements, reduced to 1.2 when \\u03b2 continuation starts\", \"r_min,0 = 2.0 elements, reduced linearly to 1.2 over the last ~30 main-loop iterations\", \"r_min,0 = 3.0 elements, reduced stepwise to 1.2 late in the main loop\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"penalization continuation p: 1\\u21924.5\", \"issue\": \"vague\", \"description\": \"Sec. 3.2 says 'p ramped from 1.0 to 4.5 over the main solve' and that \\u03b2 is doubled every 10 iterations after the ramp. The increment size, the update interval and the iteration at which the ramp ends are not given.\", \"readings\": [\"p += 0.5 every 10 iterations (reaching 4.5 at iteration 70), then \\u03b2 doubled every 10 iterations to 32\", \"p increased linearly from 1 to 4.5 over the first 60 iterations, then \\u03b2 doubling\", \"p += 0.25 every 5 iterations, then \\u03b2 doubling\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Heaviside (tanh) projection threshold and constrained field\", \"issue\": \"missing\", \"description\": \"Sec. 3.1/3.2 specify tanh projection with \\u03b2 going 1\\u219232 but give no projection threshold; the \\u03b7=0.5 in Eq. 6 is the OC damping exponent, not the threshold. The text also does not say whether the volume constraint acts on the projected densities or on the design variables.\", \"readings\": [\"threshold 0.5, volume constraint on projected physical densities\", \"threshold 0.5, volume constraint on design (unprojected) variables\", \"volume-preserving threshold found by bisection\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"OC move limit in the main loop\", \"issue\": \"missing\", \"description\": \"Only the tail move limit (m=0.05) is given (Sec. 3.5, 4.2). The main-loop value is not stated.\", \"readings\": [\"m = 0.2\", \"m = 0.1\", \"m = 0.05 (same as the tail)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"iteration budget per design step / stopping rule\", \"issue\": \"vague\", \"description\": \"Sec. 3.2 and 4.2 give a 'maximum 120 solver iterations per design step' plus a '40-iteration tail'. It is unclear whether the tail is part of the 120 and whether the main loop can stop early on a tolerance. The Table 2 convergence gate (n_iter \\u2264 1.5 n_max) does not settle this.\", \"readings\": [\"120 main + 40 tail = 160 iterations per design step\", \"120 total = 80 main + 40 tail\", \"main loop stops early at a change tolerance (e.g., max|\\u0394\\u03c1| < 0.01), then 40 tail iterations\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"treatment of passive void/solid elements in the three-field filter/projection\", \"issue\": \"missing\", \"description\": \"Sec. 3.5 locks void and solid elements and excludes them from the OC update. It does not say whether the lock applies to design variables only or is re-imposed on the filtered and projected physical densities.\", \"readings\": [\"lock on design variables only; physical densities may blur across region boundaries\", \"lock re-imposed on physical (filtered + projected) densities after filtering\", \"passive elements excluded from the filter neighbourhoods of active elements\"], \"effect\": \"layout\"}, {\"category\": \"other\", \"entity\": \"reference compliance labels in Fig. 2 (C=91.5, C=115.2)\", \"issue\": \"conflicting\", \"description\": \"The Fig. 2 caption calls the panels 'seed-42 examples'. However, the labels equal the three-seed means in Table 10 (115.2/91.5) and Table 4 (115.17 \\u00b1 1.01). It is therefore unclear which target a rerun should match.\", \"readings\": [\"labels are the seed-42 retained-best values\", \"labels are three-seed means; the seed-42 soft-seed value may differ by \\u22481\"], \"effect\": \"unsure\"}]}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "design domain physical size, orientation and element size",
+    "issue": "missing",
+    "description": "Table 3 gives only 'Mesh 80\u00d740, n_e=3200'. The paper never states the physical lengths L_x and L_y, even though Sec. 3.4 asks for LLM coordinates in [0,L_x]\u00d7[0,L_y]. Element size, aspect ratio and plane-stress thickness are also missing, and 80-along-x is only implied. For a 2D compliance solve this has no effect if elements are square and r_min and region coordinates are in element units. It does matter if they are physical lengths.",
+    "readings": [
+     "L_x \u00d7 L_y = 80 \u00d7 40 with unit square elements (nelx=80 horizontal, nely=40 vertical), unit thickness",
+     "normalized 2 \u00d7 1 domain (element size 0.025), filter radius still in element units",
+     "normalized 1 \u00d7 0.5 domain (element size 0.0125)"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "load_direction",
+    "entity": "mid-right load",
+    "issue": "missing",
+    "description": "Table 3 (ID 3) says only 'mid-right load' and gives no direction anywhere. Because the void placement is unknown, the problem may not be symmetric about mid-height, so flipping the sign may do more than mirror the layout.",
+    "readings": [
+     "vertical, downward (\u2212y)",
+     "vertical, upward (+y)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "mid-right load",
+    "issue": "missing",
+    "description": "No magnitude is given. Sec. 4.3 only says quantities are nondimensionalized with E0=1. The reported C\u224891.5/115.2 look consistent with a unit load. In a fixed minimum-compliance rerun, the magnitude only scales C by F\u00b2. In the original loop it would also shift results against the absolute \u03c3_yield=120.3 gate, which changes the controller's actions.",
+    "readings": [
+     "F = 1 (unit load)",
+     "F = 10",
+     "F = 100"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "mid-right load",
+    "issue": "vague",
+    "description": "Table 3 does not say whether 'mid-right load' is a point load or a distributed load. Other rows say 'point' or 'distributed' explicitly, and the Table 2 load-outside-void check refers to point loads. With nely=40 there is a node exactly at mid-height.",
+    "readings": [
+     "single nodal point load at the right-edge node at y = 0.5 L_y",
+     "load spread over 3 nodes (\u22480.05 L_y patch) centred at y = 0.5 L_y on the right edge"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson's ratio",
+    "issue": "missing",
+    "description": "Only E0=1 (Sec. 4.3) and plane stress (Table 3, Sec. 3.3) are given. \u03bd is never stated.",
+    "readings": [
+     "\u03bd = 0.3",
+     "\u03bd = 0.25",
+     "\u03bd = 1/3"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "void stiffness / minimum density in the compliance solve",
+    "issue": "missing",
+    "description": "The solver uses K_e = \u03c1_e^p K_e^0 with an OC lower bound \u03c1_min, and voids are locked at \u03c1_min (Sec. 3.2, 3.5, Eq. 6), but \u03c1_min is never given. The only stated floor is E_min = 1e-9 E0 in Eq. 2, which is used for the stress pass, not the solver.",
+    "readings": [
+     "pure SIMP with \u03c1_min = 1e-3",
+     "modified SIMP E = E_min + \u03c1^p(E0\u2212E_min), E_min = 1e-9 E0",
+     "pure SIMP with \u03c1_min = 1e-9"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "passive_region",
+    "entity": "the two benchmark passive voids",
+    "issue": "figure_only",
+    "description": "Table 3 only says '2 voids', and Sec. 3.5 allows circular or rectangular regions. The text never gives their shape, size or centre positions; they are visible only in Fig. 2.",
+    "readings": [
+     "two equal circles, radius \u22480.125 L_y (5 elements), centred at (1/3 L_x, 1/2 L_y) and (2/3 L_x, 1/2 L_y)",
+     "two equal circles, radius \u22480.15 L_y, stacked at x = 1/2 L_x, y = 1/4 L_y and 3/4 L_y",
+     "two circles, radius \u22480.125 L_y, staggered at (1/3 L_x, 0.3 L_y) and (2/3 L_x, 0.7 L_y)",
+     "two rectangles \u22480.1 L_x \u00d7 0.25 L_y centred at (1/3 L_x, 1/2 L_y) and (2/3 L_x, 1/2 L_y)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "reference volume of the volume constraint when passive voids are present",
+    "issue": "missing",
+    "description": "Sec. 3.2 states V(\u03c1) \u2264 v_f V0, and Sec. 3.5 locks voids at \u03c1_min and excludes them from OC. The text does not say whether v_f is taken over all 3200 elements or only over the designable (non-void) elements.",
+    "readings": [
+     "v_f relative to all 3200 elements (void elements count as empty)",
+     "v_f relative to the non-void designable elements only"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "volume fraction of the soft-seed state (Fig. 2 right, C=115.2)",
+    "issue": "conflicting",
+    "description": "Table 3 gives v_f=0.25 as the initial target. Table 14 reports a soft-seed final target of 0.28 for this problem in all repeats. The fixed-volume run at v_f=0.25 (Table 6) gives C=134.64, not 115.2. Sec. 3.5 and Fig. 2 do not say which v_f the shown state uses.",
+    "readings": [
+     "0.28",
+     "0.25"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "volume fraction of the passive-solid state (Fig. 2 left, C=91.5)",
+    "issue": "missing",
+    "description": "No final volume target is reported for the passive-solid condition; Table 14 covers only the soft-seed and rule-based runs, and the controller can change v_f. If C scales roughly as 1/v_f, going from C=115.2 at 0.28 to C=91.5 implies v_f\u22480.35.",
+    "readings": [
+     "0.25",
+     "0.28",
+     "\u22480.35 (controller-raised target)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "frozen-solid elements in the volume constraint (Fig. 2 left)",
+    "issue": "vague",
+    "description": "Sec. 3.5 says frozen elements 'are counted in the reported physical volume-fraction check, but they are not redistributed by the OC bisection'. It is unclear whether the frozen volume is subtracted from the free elements' target or added on top of v_f.",
+    "readings": [
+     "total (free + frozen) volume = v_f\u00b7N; OC bisection on free elements targets v_f\u00b7N \u2212 N_frozen",
+     "OC bisection enforces v_f on free elements only; frozen material is extra (total > v_f)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "LLM-placed frozen solid regions (Fig. 2 left)",
+    "issue": "missing",
+    "description": "Per Sec. 3.5 and the Fig. 2 caption, the passive-solid panel comes from a trace whose action sequence differs from the soft-seed trace. The text never gives the number, action type (hotspot circle, widen-member circle chain, redistribute), radius or centre of the frozen regions, and Table 1 gives no region sizes.",
+    "readings": [
+     "single circle, radius \u22483 elements (\u22480.075 L_y), centred on the peak-stress solid element at a clamped root corner (x\u22480, y\u22480 or y\u2248L_y)",
+     "single circle, radius \u22483 elements, at the load-introduction zone near (L_x, 0.5 L_y)",
+     "overlapping chain of circles (radius \u22482 elements) along a stressed upper or lower chord from root to load (widen-member action)",
+     "circle or rectangle at a member\u2013void junction next to a benchmark void, paired with a void in a low-stress zone (redistribute action)",
+     "two to four such regions accumulated over up to 5 design steps"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "LLM-placed soft-seed regions / initial density field (Fig. 2 right)",
+    "issue": "missing",
+    "description": "Sec. 3.5 does not report which spatial actions were applied in the soft-seed trace, or the seed shapes, radii and centres. Fig. 2 shows only the retained-best result, so seeds that the optimizer eroded cannot be recovered from it.",
+    "readings": [
+     "single hotspot circle, radius \u22483 elements, at a clamped root corner (x\u22480, y\u22480 or y\u2248L_y)",
+     "single hotspot circle near the load point (L_x, 0.5 L_y)",
+     "overlapping circle chain (radius \u22482 elements) along a stressed chord (widen-member action)",
+     "seed circle at a member\u2013void junction plus a void in a low-stress zone (redistribute action)",
+     "several seed regions accumulated over up to 5 design steps"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "seed density \u03c1\u0304_seed used in the soft-seed trace",
+    "issue": "vague",
+    "description": "The defaults are 0.85 for hotspot/redistribute and 0.80 for widen-member. However, the LLM may set this value, and realized values span 0.80\u20130.95 (Table 1; Sec. 3.5 'Choice of \u03c1\u0304_seed'). The value used in this trace is not reported.",
+    "readings": [
+     "0.80",
+     "0.85",
+     "0.90",
+     "0.95"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "persistence of seed/frozen regions from earlier design steps",
+    "issue": "vague",
+    "description": "Eq. (5) re-initializes only S^(t), the 'seed elements proposed at step t'. However, the Modifier accumulates regions in P^(t+1), and Sec. 3.2 applies seeds 'before the first OC update of each solver call'. It is unclear which regions were active in the solve that produced the retained-best state.",
+    "readings": [
+     "only the latest step's regions are applied",
+     "all regions accumulated in the specification are applied at every later solve"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "controller-inserted voids (redistribute / insert-passive-void actions)",
+    "issue": "missing",
+    "description": "In Table 1, 'Redistribute material' voids a low-stress region and 'Insert passive void' is available. The text does not say whether either Fig. 2 trace added voids beyond the two benchmark voids, or where.",
+    "readings": [
+     "none (only the two benchmark voids)",
+     "one extra circular void in a low-stress zone near a free right-hand corner (x\u22480.9 L_x, y\u22480.1 L_y or 0.9 L_y)",
+     "one extra void in the interior between the upper and lower load paths"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "controller-changed filter radius / penalization in the retained steps",
+    "issue": "conflicting",
+    "description": "Table 1 and Sec. 3.4 let the controller tighten or loosen r_min and adjust p, possibly combined with spatial actions. Sec. 3.2 and 4.2, however, describe a standardized tail common to all conditions (p=4.5, r_min=1.2). The global actions realized in the two Fig. 2 traces are not reported, and neither is whether they persist into the tail.",
+    "readings": [
+     "no r_min/p changes; standard schedule ending at p=4.5, r_min=1.2",
+     "controller changes affect only the main loop; the tail reverts to p=4.5, r_min=1.2",
+     "controller-set values persist into the retained state (e.g., r_min=1.5\u20132.0, p=3.0\u20134.0)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "density-filter radius schedule",
+    "issue": "missing",
+    "description": "Sec. 3.1/3.2 say r_min is 'tightened from its initial value toward r_min=1.2 during the late main loop'. The initial value, the timing of the tightening and the filter kernel are not given; the text says only 'three-field density filtering'.",
+    "readings": [
+     "r_min,0 = 1.5 elements, reduced to 1.2 when \u03b2 continuation starts",
+     "r_min,0 = 2.0 elements, reduced linearly to 1.2 over the last ~30 main-loop iterations",
+     "r_min,0 = 3.0 elements, reduced stepwise to 1.2 late in the main loop"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "penalization continuation p: 1\u21924.5",
+    "issue": "vague",
+    "description": "Sec. 3.2 says 'p ramped from 1.0 to 4.5 over the main solve' and that \u03b2 is doubled every 10 iterations after the ramp. The increment size, the update interval and the iteration at which the ramp ends are not given.",
+    "readings": [
+     "p += 0.5 every 10 iterations (reaching 4.5 at iteration 70), then \u03b2 doubled every 10 iterations to 32",
+     "p increased linearly from 1 to 4.5 over the first 60 iterations, then \u03b2 doubling",
+     "p += 0.25 every 5 iterations, then \u03b2 doubling"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Heaviside (tanh) projection threshold and constrained field",
+    "issue": "missing",
+    "description": "Sec. 3.1/3.2 specify tanh projection with \u03b2 going 1\u219232 but give no projection threshold; the \u03b7=0.5 in Eq. 6 is the OC damping exponent, not the threshold. The text also does not say whether the volume constraint acts on the projected densities or on the design variables.",
+    "readings": [
+     "threshold 0.5, volume constraint on projected physical densities",
+     "threshold 0.5, volume constraint on design (unprojected) variables",
+     "volume-preserving threshold found by bisection"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "OC move limit in the main loop",
+    "issue": "missing",
+    "description": "Only the tail move limit (m=0.05) is given (Sec. 3.5, 4.2). The main-loop value is not stated.",
+    "readings": [
+     "m = 0.2",
+     "m = 0.1",
+     "m = 0.05 (same as the tail)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "iteration budget per design step / stopping rule",
+    "issue": "vague",
+    "description": "Sec. 3.2 and 4.2 give a 'maximum 120 solver iterations per design step' plus a '40-iteration tail'. It is unclear whether the tail is part of the 120 and whether the main loop can stop early on a tolerance. The Table 2 convergence gate (n_iter \u2264 1.5 n_max) does not settle this.",
+    "readings": [
+     "120 main + 40 tail = 160 iterations per design step",
+     "120 total = 80 main + 40 tail",
+     "main loop stops early at a change tolerance (e.g., max|\u0394\u03c1| < 0.01), then 40 tail iterations"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "treatment of passive void/solid elements in the three-field filter/projection",
+    "issue": "missing",
+    "description": "Sec. 3.5 locks void and solid elements and excludes them from the OC update. It does not say whether the lock applies to design variables only or is re-imposed on the filtered and projected physical densities.",
+    "readings": [
+     "lock on design variables only; physical densities may blur across region boundaries",
+     "lock re-imposed on physical (filtered + projected) densities after filtering",
+     "passive elements excluded from the filter neighbourhoods of active elements"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "reference compliance labels in Fig. 2 (C=91.5, C=115.2)",
+    "issue": "conflicting",
+    "description": "The Fig. 2 caption calls the panels 'seed-42 examples'. However, the labels equal the three-seed means in Table 10 (115.2/91.5) and Table 4 (115.17 \u00b1 1.01). It is therefore unclear which target a rerun should match.",
+    "readings": [
+     "labels are the seed-42 retained-best values",
+     "labels are three-seed means; the seed-42 soft-seed value may differ by \u22481"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 543.2654900550842,
+ "returncode": 0,
+ "meta": {
+  "model": null,
+  "num_turns": 2,
+  "is_error": false,
+  "total_cost_usd": 1.5333147999999999,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 43084,
+   "cache_read_input_tokens": 774,
+   "output_tokens": 59424,
+   "output_tokens_details": {
+    "thinking_tokens": 53883
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 43084,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 59424,
+     "cache_read_input_tokens": 774,
+     "cache_creation_input_tokens": 43084,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 43084
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard",
+   "fallback_credit": null
+  }
+ },
+ "stderr_tail": "",
+ "task": "L11",
+ "model": "claude",
+ "model_id": "claude-opus-5-5",
+ "rep": 1,
+ "locator": "Sec. 3.5, Fig. 2, benchmark problem ID 3 of Table 3",
+ "finished": "2026-10-22T20:03:25"
+}

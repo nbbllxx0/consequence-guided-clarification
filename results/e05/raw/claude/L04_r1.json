@@ -1,0 +1,310 @@
+{
+ "raw": "{\"items\": [{\"category\": \"domain_extent\", \"entity\": \"Michell cantilever design domain\", \"issue\": \"figure_only\", \"description\": \"Sec. 4 says 'See Figure 9 for domain sizes' (figure not available). The size is only implied by Table 2: h_c = 1/30 on a 60\\u00d730 mesh (fine mesh 1440\\u00d7720) gives a 2\\u00d71 rectangle, assuming the 60 elements run along the beam axis. The text never says whether the whole rectangle is designable or contains a non-design support region.\", \"readings\": [\"Full 2 \\u00d7 1 rectangle (length 2 along x, height 1), entirely designable\", \"2 \\u00d7 1 rectangle containing a non-design support region drawn in Fig. 9 (e.g. a fixed circular region as in Michell's classical cantilever)\"], \"effect\": \"layout\"}, {\"category\": \"support_location_extent\", \"entity\": \"cantilever support\", \"issue\": \"figure_only\", \"description\": \"No sentence says where the beam is supported. Sec. 4 refers to Fig. 9 for the 'exact placement of boundaries'; only the word 'cantilever' implies one supported end.\", \"readings\": [\"Entire left edge (x = 0, 0 \\u2264 y \\u2264 1)\", \"Only a central segment of the left edge\", \"A circular/rigid clamped region near the left end (classical Michell cantilever)\"], \"effect\": \"layout\"}, {\"category\": \"support_type\", \"entity\": \"cantilever support\", \"issue\": \"figure_only\", \"description\": \"The restraint type is not stated in the text; it appears only in Fig. 9 (Sec. 4).\", \"readings\": [\"Fully clamped: u_x = u_y = 0 at all support nodes\", \"Roller-type: u_x = 0 along the support plus a single u_y restraint\"], \"effect\": \"layout\"}, {\"category\": \"load_position\", \"entity\": \"tip line load\", \"issue\": \"figure_only\", \"description\": \"Sec. 4 only says the force is 'applied along a line of 1/10 L' in the Michell cantilever case. Which edge, at what height and how the line is oriented are given only in Fig. 9.\", \"readings\": [\"Vertical segment on the right edge (x = 2) centred at mid-height (y = 0.5)\", \"Horizontal row of nodes at mid-height (y = 0.5) ending at the right edge\", \"Segment on the right edge starting at the bottom (or top) corner\"], \"effect\": \"layout\"}, {\"category\": \"load_extent_distribution\", \"entity\": \"length of loaded line ('1/10 L')\", \"issue\": \"figure_only\", \"description\": \"L is never defined in the text (presumably in Fig. 9). Because the domain is 2\\u00d71, L could be the height or the length. With L = 1 the 0.1-long line covers 3 elements on the 60\\u00d730 mesh and cannot be centred on the mid-height node, so the set of loaded nodes is also open.\", \"readings\": [\"0.1 \\u00d7 domain height = 0.1 (3 / 6 / 12 elements on 60\\u00d730 / 120\\u00d760 / 240\\u00d7120)\", \"0.1 \\u00d7 domain length = 0.2 (6 / 12 / 24 elements)\"], \"effect\": \"layout\"}, {\"category\": \"load_extent_distribution\", \"entity\": \"force distribution along the loaded line\", \"issue\": \"vague\", \"description\": \"'The force is applied along a line' (Sec. 4) does not say whether this is a uniform traction (consistent nodal loads) or equal nodal point forces.\", \"readings\": [\"Uniform traction converted to consistent nodal forces (end nodes at half weight)\", \"Equal point forces on every node of the segment\"], \"effect\": \"layout\"}, {\"category\": \"load_direction\", \"entity\": \"tip line load\", \"issue\": \"figure_only\", \"description\": \"The force direction is not stated anywhere in the text (Fig. 9 only). For a single load case the sign does not matter (C(-f) = C(f)), but the axis does.\", \"readings\": [\"Vertical, transverse to the beam axis (up or down give the same optimum)\", \"Inclined or horizontal (if Fig. 9 shows a component along the beam axis)\"], \"effect\": \"layout\"}, {\"category\": \"load_magnitude\", \"entity\": \"tip line load\", \"issue\": \"missing\", \"description\": \"No force value is given anywhere. The tabulated compliances (e.g. C_ref = 106.21 in Table 2) depend on it.\", \"readings\": [\"Total force F = 1 spread over the line\", \"Unit traction per unit length (total 0.1 for L = 1)\"], \"effect\": \"scale_only\"}, {\"category\": \"volume_fraction\", \"entity\": \"volume constraint V_max\", \"issue\": \"conflicting\", \"description\": \"V_max is never given as a number. The captions of Figs. 10\\u201312 and App. A Fig. 1 say V = 0.25 / 0.40. Tables 2, 3 and A1 give reference volume fractions of 0.2532\\u20130.2614 and 0.4023\\u20130.4165, which rise with \\u03bcmin. Eq. 1 constrains \\u03c1^d, whose superscript is unexplained, and Sec. 4 sets \\u03c1>0.99 and near-load elements to solid. It is therefore unclear which value is the actual constraint.\", \"readings\": [\"V* = 0.25 and 0.40 exactly\", \"V* = tabulated V_ref of each run (e.g. 0.2535/0.2568/0.2614 and 0.4024/0.4080/0.4165 on 60\\u00d730 for \\u03bcmin = 0.05/0.10/0.20)\", \"V* = de-homogenized V_f (e.g. 0.2695, 0.4329) if matching the final one-scale designs\"], \"effect\": \"layout\"}, {\"category\": \"passive_region\", \"entity\": \"solid region around the load\", \"issue\": \"vague\", \"description\": \"Sec. 4 says 'all elements with a density of \\u03c1>0.99 and in a small radius around the load are set to solid'. The radius is not given. It is unclear whether this is a passive region during optimization or only a post-processing step, and whether 'and' joins two conditions or two separate rules.\", \"readings\": [\"No passive region during optimization (solidification only in post-processing)\", \"Passive solid disc around the load centre with radius \\u2248 half the loaded-line length (\\u2248 0.05)\", \"Passive solid disc with radius \\u2248 2\\u20133 coarse elements (\\u2248 0.07\\u20130.1)\"], \"effect\": \"layout\"}, {\"category\": \"material\", \"entity\": \"Young's modulus and out-of-plane thickness\", \"issue\": \"missing\", \"description\": \"No elastic modulus or thickness is given; only the void ratio \\u03b1_out = 1e-9 appears (Sec. 2.1.1). The compliances in Tables 2, 3 and A1 scale with these values.\", \"readings\": [\"E = 1 with unit thickness (normalized)\", \"Physical values, e.g. E = 210 GPa with a specified thickness\"], \"effect\": \"scale_only\"}, {\"category\": \"material\", \"entity\": \"Poisson's ratio\", \"issue\": \"missing\", \"description\": \"\\u03bd is not stated anywhere in the paper.\", \"readings\": [\"\\u03bd = 0.3\", \"\\u03bd = 1/3\", \"\\u03bd = 0.25\"], \"effect\": \"layout\"}, {\"category\": \"material\", \"entity\": \"2D stress assumption\", \"issue\": \"missing\", \"description\": \"Plane stress vs. plane strain is not stated. The choice changes the effective in-plane Poisson ratio.\", \"readings\": [\"Plane stress\", \"Plane strain\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"filter radius r_min = 1.2\", \"issue\": \"vague\", \"description\": \"Sec. 4 gives 'a filter radius of r_min = 1.2 for varying mesh sizes' without units. It is unclear whether this means element widths on each mesh or a fixed physical length; a physical 1.2 would exceed the domain height of 1.\", \"readings\": [\"1.2 element widths of each coarse mesh (0.04 / 0.02 / 0.01 for 60\\u00d730 / 120\\u00d760 / 240\\u00d7120)\", \"Fixed physical radius 1.2 \\u00d7 (1/30) = 0.04 on all meshes\", \"1.2 element widths of whatever mesh the single-scale solver uses (e.g. a fine mesh)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"filter type and filtered fields\", \"issue\": \"missing\", \"description\": \"Eq. 2 only uses notation (tilde = filtered). The filter type, its weights, and which fields are filtered (\\u03bc1, \\u03bc2, s; \\u03b8?) are not given.\", \"readings\": [\"Linear-hat density filter on \\u03bc1, \\u03bc2 and s\", \"Sensitivity filter\", \"Helmholtz (PDE) filter\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"projection of s-field / eroded-dilated designs\", \"issue\": \"missing\", \"description\": \"Eqs. 1\\u20134 use projected variables (bar) with superscripts k, d and e, probably eroded/dilated designs. No threshold \\u03b7, sharpness \\u03b2 or continuation scheme is given, and the text doesn't say which design's compliance is minimized.\", \"readings\": [\"Single tanh projection, \\u03b7 = 0.5, \\u03b2 continuation (e.g. 1 \\u2192 32)\", \"Robust eroded/intermediate/dilated projections (e.g. \\u03b7 = 0.75/0.5/0.25), volume on dilated, area penalty on eroded\", \"No projection (filtered densities only)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"objective normalization C_ref (with \\u0393 = 0.05 area penalty)\", \"issue\": \"vague\", \"description\": \"Eq. 1 divides compliance by an undefined 'reference compliance' C_ref. The same symbol is used in Tables 2\\u20133 for the converged homogenization compliance. With \\u0393 = 0.05, the balance between compliance and the solid-area penalty depends on this value.\", \"readings\": [\"C_ref = compliance of the initial design\", \"C_ref = compliance of the fully solid domain\", \"C_ref = a fixed constant such as the tabulated value (e.g. 106.21)\"], \"effect\": \"layout\"}, {\"category\": \"other\", \"entity\": \"material model / interpolation for a single-material solver\", \"issue\": \"missing\", \"description\": \"The reference uses rank-2 laminates whose closed-form properties are only cited ('see e.g. [9]', Sec. 2.1), plus the s-field scheme of [15] with \\u03bcmin bounds (eqs. 1\\u20134). The formulas are not given, and a single-material density solver has no \\u03bc/\\u03b8 variables, so an interpolation must be chosen.\", \"readings\": [\"Implement rank-2 laminate homogenization (\\u03bc1, \\u03bc2, \\u03b8, s) with \\u03bcmin = 0.05/0.10/0.20, \\u0393 = 0.05, \\u03b3\\u03b8 = 0\", \"Standard SIMP with p = 3\", \"Variable-thickness sheet (SIMP p = 1)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"optimizer and stopping criterion\", \"issue\": \"missing\", \"description\": \"Sec. 4 only says eq. 1 'is solved until convergence'. The optimizer, move limits, tolerance and maximum iterations are not given.\", \"readings\": [\"MMA, stop when max design change < 0.01\", \"OC update (move limit 0.2), stop when change < 0.01\", \"Fixed iteration count (e.g. 300\\u20131000)\"], \"effect\": \"unsure\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"initial design\", \"issue\": \"missing\", \"description\": \"Starting values of \\u03bc1, \\u03bc2, s and \\u03b8 (or of the density) are not given anywhere in Sec. 2.1 or Sec. 4.\", \"readings\": [\"Uniform design at the volume bound, s = 1, \\u03b8 from principal stresses of the uniform design\", \"Uniform density = volume fraction, \\u03b8 = 0\"], \"effect\": \"unsure\"}, {\"category\": \"mesh\", \"entity\": \"optimization mesh for a single-scale re-run\", \"issue\": \"vague\", \"description\": \"Sec. 4.2 uses coarse homogenization meshes of 60\\u00d730 (Table 2), 120\\u00d760 (App. A) and 240\\u00d7120 (Table 3), plus fine meshes of 1440\\u00d7720, 2400\\u00d71200, 2880\\u00d71440 and 5760\\u00d72880. It doesn't say which one defines the example for a single-scale solver.\", \"readings\": [\"60\\u00d730 (h = 1/30)\", \"120\\u00d760 or 240\\u00d7120\", \"Fine one-scale resolution, e.g. 1440\\u00d7720 or 2400\\u00d71200\"], \"effect\": \"layout\"}, {\"category\": \"mesh\", \"entity\": \"finite element type\", \"issue\": \"missing\", \"description\": \"The element type and order are not stated; only square elements are implied by h_c.\", \"readings\": [\"4-node bilinear quadrilateral (Q4)\", \"Higher-order quadrilateral (8- or 9-node)\"], \"effect\": \"unsure\"}]}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "Michell cantilever design domain",
+    "issue": "figure_only",
+    "description": "Sec. 4 says 'See Figure 9 for domain sizes' (figure not available). The size is only implied by Table 2: h_c = 1/30 on a 60\u00d730 mesh (fine mesh 1440\u00d7720) gives a 2\u00d71 rectangle, assuming the 60 elements run along the beam axis. The text never says whether the whole rectangle is designable or contains a non-design support region.",
+    "readings": [
+     "Full 2 \u00d7 1 rectangle (length 2 along x, height 1), entirely designable",
+     "2 \u00d7 1 rectangle containing a non-design support region drawn in Fig. 9 (e.g. a fixed circular region as in Michell's classical cantilever)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "cantilever support",
+    "issue": "figure_only",
+    "description": "No sentence says where the beam is supported. Sec. 4 refers to Fig. 9 for the 'exact placement of boundaries'; only the word 'cantilever' implies one supported end.",
+    "readings": [
+     "Entire left edge (x = 0, 0 \u2264 y \u2264 1)",
+     "Only a central segment of the left edge",
+     "A circular/rigid clamped region near the left end (classical Michell cantilever)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_type",
+    "entity": "cantilever support",
+    "issue": "figure_only",
+    "description": "The restraint type is not stated in the text; it appears only in Fig. 9 (Sec. 4).",
+    "readings": [
+     "Fully clamped: u_x = u_y = 0 at all support nodes",
+     "Roller-type: u_x = 0 along the support plus a single u_y restraint"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "tip line load",
+    "issue": "figure_only",
+    "description": "Sec. 4 only says the force is 'applied along a line of 1/10 L' in the Michell cantilever case. Which edge, at what height and how the line is oriented are given only in Fig. 9.",
+    "readings": [
+     "Vertical segment on the right edge (x = 2) centred at mid-height (y = 0.5)",
+     "Horizontal row of nodes at mid-height (y = 0.5) ending at the right edge",
+     "Segment on the right edge starting at the bottom (or top) corner"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "length of loaded line ('1/10 L')",
+    "issue": "figure_only",
+    "description": "L is never defined in the text (presumably in Fig. 9). Because the domain is 2\u00d71, L could be the height or the length. With L = 1 the 0.1-long line covers 3 elements on the 60\u00d730 mesh and cannot be centred on the mid-height node, so the set of loaded nodes is also open.",
+    "readings": [
+     "0.1 \u00d7 domain height = 0.1 (3 / 6 / 12 elements on 60\u00d730 / 120\u00d760 / 240\u00d7120)",
+     "0.1 \u00d7 domain length = 0.2 (6 / 12 / 24 elements)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "force distribution along the loaded line",
+    "issue": "vague",
+    "description": "'The force is applied along a line' (Sec. 4) does not say whether this is a uniform traction (consistent nodal loads) or equal nodal point forces.",
+    "readings": [
+     "Uniform traction converted to consistent nodal forces (end nodes at half weight)",
+     "Equal point forces on every node of the segment"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "tip line load",
+    "issue": "figure_only",
+    "description": "The force direction is not stated anywhere in the text (Fig. 9 only). For a single load case the sign does not matter (C(-f) = C(f)), but the axis does.",
+    "readings": [
+     "Vertical, transverse to the beam axis (up or down give the same optimum)",
+     "Inclined or horizontal (if Fig. 9 shows a component along the beam axis)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "tip line load",
+    "issue": "missing",
+    "description": "No force value is given anywhere. The tabulated compliances (e.g. C_ref = 106.21 in Table 2) depend on it.",
+    "readings": [
+     "Total force F = 1 spread over the line",
+     "Unit traction per unit length (total 0.1 for L = 1)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "volume constraint V_max",
+    "issue": "conflicting",
+    "description": "V_max is never given as a number. The captions of Figs. 10\u201312 and App. A Fig. 1 say V = 0.25 / 0.40. Tables 2, 3 and A1 give reference volume fractions of 0.2532\u20130.2614 and 0.4023\u20130.4165, which rise with \u03bcmin. Eq. 1 constrains \u03c1^d, whose superscript is unexplained, and Sec. 4 sets \u03c1>0.99 and near-load elements to solid. It is therefore unclear which value is the actual constraint.",
+    "readings": [
+     "V* = 0.25 and 0.40 exactly",
+     "V* = tabulated V_ref of each run (e.g. 0.2535/0.2568/0.2614 and 0.4024/0.4080/0.4165 on 60\u00d730 for \u03bcmin = 0.05/0.10/0.20)",
+     "V* = de-homogenized V_f (e.g. 0.2695, 0.4329) if matching the final one-scale designs"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "solid region around the load",
+    "issue": "vague",
+    "description": "Sec. 4 says 'all elements with a density of \u03c1>0.99 and in a small radius around the load are set to solid'. The radius is not given. It is unclear whether this is a passive region during optimization or only a post-processing step, and whether 'and' joins two conditions or two separate rules.",
+    "readings": [
+     "No passive region during optimization (solidification only in post-processing)",
+     "Passive solid disc around the load centre with radius \u2248 half the loaded-line length (\u2248 0.05)",
+     "Passive solid disc with radius \u2248 2\u20133 coarse elements (\u2248 0.07\u20130.1)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Young's modulus and out-of-plane thickness",
+    "issue": "missing",
+    "description": "No elastic modulus or thickness is given; only the void ratio \u03b1_out = 1e-9 appears (Sec. 2.1.1). The compliances in Tables 2, 3 and A1 scale with these values.",
+    "readings": [
+     "E = 1 with unit thickness (normalized)",
+     "Physical values, e.g. E = 210 GPa with a specified thickness"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson's ratio",
+    "issue": "missing",
+    "description": "\u03bd is not stated anywhere in the paper.",
+    "readings": [
+     "\u03bd = 0.3",
+     "\u03bd = 1/3",
+     "\u03bd = 0.25"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "2D stress assumption",
+    "issue": "missing",
+    "description": "Plane stress vs. plane strain is not stated. The choice changes the effective in-plane Poisson ratio.",
+    "readings": [
+     "Plane stress",
+     "Plane strain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "filter radius r_min = 1.2",
+    "issue": "vague",
+    "description": "Sec. 4 gives 'a filter radius of r_min = 1.2 for varying mesh sizes' without units. It is unclear whether this means element widths on each mesh or a fixed physical length; a physical 1.2 would exceed the domain height of 1.",
+    "readings": [
+     "1.2 element widths of each coarse mesh (0.04 / 0.02 / 0.01 for 60\u00d730 / 120\u00d760 / 240\u00d7120)",
+     "Fixed physical radius 1.2 \u00d7 (1/30) = 0.04 on all meshes",
+     "1.2 element widths of whatever mesh the single-scale solver uses (e.g. a fine mesh)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "filter type and filtered fields",
+    "issue": "missing",
+    "description": "Eq. 2 only uses notation (tilde = filtered). The filter type, its weights, and which fields are filtered (\u03bc1, \u03bc2, s; \u03b8?) are not given.",
+    "readings": [
+     "Linear-hat density filter on \u03bc1, \u03bc2 and s",
+     "Sensitivity filter",
+     "Helmholtz (PDE) filter"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "projection of s-field / eroded-dilated designs",
+    "issue": "missing",
+    "description": "Eqs. 1\u20134 use projected variables (bar) with superscripts k, d and e, probably eroded/dilated designs. No threshold \u03b7, sharpness \u03b2 or continuation scheme is given, and the text doesn't say which design's compliance is minimized.",
+    "readings": [
+     "Single tanh projection, \u03b7 = 0.5, \u03b2 continuation (e.g. 1 \u2192 32)",
+     "Robust eroded/intermediate/dilated projections (e.g. \u03b7 = 0.75/0.5/0.25), volume on dilated, area penalty on eroded",
+     "No projection (filtered densities only)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "objective normalization C_ref (with \u0393 = 0.05 area penalty)",
+    "issue": "vague",
+    "description": "Eq. 1 divides compliance by an undefined 'reference compliance' C_ref. The same symbol is used in Tables 2\u20133 for the converged homogenization compliance. With \u0393 = 0.05, the balance between compliance and the solid-area penalty depends on this value.",
+    "readings": [
+     "C_ref = compliance of the initial design",
+     "C_ref = compliance of the fully solid domain",
+     "C_ref = a fixed constant such as the tabulated value (e.g. 106.21)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "material model / interpolation for a single-material solver",
+    "issue": "missing",
+    "description": "The reference uses rank-2 laminates whose closed-form properties are only cited ('see e.g. [9]', Sec. 2.1), plus the s-field scheme of [15] with \u03bcmin bounds (eqs. 1\u20134). The formulas are not given, and a single-material density solver has no \u03bc/\u03b8 variables, so an interpolation must be chosen.",
+    "readings": [
+     "Implement rank-2 laminate homogenization (\u03bc1, \u03bc2, \u03b8, s) with \u03bcmin = 0.05/0.10/0.20, \u0393 = 0.05, \u03b3\u03b8 = 0",
+     "Standard SIMP with p = 3",
+     "Variable-thickness sheet (SIMP p = 1)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "optimizer and stopping criterion",
+    "issue": "missing",
+    "description": "Sec. 4 only says eq. 1 'is solved until convergence'. The optimizer, move limits, tolerance and maximum iterations are not given.",
+    "readings": [
+     "MMA, stop when max design change < 0.01",
+     "OC update (move limit 0.2), stop when change < 0.01",
+     "Fixed iteration count (e.g. 300\u20131000)"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "initial design",
+    "issue": "missing",
+    "description": "Starting values of \u03bc1, \u03bc2, s and \u03b8 (or of the density) are not given anywhere in Sec. 2.1 or Sec. 4.",
+    "readings": [
+     "Uniform design at the volume bound, s = 1, \u03b8 from principal stresses of the uniform design",
+     "Uniform density = volume fraction, \u03b8 = 0"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "mesh",
+    "entity": "optimization mesh for a single-scale re-run",
+    "issue": "vague",
+    "description": "Sec. 4.2 uses coarse homogenization meshes of 60\u00d730 (Table 2), 120\u00d760 (App. A) and 240\u00d7120 (Table 3), plus fine meshes of 1440\u00d7720, 2400\u00d71200, 2880\u00d71440 and 5760\u00d72880. It doesn't say which one defines the example for a single-scale solver.",
+    "readings": [
+     "60\u00d730 (h = 1/30)",
+     "120\u00d760 or 240\u00d7120",
+     "Fine one-scale resolution, e.g. 1440\u00d7720 or 2400\u00d71200"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "finite element type",
+    "issue": "missing",
+    "description": "The element type and order are not stated; only square elements are implied by h_c.",
+    "readings": [
+     "4-node bilinear quadrilateral (Q4)",
+     "Higher-order quadrilateral (8- or 9-node)"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 529.1851456165314,
+ "returncode": 0,
+ "meta": {
+  "model": null,
+  "num_turns": 2,
+  "is_error": false,
+  "total_cost_usd": 1.4024108000000002,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 27926,
+   "cache_read_input_tokens": 774,
+   "output_tokens": 58942,
+   "output_tokens_details": {
+    "thinking_tokens": 54505
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 27926,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 58942,
+     "cache_read_input_tokens": 774,
+     "cache_creation_input_tokens": 27926,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 27926
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard",
+   "fallback_credit": null
+  }
+ },
+ "stderr_tail": "",
+ "task": "L04",
+ "model": "claude",
+ "model_id": "claude-opus-5-5",
+ "rep": 1,
+ "locator": "Sec. 4.2, the Michell cantilever beam",
+ "finished": "2026-10-22T19:46:42"
+}

@@ -1,0 +1,308 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Full beam versus optimized half-domain dimensions\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. V-A specifies a 192\u00d764 domain and 12,288 pixel variables, while the Fig. 2B caption describes a full beam with only half optimized. It does not explicitly identify which domain the stated dimensions describe.\",\n      \"readings\": [\n        \"The full beam is 192\u00d764 pixels; its optimized half is 96\u00d764 pixels, with mirrored full-domain densities.\",\n        \"The optimized half is 192\u00d764 pixels; the reconstructed full beam is 384\u00d764 pixels.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Physical coordinates and pixel aspect ratio\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. V-A supplies pixel counts but no physical edge coordinates, length units, or explicit horizontal and vertical pixel pitches.\",\n      \"readings\": [\n        \"The represented rectangle is [0,192]\u00d7[0,64], with square unit pixels.\",\n        \"The represented rectangle is [0,3]\u00d7[0,1], with square pixels of side 1/64.\",\n        \"The represented rectangle is [0,6]\u00d7[0,1], with pixel pitches 1/32 horizontally and 1/64 vertically.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"support_type\",\n      \"entity\": \"Restraints at the two physical lower corners\",\n      \"issue\": \"vague\",\n      \"description\": \"The Fig. 2B caption says both lower corners are supported but does not specify the restrained displacement components.\",\n      \"readings\": [\n        \"One full-beam corner is pinned and the other is a vertical roller; the half-model outer corner restrains only vertical displacement.\",\n        \"Both full-beam corner nodes restrain horizontal and vertical displacement; the half-model outer corner restrains both components.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"Spatial extent of each lower-corner support\",\n      \"issue\": \"vague\",\n      \"description\": \"The Fig. 2B caption identifies the corners but does not distinguish point supports from finite support pads.\",\n      \"readings\": [\n        \"Restrain only the corner node.\",\n        \"Restrain all nodes on the adjacent bottom-edge segment one pixel wide.\",\n        \"Restrain all nodes on the adjacent bottom-edge segment two pixels wide.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"Vertical position of the central downward force\",\n      \"issue\": \"vague\",\n      \"description\": \"The Fig. 2B caption says the force acts at the center without specifying its height. Sec. V-A supplies no load coordinates.\",\n      \"readings\": [\n        \"Top-edge midpoint: (L/2,H).\",\n        \"Geometric center: (L/2,H/2).\",\n        \"Bottom-edge midpoint: (L/2,0).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Spatial footprint and discretization of the central force\",\n      \"issue\": \"vague\",\n      \"description\": \"The Fig. 2B caption names a downward force, and Eq. (11) uses F, but neither specifies a nodal load, loading pad, or traction distribution.\",\n      \"readings\": [\n        \"Apply the entire resultant to one node.\",\n        \"Split the resultant equally between nodes one horizontal pixel spacing to either side of midspan.\",\n        \"For an edge load, apply uniform downward traction over a centered segment two pixels wide.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"Force resultant and full/half-domain normalization\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Sec. V-A nor the Fig. 2B caption gives a numerical force or states whether a nominal force refers to the full beam or its modeled half.\",\n      \"readings\": [\n        \"Full-beam resultant is 1 force unit; apply 0.5 to the half-model.\",\n        \"Half-model resultant is 1 force unit; the mirrored full beam carries 2.\",\n        \"Full-beam resultant is 1000 force units; apply 500 to the half-model.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Fixed material near loading and support locations\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. V-A gives density bounds but identifies no passive solid or void masks, including whether load and support attachment cells must remain solid.\",\n      \"readings\": [\n        \"All pixels are designable; there are no passive regions.\",\n        \"Pixels incident to load and support nodes are fixed solid; all remaining pixels are designable.\",\n        \"Two-pixel-deep loading and support pads are fixed solid; all remaining pixels are designable.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Constitutive symmetry and two-dimensional elastic model\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. V-A introduces K(v) without specifying isotropy or a plane-stress versus plane-strain constitutive reduction.\",\n      \"readings\": [\n        \"Homogeneous isotropic material under plane stress.\",\n        \"Homogeneous isotropic material under plane strain.\",\n        \"A single orthotropic material under plane stress, with material axes aligned to the grid.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Solid elastic stiffness scale\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. V-A gives no numerical solid Young's modulus or equivalent overall stiffness normalization.\",\n      \"readings\": [\n        \"E0=1 in consistent normalized units.\",\n        \"E0=70 GPa.\",\n        \"E0=210 GPa.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Poisson's ratio for an isotropic implementation\",\n      \"issue\": \"missing\",\n      \"description\": \"No Poisson's ratio is provided for the MBB finite-element model in Sec. V-A or elsewhere in the supplied text.\",\n      \"readings\": [\n        \"Poisson's ratio is 0.2.\",\n        \"Poisson's ratio is 0.3.\",\n        \"Poisson's ratio is 0.35.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Out-of-plane thickness or reference depth\",\n      \"issue\": \"missing\",\n      \"description\": \"The application is described as two-dimensional, but Sec. V-A gives no thickness or per-unit-depth convention for stiffness and applied force.\",\n      \"readings\": [\n        \"Use unit thickness or unit reference depth.\",\n        \"Use constant thickness 0.1 in the chosen length units, with the same total applied force.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Density-to-stiffness interpolation and penalization schedule\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (11) permits continuous physical densities and writes K(v), but gives no stiffness interpolation, penalization exponent, or continuation schedule. Ref. [35] is invoked without its contents.\",\n      \"readings\": [\n        \"SIMP with E(rho)=Emin+(E0-Emin)rho and fixed exponent p=1.\",\n        \"SIMP with E(rho)=Emin+(E0-Emin)rho^3 and fixed exponent p=3.\",\n        \"SIMP with p=1 for 50 iterations, p=2 for 50 iterations, and p=3 thereafter.\",\n        \"RAMP with E(rho)=Emin+(E0-Emin)rho/[1+3(1-rho)].\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Void stiffness and singularity treatment\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (11) allows zero density but does not state the residual stiffness of void pixels or how disconnected degrees of freedom are handled.\",\n      \"readings\": [\n        \"Use ersatz material with Emin/E0=1e-9.\",\n        \"Use ersatz material with Emin/E0=1e-3.\",\n        \"Use true zero stiffness and remove unsupported disconnected degrees of freedom.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Units and distance metric of the radius-2 cone filter\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. V-A fixes the cone-filter radius at 2 but does not explicitly identify its coordinate units or how distances relate to physical pixel pitches.\",\n      \"readings\": [\n        \"Use Euclidean pixel-index distance with radius two pixel spacings.\",\n        \"Use Euclidean physical-coordinate distance with radius two physical length units; for pixel pitch 0.5 this spans four pixels.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Discrete realization of the cone kernel\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. V-A names a cone filter but supplies no discrete weight formula or sampling convention.\",\n      \"readings\": [\n        \"Sample weights max(0,r-distance) at pixel centers and normalize the resulting weighted sum.\",\n        \"Integrate the linear cone kernel over each contributing pixel area and normalize those integrated weights.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Cone-filter treatment at physical domain boundaries\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. V-A does not specify padding, kernel truncation, or normalization near the top, bottom, and physical end boundaries.\",\n      \"readings\": [\n        \"Discard contributions outside the domain and renormalize using retained weights.\",\n        \"Extend the density by zero outside the domain and retain the full-kernel denominator.\",\n        \"Reflect the density across physical boundaries before filtering.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Cone-filter treatment at the symmetry cut\",\n      \"issue\": \"missing\",\n      \"description\": \"The Fig. 2B caption introduces half-domain optimization, but Sec. V-A does not explain how filtering sees the omitted mirrored half.\",\n      \"readings\": [\n        \"Mirror the prefilter density across the symmetry cut and filter using contributions from both halves.\",\n        \"Filter only the computational half, truncating and renormalizing the kernel at the cut.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Reconciliation of prefilter and physical-density volume constraints\",\n      \"issue\": \"vague\",\n      \"description\": \"Eq. (11) constrains physical density v, while Eq. (12) sets the volume of the prefilter field and then applies the cone filter. Sec. V-C claims strict enforcement, but no volume-preservation or final correction rule is supplied.\",\n      \"readings\": [\n        \"Use a sum-preserving cone operator so that the prefilter target 0.4 also gives final physical volume fraction 0.4.\",\n        \"Use a boundary-normalized cone operator and adjust the bias against the final filtered physical volume fraction 0.4.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Mapping from design pixels to analysis elements\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. V-A specifies 192\u00d764 density pixels and refers to a finite-element implementation, but does not explicitly give the analysis mesh or its relationship to those pixels.\",\n      \"readings\": [\n        \"Use one analysis element per design pixel.\",\n        \"Use a 2\u00d72 analysis-element block per design pixel, with a shared pixel density.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Finite-element family, interpolation order, and quadrature\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. V-A delegates finite-element implementation to Ref. [35] without identifying element formulation or integration in the supplied text.\",\n      \"readings\": [\n        \"Four-node bilinear quadrilaterals with 2\u00d72 Gauss integration.\",\n        \"Eight-node quadratic quadrilaterals with 3\u00d73 Gauss integration.\",\n        \"Four-node bilinear quadrilaterals with one-point integration and hourglass stabilization.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initial density field for a direct pixel-based rerun\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. V-B describes initialization from previously optimized, eroded designs but provides neither the first initialization nor an actual initial field for a particular solve. The latent initialization in Sec. V-C does not specify a direct density-solver start.\",\n      \"readings\": [\n        \"Initialize every designable pixel to density 0.4.\",\n        \"Initialize around 0.4 using zero-mean random perturbations of amplitude 0.01 with seed 0.\",\n        \"Initialize from a previously converged design after erosion and restoration of the target volume.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Direct density-optimization controls and termination\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. V-B and VI-A identify L-BFGS for direct density optimization but give no history length, line search, stopping tolerances, or iteration budget for that solver.\",\n      \"readings\": [\n        \"L-BFGS history length 10, strong-Wolfe line search, maximum 200 iterations, and projected-gradient infinity-norm tolerance 1e-6.\",\n        \"L-BFGS history length 20, Armijo backtracking, maximum 1000 iterations, and relative compliance-change tolerance 1e-5.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Finite-element equilibrium solution accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (11) states KU=F, but the supplied text specifies neither the linear solution method nor its convergence tolerance.\",\n      \"readings\": [\n        \"Use a sparse direct factorization.\",\n        \"Use preconditioned conjugate gradients with relative residual tolerance 1e-8.\",\n        \"Use preconditioned conjugate gradients with relative residual tolerance 1e-3.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"other\",\n      \"entity\": \"Half-beam versus full-beam compliance reporting\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (11) defines U^T K U, and Sec. VI-B reports compliance 246, but neither states whether the reported value is the half-model objective or the reconstructed full-beam compliance.\",\n      \"readings\": [\n        \"Report the half-model value C_half=U_half^T K_half U_half.\",\n        \"For consistent symmetric loading, report the reconstructed full-beam value C_full=2 C_half.\"\n      ],\n      \"effect\": \"scale_only\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "Full beam versus optimized half-domain dimensions",
+    "issue": "vague",
+    "description": "Sec. V-A specifies a 192\u00d764 domain and 12,288 pixel variables, while the Fig. 2B caption describes a full beam with only half optimized. It does not explicitly identify which domain the stated dimensions describe.",
+    "readings": [
+     "The full beam is 192\u00d764 pixels; its optimized half is 96\u00d764 pixels, with mirrored full-domain densities.",
+     "The optimized half is 192\u00d764 pixels; the reconstructed full beam is 384\u00d764 pixels."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "Physical coordinates and pixel aspect ratio",
+    "issue": "missing",
+    "description": "Sec. V-A supplies pixel counts but no physical edge coordinates, length units, or explicit horizontal and vertical pixel pitches.",
+    "readings": [
+     "The represented rectangle is [0,192]\u00d7[0,64], with square unit pixels.",
+     "The represented rectangle is [0,3]\u00d7[0,1], with square pixels of side 1/64.",
+     "The represented rectangle is [0,6]\u00d7[0,1], with pixel pitches 1/32 horizontally and 1/64 vertically."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_type",
+    "entity": "Restraints at the two physical lower corners",
+    "issue": "vague",
+    "description": "The Fig. 2B caption says both lower corners are supported but does not specify the restrained displacement components.",
+    "readings": [
+     "One full-beam corner is pinned and the other is a vertical roller; the half-model outer corner restrains only vertical displacement.",
+     "Both full-beam corner nodes restrain horizontal and vertical displacement; the half-model outer corner restrains both components."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "Spatial extent of each lower-corner support",
+    "issue": "vague",
+    "description": "The Fig. 2B caption identifies the corners but does not distinguish point supports from finite support pads.",
+    "readings": [
+     "Restrain only the corner node.",
+     "Restrain all nodes on the adjacent bottom-edge segment one pixel wide.",
+     "Restrain all nodes on the adjacent bottom-edge segment two pixels wide."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "Vertical position of the central downward force",
+    "issue": "vague",
+    "description": "The Fig. 2B caption says the force acts at the center without specifying its height. Sec. V-A supplies no load coordinates.",
+    "readings": [
+     "Top-edge midpoint: (L/2,H).",
+     "Geometric center: (L/2,H/2).",
+     "Bottom-edge midpoint: (L/2,0)."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Spatial footprint and discretization of the central force",
+    "issue": "vague",
+    "description": "The Fig. 2B caption names a downward force, and Eq. (11) uses F, but neither specifies a nodal load, loading pad, or traction distribution.",
+    "readings": [
+     "Apply the entire resultant to one node.",
+     "Split the resultant equally between nodes one horizontal pixel spacing to either side of midspan.",
+     "For an edge load, apply uniform downward traction over a centered segment two pixels wide."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Force resultant and full/half-domain normalization",
+    "issue": "missing",
+    "description": "Neither Sec. V-A nor the Fig. 2B caption gives a numerical force or states whether a nominal force refers to the full beam or its modeled half.",
+    "readings": [
+     "Full-beam resultant is 1 force unit; apply 0.5 to the half-model.",
+     "Half-model resultant is 1 force unit; the mirrored full beam carries 2.",
+     "Full-beam resultant is 1000 force units; apply 500 to the half-model."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Fixed material near loading and support locations",
+    "issue": "missing",
+    "description": "Sec. V-A gives density bounds but identifies no passive solid or void masks, including whether load and support attachment cells must remain solid.",
+    "readings": [
+     "All pixels are designable; there are no passive regions.",
+     "Pixels incident to load and support nodes are fixed solid; all remaining pixels are designable.",
+     "Two-pixel-deep loading and support pads are fixed solid; all remaining pixels are designable."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Constitutive symmetry and two-dimensional elastic model",
+    "issue": "missing",
+    "description": "Sec. V-A introduces K(v) without specifying isotropy or a plane-stress versus plane-strain constitutive reduction.",
+    "readings": [
+     "Homogeneous isotropic material under plane stress.",
+     "Homogeneous isotropic material under plane strain.",
+     "A single orthotropic material under plane stress, with material axes aligned to the grid."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Solid elastic stiffness scale",
+    "issue": "missing",
+    "description": "Sec. V-A gives no numerical solid Young's modulus or equivalent overall stiffness normalization.",
+    "readings": [
+     "E0=1 in consistent normalized units.",
+     "E0=70 GPa.",
+     "E0=210 GPa."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson's ratio for an isotropic implementation",
+    "issue": "missing",
+    "description": "No Poisson's ratio is provided for the MBB finite-element model in Sec. V-A or elsewhere in the supplied text.",
+    "readings": [
+     "Poisson's ratio is 0.2.",
+     "Poisson's ratio is 0.3.",
+     "Poisson's ratio is 0.35."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Out-of-plane thickness or reference depth",
+    "issue": "missing",
+    "description": "The application is described as two-dimensional, but Sec. V-A gives no thickness or per-unit-depth convention for stiffness and applied force.",
+    "readings": [
+     "Use unit thickness or unit reference depth.",
+     "Use constant thickness 0.1 in the chosen length units, with the same total applied force."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Density-to-stiffness interpolation and penalization schedule",
+    "issue": "missing",
+    "description": "Eq. (11) permits continuous physical densities and writes K(v), but gives no stiffness interpolation, penalization exponent, or continuation schedule. Ref. [35] is invoked without its contents.",
+    "readings": [
+     "SIMP with E(rho)=Emin+(E0-Emin)rho and fixed exponent p=1.",
+     "SIMP with E(rho)=Emin+(E0-Emin)rho^3 and fixed exponent p=3.",
+     "SIMP with p=1 for 50 iterations, p=2 for 50 iterations, and p=3 thereafter.",
+     "RAMP with E(rho)=Emin+(E0-Emin)rho/[1+3(1-rho)]."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Void stiffness and singularity treatment",
+    "issue": "missing",
+    "description": "Eq. (11) allows zero density but does not state the residual stiffness of void pixels or how disconnected degrees of freedom are handled.",
+    "readings": [
+     "Use ersatz material with Emin/E0=1e-9.",
+     "Use ersatz material with Emin/E0=1e-3.",
+     "Use true zero stiffness and remove unsupported disconnected degrees of freedom."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Units and distance metric of the radius-2 cone filter",
+    "issue": "vague",
+    "description": "Sec. V-A fixes the cone-filter radius at 2 but does not explicitly identify its coordinate units or how distances relate to physical pixel pitches.",
+    "readings": [
+     "Use Euclidean pixel-index distance with radius two pixel spacings.",
+     "Use Euclidean physical-coordinate distance with radius two physical length units; for pixel pitch 0.5 this spans four pixels."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Discrete realization of the cone kernel",
+    "issue": "vague",
+    "description": "Sec. V-A names a cone filter but supplies no discrete weight formula or sampling convention.",
+    "readings": [
+     "Sample weights max(0,r-distance) at pixel centers and normalize the resulting weighted sum.",
+     "Integrate the linear cone kernel over each contributing pixel area and normalize those integrated weights."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Cone-filter treatment at physical domain boundaries",
+    "issue": "missing",
+    "description": "Sec. V-A does not specify padding, kernel truncation, or normalization near the top, bottom, and physical end boundaries.",
+    "readings": [
+     "Discard contributions outside the domain and renormalize using retained weights.",
+     "Extend the density by zero outside the domain and retain the full-kernel denominator.",
+     "Reflect the density across physical boundaries before filtering."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Cone-filter treatment at the symmetry cut",
+    "issue": "missing",
+    "description": "The Fig. 2B caption introduces half-domain optimization, but Sec. V-A does not explain how filtering sees the omitted mirrored half.",
+    "readings": [
+     "Mirror the prefilter density across the symmetry cut and filter using contributions from both halves.",
+     "Filter only the computational half, truncating and renormalizing the kernel at the cut."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Reconciliation of prefilter and physical-density volume constraints",
+    "issue": "vague",
+    "description": "Eq. (11) constrains physical density v, while Eq. (12) sets the volume of the prefilter field and then applies the cone filter. Sec. V-C claims strict enforcement, but no volume-preservation or final correction rule is supplied.",
+    "readings": [
+     "Use a sum-preserving cone operator so that the prefilter target 0.4 also gives final physical volume fraction 0.4.",
+     "Use a boundary-normalized cone operator and adjust the bias against the final filtered physical volume fraction 0.4."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Mapping from design pixels to analysis elements",
+    "issue": "missing",
+    "description": "Sec. V-A specifies 192\u00d764 density pixels and refers to a finite-element implementation, but does not explicitly give the analysis mesh or its relationship to those pixels.",
+    "readings": [
+     "Use one analysis element per design pixel.",
+     "Use a 2\u00d72 analysis-element block per design pixel, with a shared pixel density."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Finite-element family, interpolation order, and quadrature",
+    "issue": "missing",
+    "description": "Sec. V-A delegates finite-element implementation to Ref. [35] without identifying element formulation or integration in the supplied text.",
+    "readings": [
+     "Four-node bilinear quadrilaterals with 2\u00d72 Gauss integration.",
+     "Eight-node quadratic quadrilaterals with 3\u00d73 Gauss integration.",
+     "Four-node bilinear quadrilaterals with one-point integration and hourglass stabilization."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial density field for a direct pixel-based rerun",
+    "issue": "missing",
+    "description": "Sec. V-B describes initialization from previously optimized, eroded designs but provides neither the first initialization nor an actual initial field for a particular solve. The latent initialization in Sec. V-C does not specify a direct density-solver start.",
+    "readings": [
+     "Initialize every designable pixel to density 0.4.",
+     "Initialize around 0.4 using zero-mean random perturbations of amplitude 0.01 with seed 0.",
+     "Initialize from a previously converged design after erosion and restoration of the target volume."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Direct density-optimization controls and termination",
+    "issue": "missing",
+    "description": "Secs. V-B and VI-A identify L-BFGS for direct density optimization but give no history length, line search, stopping tolerances, or iteration budget for that solver.",
+    "readings": [
+     "L-BFGS history length 10, strong-Wolfe line search, maximum 200 iterations, and projected-gradient infinity-norm tolerance 1e-6.",
+     "L-BFGS history length 20, Armijo backtracking, maximum 1000 iterations, and relative compliance-change tolerance 1e-5."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Finite-element equilibrium solution accuracy",
+    "issue": "missing",
+    "description": "Eq. (11) states KU=F, but the supplied text specifies neither the linear solution method nor its convergence tolerance.",
+    "readings": [
+     "Use a sparse direct factorization.",
+     "Use preconditioned conjugate gradients with relative residual tolerance 1e-8.",
+     "Use preconditioned conjugate gradients with relative residual tolerance 1e-3."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "other",
+    "entity": "Half-beam versus full-beam compliance reporting",
+    "issue": "missing",
+    "description": "Eq. (11) defines U^T K U, and Sec. VI-B reports compliance 246, but neither states whether the reported value is the half-model objective or the reconstructed full-beam compliance.",
+    "readings": [
+     "Report the half-model value C_half=U_half^T K_half U_half.",
+     "For consistent symmetric loading, report the reconstructed full-beam value C_full=2 C_half."
+    ],
+    "effect": "scale_only"
+   }
+  ]
+ },
+ "wall_s": 549.1640965938568,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L20",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 1,
+ "locator": "Sec. V-A, the MBB beam application (Fig. 2B)",
+ "finished": "2026-10-22T20:35:35"
+}

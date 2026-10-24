@@ -1,0 +1,230 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"bounding rectangle of the L-shaped domain\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 names an L-shaped bracket but gives no bounding-box aspect ratio. The 64\u00d764 image resolution in Sec. 3.1 does not explicitly establish physical cell dimensions.\",\n      \"readings\": [\n        \"Bounding width W equals bounding height H.\",\n        \"W = 2H.\",\n        \"H = 2W.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"L-shaped outline and corner cutout\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 4 'Example designs' and the Fig. 4 caption identify a classic L shape without specifying its orientation, arm widths, or cutout dimensions; the outline is left to the unavailable figure.\",\n      \"readings\": [\n        \"Remove the upper-right quarter of a W\u00d7H rectangle, leaving arms of widths W/2 and H/2.\",\n        \"Remove an upper-right rectangle of width 2W/3 and height 2H/3, leaving arms of widths W/3 and H/3.\",\n        \"Remove an upper-right rectangle of width 2W/3 and height H/2, giving unequal arm proportions.\",\n        \"Remove the lower-left quarter instead, leaving material along the top and right.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"absolute geometric scale and uniform out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"No physical dimensions or thickness are supplied for Fig. 4. For a fixed normalized geometry and two-dimensional elastic formulation, these choices do not change the normalized optimal layout.\",\n      \"readings\": [\n        \"Use nondimensional bounding width W = 1 and unit thickness.\",\n        \"Use W = 64 grid-length units and unit thickness.\",\n        \"Use W = 1 and uniform thickness t = 0.1.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"downward point load on the right edge\",\n      \"issue\": \"figure_only\",\n      \"description\": \"The Fig. 4 caption specifies the right edge but gives no position along it. The missing figure would be needed to locate the point.\",\n      \"readings\": [\n        \"Apply the load at the lower endpoint of the right boundary segment.\",\n        \"Apply it halfway along that segment.\",\n        \"Apply it at the upper endpoint of that segment.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"downward point force\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither the Fig. 4 caption nor the compliance setup states the force magnitude.\",\n      \"readings\": [\n        \"F = 1 in consistent force units.\",\n        \"F = 10 in the same units.\",\n        \"F = 100 in the same units.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"excluded corner forming the L shape\",\n      \"issue\": \"missing\",\n      \"description\": \"The dataset section discusses masks, but Fig. 4 is an out-of-distribution problem and its cutout implementation is not specified.\",\n      \"readings\": [\n        \"Remove cutout elements entirely from the elastic domain.\",\n        \"Retain the full rectangular mesh and fix cutout densities to zero, retaining the stated E_min stiffness.\",\n        \"Retain the rectangular design array but exclude cutout cells from both stiffness assembly and design updates.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"material adjoining the load and clamped edge\",\n      \"issue\": \"missing\",\n      \"description\": \"The Fig. 4 setup does not state whether load and support attachment cells remain designable or are protected as passive solid regions.\",\n      \"readings\": [\n        \"All cells inside the L-shaped region remain designable.\",\n        \"Fix a one-cell solid attachment region around the loaded node.\",\n        \"Fix solid attachment regions at the load and a one-cell strip along the clamped edge.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Fig. 4 material budget\",\n      \"issue\": \"missing\",\n      \"description\": \"Equation (2) introduces the prescribed volume V0 without giving its Fig. 4 value. The training range [0.12, 0.5] does not identify this out-of-distribution instance's target.\",\n      \"readings\": [\n        \"Material fraction f = 0.20.\",\n        \"f = 0.30.\",\n        \"f = 0.50.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"reference area used to define the material fraction\",\n      \"issue\": \"vague\",\n      \"description\": \"Equation (2) integrates over \u03a9, but the text does not establish whether \u03a9 for this masked L-shaped example excludes the cutout or denotes the full rectangular grid.\",\n      \"readings\": [\n        \"Set V0 = f times the admissible L-shaped area.\",\n        \"Set V0 = f times the full bounding-rectangle area, with the cutout contributing zero material.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"two-dimensional elastic constitutive model\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 3.1\u20133.2 give E0, E_min, and Poisson's ratio, but do not explicitly specify plane stress or plane strain. The cited 88-line code is not reproduced.\",\n      \"readings\": [\n        \"Use plane stress with the stated material parameters.\",\n        \"Use plane strain with the stated material parameters.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"density-to-stiffness interpolation and penalization\",\n      \"issue\": \"missing\",\n      \"description\": \"The compliance setup references the 88-line approach but supplies no interpolation equation, penalization exponent, or continuation schedule. The explicit SIMP discussion later concerns fracture.\",\n      \"readings\": [\n        \"Use E(\u03c1) = E_min + (E0 \u2212 E_min)\u03c1^2 with fixed exponent 2.\",\n        \"Use E(\u03c1) = E_min + (E0 \u2212 E_min)\u03c1^3 with fixed exponent 3.\",\n        \"Use the same SIMP law with an exponent increased from 1 to 3 during optimization.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"ordering of cone filtering and volume-enforcing transformation\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 3.2 specifies Equation (2) and a two-pixel cone filter without defining their order or precisely identifying the field passed to stiffness assembly.\",\n      \"readings\": [\n        \"Cone-filter the generated field first, then apply Equation (2) to obtain volume-constrained FEM densities.\",\n        \"Apply Equation (2) first, then cone-filter its densities, choosing the bisection offset using the final filtered volume.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"cone-filter treatment at exterior and cutout boundaries\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 3.1\u20133.2 state the cone shape and radius but do not define padding, boundary normalization, or whether masked cells participate in filter averages.\",\n      \"readings\": [\n        \"Truncate the cone at the L-shaped boundary and renormalize over admissible cells.\",\n        \"Filter over the bounding rectangle, including fixed-zero cutout cells, and renormalize only at the rectangle boundary.\",\n        \"Zero-pad exterior and cutout regions and retain the full cone normalization.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"relationship between the 64\u00d764 design representation and analysis mesh\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.1 fixes image and network resolution at 64\u00d764 but does not explicitly state the Fig. 4 FEM mesh or whether each pixel is one analysis element.\",\n      \"readings\": [\n        \"Use one analysis element per design pixel on a 64\u00d764 bounding grid.\",\n        \"Use a 128\u00d7128 analysis grid with each design pixel assigned to a 2\u00d72 element block.\",\n        \"Interpolate the 64\u00d764 density field onto a 128\u00d7128 analysis grid.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"finite-element interpolation and integration\",\n      \"issue\": \"missing\",\n      \"description\": \"The compliance simulations are described as following the 88-line approach, without specifying element order or quadrature in the supplied text.\",\n      \"readings\": [\n        \"Use bilinear four-node quadrilaterals with 2\u00d72 Gauss integration.\",\n        \"Use four-node quadrilaterals with reduced integration and hourglass stabilization.\",\n        \"Use biquadratic nine-node quadrilaterals with 3\u00d73 Gauss integration.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"initial density field for the Fig. 4 MMA baseline\",\n      \"issue\": \"missing\",\n      \"description\": \"The compliance sections do not specify MMA initialization. Uniform-density initialization is stated later for the separate fracture experiment.\",\n      \"readings\": [\n        \"Start from a uniform density satisfying the volume constraint.\",\n        \"Start from a feasible, spatially perturbed density field.\",\n        \"Start from a feasible nonuniform field biased toward connecting the load to the support.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"MMA update controls\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 3.1 says MMA uses default hyperparameters without identifying an implementation or specifying move limits and asymptote controls.\",\n      \"readings\": [\n        \"Use a density move limit of 0.20 and initial asymptote half-width of 0.50.\",\n        \"Use a density move limit of 0.05 and initial asymptote half-width of 0.10.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"postprocessing of the thresholded Fig. 4 designs\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 3.2 references the simplest thresholding strategy from [66] without supplying its rule; the Fig. 4 discussion explicitly compares thresholded results.\",\n      \"readings\": [\n        \"Set densities at or above 0.5 to solid and the rest to void.\",\n        \"Choose a density threshold that preserves the prescribed material fraction.\",\n        \"Assign solid material to the highest-density cells until the target discrete material count is reached.\"\n      ],\n      \"effect\": \"layout\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "bounding rectangle of the L-shaped domain",
+    "issue": "missing",
+    "description": "Sec. 4 names an L-shaped bracket but gives no bounding-box aspect ratio. The 64\u00d764 image resolution in Sec. 3.1 does not explicitly establish physical cell dimensions.",
+    "readings": [
+     "Bounding width W equals bounding height H.",
+     "W = 2H.",
+     "H = 2W."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "L-shaped outline and corner cutout",
+    "issue": "figure_only",
+    "description": "Sec. 4 'Example designs' and the Fig. 4 caption identify a classic L shape without specifying its orientation, arm widths, or cutout dimensions; the outline is left to the unavailable figure.",
+    "readings": [
+     "Remove the upper-right quarter of a W\u00d7H rectangle, leaving arms of widths W/2 and H/2.",
+     "Remove an upper-right rectangle of width 2W/3 and height 2H/3, leaving arms of widths W/3 and H/3.",
+     "Remove an upper-right rectangle of width 2W/3 and height H/2, giving unequal arm proportions.",
+     "Remove the lower-left quarter instead, leaving material along the top and right."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "absolute geometric scale and uniform out-of-plane thickness",
+    "issue": "missing",
+    "description": "No physical dimensions or thickness are supplied for Fig. 4. For a fixed normalized geometry and two-dimensional elastic formulation, these choices do not change the normalized optimal layout.",
+    "readings": [
+     "Use nondimensional bounding width W = 1 and unit thickness.",
+     "Use W = 64 grid-length units and unit thickness.",
+     "Use W = 1 and uniform thickness t = 0.1."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "load_position",
+    "entity": "downward point load on the right edge",
+    "issue": "figure_only",
+    "description": "The Fig. 4 caption specifies the right edge but gives no position along it. The missing figure would be needed to locate the point.",
+    "readings": [
+     "Apply the load at the lower endpoint of the right boundary segment.",
+     "Apply it halfway along that segment.",
+     "Apply it at the upper endpoint of that segment."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "downward point force",
+    "issue": "missing",
+    "description": "Neither the Fig. 4 caption nor the compliance setup states the force magnitude.",
+    "readings": [
+     "F = 1 in consistent force units.",
+     "F = 10 in the same units.",
+     "F = 100 in the same units."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "excluded corner forming the L shape",
+    "issue": "missing",
+    "description": "The dataset section discusses masks, but Fig. 4 is an out-of-distribution problem and its cutout implementation is not specified.",
+    "readings": [
+     "Remove cutout elements entirely from the elastic domain.",
+     "Retain the full rectangular mesh and fix cutout densities to zero, retaining the stated E_min stiffness.",
+     "Retain the rectangular design array but exclude cutout cells from both stiffness assembly and design updates."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "material adjoining the load and clamped edge",
+    "issue": "missing",
+    "description": "The Fig. 4 setup does not state whether load and support attachment cells remain designable or are protected as passive solid regions.",
+    "readings": [
+     "All cells inside the L-shaped region remain designable.",
+     "Fix a one-cell solid attachment region around the loaded node.",
+     "Fix solid attachment regions at the load and a one-cell strip along the clamped edge."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Fig. 4 material budget",
+    "issue": "missing",
+    "description": "Equation (2) introduces the prescribed volume V0 without giving its Fig. 4 value. The training range [0.12, 0.5] does not identify this out-of-distribution instance's target.",
+    "readings": [
+     "Material fraction f = 0.20.",
+     "f = 0.30.",
+     "f = 0.50."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "reference area used to define the material fraction",
+    "issue": "vague",
+    "description": "Equation (2) integrates over \u03a9, but the text does not establish whether \u03a9 for this masked L-shaped example excludes the cutout or denotes the full rectangular grid.",
+    "readings": [
+     "Set V0 = f times the admissible L-shaped area.",
+     "Set V0 = f times the full bounding-rectangle area, with the cutout contributing zero material."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "two-dimensional elastic constitutive model",
+    "issue": "missing",
+    "description": "Secs. 3.1\u20133.2 give E0, E_min, and Poisson's ratio, but do not explicitly specify plane stress or plane strain. The cited 88-line code is not reproduced.",
+    "readings": [
+     "Use plane stress with the stated material parameters.",
+     "Use plane strain with the stated material parameters."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "density-to-stiffness interpolation and penalization",
+    "issue": "missing",
+    "description": "The compliance setup references the 88-line approach but supplies no interpolation equation, penalization exponent, or continuation schedule. The explicit SIMP discussion later concerns fracture.",
+    "readings": [
+     "Use E(\u03c1) = E_min + (E0 \u2212 E_min)\u03c1^2 with fixed exponent 2.",
+     "Use E(\u03c1) = E_min + (E0 \u2212 E_min)\u03c1^3 with fixed exponent 3.",
+     "Use the same SIMP law with an exponent increased from 1 to 3 during optimization."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "ordering of cone filtering and volume-enforcing transformation",
+    "issue": "vague",
+    "description": "Sec. 3.2 specifies Equation (2) and a two-pixel cone filter without defining their order or precisely identifying the field passed to stiffness assembly.",
+    "readings": [
+     "Cone-filter the generated field first, then apply Equation (2) to obtain volume-constrained FEM densities.",
+     "Apply Equation (2) first, then cone-filter its densities, choosing the bisection offset using the final filtered volume."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "cone-filter treatment at exterior and cutout boundaries",
+    "issue": "missing",
+    "description": "Secs. 3.1\u20133.2 state the cone shape and radius but do not define padding, boundary normalization, or whether masked cells participate in filter averages.",
+    "readings": [
+     "Truncate the cone at the L-shaped boundary and renormalize over admissible cells.",
+     "Filter over the bounding rectangle, including fixed-zero cutout cells, and renormalize only at the rectangle boundary.",
+     "Zero-pad exterior and cutout regions and retain the full cone normalization."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "relationship between the 64\u00d764 design representation and analysis mesh",
+    "issue": "missing",
+    "description": "Sec. 3.1 fixes image and network resolution at 64\u00d764 but does not explicitly state the Fig. 4 FEM mesh or whether each pixel is one analysis element.",
+    "readings": [
+     "Use one analysis element per design pixel on a 64\u00d764 bounding grid.",
+     "Use a 128\u00d7128 analysis grid with each design pixel assigned to a 2\u00d72 element block.",
+     "Interpolate the 64\u00d764 density field onto a 128\u00d7128 analysis grid."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "finite-element interpolation and integration",
+    "issue": "missing",
+    "description": "The compliance simulations are described as following the 88-line approach, without specifying element order or quadrature in the supplied text.",
+    "readings": [
+     "Use bilinear four-node quadrilaterals with 2\u00d72 Gauss integration.",
+     "Use four-node quadrilaterals with reduced integration and hourglass stabilization.",
+     "Use biquadratic nine-node quadrilaterals with 3\u00d73 Gauss integration."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "initial density field for the Fig. 4 MMA baseline",
+    "issue": "missing",
+    "description": "The compliance sections do not specify MMA initialization. Uniform-density initialization is stated later for the separate fracture experiment.",
+    "readings": [
+     "Start from a uniform density satisfying the volume constraint.",
+     "Start from a feasible, spatially perturbed density field.",
+     "Start from a feasible nonuniform field biased toward connecting the load to the support."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "MMA update controls",
+    "issue": "vague",
+    "description": "Sec. 3.1 says MMA uses default hyperparameters without identifying an implementation or specifying move limits and asymptote controls.",
+    "readings": [
+     "Use a density move limit of 0.20 and initial asymptote half-width of 0.50.",
+     "Use a density move limit of 0.05 and initial asymptote half-width of 0.10."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "postprocessing of the thresholded Fig. 4 designs",
+    "issue": "vague",
+    "description": "Sec. 3.2 references the simplest thresholding strategy from [66] without supplying its rule; the Fig. 4 discussion explicitly compares thresholded results.",
+    "readings": [
+     "Set densities at or above 0.5 to solid and the rest to void.",
+     "Choose a density threshold that preserves the prescribed material fraction.",
+     "Assign solid material to the highest-density cells until the target discrete material count is reached."
+    ],
+    "effect": "layout"
+   }
+  ]
+ },
+ "wall_s": 389.0313148498535,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L01",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 1,
+ "locator": "Sec. 4 'Example designs', Fig. 4 (the first problem instance shown with a design)",
+ "finished": "2026-10-22T19:37:53"
+}

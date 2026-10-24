@@ -1,0 +1,273 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"Supported nodes at the base\",\n      \"issue\": \"vague\",\n      \"description\": \"Structures optimization locates fixed points at the base but does not explicitly distinguish the entire background-grid face from the scaffold's material contact points.\",\n      \"readings\": [\n        \"Fix all three translations of all 41 x 41 grid nodes on the bottom face.\",\n        \"Fix all three translations only at bottom-face nodes incident to the initial scaffold's solid elements.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Top nodes receiving compression loads\",\n      \"issue\": \"vague\",\n      \"description\": \"Structures optimization specifies distributed loading on the top surface through a shell, without identifying whether the loaded surface is the nominal domain face or only scaffold contact points.\",\n      \"readings\": [\n        \"Apply forces to every node on the nominal top face, including nodes adjacent to void elements.\",\n        \"Apply forces only to top-face nodes contacting the initial solid scaffold.\",\n        \"Apply the resultant to a loading shell and obtain scaffold nodal forces through shell coupling.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Spatial distribution and discretization of top forces\",\n      \"issue\": \"missing\",\n      \"description\": \"The phrase 'distributed forces' in Structures optimization does not supply a traction field or nodal force weights.\",\n      \"readings\": [\n        \"Uniform normal pressure with consistent nodal loads: interior, edge, and corner nodes receive weights proportional to 1, 1/2, and 1/4.\",\n        \"Equal normal force at every loaded top-face node.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"Compression load resultant\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Structures optimization nor the Fig. 6 caption supplies the compression force or pressure magnitude.\",\n      \"readings\": [\n        \"Total compression force of 1 in the numerical force units.\",\n        \"Total compression force of 10 in the same units.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Loading shell geometry and permanent-solid mask\",\n      \"issue\": \"vague\",\n      \"description\": \"Structures optimization calls the top shell 'thin' but gives no thickness or indication whether it occupies design-grid elements or lies outside the unit cube.\",\n      \"readings\": [\n        \"Use a surface shell at the top face, leaving all 40 x 40 x 40 voxels designable.\",\n        \"Permanently fill the uppermost voxel layer, occupying the top 1/40 of the cube height.\",\n        \"Permanently fill the uppermost two voxel layers, occupying the top 2/40 of the cube height.\",\n        \"Append a permanent-solid layer of thickness 1/40 above the unit cube.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"other\",\n      \"entity\": \"Mechanical representation of the loading shell\",\n      \"issue\": \"missing\",\n      \"description\": \"Structures optimization does not specify whether the shell has elastic stiffness, imposes rigid-platen kinematics, or merely defines equivalent distributed loads.\",\n      \"readings\": [\n        \"Model a deformable plate or shell using the solid material's E = 1 and Poisson's ratio 0.3.\",\n        \"Represent an external rigid platen through linear multipoint constraints.\",\n        \"Add no fixture stiffness and apply equivalent nodal forces directly.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"support_type\",\n      \"entity\": \"Interface between loading shell and scaffold\",\n      \"issue\": \"missing\",\n      \"description\": \"The shell description in Structures optimization does not state how its motion is coupled to the scaffold or whether lateral slip is permitted.\",\n      \"readings\": [\n        \"Bond the shell to the scaffold by tying all three displacement components.\",\n        \"Couple only normal displacement and allow tangential slip.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Loading-shell contribution to the volume constraint\",\n      \"issue\": \"vague\",\n      \"description\": \"The five target fractions are explicit, but the shell's inclusion in V and the reference volume is not. Eq. (22) does not identify shell elements separately.\",\n      \"readings\": [\n        \"Count an internal permanent-solid shell against the target fraction of the whole unit cube.\",\n        \"Exclude shell material from V while retaining the whole unit cube as the reference volume.\",\n        \"Exclude the shell and apply the target fraction only to the remaining designable volume.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Density-to-modulus penalization exponent\",\n      \"issue\": \"vague\",\n      \"description\": \"Structures optimization does not give p. The SIMP framework says p is 3 'in most cases', without explicitly assigning it to Fig. 7.\",\n      \"readings\": [\n        \"Use Eq. (12) with p = 3.\",\n        \"Use Eq. (12) with p = 2.\",\n        \"Use Eq. (12) with p = 4.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Voxel finite-element formulation\",\n      \"issue\": \"missing\",\n      \"description\": \"The 40 x 40 x 40 voxel count is explicit, but neither Structures optimization nor the Methods specifies element interpolation, integration, or stabilization.\",\n      \"readings\": [\n        \"Eight-node trilinear hexahedra with 2 x 2 x 2 Gauss integration.\",\n        \"Eight-node trilinear hexahedra with one-point integration and hourglass stabilization.\",\n        \"Twenty-node quadratic hexahedra on the same 40 x 40 x 40 cell partition.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Spatial filter operator and its position in the pipeline\",\n      \"issue\": \"vague\",\n      \"description\": \"Structures optimization says SDF values are filtered and projected. Eq. (13) describes a conventional density filter, while the pattern-preserving equations pass neural SDF values directly into projections.\",\n      \"readings\": [\n        \"Apply the averaging operator of Eq. (13) to SDF samples before projection.\",\n        \"Apply Eq. (13) to densities after projection.\",\n        \"Use only the pointwise projections of Eqs. (15) and (16), with no spatial averaging.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Spatial filter radius\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (13) introduces a filter radius but supplies no numerical radius for Fig. 7 if spatial filtering is used.\",\n      \"readings\": [\n        \"Radius of 1.5 voxel widths, equal to 0.0375 of the cube side.\",\n        \"Radius of 2 voxel widths, equal to 0.05 of the cube side.\",\n        \"Radius of 3 voxel widths, equal to 0.075 of the cube side.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"First SDF-to-density projection\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Eq. (15) gives bar_rho = exp(-alpha*s) - exp(alpha*s). The constraints following Eq. (17) instead give bar_rho = exp(alpha*s) - 1, reversing which SDF sign produces larger density.\",\n      \"readings\": [\n        \"Implement Eq. (15) literally, consistent with negative SDF denoting solid.\",\n        \"Implement the compact constraint following Eq. (17) literally.\",\n        \"Use the compact exponential form with its sign corrected to exp(-alpha*s) - 1.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Enforcement of density bounds after projection\",\n      \"issue\": \"conflicting\",\n      \"description\": \"The text requires densities between 0 and 1, but Eq. (16) can exceed those bounds when the first projection has magnitude greater than 1. No clipping or equivalent bound-enforcement rule is specified.\",\n      \"readings\": [\n        \"Evaluate Eq. (16) literally without clipping.\",\n        \"Clamp the output of Eq. (16) to the interval [0,1].\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Projection continuation schedule\",\n      \"issue\": \"vague\",\n      \"description\": \"Pattern-preserving TO specifies beta initially 1, an increase 'by beta = 4.0' every 30 iterations, and a maximum of 128, but does not distinguish addition from multiplication.\",\n      \"readings\": [\n        \"Every 30 iterations set beta = min(128, beta + 4).\",\n        \"Every 30 iterations set beta = min(128, 4*beta).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Enforcement of the volume requirement\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Eqs. (9) and (22) state a hard upper bound V <= V0. Eq. (23) instead supplies a finite symmetric penalty around V = V0, which does not guarantee that upper bound.\",\n      \"readings\": [\n        \"Minimize compliance subject to a hard inequality V <= V0.\",\n        \"Minimize Eq. (23) without a separate hard volume constraint, using the stated mu continuation.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Reference compliance c0\",\n      \"issue\": \"vague\",\n      \"description\": \"Eq. (23) calls c0 the compliance of the initial structure but does not specify whether it is evaluated on the binary starting geometry or its initially projected continuous-density representation.\",\n      \"readings\": [\n        \"Compute c0 using binary element densities determined by the initial SDF sign.\",\n        \"Compute c0 using the initial projected density field with beta = 1.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Adam configuration for structural optimization\",\n      \"issue\": \"missing\",\n      \"description\": \"Pattern-preserving TO names Adam but gives no structural-optimization learning rate, rate schedule, momentum coefficients, or epsilon. The stated learning-rate schedule belongs to morphology training.\",\n      \"readings\": [\n        \"Fixed learning rate 0.001, momentum coefficients (0.9, 0.999), epsilon 1e-8.\",\n        \"Fixed learning rate 0.0005, momentum coefficients (0.9, 0.999), epsilon 1e-8.\",\n        \"Fixed learning rate 0.001, momentum coefficients (0.9, 0.99), epsilon 1e-7.\",\n        \"Learning rate 0.0005 halved every 500 optimization iterations, momentum coefficients (0.9, 0.999), epsilon 1e-8.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Optimization termination\",\n      \"issue\": \"missing\",\n      \"description\": \"Mechanical stiffness discusses convergence curves, but the text gives neither the Fig. 7 iteration budget nor numerical stopping criteria.\",\n      \"readings\": [\n        \"Run 1000 optimization iterations.\",\n        \"Run 2000 optimization iterations.\",\n        \"After continuation parameters reach their caps, stop when relative compliance change is below 1e-4 and relative volume error is below 1e-3.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Linear equilibrium solution accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"Structures optimization specifies K U = F but gives no linear-system algorithm or convergence tolerance.\",\n      \"readings\": [\n        \"Use double-precision direct factorization.\",\n        \"Use preconditioned conjugate gradients with relative residual tolerance 1e-8.\",\n        \"Use preconditioned conjugate gradients with relative residual tolerance 1e-4.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"other\",\n      \"entity\": \"Initial scaffold and its two initial latent codes\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Mechanical stiffness and the Fig. 7 caption identify only a randomly selected shared sample. Its shape is shown in the unavailable figure; no sample ID, TPMS parameters, or latent vectors are supplied.\",\n      \"readings\": [\n        \"Use the retained sample with the smallest initial volume fraction and its code in each network.\",\n        \"Use the retained sample with the largest initial volume fraction and its code in each network.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"other\",\n      \"entity\": \"Exact learned shape spaces for the full and filtered cases\",\n      \"issue\": \"missing\",\n      \"description\": \"Fig. 7 optimizes within two learned shape spaces. The text supplies neither network coefficients nor enough deterministic dataset-selection and training information to reconstruct those exact maps; architecture alone does not determine them.\",\n      \"readings\": [\n        \"Retrain a full-dataset and filtered-dataset network pair using random seed 0.\",\n        \"Retrain a full-dataset and filtered-dataset network pair using random seed 1.\"\n      ],\n      \"effect\": \"layout\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "support_location_extent",
+    "entity": "Supported nodes at the base",
+    "issue": "vague",
+    "description": "Structures optimization locates fixed points at the base but does not explicitly distinguish the entire background-grid face from the scaffold's material contact points.",
+    "readings": [
+     "Fix all three translations of all 41 x 41 grid nodes on the bottom face.",
+     "Fix all three translations only at bottom-face nodes incident to the initial scaffold's solid elements."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Top nodes receiving compression loads",
+    "issue": "vague",
+    "description": "Structures optimization specifies distributed loading on the top surface through a shell, without identifying whether the loaded surface is the nominal domain face or only scaffold contact points.",
+    "readings": [
+     "Apply forces to every node on the nominal top face, including nodes adjacent to void elements.",
+     "Apply forces only to top-face nodes contacting the initial solid scaffold.",
+     "Apply the resultant to a loading shell and obtain scaffold nodal forces through shell coupling."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Spatial distribution and discretization of top forces",
+    "issue": "missing",
+    "description": "The phrase 'distributed forces' in Structures optimization does not supply a traction field or nodal force weights.",
+    "readings": [
+     "Uniform normal pressure with consistent nodal loads: interior, edge, and corner nodes receive weights proportional to 1, 1/2, and 1/4.",
+     "Equal normal force at every loaded top-face node."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Compression load resultant",
+    "issue": "missing",
+    "description": "Neither Structures optimization nor the Fig. 6 caption supplies the compression force or pressure magnitude.",
+    "readings": [
+     "Total compression force of 1 in the numerical force units.",
+     "Total compression force of 10 in the same units."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Loading shell geometry and permanent-solid mask",
+    "issue": "vague",
+    "description": "Structures optimization calls the top shell 'thin' but gives no thickness or indication whether it occupies design-grid elements or lies outside the unit cube.",
+    "readings": [
+     "Use a surface shell at the top face, leaving all 40 x 40 x 40 voxels designable.",
+     "Permanently fill the uppermost voxel layer, occupying the top 1/40 of the cube height.",
+     "Permanently fill the uppermost two voxel layers, occupying the top 2/40 of the cube height.",
+     "Append a permanent-solid layer of thickness 1/40 above the unit cube."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "Mechanical representation of the loading shell",
+    "issue": "missing",
+    "description": "Structures optimization does not specify whether the shell has elastic stiffness, imposes rigid-platen kinematics, or merely defines equivalent distributed loads.",
+    "readings": [
+     "Model a deformable plate or shell using the solid material's E = 1 and Poisson's ratio 0.3.",
+     "Represent an external rigid platen through linear multipoint constraints.",
+     "Add no fixture stiffness and apply equivalent nodal forces directly."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_type",
+    "entity": "Interface between loading shell and scaffold",
+    "issue": "missing",
+    "description": "The shell description in Structures optimization does not state how its motion is coupled to the scaffold or whether lateral slip is permitted.",
+    "readings": [
+     "Bond the shell to the scaffold by tying all three displacement components.",
+     "Couple only normal displacement and allow tangential slip."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Loading-shell contribution to the volume constraint",
+    "issue": "vague",
+    "description": "The five target fractions are explicit, but the shell's inclusion in V and the reference volume is not. Eq. (22) does not identify shell elements separately.",
+    "readings": [
+     "Count an internal permanent-solid shell against the target fraction of the whole unit cube.",
+     "Exclude shell material from V while retaining the whole unit cube as the reference volume.",
+     "Exclude the shell and apply the target fraction only to the remaining designable volume."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Density-to-modulus penalization exponent",
+    "issue": "vague",
+    "description": "Structures optimization does not give p. The SIMP framework says p is 3 'in most cases', without explicitly assigning it to Fig. 7.",
+    "readings": [
+     "Use Eq. (12) with p = 3.",
+     "Use Eq. (12) with p = 2.",
+     "Use Eq. (12) with p = 4."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Voxel finite-element formulation",
+    "issue": "missing",
+    "description": "The 40 x 40 x 40 voxel count is explicit, but neither Structures optimization nor the Methods specifies element interpolation, integration, or stabilization.",
+    "readings": [
+     "Eight-node trilinear hexahedra with 2 x 2 x 2 Gauss integration.",
+     "Eight-node trilinear hexahedra with one-point integration and hourglass stabilization.",
+     "Twenty-node quadratic hexahedra on the same 40 x 40 x 40 cell partition."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Spatial filter operator and its position in the pipeline",
+    "issue": "vague",
+    "description": "Structures optimization says SDF values are filtered and projected. Eq. (13) describes a conventional density filter, while the pattern-preserving equations pass neural SDF values directly into projections.",
+    "readings": [
+     "Apply the averaging operator of Eq. (13) to SDF samples before projection.",
+     "Apply Eq. (13) to densities after projection.",
+     "Use only the pointwise projections of Eqs. (15) and (16), with no spatial averaging."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Spatial filter radius",
+    "issue": "missing",
+    "description": "Eq. (13) introduces a filter radius but supplies no numerical radius for Fig. 7 if spatial filtering is used.",
+    "readings": [
+     "Radius of 1.5 voxel widths, equal to 0.0375 of the cube side.",
+     "Radius of 2 voxel widths, equal to 0.05 of the cube side.",
+     "Radius of 3 voxel widths, equal to 0.075 of the cube side."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "First SDF-to-density projection",
+    "issue": "conflicting",
+    "description": "Eq. (15) gives bar_rho = exp(-alpha*s) - exp(alpha*s). The constraints following Eq. (17) instead give bar_rho = exp(alpha*s) - 1, reversing which SDF sign produces larger density.",
+    "readings": [
+     "Implement Eq. (15) literally, consistent with negative SDF denoting solid.",
+     "Implement the compact constraint following Eq. (17) literally.",
+     "Use the compact exponential form with its sign corrected to exp(-alpha*s) - 1."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Enforcement of density bounds after projection",
+    "issue": "conflicting",
+    "description": "The text requires densities between 0 and 1, but Eq. (16) can exceed those bounds when the first projection has magnitude greater than 1. No clipping or equivalent bound-enforcement rule is specified.",
+    "readings": [
+     "Evaluate Eq. (16) literally without clipping.",
+     "Clamp the output of Eq. (16) to the interval [0,1]."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Projection continuation schedule",
+    "issue": "vague",
+    "description": "Pattern-preserving TO specifies beta initially 1, an increase 'by beta = 4.0' every 30 iterations, and a maximum of 128, but does not distinguish addition from multiplication.",
+    "readings": [
+     "Every 30 iterations set beta = min(128, beta + 4).",
+     "Every 30 iterations set beta = min(128, 4*beta)."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Enforcement of the volume requirement",
+    "issue": "conflicting",
+    "description": "Eqs. (9) and (22) state a hard upper bound V <= V0. Eq. (23) instead supplies a finite symmetric penalty around V = V0, which does not guarantee that upper bound.",
+    "readings": [
+     "Minimize compliance subject to a hard inequality V <= V0.",
+     "Minimize Eq. (23) without a separate hard volume constraint, using the stated mu continuation."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Reference compliance c0",
+    "issue": "vague",
+    "description": "Eq. (23) calls c0 the compliance of the initial structure but does not specify whether it is evaluated on the binary starting geometry or its initially projected continuous-density representation.",
+    "readings": [
+     "Compute c0 using binary element densities determined by the initial SDF sign.",
+     "Compute c0 using the initial projected density field with beta = 1."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Adam configuration for structural optimization",
+    "issue": "missing",
+    "description": "Pattern-preserving TO names Adam but gives no structural-optimization learning rate, rate schedule, momentum coefficients, or epsilon. The stated learning-rate schedule belongs to morphology training.",
+    "readings": [
+     "Fixed learning rate 0.001, momentum coefficients (0.9, 0.999), epsilon 1e-8.",
+     "Fixed learning rate 0.0005, momentum coefficients (0.9, 0.999), epsilon 1e-8.",
+     "Fixed learning rate 0.001, momentum coefficients (0.9, 0.99), epsilon 1e-7.",
+     "Learning rate 0.0005 halved every 500 optimization iterations, momentum coefficients (0.9, 0.999), epsilon 1e-8."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Optimization termination",
+    "issue": "missing",
+    "description": "Mechanical stiffness discusses convergence curves, but the text gives neither the Fig. 7 iteration budget nor numerical stopping criteria.",
+    "readings": [
+     "Run 1000 optimization iterations.",
+     "Run 2000 optimization iterations.",
+     "After continuation parameters reach their caps, stop when relative compliance change is below 1e-4 and relative volume error is below 1e-3."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Linear equilibrium solution accuracy",
+    "issue": "missing",
+    "description": "Structures optimization specifies K U = F but gives no linear-system algorithm or convergence tolerance.",
+    "readings": [
+     "Use double-precision direct factorization.",
+     "Use preconditioned conjugate gradients with relative residual tolerance 1e-8.",
+     "Use preconditioned conjugate gradients with relative residual tolerance 1e-4."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "other",
+    "entity": "Initial scaffold and its two initial latent codes",
+    "issue": "figure_only",
+    "description": "Mechanical stiffness and the Fig. 7 caption identify only a randomly selected shared sample. Its shape is shown in the unavailable figure; no sample ID, TPMS parameters, or latent vectors are supplied.",
+    "readings": [
+     "Use the retained sample with the smallest initial volume fraction and its code in each network.",
+     "Use the retained sample with the largest initial volume fraction and its code in each network."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "Exact learned shape spaces for the full and filtered cases",
+    "issue": "missing",
+    "description": "Fig. 7 optimizes within two learned shape spaces. The text supplies neither network coefficients nor enough deterministic dataset-selection and training information to reconstruct those exact maps; architecture alone does not determine them.",
+    "readings": [
+     "Retrain a full-dataset and filtered-dataset network pair using random seed 0.",
+     "Retrain a full-dataset and filtered-dataset network pair using random seed 1."
+    ],
+    "effect": "layout"
+   }
+  ]
+ },
+ "wall_s": 507.15038108825684,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L12",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 0,
+ "locator": "Results, 'Structures optimization' and 'Mechanical stiffness', Fig. 6 (right) and Fig. 7",
+ "finished": "2026-10-22T18:04:38"
+}

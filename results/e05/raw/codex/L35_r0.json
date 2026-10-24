@@ -1,0 +1,282 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Physical aspect ratios of the cantilever domain\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 gives element counts but no element dimensions. Let x, y, z denote the 40-, 20-, and 8-element directions, with respective extents L, H, B.\",\n      \"readings\": [\n        \"L:H:B = 40:20:8, using cubic elements\",\n        \"L:H:B = 40:20:4, using elements half as deep as they are long\",\n        \"L:H:B = 40:10:8, using elements half as tall as they are long\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Absolute domain dimensions\",\n      \"issue\": \"missing\",\n      \"description\": \"No physical dimensions or length units are supplied. The coordinate normalization in Sec. 3.4 supplies no physical scale. Uniform scaling preserves the layout when relative filter scales and the load pattern are preserved.\",\n      \"readings\": [\n        \"L = 40 mm, H = 20 mm, B = 8 mm\",\n        \"L = 400 mm, H = 200 mm, B = 80 mm\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"Clamped attachment footprint\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 4.1 calls the problem a cantilever; Fig. 3(a) is identified as the boundary-condition illustration. The supported node set and attachment footprint are not specified in words. Take x = 0 as the nominal attachment end for these alternatives.\",\n      \"readings\": [\n        \"Clamp every node on the full x = 0 end face\",\n        \"Clamp only the perimeter nodes of the x = 0 end face\",\n        \"Clamp four finite corner patches on the x = 0 end face\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"Applied load location\",\n      \"issue\": \"figure_only\",\n      \"description\": \"The prose gives no load coordinates or longitudinal station; the boundary conditions are assigned to unavailable Fig. 3(a).\",\n      \"readings\": [\n        \"Load centered at the free-end face: (L, H/2, B/2)\",\n        \"Load centered on the lower free-end edge: (L, 0, B/2)\",\n        \"Load on the lower surface at (3L/4, 0, B/2)\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Loaded node set and force distribution\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Neither Sec. 4.1 nor the Fig. 3 caption specifies whether loading is concentrated, spread along an edge, or spread across a face, or how nodal weights are assigned.\",\n      \"readings\": [\n        \"One concentrated nodal force\",\n        \"Equal nodal forces along a thickness-spanning edge, normalized to a prescribed total resultant\",\n        \"Uniform line traction along that edge, with endpoint nodes receiving half the interior-node force\",\n        \"Uniform traction across the free-end face, using consistent nodal area weights\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"Applied force direction\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 4.1 supplies no force components; the direction would have to be recovered from Fig. 3(a).\",\n      \"readings\": [\n        \"Transverse force in the negative y direction\",\n        \"Transverse force in the negative z direction\",\n        \"Axial force in the positive x direction\",\n        \"Equal transverse components in the negative y and negative z directions\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"Overall force scale\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (7) introduces F without numerical values or units. Sec. 4.1 and the caption do not state a resultant or a per-node magnitude. For a fixed load pattern, this changes compliance by an overall factor.\",\n      \"readings\": [\n        \"Total resultant magnitude is 1 in consistent force units\",\n        \"Total resultant magnitude is 100 in the same force units\",\n        \"Each loaded node receives a unit force, so the resultant depends on the loaded node count\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Target volume fraction V*\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.5 defines the equality target V*, but Sec. 4.1 never assigns its numerical value.\",\n      \"readings\": [\n        \"V* = 0.20\",\n        \"V* = 0.30\",\n        \"V* = 0.50\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Prescribed voids and protected solid attachments\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.2 discusses optional passive void regions, but Sec. 4.1 supplies no example-specific mask or explicit statement that all cells are designable. Protected solid attachment regions are also unspecified.\",\n      \"readings\": [\n        \"All elements are designable; no prescribed voids or protected solids\",\n        \"All elements incident to constrained or loaded nodes are fixed solid; remaining elements are designable\",\n        \"Elements whose centers lie in x between L/3 and 2L/3 and y between H/3 and 2H/3 are fixed void through the full thickness\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Solid Young's modulus E0\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (6) introduces E0 without a numerical value or units. Scaling both E0 and Emin together preserves their contrast and only scales compliance.\",\n      \"readings\": [\n        \"E0 = 1 in consistent nondimensional units\",\n        \"E0 = 70 GPa\",\n        \"E0 = 210 GPa\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Poisson's ratio\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.2 specifies isotropy but provides no Poisson's ratio for the three-dimensional elastic constitutive matrix.\",\n      \"readings\": [\n        \"Poisson's ratio = 0.20\",\n        \"Poisson's ratio = 0.30\",\n        \"Poisson's ratio = 0.45\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Void-to-solid stiffness ratio Emin/E0\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (6) includes Emin but never specifies its value or its ratio to E0.\",\n      \"readings\": [\n        \"Emin/E0 = 0.001\",\n        \"Emin/E0 = 0.000001\",\n        \"Emin/E0 = 0.000000001\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"SIMP penalization exponent\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (6) uses p without giving its value or stating whether a continuation schedule is applied in Sec. 4.1.\",\n      \"readings\": [\n        \"Fixed p = 2\",\n        \"Fixed p = 3\",\n        \"Increase p linearly from 1 to 3 over the first 100 iterations, then hold it at 3\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Filtering and density projection for the SIMP comparator\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 explicitly describes the neural result as requiring no filtering. It does not specify the SIMP comparator's filter type, radius, boundary treatment, or any density projection.\",\n      \"readings\": [\n        \"Unfiltered SIMP densities with no projection\",\n        \"Cone sensitivity filter of radius 1.5 element widths, truncated and renormalized at domain boundaries\",\n        \"Cone density filter of radius 1.5 element widths, truncated and renormalized at boundaries, with no projection\",\n        \"Cone density filter of radius 2 element widths followed by a smooth Heaviside projection with threshold 0.5 and sharpness 8\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"SIMP density bounds and their enforcement\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 describes independently stored element variables but does not explain how SGD and Adam keep those variables within admissible density bounds or whether a positive density floor is imposed.\",\n      \"readings\": [\n        \"Optimize densities directly and clip them to [0, 1] after each update\",\n        \"Optimize densities directly and clip them to [0.001, 1] after each update\",\n        \"Optimize independent logits and map each through a sigmoid\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Neural density parameterization controlling implicit regularization\",\n      \"issue\": \"missing\",\n      \"description\": \"For matching Fig. 3(b), Sec. 3.1 leaves the cosine-feature count, kernel frequency span, phase initialization, and kernel-layer trainability unspecified. These settings control the filter-free density representation.\",\n      \"readings\": [\n        \"27 fixed features on a 3-by-3-by-3 frequency grid spanning [-2pi, 2pi] in each normalized coordinate direction; phases initialized uniformly in [0, 2pi) with seed 0\",\n        \"125 fixed features on a 5-by-5-by-5 frequency grid spanning [-8pi, 8pi] in each normalized coordinate direction; phases initialized uniformly in [0, 2pi) with seed 0\",\n        \"The same 125-feature initialization, with kernel frequencies and phase biases trained along with the dense-layer weights\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"other\",\n      \"entity\": \"Enforced density symmetry\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.2 provides a symmetry operation, but Sec. 4.1 does not state whether it is used or identify a symmetry plane. The explicit symmetry statement in Sec. 4.4 concerns the bike frame.\",\n      \"readings\": [\n        \"No enforced density symmetry\",\n        \"Enforce reflection symmetry about the mid-thickness plane z = B/2\",\n        \"Enforce reflection symmetry about both z = B/2 and y = H/2\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initial density field and optimization-variable initialization\",\n      \"issue\": \"missing\",\n      \"description\": \"The uniform V* field in Sec. 3.5 defines c0. The text does not specify the starting density field, dense-layer initialization, or random seed for the validation optimization.\",\n      \"readings\": [\n        \"Start with uniform density V*; initialize neural dense weights to zero and the bias to log(V*/(1-V*))\",\n        \"Start with uniform density 0.5; initialize neural dense weights and bias to zero\",\n        \"Start near uniform V* using small random perturbations with fixed seed 0\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"SGD and Adam hyperparameters\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 fixes the optimizer switch and iteration count but supplies no learning rates, rate schedules, SGD momentum settings, or Adam coefficients and numerical epsilon.\",\n      \"readings\": [\n        \"SGD learning rate 0.01 with zero momentum; Adam learning rate 0.001, beta1 = 0.9, beta2 = 0.999, epsilon = 1e-8; constant rates within each phase\",\n        \"SGD learning rate 0.1 with momentum 0.9; Adam learning rate 0.01, beta1 = 0.9, beta2 = 0.99, epsilon = 1e-7; constant rates within each phase\",\n        \"Use the first parameter set and reduce the Adam learning rate tenfold after iteration 200\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Volume-penalty ramp alpha1\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 3.5 specifies an initial value of 0 and maximum of 100, with gradual increases, but gives no increment or ramp duration.\",\n      \"readings\": [\n        \"Increase linearly from 0 to 100 over all 300 iterations\",\n        \"Increase linearly from 0 to 100 over the first 100 iterations, then hold at 100\",\n        \"Increase quadratically from 0 to 100 over all 300 iterations\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Eight-node hexahedral element integration\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.2 specifies eight-node hexahedra but does not state the integration rule, reduced-integration stabilization, or volumetric treatment.\",\n      \"readings\": [\n        \"Trilinear hexahedra with full 2-by-2-by-2 Gauss integration\",\n        \"Trilinear hexahedra with one-point integration and hourglass stabilization\",\n        \"Trilinear hexahedra with selective reduced integration of the volumetric contribution\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Finite-element linear-solver convergence settings\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.2 specifies a CUDA-accelerated sparse iterative solver but gives no algorithm, preconditioner, residual tolerance, iteration cap, or failure handling.\",\n      \"readings\": [\n        \"Preconditioned conjugate gradients with diagonal preconditioning, relative residual tolerance 1e-6, and a 1000-iteration cap\",\n        \"Preconditioned conjugate gradients with incomplete-Cholesky preconditioning, relative residual tolerance 1e-10, and a 10000-iteration cap\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "Physical aspect ratios of the cantilever domain",
+    "issue": "missing",
+    "description": "Sec. 4.1 gives element counts but no element dimensions. Let x, y, z denote the 40-, 20-, and 8-element directions, with respective extents L, H, B.",
+    "readings": [
+     "L:H:B = 40:20:8, using cubic elements",
+     "L:H:B = 40:20:4, using elements half as deep as they are long",
+     "L:H:B = 40:10:8, using elements half as tall as they are long"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "Absolute domain dimensions",
+    "issue": "missing",
+    "description": "No physical dimensions or length units are supplied. The coordinate normalization in Sec. 3.4 supplies no physical scale. Uniform scaling preserves the layout when relative filter scales and the load pattern are preserved.",
+    "readings": [
+     "L = 40 mm, H = 20 mm, B = 8 mm",
+     "L = 400 mm, H = 200 mm, B = 80 mm"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "Clamped attachment footprint",
+    "issue": "figure_only",
+    "description": "Sec. 4.1 calls the problem a cantilever; Fig. 3(a) is identified as the boundary-condition illustration. The supported node set and attachment footprint are not specified in words. Take x = 0 as the nominal attachment end for these alternatives.",
+    "readings": [
+     "Clamp every node on the full x = 0 end face",
+     "Clamp only the perimeter nodes of the x = 0 end face",
+     "Clamp four finite corner patches on the x = 0 end face"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "Applied load location",
+    "issue": "figure_only",
+    "description": "The prose gives no load coordinates or longitudinal station; the boundary conditions are assigned to unavailable Fig. 3(a).",
+    "readings": [
+     "Load centered at the free-end face: (L, H/2, B/2)",
+     "Load centered on the lower free-end edge: (L, 0, B/2)",
+     "Load on the lower surface at (3L/4, 0, B/2)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Loaded node set and force distribution",
+    "issue": "figure_only",
+    "description": "Neither Sec. 4.1 nor the Fig. 3 caption specifies whether loading is concentrated, spread along an edge, or spread across a face, or how nodal weights are assigned.",
+    "readings": [
+     "One concentrated nodal force",
+     "Equal nodal forces along a thickness-spanning edge, normalized to a prescribed total resultant",
+     "Uniform line traction along that edge, with endpoint nodes receiving half the interior-node force",
+     "Uniform traction across the free-end face, using consistent nodal area weights"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Applied force direction",
+    "issue": "figure_only",
+    "description": "Sec. 4.1 supplies no force components; the direction would have to be recovered from Fig. 3(a).",
+    "readings": [
+     "Transverse force in the negative y direction",
+     "Transverse force in the negative z direction",
+     "Axial force in the positive x direction",
+     "Equal transverse components in the negative y and negative z directions"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Overall force scale",
+    "issue": "missing",
+    "description": "Eq. (7) introduces F without numerical values or units. Sec. 4.1 and the caption do not state a resultant or a per-node magnitude. For a fixed load pattern, this changes compliance by an overall factor.",
+    "readings": [
+     "Total resultant magnitude is 1 in consistent force units",
+     "Total resultant magnitude is 100 in the same force units",
+     "Each loaded node receives a unit force, so the resultant depends on the loaded node count"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Target volume fraction V*",
+    "issue": "missing",
+    "description": "Sec. 3.5 defines the equality target V*, but Sec. 4.1 never assigns its numerical value.",
+    "readings": [
+     "V* = 0.20",
+     "V* = 0.30",
+     "V* = 0.50"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Prescribed voids and protected solid attachments",
+    "issue": "missing",
+    "description": "Sec. 3.2 discusses optional passive void regions, but Sec. 4.1 supplies no example-specific mask or explicit statement that all cells are designable. Protected solid attachment regions are also unspecified.",
+    "readings": [
+     "All elements are designable; no prescribed voids or protected solids",
+     "All elements incident to constrained or loaded nodes are fixed solid; remaining elements are designable",
+     "Elements whose centers lie in x between L/3 and 2L/3 and y between H/3 and 2H/3 are fixed void through the full thickness"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Solid Young's modulus E0",
+    "issue": "missing",
+    "description": "Eq. (6) introduces E0 without a numerical value or units. Scaling both E0 and Emin together preserves their contrast and only scales compliance.",
+    "readings": [
+     "E0 = 1 in consistent nondimensional units",
+     "E0 = 70 GPa",
+     "E0 = 210 GPa"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson's ratio",
+    "issue": "missing",
+    "description": "Sec. 3.2 specifies isotropy but provides no Poisson's ratio for the three-dimensional elastic constitutive matrix.",
+    "readings": [
+     "Poisson's ratio = 0.20",
+     "Poisson's ratio = 0.30",
+     "Poisson's ratio = 0.45"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Void-to-solid stiffness ratio Emin/E0",
+    "issue": "missing",
+    "description": "Eq. (6) includes Emin but never specifies its value or its ratio to E0.",
+    "readings": [
+     "Emin/E0 = 0.001",
+     "Emin/E0 = 0.000001",
+     "Emin/E0 = 0.000000001"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "SIMP penalization exponent",
+    "issue": "missing",
+    "description": "Eq. (6) uses p without giving its value or stating whether a continuation schedule is applied in Sec. 4.1.",
+    "readings": [
+     "Fixed p = 2",
+     "Fixed p = 3",
+     "Increase p linearly from 1 to 3 over the first 100 iterations, then hold it at 3"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Filtering and density projection for the SIMP comparator",
+    "issue": "missing",
+    "description": "Sec. 4.1 explicitly describes the neural result as requiring no filtering. It does not specify the SIMP comparator's filter type, radius, boundary treatment, or any density projection.",
+    "readings": [
+     "Unfiltered SIMP densities with no projection",
+     "Cone sensitivity filter of radius 1.5 element widths, truncated and renormalized at domain boundaries",
+     "Cone density filter of radius 1.5 element widths, truncated and renormalized at boundaries, with no projection",
+     "Cone density filter of radius 2 element widths followed by a smooth Heaviside projection with threshold 0.5 and sharpness 8"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "SIMP density bounds and their enforcement",
+    "issue": "missing",
+    "description": "Sec. 4.1 describes independently stored element variables but does not explain how SGD and Adam keep those variables within admissible density bounds or whether a positive density floor is imposed.",
+    "readings": [
+     "Optimize densities directly and clip them to [0, 1] after each update",
+     "Optimize densities directly and clip them to [0.001, 1] after each update",
+     "Optimize independent logits and map each through a sigmoid"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Neural density parameterization controlling implicit regularization",
+    "issue": "missing",
+    "description": "For matching Fig. 3(b), Sec. 3.1 leaves the cosine-feature count, kernel frequency span, phase initialization, and kernel-layer trainability unspecified. These settings control the filter-free density representation.",
+    "readings": [
+     "27 fixed features on a 3-by-3-by-3 frequency grid spanning [-2pi, 2pi] in each normalized coordinate direction; phases initialized uniformly in [0, 2pi) with seed 0",
+     "125 fixed features on a 5-by-5-by-5 frequency grid spanning [-8pi, 8pi] in each normalized coordinate direction; phases initialized uniformly in [0, 2pi) with seed 0",
+     "The same 125-feature initialization, with kernel frequencies and phase biases trained along with the dense-layer weights"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "Enforced density symmetry",
+    "issue": "missing",
+    "description": "Sec. 3.2 provides a symmetry operation, but Sec. 4.1 does not state whether it is used or identify a symmetry plane. The explicit symmetry statement in Sec. 4.4 concerns the bike frame.",
+    "readings": [
+     "No enforced density symmetry",
+     "Enforce reflection symmetry about the mid-thickness plane z = B/2",
+     "Enforce reflection symmetry about both z = B/2 and y = H/2"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial density field and optimization-variable initialization",
+    "issue": "missing",
+    "description": "The uniform V* field in Sec. 3.5 defines c0. The text does not specify the starting density field, dense-layer initialization, or random seed for the validation optimization.",
+    "readings": [
+     "Start with uniform density V*; initialize neural dense weights to zero and the bias to log(V*/(1-V*))",
+     "Start with uniform density 0.5; initialize neural dense weights and bias to zero",
+     "Start near uniform V* using small random perturbations with fixed seed 0"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "SGD and Adam hyperparameters",
+    "issue": "missing",
+    "description": "Sec. 4.1 fixes the optimizer switch and iteration count but supplies no learning rates, rate schedules, SGD momentum settings, or Adam coefficients and numerical epsilon.",
+    "readings": [
+     "SGD learning rate 0.01 with zero momentum; Adam learning rate 0.001, beta1 = 0.9, beta2 = 0.999, epsilon = 1e-8; constant rates within each phase",
+     "SGD learning rate 0.1 with momentum 0.9; Adam learning rate 0.01, beta1 = 0.9, beta2 = 0.99, epsilon = 1e-7; constant rates within each phase",
+     "Use the first parameter set and reduce the Adam learning rate tenfold after iteration 200"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Volume-penalty ramp alpha1",
+    "issue": "vague",
+    "description": "Sec. 3.5 specifies an initial value of 0 and maximum of 100, with gradual increases, but gives no increment or ramp duration.",
+    "readings": [
+     "Increase linearly from 0 to 100 over all 300 iterations",
+     "Increase linearly from 0 to 100 over the first 100 iterations, then hold at 100",
+     "Increase quadratically from 0 to 100 over all 300 iterations"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Eight-node hexahedral element integration",
+    "issue": "missing",
+    "description": "Sec. 3.2 specifies eight-node hexahedra but does not state the integration rule, reduced-integration stabilization, or volumetric treatment.",
+    "readings": [
+     "Trilinear hexahedra with full 2-by-2-by-2 Gauss integration",
+     "Trilinear hexahedra with one-point integration and hourglass stabilization",
+     "Trilinear hexahedra with selective reduced integration of the volumetric contribution"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Finite-element linear-solver convergence settings",
+    "issue": "missing",
+    "description": "Sec. 3.2 specifies a CUDA-accelerated sparse iterative solver but gives no algorithm, preconditioner, residual tolerance, iteration cap, or failure handling.",
+    "readings": [
+     "Preconditioned conjugate gradients with diagonal preconditioning, relative residual tolerance 1e-6, and a 1000-iteration cap",
+     "Preconditioned conjugate gradients with incomplete-Cholesky preconditioning, relative residual tolerance 1e-10, and a 10000-iteration cap"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 826.1569619178772,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L35",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 0,
+ "locator": "Sec. 4.1 'Validation', the 3-D cantilever (Fig. 3)",
+ "finished": "2026-10-23T00:18:10"
+}

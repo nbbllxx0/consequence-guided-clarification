@@ -1,0 +1,145 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"cantilever clamp and its coordinate convention\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Sec. 4.1.1 gives the domain (-1,1) \u00d7 (-0.5,0.5), but calls x=0 its left boundary. The stated 3-D extension instead clamps x=-1.\",\n      \"readings\": [\n        \"Keep the stated domain and clamp its entire left edge at x=-1; treat x=0 as a typo.\",\n        \"Keep the stated domain and constrain the internal line x=0, retaining the portion -1<x<0.\",\n        \"Use the domain (0,1) \u00d7 (-0.5,0.5), with the clamp at x=0 and load at x=1; treat the domain's lower x-bound as a typo.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"downward load at the right-edge midpoint\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Sec. 4.1.1 calls this a point load at the center, but specifies the finite segment x=1, -0.05<y<0.05. Eq. (3.16) treats t as a boundary traction.\",\n      \"readings\": [\n        \"Apply a concentrated force at (1,0).\",\n        \"Apply a uniform downward traction over x=1, -0.05<y<0.05.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"normalization of the right-edge load\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.1.1's combination of 'point load' and t=(0,-1) leaves resultant-force versus traction-density normalization unresolved. This only scales pure compliance, but can change layout when the paper's fixed Ginzburg\u2013Landau and volume-penalty weights are retained.\",\n      \"readings\": [\n        \"On the stated patch, use t_y=-1, giving resultant F_y=-0.1 per unit thickness.\",\n        \"Normalize the same patch to resultant F_y=-1, giving uniform t_y=-10.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"material retained around the clamp and load\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1.1 specifies no passive-region mask or retained-solid pad dimensions. The uniform initialization does not explicitly specify whether any elements are subsequently frozen.\",\n      \"readings\": [\n        \"Allow all elements to vary; prescribe no passive regions.\",\n        \"Keep one element layer adjacent to the loaded segment solid.\",\n        \"Keep one element layer adjacent to both the clamp and loaded segment solid.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"initial volume-penalty coefficient\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.1.2 specifies only an O(1) initial lambda_penal. The known multiplier zeta=0.98 and 500 iterations do not determine the coefficient sequence without its initial value.\",\n      \"readings\": [\n        \"lambda_penal^(0)=0.5.\",\n        \"lambda_penal^(0)=1.\",\n        \"lambda_penal^(0)=2.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"timing of volume-penalty updates\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Section 4 says the penalty is updated after each outer loop, whereas Algorithm 1, line 16, updates it before that iteration's state and topology steps.\",\n      \"readings\": [\n        \"Use lambda_penal^(0)/0.98 for the first topology update.\",\n        \"Use lambda_penal^(0) for the first topology update, then divide by 0.98 after the iteration.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"reference spectral bandwidths for case (a)\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Table 2 and Sec. 4.1.2 give displacement bandwidth 35 and topology bandwidth 30. Sec. 4.1.4's spectral study reverses these when identifying the reference case. These bandwidths affect the reference design representation; they are not a stated equivalent grid-filter radius.\",\n      \"readings\": [\n        \"Use topology bandwidth 30 and displacement bandwidth 35.\",\n        \"Use topology bandwidth 35 and displacement bandwidth 30.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"finite-element cells and design-field discretization\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1.3 supplies a 120\u00d760 FEM mesh, but does not specify cell topology, displacement interpolation, or phase-field interpolation. The APF 200\u00d7100 collocation grid identified in Sec. 4.1.4 does not supply these choices.\",\n      \"readings\": [\n        \"Use 120\u00d760 bilinear quadrilaterals with nodal bilinear displacement and phase fields.\",\n        \"Split each of 120\u00d760 rectangular subdivisions into two linear triangles, with nodal linear displacement and phase fields.\",\n        \"Use 120\u00d760 bilinear displacement elements with elementwise design variables and a finite-difference discretization of the Ginzburg\u2013Landau term.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"loaded-boundary quadrature allocation\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Sec. 4.1.2 describes 500 boundary points on the loaded and clamped segments together. Sec. 4.1.4 identifies the reference sampling as n_Gamma=500 on the nonhomogeneous Neumann boundary alone.\",\n      \"readings\": [\n        \"Use 500 points on the loaded segment; enforce the clamp analytically without clamp samples.\",\n        \"Use 500 points total, split equally between loaded and clamped segments.\",\n        \"Use 500 points total, allocated approximately by segment length: 45 loaded and 455 clamped.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"FEM phase-field pseudo-time step\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 2.1 and 4.1.3 describe pseudo-time evolution and give the outer and inner iteration counts, but provide no pseudo-time step or equivalent mobility-step product.\",\n      \"readings\": [\n        \"Use a constant effective pseudo-time step of 0.0001.\",\n        \"Use a constant effective pseudo-time step of 0.001.\",\n        \"Use a constant effective pseudo-time step of 0.01.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"FEM semi-implicit phase-field update\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1.3 delegates the semi-implicit scheme to reference [21]; its update equations and stabilization choices are absent from the supplied text.\",\n      \"readings\": [\n        \"Treat the gradient-energy diffusion implicitly and the double-well derivative explicitly.\",\n        \"Use convex splitting of the double-well potential with implicit diffusion.\",\n        \"Use a stabilized linear semi-implicit update with implicit diffusion.\"\n      ],\n      \"effect\": \"layout\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "support_location_extent",
+    "entity": "cantilever clamp and its coordinate convention",
+    "issue": "conflicting",
+    "description": "Sec. 4.1.1 gives the domain (-1,1) \u00d7 (-0.5,0.5), but calls x=0 its left boundary. The stated 3-D extension instead clamps x=-1.",
+    "readings": [
+     "Keep the stated domain and clamp its entire left edge at x=-1; treat x=0 as a typo.",
+     "Keep the stated domain and constrain the internal line x=0, retaining the portion -1<x<0.",
+     "Use the domain (0,1) \u00d7 (-0.5,0.5), with the clamp at x=0 and load at x=1; treat the domain's lower x-bound as a typo."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "downward load at the right-edge midpoint",
+    "issue": "conflicting",
+    "description": "Sec. 4.1.1 calls this a point load at the center, but specifies the finite segment x=1, -0.05<y<0.05. Eq. (3.16) treats t as a boundary traction.",
+    "readings": [
+     "Apply a concentrated force at (1,0).",
+     "Apply a uniform downward traction over x=1, -0.05<y<0.05."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "normalization of the right-edge load",
+    "issue": "vague",
+    "description": "Sec. 4.1.1's combination of 'point load' and t=(0,-1) leaves resultant-force versus traction-density normalization unresolved. This only scales pure compliance, but can change layout when the paper's fixed Ginzburg\u2013Landau and volume-penalty weights are retained.",
+    "readings": [
+     "On the stated patch, use t_y=-1, giving resultant F_y=-0.1 per unit thickness.",
+     "Normalize the same patch to resultant F_y=-1, giving uniform t_y=-10."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "material retained around the clamp and load",
+    "issue": "missing",
+    "description": "Sec. 4.1.1 specifies no passive-region mask or retained-solid pad dimensions. The uniform initialization does not explicitly specify whether any elements are subsequently frozen.",
+    "readings": [
+     "Allow all elements to vary; prescribe no passive regions.",
+     "Keep one element layer adjacent to the loaded segment solid.",
+     "Keep one element layer adjacent to both the clamp and loaded segment solid."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "initial volume-penalty coefficient",
+    "issue": "vague",
+    "description": "Sec. 4.1.2 specifies only an O(1) initial lambda_penal. The known multiplier zeta=0.98 and 500 iterations do not determine the coefficient sequence without its initial value.",
+    "readings": [
+     "lambda_penal^(0)=0.5.",
+     "lambda_penal^(0)=1.",
+     "lambda_penal^(0)=2."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "timing of volume-penalty updates",
+    "issue": "conflicting",
+    "description": "Section 4 says the penalty is updated after each outer loop, whereas Algorithm 1, line 16, updates it before that iteration's state and topology steps.",
+    "readings": [
+     "Use lambda_penal^(0)/0.98 for the first topology update.",
+     "Use lambda_penal^(0) for the first topology update, then divide by 0.98 after the iteration."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "reference spectral bandwidths for case (a)",
+    "issue": "conflicting",
+    "description": "Table 2 and Sec. 4.1.2 give displacement bandwidth 35 and topology bandwidth 30. Sec. 4.1.4's spectral study reverses these when identifying the reference case. These bandwidths affect the reference design representation; they are not a stated equivalent grid-filter radius.",
+    "readings": [
+     "Use topology bandwidth 30 and displacement bandwidth 35.",
+     "Use topology bandwidth 35 and displacement bandwidth 30."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "finite-element cells and design-field discretization",
+    "issue": "missing",
+    "description": "Sec. 4.1.3 supplies a 120\u00d760 FEM mesh, but does not specify cell topology, displacement interpolation, or phase-field interpolation. The APF 200\u00d7100 collocation grid identified in Sec. 4.1.4 does not supply these choices.",
+    "readings": [
+     "Use 120\u00d760 bilinear quadrilaterals with nodal bilinear displacement and phase fields.",
+     "Split each of 120\u00d760 rectangular subdivisions into two linear triangles, with nodal linear displacement and phase fields.",
+     "Use 120\u00d760 bilinear displacement elements with elementwise design variables and a finite-difference discretization of the Ginzburg\u2013Landau term."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "loaded-boundary quadrature allocation",
+    "issue": "conflicting",
+    "description": "Sec. 4.1.2 describes 500 boundary points on the loaded and clamped segments together. Sec. 4.1.4 identifies the reference sampling as n_Gamma=500 on the nonhomogeneous Neumann boundary alone.",
+    "readings": [
+     "Use 500 points on the loaded segment; enforce the clamp analytically without clamp samples.",
+     "Use 500 points total, split equally between loaded and clamped segments.",
+     "Use 500 points total, allocated approximately by segment length: 45 loaded and 455 clamped."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "FEM phase-field pseudo-time step",
+    "issue": "missing",
+    "description": "Secs. 2.1 and 4.1.3 describe pseudo-time evolution and give the outer and inner iteration counts, but provide no pseudo-time step or equivalent mobility-step product.",
+    "readings": [
+     "Use a constant effective pseudo-time step of 0.0001.",
+     "Use a constant effective pseudo-time step of 0.001.",
+     "Use a constant effective pseudo-time step of 0.01."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "FEM semi-implicit phase-field update",
+    "issue": "missing",
+    "description": "Sec. 4.1.3 delegates the semi-implicit scheme to reference [21]; its update equations and stabilization choices are absent from the supplied text.",
+    "readings": [
+     "Treat the gradient-energy diffusion implicitly and the double-well derivative explicitly.",
+     "Use convex splitting of the double-well potential with implicit diffusion.",
+     "Use a stabilized linear semi-implicit update with implicit diffusion."
+    ],
+    "effect": "layout"
+   }
+  ]
+ },
+ "wall_s": 448.83109188079834,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L07",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 1,
+ "locator": "Sec. 4.1.1, the 2-D cantilever beam",
+ "finished": "2026-10-22T19:49:12"
+}

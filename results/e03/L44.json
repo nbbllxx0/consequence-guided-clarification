@@ -1,0 +1,85 @@
+{
+ "task": "L44",
+ "source": {
+  "arxiv": "2603.27000",
+  "position": 219,
+  "note": "authors' own paper; kept by frozen order"
+ },
+ "dim": 2,
+ "slots": {
+  "pos": [
+   "mid",
+   "corner"
+  ],
+  "volfrac": [
+   0.5
+  ]
+ },
+ "nominal": {
+  "pos": "mid",
+  "volfrac": 0.5
+ },
+ "mandatory": [
+  "volfrac"
+ ],
+ "reasons": {
+  "pos": "'tip load' only; mid-height inferred from the symmetric design, corner admissible (Alg. 2; Sec. 1.3; Fig. 5)",
+  "volfrac": "Table 3 leaves the row blank; the suite lists 0.3/0.4/0.5/0.6 for the cantilever family: mandatory"
+ },
+ "recon": [
+  "r_min schedule not stated: rmin 1.5",
+  "vf fixed to 0.5 after asking"
+ ],
+ "keys": [
+  "pos=mid|volfrac=0.5",
+  "pos=corner|volfrac=0.5"
+ ],
+ "C": [
+  [
+   62.90147498220762,
+   3350918.5303372033
+  ],
+  [
+   1360525.7684939185,
+   65.13408843718192
+  ]
+ ],
+ "ref": {
+  "pos=mid|volfrac=0.5": 62.90147498220761,
+  "pos=corner|volfrac=0.5": 65.13408843718192
+ },
+ "ref_gap_beaten": {
+  "pos=mid|volfrac=0.5": 0.0,
+  "pos=corner|volfrac=0.5": 4.440892098500626e-16
+ },
+ "noise": {
+  "pos=mid|volfrac=0.5": 0.0013658583820384896,
+  "pos=corner|volfrac=0.5": 0.0020666423279399474
+ },
+ "meta": {
+  "pos=mid|volfrac=0.5": {
+   "accepted": true,
+   "kkt": 0.29621677848599404,
+   "wall_s": 7.988526799948886,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "pos=corner|volfrac=0.5": {
+   "accepted": true,
+   "kkt": 0.06374578400465922,
+   "wall_s": 13.910164100001566,
+   "n_iter": [
+    201,
+    201
+   ]
+  }
+ },
+ "counter": {
+  "optimizations": 0,
+  "factorizations": 2,
+  "backsubs": 4,
+  "opt_wall_s": 0.0
+ }
+}

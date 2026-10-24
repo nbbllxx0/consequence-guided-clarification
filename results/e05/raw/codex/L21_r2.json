@@ -1,0 +1,291 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"in-plane design-domain dimensions\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 gives a 20 x 60 element grid, but no physical dimensions, cell aspect ratio, or explicit square-cell assumption. Sec. 5.1's full-span description does not determine these.\",\n      \"readings\": [\n        \"L = 60, H = 20 in consistent length units\",\n        \"L = 3, H = 1 in the same length units\",\n        \"L = 60, H = 60, using rectangular cells\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"mapping of grid dimensions to coordinate axes\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4's '20 x 60' does not explicitly identify the horizontal and vertical element counts.\",\n      \"readings\": [\n        \"60 elements horizontally and 20 vertically\",\n        \"20 elements horizontally and 60 vertically\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"uniform out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"The two-dimensional grid in Sec. 4 is not assigned a thickness or an explicit unit-thickness compliance convention.\",\n      \"readings\": [\n        \"Uniform thickness t = 1\",\n        \"Uniform thickness t = 0.1\",\n        \"Uniform thickness t = 10\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"single loaded node on the right boundary\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 specifies a randomly selected admissible boundary node; Sec. 5.1 identifies the right edge for this example but gives no vertical coordinate.\",\n      \"readings\": [\n        \"Load at (L, H/4)\",\n        \"Load at (L, H/2)\",\n        \"Load at (L, 3H/4)\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Fig. 5(c) target volume fraction\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 supplies only the sampling interval [0.3, 0.7]; Sec. 5.1 says the target is shared without identifying it. Appendix A.5's value 0.5 belongs to its separate intrusive half-MBB experiment.\",\n      \"readings\": [\n        \"Volume fraction 0.3\",\n        \"Volume fraction 0.5\",\n        \"Volume fraction 0.7\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"passive element mask, particularly near supports and load\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 2.1, 4, and 5.1 do not explicitly specify passive solid or void elements, including whether support-adjacent and load-adjacent elements remain designable.\",\n      \"readings\": [\n        \"All 1200 elements are designable; no passive elements\",\n        \"Elements incident to the loaded node are forced solid\",\n        \"A one-element strip along the left support and elements incident to the loaded node are forced solid\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"solid material symmetry and orientation\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 supplies a scalar Young's-modulus interpolation but does not explicitly specify the complete solid elasticity tensor or material symmetry.\",\n      \"readings\": [\n        \"Isotropic solid\",\n        \"Orthotropic solid with Ex = E0, Ey = 0.5 E0, Gxy = 0.25 E0, nu_xy = 0.25, with axes aligned to the grid\",\n        \"The same orthotropic solid with material axes rotated 45 degrees\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"two-dimensional elastic idealization\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Sec. 2.1 nor Sec. 4 states the constitutive reduction used for the planar grid.\",\n      \"readings\": [\n        \"Plane stress\",\n        \"Plane strain\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"solid Young's modulus E0\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. 2 defines E0 symbolically without assigning its value or normalization.\",\n      \"readings\": [\n        \"E0 = 1 in a fixed consistent stress unit\",\n        \"E0 = 1000 in that stress unit\",\n        \"E0 = 200000 in that stress unit, holding E_min/E0 and other dimensionless material properties fixed\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"near-void stiffness relative to solid stiffness\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. 2 introduces E_min but gives neither its value nor E_min/E0.\",\n      \"readings\": [\n        \"E_min/E0 = 1e-9\",\n        \"E_min/E0 = 1e-6\",\n        \"E_min/E0 = 1e-3\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Poisson's ratio for an isotropic implementation\",\n      \"issue\": \"missing\",\n      \"description\": \"The material description in Sec. 2.1 provides no Poisson's ratio.\",\n      \"readings\": [\n        \"nu = 0.2\",\n        \"nu = 0.3\",\n        \"nu = 0.4\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"finite-element interpolation and integration\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 specifies element counts but not element order, node arrangement, or quadrature. Appendix A.5's Top88 label does not explicitly identify the main-example implementation.\",\n      \"readings\": [\n        \"Four-node bilinear quadrilaterals with 2 x 2 Gauss integration\",\n        \"Nine-node biquadratic quadrilaterals with 3 x 3 Gauss integration\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"sensitivity-filter kernel\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2.1 calls the regularization 'standard convolution filtering' without defining its kernel.\",\n      \"readings\": [\n        \"Cone weights w_ij = max(0, r - d_ij)\",\n        \"Gaussian weights\",\n        \"Uniform box-filter weights\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"sensitivity-filter length scale and distance units\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 gives no filter radius, bandwidth, stencil extent, or indication whether distances use grid indices or physical coordinates.\",\n      \"readings\": [\n        \"Cone support radius 1.5 in element-index coordinates\",\n        \"Cone support radius 3 in element-index coordinates\",\n        \"Cone support radius 0.05 L measured in physical coordinates\",\n        \"Gaussian bandwidth one element pitch, truncated at three bandwidths\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"sensitivity-filter density weighting and denominator regularization\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2.1 does not state whether convolution acts directly on sensitivities or uses density-weighted sensitivity filtering, nor any small-density denominator floor.\",\n      \"readings\": [\n        \"Filtered sensitivity = sum(w_ij g_j) / sum(w_ij)\",\n        \"Filtered sensitivity = sum(w_ij rho_j g_j) / (max(rho_i, 0.001) sum(w_ij))\",\n        \"The density-weighted formula with denominator floor 1e-6\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"sensitivity-filter boundary treatment\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 does not specify convolution padding or normalization where the stencil crosses a domain boundary.\",\n      \"readings\": [\n        \"Truncate the stencil and renormalize over existing elements\",\n        \"Zero-pad outside the domain and retain the full-stencil normalization\",\n        \"Reflect the field across boundaries\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"clean initial density field for the SIMP reference\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4 specifies Gaussian-smoothed random variation of amplitude 0.05 and clipping to [0.001, 1], but not the realized array, generation seed, noise distribution, smoothing bandwidth, or amplitude normalization. Fig. 5(c)'s shared-init column is unavailable; the split seed does not identify the field.\",\n      \"readings\": [\n        \"Add uniform white noise generated with seed 0, Gaussian-smoothed with bandwidth one cell and normalized to peak amplitude 0.05, then apply the stated clipping\",\n        \"Use the same construction with seed 1\",\n        \"Add Gaussian white noise generated with seed 0, smoothed with bandwidth two cells and normalized to RMS amplitude 0.05, then apply the stated clipping\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"optimality-criteria update formula and damping\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 specifies optimality-criteria updates but does not give the update formula or damping exponent.\",\n      \"readings\": [\n        \"Multiplicative OC update with exponent 0.5\",\n        \"Multiplicative OC update with exponent 0.25\",\n        \"Multiplicative OC update with exponent 1\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"optimality-criteria move limit\",\n      \"issue\": \"missing\",\n      \"description\": \"No per-iteration density move limit is reported for the reference optimization in Secs. 2.1 or 4.\",\n      \"readings\": [\n        \"Maximum density change 0.05 per iteration\",\n        \"Maximum density change 0.1 per iteration\",\n        \"Maximum density change 0.2 per iteration\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"OC volume-multiplier solution tolerance\",\n      \"issue\": \"missing\",\n      \"description\": \"The volume constraint is specified in Sec. 2.1, but the numerical multiplier-search rule and its tolerance are not.\",\n      \"readings\": [\n        \"Bisection until relative multiplier-bracket width is below 1e-3\",\n        \"Bisection until relative multiplier-bracket width is below 1e-6\",\n        \"Search until the absolute volume-fraction residual is below 1e-8\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"SIMP stopping criterion and iteration cap\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 2.1 and 4 give no reference-run convergence tolerance or iteration cap. Appendix A.5's iteration counts concern its separate experiment.\",\n      \"readings\": [\n        \"Stop at maximum element-density change below 0.01, with a 100-iteration cap\",\n        \"Stop at maximum element-density change below 0.001, with a 500-iteration cap\",\n        \"Stop at relative compliance change below 1e-6, with a 500-iteration cap\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"finite-element equilibrium solution accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 states equilibrium but gives no numerical linear solver, precision, or residual tolerance.\",\n      \"readings\": [\n        \"Double-precision sparse direct factorization\",\n        \"Double-precision conjugate gradients with relative residual tolerance 1e-8\",\n        \"Double-precision conjugate gradients with relative residual tolerance 1e-4\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"other\",\n      \"entity\": \"SIMP reference representation for display and compliance evaluation\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 5.1 mentions absolute compliance and thresholded prediction-to-SIMP ratios, but does not explicitly establish whether the SIMP reference remains continuous or is binarized, or give a reference threshold.\",\n      \"readings\": [\n        \"Display and evaluate converged continuous SIMP densities using Eq. 2\",\n        \"Binarize the SIMP reference at density 0.5 before display and evaluation\",\n        \"Binarize by retaining the highest-density elements up to the target volume\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "in-plane design-domain dimensions",
+    "issue": "missing",
+    "description": "Sec. 4 gives a 20 x 60 element grid, but no physical dimensions, cell aspect ratio, or explicit square-cell assumption. Sec. 5.1's full-span description does not determine these.",
+    "readings": [
+     "L = 60, H = 20 in consistent length units",
+     "L = 3, H = 1 in the same length units",
+     "L = 60, H = 60, using rectangular cells"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "mapping of grid dimensions to coordinate axes",
+    "issue": "vague",
+    "description": "Sec. 4's '20 x 60' does not explicitly identify the horizontal and vertical element counts.",
+    "readings": [
+     "60 elements horizontally and 20 vertically",
+     "20 elements horizontally and 60 vertically"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "uniform out-of-plane thickness",
+    "issue": "missing",
+    "description": "The two-dimensional grid in Sec. 4 is not assigned a thickness or an explicit unit-thickness compliance convention.",
+    "readings": [
+     "Uniform thickness t = 1",
+     "Uniform thickness t = 0.1",
+     "Uniform thickness t = 10"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "load_position",
+    "entity": "single loaded node on the right boundary",
+    "issue": "missing",
+    "description": "Sec. 4 specifies a randomly selected admissible boundary node; Sec. 5.1 identifies the right edge for this example but gives no vertical coordinate.",
+    "readings": [
+     "Load at (L, H/4)",
+     "Load at (L, H/2)",
+     "Load at (L, 3H/4)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Fig. 5(c) target volume fraction",
+    "issue": "missing",
+    "description": "Sec. 4 supplies only the sampling interval [0.3, 0.7]; Sec. 5.1 says the target is shared without identifying it. Appendix A.5's value 0.5 belongs to its separate intrusive half-MBB experiment.",
+    "readings": [
+     "Volume fraction 0.3",
+     "Volume fraction 0.5",
+     "Volume fraction 0.7"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "passive element mask, particularly near supports and load",
+    "issue": "missing",
+    "description": "Secs. 2.1, 4, and 5.1 do not explicitly specify passive solid or void elements, including whether support-adjacent and load-adjacent elements remain designable.",
+    "readings": [
+     "All 1200 elements are designable; no passive elements",
+     "Elements incident to the loaded node are forced solid",
+     "A one-element strip along the left support and elements incident to the loaded node are forced solid"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "solid material symmetry and orientation",
+    "issue": "missing",
+    "description": "Sec. 2.1 supplies a scalar Young's-modulus interpolation but does not explicitly specify the complete solid elasticity tensor or material symmetry.",
+    "readings": [
+     "Isotropic solid",
+     "Orthotropic solid with Ex = E0, Ey = 0.5 E0, Gxy = 0.25 E0, nu_xy = 0.25, with axes aligned to the grid",
+     "The same orthotropic solid with material axes rotated 45 degrees"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "two-dimensional elastic idealization",
+    "issue": "missing",
+    "description": "Neither Sec. 2.1 nor Sec. 4 states the constitutive reduction used for the planar grid.",
+    "readings": [
+     "Plane stress",
+     "Plane strain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "solid Young's modulus E0",
+    "issue": "missing",
+    "description": "Eq. 2 defines E0 symbolically without assigning its value or normalization.",
+    "readings": [
+     "E0 = 1 in a fixed consistent stress unit",
+     "E0 = 1000 in that stress unit",
+     "E0 = 200000 in that stress unit, holding E_min/E0 and other dimensionless material properties fixed"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "near-void stiffness relative to solid stiffness",
+    "issue": "missing",
+    "description": "Eq. 2 introduces E_min but gives neither its value nor E_min/E0.",
+    "readings": [
+     "E_min/E0 = 1e-9",
+     "E_min/E0 = 1e-6",
+     "E_min/E0 = 1e-3"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson's ratio for an isotropic implementation",
+    "issue": "missing",
+    "description": "The material description in Sec. 2.1 provides no Poisson's ratio.",
+    "readings": [
+     "nu = 0.2",
+     "nu = 0.3",
+     "nu = 0.4"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "finite-element interpolation and integration",
+    "issue": "missing",
+    "description": "Sec. 4 specifies element counts but not element order, node arrangement, or quadrature. Appendix A.5's Top88 label does not explicitly identify the main-example implementation.",
+    "readings": [
+     "Four-node bilinear quadrilaterals with 2 x 2 Gauss integration",
+     "Nine-node biquadratic quadrilaterals with 3 x 3 Gauss integration"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "sensitivity-filter kernel",
+    "issue": "vague",
+    "description": "Sec. 2.1 calls the regularization 'standard convolution filtering' without defining its kernel.",
+    "readings": [
+     "Cone weights w_ij = max(0, r - d_ij)",
+     "Gaussian weights",
+     "Uniform box-filter weights"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "sensitivity-filter length scale and distance units",
+    "issue": "missing",
+    "description": "Sec. 2.1 gives no filter radius, bandwidth, stencil extent, or indication whether distances use grid indices or physical coordinates.",
+    "readings": [
+     "Cone support radius 1.5 in element-index coordinates",
+     "Cone support radius 3 in element-index coordinates",
+     "Cone support radius 0.05 L measured in physical coordinates",
+     "Gaussian bandwidth one element pitch, truncated at three bandwidths"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "sensitivity-filter density weighting and denominator regularization",
+    "issue": "vague",
+    "description": "Sec. 2.1 does not state whether convolution acts directly on sensitivities or uses density-weighted sensitivity filtering, nor any small-density denominator floor.",
+    "readings": [
+     "Filtered sensitivity = sum(w_ij g_j) / sum(w_ij)",
+     "Filtered sensitivity = sum(w_ij rho_j g_j) / (max(rho_i, 0.001) sum(w_ij))",
+     "The density-weighted formula with denominator floor 1e-6"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "sensitivity-filter boundary treatment",
+    "issue": "missing",
+    "description": "Sec. 2.1 does not specify convolution padding or normalization where the stencil crosses a domain boundary.",
+    "readings": [
+     "Truncate the stencil and renormalize over existing elements",
+     "Zero-pad outside the domain and retain the full-stencil normalization",
+     "Reflect the field across boundaries"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "clean initial density field for the SIMP reference",
+    "issue": "vague",
+    "description": "Sec. 4 specifies Gaussian-smoothed random variation of amplitude 0.05 and clipping to [0.001, 1], but not the realized array, generation seed, noise distribution, smoothing bandwidth, or amplitude normalization. Fig. 5(c)'s shared-init column is unavailable; the split seed does not identify the field.",
+    "readings": [
+     "Add uniform white noise generated with seed 0, Gaussian-smoothed with bandwidth one cell and normalized to peak amplitude 0.05, then apply the stated clipping",
+     "Use the same construction with seed 1",
+     "Add Gaussian white noise generated with seed 0, smoothed with bandwidth two cells and normalized to RMS amplitude 0.05, then apply the stated clipping"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "optimality-criteria update formula and damping",
+    "issue": "missing",
+    "description": "Sec. 2.1 specifies optimality-criteria updates but does not give the update formula or damping exponent.",
+    "readings": [
+     "Multiplicative OC update with exponent 0.5",
+     "Multiplicative OC update with exponent 0.25",
+     "Multiplicative OC update with exponent 1"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "optimality-criteria move limit",
+    "issue": "missing",
+    "description": "No per-iteration density move limit is reported for the reference optimization in Secs. 2.1 or 4.",
+    "readings": [
+     "Maximum density change 0.05 per iteration",
+     "Maximum density change 0.1 per iteration",
+     "Maximum density change 0.2 per iteration"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "OC volume-multiplier solution tolerance",
+    "issue": "missing",
+    "description": "The volume constraint is specified in Sec. 2.1, but the numerical multiplier-search rule and its tolerance are not.",
+    "readings": [
+     "Bisection until relative multiplier-bracket width is below 1e-3",
+     "Bisection until relative multiplier-bracket width is below 1e-6",
+     "Search until the absolute volume-fraction residual is below 1e-8"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "SIMP stopping criterion and iteration cap",
+    "issue": "missing",
+    "description": "Secs. 2.1 and 4 give no reference-run convergence tolerance or iteration cap. Appendix A.5's iteration counts concern its separate experiment.",
+    "readings": [
+     "Stop at maximum element-density change below 0.01, with a 100-iteration cap",
+     "Stop at maximum element-density change below 0.001, with a 500-iteration cap",
+     "Stop at relative compliance change below 1e-6, with a 500-iteration cap"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "finite-element equilibrium solution accuracy",
+    "issue": "missing",
+    "description": "Sec. 2.1 states equilibrium but gives no numerical linear solver, precision, or residual tolerance.",
+    "readings": [
+     "Double-precision sparse direct factorization",
+     "Double-precision conjugate gradients with relative residual tolerance 1e-8",
+     "Double-precision conjugate gradients with relative residual tolerance 1e-4"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "other",
+    "entity": "SIMP reference representation for display and compliance evaluation",
+    "issue": "vague",
+    "description": "Sec. 5.1 mentions absolute compliance and thresholded prediction-to-SIMP ratios, but does not explicitly establish whether the SIMP reference remains continuous or is binarized, or give a reference threshold.",
+    "readings": [
+     "Display and evaluate converged continuous SIMP densities using Eq. 2",
+     "Binarize the SIMP reference at density 0.5 before display and evaluation",
+     "Binarize by retaining the highest-density elements up to the target volume"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 574.7535266876221,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L21",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 2,
+ "locator": "Sec. 5.1, Fig. 5(c), 'SIMP reference'",
+ "finished": "2026-10-22T22:38:58"
+}

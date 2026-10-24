@@ -1,0 +1,111 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"cantilever support\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 4.1 calls the domain a classic cantilever and mentions fixed-boundary corners, but does not specify the constrained node set. Fig. 3's caption identifies an unavailable problem-setup panel.\",\n      \"readings\": [\n        \"Clamp both displacement components on the entire left edge.\",\n        \"Clamp both displacement components only at the upper-left and lower-left corner nodes.\",\n        \"Clamp both displacement components on two left-edge segments covering y/H in [0,0.05] and [0.95,1].\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"100 MPa traction on the right edge\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Sec. 4.1 nor the returning-cantilever description in Sec. 4.4 specifies the traction vector. The downward traction in Sec. 4.3 belongs to a different problem.\",\n      \"readings\": [\n        \"Transverse downward traction: (tx,ty) = (0,-100) MPa.\",\n        \"Outward axial traction: (tx,ty) = (100,0) MPa.\",\n        \"Oblique traction: (tx,ty) = (100/sqrt(2),-100/sqrt(2)) MPa.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"loaded portion of the right edge\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.1 says traction is applied to the right edge; Sec. 4.4 describes it as applied at the center of that edge. These statements do not uniquely establish a distributed edge load, a centered patch width, or a nodal representation.\",\n      \"readings\": [\n        \"Uniform 100 MPa traction over the entire 100 mm right edge.\",\n        \"Uniform 100 MPa traction over a centered 10 mm segment, y/H in [0.45,0.55].\",\n        \"A force at the midpoint node, using a 1 mm tributary edge length and the stated 1 mm thickness: resultant magnitude 100 N.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"material near the support and load application\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 3.2\u20133.4 and 4.1 do not explicitly identify passive material masks or state whether support and load attachment regions remain designable. Their presence and dimensions cannot be recovered from the unavailable setup panel.\",\n      \"readings\": [\n        \"All elements remain designable; there are no passive regions.\",\n        \"Fix the first and last element columns at solid density.\",\n        \"Fix a 1 mm strip next to the left support and a centered 5 mm by 10 mm pad next to the right-edge load at solid density.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"initial density field for the elastic baseline\",\n      \"issue\": \"missing\",\n      \"description\": \"No initial topology-density field is supplied for Sec. 4.1. The uniform compositional initialization in Sec. 4.5 applies to a different design variable and example.\",\n      \"readings\": [\n        \"Initialize every designable element at rho = 0.5.\",\n        \"Initialize every designable element at rho = 1.\",\n        \"Initialize near rho = 0.5 with a small spatial perturbation to break symmetry.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"remaining MMA controls\",\n      \"issue\": \"vague\",\n      \"description\": \"Secs. 3.4 and 4 refer to implementation defaults without printing the remaining MMA constants or identifying a code revision. The stated move limit alone does not determine these controls.\",\n      \"readings\": [\n        \"Use MMA with initial asymptote distance 0.5 of the variable range, increase/decrease factors 1.2/0.7, and subproblem coefficients c = 1000, d = 0.\",\n        \"Use the same asymptote settings with subproblem coefficients c = 10000, d = 0.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"additional objective-change stopping test\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Sec. 3.5 says termination requires both design and objective changes below tolerance. Sec. 4 instead specifies a 250-iteration cap or maximum density change at most 1e-5, without an objective-change test or its tolerance.\",\n      \"readings\": [\n        \"Follow Sec. 4: stop at 250 iterations or maximum density change at most 1e-5.\",\n        \"Retain the 250-iteration cap, but otherwise require both maximum density change at most 1e-5 and relative compliance change at most 1e-5.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"elastic equilibrium and sensitivity linear solves\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.3.3 describes linearized systems within the creep solver, but neither it nor Sec. 4.1 specifies the elastic baseline's linear-solver accuracy or arithmetic precision.\",\n      \"readings\": [\n        \"Use double-precision sparse direct solves.\",\n        \"Use double-precision iterative solves with relative residual tolerance 1e-8.\",\n        \"Use single-precision iterative solves with relative residual tolerance 1e-5.\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "support_location_extent",
+    "entity": "cantilever support",
+    "issue": "figure_only",
+    "description": "Sec. 4.1 calls the domain a classic cantilever and mentions fixed-boundary corners, but does not specify the constrained node set. Fig. 3's caption identifies an unavailable problem-setup panel.",
+    "readings": [
+     "Clamp both displacement components on the entire left edge.",
+     "Clamp both displacement components only at the upper-left and lower-left corner nodes.",
+     "Clamp both displacement components on two left-edge segments covering y/H in [0,0.05] and [0.95,1]."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "100 MPa traction on the right edge",
+    "issue": "missing",
+    "description": "Neither Sec. 4.1 nor the returning-cantilever description in Sec. 4.4 specifies the traction vector. The downward traction in Sec. 4.3 belongs to a different problem.",
+    "readings": [
+     "Transverse downward traction: (tx,ty) = (0,-100) MPa.",
+     "Outward axial traction: (tx,ty) = (100,0) MPa.",
+     "Oblique traction: (tx,ty) = (100/sqrt(2),-100/sqrt(2)) MPa."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "loaded portion of the right edge",
+    "issue": "vague",
+    "description": "Sec. 4.1 says traction is applied to the right edge; Sec. 4.4 describes it as applied at the center of that edge. These statements do not uniquely establish a distributed edge load, a centered patch width, or a nodal representation.",
+    "readings": [
+     "Uniform 100 MPa traction over the entire 100 mm right edge.",
+     "Uniform 100 MPa traction over a centered 10 mm segment, y/H in [0.45,0.55].",
+     "A force at the midpoint node, using a 1 mm tributary edge length and the stated 1 mm thickness: resultant magnitude 100 N."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "material near the support and load application",
+    "issue": "missing",
+    "description": "Secs. 3.2\u20133.4 and 4.1 do not explicitly identify passive material masks or state whether support and load attachment regions remain designable. Their presence and dimensions cannot be recovered from the unavailable setup panel.",
+    "readings": [
+     "All elements remain designable; there are no passive regions.",
+     "Fix the first and last element columns at solid density.",
+     "Fix a 1 mm strip next to the left support and a centered 5 mm by 10 mm pad next to the right-edge load at solid density."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "initial density field for the elastic baseline",
+    "issue": "missing",
+    "description": "No initial topology-density field is supplied for Sec. 4.1. The uniform compositional initialization in Sec. 4.5 applies to a different design variable and example.",
+    "readings": [
+     "Initialize every designable element at rho = 0.5.",
+     "Initialize every designable element at rho = 1.",
+     "Initialize near rho = 0.5 with a small spatial perturbation to break symmetry."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "remaining MMA controls",
+    "issue": "vague",
+    "description": "Secs. 3.4 and 4 refer to implementation defaults without printing the remaining MMA constants or identifying a code revision. The stated move limit alone does not determine these controls.",
+    "readings": [
+     "Use MMA with initial asymptote distance 0.5 of the variable range, increase/decrease factors 1.2/0.7, and subproblem coefficients c = 1000, d = 0.",
+     "Use the same asymptote settings with subproblem coefficients c = 10000, d = 0."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "additional objective-change stopping test",
+    "issue": "conflicting",
+    "description": "Sec. 3.5 says termination requires both design and objective changes below tolerance. Sec. 4 instead specifies a 250-iteration cap or maximum density change at most 1e-5, without an objective-change test or its tolerance.",
+    "readings": [
+     "Follow Sec. 4: stop at 250 iterations or maximum density change at most 1e-5.",
+     "Retain the 250-iteration cap, but otherwise require both maximum density change at most 1e-5 and relative compliance change at most 1e-5."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "elastic equilibrium and sensitivity linear solves",
+    "issue": "missing",
+    "description": "Sec. 3.3.3 describes linearized systems within the creep solver, but neither it nor Sec. 4.1 specifies the elastic baseline's linear-solver accuracy or arithmetic precision.",
+    "readings": [
+     "Use double-precision sparse direct solves.",
+     "Use double-precision iterative solves with relative residual tolerance 1e-8.",
+     "Use single-precision iterative solves with relative residual tolerance 1e-5."
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 348.46144342422485,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L17",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 0,
+ "locator": "Sec. 4.1, the structural cantilever baseline design minimizing elastic compliance (Fig. 3)",
+ "finished": "2026-10-22T18:17:20"
+}

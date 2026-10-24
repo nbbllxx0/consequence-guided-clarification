@@ -1,0 +1,23 @@
+\begin{table}[t]
+\centering\small
+\caption{Verification and diagnostic controls.}
+\label{tab:tab_verification}
+\begin{tabular}{llp{9cm}}
+\toprule
+Check & Case & Result \\
+\midrule
+V1 sensitivities & 2D\_cantilever\_60x30\_beta1 & max \textbar{}FD-adjoint\textbar{}/max\textbar{}dc\textbar{} = 1.1e-08; max rel. = 5.1e-07 (h = 0.0001) \\
+V1 sensitivities & 2D\_cantilever\_60x30\_beta8 & max \textbar{}FD-adjoint\textbar{}/max\textbar{}dc\textbar{} = 1.0e-07; max rel. = 8.6e-06 (h = 0.0001) \\
+V1 sensitivities & 3D\_cantilever\_16x8x8\_beta1 & max \textbar{}FD-adjoint\textbar{}/max\textbar{}dc\textbar{} = 7.9e-09; max rel. = 5.8e-07 (h = 0.0001) \\
+V1 sensitivities & 3D\_cantilever\_16x8x8\_beta8 & max \textbar{}FD-adjoint\textbar{}/max\textbar{}dc\textbar{} = 2.4e-08; max rel. = 3.1e-06 (h = 0.0001) \\
+C1 & C1\_scale\_3F & compliance ratio 9.000000 (expected 9); max design difference 4.9e-04 \\
+C2 & C2\_sign\_minusF & compliance ratio 1.000000 (expected 1); max design difference 0.0e+00 \\
+C3 & two springs & V(theta) in [1.000000, 1.000000]; regret of x(0.5) at theta = 0.2: 228.96\% \\
+C4/C5 omitted intent & L04\_c0.7 & robust worst loss in pool 0.021; loss at intended c = 0.7: 9.13e+03 \\
+C4/C5 omitted intent & L14\_c0.3 & robust worst loss in pool 0.011; loss at intended c = 0.3: 9.91e+03 \\
+C6 & C6\_L41\_x\_rollers & free rigid modes 1 (annotated reading: 0) \\
+C7 & C7\_L24\_vertical\_only\_strips & free rigid modes 3 (annotated reading: 0) \\
+C6/C7 & all 134 annotated readings & free rigid modes 0 \\
+\bottomrule
+\end{tabular}
+\end{table}

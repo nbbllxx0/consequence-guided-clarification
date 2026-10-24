@@ -1,0 +1,279 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"Location and number of clamped boundary portions Gamma_u\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 4.1.1 identifies the supports only through Fig. 6a. Their locations and number are not described. Coordinates below use the square [0,L] x [0,L].\",\n      \"readings\": [\n        \"A clamped portion of the left edge x=0.\",\n        \"A clamped portion of the bottom edge y=0.\",\n        \"Separate clamped portions on the left and right edges.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"Extent of each clamped boundary portion\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Neither Sec. 4.1.1 nor the Fig. 6 caption specifies support lengths or endpoints. The zero-displacement condition itself is explicit.\",\n      \"readings\": [\n        \"Clamp the entire selected edge.\",\n        \"Clamp a central patch spanning tangential coordinates 0.4L to 0.6L.\",\n        \"Clamp two end patches spanning 0 to 0.1L and 0.9L to L.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"Number and locations of loaded boundary portions Gamma_t\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 4.1.1 says only 'asymmetrically loaded' and refers to Fig. 6a; no loaded edge, coordinates, or number of patches is given.\",\n      \"readings\": [\n        \"One right-edge patch centered at (L,L/4).\",\n        \"One right-edge patch centered at (L,3L/4).\",\n        \"One top-edge patch centered at (3L/4,L).\",\n        \"Two right-edge patches centered at (L,L/4) and (L,L/2), loaded simultaneously.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Length of the traction application region\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 4.1 specifies a traction magnitude in N/m but does not give the length or endpoints of Gamma_t for Fig. 6a. Consequently, the resultant force is also undetermined.\",\n      \"readings\": [\n        \"Apply the stated traction over a segment of length 0.05L.\",\n        \"Apply it over a segment of length 0.1L.\",\n        \"Apply it over the entire selected edge.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"Direction of the applied traction\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 4.1 gives only the traction magnitude; Sec. 4.1.1 and the Fig. 6 caption supply no vector components or angle.\",\n      \"readings\": [\n        \"Vertical downward, with unit direction (0,-1).\",\n        \"Horizontal, with unit direction (1,0).\",\n        \"Oblique downward, with unit direction (1,-1)/sqrt(2).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Protected material at loads and supports\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 2.2\u20133 impose a level-set boundary value on auxiliary G_t, but do not explicitly map that set to physical boundary sets or specify finite passive cell masks for Fig. 6a.\",\n      \"readings\": [\n        \"Map G_t exactly to Gamma_t and impose only boundary values, with no additional passive cells.\",\n        \"Protect one cell of solid material inward from Gamma_t.\",\n        \"Protect one cell inward from both Gamma_t and Gamma_u.\",\n        \"Protect solid pads of depth 0.02L at both loaded and supported portions.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Beta values used in the parameter study\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.1.1 states that beta varies between 2 and 8, but does not enumerate the separate runs shown in Fig. 7.\",\n      \"readings\": [\n        \"Run beta values {2,8}.\",\n        \"Run beta values {2,4,6,8}.\",\n        \"Run beta values {2,3,4,5,6,7,8}.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Material indicator used for stiffness and volume\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Sec. 2.2, Eq. (23), introduces a smooth tanh indicator, whereas Sec. 4.1 explicitly treats Theta as binary when simplifying the Ersatz formulation.\",\n      \"readings\": [\n        \"Use binary Theta=1 for phi>=0 and Theta=0 otherwise in stiffness and volume.\",\n        \"Use Theta=(tanh(2 beta phi)+1)/2 in stiffness and volume.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Ersatz stiffness and sensitivity when using smooth Theta\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Eq. (40) gives cubic interpolation for q=3, while the subsequent binary identities and Eq. (41) give simplifications that are inequivalent for the smooth indicator of Eq. (23).\",\n      \"readings\": [\n        \"Use cubic stiffness (1-e)Theta^3+e and its exact derivative 3(1-e)Theta^2.\",\n        \"Use cubic stiffness but the simplified Eq. (41) sensitivity 3(1-e)Theta.\",\n        \"Apply the stated binary identities to obtain linear stiffness (1-e)Theta+e, while retaining Eq. (41) for sensitivity.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Level-set Dirichlet value on auxiliary G_t\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Secs. 2.2\u20133 and the strong wave problem in Appendix A.1 prescribe phi=1, but the final boundary condition in the Appendix A.1 weak formulation prescribes phi=0.\",\n      \"readings\": [\n        \"Enforce phi=1 on G_t.\",\n        \"Enforce phi=0 on G_t.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"History term in the wave update\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Eq. (32), the later weak and matrix forms, and Appendix A.1 use the previous field phi_(v-1). Eq. (34) instead subtracts phi_v; with m=k=0 these produce different updates.\",\n      \"readings\": [\n        \"Use right-hand side -S_v+2 phi_v-phi_(v-1).\",\n        \"Follow Eq. (34) literally and use right-hand side -S_v+phi_v.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Numerical values of the initial level-set fields\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.1 specifies completely filled initial configurations for phi_0 and phi_(-1), but does not give their numerical amplitudes. Positive fields can describe the same filled topology.\",\n      \"readings\": [\n        \"Set phi_0=phi_(-1)=1 at all free nodes.\",\n        \"Set phi_0=phi_(-1)=0.5 at free nodes, applying prescribed boundary values separately.\",\n        \"Use equal, spatially varying positive initial fields, applying prescribed boundary values separately.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Enforcement of level-set bounds\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 defines phi within [-1,1], but Sec. 3 does not specify how the linear wave update is kept within those bounds.\",\n      \"readings\": [\n        \"Clip nodal values to [-1,1] after every update and store the clipped history.\",\n        \"Solve each update as a problem with explicit box constraints.\",\n        \"Rescale an overflowing field into [-1,1], then reapply prescribed boundary values.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Sensitivity normalization C_v\",\n      \"issue\": \"vague\",\n      \"description\": \"Eq. (44) places an L2(D) magnitude inside another domain integral, leaving unclear whether it denotes a pointwise magnitude or a global norm. Let s(x) denote the equilibrium sensitivity density.\",\n      \"readings\": [\n        \"Use mean absolute sensitivity: C_v=integral_D |s|/(c_f V_0).\",\n        \"Interpret the inner expression as a global L2 norm, giving C_v=sqrt(integral_D s^2)/c_f.\",\n        \"Use root-mean-square sensitivity: C_v=sqrt(integral_D s^2/V_0)/c_f.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Augmented-Lagrangian initialization and penalty schedule\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 gives multiplier equations and says r increases to r_max, but supplies no initial multiplier, initial penalty, growth rate, or cap. J_init below denotes initial compliance.\",\n      \"readings\": [\n        \"lambda_0=0, r_0=J_init, and r_(n+1)=min(1.05 r_n,1000 J_init).\",\n        \"lambda_0=J_init, r_0=10 J_init, and r_(n+1)=min(1.2 r_n,10000 J_init).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Timing of multiplier and penalty updates\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 3 computes sensitivities before the stated multiplier update, while Sec. 4.1 expresses f_1 using lambda and defines an update from lambda-prime without iteration indices. The penalty-update timing is also unspecified.\",\n      \"readings\": [\n        \"Evaluate f_1 with stored lambda and r, then update both for the next iteration.\",\n        \"Update lambda using the current constraint before evaluating f_1; increase r afterward.\",\n        \"Increase r and update lambda before evaluating the current f_1.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Termination criteria and reported final iterate\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3 mentions convergence or a predefined iteration limit, but gives no tolerances, monitoring window, limit, or rule for selecting an iterate if the undamped update oscillates.\",\n      \"readings\": [\n        \"Stop after 500 updates and report the last iterate.\",\n        \"Stop when relative compliance change and positive volume violation are below 1e-3 for five iterations, with a 1000-iteration cap.\",\n        \"Use thresholds of 1e-4 over ten iterations and a 2000-iteration cap, reporting the best feasible iterate.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Structured-grid resolution corresponding to the adaptive mesh\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3 uses adaptive mmg refinement; Sec. 4.1 provides only minimum and maximum element sizes. These do not determine element counts, the refinement pattern, or an equivalent fixed structured grid.\",\n      \"readings\": [\n        \"Use a fixed 100 x 100 grid, with cell width 0.01L.\",\n        \"Use a fixed 200 x 200 grid, with cell width 0.005L.\",\n        \"Use a fixed 2000 x 2000 grid, with cell width 0.0005L.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Finite-element spaces for displacement and level set\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3 introduces unspecified shape functions. Its choice alpha=2 identifies a function-space order and does not specify finite-element polynomial degrees or the relationship between displacement and level-set discretizations.\",\n      \"readings\": [\n        \"Use bilinear quadrilateral elements for both displacement and phi.\",\n        \"Use quadratic quadrilateral elements for both fields.\",\n        \"Use bilinear displacement elements and quadratic level-set elements on the same structured cells.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Integration and conversion of phi into cell properties\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 3\u20134.1 give continuum integrals but no quadrature or rule for converting a nodal level set into cell stiffness and material volume, particularly in cells crossed by phi=0.\",\n      \"readings\": [\n        \"Evaluate Theta and tau at quadrature points and integrate their spatial variation.\",\n        \"Evaluate Theta at each cell center and assign constant cell properties.\",\n        \"For a binary indicator, resolve the positive-phi subcell area and integrate solid and Ersatz portions separately.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Transfer of support and traction segments to grid nodes and faces\",\n      \"issue\": \"missing\",\n      \"description\": \"The paper gives no structured-grid rule for segment endpoints that fall between nodes, partial loaded faces, or the corresponding constrained-node selection.\",\n      \"readings\": [\n        \"Choose a grid aligned with all boundary-segment endpoints and assemble consistent boundary loads.\",\n        \"Snap endpoints to the nearest grid nodes and use the resulting whole faces.\",\n        \"Integrate traction over exact partial-face overlaps and constrain nodes lying within each support segment.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Numerical solution accuracy for equilibrium and wave systems\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3 names FreeFEM++ and finite elements but does not state linear solver choices or residual tolerances for either system.\",\n      \"readings\": [\n        \"Use direct factorization for both systems.\",\n        \"Use iterative solves with relative residual tolerance 1e-8.\",\n        \"Use iterative solves with relative residual tolerance 1e-4.\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "support_location_extent",
+    "entity": "Location and number of clamped boundary portions Gamma_u",
+    "issue": "figure_only",
+    "description": "Sec. 4.1.1 identifies the supports only through Fig. 6a. Their locations and number are not described. Coordinates below use the square [0,L] x [0,L].",
+    "readings": [
+     "A clamped portion of the left edge x=0.",
+     "A clamped portion of the bottom edge y=0.",
+     "Separate clamped portions on the left and right edges."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "Extent of each clamped boundary portion",
+    "issue": "figure_only",
+    "description": "Neither Sec. 4.1.1 nor the Fig. 6 caption specifies support lengths or endpoints. The zero-displacement condition itself is explicit.",
+    "readings": [
+     "Clamp the entire selected edge.",
+     "Clamp a central patch spanning tangential coordinates 0.4L to 0.6L.",
+     "Clamp two end patches spanning 0 to 0.1L and 0.9L to L."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "Number and locations of loaded boundary portions Gamma_t",
+    "issue": "figure_only",
+    "description": "Sec. 4.1.1 says only 'asymmetrically loaded' and refers to Fig. 6a; no loaded edge, coordinates, or number of patches is given.",
+    "readings": [
+     "One right-edge patch centered at (L,L/4).",
+     "One right-edge patch centered at (L,3L/4).",
+     "One top-edge patch centered at (3L/4,L).",
+     "Two right-edge patches centered at (L,L/4) and (L,L/2), loaded simultaneously."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Length of the traction application region",
+    "issue": "figure_only",
+    "description": "Sec. 4.1 specifies a traction magnitude in N/m but does not give the length or endpoints of Gamma_t for Fig. 6a. Consequently, the resultant force is also undetermined.",
+    "readings": [
+     "Apply the stated traction over a segment of length 0.05L.",
+     "Apply it over a segment of length 0.1L.",
+     "Apply it over the entire selected edge."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Direction of the applied traction",
+    "issue": "figure_only",
+    "description": "Sec. 4.1 gives only the traction magnitude; Sec. 4.1.1 and the Fig. 6 caption supply no vector components or angle.",
+    "readings": [
+     "Vertical downward, with unit direction (0,-1).",
+     "Horizontal, with unit direction (1,0).",
+     "Oblique downward, with unit direction (1,-1)/sqrt(2)."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Protected material at loads and supports",
+    "issue": "missing",
+    "description": "Secs. 2.2\u20133 impose a level-set boundary value on auxiliary G_t, but do not explicitly map that set to physical boundary sets or specify finite passive cell masks for Fig. 6a.",
+    "readings": [
+     "Map G_t exactly to Gamma_t and impose only boundary values, with no additional passive cells.",
+     "Protect one cell of solid material inward from Gamma_t.",
+     "Protect one cell inward from both Gamma_t and Gamma_u.",
+     "Protect solid pads of depth 0.02L at both loaded and supported portions."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Beta values used in the parameter study",
+    "issue": "vague",
+    "description": "Sec. 4.1.1 states that beta varies between 2 and 8, but does not enumerate the separate runs shown in Fig. 7.",
+    "readings": [
+     "Run beta values {2,8}.",
+     "Run beta values {2,4,6,8}.",
+     "Run beta values {2,3,4,5,6,7,8}."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Material indicator used for stiffness and volume",
+    "issue": "conflicting",
+    "description": "Sec. 2.2, Eq. (23), introduces a smooth tanh indicator, whereas Sec. 4.1 explicitly treats Theta as binary when simplifying the Ersatz formulation.",
+    "readings": [
+     "Use binary Theta=1 for phi>=0 and Theta=0 otherwise in stiffness and volume.",
+     "Use Theta=(tanh(2 beta phi)+1)/2 in stiffness and volume."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Ersatz stiffness and sensitivity when using smooth Theta",
+    "issue": "conflicting",
+    "description": "Eq. (40) gives cubic interpolation for q=3, while the subsequent binary identities and Eq. (41) give simplifications that are inequivalent for the smooth indicator of Eq. (23).",
+    "readings": [
+     "Use cubic stiffness (1-e)Theta^3+e and its exact derivative 3(1-e)Theta^2.",
+     "Use cubic stiffness but the simplified Eq. (41) sensitivity 3(1-e)Theta.",
+     "Apply the stated binary identities to obtain linear stiffness (1-e)Theta+e, while retaining Eq. (41) for sensitivity."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Level-set Dirichlet value on auxiliary G_t",
+    "issue": "conflicting",
+    "description": "Secs. 2.2\u20133 and the strong wave problem in Appendix A.1 prescribe phi=1, but the final boundary condition in the Appendix A.1 weak formulation prescribes phi=0.",
+    "readings": [
+     "Enforce phi=1 on G_t.",
+     "Enforce phi=0 on G_t."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "History term in the wave update",
+    "issue": "conflicting",
+    "description": "Eq. (32), the later weak and matrix forms, and Appendix A.1 use the previous field phi_(v-1). Eq. (34) instead subtracts phi_v; with m=k=0 these produce different updates.",
+    "readings": [
+     "Use right-hand side -S_v+2 phi_v-phi_(v-1).",
+     "Follow Eq. (34) literally and use right-hand side -S_v+phi_v."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Numerical values of the initial level-set fields",
+    "issue": "vague",
+    "description": "Sec. 4.1 specifies completely filled initial configurations for phi_0 and phi_(-1), but does not give their numerical amplitudes. Positive fields can describe the same filled topology.",
+    "readings": [
+     "Set phi_0=phi_(-1)=1 at all free nodes.",
+     "Set phi_0=phi_(-1)=0.5 at free nodes, applying prescribed boundary values separately.",
+     "Use equal, spatially varying positive initial fields, applying prescribed boundary values separately."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Enforcement of level-set bounds",
+    "issue": "missing",
+    "description": "Sec. 2.1 defines phi within [-1,1], but Sec. 3 does not specify how the linear wave update is kept within those bounds.",
+    "readings": [
+     "Clip nodal values to [-1,1] after every update and store the clipped history.",
+     "Solve each update as a problem with explicit box constraints.",
+     "Rescale an overflowing field into [-1,1], then reapply prescribed boundary values."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Sensitivity normalization C_v",
+    "issue": "vague",
+    "description": "Eq. (44) places an L2(D) magnitude inside another domain integral, leaving unclear whether it denotes a pointwise magnitude or a global norm. Let s(x) denote the equilibrium sensitivity density.",
+    "readings": [
+     "Use mean absolute sensitivity: C_v=integral_D |s|/(c_f V_0).",
+     "Interpret the inner expression as a global L2 norm, giving C_v=sqrt(integral_D s^2)/c_f.",
+     "Use root-mean-square sensitivity: C_v=sqrt(integral_D s^2/V_0)/c_f."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Augmented-Lagrangian initialization and penalty schedule",
+    "issue": "missing",
+    "description": "Sec. 4.1 gives multiplier equations and says r increases to r_max, but supplies no initial multiplier, initial penalty, growth rate, or cap. J_init below denotes initial compliance.",
+    "readings": [
+     "lambda_0=0, r_0=J_init, and r_(n+1)=min(1.05 r_n,1000 J_init).",
+     "lambda_0=J_init, r_0=10 J_init, and r_(n+1)=min(1.2 r_n,10000 J_init)."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Timing of multiplier and penalty updates",
+    "issue": "vague",
+    "description": "Sec. 3 computes sensitivities before the stated multiplier update, while Sec. 4.1 expresses f_1 using lambda and defines an update from lambda-prime without iteration indices. The penalty-update timing is also unspecified.",
+    "readings": [
+     "Evaluate f_1 with stored lambda and r, then update both for the next iteration.",
+     "Update lambda using the current constraint before evaluating f_1; increase r afterward.",
+     "Increase r and update lambda before evaluating the current f_1."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Termination criteria and reported final iterate",
+    "issue": "missing",
+    "description": "Sec. 3 mentions convergence or a predefined iteration limit, but gives no tolerances, monitoring window, limit, or rule for selecting an iterate if the undamped update oscillates.",
+    "readings": [
+     "Stop after 500 updates and report the last iterate.",
+     "Stop when relative compliance change and positive volume violation are below 1e-3 for five iterations, with a 1000-iteration cap.",
+     "Use thresholds of 1e-4 over ten iterations and a 2000-iteration cap, reporting the best feasible iterate."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Structured-grid resolution corresponding to the adaptive mesh",
+    "issue": "missing",
+    "description": "Sec. 3 uses adaptive mmg refinement; Sec. 4.1 provides only minimum and maximum element sizes. These do not determine element counts, the refinement pattern, or an equivalent fixed structured grid.",
+    "readings": [
+     "Use a fixed 100 x 100 grid, with cell width 0.01L.",
+     "Use a fixed 200 x 200 grid, with cell width 0.005L.",
+     "Use a fixed 2000 x 2000 grid, with cell width 0.0005L."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Finite-element spaces for displacement and level set",
+    "issue": "missing",
+    "description": "Sec. 3 introduces unspecified shape functions. Its choice alpha=2 identifies a function-space order and does not specify finite-element polynomial degrees or the relationship between displacement and level-set discretizations.",
+    "readings": [
+     "Use bilinear quadrilateral elements for both displacement and phi.",
+     "Use quadratic quadrilateral elements for both fields.",
+     "Use bilinear displacement elements and quadratic level-set elements on the same structured cells."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Integration and conversion of phi into cell properties",
+    "issue": "missing",
+    "description": "Secs. 3\u20134.1 give continuum integrals but no quadrature or rule for converting a nodal level set into cell stiffness and material volume, particularly in cells crossed by phi=0.",
+    "readings": [
+     "Evaluate Theta and tau at quadrature points and integrate their spatial variation.",
+     "Evaluate Theta at each cell center and assign constant cell properties.",
+     "For a binary indicator, resolve the positive-phi subcell area and integrate solid and Ersatz portions separately."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Transfer of support and traction segments to grid nodes and faces",
+    "issue": "missing",
+    "description": "The paper gives no structured-grid rule for segment endpoints that fall between nodes, partial loaded faces, or the corresponding constrained-node selection.",
+    "readings": [
+     "Choose a grid aligned with all boundary-segment endpoints and assemble consistent boundary loads.",
+     "Snap endpoints to the nearest grid nodes and use the resulting whole faces.",
+     "Integrate traction over exact partial-face overlaps and constrain nodes lying within each support segment."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Numerical solution accuracy for equilibrium and wave systems",
+    "issue": "missing",
+    "description": "Sec. 3 names FreeFEM++ and finite elements but does not state linear solver choices or residual tolerances for either system.",
+    "readings": [
+     "Use direct factorization for both systems.",
+     "Use iterative solves with relative residual tolerance 1e-8.",
+     "Use iterative solves with relative residual tolerance 1e-4."
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 645.7342092990875,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L16",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 1,
+ "locator": "Sec. 4.1.1, Fig. 6",
+ "finished": "2026-10-22T20:25:54"
+}

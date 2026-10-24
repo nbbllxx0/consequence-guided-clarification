@@ -1,0 +1,208 @@
+{
+ "raw": "{\"items\": [{\"category\": \"domain_extent\", \"entity\": \"2-D cantilever design domain (height / length-to-height ratio)\", \"issue\": \"figure_only\", \"description\": \"Sec. 4.1 and Table 1 only say '2D cantilever beam'. The geometry is drawn only in Table 1's 'Boundary Conditions' image. Sec. 4.5 fixes only the longest side (1 mm, 'for all examples'), so the height is never given. Other cantilevers in the paper are 2:1 in x\\u2013y (40\\u00d720\\u00d78, Fig. 2) and 3:1 (the 'long' beams).\", \"readings\": [\"2:1 (1.0 mm \\u00d7 0.5 mm)\", \"3:1 (1.0 mm \\u00d7 0.333 mm)\", \"1.5:1 (1.0 mm \\u00d7 0.667 mm)\", \"1:1 (1.0 mm \\u00d7 1.0 mm)\"], \"effect\": \"layout\"}, {\"category\": \"mesh\", \"entity\": \"FE/SIMP grid for the 2-D example\", \"issue\": \"missing\", \"description\": \"Grid sizes are given only for the 3-D cases. The 2-D grid is never stated, yet it is the 88-line SIMP mesh, the fixed DMF-TONN volume-fraction grid (Sec. 4.5) and the FE mesh behind every compliance in Table 1 (Sec. 4). Because the density-filter radius is 1.5 elements, its physical size is unknown too. The only constraint is Sec. 4.6: each SIMP grid has more than 6000 points. The 69 s / 124 s SIMP times hint at a fairly fine grid.\", \"readings\": [\"120 \\u00d7 60 elements (2:1, 7200 elements)\", \"160 \\u00d7 80 elements (2:1)\", \"200 \\u00d7 100 elements (2:1)\", \"150 \\u00d7 50 or 180 \\u00d7 60 elements (if 3:1)\", \"120 \\u00d7 80 elements (if 1.5:1)\", \"100 \\u00d7 100 elements (if 1:1)\"], \"effect\": \"layout\"}, {\"category\": \"support_location_extent\", \"entity\": \"Clamped edge of the cantilever\", \"issue\": \"figure_only\", \"description\": \"Supports appear only in Table 1's BC image. The word 'cantilever' and Sec. 3.2.1 (fixed sides as full-side hard constraints that zero all displacement components, shown for the x = min side) suggest the whole left edge is clamped. The text never states this for the 2-D case. Clamping the right edge with the load on the left would just be the mirror image.\", \"readings\": [\"Entire left edge (x = 0, full height) clamped, u_x = u_y = 0\", \"Only part of the left edge clamped (e.g. a central segment, or only the top and bottom corners)\"], \"effect\": \"layout\"}, {\"category\": \"load_position\", \"entity\": \"Load on the free (right) end\", \"issue\": \"figure_only\", \"description\": \"The load location appears only in Table 1's BC image. The paper's other cantilevers are loaded in two different places: 'right bottom end' (Sec. 4.4 / Table 3) and 'center of the right side' (Sec. 4.5 / Fig. 5). Sec. 4.1 only says the example is 'similar' to NTopo's 2-D cantilever. A top-right corner load is the mirror image of a bottom-right one.\", \"readings\": [\"Bottom-right corner (x = L, y = 0), or equivalently the top-right corner\", \"Mid-height of the right edge (x = L, y = H/2)\"], \"effect\": \"layout\"}, {\"category\": \"load_extent_distribution\", \"entity\": \"Tip load\", \"issue\": \"vague\", \"description\": \"Eq. (5) applies the load as a traction T over an area A sampled at N_b boundary points. Sec. 4.5 instead speaks of 'Force = 0.1N' and 'force vector location points', and the 88-line SIMP code uses nodal forces. The size of the loaded patch in 2-D is never given, nor (for a corner load) which edge it lies on.\", \"readings\": [\"Single nodal point force\", \"Uniform traction over a short segment at the load point (about 1\\u20133 element lengths, or ~5% of the edge)\", \"Uniform shear traction over the whole right edge\"], \"effect\": \"layout\"}, {\"category\": \"load_direction\", \"entity\": \"Tip load\", \"issue\": \"figure_only\", \"description\": \"The direction is not given in the text, only in the BC image. 'Cantilever beam' and the y-displacement discussion for the 3-D cantilever (Sec. 4.2, Fig. 2) imply a transverse (y) load. The sign does not matter: compliance is quadratic in F, so +F and \\u2212F give the same compliance and the same layout.\", \"readings\": [\"\\u2212y (downward, transverse)\", \"+y (upward, transverse)\"], \"effect\": \"scale_only\"}, {\"category\": \"load_magnitude\", \"entity\": \"Tip load magnitude\", \"issue\": \"vague\", \"description\": \"'Force = 0.1N \\u2026 for all examples' is stated only in Sec. 4.5 (Additional Examples). It is unclear whether it applies to the 2-D tables, which were run with the 88-line code (default unit load). It is also unclear whether 0.1 is the total force or the traction T of Eq. (5). Table 1's ~1e-4 compliances suggest scaled values but do not pin them down.\", \"readings\": [\"0.1 N total force\", \"Unit force F = 1 (88-line code default)\", \"0.1 taken as traction T in Eq. (5), so total force = 0.1 \\u00d7 loaded length\"], \"effect\": \"scale_only\"}, {\"category\": \"material\", \"entity\": \"Young's modulus and out-of-plane thickness (stiffness scale)\", \"issue\": \"vague\", \"description\": \"E = 1000 N/mm\\u00b2 and \\u03bd = 0.3 are given 'for all examples' only in Sec. 4.5. It is unclear whether the 2-D SIMP/FE runs used these or the 88-line defaults (E0 = 1, \\u03bd = 0.3). The 2-D thickness is never stated. In plane stress, compliance scales with 1/(E\\u00b7t).\", \"readings\": [\"E = 1000 N/mm\\u00b2, \\u03bd = 0.3, thickness 1 mm\", \"E0 = 1, \\u03bd = 0.3, unit thickness (88-line defaults)\"], \"effect\": \"scale_only\"}, {\"category\": \"material\", \"entity\": \"2-D constitutive assumption (plane stress vs plane strain)\", \"issue\": \"missing\", \"description\": \"Eqs. (3)\\u2013(5) are given 'for 3d problems' and use the 3-D Lam\\u00e9 \\u03bb = E\\u03bd/((1+\\u03bd)(1\\u22122\\u03bd)). No 2-D assumption is stated. The 88-line SIMP FE behind all reported compliances is plane stress, but using Eq. (4) directly with 2-D strains gives plane strain (effective \\u03bd \\u2248 0.43, stiffer).\", \"readings\": [\"Plane stress (as in the 88-line Q4 element)\", \"Plane strain (Eq. 4 with 3-D Lam\\u00e9 constants applied to 2-D strains)\"], \"effect\": \"layout\"}, {\"category\": \"other\", \"entity\": \"Definition of the reported compliance\", \"issue\": \"conflicting\", \"description\": \"Sec. 3.3 and Alg. 1 (line 19) call compliance the internal strain energy (Eq. 4), which equals \\u00bdu\\u1d40Ku. Table 1's values come from 'the same FE solver' as SIMP (Sec. 4), where compliance is normally F\\u1d40u = u\\u1d40Ku. This leaves a factor-of-2 ambiguity when comparing a re-run with Table 1.\", \"readings\": [\"c = F\\u1d40u = u\\u1d40Ku (standard FE/SIMP compliance)\", \"c = strain energy = \\u00bdF\\u1d40u (ISE of Eq. 4)\"], \"effect\": \"scale_only\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"SIMP stopping criterion\", \"issue\": \"vague\", \"description\": \"Sec. 4.1 says SIMP was run 'with the default convergence criterion' without saying what it is. For Top3D, Sec. 4.4 uses at most 200 iterations and a 0.01 change tolerance. DMF-TONN instead runs a fixed number of iterations.\", \"readings\": [\"Stop when the maximum element-density change < 0.01, no iteration cap (88-line default)\", \"Change < 0.01 or at most 200 iterations (as for Top3D in Sec. 4.4)\", \"Fixed 2000 iterations (DMF-TONN budget in Sec. 4.1)\"], \"effect\": \"unsure\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Iteration count of the DMF-TONN reference run\", \"issue\": \"conflicting\", \"description\": \"Sec. 4.1 says DMF-TONN ran n_opt = 2000 iterations for 2-D problems. Sec. 4.2 says n_opt = 700 is used 'for each of the presented examples in this paper'.\", \"readings\": [\"2000 iterations\", \"700 iterations\"], \"effect\": \"unsure\"}, {\"category\": \"other\", \"entity\": \"Thresholding for the 'Binary Structure Compliance' row\", \"issue\": \"vague\", \"description\": \"Sec. 4.1 only says densities are thresholded to 0/1 'ensuring the volume fraction remains the same after thresholding'. It does not say which field is thresholded (filtered physical vs raw design densities; for DMF-TONN, how the continuous field is sampled onto the FE grid). It also does not say what stiffness the 0-density elements get in the FE evaluation.\", \"readings\": [\"Rank the filtered physical densities and set the top 50% of elements to 1, with void E = 1e-9\\u00b7E\", \"Rank the unfiltered design variables (or the DMF-TONN field sampled at element centres) and set the top 50% to 1\"], \"effect\": \"unsure\"}]}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "2-D cantilever design domain (height / length-to-height ratio)",
+    "issue": "figure_only",
+    "description": "Sec. 4.1 and Table 1 only say '2D cantilever beam'. The geometry is drawn only in Table 1's 'Boundary Conditions' image. Sec. 4.5 fixes only the longest side (1 mm, 'for all examples'), so the height is never given. Other cantilevers in the paper are 2:1 in x\u2013y (40\u00d720\u00d78, Fig. 2) and 3:1 (the 'long' beams).",
+    "readings": [
+     "2:1 (1.0 mm \u00d7 0.5 mm)",
+     "3:1 (1.0 mm \u00d7 0.333 mm)",
+     "1.5:1 (1.0 mm \u00d7 0.667 mm)",
+     "1:1 (1.0 mm \u00d7 1.0 mm)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "FE/SIMP grid for the 2-D example",
+    "issue": "missing",
+    "description": "Grid sizes are given only for the 3-D cases. The 2-D grid is never stated, yet it is the 88-line SIMP mesh, the fixed DMF-TONN volume-fraction grid (Sec. 4.5) and the FE mesh behind every compliance in Table 1 (Sec. 4). Because the density-filter radius is 1.5 elements, its physical size is unknown too. The only constraint is Sec. 4.6: each SIMP grid has more than 6000 points. The 69 s / 124 s SIMP times hint at a fairly fine grid.",
+    "readings": [
+     "120 \u00d7 60 elements (2:1, 7200 elements)",
+     "160 \u00d7 80 elements (2:1)",
+     "200 \u00d7 100 elements (2:1)",
+     "150 \u00d7 50 or 180 \u00d7 60 elements (if 3:1)",
+     "120 \u00d7 80 elements (if 1.5:1)",
+     "100 \u00d7 100 elements (if 1:1)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "Clamped edge of the cantilever",
+    "issue": "figure_only",
+    "description": "Supports appear only in Table 1's BC image. The word 'cantilever' and Sec. 3.2.1 (fixed sides as full-side hard constraints that zero all displacement components, shown for the x = min side) suggest the whole left edge is clamped. The text never states this for the 2-D case. Clamping the right edge with the load on the left would just be the mirror image.",
+    "readings": [
+     "Entire left edge (x = 0, full height) clamped, u_x = u_y = 0",
+     "Only part of the left edge clamped (e.g. a central segment, or only the top and bottom corners)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "Load on the free (right) end",
+    "issue": "figure_only",
+    "description": "The load location appears only in Table 1's BC image. The paper's other cantilevers are loaded in two different places: 'right bottom end' (Sec. 4.4 / Table 3) and 'center of the right side' (Sec. 4.5 / Fig. 5). Sec. 4.1 only says the example is 'similar' to NTopo's 2-D cantilever. A top-right corner load is the mirror image of a bottom-right one.",
+    "readings": [
+     "Bottom-right corner (x = L, y = 0), or equivalently the top-right corner",
+     "Mid-height of the right edge (x = L, y = H/2)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Tip load",
+    "issue": "vague",
+    "description": "Eq. (5) applies the load as a traction T over an area A sampled at N_b boundary points. Sec. 4.5 instead speaks of 'Force = 0.1N' and 'force vector location points', and the 88-line SIMP code uses nodal forces. The size of the loaded patch in 2-D is never given, nor (for a corner load) which edge it lies on.",
+    "readings": [
+     "Single nodal point force",
+     "Uniform traction over a short segment at the load point (about 1\u20133 element lengths, or ~5% of the edge)",
+     "Uniform shear traction over the whole right edge"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Tip load",
+    "issue": "figure_only",
+    "description": "The direction is not given in the text, only in the BC image. 'Cantilever beam' and the y-displacement discussion for the 3-D cantilever (Sec. 4.2, Fig. 2) imply a transverse (y) load. The sign does not matter: compliance is quadratic in F, so +F and \u2212F give the same compliance and the same layout.",
+    "readings": [
+     "\u2212y (downward, transverse)",
+     "+y (upward, transverse)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Tip load magnitude",
+    "issue": "vague",
+    "description": "'Force = 0.1N \u2026 for all examples' is stated only in Sec. 4.5 (Additional Examples). It is unclear whether it applies to the 2-D tables, which were run with the 88-line code (default unit load). It is also unclear whether 0.1 is the total force or the traction T of Eq. (5). Table 1's ~1e-4 compliances suggest scaled values but do not pin them down.",
+    "readings": [
+     "0.1 N total force",
+     "Unit force F = 1 (88-line code default)",
+     "0.1 taken as traction T in Eq. (5), so total force = 0.1 \u00d7 loaded length"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Young's modulus and out-of-plane thickness (stiffness scale)",
+    "issue": "vague",
+    "description": "E = 1000 N/mm\u00b2 and \u03bd = 0.3 are given 'for all examples' only in Sec. 4.5. It is unclear whether the 2-D SIMP/FE runs used these or the 88-line defaults (E0 = 1, \u03bd = 0.3). The 2-D thickness is never stated. In plane stress, compliance scales with 1/(E\u00b7t).",
+    "readings": [
+     "E = 1000 N/mm\u00b2, \u03bd = 0.3, thickness 1 mm",
+     "E0 = 1, \u03bd = 0.3, unit thickness (88-line defaults)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "2-D constitutive assumption (plane stress vs plane strain)",
+    "issue": "missing",
+    "description": "Eqs. (3)\u2013(5) are given 'for 3d problems' and use the 3-D Lam\u00e9 \u03bb = E\u03bd/((1+\u03bd)(1\u22122\u03bd)). No 2-D assumption is stated. The 88-line SIMP FE behind all reported compliances is plane stress, but using Eq. (4) directly with 2-D strains gives plane strain (effective \u03bd \u2248 0.43, stiffer).",
+    "readings": [
+     "Plane stress (as in the 88-line Q4 element)",
+     "Plane strain (Eq. 4 with 3-D Lam\u00e9 constants applied to 2-D strains)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "Definition of the reported compliance",
+    "issue": "conflicting",
+    "description": "Sec. 3.3 and Alg. 1 (line 19) call compliance the internal strain energy (Eq. 4), which equals \u00bdu\u1d40Ku. Table 1's values come from 'the same FE solver' as SIMP (Sec. 4), where compliance is normally F\u1d40u = u\u1d40Ku. This leaves a factor-of-2 ambiguity when comparing a re-run with Table 1.",
+    "readings": [
+     "c = F\u1d40u = u\u1d40Ku (standard FE/SIMP compliance)",
+     "c = strain energy = \u00bdF\u1d40u (ISE of Eq. 4)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "SIMP stopping criterion",
+    "issue": "vague",
+    "description": "Sec. 4.1 says SIMP was run 'with the default convergence criterion' without saying what it is. For Top3D, Sec. 4.4 uses at most 200 iterations and a 0.01 change tolerance. DMF-TONN instead runs a fixed number of iterations.",
+    "readings": [
+     "Stop when the maximum element-density change < 0.01, no iteration cap (88-line default)",
+     "Change < 0.01 or at most 200 iterations (as for Top3D in Sec. 4.4)",
+     "Fixed 2000 iterations (DMF-TONN budget in Sec. 4.1)"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Iteration count of the DMF-TONN reference run",
+    "issue": "conflicting",
+    "description": "Sec. 4.1 says DMF-TONN ran n_opt = 2000 iterations for 2-D problems. Sec. 4.2 says n_opt = 700 is used 'for each of the presented examples in this paper'.",
+    "readings": [
+     "2000 iterations",
+     "700 iterations"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "other",
+    "entity": "Thresholding for the 'Binary Structure Compliance' row",
+    "issue": "vague",
+    "description": "Sec. 4.1 only says densities are thresholded to 0/1 'ensuring the volume fraction remains the same after thresholding'. It does not say which field is thresholded (filtered physical vs raw design densities; for DMF-TONN, how the continuous field is sampled onto the FE grid). It also does not say what stiffness the 0-density elements get in the FE evaluation.",
+    "readings": [
+     "Rank the filtered physical densities and set the top 50% of elements to 1, with void E = 1e-9\u00b7E",
+     "Rank the unfiltered design variables (or the DMF-TONN field sampled at element centres) and set the top 50% to 1"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 512.923583984375,
+ "returncode": 0,
+ "meta": {
+  "model": null,
+  "num_turns": 2,
+  "is_error": false,
+  "total_cost_usd": 1.2639627999999998,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 17305,
+   "cache_read_input_tokens": 774,
+   "output_tokens": 56268,
+   "output_tokens_details": {
+    "thinking_tokens": 53031
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 17305,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 56268,
+     "cache_read_input_tokens": 774,
+     "cache_creation_input_tokens": 17305,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 17305
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard",
+   "fallback_credit": null
+  }
+ },
+ "stderr_tail": "",
+ "task": "L08",
+ "model": "claude",
+ "model_id": "claude-opus-5-5",
+ "rep": 2,
+ "locator": "Sec. 4.1, the 2-D cantilever beam of Table 1",
+ "finished": "2026-10-22T21:58:45"
+}

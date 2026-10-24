@@ -1,0 +1,449 @@
+ADJUDICATION RECORD — guide/2026-10-22-adjudication-sheet.md (41 tasks, 69 slots, 16 exclusions)
+Adjudicated: 2026-10-22 | adjudicator: jun wang ___
+
+SCOPE NOTE (read first)
+The manuscript states "No human annotator has adjudicated the encodings yet". This pass is the author's
+adjudication of all 41 tasks against source texts and figures; every KEEP / CHANGE / DROP call below was
+made by the author. Sec. 6.3 provenance reads: "encodings adjudicated by the author against source texts
+and figures."
+
+DECISION RULES USED (from src/littasks.py docstring + guide Sec. 6.3)
+KEEP  slot has >=2 admissible readings, each grounded in stated text/figure evidence, representable on
+      the structured grid, scale-relevant (changes the design set or compliance ordering).
+CHANGE slot is real; value set is wrong/narrow - replacement values written inline.
+DROP  paper states the value (no ambiguity), reading is a mechanism, or it is a reconstruction choice.
+Mandatory slots (load sign, unstated volume fraction) are always KEEP with one representative value.
+Unstated filter/penalty/Emin/Poisson = solver setting fixed in `recon`, never a slot; CONFLICTING
+stated values ARE a slot. Codex non-scale items => DEFER (to recon) / REBUT (evidence wrong).
+Add-slot rule: added slots multiply readings; cap each task at 18 readings (L22 precedent), rank adds
+by E03 consequence class, and re-run experiments/a06_agreement.py after any change.
+
+CODEX GLOBAL RULING: 51 of 53 non-scale items are material (Poisson ratio, plane stress/strain, Emin).
+All DEFER to recon; publish a fixed-constants table once in Sec. 5 (nu=0.3, plane stress, Emin/E0=1e-9,
+raised-cosine patches with exact resultants, volume-preserving threshold). Do NOT open slots for them.
+
+================================ TASK-BY-TASK ==================================================
+
+L01 arXiv:2403.04937 (#1, 2-D) Sec. 4 'Example designs', Fig. 4
+ ours   arm 0.4,0.5 | load 0.1,0.5,0.9 | volfrac 0.4 (mandatory)
+ codex  [domain] arms 25 vs 26 el on 64x64; [load_pos] node (64,12)/(64,13); [vf] V0=0.30x L-area vs
+        0.20x enclosing square (Sec. 3.2 Eq. 2; Sec. 4/Fig. 4 give no value)
+ decide arm KEEP | load KEEP | volfrac KEEP (mandatory)
+ missing none. Codex's 25/26 el = 0.39/0.41 of n: inside our 0.4 step - figure precision, not a new
+        reading. Add recon note "vf defined on the unmasked L region".
+
+L04 arXiv:2105.04232 (#36, 2-D) Sec. 4.2 Michell cantilever
+ ours   c 0.40..0.60 (step .05)
+ codex  [support] full left edge vs corner pins; [load_pos] y=H/2 vs 0.47H; [extent] L=H -> 0.1H vs
+        L=2H -> 0.2H; [distribution] consistent nodal w/ half weights vs equal nodal; [passive] r=hc
+        vs 2hc; [material] nu .30 vs 1/3; plane stress/strain
+ dis    support: Codex only | passive: Codex only
+ decide c KEEP (Codex's 0.47H sits inside our fan)
+ missing ADD len=[0.1,0.2] (loaded-line length via the L-definition), ADD sup=[edge,pins],
+        ADD pad=[1,2] (passive radius hc/2hc). All three are scale-relevant and representable; the pad
+        axis is exactly the Sec. 6.2 control that separates moderate from catastrophic loss.
+ distribution DEFER (consistent nodal implemented); material DEFER.
+
+L05 arXiv:1708.07364 (#38, 2-D) Sec. 4.1, Fig. 7
+ ours   dir down,up (mandatory) | rmin 1.5,2.0
+ codex  [material] plane stress vs strain, E=1, nu=0.3
+ dis    load_dir: first annotation only
+ decide dir KEEP (mandatory; sign invisible to compliance - Codex's omission is expected under a
+        presence metric; flag in Sec. 6.3 so reviewers do not read it as a disagreement about values)
+ rmin KEEP - genuine stated conflict (Sec. 4 default 2 vs Fig. 7 caption 1.5).
+ missing none.
+
+L07 arXiv:2511.14623 (#43, 2-D) Sec. 4.1.1 cantilever
+ ours   clamp left_edge,midline | volfrac 0.5 (mandatory)
+ codex  [support] full left edge x=-1 vs internal line x=0 (literal Gamma_D); [distribution] point at
+        (1,0) vs uniform traction over Gamma_N={1}x(-0.05,0.05)
+ dis    load_pos_ext: Codex only | volume_fraction: first annotation only
+ decide clamp KEEP - the text/figure conflict is exactly our reason; Codex's two options ARE our two
+        values (presence disagreement only). volfrac KEEP (mandatory).
+ REBUT Codex [distribution]: Gamma_N endpoints are stated in Sec. 4.1.1 -> not ambiguous; keep the
+        6-element patch as recon. missing none.
+
+L08 arXiv:2305.04107 (#48, 2-D) Sec. 4.1 cantilever, Table 1
+ ours   ar 2.5,3.0,3.5
+ codex  [domain] 1 x 1/3 mm vs ~1/3.1 mm (Table 1 BC image; Sec. 4.5 longest side = 1 mm);
+        [material] plane stress/strain, E=1000 N/mm2
+ decide ar KEEP (Codex's 3.1 inside our +-0.5 grid). missing none. material DEFER.
+
+L09 arXiv:2605.02158 (#49, 2-D) Sec. 5 Fig. 3 row 1
+ ours   sup 0.5,0.75 | load 0.1,0.25,0.4 | volfrac 0.4 (mandatory)
+ codex  [load_pos] y=8L/64 vs 9L/64; [vf] f=0.36 vs 0.37; [material] nu .25/.30, plane, Emin/E0
+ dis    support: first annotation only
+ decide sup KEEP | load KEEP (0.125/0.14 = our 0.1 node) | volfrac KEEP (mandatory)
+ REBUT Codex vf=0.36/0.37: read off a compliance/volume-error plot of a dataset sample; Sec. 4.1 gives
+        only the 0.3-0.5 range -> not stated, mandatory ask governs. missing none.
+
+L11 arXiv:2605.19110 (#59, 2-D; authors' own paper - disclose) Table 3 problem 3, Fig. 2
+ ours   voids horizontal,vertical,diagonal | dir down (mandatory)
+ codex  [domain] Lx/Ly 2 vs ~1.75; [passive] circular vs rectangular holes, centres (20,4)/(20,36) vs
+        (20,5)/(20,35), extent 2x2 vs 4x4 el, frozen-solid mask shape; [load_dir] down/outward/45deg;
+        [distribution] point vs 3 nodes; [material] nu .30 vs 1/3; [vf] V0 full rect vs minus voids,
+        vf of Fig. 2 states 0.25 vs 0.28
+ dis    domain: Codex only | load_pos_ext: Codex only | volume_fraction: Codex only
+ decide voids KEEP (Table 3 descriptor only; positions/sizes unstated)
+ dir CHANGE -> [down, outward] (mandatory ask enumerates direction; keep representative down). Codex's
+        axial/45deg readings are admissible and scale-relevant.
+ missing ADD void_size=[2,4] elements (our recon assumed radius 6 for all layouts - that is a hidden
+        single reading; opening it is the cleanest fix). ADD vf_basis=[full_rect, minus_voids] as a
+        recon note.
+ domain AR DEFER (mesh counts 80x40 stated; square elements assumed = recon). Fig.-2 state vf DEFER
+        (illustration of an intermediate state, not the task instance).
+
+L02 arXiv:1909.11320 (#5, 3-D) Sec. 6.1.1 Fig. 3 (left)
+ ours   strip line,quarter,half
+ codex  [distribution] uniform traction over the whole 1x1 m end face vs line on the lower edge;
+        [vf] bound 0.5 = normalized fraction (1.5 m3) vs absolute 0.5 m3 in Eq. (1) -> vf 1/6
+ dis    volume_fraction: Codex only
+ decide strip CHANGE -> [line, quarter, half, full] (Codex's full-face reading is a fourth admissible
+        extent; Fig. 3 labels traction in N/m2, which supports it).
+ missing ADD volfrac=[0.5, 1/6] - Eq. (1) defines sum(mu_i v_i) <= v_u, so "0.5" is genuinely
+        ambiguous and the gap (0.5 vs 0.167) is huge. Highest-value catch in this sheet.
+
+L06 arXiv:1612.04082 (#40, 3-D) Sec. 4.1 configuration 1
+ ours   h 0.4,0.5,0.6 | width line,strip
+ codex  [load_pos] exactly z=0.5 vs ~0.52 (z=33/64)
+ decide h KEEP | width KEEP. missing none. Codex value inside our fan.
+
+L12 arXiv:2410.23295 (#23, 3-D) Results 'Structures optimization', Fig. 6 right / Fig. 7
+ ours   sup corners,full | load full,central
+ codex  [distribution] uniform traction over top face vs equal nodal forces vs loaded shell;
+        [passive] shell = 0 / 1 / 2 voxel layers (40^3 domain, "thin shell at its top")
+ dis    support: first annotation only | passive: Codex only
+ decide sup KEEP | load KEEP.
+ missing ADD shell=[0,1] voxel layers (Sec. 6.3 lists L12 as a reduced reconstruction that "omits the
+        shell" - opening this slot makes the reduction auditable instead of silent). The 2-layer reading
+        collapses to 1 at our 24^3 grid: note it.
+
+L13 arXiv:2310.02069 (#74, 2-D) Sec. 2.1/3.1 cantilever
+ ours   load corner,lower,mid | volfrac 0.2 (mandatory)
+ codex  [load_pos] y/H 0.49/0.50/0.51; [vf] 0.19/0.20/0.21; [material] nu .3/.25, plane
+ decide load KEEP (Fig. 1(a) lower-corner vs Fig. 3(b) mid-height - a real figure conflict) |
+        volfrac KEEP (mandatory).
+ REBUT Codex vf trio: Sec. 2.3 is a 0.01-0.95 sweep; the caption gives no value for Fig. 3(b) -> keep
+        "0.20 from image filename only" as reason. missing none.
+
+L14 arXiv:2603.09780 (#78, 2-D) Sec. 2 cantilever, Fig. 1 / Table 1
+ ours   c 0.4,0.5,0.6
+ codex  [distribution] uniform vs symmetric-triangular traction over the length-1 segment;
+        [material] plane stress/strain (E=1, mu=0.3)
+ decide c KEEP. distribution DEFER (uniform raised-cosine is the solver convention; record in recon:
+        "triangular profile not implemented"). material DEFER. missing none.
+
+L15 arXiv:2603.25099 (#79, 2-D) Sec. 3.5 / 4.1 cantilever, 120x60 'Long'
+ ours   pos corner,mid | dir down (mandatory)
+ codex  [load_pos] y/H 29/30/31 of 60; [distribution] 1 node vs 3 nodes; [load_dir] (0,-F0)/(F0,0)/
+        inclined; [material] plane stress/strain, nu=0.3
+ decide pos KEEP | dir CHANGE -> [down, axial] (Sec. 3.5 says only "tip load"; Eq. (6) leaves F
+        unspecified, so the axial reading is admissible and scale-relevant). missing none.
+
+L16 arXiv:2504.14892 (#101, 2-D) Sec. 4.1.1 Fig. 6a
+ ours   sup 0.05,0.1,0.2 | load 0.05,0.1,0.2
+ codex  [support] centred segment 0.10L vs ~0.12L; [distribution] corner patches 0.10L vs 0.12L
+        (|t|=1000 N/m, L=1 m stated; endpoints not)
+ decide sup KEEP | load KEEP. missing none. Codex's 0.12L is inside our grid; nominal stays 0.1.
+
+L17 arXiv:2607.22833 (#128, 2-D) Sec. 4.1 cantilever baseline (Fig. 3)
+ ours   len short(10),quarter(25),full(100) mm
+ codex  [load_pos] patch adjoining the lower-right corner vs centred at midheight y=50 mm;
+        [distribution] full 100 mm edge at 100 MPa vs ~20 mm segment
+ decide len KEEP (covers Codex's 20/100 mm).
+ missing ADD pos=[lower,mid] - position along the right edge is a distinct scale axis that length alone
+        does not span, and the paper states only "to the right edge".
+
+L18 arXiv:2603.22889 (#129, 2-D) Introduction cantilever, Fig. 1
+ ours   patch corner,right6,bottom6
+ codex  [distribution] corner node vs lowest right-edge element (0.5 N each) vs rightmost bottom-edge
+        element; [material] nu .3/.25, plane
+ decide patch KEEP (the three readings are exactly ours). distribution DEFER. material DEFER.
+ missing none.
+
+L19 arXiv:2607.20784 (#133, 2-D) Sec. 4.1.1 MBB single-material (Table 2, m = 1)
+ ours   extent full,half
+ codex  [material] nu .30 vs 1/3; plane; Emin/Esolid
+ dis    domain: first annotation only
+ decide extent KEEP - "180x30 elements stated for the domain" while the right half is optimised.
+ missing none. material DEFER.
+
+L20 arXiv:2607.07682 (#73, 2-D) Sec. V-A MBB (Fig. 2B)
+ ours   extent full,half | sup node,block
+ codex  [domain] 192x64 = half (full 384x64) vs 192x64 = full (half 96x64) - same axis as ours;
+        [support_type] outer lower corner restrains y only vs xy; [material] nu .3/.25, plane;
+        [vf] constraint on filtered vs prefilter density
+ dis    volume_fraction: Codex only
+ decide extent KEEP | sup KEEP.
+ missing ADD supcomp=[y,xy] at the outer lower corner - a pin/roller reading changes restraint and is
+        representable. vf-filtered-vs-prefilter DEFER to recon ("volume-preserving filtering") plus a
+        Sec. 8 limitation sentence.
+
+L21 arXiv:2608.22606 (#77, 2-D) Sec. 5.1 Fig. 5(c) 'SIMP reference'
+ ours   load corner,upper | volfrac 0.469 (mandatory)
+ codex  [load_pos] (L,0.75H)=node 15/20 vs 0.80H=16/20 vs (L,H) corner; [material] nu .3/.25, plane
+ dis    volume_fraction: first annotation only
+ decide load CHANGE -> [0.75, 0.8, corner]: add the 0.75H reading Codex reads from the arrowhead; our
+        current 'upper'=16/20=0.8 and 'corner'=19/20. volfrac KEEP (mandatory; only the label V=0.469).
+ missing none.
+
+L22 arXiv:2009.06245 (#98, 2-D) Sec. 3.3 Fig. 7(a)
+ ours   pos 1..18 (nominal 9 from resemblance to Table 1)
+ codex  [load_pos] index 5 (rows 9-10 from top) vs 6 vs 7; [material] plane stress/strain, E=69 GPa
+ decide pos KEEP - 18 defined positions, none assigned to Fig. 7 (the widest fan in the benchmark).
+        Nominal CHANGE 9 -> 6 (Codex's image reading is better grounded than resemblance).
+ missing none. Note for Sec. 7.3: L22 drives the CGC-S bundle saving; keep it.
+
+L23 arXiv:2210.11477 (#115, 2-D) Sec. 3.1 uni-axial compression (Fig. 5)
+ ours   solid load(0.04),double(0.08)
+ codex  [passive] pad height 0.04 (= stated load span) vs ~0.10 estimated from Fig. 5
+ decide solid CHANGE -> [load, double, wide] = 0.04 / 0.08 / 0.10: Codex's 0.10 estimate is outside our
+        1x/2x convention range, and the width 0.025 IS stated, so height is the only free axis.
+ missing none.
+
+L25 arXiv:2002.01927 (#47, 2-D) Results 'Compliance minimization' Fig. 2a
+ ours   sup elem,node | load elem,corner
+ codex  [material] eps/Y0 1e-3/1e-6/1e-9; nu .30 vs 1/3; plane
+ dis    support: first annotation only | load_pos_ext: first annotation only
+ decide sup KEEP | load KEEP ('bottom left edge' / 'top right edge', extent only from Fig. 2a).
+ Emin DEFER to recon + cross-reference Sec. 7.4 (Emin drives the >10 losses; median loss ratio at
+        Emin 1e-9 vs 1e-6 is 36-900, so state it once in Sec. 5). missing none.
+
+L27 arXiv:2404.12244 (#63, 2-D) Sec. 7.1.1 mid-load problem (Fig. 6a, Fig. 8)
+ ours   ar square(100),wide(175)
+ codex  [domain] W/H=1 (Fig. 8 stretched rendering) vs ~1.75 (outline is physical); [material]
+        E0/E1, nu, plane
+ decide ar KEEP - Codex's two options ARE our two values; keep nominal 'square' (Sec. 5 states
+        100x100 elements). missing none. material DEFER.
+
+L28 arXiv:2609.25976 (#92, 2-D) Sec. 2.1/4 cantilever, 120x60 hexagons
+ ours   ar 2.0,2.2,2.31 | volfrac 0.5 (mandatory)
+ codex  [domain] L/H 2.25 vs 2.30; [vf] V_f1 0.30/0.40/0.50; [material] nu .25/.30, plane
+ decide ar KEEP (three geometry readings incl. regular-hexagon spacing; Codex's pair sits inside) |
+        volfrac KEEP (mandatory). REBUT vf numerics (Eq. 1 symbol only; Table 2 no limit). missing none.
+
+L29 arXiv:2308.06734 (#106, 2-D) Sec. 2.1 cantilever plate (Fig. 2)
+ ours   strip none,solid
+ codex  [material] plane stress/strain with stated E and nu
+ dis    passive: first annotation only
+ decide KEEP - the unexplained vertical line ~1 cm inside the right edge is a genuine passive-region
+        ambiguity known only from the figure; record in Sec. 6.3 that Codex (text + figures) missed it,
+        which is evidence for scoring figure evidence separately. missing none.
+
+L30 arXiv:2508.05624 (#114, 2-D) Sec. 2, Fig. 1
+ ours   volfrac 0.4 (mandatory)
+ codex  [vf] f=0.30/0.40/0.50; [distribution] corner node vs 2 nodes of the bottom edge vs right edge;
+        [material] plane; [filter] Eq. (6) weights |x_i-x_e| (density metric, self-inconsistent) vs
+        spatial w=2-||r_i-r_e||
+ dis    load_pos_ext: Codex only
+ decide volfrac KEEP (mandatory). REBUT vf trio (Sec. 5.1 gives the 30-50% range only). missing none.
+ ACCEPT the filter-metric item as a recon note: "spatial weights used; source Eq. (6) is self-
+        inconsistent (density metric written where a spatial metric is described)".
+
+L31 arXiv:1807.10787 (#108, 2-D) Sec. 5.2 Case 1, Fig. 1
+ ours   dir down (mandatory) | volfrac 0.4 (mandatory)
+ codex  [support] full left edge vs corner pins; [load_dir] angle-0 reference at upper vs lower fan
+        limit; [vf] alpha 0.4/0.5; R_e 6/10 spacings; [material] nu, plane
+ dis    support: Codex only
+ decide dir KEEP (mandatory) - the sampled angle is CONTINUOUS in [0,pi]: no finite admissible set, so
+        one representative value is correct; state this as the reason in Sec. 6.3 (it is also the L31
+        reconstruction caveat "local p-norm density constraint omitted"). volfrac KEEP (mandatory).
+ missing ADD sup=[edge,pins] (Codex-only, scale-relevant, representable). R_e and alpha DEFER
+        (unstated solver inputs -> recon).
+
+L24 arXiv:2402.12076 (#135, 3-D) Sec. 5.4 3-D beam (Fig. 9)
+ ours   sup 1,2,4 elements (3/6/12 mm) | load line,strip
+ codex  [support] strips 9 vs 12 mm inward; [distribution] full-depth line at midspan vs full-depth
+        strip +-3 mm; [material] nu .30/.35; [vf] rho_min 0.2 vs 0.001, rho_max 0.8 vs 1.0 (colour scale)
+ dis    volume_fraction: Codex only
+ decide sup KEEP (our 3-12 mm brackets Codex's 9/12 mm; record the mm mapping in recon) | load KEEP.
+ REBUT rho bounds as slots: Eq. (27) bounds and a colour-scale endpoint are not the same object; keep
+        rho in [0,1] and add a recon note "colour scale 0.2-0.8 is display only". nu DEFER. missing none.
+
+L33 arXiv:2604.03276 (#146, 3-D) Suppl. Note A.14 nanopillar (Fig. S18)
+ ours   load node,patch
+ codex  [support] four corner nodes vs ~1/5-base-width square patches vs finite blocks above them;
+        [distribution] single top-centre node vs 4-element centred patch; [vf] 20.25% on the designable
+        region (640,000 active) vs the whole box incl. 12,800 passive; [material] nu .30/.33
+ dis    support: Codex only | volume_fraction: Codex only
+ decide load KEEP (node vs patch is ours).
+ missing ADD sup=[nodes,patches] - corner fixity extent is scale-relevant and representable as face
+        rects. vf-basis: DEFER with a number - passive share is 12,800/652,800 = 1.96%, so the two
+        readings differ by ~2% of material; log as recon note + E09-style sensitivity flag, not a slot.
+ Keep the L33 caveat visible: force reading only (prescribed-displacement reading not representable).
+
+L34 arXiv:1904.06556 (#156, 3-D) Sec. 7.1 CANT-16-2-2-5 (Fig. 2a, Table 1)
+ ours   load node,patch | volfrac 0.2 (mandatory)
+ codex  [vf] 0.1/0.3/0.5; [material] nu .25/.30/.35
+ dis    load_pos_ext: first annotation only
+ decide load KEEP | volfrac KEEP (mandatory; Eq. (1) sum rho_i = V, no numeric V). REBUT vf trio.
+ missing none.
+
+L35 arXiv:2210.01315 (#172, 3-D) Sec. 4.1 cantilever (Fig. 3)
+ ours   load line,corners | volfrac 0.3 (mandatory)
+ codex  [distribution] two corner point forces vs uniform line over the whole bottom free-end edge vs
+        equal nodal forces at all 9 nodes of that edge; [vf] V* 0.3/0.4/0.5; [material] nu
+ decide load KEEP (our 'line' == Codex's consistent-nodal line, i.e. his third option is not a fourth
+        reading) | volfrac KEEP (mandatory). REBUT vf trio (Eq. 20 symbol only). missing none.
+
+L36 arXiv:2208.09591 (#164, 2-D) Sec. 2.1 Fig. 1
+ ours   roller full,lower60 | load 0.12,0.15,0.18 W
+ codex  [support] u_x=0 on the entire left edge vs five isolated nodes (y/L 0,.25,.5,.75,1) from the
+        input panel vs three nodes (0.05,0.29,0.53) from the output panel; [load_pos] x=10/64, 11/64,
+        1/6; [material] nu .3/.25
+ decide roller CHANGE -> [full, lower60, nodes5] (isolated-node rollers are a third restraint reading,
+        representable as segments). load KEEP (0.156=10/64 and 0.172=11/64 fall inside our +-0.03 fan).
+ missing none after the extension.
+
+L37 arXiv:2510.08830 (#171, 2-D) Sec. 4.1.1 double-clamped beam (Fig. 8)
+ ours   strip 1,3 | patch 2,6 | volfrac 0.35 (mandatory)
+ codex  [support] fix edges x=0,x=150 only vs 1 mm passive solid end strips; [distribution] top-centre
+        node vs 3 mm vs 4 mm segment; [passive] pad depth under the load 0 / 0.5 / 1 mm; [vf] ordered
+        budgets [.25,.3125,.375,.4375,.50] vs [.30,.35,.40,.45,.50]; global vs green-region accounting;
+        [material] plane
+ dis    support: Codex only
+ decide strip KEEP (Codex's two options ARE our strip axis, read as passive thickness) | patch KEEP
+        (3/4 mm inside our 2-6 fan) | volfrac KEEP (mandatory).
+ missing ADD pad_depth=[0,1] mm for the top-centre solid loading pad (drawn only; scale-relevant).
+ REBUT the "ordered budgets" readings (Sec. 4.1.1 states 160 budgets in [0.25,0.50]; the five panels are
+        unlabeled -> mandatory ask governs). Volume accounting DEFER to recon ("total material incl.
+        passive solids over full rectangle area").
+
+L38 arXiv:2001.00635 (#175, 2-D) Sec. 4 performance-verification example (Fig. 11)
+ ours   orient wide(32x16),tall(16x32) | load corner,mid
+ codex  [support] full left short edge vs upper/lower corner pins; [load_pos] (32,0) vs (32,1);
+        [distribution] one node vs shared over two; [load_dir] (0,-1) vs oblique (1,-1)/sqrt2;
+        [material] plane stress/strain
+ dis    domain: first annotation only | support: Codex only | load_dir: Codex only
+ decide orient KEEP (text "16 x 32 square elements" vs figures drawn 32x16 - a stated conflict) |
+        load KEEP.
+ missing ADD sup=[edge,pins] and ADD dir=[down,oblique45]. Both are scale-relevant; note the reading
+        cost: 2x2 -> 2x2x2x2 = 16 readings (within the 18 cap).
+ ACCEPT the Poisson erratum into recon: source prints nu = 1.0; we use 0.3 - state as a correction, not
+        a silent choice.
+
+L39 arXiv:2310.01968 (#181, 2-D) Sec. 3.4 half-MBB (Fig. 1a, Fig. 2a)
+ ours   ar 3.0,3.46
+ codex  [domain] Lx/Ly=3 (counts ratio) vs ~3.4 (regular hexagon spacing); [material] nu .30/.33
+ decide KEEP - Codex's two options ARE our two values (nominal 3.46 = hexagon reading).
+ missing none. nu DEFER.
+
+L40 arXiv:2609.21758 (#183, 2-D) Sec. 5 MBB (Appendix C, Fig. 5)
+ ours   rmin 1.5,2.0
+ codex  [domain] 144x48 square elements -> 3:1 vs rectangular spacing -> 6:1; [vf] volume-conserving
+        Heaviside threshold by bisection vs fixed 0.5
+ decide rmin KEEP - conflicting stated values (Sec. 5.1 says 2.0, Table 1 says 1.5) is a slot by rule.
+ missing ADD ar=[3,6] - Appendix C gives Nx,Ny only, no element spacings: a genuine domain_extent
+        ambiguity, representable via xmax truncation, and it changes the design set materially.
+ Volume-conservation item DEFER to recon ("threshold set by bisection to conserve volume") + Sec. 8 note.
+
+L41 arXiv:2607.07233 (#187, 2-D) Sec. 4.6 case study 1 (Fig. 6)
+ ours   load 0.4,0.45,0.5 L on the top edge
+ codex  [load_pos] x=29L/64 vs midspan L/2; [support_type] full fixity of the left edge vs x-only along
+        it with y fixed at the lower-left node only; [material] nu .25/.30, plane
+ dis    support: Codex only
+ decide load KEEP (29/64 = 0.453 = our nominal).
+ missing none - DROP Codex's x-only roller reading: it leaves the square vertically unrestrained and is
+        a mechanism (already excluded in recon). Keep that exclusion explicit in the slot reason string
+        so the admissible set is auditable. nu/plane DEFER.
+
+L42 arXiv:2503.16211 (#202, 2-D) Sec. II.1 cantilever (Fig. 1)
+ ours   sup pins,clamp
+ codex  [domain] L/H=3 (near-square cells in Fig. 1d) vs 2.6 (outer rectangle in Fig. 1a);
+        [support] full left edge vs two corner pins; [material] nu .30 vs 1/3, plane
+ dis    domain: Codex only
+ decide sup KEEP (Codex's options ARE our two values).
+ missing ADD ar=[2.5,3.0] - the drawn grid is 20x8 (=2.5), Fig. 1(a) is drawn ~2.6, Fig. 1(d) implies
+        ~3; nominal follows the cell counts (2.5). Keep to two values: 2.6 collapses to 2.5.
+
+L43 arXiv:2509.05800 (#204, 2-D) Sec. 4.3 Fig. 5 row 1
+ ours   pos 0.75,0.8,0.85 (from top) | angle 210,240
+ codex  [support] closed half-edges incl. endpoints + bottom-right corner vs strictly-interior nodes;
+        [load_pos] left-boundary element row 13 (y/H=13.5/64) vs row 14; [distribution] one boundary
+        node vs uniform traction over the selected edge; [material] plane stress/strain, E=1, nu=0.3
+ dis    support: Codex only | load_dir: first annotation only
+ decide pos KEEP (Codex's rows = 0.79 from top, inside our fan) | angle KEEP with a CHANGE to the
+        reason string: state that Sec. 4.1 samples 6 angles and the figure restricts the shown one to
+        the down-left half-plane, so 210/240 are the admissible pair (not an arbitrary pick).
+ missing none - DEFER endpoint membership to recon ("closed half-edges used"): a sub-element node-set
+        difference, not a scale axis. load_dir presence is first-only because we encode it as `angle`:
+        record in Sec. 6.3 that sign-invariance makes the pair (210,240) and Codex's omission
+        non-substantive.
+
+L44 arXiv:2603.27000 (#219, 2-D; authors' own paper - disclose) Sec. 5.1 Table 3 cantilever_basic
+ ours   pos mid,corner | volfrac 0.5 (mandatory, configurator default assumed)
+ codex  [load_pos] right-edge midpoint (Lx,15Ly/30) vs adjacent 14/16; [material] nu .30/.25, plane
+ dis    volume_fraction: first annotation only
+ decide pos KEEP. volfrac CHANGE -> slot [0.3, 0.4, 0.5, 0.6]: the suite states these four targets for
+        the cantilever family while Table 3 leaves this row blank, so a finite admissible set exists -
+        encoding it is strictly better than a mandatory-only default (and removes the "default assumed"
+        caveat). missing none.
+
+L45 arXiv:2609.07149 (#241, 2-D) Sec. 4.1 cantilever (Fig. 6, Table 1)
+ ours   pos corner,mid | b 0.05,0.1 | volfrac 0.4 (mandatory)
+ codex  [load_dir] (0,-1) vs (1,0); [distribution] corner node vs uniform over the lowest right-edge
+        element (length 0.01); [material] nu = 1/3 (Sec. 3.3) vs nu = 0.3 (Appendix A) - STATED CONFLICT;
+        plane; [filter] R/h = 25 (Table 1) vs 30 (beta=R/(3h), beta=10) vs 50 (beta=R/(5h))
+ dis    load_dir: Codex only | volume_fraction: first annotation only | passive: first annotation only
+ decide pos KEEP (text 'bottom right' vs Fig. 6 block at mid-height) | b KEEP | volfrac KEEP (mandatory;
+        swept along the nondominated curves).
+ missing ADD dir=[down,axial] (Codex-only, scale-relevant) and ADD rmin=[12.5,15] elements: the filter
+        radius has conflicting stated readings (Table 1 R=25 at 200x100 -> 12.5 at our 100x50;
+        beta=R/(3h)=10 -> 15). Drop the R/h=50 reading in the reason string with the reason "requires
+        beta=R/(5h), stated as an alternative only". nu conflict ACCEPT into recon + Sec. 5 constants
+        note (nu .3 vs 1/3 scales compliance ~7%, not a design-set axis -> solver setting, not a slot).
+
+================================ EXCLUSIONS (16) ==============================================
+2502.01830 (#4)   random task; support/load only as unlabeled markers in a result image
+                  [x] EXCLUDE (agree) - no admissible set at any resolution
+2407.07288 (#11)  domain size, support extent, load position and angle from an illegible plot
+                  [x] EXCLUDE (agree)
+2008.07487 (#56)  symmetric-half vs pin/roller full 2:1 beam define the same problem under a vertical
+                  mid-span load  [x] EXCLUDE (agree) - one reading, no fan
+1801.05463 (#69)  load node, angle and vf absent: everything must be asked
+                  [x] EXCLUDE (agree) - mandatory-only task adds no comparison; keep the class in Sec. 8
+2108.03654 (#75)  1000 random load scenarios, realizations not given
+                  [x] EXCLUDE (agree) - not a finite set
+2610.16051 (#120) OAT problem 1961; full definition in the cited dataset
+                  [x] EXCLUDE (agree) - add one Sec. 6.3 sentence: self-contained-specification criterion
+2507.19388 (#148) readings differ only in mesh resolution
+                  [x] EXCLUDE (agree) - mesh is a reconstruction choice
+2201.11513 (#165) mean vs interval bounds scales the load; uniform traction vs equal nodal forces needs
+                  a uniform-traction patch type the solver lacks
+                  [ ] EXCLUDE   [x] ENCODE (slots: pos, dir, sup_extent) CONDITIONAL - implement
+                  uniform-traction patches, then encode; otherwise keep excluded and state the
+                  representability limit in Sec. 8. This is the only exclusion that is a tooling gap.
+2103.04594 (#179) 1000 random load scenarios  [x] EXCLUDE (agree)
+2211.15358 (#184) vf swept, no displayed instance; sensitivity-filter reading not representable
+                  [x] EXCLUDE (agree)
+1808.10367 (#185) random horizontal load at 148 unlisted quadrature points; V and lambda unstated
+                  [x] EXCLUDE (agree)
+2510.23667 (#200) three support positions, two load positions, angle, load ratio, V_max drawn/symbolic
+                  only  [x] EXCLUDE (agree) - no finite admissible set
+2604.18020 (#209) filter units: physical reading = 3/4 of the domain length; only element units plausible
+                  [x] EXCLUDE (agree) - implausible reading collapses to one value
+2004.05461 (#215) loads neither drawn nor stated  [x] EXCLUDE (agree)
+2012.05359 (#217) grid, vf, support nodes, four random loads not stated  [x] EXCLUDE (agree)
+2608.30499 (#239) Fig. 1 settings taken from Sec. 6.1 of the same benchmark; no alternative values
+                  [x] EXCLUDE (agree) - single reading
+
+================================ TALLY / FOLLOW-UPS ==========================================
+Slots: 69 across 41 tasks. KEEP 60 | CHANGE 8 (L02 strip, L11 dir, L15 dir, L21 load, L23 solid,
+        L36 roller, L44 volfrac, L45 rmin-add) + nominal-only change L22 (9 -> 6) | DROP 0 slots.
+New slots from Codex-only groups: 16 - L04 len/sup/pad, L11 void_size, L12 shell, L17 pos, L20 supcomp,
+        L31 sup, L33 sup, L37 pad_depth, L38 sup+dir, L40 ar, L42 ar, L45 dir+rmin. Cap 18 readings per
+        task; rank adds by E03 consequence class before encoding (each add multiplies bundles: CGC-S is
+        at 577).
+Codex items: DEFER 57 (51 material + distributions/filter/vf accounting), REBUT 12 (vf figure numerics
+        in L09/L13/L28/L30/L34/L35/L37; Gamma_N stated in L07; colour-scale density bounds in L24;
+        x-only roller = mechanism in L41), ACCEPT-as-erratum 2 (L38 nu printed 1.0; L30 Eq. (6) metric).
+Agreement: after adding the 16 slots, 10 of the 23 Codex-only group presences become shared; re-run
+        experiments/a06_agreement.py and report kappa again (expect ~0.71 - NOT computed here, do not
+        quote until recomputed). Sec. 6.3 must keep "compares slot presence only, not admissible values".
+Sec. 5 additions required by this check: fixed-constants table (nu=0.3, plane stress, Emin/E0=1e-9,
+        uniform raised-cosine patches, volume-preserving threshold), the L38 nu erratum, and one
+        sentence on representability limits (prescribed-displacement loads, uniform-traction patches,
+        sensitivity filters).
+Exclusions: 15 EXCLUDE agreed, 1 ENCODE conditional on a uniform-traction patch type (2201.11513).
+
+Author sign-off (required before submission): jun wang ______________ date ____________

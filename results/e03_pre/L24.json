@@ -1,0 +1,176 @@
+{
+ "task": "L24",
+ "source": {
+  "arxiv": "2402.12076",
+  "position": 135
+ },
+ "dim": 3,
+ "slots": {
+  "sup": [
+   1,
+   2,
+   4
+  ],
+  "load": [
+   "line",
+   "strip"
+  ]
+ },
+ "nominal": {
+  "sup": 2,
+  "load": "line"
+ },
+ "mandatory": [],
+ "reasons": {
+  "sup": "'bottom sides are fixed', strips drawn at both ends, width not stated (Fig. 9 caption; Fig. 9(a)); convention 1-4 elements of 40",
+  "load": "'uniformly applied at the center of the beam top', drawn as a line across the depth; line vs strip not stated (Fig. 9 caption; Fig. 9(a))"
+ },
+ "recon": [
+  "IGA porous-unit model in source; solid SIMP on 40x16x16 (3 mm voxels)",
+  "FE domain taken as the manufactured size"
+ ],
+ "keys": [
+  "load=line|sup=1",
+  "load=strip|sup=1",
+  "load=line|sup=2",
+  "load=strip|sup=2",
+  "load=line|sup=4",
+  "load=strip|sup=4"
+ ],
+ "C": [
+  [
+   0.5273576103699054,
+   0.4760820985471195,
+   0.47946395791498164,
+   0.4279987531693297,
+   0.4346767585946596,
+   0.38284538169573384
+  ],
+  [
+   0.5275757720445755,
+   0.47591654051318866,
+   0.48007597951299175,
+   0.4282139751943831,
+   0.4358590622788537,
+   0.38360441579987453
+  ],
+  [
+   0.5355938195049585,
+   0.48520041858130003,
+   0.4722273081543362,
+   0.4215837931552022,
+   0.4069873116049506,
+   0.35591062651419775
+  ],
+  [
+   0.5345814689096022,
+   0.4839598585549713,
+   0.4723413356052571,
+   0.42146574237094026,
+   0.40871852700476674,
+   0.3574046748078332
+  ],
+  [
+   1.7069724824664867,
+   1.6574120140208084,
+   0.5236741769600102,
+   0.4744971127876941,
+   0.3867161123378602,
+   0.337215800883114
+  ],
+  [
+   1.721374818977008,
+   1.671465066959443,
+   0.5219469161049469,
+   0.47242602837345105,
+   0.38691073560842626,
+   0.3370123957809498
+  ]
+ ],
+ "ref": {
+  "load=line|sup=1": 0.5273576103699054,
+  "load=strip|sup=1": 0.47591654051318866,
+  "load=line|sup=2": 0.4722273081543319,
+  "load=strip|sup=2": 0.42146574237094026,
+  "load=line|sup=4": 0.3867161123378602,
+  "load=strip|sup=4": 0.3370123957809498
+ },
+ "ref_gap_beaten": {
+  "load=line|sup=1": 5.10702591327572e-15,
+  "load=strip|sup=1": 1.7763568394002505e-15,
+  "load=line|sup=2": 0.0,
+  "load=strip|sup=2": 7.993605777301127e-15,
+  "load=line|sup=4": 0.0,
+  "load=strip|sup=4": 2.886579864025407e-15
+ },
+ "noise": {
+  "load=line|sup=1": 4.6307286167318e-05,
+  "load=strip|sup=1": 4.666847465431093e-05,
+  "load=line|sup=2": 8.100124524668125e-05,
+  "load=strip|sup=2": 0.0004518537422574762,
+  "load=line|sup=4": 3.9028065399460315e-05,
+  "load=strip|sup=4": 0.00017863917116142013
+ },
+ "meta": {
+  "load=line|sup=1": {
+   "accepted": true,
+   "kkt": 0.21642260795012536,
+   "wall_s": 525.0404597000452,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "load=strip|sup=1": {
+   "accepted": true,
+   "kkt": 0.23824269864968545,
+   "wall_s": 439.72682499990333,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "load=line|sup=2": {
+   "accepted": true,
+   "kkt": 0.30449310083510006,
+   "wall_s": 328.40308980003465,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "load=strip|sup=2": {
+   "accepted": true,
+   "kkt": 0.31204752593340557,
+   "wall_s": 289.3402823000215,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "load=line|sup=4": {
+   "accepted": true,
+   "kkt": 0.2099825171200992,
+   "wall_s": 290.350897999946,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "load=strip|sup=4": {
+   "accepted": true,
+   "kkt": 0.200023876364116,
+   "wall_s": 399.83760980004445,
+   "n_iter": [
+    201,
+    201
+   ]
+  }
+ },
+ "counter": {
+  "optimizations": 0,
+  "factorizations": 18,
+  "backsubs": 36,
+  "opt_wall_s": 0.0
+ }
+}

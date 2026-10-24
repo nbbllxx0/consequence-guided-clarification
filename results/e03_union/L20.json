@@ -1,0 +1,240 @@
+{
+ "task": "L20",
+ "source": {
+  "arxiv": "2607.07682",
+  "position": 73
+ },
+ "dim": 2,
+ "slots": {
+  "extent": [
+   "full",
+   "half"
+  ],
+  "sup": [
+   "node",
+   "block"
+  ],
+  "supcomp": [
+   "y",
+   "xy"
+  ]
+ },
+ "nominal": {
+  "extent": "half",
+  "sup": "node",
+  "supcomp": "y"
+ },
+ "mandatory": [],
+ "reasons": {
+  "extent": "192x64 with half-symmetry; half or full beam not stated (Sec. V-A; Fig. 2B; Fig. S11)",
+  "sup": "'both lower corners supported', drawn as small blocks; size not stated (Fig. 2B)",
+  "supcomp": "restraint at the outer lower corner: roller (y) or pin (xy) (adjudicator B)"
+ },
+ "recon": [
+  "L-BFGS in source; OC",
+  "block support = 4-element segment ending at the corner",
+  "volume constraint on the filtered density (source: prefilter field, Eq. 12)"
+ ],
+ "keys": [
+  "extent=full|sup=node|supcomp=y",
+  "extent=full|sup=node|supcomp=xy",
+  "extent=full|sup=block|supcomp=y",
+  "extent=full|sup=block|supcomp=xy",
+  "extent=half|sup=node|supcomp=y",
+  "extent=half|sup=node|supcomp=xy",
+  "extent=half|sup=block|supcomp=y",
+  "extent=half|sup=block|supcomp=xy"
+ ],
+ "C": [
+  [
+   53.41044388645199,
+   38.50833719755838,
+   45.94573791394208,
+   35.644997226120665,
+   33197430.641908925,
+   21758918.494899992,
+   25319141.616288714,
+   17511076.637410264
+  ],
+  [
+   170.93862707651306,
+   29.44866963678759,
+   124.75163478085749,
+   24.117199841240925,
+   34454188.86159401,
+   22950273.531442415,
+   26499840.51896036,
+   18659575.474469967
+  ],
+  [
+   57.25893706072406,
+   37.708006134053214,
+   44.61044434412151,
+   33.04759473822169,
+   33685244.819569916,
+   22171424.828749165,
+   25779738.931086905,
+   17908889.8677079
+  ],
+  [
+   278.88329848839,
+   30.38146584321658,
+   213.11919413728216,
+   23.634466491991855,
+   34808541.61111644,
+   23229684.508370712,
+   26833988.932027314,
+   18928339.913910296
+  ],
+  [
+   Infinity,
+   Infinity,
+   Infinity,
+   Infinity,
+   226.06046095586078,
+   166.29287025580564,
+   214.65475901491365,
+   162.13668921544314
+  ],
+  [
+   Infinity,
+   Infinity,
+   Infinity,
+   Infinity,
+   1464.7061348652533,
+   114.31676565233553,
+   985.120813297496,
+   102.57907397445625
+  ],
+  [
+   Infinity,
+   Infinity,
+   Infinity,
+   Infinity,
+   250.3158244447414,
+   168.54662793537508,
+   207.04799195297366,
+   165.30884887336802
+  ],
+  [
+   Infinity,
+   Infinity,
+   Infinity,
+   Infinity,
+   1377.6186995623973,
+   116.3159759009551,
+   1035.9880377659017,
+   100.90850077136724
+  ]
+ ],
+ "ref": {
+  "extent=full|sup=node|supcomp=y": 53.41044388645199,
+  "extent=full|sup=node|supcomp=xy": 29.44866963678759,
+  "extent=full|sup=block|supcomp=y": 44.61044434412151,
+  "extent=full|sup=block|supcomp=xy": 23.634466491991855,
+  "extent=half|sup=node|supcomp=y": 226.06046095586078,
+  "extent=half|sup=node|supcomp=xy": 114.31676565233553,
+  "extent=half|sup=block|supcomp=y": 207.04799195297366,
+  "extent=half|sup=block|supcomp=xy": 100.90850077136724
+ },
+ "ref_gap_beaten": {
+  "extent=full|sup=node|supcomp=y": 0.0,
+  "extent=full|sup=node|supcomp=xy": 0.0,
+  "extent=full|sup=block|supcomp=y": 0.0,
+  "extent=full|sup=block|supcomp=xy": 0.0,
+  "extent=half|sup=node|supcomp=y": 0.0,
+  "extent=half|sup=node|supcomp=xy": 0.0,
+  "extent=half|sup=block|supcomp=y": 0.0,
+  "extent=half|sup=block|supcomp=xy": 0.0
+ },
+ "noise": {
+  "extent=full|sup=node|supcomp=y": 0.0005163250208478175,
+  "extent=full|sup=node|supcomp=xy": 0.0003899705713692335,
+  "extent=full|sup=block|supcomp=y": 0.003369850304073865,
+  "extent=full|sup=block|supcomp=xy": 0.0008759705753866323,
+  "extent=half|sup=node|supcomp=y": 0.0018713504384173132,
+  "extent=half|sup=node|supcomp=xy": 0.0003160312775310986,
+  "extent=half|sup=block|supcomp=y": 0.004718703015314486,
+  "extent=half|sup=block|supcomp=xy": 0.00039427777743249247
+ },
+ "meta": {
+  "extent=full|sup=node|supcomp=y": {
+   "accepted": true,
+   "kkt": 0.1442262121022203,
+   "wall_s": 52.7244896000484,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "extent=full|sup=node|supcomp=xy": {
+   "accepted": true,
+   "kkt": 0.07805044252343903,
+   "wall_s": 127.14186059997883,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "extent=full|sup=block|supcomp=y": {
+   "accepted": true,
+   "kkt": 0.17319518805728315,
+   "wall_s": 55.40987910004333,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "extent=full|sup=block|supcomp=xy": {
+   "accepted": true,
+   "kkt": 0.09286062006495727,
+   "wall_s": 132.49558640015312,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "extent=half|sup=node|supcomp=y": {
+   "accepted": true,
+   "kkt": 0.2717892127588728,
+   "wall_s": 134.58491430000868,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "extent=half|sup=node|supcomp=xy": {
+   "accepted": true,
+   "kkt": 0.04903576148701935,
+   "wall_s": 72.74972500000149,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "extent=half|sup=block|supcomp=y": {
+   "accepted": true,
+   "kkt": 0.602080558268252,
+   "wall_s": 122.64229849993717,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "extent=half|sup=block|supcomp=xy": {
+   "accepted": true,
+   "kkt": 0.09591037993850099,
+   "wall_s": 75.07567389996257,
+   "n_iter": [
+    201,
+    201
+   ]
+  }
+ },
+ "counter": {
+  "optimizations": 0,
+  "factorizations": 64,
+  "backsubs": 64,
+  "opt_wall_s": 0.0
+ }
+}

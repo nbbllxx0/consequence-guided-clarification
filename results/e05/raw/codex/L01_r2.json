@@ -1,0 +1,256 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"outer aspect ratio of the L-shaped bracket\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 names an L-shaped bracket but gives no outer width-to-height ratio. The 64\u00d764 image resolution in Sec. 3.1 does not explicitly specify physical element spacings.\",\n      \"readings\": [\n        \"Outer width W equals height H; square grid cells\",\n        \"W = 2H; rectangular grid cells\",\n        \"W = H/2; rectangular grid cells\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"absolute in-plane length scale\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Example designs nor the Fig. 4 caption supplies dimensional side lengths or a length normalization.\",\n      \"readings\": [\n        \"W = 1 in normalized units\",\n        \"W = 64 in element-length units\",\n        \"W = 100 mm, with all in-plane geometry and filter dimensions scaled consistently\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"L-shaped footprint, notch orientation, and leg widths\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4 and the Fig. 4 caption say only 'classic L-shaped bracket'. No corner coordinates or leg dimensions are supplied. The training dataset's square-mask description does not define this out-of-distribution instance.\",\n      \"readings\": [\n        \"Bounding box [0,W]\u00d7[0,H], with the upper-right region x>0.5W and y>0.5H removed\",\n        \"Same bounding box, with x>0.4W and y>0.4H removed\",\n        \"Same bounding box, with x>0.3W and y>0.6H removed\",\n        \"Same bounding box, with the lower-right region x>0.5W and y<0.5H removed\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 3.1\u20133.2 specify elastic constants but no thickness for the two-dimensional compliance model.\",\n      \"readings\": [\n        \"Uniform unit thickness\",\n        \"Uniform thickness t = 0.01W\",\n        \"Uniform thickness t = 0.1W\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"downward point load on the right edge\",\n      \"issue\": \"vague\",\n      \"description\": \"The Fig. 4 caption identifies the right edge but gives no coordinate along that edge.\",\n      \"readings\": [\n        \"At the lower endpoint of the rightmost material edge\",\n        \"At the midpoint of the rightmost material edge\",\n        \"At the upper endpoint of the rightmost material edge\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"downward point force\",\n      \"issue\": \"missing\",\n      \"description\": \"The Fig. 4 caption specifies the force direction and point character but not its magnitude.\",\n      \"readings\": [\n        \"F = 1 in the chosen force units\",\n        \"F = 0.1 in the same units\",\n        \"F = 10 in the same units\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"numerical representation of the L-shaped cutout\",\n      \"issue\": \"missing\",\n      \"description\": \"The text does not state whether the Fig. 4 notch is outside the finite-element domain or a passive void inside a rectangular computational mesh.\",\n      \"readings\": [\n        \"Remove notch elements and unused degrees of freedom from the elastic model\",\n        \"Retain the rectangular mesh and fix notch densities to zero, retaining the stated E_min stiffness\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"prescribed solid material near the clamp and point load\",\n      \"issue\": \"missing\",\n      \"description\": \"No Fig. 4 specification identifies fixed-solid cells or states that all material cells, including those adjacent to loads and supports, remain designable.\",\n      \"readings\": [\n        \"No passive-solid cells\",\n        \"Fix all elements incident to the loaded node to density 1\",\n        \"Fix elements incident to the loaded node and a one-element strip adjacent to the clamped edge to density 1\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"material budget for the Fig. 4 instance\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.2 introduces V0 but supplies no value for Fig. 4. The interval [0.12,0.5] in Sec. 3.1 describes training data, not the selected out-of-distribution instance.\",\n      \"readings\": [\n        \"Volume fraction 0.20\",\n        \"Volume fraction 0.30\",\n        \"Volume fraction 0.50\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"reference volume and passive-solid accounting\",\n      \"issue\": \"vague\",\n      \"description\": \"Eq. (2) integrates over \u03a9, but the text does not define whether \u03a9 excludes the notch or how any prescribed solid material enters the Fig. 4 budget.\",\n      \"readings\": [\n        \"Budget equals the chosen fraction of the remaining L-shaped area, including passive solids in consumed material\",\n        \"Budget equals the chosen fraction of the entire rectangular bounding-box area\",\n        \"Apply the fraction only to designable cells and add prescribed solid material outside that budget\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"two-dimensional elastic constitutive assumption\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 3.1\u20133.2 give E0, E_min, and Poisson's ratio, but do not explicitly state plane stress or plane strain; the 88-line-code reference is not reproduced.\",\n      \"readings\": [\n        \"Plane stress with \u03bd = 0.3\",\n        \"Plane strain with \u03bd = 0.3\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"density-to-stiffness interpolation and penalization\",\n      \"issue\": \"missing\",\n      \"description\": \"The compliance setup refers to the 88-line-code approach without giving the stiffness interpolation equation, penalty exponent, or continuation schedule.\",\n      \"readings\": [\n        \"SIMP: E(\u03c1) = E_min + (E0\u2212E_min)\u03c1\u00b2\",\n        \"SIMP: E(\u03c1) = E_min + (E0\u2212E_min)\u03c1\u00b3\",\n        \"SIMP: E(\u03c1) = E_min + (E0\u2212E_min)\u03c1\u2074\",\n        \"SIMP with the exponent increased from 1 to 3 during optimization\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"density bounds in the MMA reference problem\",\n      \"issue\": \"missing\",\n      \"description\": \"The text does not give MMA density bounds. Eq. (2) describes the neural-output mapping; the stated E_min is a stiffness floor rather than a density lower bound.\",\n      \"readings\": [\n        \"0 \u2264 \u03c1 \u2264 1\",\n        \"10^-6 \u2264 \u03c1 \u2264 1\",\n        \"10^-3 \u2264 \u03c1 \u2264 1\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"placement of the cone filter relative to the sigmoid transformation\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 3.2 specifies Eq. (2) and a radius-2-pixel cone filter but gives no explicit processing order or complete raw-variable-to-physical-density equation.\",\n      \"readings\": [\n        \"Cone-filter the raw network outputs, then apply the volume-constrained sigmoid\",\n        \"Apply the sigmoid first, then cone-filter densities, choosing the sigmoid bias to satisfy the final physical-volume constraint\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"cone-filter treatment of the notch and domain boundaries\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 3.1\u20133.2 specify the cone radius but do not describe neighbor exclusion, normalization, or mask enforcement near the L-shaped cutout.\",\n      \"readings\": [\n        \"Average only over remaining L-domain cells and renormalize weights over those cells\",\n        \"Filter on the full rectangular grid with zero-density notch cells included in normalization, then reapply the notch mask\",\n        \"Use reflected density extension at boundaries before applying the cone kernel\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"finite-element formulation and integration\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.1 gives 64\u00d764 density-image resolution and references the 88-line-code approach, but does not explicitly state element interpolation or quadrature.\",\n      \"readings\": [\n        \"One bilinear four-node quadrilateral per density pixel, with full 2\u00d72 Gauss integration\",\n        \"One bilinear four-node quadrilateral per density pixel, with stabilized one-point integration\",\n        \"One quadratic eight-node quadrilateral per density cell, with full 3\u00d73 Gauss integration\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"rasterization of the L-shaped notch\",\n      \"issue\": \"missing\",\n      \"description\": \"No Fig. 4 mask array, cell-index limits, or rounding rule is supplied for mapping geometric corner coordinates to the 64\u00d764 density grid.\",\n      \"readings\": [\n        \"Mark a cell void when its center lies inside the notch\",\n        \"Mark a cell void whenever it intersects the notch\",\n        \"Mark a cell void only when it lies entirely inside the notch\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"MMA default update controls\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 3.1 calls the MMA hyperparameters 'default' without identifying an implementation or giving move limits and asymptote settings.\",\n      \"readings\": [\n        \"Maximum density move 0.1, initial asymptote distance 0.5 of the density range\",\n        \"Maximum density move 0.2, initial asymptote distance 0.5 of the density range\",\n        \"Maximum density move 0.2, initial asymptote distance 0.2 of the density range\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"initial density field for the Fig. 4 MMA reference\",\n      \"issue\": \"missing\",\n      \"description\": \"The compliance-example setup gives no initial field. The later explicit uniform initialization belongs to the separate fracture experiment.\",\n      \"readings\": [\n        \"Uniform density satisfying the material budget\",\n        \"A slightly perturbed uniform field, renormalized to the same budget\",\n        \"A nonuniform feasible starting design\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"accuracy of elastic solves and volume-bias bisection\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 3.1\u20133.2 specify neither the elastic linear-solver accuracy nor the stopping tolerance for the bisection defining b in Eq. (2).\",\n      \"readings\": [\n        \"Sparse direct elastic solve; relative volume error below 10^-10\",\n        \"Iterative elastic solve with relative residual below 10^-8; relative volume error below 10^-6\",\n        \"Iterative elastic solve with relative residual below 10^-6; relative volume error below 10^-4\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "outer aspect ratio of the L-shaped bracket",
+    "issue": "missing",
+    "description": "Sec. 4 names an L-shaped bracket but gives no outer width-to-height ratio. The 64\u00d764 image resolution in Sec. 3.1 does not explicitly specify physical element spacings.",
+    "readings": [
+     "Outer width W equals height H; square grid cells",
+     "W = 2H; rectangular grid cells",
+     "W = H/2; rectangular grid cells"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "absolute in-plane length scale",
+    "issue": "missing",
+    "description": "Neither Example designs nor the Fig. 4 caption supplies dimensional side lengths or a length normalization.",
+    "readings": [
+     "W = 1 in normalized units",
+     "W = 64 in element-length units",
+     "W = 100 mm, with all in-plane geometry and filter dimensions scaled consistently"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "L-shaped footprint, notch orientation, and leg widths",
+    "issue": "vague",
+    "description": "Sec. 4 and the Fig. 4 caption say only 'classic L-shaped bracket'. No corner coordinates or leg dimensions are supplied. The training dataset's square-mask description does not define this out-of-distribution instance.",
+    "readings": [
+     "Bounding box [0,W]\u00d7[0,H], with the upper-right region x>0.5W and y>0.5H removed",
+     "Same bounding box, with x>0.4W and y>0.4H removed",
+     "Same bounding box, with x>0.3W and y>0.6H removed",
+     "Same bounding box, with the lower-right region x>0.5W and y<0.5H removed"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "out-of-plane thickness",
+    "issue": "missing",
+    "description": "Secs. 3.1\u20133.2 specify elastic constants but no thickness for the two-dimensional compliance model.",
+    "readings": [
+     "Uniform unit thickness",
+     "Uniform thickness t = 0.01W",
+     "Uniform thickness t = 0.1W"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "load_position",
+    "entity": "downward point load on the right edge",
+    "issue": "vague",
+    "description": "The Fig. 4 caption identifies the right edge but gives no coordinate along that edge.",
+    "readings": [
+     "At the lower endpoint of the rightmost material edge",
+     "At the midpoint of the rightmost material edge",
+     "At the upper endpoint of the rightmost material edge"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "downward point force",
+    "issue": "missing",
+    "description": "The Fig. 4 caption specifies the force direction and point character but not its magnitude.",
+    "readings": [
+     "F = 1 in the chosen force units",
+     "F = 0.1 in the same units",
+     "F = 10 in the same units"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "numerical representation of the L-shaped cutout",
+    "issue": "missing",
+    "description": "The text does not state whether the Fig. 4 notch is outside the finite-element domain or a passive void inside a rectangular computational mesh.",
+    "readings": [
+     "Remove notch elements and unused degrees of freedom from the elastic model",
+     "Retain the rectangular mesh and fix notch densities to zero, retaining the stated E_min stiffness"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "prescribed solid material near the clamp and point load",
+    "issue": "missing",
+    "description": "No Fig. 4 specification identifies fixed-solid cells or states that all material cells, including those adjacent to loads and supports, remain designable.",
+    "readings": [
+     "No passive-solid cells",
+     "Fix all elements incident to the loaded node to density 1",
+     "Fix elements incident to the loaded node and a one-element strip adjacent to the clamped edge to density 1"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "material budget for the Fig. 4 instance",
+    "issue": "missing",
+    "description": "Sec. 3.2 introduces V0 but supplies no value for Fig. 4. The interval [0.12,0.5] in Sec. 3.1 describes training data, not the selected out-of-distribution instance.",
+    "readings": [
+     "Volume fraction 0.20",
+     "Volume fraction 0.30",
+     "Volume fraction 0.50"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "reference volume and passive-solid accounting",
+    "issue": "vague",
+    "description": "Eq. (2) integrates over \u03a9, but the text does not define whether \u03a9 excludes the notch or how any prescribed solid material enters the Fig. 4 budget.",
+    "readings": [
+     "Budget equals the chosen fraction of the remaining L-shaped area, including passive solids in consumed material",
+     "Budget equals the chosen fraction of the entire rectangular bounding-box area",
+     "Apply the fraction only to designable cells and add prescribed solid material outside that budget"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "two-dimensional elastic constitutive assumption",
+    "issue": "missing",
+    "description": "Secs. 3.1\u20133.2 give E0, E_min, and Poisson's ratio, but do not explicitly state plane stress or plane strain; the 88-line-code reference is not reproduced.",
+    "readings": [
+     "Plane stress with \u03bd = 0.3",
+     "Plane strain with \u03bd = 0.3"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "density-to-stiffness interpolation and penalization",
+    "issue": "missing",
+    "description": "The compliance setup refers to the 88-line-code approach without giving the stiffness interpolation equation, penalty exponent, or continuation schedule.",
+    "readings": [
+     "SIMP: E(\u03c1) = E_min + (E0\u2212E_min)\u03c1\u00b2",
+     "SIMP: E(\u03c1) = E_min + (E0\u2212E_min)\u03c1\u00b3",
+     "SIMP: E(\u03c1) = E_min + (E0\u2212E_min)\u03c1\u2074",
+     "SIMP with the exponent increased from 1 to 3 during optimization"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "density bounds in the MMA reference problem",
+    "issue": "missing",
+    "description": "The text does not give MMA density bounds. Eq. (2) describes the neural-output mapping; the stated E_min is a stiffness floor rather than a density lower bound.",
+    "readings": [
+     "0 \u2264 \u03c1 \u2264 1",
+     "10^-6 \u2264 \u03c1 \u2264 1",
+     "10^-3 \u2264 \u03c1 \u2264 1"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "placement of the cone filter relative to the sigmoid transformation",
+    "issue": "vague",
+    "description": "Sec. 3.2 specifies Eq. (2) and a radius-2-pixel cone filter but gives no explicit processing order or complete raw-variable-to-physical-density equation.",
+    "readings": [
+     "Cone-filter the raw network outputs, then apply the volume-constrained sigmoid",
+     "Apply the sigmoid first, then cone-filter densities, choosing the sigmoid bias to satisfy the final physical-volume constraint"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "cone-filter treatment of the notch and domain boundaries",
+    "issue": "missing",
+    "description": "Secs. 3.1\u20133.2 specify the cone radius but do not describe neighbor exclusion, normalization, or mask enforcement near the L-shaped cutout.",
+    "readings": [
+     "Average only over remaining L-domain cells and renormalize weights over those cells",
+     "Filter on the full rectangular grid with zero-density notch cells included in normalization, then reapply the notch mask",
+     "Use reflected density extension at boundaries before applying the cone kernel"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "finite-element formulation and integration",
+    "issue": "missing",
+    "description": "Sec. 3.1 gives 64\u00d764 density-image resolution and references the 88-line-code approach, but does not explicitly state element interpolation or quadrature.",
+    "readings": [
+     "One bilinear four-node quadrilateral per density pixel, with full 2\u00d72 Gauss integration",
+     "One bilinear four-node quadrilateral per density pixel, with stabilized one-point integration",
+     "One quadratic eight-node quadrilateral per density cell, with full 3\u00d73 Gauss integration"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "rasterization of the L-shaped notch",
+    "issue": "missing",
+    "description": "No Fig. 4 mask array, cell-index limits, or rounding rule is supplied for mapping geometric corner coordinates to the 64\u00d764 density grid.",
+    "readings": [
+     "Mark a cell void when its center lies inside the notch",
+     "Mark a cell void whenever it intersects the notch",
+     "Mark a cell void only when it lies entirely inside the notch"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "MMA default update controls",
+    "issue": "vague",
+    "description": "Sec. 3.1 calls the MMA hyperparameters 'default' without identifying an implementation or giving move limits and asymptote settings.",
+    "readings": [
+     "Maximum density move 0.1, initial asymptote distance 0.5 of the density range",
+     "Maximum density move 0.2, initial asymptote distance 0.5 of the density range",
+     "Maximum density move 0.2, initial asymptote distance 0.2 of the density range"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "initial density field for the Fig. 4 MMA reference",
+    "issue": "missing",
+    "description": "The compliance-example setup gives no initial field. The later explicit uniform initialization belongs to the separate fracture experiment.",
+    "readings": [
+     "Uniform density satisfying the material budget",
+     "A slightly perturbed uniform field, renormalized to the same budget",
+     "A nonuniform feasible starting design"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "accuracy of elastic solves and volume-bias bisection",
+    "issue": "missing",
+    "description": "Secs. 3.1\u20133.2 specify neither the elastic linear-solver accuracy nor the stopping tolerance for the bisection defining b in Eq. (2).",
+    "readings": [
+     "Sparse direct elastic solve; relative volume error below 10^-10",
+     "Iterative elastic solve with relative residual below 10^-8; relative volume error below 10^-6",
+     "Iterative elastic solve with relative residual below 10^-6; relative volume error below 10^-4"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 722.0756435394287,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L01",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 2,
+ "locator": "Sec. 4 'Example designs', Fig. 4 (the first problem instance shown with a design)",
+ "finished": "2026-10-22T21:47:24"
+}

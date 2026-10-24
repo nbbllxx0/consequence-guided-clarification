@@ -1,0 +1,125 @@
+{
+ "task": "L25",
+ "source": {
+  "arxiv": "2002.01927",
+  "position": 47
+ },
+ "dim": 2,
+ "slots": {
+  "sup": [
+   "elem",
+   "node"
+  ],
+  "load": [
+   "elem",
+   "corner"
+  ]
+ },
+ "nominal": {
+  "sup": "elem",
+  "load": "elem"
+ },
+ "mandatory": [],
+ "reasons": {
+  "sup": "'bottom left edge' read as one source element edge only from Fig. 2a",
+  "load": "'top right edge' read as one source element edge only from Fig. 2a"
+ },
+ "recon": [
+  "4x4 COMSOL elements in source; 40x40 grid (one source edge = 10 elements)",
+  "rmin 1.5"
+ ],
+ "keys": [
+  "load=elem|sup=elem",
+  "load=corner|sup=elem",
+  "load=elem|sup=node",
+  "load=corner|sup=node"
+ ],
+ "C": [
+  [
+   8.750266507867904,
+   11.460918162413213,
+   6917803.169490108,
+   6917805.347445462
+  ],
+  [
+   21276.567183643867,
+   11.054894130673574,
+   6952999.251467357,
+   6931789.943614325
+  ],
+  [
+   11.74706947691114,
+   16.69546247409043,
+   20.408726026402256,
+   24.409282993480982
+  ],
+  [
+   546.4810951790038,
+   14.533668327015071,
+   555.3542477072153,
+   23.24045237967925
+  ]
+ ],
+ "ref": {
+  "load=elem|sup=elem": 8.750266507867904,
+  "load=corner|sup=elem": 11.054894130673574,
+  "load=elem|sup=node": 20.408726026402245,
+  "load=corner|sup=node": 23.24045237967925
+ },
+ "ref_gap_beaten": {
+  "load=elem|sup=elem": 0.0,
+  "load=corner|sup=elem": 0.0,
+  "load=elem|sup=node": 0.0,
+  "load=corner|sup=node": 0.0
+ },
+ "noise": {
+  "load=elem|sup=elem": 0.0004400847168405124,
+  "load=corner|sup=elem": 0.0003006195607361932,
+  "load=elem|sup=node": 0.0014171734415301704,
+  "load=corner|sup=node": 0.002328621279597082
+ },
+ "meta": {
+  "load=elem|sup=elem": {
+   "accepted": true,
+   "kkt": 0.03751484905560374,
+   "wall_s": 10.187899300013669,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "load=corner|sup=elem": {
+   "accepted": true,
+   "kkt": 0.23303666314267055,
+   "wall_s": 13.090680600027554,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "load=elem|sup=node": {
+   "accepted": true,
+   "kkt": 0.08877056931009075,
+   "wall_s": 10.844513499876484,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "load=corner|sup=node": {
+   "accepted": true,
+   "kkt": 0.11954029082855086,
+   "wall_s": 13.48941800009925,
+   "n_iter": [
+    201,
+    201
+   ]
+  }
+ },
+ "counter": {
+  "optimizations": 0,
+  "factorizations": 8,
+  "backsubs": 16,
+  "opt_wall_s": 0.0
+ }
+}

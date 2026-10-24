@@ -1,0 +1,209 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Physical dimensions of the cantilever cuboid\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 7 determines L=16a, W=H=2a from equal coarse cubes, but never specifies their edge length a or physical units. The aspect ratio is determined.\",\n      \"readings\": [\n        \"a=1 length unit: domain 16\u00d72\u00d72, fine-element edge 1/16.\",\n        \"a=1/16 length unit: domain 1\u00d71/8\u00d71/8, fine-element edge 1/256.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Load centered on the right-hand face\",\n      \"issue\": \"vague\",\n      \"description\": \"Section 7 places the z-directed load in the middle of the right face and refers to unavailable Fig. 2(a). It does not distinguish a concentrated nodal force from a distributed load or specify a footprint and force weights.\",\n      \"readings\": [\n        \"A concentrated force at the center node (L,W/2,H/2).\",\n        \"Equal forces on the nine face nodes with y/W and z/H in {15/32,16/32,17/32}, normalized to a prescribed resultant.\",\n        \"Uniform traction on the centered patch 3/8\u2264y/W\u22645/8 and 3/8\u2264z/H\u22645/8, assembled as consistent nodal forces.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"Polarity of the z-directed load\",\n      \"issue\": \"vague\",\n      \"description\": \"Section 7 specifies the z direction without an explicit signed component; the arrow in Fig. 2(a) is unavailable. Reversing this sole load leaves compliance and the optimal density unchanged in linear elasticity.\",\n      \"readings\": [\n        \"Force acts along +z.\",\n        \"Force acts along -z.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"Resultant force on the right-hand face\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Section 7 nor the CANT-16-2-2-5 description supplies a force or traction magnitude. Table 1's objective values cannot identify it independently of the other missing inputs.\",\n      \"readings\": [\n        \"Total resultant magnitude F=1 in consistent force units.\",\n        \"Total resultant magnitude F=10 in the same units, with the same spatial distribution.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Allowed material volume\",\n      \"issue\": \"missing\",\n      \"description\": \"Equation (1) specifies sum(rho_i)=V, but no numerical V or volume fraction is supplied for this example. The plotting fractions and density cutoffs in Figures 3\u20135 do not specify V.\",\n      \"readings\": [\n        \"With upper density normalized to 1, V=0.2m.\",\n        \"With upper density normalized to 1, V=0.4m.\",\n        \"With upper density normalized to 1, V=0.5m.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Upper density bounds\",\n      \"issue\": \"missing\",\n      \"description\": \"Equation (1) introduces upper bounds rho_upper, but Section 7.1 supplies only the lower bounds. No numerical upper bound or full-density normalization is stated.\",\n      \"readings\": [\n        \"Uniform upper bound rho_upper_i=1.\",\n        \"Uniform upper bound rho_upper_i=2, holding V in the equation's density units fixed.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Overall elastic stiffness scale\",\n      \"issue\": \"missing\",\n      \"description\": \"The paper defines generic element stiffness matrices K_i without giving Young's modulus or an equivalent overall scale for the elasticity tensor.\",\n      \"readings\": [\n        \"Reference elastic modulus E_ref=1 in consistent units.\",\n        \"Reference elastic modulus E_ref=10 in the same units, with the normalized elasticity tensor unchanged.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Normalized elasticity tensor, including Poisson coupling and material symmetry\",\n      \"issue\": \"missing\",\n      \"description\": \"Sections 1 and 6.2 specify stiffness properties and finite-element bases, but no constitutive tensor, isotropy assumption, Poisson ratio, or material-axis orientation.\",\n      \"readings\": [\n        \"Homogeneous isotropic elasticity with Poisson ratio 0.30.\",\n        \"Homogeneous isotropic elasticity with Poisson ratio 0.25.\",\n        \"Homogeneous orthotropic elasticity aligned with x,y,z, with C/E_ref=diag(2,1,1,0.4,0.4,0.4) in engineering-shear Voigt order xx,yy,zz,yz,xz,xy.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Integration used to construct the hexahedral element stiffness matrices\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 6.2 determines trilinear hexahedral displacement elements and elementwise constant density, but does not specify stiffness quadrature or an integration modification.\",\n      \"readings\": [\n        \"Fully integrated Q1 hexahedra using 2\u00d72\u00d72 Gauss quadrature.\",\n        \"For isotropic elasticity, selective reduced integration: one-point volumetric integration and 2\u00d72\u00d72 integration of the deviatoric term.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initial PBM penalty parameters for the Table 1 PBM rows\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 3.2 gives initial primal variables and multipliers, penalty reduction factors, and penalty floors, but not initial p_i, q_lower_i, or q_upper_i.\",\n      \"readings\": [\n        \"Initialize all three penalty-parameter vectors to 1.\",\n        \"Initialize all three penalty-parameter vectors to 0.1.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"PBM Newton backtracking configuration\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 3.2 and Algorithm 2 prescribe an Armijo backtracking search without specifying the sufficient-decrease constant, contraction factor, or initial trial step.\",\n      \"readings\": [\n        \"Initial step 1, Armijo constant 0.0001, contraction factor 0.5.\",\n        \"Initial step 1, Armijo constant 0.01, contraction factor 0.8.\",\n        \"Initial step 0.5, Armijo constant 0.0001, contraction factor 0.5.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Gauss-Seidel smoothing within the multigrid preconditioner\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 6.1 names Gauss-Seidel smoothing but does not give pre/post sweep counts, sweep ordering, or scalar versus nodal-block updates.\",\n      \"readings\": [\n        \"One lexicographic scalar forward presweep and one reverse-order scalar postsweep.\",\n        \"Two lexicographic scalar forward presweeps and two reverse-order scalar postsweeps.\",\n        \"One forward and one backward sweep using 3\u00d73 displacement blocks at each node.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Multigrid coarsest-level solver\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 6 specifies Galerkin coarse operators and a V-cycle, but does not specify how the coarsest system is solved.\",\n      \"readings\": [\n        \"Solve the coarsest system directly by Cholesky factorization.\",\n        \"Approximate the coarsest solve with ten symmetric Gauss-Seidel iterations starting from zero.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"MINRES residual measurement\",\n      \"issue\": \"vague\",\n      \"description\": \"Equation (31) gives a relative residual test with unsubscripted norms. It does not explicitly distinguish a true Euclidean residual check from the preconditioned residual estimate used by an implementation.\",\n      \"readings\": [\n        \"Check ||b-Az||_2 / ||b||_2 explicitly.\",\n        \"Check the corresponding preconditioned residual norm or its MINRES recurrence estimate.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initial guesses for successive MINRES solves\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 6 gives MINRES tolerances but does not state whether linear solves start from zero or reuse previous solutions. The outer PBM/IP initial values do not specify initial Newton increments.\",\n      \"readings\": [\n        \"Start every linear solve from zero.\",\n        \"Reuse the previous displacement in DOC and the previous Newton increment in PBM/IP.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initial DOC density distribution\",\n      \"issue\": \"missing\",\n      \"description\": \"Sections 3.2 and 4.1 explicitly initialize PBM and IP densities uniformly, but Section 5 and Algorithm 4 do not specify a DOC initial density.\",\n      \"readings\": [\n        \"Uniform density rho_i=V/m.\",\n        \"A feasible volume-preserving perturbation: half the cells at V/m+epsilon and half at V/m-epsilon, with epsilon=0.1 times the smaller distance from V/m to the uniform density bounds.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initial stored values for the shifted IP barrier update\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 4.1 initializes r=s=0.01, but Algorithm 3 first assigns r=r_plus and s=s_plus on line 4 before line 11 has initialized those stored values.\",\n      \"readings\": [\n        \"Initialize stored r_plus=s_plus=0.01 as well.\",\n        \"Initialize stored r_plus and s_plus from the initial complementarity measures multiplied by 0.2, while retaining r=s=0.01 for the first Newton solve.\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "Physical dimensions of the cantilever cuboid",
+    "issue": "missing",
+    "description": "Section 7 determines L=16a, W=H=2a from equal coarse cubes, but never specifies their edge length a or physical units. The aspect ratio is determined.",
+    "readings": [
+     "a=1 length unit: domain 16\u00d72\u00d72, fine-element edge 1/16.",
+     "a=1/16 length unit: domain 1\u00d71/8\u00d71/8, fine-element edge 1/256."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Load centered on the right-hand face",
+    "issue": "vague",
+    "description": "Section 7 places the z-directed load in the middle of the right face and refers to unavailable Fig. 2(a). It does not distinguish a concentrated nodal force from a distributed load or specify a footprint and force weights.",
+    "readings": [
+     "A concentrated force at the center node (L,W/2,H/2).",
+     "Equal forces on the nine face nodes with y/W and z/H in {15/32,16/32,17/32}, normalized to a prescribed resultant.",
+     "Uniform traction on the centered patch 3/8\u2264y/W\u22645/8 and 3/8\u2264z/H\u22645/8, assembled as consistent nodal forces."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Polarity of the z-directed load",
+    "issue": "vague",
+    "description": "Section 7 specifies the z direction without an explicit signed component; the arrow in Fig. 2(a) is unavailable. Reversing this sole load leaves compliance and the optimal density unchanged in linear elasticity.",
+    "readings": [
+     "Force acts along +z.",
+     "Force acts along -z."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Resultant force on the right-hand face",
+    "issue": "missing",
+    "description": "Neither Section 7 nor the CANT-16-2-2-5 description supplies a force or traction magnitude. Table 1's objective values cannot identify it independently of the other missing inputs.",
+    "readings": [
+     "Total resultant magnitude F=1 in consistent force units.",
+     "Total resultant magnitude F=10 in the same units, with the same spatial distribution."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Allowed material volume",
+    "issue": "missing",
+    "description": "Equation (1) specifies sum(rho_i)=V, but no numerical V or volume fraction is supplied for this example. The plotting fractions and density cutoffs in Figures 3\u20135 do not specify V.",
+    "readings": [
+     "With upper density normalized to 1, V=0.2m.",
+     "With upper density normalized to 1, V=0.4m.",
+     "With upper density normalized to 1, V=0.5m."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Upper density bounds",
+    "issue": "missing",
+    "description": "Equation (1) introduces upper bounds rho_upper, but Section 7.1 supplies only the lower bounds. No numerical upper bound or full-density normalization is stated.",
+    "readings": [
+     "Uniform upper bound rho_upper_i=1.",
+     "Uniform upper bound rho_upper_i=2, holding V in the equation's density units fixed."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Overall elastic stiffness scale",
+    "issue": "missing",
+    "description": "The paper defines generic element stiffness matrices K_i without giving Young's modulus or an equivalent overall scale for the elasticity tensor.",
+    "readings": [
+     "Reference elastic modulus E_ref=1 in consistent units.",
+     "Reference elastic modulus E_ref=10 in the same units, with the normalized elasticity tensor unchanged."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Normalized elasticity tensor, including Poisson coupling and material symmetry",
+    "issue": "missing",
+    "description": "Sections 1 and 6.2 specify stiffness properties and finite-element bases, but no constitutive tensor, isotropy assumption, Poisson ratio, or material-axis orientation.",
+    "readings": [
+     "Homogeneous isotropic elasticity with Poisson ratio 0.30.",
+     "Homogeneous isotropic elasticity with Poisson ratio 0.25.",
+     "Homogeneous orthotropic elasticity aligned with x,y,z, with C/E_ref=diag(2,1,1,0.4,0.4,0.4) in engineering-shear Voigt order xx,yy,zz,yz,xz,xy."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Integration used to construct the hexahedral element stiffness matrices",
+    "issue": "missing",
+    "description": "Section 6.2 determines trilinear hexahedral displacement elements and elementwise constant density, but does not specify stiffness quadrature or an integration modification.",
+    "readings": [
+     "Fully integrated Q1 hexahedra using 2\u00d72\u00d72 Gauss quadrature.",
+     "For isotropic elasticity, selective reduced integration: one-point volumetric integration and 2\u00d72\u00d72 integration of the deviatoric term."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial PBM penalty parameters for the Table 1 PBM rows",
+    "issue": "missing",
+    "description": "Section 3.2 gives initial primal variables and multipliers, penalty reduction factors, and penalty floors, but not initial p_i, q_lower_i, or q_upper_i.",
+    "readings": [
+     "Initialize all three penalty-parameter vectors to 1.",
+     "Initialize all three penalty-parameter vectors to 0.1."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "PBM Newton backtracking configuration",
+    "issue": "missing",
+    "description": "Section 3.2 and Algorithm 2 prescribe an Armijo backtracking search without specifying the sufficient-decrease constant, contraction factor, or initial trial step.",
+    "readings": [
+     "Initial step 1, Armijo constant 0.0001, contraction factor 0.5.",
+     "Initial step 1, Armijo constant 0.01, contraction factor 0.8.",
+     "Initial step 0.5, Armijo constant 0.0001, contraction factor 0.5."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Gauss-Seidel smoothing within the multigrid preconditioner",
+    "issue": "missing",
+    "description": "Section 6.1 names Gauss-Seidel smoothing but does not give pre/post sweep counts, sweep ordering, or scalar versus nodal-block updates.",
+    "readings": [
+     "One lexicographic scalar forward presweep and one reverse-order scalar postsweep.",
+     "Two lexicographic scalar forward presweeps and two reverse-order scalar postsweeps.",
+     "One forward and one backward sweep using 3\u00d73 displacement blocks at each node."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Multigrid coarsest-level solver",
+    "issue": "missing",
+    "description": "Section 6 specifies Galerkin coarse operators and a V-cycle, but does not specify how the coarsest system is solved.",
+    "readings": [
+     "Solve the coarsest system directly by Cholesky factorization.",
+     "Approximate the coarsest solve with ten symmetric Gauss-Seidel iterations starting from zero."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "MINRES residual measurement",
+    "issue": "vague",
+    "description": "Equation (31) gives a relative residual test with unsubscripted norms. It does not explicitly distinguish a true Euclidean residual check from the preconditioned residual estimate used by an implementation.",
+    "readings": [
+     "Check ||b-Az||_2 / ||b||_2 explicitly.",
+     "Check the corresponding preconditioned residual norm or its MINRES recurrence estimate."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial guesses for successive MINRES solves",
+    "issue": "missing",
+    "description": "Section 6 gives MINRES tolerances but does not state whether linear solves start from zero or reuse previous solutions. The outer PBM/IP initial values do not specify initial Newton increments.",
+    "readings": [
+     "Start every linear solve from zero.",
+     "Reuse the previous displacement in DOC and the previous Newton increment in PBM/IP."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial DOC density distribution",
+    "issue": "missing",
+    "description": "Sections 3.2 and 4.1 explicitly initialize PBM and IP densities uniformly, but Section 5 and Algorithm 4 do not specify a DOC initial density.",
+    "readings": [
+     "Uniform density rho_i=V/m.",
+     "A feasible volume-preserving perturbation: half the cells at V/m+epsilon and half at V/m-epsilon, with epsilon=0.1 times the smaller distance from V/m to the uniform density bounds."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial stored values for the shifted IP barrier update",
+    "issue": "missing",
+    "description": "Section 4.1 initializes r=s=0.01, but Algorithm 3 first assigns r=r_plus and s=s_plus on line 4 before line 11 has initialized those stored values.",
+    "readings": [
+     "Initialize stored r_plus=s_plus=0.01 as well.",
+     "Initialize stored r_plus and s_plus from the initial complementarity measures multiplied by 0.2, while retaining r=s=0.01 for the first Newton solve."
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 800.3341906070709,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L34",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 0,
+ "locator": "Sec. 7.1, example CANT-16-2-2-5 (Fig. 2(a), Table 1)",
+ "finished": "2026-10-22T19:07:39"
+}

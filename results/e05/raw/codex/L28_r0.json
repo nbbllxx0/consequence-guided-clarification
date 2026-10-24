@@ -1,0 +1,267 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"beam dimensions and aspect ratio\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 gives no length, height, or coordinate bounds. Sec. 4 gives horizontal and vertical hexagonal-element counts, which do not uniquely specify physical dimensions or a rectangular-grid aspect ratio.\",\n      \"readings\": [\n        \"Rectangle with L=2 and H=1.\",\n        \"Rectangle with L=120 and H=60 in mesh-coordinate units.\",\n        \"Rectangle with L/H=sqrt(3), following a flat-top honeycomb pitch interpretation.\",\n        \"Rectangle with L/H=4/sqrt(3), following a pointy-top honeycomb pitch interpretation.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"point load at the lower-right corner\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 and the Fig. 1 caption specify the load location and concentration, but neither states its direction.\",\n      \"readings\": [\n        \"Vertically downward: F=(0,-P).\",\n        \"Horizontally outward: F=(P,0).\",\n        \"Diagonally down and outward: F=(P/sqrt(2),-P/sqrt(2)).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"point load at the lower-right corner\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Sec. 2.1, the Fig. 1 caption, nor Sec. 4 supplies the force magnitude or its normalization.\",\n      \"readings\": [\n        \"P=1 in consistent force units.\",\n        \"P=10 in the same force units.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"nondesign elements, particularly near the clamp and load\",\n      \"issue\": \"missing\",\n      \"description\": \"The text does not explicitly state whether every element is designable or whether any elements are prescribed solid near supports or the loaded corner.\",\n      \"readings\": [\n        \"Every element is designable; no passive regions.\",\n        \"A one-cell patch adjoining the loaded corner is fixed solid.\",\n        \"A one-cell strip adjoining the left clamp and a one-cell patch at the loaded corner are fixed solid.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"single-material volume-fraction limit\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (1) introduces the prescribed volume fraction, but Sec. 4 and Table 2 give no numerical value for the M=1 SIMP run.\",\n      \"readings\": [\n        \"V_f=0.3.\",\n        \"V_f=0.4.\",\n        \"V_f=0.5.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"density field used to evaluate material volume\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (1) does not define V(x). Sec. 2.2.1 explicitly sends projected densities to stiffness interpolation, but does not explicitly identify the density field used in the volume constraint.\",\n      \"readings\": [\n        \"V=sum_e(v_e*x_e), using raw design variables.\",\n        \"V=sum_e(v_e*tilde_x_e), using filtered densities.\",\n        \"V=sum_e(v_e*x_phys_e), using projected physical densities.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"solid-phase selection and normalized modulus for M=1\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Table 1 numbers the stiffest solid as Phase 1 with modulus 1, whereas Eq. (14) numbers phases in ascending stiffness starting at zero. Sec. 4 does not explicitly map N_MP or phase indices to the single-material run.\",\n      \"readings\": [\n        \"Use Table 1's Phase 1: E_s=1 and E_min=1e-9.\",\n        \"Regenerate Eq. (14) for two total phases, including void: use its unit-modulus endpoint as the solid and retain E_min=1e-9.\",\n        \"Use Eq. (14) as a fixed sixteen-phase palette, including void, and select its first positive phase for M=1: E_s=1/15 and E_min=1e-9.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"two-dimensional constitutive assumption\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 calls the problem two-dimensional, but does not specify plane stress or plane strain.\",\n      \"readings\": [\n        \"Isotropic plane stress.\",\n        \"Isotropic plane strain.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Poisson's ratio\",\n      \"issue\": \"missing\",\n      \"description\": \"The material sections and Sec. 4 specify Young's-modulus interpolation but provide no Poisson's ratio for constructing the elastic constitutive matrix.\",\n      \"readings\": [\n        \"Constant Poisson's ratio nu=0.2.\",\n        \"Constant Poisson's ratio nu=0.3.\",\n        \"Constant Poisson's ratio nu=0.35.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"uniform out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"The two-dimensional model has no stated thickness or explicit unit-thickness convention. For a prescribed total point force, uniform thickness scales stiffness and compliance.\",\n      \"readings\": [\n        \"Unit thickness t=1.\",\n        \"Uniform thickness t=0.1 in the same length units.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"SIMP penalization exponent and continuation\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (4) introduces p, but neither its numerical value nor any continuation rule is supplied.\",\n      \"readings\": [\n        \"Keep p=3 throughout.\",\n        \"Keep p=4 throughout.\",\n        \"Use p=1, then p=2 after 50 iterations, then p=3 after 100 iterations.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"density-filter weights\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (2) defines normalized weighted averaging but does not define W_ej.\",\n      \"readings\": [\n        \"Linear cone weights: W_ej=max(0,r-d_ej).\",\n        \"Uniform weights within the filter neighborhood.\",\n        \"Quadratic cone weights: W_ej=max(0,r-d_ej)^2.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"units and geometric meaning of filter radius 4\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4 specifies r_fill=4 without identifying the length unit or conversion from the hexagonal mesh to the requested structured grid.\",\n      \"readings\": [\n        \"Radius equals four nearest-neighbor centroid spacings.\",\n        \"Radius equals four hexagon side lengths.\",\n        \"Radius equals four units of the domain-coordinate system.\",\n        \"On a rectangular reconstruction, radius equals four square-cell widths.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"filter distance and neighborhood construction\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.2.1 says the neighborhood is determined by the radius, but does not define the distance metric or the representative point of each element.\",\n      \"readings\": [\n        \"Euclidean distance between element centroids.\",\n        \"Chebyshev distance between structured-grid cell indices.\",\n        \"Adjacency-graph distance measured in element-neighbor hops.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Heaviside projection continuation schedule\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4 fixes the starting beta at 1 and maximum at 32, but gives no intermediate sequence, update interval, convergence trigger, or number of iterations at each level.\",\n      \"readings\": [\n        \"Use beta=1,2,4,8,16,32, doubling every 50 iterations.\",\n        \"Use beta=1,2,4,8,16,32, advancing only after convergence at each level.\",\n        \"Increase beta by 1 every 10 iterations until reaching 32.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"initial design field\",\n      \"issue\": \"missing\",\n      \"description\": \"No initial density field is specified for the nonconvex SIMP optimization.\",\n      \"readings\": [\n        \"Uniform raw density x_e=V_f.\",\n        \"Uniform raw density chosen so that the initial projected density equals V_f at beta=1.\",\n        \"An alternating plus/minus 0.01 perturbation around the uniform field, rescaled to the same initial material volume.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"MMA update configuration\",\n      \"issue\": \"missing\",\n      \"description\": \"The Introduction specifies MMA, but gives no move limits, asymptote parameters, subproblem penalties, or numerical objective and constraint scaling.\",\n      \"readings\": [\n        \"Move limit 0.2; initial asymptote factor 0.5, increase 1.2, decrease 0.7; MMA c=1000 and d=0; use raw compliance and constraint V/V0-V_f.\",\n        \"Move limit 0.05; initial asymptote factor 0.2, increase 1.1, decrease 0.5; MMA c=100 and d=1; normalize compliance by its initial value and use constraint V/(V0*V_f)-1.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"optimization termination\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 supplies no stopping tolerance, convergence measure, iteration cap, or final convergence requirement after beta reaches 32.\",\n      \"readings\": [\n        \"At beta=32, stop when maximum raw-density change is below 1e-3; cap the run at 500 iterations.\",\n        \"At beta=32, stop after relative compliance change remains below 1e-4 for ten iterations; cap the run at 1000 iterations.\",\n        \"Stop after a fixed 300 iterations.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"geometric realization of the stated hexagonal mesh\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 2.1 points to Fig. 1 for the discretization. Sec. 4 supplies HoneyMesher and directional counts, but no node coordinates, orientation, staggering, connectivity, or boundary-cell construction from which to reconstruct or translate that mesh.\",\n      \"readings\": [\n        \"Flat-top hexagons arranged in staggered columns, with boundary cells fitted to a rectangle.\",\n        \"Pointy-top hexagons arranged in staggered rows, with boundary cells fitted to a rectangle.\",\n        \"Retain complete boundary hexagons, producing a staggered outer outline.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"element stiffness formulation and numerical integration\",\n      \"issue\": \"missing\",\n      \"description\": \"The text identifies hexagonal finite elements but does not specify their displacement shape functions, internal degrees of freedom, or quadrature. These are needed for numerical reproduction rather than merely matching cell counts.\",\n      \"readings\": [\n        \"Six-vertex polygonal elements using Wachspress coordinates and quadrature over triangular subdomains.\",\n        \"Six-vertex polygonal elements using mean-value coordinates and quadrature over triangular subdomains.\",\n        \"Hexagons assembled from six linear triangles with an internal center node that is statically condensed.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"linear equilibrium solution\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (1) specifies K U=F but gives no linear solver or numerical accuracy requirement for reproducing the reported run.\",\n      \"readings\": [\n        \"Sparse direct factorization.\",\n        \"Preconditioned conjugate gradients with relative residual tolerance 1e-8.\",\n        \"Preconditioned conjugate gradients with relative residual tolerance 1e-4.\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "beam dimensions and aspect ratio",
+    "issue": "missing",
+    "description": "Sec. 2.1 gives no length, height, or coordinate bounds. Sec. 4 gives horizontal and vertical hexagonal-element counts, which do not uniquely specify physical dimensions or a rectangular-grid aspect ratio.",
+    "readings": [
+     "Rectangle with L=2 and H=1.",
+     "Rectangle with L=120 and H=60 in mesh-coordinate units.",
+     "Rectangle with L/H=sqrt(3), following a flat-top honeycomb pitch interpretation.",
+     "Rectangle with L/H=4/sqrt(3), following a pointy-top honeycomb pitch interpretation."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "point load at the lower-right corner",
+    "issue": "missing",
+    "description": "Sec. 2.1 and the Fig. 1 caption specify the load location and concentration, but neither states its direction.",
+    "readings": [
+     "Vertically downward: F=(0,-P).",
+     "Horizontally outward: F=(P,0).",
+     "Diagonally down and outward: F=(P/sqrt(2),-P/sqrt(2))."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "point load at the lower-right corner",
+    "issue": "missing",
+    "description": "Neither Sec. 2.1, the Fig. 1 caption, nor Sec. 4 supplies the force magnitude or its normalization.",
+    "readings": [
+     "P=1 in consistent force units.",
+     "P=10 in the same force units."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "nondesign elements, particularly near the clamp and load",
+    "issue": "missing",
+    "description": "The text does not explicitly state whether every element is designable or whether any elements are prescribed solid near supports or the loaded corner.",
+    "readings": [
+     "Every element is designable; no passive regions.",
+     "A one-cell patch adjoining the loaded corner is fixed solid.",
+     "A one-cell strip adjoining the left clamp and a one-cell patch at the loaded corner are fixed solid."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "single-material volume-fraction limit",
+    "issue": "missing",
+    "description": "Eq. (1) introduces the prescribed volume fraction, but Sec. 4 and Table 2 give no numerical value for the M=1 SIMP run.",
+    "readings": [
+     "V_f=0.3.",
+     "V_f=0.4.",
+     "V_f=0.5."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "density field used to evaluate material volume",
+    "issue": "missing",
+    "description": "Eq. (1) does not define V(x). Sec. 2.2.1 explicitly sends projected densities to stiffness interpolation, but does not explicitly identify the density field used in the volume constraint.",
+    "readings": [
+     "V=sum_e(v_e*x_e), using raw design variables.",
+     "V=sum_e(v_e*tilde_x_e), using filtered densities.",
+     "V=sum_e(v_e*x_phys_e), using projected physical densities."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "solid-phase selection and normalized modulus for M=1",
+    "issue": "conflicting",
+    "description": "Table 1 numbers the stiffest solid as Phase 1 with modulus 1, whereas Eq. (14) numbers phases in ascending stiffness starting at zero. Sec. 4 does not explicitly map N_MP or phase indices to the single-material run.",
+    "readings": [
+     "Use Table 1's Phase 1: E_s=1 and E_min=1e-9.",
+     "Regenerate Eq. (14) for two total phases, including void: use its unit-modulus endpoint as the solid and retain E_min=1e-9.",
+     "Use Eq. (14) as a fixed sixteen-phase palette, including void, and select its first positive phase for M=1: E_s=1/15 and E_min=1e-9."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "two-dimensional constitutive assumption",
+    "issue": "missing",
+    "description": "Sec. 2.1 calls the problem two-dimensional, but does not specify plane stress or plane strain.",
+    "readings": [
+     "Isotropic plane stress.",
+     "Isotropic plane strain."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson's ratio",
+    "issue": "missing",
+    "description": "The material sections and Sec. 4 specify Young's-modulus interpolation but provide no Poisson's ratio for constructing the elastic constitutive matrix.",
+    "readings": [
+     "Constant Poisson's ratio nu=0.2.",
+     "Constant Poisson's ratio nu=0.3.",
+     "Constant Poisson's ratio nu=0.35."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "uniform out-of-plane thickness",
+    "issue": "missing",
+    "description": "The two-dimensional model has no stated thickness or explicit unit-thickness convention. For a prescribed total point force, uniform thickness scales stiffness and compliance.",
+    "readings": [
+     "Unit thickness t=1.",
+     "Uniform thickness t=0.1 in the same length units."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "SIMP penalization exponent and continuation",
+    "issue": "missing",
+    "description": "Eq. (4) introduces p, but neither its numerical value nor any continuation rule is supplied.",
+    "readings": [
+     "Keep p=3 throughout.",
+     "Keep p=4 throughout.",
+     "Use p=1, then p=2 after 50 iterations, then p=3 after 100 iterations."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "density-filter weights",
+    "issue": "missing",
+    "description": "Eq. (2) defines normalized weighted averaging but does not define W_ej.",
+    "readings": [
+     "Linear cone weights: W_ej=max(0,r-d_ej).",
+     "Uniform weights within the filter neighborhood.",
+     "Quadratic cone weights: W_ej=max(0,r-d_ej)^2."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "units and geometric meaning of filter radius 4",
+    "issue": "vague",
+    "description": "Sec. 4 specifies r_fill=4 without identifying the length unit or conversion from the hexagonal mesh to the requested structured grid.",
+    "readings": [
+     "Radius equals four nearest-neighbor centroid spacings.",
+     "Radius equals four hexagon side lengths.",
+     "Radius equals four units of the domain-coordinate system.",
+     "On a rectangular reconstruction, radius equals four square-cell widths."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "filter distance and neighborhood construction",
+    "issue": "missing",
+    "description": "Sec. 2.2.1 says the neighborhood is determined by the radius, but does not define the distance metric or the representative point of each element.",
+    "readings": [
+     "Euclidean distance between element centroids.",
+     "Chebyshev distance between structured-grid cell indices.",
+     "Adjacency-graph distance measured in element-neighbor hops."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Heaviside projection continuation schedule",
+    "issue": "vague",
+    "description": "Sec. 4 fixes the starting beta at 1 and maximum at 32, but gives no intermediate sequence, update interval, convergence trigger, or number of iterations at each level.",
+    "readings": [
+     "Use beta=1,2,4,8,16,32, doubling every 50 iterations.",
+     "Use beta=1,2,4,8,16,32, advancing only after convergence at each level.",
+     "Increase beta by 1 every 10 iterations until reaching 32."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "initial design field",
+    "issue": "missing",
+    "description": "No initial density field is specified for the nonconvex SIMP optimization.",
+    "readings": [
+     "Uniform raw density x_e=V_f.",
+     "Uniform raw density chosen so that the initial projected density equals V_f at beta=1.",
+     "An alternating plus/minus 0.01 perturbation around the uniform field, rescaled to the same initial material volume."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "MMA update configuration",
+    "issue": "missing",
+    "description": "The Introduction specifies MMA, but gives no move limits, asymptote parameters, subproblem penalties, or numerical objective and constraint scaling.",
+    "readings": [
+     "Move limit 0.2; initial asymptote factor 0.5, increase 1.2, decrease 0.7; MMA c=1000 and d=0; use raw compliance and constraint V/V0-V_f.",
+     "Move limit 0.05; initial asymptote factor 0.2, increase 1.1, decrease 0.5; MMA c=100 and d=1; normalize compliance by its initial value and use constraint V/(V0*V_f)-1."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "optimization termination",
+    "issue": "missing",
+    "description": "Sec. 4 supplies no stopping tolerance, convergence measure, iteration cap, or final convergence requirement after beta reaches 32.",
+    "readings": [
+     "At beta=32, stop when maximum raw-density change is below 1e-3; cap the run at 500 iterations.",
+     "At beta=32, stop after relative compliance change remains below 1e-4 for ten iterations; cap the run at 1000 iterations.",
+     "Stop after a fixed 300 iterations."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "geometric realization of the stated hexagonal mesh",
+    "issue": "figure_only",
+    "description": "Sec. 2.1 points to Fig. 1 for the discretization. Sec. 4 supplies HoneyMesher and directional counts, but no node coordinates, orientation, staggering, connectivity, or boundary-cell construction from which to reconstruct or translate that mesh.",
+    "readings": [
+     "Flat-top hexagons arranged in staggered columns, with boundary cells fitted to a rectangle.",
+     "Pointy-top hexagons arranged in staggered rows, with boundary cells fitted to a rectangle.",
+     "Retain complete boundary hexagons, producing a staggered outer outline."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "element stiffness formulation and numerical integration",
+    "issue": "missing",
+    "description": "The text identifies hexagonal finite elements but does not specify their displacement shape functions, internal degrees of freedom, or quadrature. These are needed for numerical reproduction rather than merely matching cell counts.",
+    "readings": [
+     "Six-vertex polygonal elements using Wachspress coordinates and quadrature over triangular subdomains.",
+     "Six-vertex polygonal elements using mean-value coordinates and quadrature over triangular subdomains.",
+     "Hexagons assembled from six linear triangles with an internal center node that is statically condensed."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "linear equilibrium solution",
+    "issue": "missing",
+    "description": "Eq. (1) specifies K U=F but gives no linear solver or numerical accuracy requirement for reproducing the reported run.",
+    "readings": [
+     "Sparse direct factorization.",
+     "Preconditioned conjugate gradients with relative residual tolerance 1e-8.",
+     "Preconditioned conjugate gradients with relative residual tolerance 1e-4."
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 680.244389295578,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L28",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 0,
+ "locator": "Sec. 2.1 / Sec. 4, the cantilever beam of Fig. 1, single-material extended SIMP case",
+ "finished": "2026-10-22T18:46:27"
+}

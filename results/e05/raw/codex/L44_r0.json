@@ -1,0 +1,321 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"cantilever_basic design domain\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.1 requires Lx and Ly, but neither Table 3 nor a row-specific prompt supplies them. Element counts do not establish physical aspect ratio.\",\n      \"readings\": [\n        \"Rectangle with Lx=2, Ly=1.\",\n        \"Rectangle with Lx=3, Ly=1.\",\n        \"Rectangle with Lx=60, Ly=30.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"cantilever_basic element counts\",\n      \"issue\": \"vague\",\n      \"description\": \"Table 3 gives no mesh. Its compliance matches cantilever_60x30 in Table 5, and Algorithm 2 defaults to 60x30, but the text never explicitly maps the two identifiers. Sec. 4.1 also lists a 120x40 standard cantilever.\",\n      \"readings\": [\n        \"60x30 elements, using the default and matching Table 5 entry.\",\n        \"120x40 elements, treating cantilever_basic as the other standard resolution.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"2-D finite elements\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.3 specifies assembly and a sparse direct solve, but not element interpolation, quadrature, or stabilization.\",\n      \"readings\": [\n        \"Four-node bilinear quadrilaterals with 2x2 Gauss integration.\",\n        \"Four-node quadrilaterals with reduced integration and hourglass stabilization.\",\n        \"Eight-node quadratic quadrilaterals with 3x3 Gauss integration.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"load at the free end\",\n      \"issue\": \"vague\",\n      \"description\": \"Algorithm 2 supplies only 'tip load'. The mid-right examples in Secs. 1.3 and 4.1 describe a cantilever with a hole and are not identified as cantilever_basic.\",\n      \"readings\": [\n        \"Right-edge midpoint: x=Lx, y=Ly/2.\",\n        \"Lower-right corner: x=Lx, y=0.\",\n        \"Upper-right corner: x=Lx, y=Ly.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"free-end load application\",\n      \"issue\": \"vague\",\n      \"description\": \"The actual load specification is absent. 'Tip load' does not establish whether the resultant acts at one node or is spread over the end boundary; Secs. 3.1\u20133.2 support both point and distributed loads.\",\n      \"readings\": [\n        \"Concentrated force at one nearest node.\",\n        \"Same resultant distributed over three adjacent end nodes with weights 1/4, 1/2, 1/4.\",\n        \"Uniform traction over the entire right edge, assembled using Eq. 3.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"free-end force vector\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Table 3 nor the generic cantilever rule states the direction for this row. The downward-load examples are not explicitly this case.\",\n      \"readings\": [\n        \"Transverse downward force: direction (0,-1).\",\n        \"Axial outward force: direction (1,0).\",\n        \"Oblique force: direction (1,-1)/sqrt(2).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"total applied force\",\n      \"issue\": \"missing\",\n      \"description\": \"No force magnitude or units are published for cantilever_basic. The Fy=-1 illustration in Sec. 4.1 accompanies the hole example.\",\n      \"readings\": [\n        \"Total resultant magnitude 1 in consistent force units.\",\n        \"Total resultant magnitude 10 in the same units.\",\n        \"Total resultant magnitude 100 in the same units.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"cantilever_basic target volume fraction\",\n      \"issue\": \"vague\",\n      \"description\": \"Algorithm 2 gives a default of 0.5, but Table 3 does not publish the row's prompt or target. Sec. 4.1 lists other fractions without a row-specific assignment.\",\n      \"readings\": [\n        \"Vf=0.5, applying the configurator default.\",\n        \"Vf=0.4, supplied as a prompt override.\",\n        \"Vf=0.6, supplied as a prompt override.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"cantilever_basic passive-element mask\",\n      \"issue\": \"missing\",\n      \"description\": \"The row's passive-region set is not printed. Naming separate hole and insert benchmarks does not specify whether the basic case includes solid attachment pads.\",\n      \"readings\": [\n        \"No passive regions; every element is designable.\",\n        \"One element column next to the fixed edge is passive solid.\",\n        \"A passive-solid pad of elements adjacent to the loaded node.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"2-D constitutive model\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.3 does not provide the base elasticity matrix, material symmetry, or plane assumption.\",\n      \"readings\": [\n        \"Isotropic plane stress.\",\n        \"Isotropic plane strain.\",\n        \"Orthotropic plane stress with the stiff material axis parallel to x.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Poisson ratio under an isotropic interpretation\",\n      \"issue\": \"missing\",\n      \"description\": \"No Poisson ratio is stated anywhere for this example.\",\n      \"readings\": [\n        \"nu=0.2.\",\n        \"nu=0.3.\",\n        \"nu=0.45.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"solid-material Young modulus\",\n      \"issue\": \"missing\",\n      \"description\": \"No solid modulus or stiffness normalization is stated. These alternatives hold all dimensionless elastic constants and stiffness-floor ratios fixed.\",\n      \"readings\": [\n        \"Normalized E0=1.\",\n        \"E0=70 GPa in consistent physical units.\",\n        \"E0=210 GPa in consistent physical units.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"uniform out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"The 2-D model has no stated thickness or explicit unit-thickness convention. These readings hold the applied resultant forces fixed.\",\n      \"readings\": [\n        \"Unit thickness t=1 in the chosen length unit.\",\n        \"Uniform thickness t=0.1 in the same unit.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"SIMP stiffness interpolation and residual stiffness\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.3 names SIMP without its stiffness formula or modulus floor. The stated density floor rho_min=0.001 does not determine an independent minimum modulus.\",\n      \"readings\": [\n        \"E(rho)=E0*rho^p with no additional modulus floor.\",\n        \"E(rho)=Emin+(E0-Emin)*rho^p with Emin/E0=1e-9.\",\n        \"Same interpolation with Emin/E0=1e-6.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"controller used for the configuration-accuracy comparison\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Sec. 4.4 and Table 3 specify the LLM controller, whereas the associated Figure 5 caption specifies the schedule controller.\",\n      \"readings\": [\n        \"Use the LLM controller, following Table 3 and Sec. 4.4.\",\n        \"Use the deterministic schedule controller, following Figure 5.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"main-phase initial continuation parameters\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.3 describes an initialization method returning p, beta, r_min and delta, but does not publish its values for this run. The numerical tail settings do not determine these starting values.\",\n      \"readings\": [\n        \"Initialize (p,beta,r_min,delta)=(1,1,1.5,0.20).\",\n        \"Initialize (p,beta,r_min,delta)=(3,1,2.0,0.10).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"main-phase continuation and restart history\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 3.3 and 4.2 provide neither the realized LLM parameter/action trace nor a numerical four-phase schedule. Initialization and the common tail alone cannot reproduce the exploration.\",\n      \"readings\": [\n        \"Raise p before beta, retain the initial filter radius until the tail, and perform no main-phase restart.\",\n        \"Raise p and beta together, tighten the filter during exploration, and restart from the best valid snapshot after a compliance spike.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"LLM controller observation interval\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.2 says the controller observes every k iterations but never assigns k.\",\n      \"readings\": [\n        \"k=1.\",\n        \"k=5.\",\n        \"k=10.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"density-filter weights\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. 5 specifies normalized weights within r_min but does not define their dependence on distance.\",\n      \"readings\": [\n        \"Linear cone weights: max(0,r_min-distance).\",\n        \"Uniform weights for all centroids within r_min.\",\n        \"Gaussian weights with standard deviation r_min/2, truncated at r_min.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"filter-radius units and distance metric\",\n      \"issue\": \"vague\",\n      \"description\": \"The tail radius is explicitly 1.20, but Secs. 3.3 and 4.2 do not say whether distances use element indices or physical coordinates.\",\n      \"readings\": [\n        \"Radius 1.20 in Euclidean element-index coordinates.\",\n        \"Radius 1.20 in the physical coordinate units of Lx and Ly.\",\n        \"Physical radius equal to 1.20 times the horizontal element width.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Heaviside projection\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. 5 names H_beta without its formula or threshold. Specifying beta, including the tail value, does not determine the projection.\",\n      \"readings\": [\n        \"Normalized tanh projection with fixed threshold eta=0.5.\",\n        \"Normalized tanh projection with fixed threshold eta=0.3.\",\n        \"Normalized tanh projection with eta adjusted each iteration to preserve filtered volume.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"initial main-phase density field\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. 6 specifies uniform initialization only for a tail without a valid snapshot. The initial density field for the ordinary main solve is not stated.\",\n      \"readings\": [\n        \"Uniform raw density rho=Vf.\",\n        \"Uniform raw density rho=1.\",\n        \"Seed-42 random perturbations within Vf\u00b10.01, recentered to mean Vf.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"OC density-update formula\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 3.2\u20133.3 name OC and its move limit but do not give the multiplicative update or damping exponent.\",\n      \"readings\": [\n        \"Multiplicative OC with exponent 1/2, clipped by move and density bounds.\",\n        \"Multiplicative OC with exponent 1/3, clipped by the same bounds.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"OC multiplier-bisection controls\",\n      \"issue\": \"missing\",\n      \"description\": \"The OC bisection is mentioned in Sec. 3.2, but its bracket, stopping tolerance and iteration cap are absent.\",\n      \"readings\": [\n        \"Bracket [0,1e9], relative interval tolerance 1e-3, maximum 100 steps.\",\n        \"Adaptively expanded bracket, relative interval tolerance 1e-6, maximum 200 steps.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"300-iteration budget accounting\",\n      \"issue\": \"vague\",\n      \"description\": \"Table 3 says 300 iterations and Sec. 4.2 specifies a 40-iteration tail. Sec. 5.2 calls 300 iterations exploration, but Table 3 does not explicitly state whether its budget follows that accounting.\",\n      \"readings\": [\n        \"300 main iterations followed by 40 tail iterations: 340 total.\",\n        \"260 main iterations followed by 40 tail iterations: 300 total.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"solver early-exit policy\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.3 mentions early exit, compliance stability and functional convergence as evaluator evidence, but gives no operational solver stopping rule or stability-window length.\",\n      \"readings\": [\n        \"Run the full main budget and full 40-iteration tail.\",\n        \"End the main phase when maximum raw-density change is below 0.001, then run the tail.\",\n        \"End the main phase when relative compliance range is below 0.005 over 10 iterations, then run the tail.\"\n      ],\n      \"effect\": \"layout\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "cantilever_basic design domain",
+    "issue": "missing",
+    "description": "Sec. 3.1 requires Lx and Ly, but neither Table 3 nor a row-specific prompt supplies them. Element counts do not establish physical aspect ratio.",
+    "readings": [
+     "Rectangle with Lx=2, Ly=1.",
+     "Rectangle with Lx=3, Ly=1.",
+     "Rectangle with Lx=60, Ly=30."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "cantilever_basic element counts",
+    "issue": "vague",
+    "description": "Table 3 gives no mesh. Its compliance matches cantilever_60x30 in Table 5, and Algorithm 2 defaults to 60x30, but the text never explicitly maps the two identifiers. Sec. 4.1 also lists a 120x40 standard cantilever.",
+    "readings": [
+     "60x30 elements, using the default and matching Table 5 entry.",
+     "120x40 elements, treating cantilever_basic as the other standard resolution."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "2-D finite elements",
+    "issue": "missing",
+    "description": "Sec. 3.3 specifies assembly and a sparse direct solve, but not element interpolation, quadrature, or stabilization.",
+    "readings": [
+     "Four-node bilinear quadrilaterals with 2x2 Gauss integration.",
+     "Four-node quadrilaterals with reduced integration and hourglass stabilization.",
+     "Eight-node quadratic quadrilaterals with 3x3 Gauss integration."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "load at the free end",
+    "issue": "vague",
+    "description": "Algorithm 2 supplies only 'tip load'. The mid-right examples in Secs. 1.3 and 4.1 describe a cantilever with a hole and are not identified as cantilever_basic.",
+    "readings": [
+     "Right-edge midpoint: x=Lx, y=Ly/2.",
+     "Lower-right corner: x=Lx, y=0.",
+     "Upper-right corner: x=Lx, y=Ly."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "free-end load application",
+    "issue": "vague",
+    "description": "The actual load specification is absent. 'Tip load' does not establish whether the resultant acts at one node or is spread over the end boundary; Secs. 3.1\u20133.2 support both point and distributed loads.",
+    "readings": [
+     "Concentrated force at one nearest node.",
+     "Same resultant distributed over three adjacent end nodes with weights 1/4, 1/2, 1/4.",
+     "Uniform traction over the entire right edge, assembled using Eq. 3."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "free-end force vector",
+    "issue": "missing",
+    "description": "Neither Table 3 nor the generic cantilever rule states the direction for this row. The downward-load examples are not explicitly this case.",
+    "readings": [
+     "Transverse downward force: direction (0,-1).",
+     "Axial outward force: direction (1,0).",
+     "Oblique force: direction (1,-1)/sqrt(2)."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "total applied force",
+    "issue": "missing",
+    "description": "No force magnitude or units are published for cantilever_basic. The Fy=-1 illustration in Sec. 4.1 accompanies the hole example.",
+    "readings": [
+     "Total resultant magnitude 1 in consistent force units.",
+     "Total resultant magnitude 10 in the same units.",
+     "Total resultant magnitude 100 in the same units."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "cantilever_basic target volume fraction",
+    "issue": "vague",
+    "description": "Algorithm 2 gives a default of 0.5, but Table 3 does not publish the row's prompt or target. Sec. 4.1 lists other fractions without a row-specific assignment.",
+    "readings": [
+     "Vf=0.5, applying the configurator default.",
+     "Vf=0.4, supplied as a prompt override.",
+     "Vf=0.6, supplied as a prompt override."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "cantilever_basic passive-element mask",
+    "issue": "missing",
+    "description": "The row's passive-region set is not printed. Naming separate hole and insert benchmarks does not specify whether the basic case includes solid attachment pads.",
+    "readings": [
+     "No passive regions; every element is designable.",
+     "One element column next to the fixed edge is passive solid.",
+     "A passive-solid pad of elements adjacent to the loaded node."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "2-D constitutive model",
+    "issue": "missing",
+    "description": "Sec. 3.3 does not provide the base elasticity matrix, material symmetry, or plane assumption.",
+    "readings": [
+     "Isotropic plane stress.",
+     "Isotropic plane strain.",
+     "Orthotropic plane stress with the stiff material axis parallel to x."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson ratio under an isotropic interpretation",
+    "issue": "missing",
+    "description": "No Poisson ratio is stated anywhere for this example.",
+    "readings": [
+     "nu=0.2.",
+     "nu=0.3.",
+     "nu=0.45."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "solid-material Young modulus",
+    "issue": "missing",
+    "description": "No solid modulus or stiffness normalization is stated. These alternatives hold all dimensionless elastic constants and stiffness-floor ratios fixed.",
+    "readings": [
+     "Normalized E0=1.",
+     "E0=70 GPa in consistent physical units.",
+     "E0=210 GPa in consistent physical units."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "uniform out-of-plane thickness",
+    "issue": "missing",
+    "description": "The 2-D model has no stated thickness or explicit unit-thickness convention. These readings hold the applied resultant forces fixed.",
+    "readings": [
+     "Unit thickness t=1 in the chosen length unit.",
+     "Uniform thickness t=0.1 in the same unit."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "SIMP stiffness interpolation and residual stiffness",
+    "issue": "missing",
+    "description": "Sec. 3.3 names SIMP without its stiffness formula or modulus floor. The stated density floor rho_min=0.001 does not determine an independent minimum modulus.",
+    "readings": [
+     "E(rho)=E0*rho^p with no additional modulus floor.",
+     "E(rho)=Emin+(E0-Emin)*rho^p with Emin/E0=1e-9.",
+     "Same interpolation with Emin/E0=1e-6."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "controller used for the configuration-accuracy comparison",
+    "issue": "conflicting",
+    "description": "Sec. 4.4 and Table 3 specify the LLM controller, whereas the associated Figure 5 caption specifies the schedule controller.",
+    "readings": [
+     "Use the LLM controller, following Table 3 and Sec. 4.4.",
+     "Use the deterministic schedule controller, following Figure 5."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "main-phase initial continuation parameters",
+    "issue": "missing",
+    "description": "Sec. 3.3 describes an initialization method returning p, beta, r_min and delta, but does not publish its values for this run. The numerical tail settings do not determine these starting values.",
+    "readings": [
+     "Initialize (p,beta,r_min,delta)=(1,1,1.5,0.20).",
+     "Initialize (p,beta,r_min,delta)=(3,1,2.0,0.10)."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "main-phase continuation and restart history",
+    "issue": "missing",
+    "description": "Secs. 3.3 and 4.2 provide neither the realized LLM parameter/action trace nor a numerical four-phase schedule. Initialization and the common tail alone cannot reproduce the exploration.",
+    "readings": [
+     "Raise p before beta, retain the initial filter radius until the tail, and perform no main-phase restart.",
+     "Raise p and beta together, tighten the filter during exploration, and restart from the best valid snapshot after a compliance spike."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "LLM controller observation interval",
+    "issue": "vague",
+    "description": "Sec. 4.2 says the controller observes every k iterations but never assigns k.",
+    "readings": [
+     "k=1.",
+     "k=5.",
+     "k=10."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "density-filter weights",
+    "issue": "missing",
+    "description": "Eq. 5 specifies normalized weights within r_min but does not define their dependence on distance.",
+    "readings": [
+     "Linear cone weights: max(0,r_min-distance).",
+     "Uniform weights for all centroids within r_min.",
+     "Gaussian weights with standard deviation r_min/2, truncated at r_min."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "filter-radius units and distance metric",
+    "issue": "vague",
+    "description": "The tail radius is explicitly 1.20, but Secs. 3.3 and 4.2 do not say whether distances use element indices or physical coordinates.",
+    "readings": [
+     "Radius 1.20 in Euclidean element-index coordinates.",
+     "Radius 1.20 in the physical coordinate units of Lx and Ly.",
+     "Physical radius equal to 1.20 times the horizontal element width."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Heaviside projection",
+    "issue": "missing",
+    "description": "Eq. 5 names H_beta without its formula or threshold. Specifying beta, including the tail value, does not determine the projection.",
+    "readings": [
+     "Normalized tanh projection with fixed threshold eta=0.5.",
+     "Normalized tanh projection with fixed threshold eta=0.3.",
+     "Normalized tanh projection with eta adjusted each iteration to preserve filtered volume."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "initial main-phase density field",
+    "issue": "missing",
+    "description": "Eq. 6 specifies uniform initialization only for a tail without a valid snapshot. The initial density field for the ordinary main solve is not stated.",
+    "readings": [
+     "Uniform raw density rho=Vf.",
+     "Uniform raw density rho=1.",
+     "Seed-42 random perturbations within Vf\u00b10.01, recentered to mean Vf."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "OC density-update formula",
+    "issue": "missing",
+    "description": "Secs. 3.2\u20133.3 name OC and its move limit but do not give the multiplicative update or damping exponent.",
+    "readings": [
+     "Multiplicative OC with exponent 1/2, clipped by move and density bounds.",
+     "Multiplicative OC with exponent 1/3, clipped by the same bounds."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "OC multiplier-bisection controls",
+    "issue": "missing",
+    "description": "The OC bisection is mentioned in Sec. 3.2, but its bracket, stopping tolerance and iteration cap are absent.",
+    "readings": [
+     "Bracket [0,1e9], relative interval tolerance 1e-3, maximum 100 steps.",
+     "Adaptively expanded bracket, relative interval tolerance 1e-6, maximum 200 steps."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "300-iteration budget accounting",
+    "issue": "vague",
+    "description": "Table 3 says 300 iterations and Sec. 4.2 specifies a 40-iteration tail. Sec. 5.2 calls 300 iterations exploration, but Table 3 does not explicitly state whether its budget follows that accounting.",
+    "readings": [
+     "300 main iterations followed by 40 tail iterations: 340 total.",
+     "260 main iterations followed by 40 tail iterations: 300 total."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "solver early-exit policy",
+    "issue": "missing",
+    "description": "Sec. 4.3 mentions early exit, compliance stability and functional convergence as evaluator evidence, but gives no operational solver stopping rule or stability-window length.",
+    "readings": [
+     "Run the full main budget and full 40-iteration tail.",
+     "End the main phase when maximum raw-density change is below 0.001, then run the tail.",
+     "End the main phase when relative compliance range is below 0.005 over 10 iterations, then run the tail."
+    ],
+    "effect": "layout"
+   }
+  ]
+ },
+ "wall_s": 671.7642953395844,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L44",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 0,
+ "locator": "Sec. 5.1, Table 3, row cantilever_basic",
+ "finished": "2026-10-22T19:37:59"
+}

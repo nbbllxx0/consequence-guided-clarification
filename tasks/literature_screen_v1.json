@@ -1,0 +1,2908 @@
+[
+ {
+  "position": 1,
+  "arxiv_id": "2403.04937",
+  "title": "Gradient-free neural topology optimization: Towards effective fracture-resistant designs",
+  "first_submitted": "2024-03-07",
+  "primary_category": "cs.LG",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 4 'Example designs', Fig. 4 (first individual problem instance with reported design; Figs. 2-3 are aggregate statistics over randomly generated problem sets)",
+  "statement_excerpt": "\"Figure 4: An example of an out-of-distribution problem: classic L-shaped bracket problem, with clamped support along the top edge and a downward point load applied at the right edge.\"",
+  "dim": 2,
+  "geometry": {
+   "value": "L-shaped bracket inside a square grid; no dimensions or cut-out size stated",
+   "source": "figure"
+  },
+  "supports": {
+   "value": "clamped along the top edge (of the L's vertical arm)",
+   "source": "figure"
+  },
+  "loads": {
+   "value": "point load, downward, 'at the right edge'; exact position and magnitude not stated",
+   "source": "figure"
+  },
+  "passive_regions": {
+   "value": "none stated for this instance (training data used random square masks)",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "not stated for this instance (problem sets drawn from range [0.12, 0.5])",
+   "source": "missing"
+  },
+  "mesh": {
+   "value": "64 x 64 pixel grid (stated for the dataset designs in general)",
+   "source": "text"
+  },
+  "material": {
+   "value": "E0 = 1.0, Emin = 1e-9, nu = 0.3",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "cone filter, radius 2 pixels",
+   "source": "text"
+  },
+  "ambiguous": true,
+  "ambiguous_reason": "Load position on right edge, L-bracket cut-out size and volume fraction not stated; only caption words and result images.",
+  "benchmark_family": "L-bracket",
+  "evidence": {
+   "geometry": "Fig. 4 caption and images",
+   "supports": "Fig. 4 caption",
+   "loads": "Fig. 4 caption",
+   "volume_fraction": "Sec. 3.1 Dataset (range only)",
+   "mesh": "Sec. 3.1 Dataset para 3",
+   "material": "Sec. 3.1 Dataset para 3; Sec. 3.2 TO set-up",
+   "filter_radius": "Sec. 3.1 Dataset para 3"
+  },
+  "notes": "Fig. 4 shows only optimized designs, no boundary-condition sketch. Problem generated with the Hoyer et al. problem classes (ref. [19]).",
+  "borderline": false
+ },
+ {
+  "position": 2,
+  "arxiv_id": "2503.21456",
+  "title": "Mechanostat-type effective density correction for Carter-Hayes growth applied to topology optimization and its efficient interpolation for a target strain energy and volume fraction",
+  "first_submitted": "2025-03-27",
+  "primary_category": "math.OC",
+  "source_read": "arxiv_html",
+  "eligible": false,
+  "ineligible_reason": "other",
+  "ineligible_note": "No fixed volume constraint: the abstract states 'volume fraction is left unconstrained' and Sec. 2 replaces it by a logarithmic volume-compliance growth rule (Carter-Hayes/mechanostat). Borderline: Sec. 6.1 grows volume toward a target fraction.",
+  "borderline": true,
+  "evidence_ineligibility": "Abstract para 2; Sec. 2 last para; Sec. 6.1 para 1"
+ },
+ {
+  "position": 3,
+  "arxiv_id": "2305.08771",
+  "title": "Topology optimization of pressure-loaded multi-material structures",
+  "first_submitted": "2023-05-15",
+  "primary_category": "cs.CE",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 5 / 5.1 (two-material case), externally pressurized arch, problem-definition Fig. 1(a); results Fig. 2",
+  "statement_excerpt": "\"Figure 1 displays the design domains of the externally pressurized arch and pressure-loaded piston structures. $\\Gamma_{\\text{p}}$ and $\\Gamma_{\\mathrm{p_{0}}}$ indicate the full and zero pressure load boundaries, respectively. The displacement boundary conditions are also depicted in the figure.\"",
+  "dim": 2,
+  "geometry": {
+   "value": "rectangle Lx = 0.2 m x Ly = 0.1 m; out-of-plane thickness 0.001 m",
+   "source": "text"
+  },
+  "supports": {
+   "value": "pin supports drawn at bottom-left and bottom-right corners",
+   "source": "figure"
+  },
+  "loads": {
+   "value": "design-dependent fluid pressure: 1 bar on top, left and right edges (Gamma_p), 0 bar on bottom edge (Gamma_p0)",
+   "source": "figure"
+  },
+  "passive_regions": {
+   "value": "none stated or drawn",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "two linear volume constraints, v_f1 = 0.1 and v_f2 = 0.1",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "200 x 100 hexagonal elements",
+   "source": "text"
+  },
+  "material": {
+   "value": "E1 = 40 MPa, E2 = 100 MPa, nu = 0.40, plane stress, Emin = 1e-6 min(E1,E2)",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "r_fill = 3 x (Lx/Nex, Ly/Ney)",
+   "source": "text"
+  },
+  "ambiguous": false,
+  "ambiguous_reason": "",
+  "benchmark_family": "other",
+  "evidence": {
+   "geometry": "Sec. 5 para 2",
+   "supports": "Fig. 1(a) drawing",
+   "loads": "Fig. 1(a) drawing; Fig. 1 caption (1 bar / 0 bar)",
+   "volume_fraction": "Sec. 5.1 para 1",
+   "mesh": "Sec. 5 para 2",
+   "material": "Sec. 5 para 1; Sec. 5.1; Sec. 2 E_min",
+   "filter_radius": "Sec. 5 para 2"
+  },
+  "notes": "Two-material compliance minimization with design-dependent pressure loads; family 'other' = pressurized-arch benchmark.",
+  "borderline": false
+ },
+ {
+  "position": 4,
+  "arxiv_id": "2502.01830",
+  "title": "Meta-neural Topology Optimization: Knowledge Infusion with Meta-learning",
+  "first_submitted": "2025-02-03",
+  "primary_category": "cs.CE",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 4.3, Fig. 8 row 1 (first individual task shown with designs; earlier results are aggregate over random task sets; Fig. 5 shows example BCs without results)",
+  "statement_excerpt": "\"Fig. 8 showcases examples from our cross-resolution test set, where meta-neural TO consistently achieves the lowest compliance values while requiring significantly fewer iterations than both baseline methods.\"",
+  "dim": 2,
+  "geometry": {
+   "value": "square design domain",
+   "source": "text"
+  },
+  "supports": {
+   "value": "point supports drawn as markers (x-support and y-support triangles per Fig. 5 legend) on left/right edges; positions only in figure",
+   "source": "figure"
+  },
+  "loads": {
+   "value": "one point force (arrow) near bottom-right interior, direction drawn; magnitude not stated",
+   "source": "figure"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "not stated for this task (task targets sampled uniformly from [0.1, 0.5])",
+   "source": "missing"
+  },
+  "mesh": {
+   "value": "256 x 256 (cross-resolution test set)",
+   "source": "text"
+  },
+  "material": {
+   "value": "Emax = 1.0, Emin = 1e-9, p = 3, nu = 0.3",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "filtering mentioned (Fig. 2) but radius not found in text",
+   "source": "missing"
+  },
+  "ambiguous": true,
+  "ambiguous_reason": "Support and load positions only as markers in result images; volume fraction and load magnitude not stated.",
+  "benchmark_family": "custom",
+  "evidence": {
+   "geometry": "Sec. 3.4 para 1",
+   "supports": "Fig. 8 row 1; legend in Fig. 5",
+   "loads": "Fig. 8 row 1",
+   "volume_fraction": "Sec. 3.4 (range only)",
+   "mesh": "Sec. 3.4 para 2",
+   "material": "Sec. 3.1 para 3",
+   "filter_radius": "Fig. 2 caption mentions filtering; no radius located"
+  },
+  "notes": "Pseudorandom task generator (Sosnovik and Oseledets); primary example is a randomly generated task.",
+  "borderline": false
+ },
+ {
+  "position": 5,
+  "arxiv_id": "1909.11320",
+  "title": "Accelerating design optimization using reduced order models",
+  "first_submitted": "2019-09-25",
+  "primary_category": "math.NA",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 6.1.1 (3D cantilever beam), Fig. 3 left",
+  "statement_excerpt": "\"Cantilever beam design problem is the same as the numerical examples considered in [64]. The design domains and optimal designs for two problems are shown in Figure 3. Compliance minimization with total mass constraint is considered.\"",
+  "dim": 3,
+  "geometry": {
+   "value": "box 3 m x 1 m x 1 m",
+   "source": "figure"
+  },
+  "supports": {
+   "value": "fixed boundary at one end face",
+   "source": "figure"
+  },
+  "loads": {
+   "value": "distributed downward load 1e6 N/m^2 drawn along the bottom edge of the opposite end face",
+   "source": "figure"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "mass-constraint upper bound 0.5",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "structured uniform hexahedral mesh; 3,000 / 24,000 / 192,000 design variables (three resolutions)",
+   "source": "text"
+  },
+  "material": {
+   "value": "E = 2.0e11 N/m^2, nu = 0.29, SIMP s = 3",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "Helmholtz filter, r = 0.1 m",
+   "source": "text"
+  },
+  "ambiguous": true,
+  "ambiguous_reason": "Load drawn along end-face bottom edge with surface-traction units; loaded width (edge line vs strip) not stated.",
+  "benchmark_family": "cantilever",
+  "evidence": {
+   "geometry": "Fig. 3 left (dimension labels)",
+   "supports": "Fig. 3 left ('Fixed boundary')",
+   "loads": "Fig. 3 left",
+   "volume_fraction": "Sec. 6.1.1",
+   "mesh": "Sec. 6.1.1",
+   "material": "Sec. 6.1.1 and Fig. 3 left",
+   "filter_radius": "Sec. 6.1.1"
+  },
+  "notes": "Problem taken from ref. [64].",
+  "borderline": false
+ },
+ {
+  "position": 6,
+  "arxiv_id": "2507.16519",
+  "title": "A robust and stable phase field method for structural topology optimization",
+  "first_submitted": "2025-07-22",
+  "primary_category": "math.OC",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 4.2, Example 1 Case 1; problem-definition Fig. 1(a); first results Sec. 4.2.1, Fig. 2",
+  "statement_excerpt": "\"Case 1 (Figure 1 (a)): Domain $\\Omega=(0,2)\\times(0,1)$ with Dirichlet condition: $\\mathbf{u}=\\mathbf{0}$ on $\\{0\\}\\times[0,1]$ , Neumann condition: $\\mathbf{s}=(0,-1)^{\\top}$ at $\\{2\\}\\times[0.45,0.55]$ and traction-free elsewhere.\"",
+  "dim": 2,
+  "geometry": {
+   "value": "rectangle 2 x 1",
+   "source": "text"
+  },
+  "supports": {
+   "value": "u = 0 on left edge {0}x[0,1] (clamped)",
+   "source": "text"
+  },
+  "loads": {
+   "value": "distributed traction s = (0,-1) on right edge segment {2}x[0.45,0.55] (mid-height), downward, unit magnitude",
+   "source": "text"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "beta = 0.4 (Sec. 4.2.1 study with Algorithm 2)",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "400 x 200 (conforming/DG FE, element type not stated for this case)",
+   "source": "text"
+  },
+  "material": {
+   "value": "E = 100/91 (~1.1), nu = 3/7 (~0.43), E_min = 1e-4, p = 3",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "no density filter (phase-field method); interface width epsilon = 0.01 stated as regularization",
+   "source": "text"
+  },
+  "ambiguous": false,
+  "ambiguous_reason": "",
+  "benchmark_family": "cantilever",
+  "evidence": {
+   "geometry": "Sec. 4.2 Example 1 Case 1",
+   "supports": "Sec. 4.2 Example 1 Case 1",
+   "loads": "Sec. 4.2 Example 1 Case 1; Fig. 1 caption (a)",
+   "volume_fraction": "Sec. 4.2.1 para 2",
+   "mesh": "Sec. 4.2.1 para 1",
+   "material": "Sec. 4.2 last para before Fig. 1",
+   "filter_radius": "Sec. 4.2.1 para 2 (epsilon)"
+  },
+  "notes": "Volume fraction beta varies across later studies (Fig. 8); the value recorded is the one used in the first reported run.",
+  "borderline": false
+ },
+ {
+  "position": 7,
+  "arxiv_id": "2508.19169",
+  "title": "Graph Neural Network-Based Topology Optimization for Self-Supporting Structures in Additive Manufacturing",
+  "first_submitted": "2025-08-26",
+  "primary_category": "cs.CE",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 8.1, Fig. 4 (problem), Fig. 5(a) configuration without AM filter or stress constraint",
+  "statement_excerpt": "\"This example investigates a simply supported beam subjected to a uniformly distributed load along its bottom edge. The loading and boundary conditions are illustrated in Figure 4. The design domain is discretized using a structured mesh of $60\\times 20$ bilinear quadrilateral elements.\"",
+  "dim": 2,
+  "geometry": {
+   "value": "rectangle, 3:1 aspect implied by 60 x 20 elements; physical size not stated",
+   "source": "figure"
+  },
+  "supports": {
+   "value": "pin at bottom-left corner, roller at bottom-right corner",
+   "source": "figure"
+  },
+  "loads": {
+   "value": "uniformly distributed downward load along the bottom edge; magnitude not stated",
+   "source": "text"
+  },
+  "passive_regions": {
+   "value": "bottom-most element layer fixed solid (rho = 1)",
+   "source": "text"
+  },
+  "volume_fraction": {
+   "value": "0.5 (penalty term in loss)",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "60 x 20 bilinear quadrilateral elements",
+   "source": "text"
+  },
+  "material": {
+   "value": "E = 1, nu = 0.3 (plane stress)",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "no density filter radius stated (GNN parameterization)",
+   "source": "missing"
+  },
+  "ambiguous": false,
+  "ambiguous_reason": "",
+  "benchmark_family": "bridge",
+  "evidence": {
+   "geometry": "Sec. 8.1 mesh; Fig. 4",
+   "supports": "Fig. 4 drawing",
+   "loads": "Sec. 8.1 para 1; Fig. 4",
+   "passive_regions": "Sec. 8.1 para 1",
+   "volume_fraction": "Sec. 8.1 para 1",
+   "mesh": "Sec. 8.1 para 1",
+   "material": "Sec. 8 para 1; Sec. 4 (plane stress)",
+   "filter_radius": "no mention found"
+  },
+  "notes": "Family 'bridge' chosen for simply supported beam with distributed load; could also be read as 'other'.",
+  "borderline": false
+ },
+ {
+  "position": 8,
+  "arxiv_id": "2309.00396",
+  "title": "Denture reinforcement via topology optimization",
+  "first_submitted": "2023-09-01",
+  "primary_category": "cs.CE",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 3.1 and 3.3, Fig. 2 (BCs); first mass limit 20%, Fig. 3",
+  "statement_excerpt": "\"A Dirichlet boundary condition ( $\\boldsymbol{u}=\\boldsymbol{0}$ ) is on the lower surface of the denture, where the denture typically contacts the mouth tissue (the top left subfigure in Figure 2). Forces (Neumann boundary conditions) are applied vertically on the teeth (the bottom left subfigure in Figure 2).\"",
+  "dim": 3,
+  "geometry": {
+   "value": "scanned denture model (denture base + teeth); no overall dimensions; 0.5 mm facet resolution",
+   "source": "text"
+  },
+  "supports": {
+   "value": "u = 0 on lower surface of denture (Fig. 2 caption: blue line)",
+   "source": "text"
+  },
+  "loads": {
+   "value": "vertical forces on small faces on teeth: 150 N anterior, 450 N premolar, 900 N posterior",
+   "source": "text"
+  },
+  "passive_regions": {
+   "value": "teeth domain excluded from optimization (non-design)",
+   "source": "text"
+  },
+  "volume_fraction": {
+   "value": "reinforcement mass upper limit 20% (also 40%, 57%)",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "quadratic tetrahedra, 104,168 nodes, 61,108 elements",
+   "source": "text"
+  },
+  "material": {
+   "value": "E-glass E = 72,000 MPa, nu = 0.2; PMMA E = 2550 MPa, nu = 0.3",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "filtering mentioned (Ansys SIMP module); radius not stated",
+   "source": "missing"
+  },
+  "ambiguous": true,
+  "ambiguous_reason": "Text says Dirichlet on 'lower surface' while Fig. 2 caption marks a blue line; whether each force is per tooth or per region not stated.",
+  "benchmark_family": "custom",
+  "evidence": {
+   "geometry": "Sec. 2.1; Sec. 3.1 para 1",
+   "supports": "Sec. 3.1 para 2; Fig. 2 caption",
+   "loads": "Sec. 3.1 para 2; Fig. 2 caption",
+   "passive_regions": "Sec. 3.3 para 1",
+   "volume_fraction": "Sec. 3.3 para 1",
+   "mesh": "Sec. 3.1 para 2",
+   "material": "Table 1",
+   "filter_radius": "Sec. 2.3"
+  },
+  "notes": "Mass constraint on reinforcement treated as volume constraint (uniform density).",
+  "borderline": false
+ },
+ {
+  "position": 9,
+  "arxiv_id": "2010.10770",
+  "title": "Component-wise reduced order model lattice-type structure design",
+  "first_submitted": "2020-10-21",
+  "primary_category": "math.NA",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 6.1 (cantilever beam with lattice structure), Fig. 5 problem setup; results Sec. 6.1.2, Fig. 7",
+  "statement_excerpt": "\"We place the structure under tension by setting homogeneous Dirichlet boundary conditions for displacement on the lower- and upper-most ports and the middle two ports on the left hand side of the system and applying a uniform pressure force to each of the middle two ports on the right-hand side.\"",
+  "dim": 2,
+  "geometry": {
+   "value": "square-grid lattice of 290 components (joints + struts); strut length 5 cm, port length 1 cm; overall layout only in Fig. 5",
+   "source": "figure"
+  },
+  "supports": {
+   "value": "homogeneous Dirichlet on lower-most, upper-most and middle two ports of the left side",
+   "source": "text"
+  },
+  "loads": {
+   "value": "uniform pressure on middle two right-side ports: upper port +X and +Y, lower port +X and -Y, 100e6 N/m each component (text also states effective sqrt(2)e6 N/m at 45 deg)",
+   "source": "text"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "maximum mass fraction 60% (component volume fractions as design variables)",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "component meshes of bilinear quads: joint 3,675 elements, strut 3,800 elements; FOM 1,844,640 DOF",
+   "source": "text"
+  },
+  "material": {
+   "value": "E = 69 GPa, nu = 0.3, plane stress",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "no filter stated (one design variable per component)",
+   "source": "missing"
+  },
+  "ambiguous": true,
+  "ambiguous_reason": "Which left-side ports are fixed is hard to map onto Fig. 5 (no BCs drawn); load magnitude stated as 100e6 N/m per direction but effective value given as sqrt(2)e6 N/m.",
+  "benchmark_family": "cantilever",
+  "evidence": {
+   "geometry": "Sec. 6.1 para 1-2; Fig. 5 (lattice only)",
+   "supports": "Sec. 6.1 para 2",
+   "loads": "Sec. 6.1 para 2",
+   "volume_fraction": "Sec. 6.1.2 para 1",
+   "mesh": "Sec. 6.1 para 1-2",
+   "material": "Sec. 6.1 para 1",
+   "filter_radius": "no mention found"
+  },
+  "notes": "Component-wise (lattice) TO; Fig. 5 image shows the lattice without boundary-condition symbols.",
+  "borderline": false
+ },
+ {
+  "position": 10,
+  "arxiv_id": "2101.02973",
+  "title": "Topology Optimization with linearized buckling criteria in 250 lines of Matlab",
+  "first_submitted": "2021-01-08",
+  "primary_category": "math.OC",
+  "source_read": "arxiv_html",
+  "eligible": false,
+  "ineligible_reason": "other",
+  "ineligible_note": "No compliance-objective example: Sec. 5.1 solves volume minimization with a compliance constraint, then buckling-load-factor maximization with compliance and volume constraints; Sec. 5.2 is volume minimization with compliance and BLF constraints. The code can solve volume-constrained minimum compliance (Sec. 2.1) but no such example is reported.",
+  "borderline": false,
+  "evidence_ineligibility": "Sec. 2.1 Eqs. (13)-(14); Sec. 5.1 Eq. (28); Sec. 5.2 para 2"
+ },
+ {
+  "position": 11,
+  "arxiv_id": "2407.07288",
+  "title": "Structural Design Through Reinforcement Learning",
+  "first_submitted": "2024-07-10",
+  "primary_category": "cs.AI",
+  "source_read": "arxiv_pdf",
+  "eligible": true,
+  "example_ref": "Results, Fig. 10 row A, 'Baseline' column (first individual instance shown with an optimized design; earlier results are aggregate over 1000 random test samples; Fig. 3a is a random RL episode, not an optimized design)",
+  "statement_excerpt": "\"The support condition is placed randomly on one of the four boundaries without spanning multiple boundaries, covering only a fraction of the chosen boundary at a time. The point load is then placed randomly on the opposite boundary, with a random orientation and a unit load magnitude.\"",
+  "dim": 2,
+  "geometry": {
+   "value": "rectangle; generator samples height and width in [1.0, 2.0]; this sample's size readable only from small axis ticks in Fig. 10 (approx. width < 1.4, height ~1.7, not legible)",
+   "source": "figure"
+  },
+  "supports": {
+   "value": "fully supported segment (hatched) on part of the bottom edge",
+   "source": "figure"
+  },
+  "loads": {
+   "value": "single point load of unit magnitude on top edge, oblique arrow; position and angle only drawn",
+   "source": "figure"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "not stated for this sample (generator range 20%-40%; achieved volume 0.300 shown under design)",
+   "source": "missing"
+  },
+  "mesh": {
+   "value": "50 elements per unit of height and width",
+   "source": "text"
+  },
+  "material": {
+   "value": "Young's modulus value not stated; void stiffness 1e-9 (ersatz model)",
+   "source": "missing"
+  },
+  "filter_radius": {
+   "value": "no density filter (Moving Morphable Components; Heaviside regularization parameter 1e-2)",
+   "source": "text"
+  },
+  "ambiguous": true,
+  "ambiguous_reason": "Domain size, support extent, load position/angle and volume limit for this sample only readable approximately from a small plot without legible ticks.",
+  "benchmark_family": "custom",
+  "evidence": {
+   "geometry": "Sec. on BC distribution (Table 2, Fig. 2); Fig. 10 row A",
+   "supports": "Fig. 10 row A baseline; Table 2",
+   "loads": "text para before Table 2 (unit magnitude); Fig. 10 row A",
+   "volume_fraction": "Table 2 (range); Fig. 10 row A label",
+   "mesh": "para before Table 2",
+   "material": "MMC/ersatz paragraph (Eqs. 8-10 region)",
+   "filter_radius": "MMC paragraph"
+  },
+  "notes": "Random task generator (SOgym). Baseline design obtained by MMC with hybrid MMA-GCMMA (Appendix A). PDF read via pdftotext; page 15 rendered with pdftoppm.",
+  "borderline": false
+ },
+ {
+  "position": 12,
+  "arxiv_id": "2605.28857",
+  "title": "Comparative Analysis of Compliance-Matrix Induced Norms in Structural Topology Optimization",
+  "first_submitted": "2026-05-19",
+  "primary_category": "cs.CE",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 4, bridge structure: Fig. 2 (left) initial setup, Fig. 3 (quadratic compliance column)",
+  "statement_excerpt": "\"For each case, the initial design domain, boundary conditions, and loading configurations were defined according to conventional benchmark settings.\"",
+  "dim": 2,
+  "geometry": {
+   "value": "rectangle, approx. 2:1 as drawn; dimensions and nelx/nely not stated",
+   "source": "figure"
+  },
+  "supports": {
+   "value": "pins at bottom-left and bottom-right corners (code: x and y DOFs of both bottom corner nodes fixed)",
+   "source": "code_or_appendix"
+  },
+  "loads": {
+   "value": "point load F = (0,-1) at bottom mid-span node (code: F(2*(nelx/2+1)*(nely+1)) = -1)",
+   "source": "code_or_appendix"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "volfrac = 0.5",
+   "source": "figure"
+  },
+  "mesh": {
+   "value": "not stated (99-line code, nelx/nely values not given)",
+   "source": "missing"
+  },
+  "material": {
+   "value": "E = 1, nu = 0.3, penal = 3",
+   "source": "figure"
+  },
+  "filter_radius": {
+   "value": "99-line code filter retained; rmin not stated",
+   "source": "missing"
+  },
+  "ambiguous": false,
+  "ambiguous_reason": "",
+  "benchmark_family": "MBB",
+  "evidence": {
+   "geometry": "Fig. 2 left (inline drawing)",
+   "supports": "Fig. 2 left; code snippet after Fig. 2 ('Fixeddofs')",
+   "loads": "Fig. 2 caption F=(0,-1); code snippet after Fig. 2",
+   "volume_fraction": "Fig. 2 caption",
+   "mesh": "no mention found",
+   "material": "Fig. 2 caption",
+   "filter_radius": "Sec. 1 para 3; Sec. 3.3 (99-line code)"
+  },
+  "notes": "Paper calls it 'bridge structure'; setup is a full simply supported beam with mid-span bottom point load, classified MBB per screening rule. Load node and fixed DOFs given as a MATLAB code snippet in the text body (code listing placed in the body after Fig. 2; tagged code_or_appendix because the listing, not prose, states the exact nodes; the drawing agrees). Mesh size not readable anywhere.",
+  "borderline": false
+ },
+ {
+  "position": 13,
+  "arxiv_id": "2412.18441",
+  "title": "Normalized field product approach: A parameter-free density evaluation method for close-to-binary solutions in topology optimization with embedded length scale",
+  "first_submitted": "2024-12-24",
+  "primary_category": "cs.CE",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 4 / 4.1, cantilever beam: problem Fig. 4(a); first solution Fig. 6(a) (mesh 100 x 50, vf 0.35, ls 2)",
+  "statement_excerpt": "\"The design domains for the solved stiff structures and an inverter CM are shown in Fig. 4 and Fig. 5, respectively. The dimensions, boundary conditions, and applied load locations for all the problems are mentioned in the figures.\"",
+  "dim": 2,
+  "geometry": {
+   "value": "rectangle 2 x 1 (units not stated)",
+   "source": "figure"
+  },
+  "supports": {
+   "value": "left edge clamped (hatched wall)",
+   "source": "figure"
+  },
+  "loads": {
+   "value": "point load f, downward, at bottom-right corner; magnitude not stated",
+   "source": "figure"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "v_f = 0.35",
+   "source": "figure"
+  },
+  "mesh": {
+   "value": "100 x 50 quadrilateral elements (Fig. 6(a); also 140x70, 180x90)",
+   "source": "figure"
+  },
+  "material": {
+   "value": "E = 2e4, nu = 0.3, SIMP eta = 3, rho_min = 1e-4",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "no conventional filter; square neighborhood with ls = 2 (5 x 5 elements) sets length scale",
+   "source": "figure"
+  },
+  "ambiguous": false,
+  "ambiguous_reason": "",
+  "benchmark_family": "cantilever",
+  "evidence": {
+   "geometry": "Fig. 4(a)",
+   "supports": "Fig. 4(a)",
+   "loads": "Fig. 4(a)",
+   "volume_fraction": "Fig. 6(a) sub-caption",
+   "mesh": "Fig. 6(a) sub-caption; Sec. 4 para on quadrilateral elements",
+   "material": "Sec. 4 para 3",
+   "filter_radius": "Fig. 6(a) sub-caption (ls); Sec. 4 para 2 defines ls"
+  },
+  "notes": "Load magnitude f not given numerically. Mesh, vf and ls for the first run are only in sub-captions.",
+  "borderline": false
+ },
+ {
+  "position": 14,
+  "arxiv_id": "2601.23269",
+  "title": "Rank Reduction AutoEncoders for Mechanical Design: Advancing Novel and Efficient Data-Driven Topology Optimization",
+  "first_submitted": "2026-01-30",
+  "primary_category": "math.NA",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 5, half MBB beam, Fig. 3 (domain and BCs); dataset of 100 TO runs (DoE over volume fraction)",
+  "statement_excerpt": "\"The main example consists of performing a Design of Experiments (DoE) by sweeping the volume constraint in a compliance minimization problem, as the half MBB beam displayed in Figure 3.\"",
+  "dim": 2,
+  "geometry": {
+   "value": "square domain (80 x 80 square elements); physical size not stated",
+   "source": "text"
+  },
+  "supports": {
+   "value": "rollers along left edge (symmetry, horizontal fixed); roller at bottom-right corner (vertical fixed)",
+   "source": "figure"
+  },
+  "loads": {
+   "value": "unit point load, downward, at top-left corner",
+   "source": "figure"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "swept: 100 values equispaced in [0.1, 0.9] (training); 20 values for test",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "80 x 80 quad elements",
+   "source": "text"
+  },
+  "material": {
+   "value": "E0 = 1, nu = 0.3, Emin = 1e-9, p = 3",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "sensitivity filter, R = 1.5 element sizes",
+   "source": "text"
+  },
+  "ambiguous": false,
+  "ambiguous_reason": "",
+  "benchmark_family": "MBB",
+  "evidence": {
+   "geometry": "Sec. 5 para 2",
+   "supports": "Fig. 3",
+   "loads": "Fig. 3 (position); Sec. 5 para 2 (unit load)",
+   "volume_fraction": "Sec. 5 para 2",
+   "mesh": "Sec. 5 para 2",
+   "material": "Sec. 5 para 2",
+   "filter_radius": "Sec. 5 para 2"
+  },
+  "notes": "Unit load magnitude stated in text; position only in figure (loads tagged figure). Solved with top88 OC. Volume fraction is a sweep, not a single value.",
+  "borderline": false
+ },
+ {
+  "position": 15,
+  "arxiv_id": "2012.01359",
+  "title": "3D architected isotropic materials with tunable stiffness and buckling strength",
+  "first_submitted": "2020-12-02",
+  "primary_category": "math.NA",
+  "source_read": "arxiv_html",
+  "eligible": false,
+  "ineligible_reason": "other",
+  "ineligible_note": "Material/microstructure design: periodic RVE with homogenized Young's modulus and Block-Floquet buckling strength objectives; no structure with prescribed loads and supports.",
+  "borderline": false,
+  "evidence_ineligibility": "Abstract; Sec. 2.1; Fig. 1 caption (RVE, periodic microstructure)"
+ },
+ {
+  "position": 16,
+  "arxiv_id": "2406.18833",
+  "title": "A novel design update framework for topology optimization with quantum annealing: Application to truss and continuum structures",
+  "first_submitted": "2024-06-27",
+  "primary_category": "cs.CE",
+  "source_read": "arxiv_pdf",
+  "eligible": true,
+  "example_ref": "Sec. 4.1 (truss optimization), Fig. 5(a) 6-member truss; results Fig. 6",
+  "statement_excerpt": "\"We consider the optimal design problem of three truss structures with different geometries and boundary conditions, as shown in Fig. 5.\"",
+  "dim": 2,
+  "geometry": {
+   "value": "single square bay 1 m x 1 m, 6 truss members (4 edges + 2 diagonals); member lengths 1 m or sqrt(2) m",
+   "source": "figure"
+  },
+  "supports": {
+   "value": "two left-side nodes fixed to wall (hatched)",
+   "source": "figure"
+  },
+  "loads": {
+   "value": "point load 100 kN downward at bottom-right node",
+   "source": "figure"
+  },
+  "passive_regions": {
+   "value": "none (not applicable to truss)",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "target ratio of total volume to initial total volume V0 = 1 (volume constraint V <= V0); initial design value rho_o = 0.35",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "6 bar elements (ground structure of Fig. 5(a))",
+   "source": "figure"
+  },
+  "material": {
+   "value": "E = 2e11 N/m^2; initial cross-section area 0.5 m^2",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "not applicable (discrete truss/frame model)",
+   "source": "missing"
+  },
+  "ambiguous": false,
+  "ambiguous_reason": "",
+  "benchmark_family": "cantilever",
+  "evidence": {
+   "geometry": "Fig. 5(a); Sec. 4.1 para 1 (member lengths)",
+   "supports": "Fig. 5(a)",
+   "loads": "Fig. 5(a)",
+   "volume_fraction": "Sec. 4.1 para 1 and last para of p. 12",
+   "mesh": "Fig. 5(a); Sec. 4.1 last para (6-member truss)",
+   "material": "Sec. 4.1 para 1",
+   "filter_radius": "n/a"
+  },
+  "notes": "Discrete truss model (quantum-annealing design update). PDF read; pdftotext garbled equations, pages 12-13 rendered with pdftoppm and read visually. Meaning of rho_o (initial design variable) inferred from context.",
+  "borderline": false
+ },
+ {
+  "position": 17,
+  "arxiv_id": "2212.00964",
+  "title": "JAX-FEM: A differentiable GPU-accelerated 3D finite element solver for automatic inverse design and mechanistic data science",
+  "first_submitted": "2022-12-02",
+  "primary_category": "cs.MS",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 3.2, three-hole bracket, Fig. 9 (the preceding thin-plate example, Fig. 7, uses a hyperelastic material and is not linear-elastic)",
+  "statement_excerpt": "\"As a more realistic case with more complex geometry, we use topology optimization for the lightweight design of a bracket with three screw holes. The bracket is assumed to be made of a linear elastic material and the boundary conditions are shown in the upper panel of Fig. 9.\"",
+  "dim": 3,
+  "geometry": {
+   "value": "bracket with three screw-hole lugs around a box-shaped design space; no dimensions stated",
+   "source": "figure"
+  },
+  "supports": {
+   "value": "fixed on the inner walls of two holes",
+   "source": "figure"
+  },
+  "loads": {
+   "value": "uniform loading along +y on inner wall of the upper hole; magnitude not stated",
+   "source": "figure"
+  },
+  "passive_regions": {
+   "value": "material outside the blue box design space is non-design (no change allowed)",
+   "source": "text"
+  },
+  "volume_fraction": {
+   "value": "45% of the blue box design region (same as human design)",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "not stated (voxel-like hexahedral appearance in result image)",
+   "source": "missing"
+  },
+  "material": {
+   "value": "linear elastic; E and nu values not stated",
+   "source": "missing"
+  },
+  "filter_radius": {
+   "value": "convolution sensitivity filter stated for plate example; radius not stated",
+   "source": "missing"
+  },
+  "ambiguous": true,
+  "ambiguous_reason": "No dimensions, load magnitude or material values; geometry only from a rendered CAD image.",
+  "benchmark_family": "custom",
+  "evidence": {
+   "geometry": "Fig. 9 top panel",
+   "supports": "Fig. 9 caption",
+   "loads": "Fig. 9 caption and arrow",
+   "passive_regions": "Sec. 3.2 last para",
+   "volume_fraction": "Sec. 3.2 last para",
+   "mesh": "no mention found",
+   "material": "Sec. 3.2 last para (linear elastic only)",
+   "filter_radius": "Sec. 3.2 para 3 (plate example)"
+  },
+  "notes": "First TO example (thin plate, Fig. 7) skipped: hyperelastic material. Volume fraction stated only as equal to human design (45%).",
+  "borderline": false
+ },
+ {
+  "position": 18,
+  "arxiv_id": "2503.20915",
+  "title": "Term-sparse polynomial optimization for the design of frame structures",
+  "first_submitted": "2025-03-26",
+  "primary_category": "math.OC",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 5.1 '21-elements frame structure', compliance minimization setting; Fig. 8(a) (Sec. 2.2 illustration problem skipped: weight minimization)",
+  "statement_excerpt": "\"Two downward loads are applied to the nodes c and f with magnitudes of $2$ and $3.5$ , respectively, and the left nodes a, d and g are clamped.\"",
+  "dim": 2,
+  "geometry": {
+   "value": "frame ground structure, 8 nodes and 21 Euler-Bernoulli elements on a 2 x 2 grid of unit bays (top-right node absent)",
+   "source": "figure"
+  },
+  "supports": {
+   "value": "left nodes a, d, g clamped",
+   "source": "text"
+  },
+  "loads": {
+   "value": "downward point loads 2 at node c and 3.5 at node f (drawn at middle-right and bottom-right nodes)",
+   "source": "text"
+  },
+  "passive_regions": {
+   "value": "none (not applicable to frame)",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "total weight upper bound w = 0.5 (density 1)",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "21 frame elements, 8 nodes",
+   "source": "text"
+  },
+  "material": {
+   "value": "E = 1, density 1; circular hollow sections, wall thickness 0.376 x radius",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "not applicable (discrete truss/frame model)",
+   "source": "missing"
+  },
+  "ambiguous": false,
+  "ambiguous_reason": "",
+  "benchmark_family": "cantilever",
+  "evidence": {
+   "geometry": "Fig. 8(a) (bay dimensions 1 as SVG labels); Sec. 5.1 para 1",
+   "supports": "Sec. 5.1 para 1",
+   "loads": "Sec. 5.1 para 1; Fig. 8(a)",
+   "volume_fraction": "Sec. 5.1 'Compliance minimization' para 1",
+   "mesh": "Sec. 5.1 para 1",
+   "material": "Sec. 5.1 para 1",
+   "filter_radius": "n/a"
+  },
+  "notes": "Discrete frame model (moment-SOS global optimization). Weight constraint treated as volume constraint. Problem from ref. [32]; paper notes errata in [32]. Figure labels read from inline SVG text.",
+  "borderline": false
+ },
+ {
+  "position": 19,
+  "arxiv_id": "2005.05436",
+  "title": "A new generation 99 line Matlab code for compliance Topology Optimization and its extension to 3D",
+  "first_submitted": "2020-05-05",
+  "primary_category": "cs.CE",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 3, half MBB beam, Fig. 2 (default test case used in Secs. 3.1-3.4)",
+  "statement_excerpt": "\"We will often refer to the half MBB beam example (see Figure 2) for numerical testing. Unless stated otherwise we choose $\\Omega_{h}=300\\times 100$ , $f=0.5$ and $r_{\\rm min}=8.75$ (Sigmund, 2007). The load, having total magnitude $|q|=1$ is applied to the first node.\"",
+  "dim": 2,
+  "geometry": {
+   "value": "rectangle Lx x Ly (symbolic in Fig. 2); nelx, nely define physical dimensions, so 300 x 100 with unit elements",
+   "source": "text"
+  },
+  "supports": {
+   "value": "rollers along left edge (symmetry, horizontal fixed); roller at bottom-right corner (vertical fixed)",
+   "source": "code_or_appendix"
+  },
+  "loads": {
+   "value": "point load |q| = 1 at 'the first node' (top-left corner), downward",
+   "source": "text"
+  },
+  "passive_regions": {
+   "value": "none (pasS = [], pasV = [])",
+   "source": "text"
+  },
+  "volume_fraction": {
+   "value": "f = 0.5",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "300 x 100 elements",
+   "source": "text"
+  },
+  "material": {
+   "value": "E1 = 1, E0 = 1e-9, nu = 0.3",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "rmin = 8.75 (element units)",
+   "source": "text"
+  },
+  "ambiguous": false,
+  "ambiguous_reason": "",
+  "benchmark_family": "MBB",
+  "evidence": {
+   "geometry": "Sec. 3 para 1 (nelx, nely define physical dimensions); Fig. 2",
+   "supports": "Fig. 2; Appendix code top99neo line 32: fixed = union(1:2:2*(nely+1), 2*nodeNrs(end,end))",
+   "loads": "Sec. 3 para before Table 1; Fig. 2 (direction)",
+   "passive_regions": "Sec. 3 para before Table 1",
+   "volume_fraction": "Sec. 3 para before Table 1",
+   "mesh": "Sec. 3 para before Table 1",
+   "material": "Sec. 3 para before Table 1",
+   "filter_radius": "Sec. 3 para before Table 1"
+  },
+  "notes": "Load node position 'first node' relies on top88 node numbering; direction only in figure. Supports also defined in code (Appendix B).",
+  "borderline": false
+ },
+ {
+  "position": 20,
+  "arxiv_id": "2205.14832",
+  "title": "LatticeOPT: A heuristic topology optimization framework for thin-walled, 2D extruded lattices",
+  "first_submitted": "2022-05-30",
+  "primary_category": "math.OC",
+  "source_read": "arxiv_html",
+  "eligible": false,
+  "ineligible_reason": "other",
+  "ineligible_note": "Explicit dynamic, elasto-plastic (crashworthiness/blast) problems with energy-absorption or damage objectives; no linear-elastic compliance example.",
+  "borderline": false,
+  "evidence_ineligibility": "Abstract; Sec. 3.1 para 1-2; Sec. 3.2 para 1"
+ },
+ {
+  "position": 21,
+  "arxiv_id": "2502.05899",
+  "title": "Topology Optimization considering Shielding and Penetrating Features based on Fictitious Physical Model",
+  "first_submitted": "2025-02-09",
+  "primary_category": "math.OC",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 5.1, Fig. 8(a) problem setting; Fig. 8(b) optimized without shielding condition (pure mean compliance + volume)",
+  "statement_excerpt": "\"The displacement is fixed at the left and right boundaries $\\Gamma_{u}$ on the lower edge, and the traction $\\bm{t}$ is applied to the center boundary $\\Gamma_{t}$ on the lower edge. [...] Additionally, the maximum volume is limited to 20% of the fixed design domain $D$ .\"",
+  "dim": 2,
+  "geometry": {
+   "value": "rectangle 20 x 12 units scaled by 0.05 (i.e. 1.0 x 0.6)",
+   "source": "figure"
+  },
+  "supports": {
+   "value": "fixed on two bottom-edge segments Gamma_u, each 1 unit (x0.05) wide, starting 1 unit from each bottom corner",
+   "source": "figure"
+  },
+  "loads": {
+   "value": "downward distributed traction, magnitude 1.0e5, on centered bottom-edge segment 2 units (x0.05) wide",
+   "source": "figure"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "maximum volume 20% of design domain",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "triangular elements; size/count not stated",
+   "source": "text"
+  },
+  "material": {
+   "value": "E = 210e9, nu = 0.3",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "no filter (level-set with regularization parameter tau = 1e-4, transition width delta = 1e-3)",
+   "source": "text"
+  },
+  "ambiguous": false,
+  "ambiguous_reason": "",
+  "benchmark_family": "bridge",
+  "evidence": {
+   "geometry": "Fig. 8(a) dimension labels and [x 0.05] scale",
+   "supports": "Sec. 5.1 para 1; Fig. 8(a)",
+   "loads": "Sec. 5 para 1 (magnitude, direction); Sec. 5.1 para 1; Fig. 8(a) (segment width)",
+   "volume_fraction": "Sec. 5.1 para 1",
+   "mesh": "Sec. 4.2 para 1",
+   "material": "Sec. 5 para 1",
+   "filter_radius": "Sec. 5 para 1"
+  },
+  "notes": "Section 3 thermal field studies are feature-evaluation demos, not TO examples. Supported span with centered bottom traction; classed bridge (could be read as MBB-type 3-point bending with distributed load). Mesh tagged text but only element type is stated.",
+  "borderline": false
+ },
+ {
+  "position": 22,
+  "arxiv_id": "2307.16521",
+  "title": "Thermo-mechanical level-set topology optimization of a load carrying battery pack for electric aircraft",
+  "first_submitted": "2023-07-31",
+  "primary_category": "math.OC",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "borderline": true,
+  "example_ref": "Sec. 4.1-4.2, battery pack, Fig. 3 (geometry, BCs); first weight listed k = 1.0 (structural compliance only), results Fig. 5(c,f,i)",
+  "statement_excerpt": "\"A 3x2 configuration with a spacing of 5 mm between the cells is chosen for the battery pack. [...] Structurally the pack is analogous to a cantilever beam with one side fixed and the other subjected to a traction load of 15 N/mm2.\"",
+  "dim": 3,
+  "geometry": {
+   "value": "box 83 x 57 x 70 mm containing a 3x2 array of cylindrical cells (diameter 21 mm, height 70 mm, 5 mm spacing)",
+   "source": "figure"
+  },
+  "supports": {
+   "value": "one end face: no displacement",
+   "source": "figure"
+  },
+  "loads": {
+   "value": "traction 15 N/mm^2 on the opposite end face; direction not stated; plus thermal strain from battery heat generation (steady-state)",
+   "source": "text"
+  },
+  "passive_regions": {
+   "value": "battery cells (separate material) inside the pack; whether excluded from design not stated explicitly",
+   "source": "figure"
+  },
+  "volume_fraction": {
+   "value": "constraint Vol <= xi Vol(D); value of xi not stated",
+   "source": "missing"
+  },
+  "mesh": {
+   "value": "48 x 32 x 40 linear hexahedra, 265,188 DOF",
+   "source": "text"
+  },
+  "material": {
+   "value": "aluminium E = 68 GPa, nu = 0.32, alpha = 21e-6; cell E = 1.5 GPa, nu = 0.2, alpha = 10e-6",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "no filter (level-set method); not stated",
+   "source": "missing"
+  },
+  "ambiguous": true,
+  "ambiguous_reason": "Traction direction and volume fraction not given; which end face is loaded only from figure labels.",
+  "benchmark_family": "custom",
+  "evidence": {
+   "geometry": "Sec. 4.1 para 2; Fig. 3(a)",
+   "supports": "Fig. 3(b)",
+   "loads": "Sec. 4.1 para 2; Fig. 3(b)",
+   "passive_regions": "Fig. 3(a); Table 1",
+   "volume_fraction": "Sec. 3.2 Eq. (11)",
+   "mesh": "Sec. 4.1 para 3",
+   "material": "Table 1",
+   "filter_radius": "Sec. 3.1 (level set)"
+  },
+  "notes": "Borderline: thermo-mechanical (linear thermoelastic) model; k = 1.0 removes thermal compliance from the objective but thermal strains still load the structure. Classed eligible as structural compliance with volume constraint."
+ },
+ {
+  "position": 23,
+  "arxiv_id": "2410.23295",
+  "title": "Simultaneous Topology Optimization of Differentiable and Non-Differentiable Objectives via Morphology Learning: Stiffness and Cell Growth on Scaffold",
+  "first_submitted": "2024-10-15",
+  "primary_category": "cond-mat.soft",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Results 'Structures optimization' and 'Mechanical stiffness' (first experiment), set-up Fig. 6 right, results Fig. 7",
+  "statement_excerpt": "\"As shown on the right of Fig. 6, the points at the base of the design domain are fixed, and the top surface is subjected to distributed forces generated by placing a thin shell at the top of the design domain.\"",
+  "dim": 3,
+  "geometry": {
+   "value": "cube (scaffold unit cell); 40 x 40 x 40 voxels; physical size not stated for the FE model",
+   "source": "text"
+  },
+  "supports": {
+   "value": "points at the base fixed (Fig. 6: 'Ground')",
+   "source": "text"
+  },
+  "loads": {
+   "value": "compressive distributed force on top surface transmitted through a thin shell; downward (Fig. 6 arrow F); magnitude not stated",
+   "source": "text"
+  },
+  "passive_regions": {
+   "value": "thin shell placed on top to distribute the load; whether it is a non-design solid layer is not stated",
+   "source": "text"
+  },
+  "volume_fraction": {
+   "value": "0.3, 0.35, 0.4, 0.45, 0.5 (five targets; penalty term mu (V/V0-1)^2 in loss)",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "40 x 40 x 40 voxel elements",
+   "source": "text"
+  },
+  "material": {
+   "value": "E = 1.0 (solid), Emin = 1e-3, nu = 0.3",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "no density-filter radius stated for the latent-code method (projections alpha = 2, beta 1 to 128 instead)",
+   "source": "missing"
+  },
+  "ambiguous": true,
+  "ambiguous_reason": "Load magnitude not stated and the role of the top 'thin shell' (extra solid layer or loaded surface) is unclear.",
+  "benchmark_family": "custom",
+  "evidence": {
+   "geometry": "Results 'Structures optimization' para 1",
+   "supports": "same para; Fig. 6 right",
+   "loads": "same para; Fig. 6 right",
+   "passive_regions": "same para",
+   "volume_fraction": "'Mechanical stiffness' para 1; Methods Eq. (23)",
+   "mesh": "'Structures optimization' para 1",
+   "material": "'Structures optimization' para 2",
+   "filter_radius": "Methods 'Pattern-preserving TO framework'"
+  },
+  "notes": "Design variables are latent codes of a neural SDF; initial structure randomly selected from dataset.",
+  "borderline": false
+ },
+ {
+  "position": 24,
+  "arxiv_id": "2011.07732",
+  "title": "Exploiting Lagrange duality for topology optimization with frictionless unilateral contact",
+  "first_submitted": "2020-11-16",
+  "primary_category": "math.OC",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "borderline": true,
+  "example_ref": "Sec. 4.1 Example (I), problem setting Fig. 1; bilateral-contact comparison case Fig. 3 (first linear instance; the unilateral-contact runs of Fig. 2 precede it)",
+  "statement_excerpt": "\"For comparison, if we suppose that the contact conditions are bilateral (i.e., all the contact candidate nodes are replaced by roller supports), then the solution shown in Figure 3 is obtained.\"",
+  "dim": 2,
+  "geometry": {
+   "value": "ground-structure truss, nodes on a 1 m x 1 m grid (11 x 6 nodes in Fig. 1), m = 1361 members, n = 132 DOF",
+   "source": "text"
+  },
+  "supports": {
+   "value": "roller supports at the c = 20 contact-candidate nodes facing a rigid U-shaped obstacle (left, top-left, bottom-left); which nodes are candidates is only implied by Fig. 1",
+   "source": "figure"
+  },
+  "loads": {
+   "value": "point load 100 kN, downward, at the right bottom node",
+   "source": "text"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "upper bound v on structural volume used (Eq. 5c) but its value for Example (I) not found",
+   "source": "missing"
+  },
+  "mesh": {
+   "value": "ground structure of 1361 members on 1 m node grid",
+   "source": "text"
+  },
+  "material": {
+   "value": "E = 20 GPa",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "not applicable (discrete truss/frame model)",
+   "source": "missing"
+  },
+  "ambiguous": true,
+  "ambiguous_reason": "The 20 contact-candidate (roller) nodes are not identified explicitly; Fig. 1 shows the obstacle but no node marks; volume bound not given.",
+  "benchmark_family": "cantilever",
+  "evidence": {
+   "geometry": "Sec. 4.1 para 4; Fig. 1",
+   "supports": "Sec. 4.1 para 4-5; Fig. 1 drawing",
+   "loads": "Sec. 4.1 para 4; Fig. 1 arrow",
+   "volume_fraction": "Sec. 2.1 Eq. (5c), no value in Sec. 4.1",
+   "mesh": "Sec. 4.1 para 4",
+   "material": "Sec. 4.1 para 4",
+   "filter_radius": "truss model"
+  },
+  "notes": "Paper's focus is frictionless unilateral contact (nonlinear BC); the recorded bilateral case is the paper's linear comparison run. Discrete truss: filter radius not applicable. Borderline: could also be judged ineligible (other: contact)."
+ },
+ {
+  "position": 25,
+  "arxiv_id": "1910.13002",
+  "title": "De-homogenization of optimal multi-scale 3D topologies",
+  "first_submitted": "2019-10-28",
+  "primary_category": "cs.CE",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 2.5, Michell cantilever (first of the four examples listed; Fig. 4); results Sec. 4.1 Table 2 row 1",
+  "statement_excerpt": "\"For the Michell cantilever the load is applied in a distributed sense over a patch of $L/6\\times L/6$ with a magnitude of $36/L^{2}$ . Furthermore, this patch of elements is set to solid with a depth of $L/24$ into the domain.\"",
+  "dim": 3,
+  "geometry": {
+   "value": "box 2L x L x L, L = 1",
+   "source": "figure"
+  },
+  "supports": {
+   "value": "fully clamped end face (x = 0)",
+   "source": "figure"
+  },
+  "loads": {
+   "value": "distributed load over an L/6 x L/6 patch, magnitude 36/L^2 (total 1), downward; patch drawn at centre of the opposite end face",
+   "source": "text"
+  },
+  "passive_regions": {
+   "value": "load patch set solid to a depth L/24",
+   "source": "text"
+  },
+  "volume_fraction": {
+   "value": "V_f^max = 0.1",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "coarse optimization mesh 48 x 24 x 24 tri-linear elements (also 96 x 48 x 48); de-homogenized on 960 x 480 x 480",
+   "source": "text"
+  },
+  "material": {
+   "value": "E+ = 1, E- = 1e-3 (rank-3 laminate weak phase); Poisson's ratio not found",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "no density filter in homogenization-based optimization (width/angle regularization instead); R = 2h^c only for SIMP reference designs",
+   "source": "text"
+  },
+  "ambiguous": false,
+  "ambiguous_reason": "",
+  "benchmark_family": "Michell",
+  "evidence": {
+   "geometry": "Fig. 4 (Michell cantilever panel); Sec. 2.5 (L = 1)",
+   "supports": "Fig. 4 hatching",
+   "loads": "Sec. 2.5 para 2; Fig. 4 (patch position)",
+   "passive_regions": "Sec. 2.5 para 2",
+   "volume_fraction": "Sec. 2.5 para 2",
+   "mesh": "Table 2; Table 3",
+   "material": "Sec. 2.5 para 2",
+   "filter_radius": "Sec. 2.2-2.3; Sec. 4.1 para 2"
+  },
+  "notes": "Homogenization-based (rank-3 laminate) TO followed by de-homogenization. The first result actually computed (Table 1) is the electrical-mast example; Michell cantilever chosen as first example listed and drawn. Family follows the paper's name 'Michell cantilever' (geometrically a 3-D end-loaded cantilever). Load-patch vertical position on end face only in figure.",
+  "borderline": false
+ },
+ {
+  "position": 26,
+  "arxiv_id": "2112.00648",
+  "title": "Remixing Functionally Graded Structures: Data-Driven Topology Optimization with Multiclass Shape Blending",
+  "first_submitted": "2021-12-01",
+  "primary_category": "cs.CE",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 3.2, MBB beam, problem-definition Fig. 4(a); first result Fig. 5 (truss basis, 2 classes)",
+  "statement_excerpt": "\"We begin with compliance minimization examples, the first of which is the classic MBB beam. The boundary conditions are depicted in 4(a), and we follow the same set-up as in Xia and Breitkopf (2014) and Wang et al (2020c) in order to compare our results with those of existing methods.\"",
+  "dim": 2,
+  "geometry": {
+   "value": "rectangle 40 x 16 microstructure cells (half MBB); physical size not stated",
+   "source": "text"
+  },
+  "supports": {
+   "value": "horizontal rollers along left edge (symmetry), vertical roller at bottom-right corner",
+   "source": "figure"
+  },
+  "loads": {
+   "value": "point load F = 1, downward, at top-left corner",
+   "source": "figure"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "global volume fraction limit V*_Global = 0.36 (adaptive target, plus BESO macro volume V*_BESO = sqrt(V*_Global))",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "40 x 16 macro elements (microstructures)",
+   "source": "text"
+  },
+  "material": {
+   "value": "base-material properties not found; effective stiffness from neural-network predictions of homogenized microstructures",
+   "source": "missing"
+  },
+  "filter_radius": {
+   "value": "r_min = 3.0 on all design variables",
+   "source": "text"
+  },
+  "ambiguous": false,
+  "ambiguous_reason": "",
+  "benchmark_family": "MBB",
+  "evidence": {
+   "geometry": "Sec. 3.2 para 1; Fig. 4(a) caption",
+   "supports": "Fig. 4(a) drawing",
+   "loads": "Fig. 4(a) drawing ('F = 1')",
+   "volume_fraction": "Sec. 3.2 para 1 and para 3",
+   "mesh": "Sec. 3.2 para 1",
+   "material": "no mention found",
+   "filter_radius": "Sec. 3.2 para after Fig. 4"
+  },
+  "notes": "Multiscale multiclass functionally graded design (BESO macro + MMA micro); set-up follows Xia and Breitkopf (2014).",
+  "borderline": false
+ },
+ {
+  "position": 27,
+  "arxiv_id": "2505.02438",
+  "title": "SOPTX: A High-Performance Multi-Backend Framework for Topology Optimization",
+  "first_submitted": "2025-05-05",
+  "primary_category": "math.AP",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 4.2 (2D cantilever beam), Fig. 3; results Figs. 4-5",
+  "statement_excerpt": "\"The left end of the beam is fixed, and a downward concentrated load $T=-1$ is applied to the bottom of the right end. A $160\\times 100$ uniform quadrilateral mesh is used. The target volume fraction is set to 0.4, with material properties $E=1$ and $\\nu=0.3$ .\"",
+  "dim": 2,
+  "geometry": {
+   "value": "rectangle 160 x 100 (xmin=0, xmax=160, ymin=0, ymax=100)",
+   "source": "code_or_appendix"
+  },
+  "supports": {
+   "value": "left edge fixed (x and y DOFs at x = xmin)",
+   "source": "text"
+  },
+  "loads": {
+   "value": "concentrated load T = -1 (downward) at bottom of right end, i.e. node (xmax, ymin)",
+   "source": "text"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "0.4",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "160 x 100 uniform quadrilateral (h = 1)",
+   "source": "text"
+  },
+  "material": {
+   "value": "E = 1, nu = 0.3, SIMP p = 3",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "sensitivity filter r = 6.0",
+   "source": "text"
+  },
+  "ambiguous": false,
+  "ambiguous_reason": "",
+  "benchmark_family": "cantilever",
+  "evidence": {
+   "geometry": "Code 1 (pde = Cantilever2dData1(xmin=0, xmax=160, ymin=0, ymax=100)); Code 2",
+   "supports": "Sec. 4.2 para 1; Fig. 3 caption; Appendix A",
+   "loads": "Sec. 4.2 para 1; Appendix A force()",
+   "volume_fraction": "Sec. 4.2 para 1",
+   "mesh": "Sec. 4.2 para 1; Code 2",
+   "material": "Sec. 4.2 para 1",
+   "filter_radius": "Sec. 4.2 para 1"
+  },
+  "notes": "Text says r = 6.0 'matches the mesh element size', while Code 2 sets h = 1; the radius value itself is unambiguous.",
+  "borderline": false
+ },
+ {
+  "position": 28,
+  "arxiv_id": "2608.19763",
+  "title": "Modular fabrication and design of thick rigid-foldable origami metamaterials",
+  "first_submitted": "2026-08-20",
+  "primary_category": "cs.CE",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "borderline": true,
+  "example_ref": "Results 'Topology optimization of origami metamaterials', Fig. 4c; formulation in Methods",
+  "statement_excerpt": "\"A compressive load was applied to the top surface of the structure, whereas selected nodes on the bottom surface were fixed, as indicated in Fig. 4c.\"",
+  "dim": 3,
+  "geometry": {
+   "value": "ground structure of periodically tessellated thick Miura-ori tube units (bar-and-hinge model); number of units and dimensions not stated",
+   "source": "figure"
+  },
+  "supports": {
+   "value": "'selected nodes on the bottom surface' fixed; Fig. 4c marks four support triangles near the bottom",
+   "source": "figure"
+  },
+  "loads": {
+   "value": "compressive (downward) load on top surface, drawn as arrows along the top row; magnitude and distribution not stated",
+   "source": "text"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "V_f = 0.6 (panel volume fraction on ground structure)",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "bar-and-hinge discretization of the tessellation; panel count N not stated",
+   "source": "missing"
+  },
+  "material": {
+   "value": "not stated (stiffness via baseline bar-and-hinge matrices at thickness t0; SIMP p = 3)",
+   "source": "missing"
+  },
+  "filter_radius": {
+   "value": "graph-based density filter R_min = 4.5 (shortest-path distance on panel graph)",
+   "source": "text"
+  },
+  "ambiguous": true,
+  "ambiguous_reason": "Which bottom nodes are fixed ('selected nodes') and the size of the tessellation are only shown as symbols in Fig. 4c.",
+  "benchmark_family": "custom",
+  "evidence": {
+   "geometry": "Results para 1; Fig. 4a-c",
+   "supports": "Results para 3; Fig. 4c",
+   "loads": "Results para 3; Fig. 4c arrows",
+   "volume_fraction": "Methods last para",
+   "mesh": "Methods para 1",
+   "material": "Methods Eqs. (4)-(7)",
+   "filter_radius": "Methods Eqs. (1)-(2), last para"
+  },
+  "notes": "Discrete bar-and-hinge (origami) model with connectivity penalty terms in the objective; borderline as 'linear-elastic continuum TO' but compliance + volume constraint holds."
+ },
+ {
+  "position": 29,
+  "arxiv_id": "2610.27378",
+  "title": "Topology optimization of shipboard components for Navy shock certification via the Dynamic Design Analysis Method",
+  "first_submitted": "2026-10-19",
+  "primary_category": "cs.CE",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 5.5 companion study (compliance minimization, Eq. 64) on the frame of Sec. 5.3 / Fig. 4; results Fig. 17, Table 7. Earlier examples (Sec. 5.1-5.4) are volume minimization with DDAM constraints and are not eligible.",
+  "statement_excerpt": "\"The frame is designed the way a structural engineer would design it, by minimizing compliance under a static equivalent of the shock, the classical problem of topology optimization [8, 9]. The equipment is applied as a fore-and-aft inertial load on the mounting pads, and the volume is constrained rather than minimized,\"",
+  "dim": 3,
+  "geometry": {
+   "value": "equipment-frame envelope 800 x 900 x 2600 mm; design domain = two side frames and a back panel, 40 mm thick, side frames 640 mm deep; two non-design shelves at 1190 and 2290 mm",
+   "source": "text"
+  },
+  "supports": {
+   "value": "bolted footprint restrained at the deck",
+   "source": "text"
+  },
+  "loads": {
+   "value": "static fore-and-aft inertial load of the equipment (2700 kg per shelf) applied on the four mounting pads of each shelf via rigid attachment; magnitude not stated (paper notes it does not affect the minimizer)",
+   "source": "text"
+  },
+  "passive_regions": {
+   "value": "non-design: shelves, 50 mm collars in the frames on either side of each shelf, 60 mm skin at the bolted footprint",
+   "source": "text"
+  },
+  "volume_fraction": {
+   "value": "v <= 0.5438 v0",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "HEX8, nominal h = 20 mm, 28,160 elements, 43,893 nodes",
+   "source": "text"
+  },
+  "material": {
+   "value": "steel E = 200 GPa, nu = 0.30, rho = 7850 kg/m^3",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "kernel density filter, radius 2.5 x average element edge length, no projection",
+   "source": "text"
+  },
+  "ambiguous": false,
+  "ambiguous_reason": "",
+  "benchmark_family": "custom",
+  "evidence": {
+   "geometry": "Sec. 5.3 Setup para 5; Fig. 4 caption",
+   "supports": "Sec. 5.2 Setup para 1; Fig. 4 caption",
+   "loads": "Sec. 5.5 'The design problem' para 1-2; Sec. 5.3 Setup",
+   "passive_regions": "Sec. 5.3 Discretization",
+   "volume_fraction": "Eq. (64)",
+   "mesh": "Sec. 5.3 Discretization",
+   "material": "Sec. 5.3 Setup para 6",
+   "filter_radius": "Sec. 5 intro (line on MMA and density filter)"
+  },
+  "notes": "Compliance problem is a comparison run inside a DDAM (dynamic) paper; all settings are inherited by reference from Sec. 5.3 ('Mesh, material, non-design regions, penalization, filter and move limit are those of Section 5.3').",
+  "borderline": false
+ },
+ {
+  "position": 30,
+  "arxiv_id": "2608.28513",
+  "title": "Machine-learning-assisted multiscale topology optimization of functionally graded superimposed lattice structures",
+  "first_submitted": "2026-08-28",
+  "primary_category": "cs.CE",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 4.1 (macroscale stage, 3-D MBB beam), Fig. 11; Table 2",
+  "statement_excerpt": "\"A downward unit line load $\\mathbf{t}$ is applied along the full depth of the beam at the top mid-span, while the four lower corners of the domain are hinged (pinned) supports.\"",
+  "dim": 3,
+  "geometry": {
+   "value": "box 20 x 5 x 5 (length x height x depth), dimensionless",
+   "source": "text"
+  },
+  "supports": {
+   "value": "four lower corners pinned",
+   "source": "text"
+  },
+  "loads": {
+   "value": "downward unit line load along the full depth at top mid-span",
+   "source": "text"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "0.5",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "60 x 15 x 15 = 13,500 first-order hexahedra",
+   "source": "text"
+  },
+  "material": {
+   "value": "E = 45, nu = 0.3 (dimensionless), SIMP q = 3",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "sensitivity filter r_min = 0.5",
+   "source": "text"
+  },
+  "ambiguous": false,
+  "ambiguous_reason": "",
+  "benchmark_family": "MBB",
+  "evidence": {
+   "geometry": "Sec. 4.1 para 1",
+   "supports": "Sec. 4.1 para 1; Fig. 11 caption",
+   "loads": "Sec. 4.1 para 1; Fig. 11 caption",
+   "volume_fraction": "Table 2",
+   "mesh": "Sec. 4.1 para 1",
+   "material": "Sec. 4.1 para 1; Table 2",
+   "filter_radius": "Table 2"
+  },
+  "notes": "Full (not half) 3-D MBB beam; macroscale SIMP stage of a two-stage multiscale lattice method.",
+  "borderline": false
+ },
+ {
+  "position": 31,
+  "arxiv_id": "2312.06378",
+  "title": "Density-based isogeometric topology optimization of shell structures",
+  "first_submitted": "2023-12-11",
+  "primary_category": "math.OC",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 5.1, case 1 (Fig. 6(a) top row); Table 1 case 1",
+  "statement_excerpt": "\"The IGA-SIMP method and FEA-SIMP method are compared on a hyperbolic shell subjected to different loads and boundary conditions. To minimize errors arising from the accuracy of geometric representation, we employ bi-quadratic Lagrange isoparametric elements to depict the geometric structure within the FEA-SIMP method. Three distinct scenarios, as illustrated in Fig.6(a), are examined.\"",
+  "dim": 3,
+  "geometry": {
+   "value": "doubly curved NURBS shell surface (called 'hyperbolic shell'), thickness h = 5; surface dimensions and control points not stated",
+   "source": "figure"
+  },
+  "supports": {
+   "value": "four corner points fixed (blue triangles)",
+   "source": "figure"
+  },
+  "loads": {
+   "value": "single point force at top centre, downward (red arrow); magnitude not stated",
+   "source": "figure"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "V* = 0.3 V_s",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "IGA analysis 50 x 50 elements (DOF 52 x 52) and 100 x 100; 15 x 15 density control coefficients",
+   "source": "text"
+  },
+  "material": {
+   "value": "E = 2100, nu = 0.3, Reissner-Mindlin shell",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "no density filter in the global-volume case (Heaviside projection tau 2 to 64, kappa = 0.5); local radius R only for porous-shell model",
+   "source": "text"
+  },
+  "ambiguous": true,
+  "ambiguous_reason": "Shell geometry (span, rise, curvature) and load magnitude are not given; only a rendered figure.",
+  "benchmark_family": "custom",
+  "evidence": {
+   "geometry": "Sec. 5.1 para 1; Sec. 5 para 2 (h = 5); Fig. 6(a)",
+   "supports": "Fig. 6(a) case 1; Sec. 5.1 legend sentence",
+   "loads": "Fig. 6(a) case 1; Sec. 5.1 legend sentence ('single arrow ... top center')",
+   "volume_fraction": "Sec. 5.1 para 1",
+   "mesh": "Table 1; Fig. 6 caption",
+   "material": "Sec. 5 para 2",
+   "filter_radius": "Sec. 2.3 Eq. (11); Sec. 5 para 2; Sec. 5.2"
+  },
+  "notes": "Isogeometric shell TO; the legend text defines symbol meanings, but where supports and load sit is only drawn.",
+  "borderline": false
+ },
+ {
+  "position": 32,
+  "arxiv_id": "2609.27685",
+  "title": "Topology optimization of multimaterial aircraft pylons using generalized shape function approach",
+  "first_submitted": "2026-09-23",
+  "primary_category": "cs.CE",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 4, pylon mid-plane design domain Fig. 1(b); first case M = 2 materials, Table 1(c)",
+  "statement_excerpt": "\"$L_{x}$ and $L_{y}$ represent the dimensions along the $x$ - and $y$ -axes, respectively. A portion of the top edge, spanning 30% from its right end, is held fixed, while a constant distributed force $F$ acts along the bottom edge. Herein, we only consider the force applied due to the weight of the fuselage.\"",
+  "dim": 2,
+  "geometry": {
+   "value": "rectangle Lx x Ly; numerical Lx, Ly not stated (drawing approx. 2:1, mesh 150 x 60)",
+   "source": "figure"
+  },
+  "supports": {
+   "value": "top edge fixed over 30% of its length from the right end",
+   "source": "text"
+  },
+  "loads": {
+   "value": "constant distributed force F = 1 along the bottom edge, downward (arrows in Fig. 1(b))",
+   "source": "text"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "0.2 per material (2-D shape functions, M = 2 and 3)",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "150 x 60 elements",
+   "source": "text"
+  },
+  "material": {
+   "value": "normalized E = 1 and 2/3 for M = 2; void 1e-9; nu = 0.3; SIMP p = 3",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "r_min = 6 (density filter on design variables) with Heaviside-type projection",
+   "source": "text"
+  },
+  "ambiguous": true,
+  "ambiguous_reason": "Lx and Ly are symbolic only; Fig. 1(b) drawn about 2:1 while the 150 x 60 mesh implies 2.5:1 if elements are square.",
+  "benchmark_family": "custom",
+  "evidence": {
+   "geometry": "Sec. 4 para 1; Fig. 1(b) (inline SVG labels Lx, Ly, 0.3Lx)",
+   "supports": "Sec. 4 para 1; Fig. 1(b)",
+   "loads": "Sec. 4 para 1-2; Fig. 1(b)",
+   "volume_fraction": "Sec. 4 para 2",
+   "mesh": "Sec. 4 para 2",
+   "material": "Sec. 4 para 2-3; para after Fig. 2",
+   "filter_radius": "Sec. 4 para 2"
+  },
+  "notes": "Multimaterial gSF method. Fig. 1(b) is an inline LaTeXML SVG; Inkscape could not render it, so its labels and path coordinates were read from source.html.",
+  "borderline": false
+ },
+ {
+  "position": 33,
+  "arxiv_id": "2008.08902",
+  "title": "Topology Optimization and 3D printing of Large Deformation Compliant Mechanisms for Straining Biological Tissues",
+  "first_submitted": "2020-08-20",
+  "primary_category": "cs.CE",
+  "source_read": "arxiv_html",
+  "eligible": false,
+  "ineligible_reason": "other",
+  "ineligible_note": "Compliant-mechanism synthesis with geometric nonlinearity and hyperelastic material; objective is a least-squares error to target tissue strains, not compliance.",
+  "borderline": false,
+  "evidence_ineligibility": "Abstract; Sec. 2.1 Eq. (5)"
+ },
+ {
+  "position": 34,
+  "arxiv_id": "2205.14780",
+  "title": "Nesterov's acceleration for level set-based topology optimization using reaction-diffusion equations",
+  "first_submitted": "2022-05-29",
+  "primary_category": "math.AP",
+  "source_read": "arxiv_pdf",
+  "eligible": true,
+  "example_ref": "Sec. 4.1 Cantilever model, Case (i); problem-definition Fig. 1(a) (PDF p. 15); code in Appendix A",
+  "statement_excerpt": "\"Based on Figure 1a, we consider the so-called cantilever model. The given parameters are the same as in the code (see Appendix A). In particular, we set (τ, Gmax) = (5.0 × 10−4, 0.45), and the number of triangles nt and maximum edge size hmax are set to (nt, hmax) = (38400, 0.0144).\"",
+  "dim": 2,
+  "geometry": {
+   "value": "rectangle 2 x 1",
+   "source": "figure"
+  },
+  "supports": {
+   "value": "left edge clamped (u1 = u2 = 0 on wall labels 4, 8, 12)",
+   "source": "figure"
+  },
+  "loads": {
+   "value": "traction t = (0, -1e3) on right-edge segment y in [0.46, 0.54] (Gamma_t)",
+   "source": "code_or_appendix"
+  },
+  "passive_regions": {
+   "value": "level set fixed to phi = 1 on the traction boundary (label 6)",
+   "source": "code_or_appendix"
+  },
+  "volume_fraction": {
+   "value": "Gmax = 0.45 (|Omega| <= Gmax |D|)",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "unstructured triangles, nt = 38400, hmax = 0.0144 (P1/P2 FreeFEM++ spaces)",
+   "source": "text"
+  },
+  "material": {
+   "value": "E = 2.1e11, nu = 0.3; ersatz ratio 1e-3 in code",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "no density filter (level set with reaction-diffusion regularization tau = 5e-4)",
+   "source": "text"
+  },
+  "ambiguous": false,
+  "ambiguous_reason": "",
+  "benchmark_family": "cantilever",
+  "evidence": {
+   "geometry": "Fig. 1(a) (rendered PDF p. 15); Appendix A mesh Pos0/Pos1",
+   "supports": "Fig. 1(a) hatching; Appendix A on(wall,...)",
+   "loads": "Appendix A macro g [0,-1.0e3] and traction label 6 (y = 0.5 +/- 0.04)",
+   "passive_regions": "Appendix A phiOne = [6]",
+   "volume_fraction": "Sec. 4.1 para 1; Sec. 1 (Uad)",
+   "mesh": "Sec. 4.1 para 1",
+   "material": "Sec. 4 para 1 (p. 14); Appendix A",
+   "filter_radius": "Sec. 4.1 para 1 (tau)"
+  },
+  "notes": "Level-set method with topological derivative; text defers parameters to the FreeFEM++ code. Load magnitude and load-segment width appear only in the code.",
+  "borderline": false
+ },
+ {
+  "position": 35,
+  "arxiv_id": "2004.07002",
+  "title": "Modular-topology optimization with Wang tilings: An application to truss structures",
+  "first_submitted": "2020-04-15",
+  "primary_category": "cs.CE",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 4.1.1 (hinge-supported beam, coarse discretization), Fig. 5",
+  "statement_excerpt": "\"As the first illustration, we investigate a simply-supported beam of dimensions $8\\times 3$ , see Fig. 5. Under coarse discretization, the beam splits up into $24$ unit-size square modules that follow the corner Wang tiling formalism, recall Fig. 1.\"",
+  "dim": 2,
+  "geometry": {
+   "value": "rectangle 8 x 3, split into 24 unit-size square modules",
+   "source": "text"
+  },
+  "supports": {
+   "value": "hinges at the bottom-left and bottom-right corners",
+   "source": "text"
+  },
+  "loads": {
+   "value": "point force of magnitude 10 at mid-span of the top edge; downward per Fig. 5 arrow",
+   "source": "text"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "volume upper bound V-bar used in Eq. (1c) but no value found for Sec. 4.1 (V-bar = 100 and 200 given only for Secs. 4.2 and 4.3)",
+   "source": "missing"
+  },
+  "mesh": {
+   "value": "modular truss ground structure per module as in Fig. 3b (bar count not stated in text)",
+   "source": "figure"
+  },
+  "material": {
+   "value": "E = 1 for each bar",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "not applicable (discrete truss/frame model)",
+   "source": "missing"
+  },
+  "ambiguous": false,
+  "ambiguous_reason": "",
+  "benchmark_family": "MBB",
+  "evidence": {
+   "geometry": "Sec. 4.1.1 para 1; Fig. 5",
+   "supports": "Sec. 4.1.1 para 1; Fig. 5",
+   "loads": "Sec. 4.1.1 para 1; Fig. 5 arrow",
+   "volume_fraction": "Sec. 2.2 Eq. (1c); no value in Sec. 4.1",
+   "mesh": "Fig. 3b; Fig. 5",
+   "material": "Sec. 4.1.1 para 1",
+   "filter_radius": "truss model"
+  },
+  "notes": "Modular truss topology optimization (Wang tilings, SOCP + genetic algorithm). Load direction only drawn; 'magnitude 10' in text.",
+  "borderline": false
+ },
+ {
+  "position": 36,
+  "arxiv_id": "2105.04232",
+  "title": "De-homogenization using Convolutional Neural Networks",
+  "first_submitted": "2021-05-10",
+  "primary_category": "cs.LG",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 4.2 Michell cantilever beam; problem-definition Fig. 9(a); first configuration Table 2 row 1 / Fig. 10(a) (V = 0.25, mu_min = 0.05)",
+  "statement_excerpt": "\"See Figure 9 for domain sizes and exact placement of boundaries and loads for the three cases. To avoid stress singularities at load locations the force is applied along a line of $\\frac{1}{10}L$ in the Michell cantilever case\"",
+  "dim": 2,
+  "geometry": {
+   "value": "rectangle 2L x L",
+   "source": "figure"
+  },
+  "supports": {
+   "value": "left edge fully clamped (hatched)",
+   "source": "figure"
+  },
+  "loads": {
+   "value": "downward force distributed over a line of L/10 (line length in text) on the right edge, drawn around mid-height; magnitude not stated",
+   "source": "figure"
+  },
+  "passive_regions": {
+   "value": "elements with rho > 0.99 in a small radius around the load set solid (radius not stated)",
+   "source": "text"
+  },
+  "volume_fraction": {
+   "value": "V = 0.25 (first configuration; 0.40 also run)",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "60 x 30 homogenization mesh (h_c = 1/30); de-homogenized fine mesh h_f = h_c/24",
+   "source": "text"
+  },
+  "material": {
+   "value": "rank-2 laminate of solid with void stiffness alpha_out = 1e-9; base Young's modulus and Poisson's ratio not stated",
+   "source": "missing"
+  },
+  "filter_radius": {
+   "value": "r_min = 1.2 (units not stated, presumably elements)",
+   "source": "text"
+  },
+  "ambiguous": true,
+  "ambiguous_reason": "Load line drawn near mid-height of the right edge, exact vertical position not stated; load magnitude and base material not given.",
+  "benchmark_family": "Michell",
+  "evidence": {
+   "geometry": "Fig. 9(a)",
+   "supports": "Fig. 9(a)",
+   "loads": "Sec. 4 para 1 (line length); Fig. 9(a) (position, direction)",
+   "passive_regions": "Sec. 4 para 1",
+   "volume_fraction": "Table 2; Fig. 10(a) caption",
+   "mesh": "Sec. 4.2 para 1; Table 2",
+   "material": "Sec. 2.1.1 (alpha_out only)",
+   "filter_radius": "Sec. 4 para 1"
+  },
+  "notes": "Homogenization-based TO (rank-2 laminates) followed by CNN de-homogenization. The abstract teaser Fig. 1 (double-clamped beam) was not treated as the primary example because it is defined only in Sec. 4.3. Objective also includes an angle-regularization and solid-area penalty term (Eq. 1).",
+  "borderline": false
+ },
+ {
+  "position": 37,
+  "arxiv_id": "2107.04468",
+  "title": "Revisiting Non-Convexity in Topology Optimization of Compliance Minimization Problems",
+  "first_submitted": "2021-07-09",
+  "primary_category": "math.OC",
+  "source_read": "arxiv_html",
+  "eligible": false,
+  "ineligible_reason": "no numerical example",
+  "ineligible_note": "Analytical treatment of non-convexity sources (penalization, filtering, continuation) in compliance minimization; the three figures illustrate convexity concepts only, no structural TO example with loads and supports. Paper type stated as 'Research paper', so not classed as review.",
+  "borderline": false,
+  "evidence_ineligibility": "Abstract; outline (Secs. 2-6, Figs. 1-3 captions)"
+ },
+ {
+  "position": 38,
+  "arxiv_id": "1708.07364",
+  "title": "Self-supporting Topology Optimization for Additive Manufacturing",
+  "first_submitted": "2017-08-24",
+  "primary_category": "cs.CE",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 4.1, Fig. 7(a) rectangular cantilever; reference design without self-supporting constraint Fig. 8(a) (Table 3 'Beam', C_ref)",
+  "statement_excerpt": "\"The model on the left has a $150\\times 60$ rectangular domain, and has a target volume fraction of $0.6$ . ... Both models are fixed on the left edge with an external force exerted on the middle point of its right edge. The print direction is determined from left to right.\"",
+  "dim": 2,
+  "geometry": {
+   "value": "rectangle 150 x 60 (dimensionless)",
+   "source": "text"
+  },
+  "supports": {
+   "value": "left edge fixed",
+   "source": "text"
+  },
+  "loads": {
+   "value": "point force at middle of right edge; downward direction only in Fig. 7(a); magnitude not stated",
+   "source": "text"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "0.6",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "150 x 60 elements (9000 elements, Table 3)",
+   "source": "text"
+  },
+  "material": {
+   "value": "E = 1, nu = 0.3, p = 3 (dimensionless)",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "minimum thickness / density filter r = 1.5 per Fig. 7 caption and Table 3; Sec. 4 states default minimal thickness 2",
+   "source": "text"
+  },
+  "ambiguous": true,
+  "ambiguous_reason": "Filter radius conflicts: Sec. 4 default minimal thickness 2 vs Fig. 7 caption 1.5; load magnitude not stated.",
+  "benchmark_family": "cantilever",
+  "evidence": {
+   "geometry": "Sec. 4.1 para 1; Fig. 7(a)",
+   "supports": "Sec. 4.1 para 1; Fig. 7(a)",
+   "loads": "Sec. 4.1 para 1; Fig. 7(a) arrow",
+   "volume_fraction": "Sec. 4.1 para 1",
+   "mesh": "Table 3 (#M = 9000)",
+   "material": "Sec. 4 para 1",
+   "filter_radius": "Fig. 7 caption; Sec. 4 para 1; Table 3; Sec. 4.1.2"
+  },
+  "notes": "Paper adds a self-supporting (AM) constraint; the primary example is the reference run without it (Fig. 8(a)). Mesh inferred as one element per unit from 9000 elements = 150 x 60.",
+  "borderline": false
+ },
+ {
+  "position": 39,
+  "arxiv_id": "2308.06756",
+  "title": "An Adaptive Phase-Field Method for Structural Topology Optimization",
+  "first_submitted": "2023-08-13",
+  "primary_category": "math.OC",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 4, Example (a) cantilever; problem-definition Fig. 1 (first panel); results Fig. 3",
+  "statement_excerpt": "\"The cantilever problem with the design domain $\\Omega=(-1,1)\\times(-0.5,0.5)$ , with $V^{0}=1$ . The displacement field on the left side is fixed at zero, and the free traction on the rest except a vertical point load $(0,-1)^{\\top}$ is applied to the middle of the right side.\"",
+  "dim": 2,
+  "geometry": {
+   "value": "rectangle (-1,1) x (-0.5,0.5), i.e. 2 x 1",
+   "source": "text"
+  },
+  "supports": {
+   "value": "left side fixed (zero displacement)",
+   "source": "text"
+  },
+  "loads": {
+   "value": "point load (0,-1) at middle of right side, downward, unit magnitude",
+   "source": "text"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "V0 = 1 (absolute volume; 0.5 of the domain area 2)",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "adaptive FE mesh, 1718 vertices initially, refined to 16687 vertices over 6 steps",
+   "source": "figure"
+  },
+  "material": {
+   "value": "E = 1, nu = 0.3, p = 3, rho lower bound 1e-4",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "no density filter (phase-field); phase-field parameters beta = 1e-5, gamma = 1e-2 (Table 1)",
+   "source": "text"
+  },
+  "ambiguous": false,
+  "ambiguous_reason": "",
+  "benchmark_family": "cantilever",
+  "evidence": {
+   "geometry": "Sec. 4 Example (a)",
+   "supports": "Sec. 4 Example (a)",
+   "loads": "Sec. 4 Example (a)",
+   "volume_fraction": "Sec. 4 Example (a)",
+   "mesh": "Fig. 3 caption (vertex counts)",
+   "material": "Sec. 4 para 1; Table 1 text",
+   "filter_radius": "Table 1"
+  },
+  "notes": "Volume given as absolute V0; fraction 0.5 computed from domain area. Element type of the adaptive mesh not stated in the read sections.",
+  "borderline": false
+ },
+ {
+  "position": 40,
+  "arxiv_id": "1612.04082",
+  "title": "What Lies Beneath the Surface: Topological-Shape Optimization With the Kernel-Independent Fast Multipole Method",
+  "first_submitted": "2016-12-13",
+  "primary_category": "math.OC",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 4.1 Cantilever supports, configuration 1; problem-definition Fig. 2(A) (text cites it as 'Fig. 1(A, D)'); result Fig. 2(B)",
+  "statement_excerpt": "\"We start with a unit cube with one of its sides fixed and two different load configurations applied to the side opposite to a fixed one (Fig.1(A, D)). The material properties are $G=1$ , $\\nu=0.3$ . The initial model contains $64^{3}$ voxels, $0.79\\cdot 10^{6}$ volume DOFs and $4.72\\cdot 10^{6}$ surface DOFs. We use $\\alpha_{c}=0.6$ .\"",
+  "dim": 3,
+  "geometry": {
+   "value": "unit cube",
+   "source": "text"
+  },
+  "supports": {
+   "value": "one face fixed (hatched face in Fig. 2(A))",
+   "source": "text"
+  },
+  "loads": {
+   "value": "downward line load across the opposite face along a horizontal line at about mid-height (Cantilever 1); magnitude not stated",
+   "source": "figure"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "target material ratio alpha_c = 0.6",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "64^3 voxels; boundary element discretization (0.79e6 volume DOFs, 4.72e6 surface DOFs)",
+   "source": "text"
+  },
+  "material": {
+   "value": "G = 1, nu = 0.3",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "no filter; topological-derivative threshold parameter C (typically 0.001-0.1) acts as implicit regularization, value for this run not stated",
+   "source": "missing"
+  },
+  "ambiguous": true,
+  "ambiguous_reason": "Load drawn as arrows along a dotted line on the end face; height of the line, line vs. strip traction and magnitude not stated.",
+  "benchmark_family": "cantilever",
+  "evidence": {
+   "geometry": "Sec. 4.1 para 1",
+   "supports": "Sec. 4.1 para 1; Fig. 2(A)",
+   "loads": "Fig. 2(A) drawing",
+   "volume_fraction": "Sec. 4.1 para 1; Fig. 2 caption",
+   "mesh": "Sec. 4.1 para 1",
+   "material": "Sec. 4.1 para 1",
+   "filter_radius": "Sec. 2.3 (parameter C)"
+  },
+  "notes": "Topological-derivative / BEM method with hard-kill voxel removal; objective is strain energy for given volume. Text figure references are off by one (Fig. 1 vs Fig. 2).",
+  "borderline": false
+ },
+ {
+  "position": 41,
+  "arxiv_id": "2103.02047",
+  "title": "Towards Optimal Heterogeneity in Lattice Structures",
+  "first_submitted": "2021-02-22",
+  "primary_category": "cond-mat.mtrl-sci",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 4.1 Case 1: Cantilever beam; boundary conditions Fig. 3(a); result Fig. 3(b)",
+  "statement_excerpt": "\"The first problem is the cantilever case (boundary conditions: Figure 3(a)). We encastre one end of the domain by completely fixing the nodes that fall in the blue region. A distributed transverse force is applied to all of the nodes on the other end, red arrows indicate the direction.\"",
+  "dim": 3,
+  "geometry": {
+   "value": "box divided into cubic lattice subdivisions; approx. 0.7 x 0.22 x 0.22 read from Fig. 3(a) axis ticks (units not stated); number of subdivisions not stated",
+   "source": "figure"
+  },
+  "supports": {
+   "value": "nodes in blue region at one end completely fixed (encastre)",
+   "source": "text"
+  },
+  "loads": {
+   "value": "distributed transverse force on all nodes of the other end face, downward per arrows; magnitude not stated",
+   "source": "text"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "target volume ratio mu = 5% (plus minimum porosity kappa = 40% per subdivision)",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "Timoshenko 3D frame elements in cubic subdivisions (8 phase groups per cube); count not stated",
+   "source": "missing"
+  },
+  "material": {
+   "value": "not stated (Young's modulus symbol E only in appendix); circular cross sections",
+   "source": "missing"
+  },
+  "filter_radius": {
+   "value": "not applicable (discrete truss/frame model)",
+   "source": "missing"
+  },
+  "ambiguous": true,
+  "ambiguous_reason": "Domain size, lattice resolution, load magnitude and material are not stated; size only readable from axis ticks in Fig. 3(a).",
+  "benchmark_family": "cantilever",
+  "evidence": {
+   "geometry": "Fig. 3(a) axis ticks",
+   "supports": "Sec. 4.1 para 1; Fig. 3(a)",
+   "loads": "Sec. 4.1 para 1; Fig. 3(a) arrows",
+   "volume_fraction": "Sec. 4 para 2",
+   "mesh": "Sec. 2; Appendix 7",
+   "material": "Appendix 7",
+   "filter_radius": "n/a"
+  },
+  "notes": "Lattice of beam (frame) segments; extra minimum-porosity constraint per cube. Discrete frame model, so filter radius not applicable.",
+  "borderline": false
+ },
+ {
+  "position": 42,
+  "arxiv_id": "2104.01965",
+  "title": "AuTO: A Framework for Automatic differentiation in Topology Optimization",
+  "first_submitted": "2021-04-05",
+  "primary_category": "cs.MS",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 2.3, example (a) tip-loaded cantilever, Fig. 1(a)",
+  "statement_excerpt": "\"We illustrate the above AD framework using two popular examples of compliance minimization [16]: (a) minimizing structural compliance of a tip-loaded cantilever (see Figure 1a) ... The mesh was chosen to be 60 $\\times$ 30 grid for the structural problem ... The target volume fraction in both problems is $V^{*}=0.5$ . The material properties are $E=1$ , $\\nu=0.3$\"",
+  "dim": 2,
+  "geometry": {
+   "value": "rectangle 2L x L (L not given numerically)",
+   "source": "figure"
+  },
+  "supports": {
+   "value": "left edge clamped (hatched)",
+   "source": "figure"
+  },
+  "loads": {
+   "value": "point force f, downward, at bottom-right corner ('tip-loaded'); magnitude not stated",
+   "source": "figure"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "V* = 0.5",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "60 x 30 grid",
+   "source": "text"
+  },
+  "material": {
+   "value": "E = 1, nu = 0.3; SIMP (penalty value not stated in example)",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "not stated for this example",
+   "source": "missing"
+  },
+  "ambiguous": false,
+  "ambiguous_reason": "",
+  "benchmark_family": "cantilever",
+  "evidence": {
+   "geometry": "Fig. 1(a)",
+   "supports": "Fig. 1(a)",
+   "loads": "Fig. 1(a); Sec. 2.3 ('tip-loaded')",
+   "volume_fraction": "Sec. 2.3 para 1",
+   "mesh": "Sec. 2.3 para 1",
+   "material": "Sec. 2.3 para 1",
+   "filter_radius": "no value found (Sec. 2.4 mentions filters generally)"
+  },
+  "notes": "Example referenced to ref. [16].",
+  "borderline": false
+ },
+ {
+  "position": 43,
+  "arxiv_id": "2511.14623",
+  "title": "A Unified Phase-Field Fourier Neural Network Framework for Topology Optimization",
+  "first_submitted": "2025-11-18",
+  "primary_category": "math.OC",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 4.1.1, case (a) 2D cantilever beam; problem-definition Fig. 4(a); results Fig. 5",
+  "statement_excerpt": "\"Cantilever beam: A standard cantilever setup where the left boundary is clamped on $\\Gamma_{D}=\\{0\\}\\times(-0.5,0.5)$ , and a downward point load $\\mathbf{t}=(0,-1)^{\\mathrm{T}}$ is applied to the center of the right boundary on $\\Gamma_{N}=\\{1\\}\\times(-0.05,0.05)$ .\"",
+  "dim": 2,
+  "geometry": {
+   "value": "rectangle (-1,1) x (-0.5,0.5), i.e. 2 x 1",
+   "source": "text"
+  },
+  "supports": {
+   "value": "left boundary clamped (text gives Gamma_D = {0} x (-0.5,0.5), Fig. 4(a) shows clamp on left edge x = -1)",
+   "source": "text"
+  },
+  "loads": {
+   "value": "traction t = (0,-1) on right-edge segment {1} x (-0.05,0.05), downward, unit",
+   "source": "text"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "beta = 0.5 (volume penalty)",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "mesh-free: 2e4 interior collocation points on a tensor-product grid, 500 boundary points",
+   "source": "text"
+  },
+  "material": {
+   "value": "E = 1.0, nu = 0.3, p = 3, phi_min = 1e-4",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "no density filter (phase-field); epsilon = gamma = 0.01",
+   "source": "text"
+  },
+  "ambiguous": true,
+  "ambiguous_reason": "Clamped boundary written as {0} x (-0.5,0.5) (domain mid-line) while prose and Fig. 4(a) say left edge x = -1.",
+  "benchmark_family": "cantilever",
+  "evidence": {
+   "geometry": "Sec. 4.1.1 para 2",
+   "supports": "Sec. 4.1.1 'Cantilever beam'; Fig. 4(a)",
+   "loads": "Sec. 4.1.1 'Cantilever beam'",
+   "volume_fraction": "Sec. 4.1.1 para 1",
+   "mesh": "Sec. 4.1.2 para 1; Table 2",
+   "material": "Sec. 4.1.1 para 1",
+   "filter_radius": "Sec. 4.1.1 para 1"
+  },
+  "notes": "Neural (Fourier network) phase-field method; the coordinate typo is the only inconsistency found.",
+  "borderline": false
+ },
+ {
+  "position": 44,
+  "arxiv_id": "2406.00067",
+  "title": "Nonlinear synthesis of compliant mechanisms with selective compliance",
+  "first_submitted": "2024-05-30",
+  "primary_category": "math.OC",
+  "source_read": "arxiv_html",
+  "eligible": false,
+  "ineligible_reason": "other",
+  "ineligible_note": "Compliant-mechanism synthesis (path-generating, selective compliance) with geometric and material nonlinearities; objective is not structural compliance with a volume constraint.",
+  "borderline": false,
+  "evidence_ineligibility": "Abstract paras 1-2; Sec. 6 'Optimization formulation'; Sec. 7 examples (inverter, pivot joint, shape-adaptive structure)"
+ },
+ {
+  "position": 45,
+  "arxiv_id": "1910.05585",
+  "title": "Adaptive Mesh Refinement for Topology Optimization with Discrete Geometric Components",
+  "first_submitted": "2019-10-12",
+  "primary_category": "math.OC",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 5.1, 2D MBB beam; problem definition Fig. 10 (full beam) and Fig. 11 (half model); results Figs. 12-13",
+  "statement_excerpt": "\"We consider the well-known Messerchmitt-Bölkow-Blohm (MBB) beam design problem shown in Fig. 10 for the first example. The optimization problem is the minimization of the structural compliance subject to a volume fraction constraint $v^{*}=0.3$ (Eq. 13). ... The applied load $F$ has a magnitude of 10.\"",
+  "dim": 2,
+  "geometry": {
+   "value": "full beam 40 x 5 (dimension labels in Fig. 10); right half 20 x 5 modelled",
+   "source": "figure"
+  },
+  "supports": {
+   "value": "full beam: pin at bottom-left, roller at bottom-right; half model: symmetry rollers on left edge, roller at bottom-right corner",
+   "source": "figure"
+  },
+  "loads": {
+   "value": "point load F = 10 (magnitude in text), downward at top mid-span (top-left corner of half model)",
+   "source": "figure"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "v* = 0.3",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "bilinear quads, adaptive: coarse h_c = 0.25 refined 2 levels to h = 0.0625 (10,756 elements at end); full-resolution reference 25,600 elements",
+   "source": "text"
+  },
+  "material": {
+   "value": "E = 1E5, nu = 0.3, rho_min = 1E-4",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "no density filter; geometry projection with sampling window radius R circumscribing the element (numeric value not stated)",
+   "source": "text"
+  },
+  "ambiguous": false,
+  "ambiguous_reason": "",
+  "benchmark_family": "MBB",
+  "evidence": {
+   "geometry": "Fig. 10 overlay labels '40', '5' (read from HTML figure text); consistent with 25,600 elements of size 0.0625",
+   "supports": "Fig. 10; Fig. 11",
+   "loads": "Sec. 5.1 para 1 (magnitude); Fig. 10-11 (position)",
+   "volume_fraction": "Sec. 5.1 para 1",
+   "mesh": "Sec. 5 para 1; Sec. 5.1 paras 1-2",
+   "material": "Sec. 5 para 1",
+   "filter_radius": "Sec. 2 para 1; Sec. 3"
+  },
+  "notes": "Geometry-projection method with discrete bar components; dimension labels are LaTeX overlays on the figure image.",
+  "borderline": false
+ },
+ {
+  "position": 46,
+  "arxiv_id": "2111.13875",
+  "title": "Topology optimization of stiff structures under self-weight for given volume using a smooth Heaviside function",
+  "first_submitted": "2021-11-27",
+  "primary_category": "cs.CE",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 4.1.1, self-weight loadbearing arch, Fig. 4(a); first case CASE I (100 x 50 FEs, without constraint g2), Fig. 5(a)",
+  "statement_excerpt": "\"The design domain for the self-weight loadbearing arch structure is depicted in Fig. 4(a). Both ends of the bottom edge are fixed (Fig. 4(a)), and no external force is applied (i.e $\\kappa=0$ ). $L_{x}=$2\\text{\\,}\\mathrm{m}$$ and $L_{y}=$1\\text{\\,}\\mathrm{m}$$ are taken.\"",
+  "dim": 2,
+  "geometry": {
+   "value": "rectangle Lx = 2 m x Ly = 1 m, thickness t = 0.01 m",
+   "source": "text"
+  },
+  "supports": {
+   "value": "both ends of the bottom edge fixed (hatches at bottom corners in Fig. 4(a)); extent of fixed region not stated",
+   "source": "text"
+  },
+  "loads": {
+   "value": "self-weight only (design-dependent body force, g = -9.81 m/s^2, density 7850 kg/m^3); no external force (kappa = 0)",
+   "source": "text"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "permitted volume fraction 0.25 (not active at convergence for CASE I per Fig. 5 caption)",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "100 x 50 bilinear quadrilateral FEs (CASE I; 200 x 100 in CASES III-IV)",
+   "source": "text"
+  },
+  "material": {
+   "value": "E = 210 GPa, mass density 7850 kg/m^3, void/solid contrast 1e-6, p = 3; Poisson's ratio not found",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "2.5 x max(Lx/Nex, Ly/Ney) (three-field density with Heaviside projection, beta doubled every 25 iterations to 256)",
+   "source": "text"
+  },
+  "ambiguous": true,
+  "ambiguous_reason": "'Both ends of the bottom edge are fixed' drawn as small corner hatches; number of fixed nodes/segment length not stated; Poisson's ratio not given.",
+  "benchmark_family": "other",
+  "evidence": {
+   "geometry": "Sec. 4.1.1 para 1; Sec. 4 para 1 (thickness); Fig. 4(a)",
+   "supports": "Sec. 4.1.1 para 1; Fig. 4(a)",
+   "loads": "Sec. 4.1.1 para 1; Sec. 2 (g); Sec. 4 para 1 (density)",
+   "volume_fraction": "Sec. 4.1.1 para 1; Fig. 5 caption",
+   "mesh": "Sec. 4.1.1 'Qualifying constraint g2' para 2",
+   "material": "Sec. 3 para 1; Sec. 4 para 1",
+   "filter_radius": "Sec. 4.1.1 para 1; Sec. 4 para 1"
+  },
+  "notes": "Self-weight (design-dependent) loading; family 'other' = self-weight arch benchmark. Paper's next example is an MBB with self-weight plus external load.",
+  "borderline": false
+ },
+ {
+  "position": 47,
+  "arxiv_id": "2002.01927",
+  "title": "Self-Directed Online Machine Learning for Topology Optimization",
+  "first_submitted": "2020-02-04",
+  "primary_category": "cs.CE",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Results, 'Compliance minimization', first problem (5 x 5 design variables), Fig. 2a",
+  "statement_excerpt": "\"As shown in Fig. 2a, a square domain is divided evenly by a $4\\times 4$ mesh. A force downward is applied at the top right edge; the bottom left edge is set as a roller (no vertical displacement); the right boundary is set to be symmetric.\"",
+  "dim": 2,
+  "geometry": {
+   "value": "square domain; side length not stated",
+   "source": "text"
+  },
+  "supports": {
+   "value": "roller (no vertical displacement) on bottom-left element edge; symmetry condition on right boundary",
+   "source": "text"
+  },
+  "loads": {
+   "value": "downward force distributed along the top-right element edge (per Fig. 2a); magnitude not stated",
+   "source": "text"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "0.5 (w . rho <= 0.5)",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "4 x 4 elements, 25 nodal design variables, bilinear interpolation (COMSOL)",
+   "source": "text"
+  },
+  "material": {
+   "value": "SIMP Y = Y0 rho^3 + epsilon(1 - rho^3); Y0, epsilon and Poisson's ratio not stated",
+   "source": "missing"
+  },
+  "filter_radius": {
+   "value": "no filter stated for compliance problems (Helmholtz filter used only in heat problem baseline)",
+   "source": "missing"
+  },
+  "ambiguous": true,
+  "ambiguous_reason": "'top right edge' and 'bottom left edge' read as single element edges only from Fig. 2a; domain size, load magnitude and material constants not given.",
+  "benchmark_family": "MBB",
+  "evidence": {
+   "geometry": "Results para after Fig. 2",
+   "supports": "Results para after Fig. 2; Fig. 2a",
+   "loads": "Results para after Fig. 2; Fig. 2a",
+   "volume_fraction": "Eq. (5)",
+   "mesh": "Results para after Fig. 2; Methods 'Interpolation of design variables'",
+   "material": "Eq. (6)",
+   "filter_radius": "Methods 'FEM and gradient-based baselines'"
+  },
+  "notes": "Non-gradient DNN-surrogate optimizer; objective normalized elastic energy (equivalent to compliance). Half-MBB-type setup with symmetry on the right.",
+  "borderline": false
+ },
+ {
+  "position": 48,
+  "arxiv_id": "2305.04107",
+  "title": "DMF-TONN: Direct Mesh-free Topology Optimization using Neural Networks",
+  "first_submitted": "2023-05-06",
+  "primary_category": "cs.CE",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 4.1, 2D cantilever beam, Table 1 (target volume fraction 0.5), boundary-condition sketch in Table 1 'Boundary Conditions' column",
+  "statement_excerpt": "\"We compare the compliances and computational times for a 2D cantilever beam example in Tables 1 and 2. We run the SIMP code (Andreassen et al. (2011)) with the default convergence criterion, and run NTopo for 200 iterations as shown in (Zehnder et al. (2021)) for a similar 2D cantilever beam example.\"",
+  "dim": 2,
+  "geometry": {
+   "value": "rectangle, drawn about 3:1; dimensions not stated",
+   "source": "figure"
+  },
+  "supports": {
+   "value": "left edge fixed",
+   "source": "figure"
+  },
+  "loads": {
+   "value": "point force F, downward, at bottom-right corner; magnitude not stated",
+   "source": "figure"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "0.5 (Table 1; 0.3 in Table 2); enforced as penalty in loss",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "mesh-free random sampling for DMF-TONN; SIMP baseline grid size not stated",
+   "source": "missing"
+  },
+  "material": {
+   "value": "SIMP E = E_material rho^3; E_material and nu values not stated",
+   "source": "missing"
+  },
+  "filter_radius": {
+   "value": "SIMP baseline density filter radius 1.5 x element size; none for DMF-TONN",
+   "source": "text"
+  },
+  "ambiguous": true,
+  "ambiguous_reason": "Domain size/aspect ratio, discretization, load magnitude and material values are not stated; only a schematic sketch is given.",
+  "benchmark_family": "cantilever",
+  "evidence": {
+   "geometry": "Table 1 BC image (Boundary_Conditions_2D)",
+   "supports": "Table 1 BC image",
+   "loads": "Table 1 BC image",
+   "volume_fraction": "Table 1-2 captions; Eq. (6)",
+   "mesh": "Sec. 3; Sec. 4 para 2",
+   "material": "Sec. 3.3 para 1",
+   "filter_radius": "Sec. 4 para 2"
+  },
+  "notes": "Neural-network mesh-free method; 2D problem described as similar to the NTopo cantilever. Fig. 2 (3D cantilever) appears earlier in the HTML float order but belongs to Sec. 4.2.",
+  "borderline": false
+ },
+ {
+  "position": 49,
+  "arxiv_id": "2605.02158",
+  "title": "Diffusion Transformers with Hybrid Conditioning for Structural Optimization",
+  "first_submitted": "2026-05-04",
+  "primary_category": "cs.CE",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 5, Fig. 3 row 1 (first individual dataset instance shown with SIMP ground-truth design; Fig. 1 in Sec. 2 is a schematic illustration of a generic problem)",
+  "statement_excerpt": "\"Boundary conditions were randomly assigned for each sample to ensure diversity in problem definitions. Between 1 and 4 boundary constraints were applied as either fixed points in the corners or midpoints of edges, or as fixed segments connecting these locations. A single external load was applied along the edge of the domain per sample.\"",
+  "dim": 2,
+  "geometry": {
+   "value": "square domain (64 x 64 elements); physical size not stated",
+   "source": "text"
+  },
+  "supports": {
+   "value": "green segments drawn on upper part of left edge and on right edge (marker meaning not given in a legend)",
+   "source": "figure"
+  },
+  "loads": {
+   "value": "single unit-magnitude load on lower part of left edge, drawn pointing left (-x); direction sampled randomly per text",
+   "source": "figure"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "not stated for this sample (dataset targets sampled uniformly in [0.3, 0.5])",
+   "source": "missing"
+  },
+  "mesh": {
+   "value": "64 x 64 square elements",
+   "source": "text"
+  },
+  "material": {
+   "value": "SIMP penalization p = 3; E0, Emin and Poisson's ratio not stated",
+   "source": "missing"
+  },
+  "filter_radius": {
+   "value": "not stated",
+   "source": "missing"
+  },
+  "ambiguous": true,
+  "ambiguous_reason": "Supports and load only as unlabeled green marks in result images; support vs load marks distinguished only by arrowheads; volume fraction and material not stated.",
+  "benchmark_family": "custom",
+  "evidence": {
+   "geometry": "Sec. 4.1 para 1",
+   "supports": "Fig. 3 row 1 images",
+   "loads": "Fig. 3 row 1 image; Sec. 4.1 para 1 (unit magnitude)",
+   "volume_fraction": "Sec. 4.1 para 1 (range only)",
+   "mesh": "Sec. 4.1 para 1",
+   "material": "Sec. 2 (symbols only); Sec. 4.1 para 2 (p = 3)",
+   "filter_radius": "no mention found"
+  },
+  "notes": "Randomly generated dataset (30,000 SIMP samples) used to train a diffusion transformer; the primary example is a random sample.",
+  "borderline": false
+ },
+ {
+  "position": 50,
+  "arxiv_id": "2608.18308",
+  "title": "Toward Topology-Optimized Foundry PDKs: A Seeded Design Framework for Multimode Interferometers",
+  "first_submitted": "2026-08-18",
+  "primary_category": "physics.optics",
+  "source_read": "arxiv_html",
+  "eligible": false,
+  "ineligible_reason": "not structural",
+  "ineligible_note": "Photonic inverse design of silicon multimode interferometers (FDTD, optical figure of merit); 'compliance' refers to foundry design-rule compliance.",
+  "borderline": false,
+  "evidence_ineligibility": "Sec. 1 para 1; Sec. 2.2 para 1"
+ },
+ {
+  "position": 51,
+  "arxiv_id": "2112.02506",
+  "title": "Enhancing Data-driven Multiscale Topology Optimization with Generalized De-homogenization",
+  "first_submitted": "2021-12-05",
+  "primary_category": "cs.CE",
+  "source_read": "arxiv_pdf",
+  "eligible": false,
+  "ineligible_reason": "other",
+  "ineligible_note": "All three case studies (pinned, clamped, cantilever beams) minimize the frequency response under harmonic excitation over a frequency range (damped dynamic analysis), not static compliance.",
+  "borderline": false,
+  "evidence_ineligibility": "Abstract; Sec. 3.2 (Eq. 8, damped harmonic system); Sec. 5 case studies 4.1-4.3 (PDF section numbering)"
+ },
+ {
+  "position": 52,
+  "arxiv_id": "2108.01616",
+  "title": "Non-intrusive polynomial chaos expansion for topology optimization using polygonal meshes",
+  "first_submitted": "2021-07-14",
+  "primary_category": "cs.CE",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 4.1 (cantilever beam), Fig. 4(a) configuration; deterministic (non-robust) TO result Fig. 4(b)",
+  "statement_excerpt": "\"This first example consists of a simple cantilever beam subjected to a pair of vertical loads, with uncertain magnitudes, applied at the two right edge corners, as illustrated in Figure 4(a).\"",
+  "dim": 2,
+  "geometry": {
+   "value": "rectangle 60 (horizontal) x 30 (vertical), consistent units",
+   "source": "text"
+  },
+  "supports": {
+   "value": "left edge clamped (hatched)",
+   "source": "figure"
+  },
+  "loads": {
+   "value": "two vertical point loads at the right-edge corners, nominal F1 = F2 = 1, opposite directions (Fig. 4a: F1 downward at top-right, F2 upward at bottom-right)",
+   "source": "text"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "0.3",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "polygonal mesh, N = 7,200 elements (PolyTop)",
+   "source": "text"
+  },
+  "material": {
+   "value": "E0 = 1, nu = 0.3, Emin = 1e-9, penalization 3",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "1.5",
+   "source": "text"
+  },
+  "ambiguous": false,
+  "ambiguous_reason": "",
+  "benchmark_family": "cantilever",
+  "evidence": {
+   "geometry": "Sec. 4.1 para 2",
+   "supports": "Fig. 4(a) drawing",
+   "loads": "Sec. 4.1 para 1-2 and para 4; Fig. 4(a)",
+   "volume_fraction": "Sec. 4.1 para 2",
+   "mesh": "Sec. 4.1 para 2",
+   "material": "Sec. 4.1 para 2",
+   "filter_radius": "Sec. 4.1 para 2"
+  },
+  "notes": "Primary configuration is the deterministic nominal problem (Fig. 4b); robust variants use uniformly distributed load magnitudes. Which force points up vs down is only in Fig. 4(a).",
+  "borderline": false
+ },
+ {
+  "position": 53,
+  "arxiv_id": "2502.02052",
+  "title": "Multimaterial topology optimization for finite strain elastoplasticity: theory, methods, and applications",
+  "first_submitted": "2025-02-04",
+  "primary_category": "cs.CE",
+  "source_read": "arxiv_html",
+  "eligible": false,
+  "ineligible_reason": "other",
+  "ineligible_note": "All examples use finite strain elastoplasticity (dampers, hyperelastic-elastoplastic beams, crash bumpers, profiled sheets) with energy/load-capacity objectives; no linear-elastic compliance example.",
+  "borderline": false,
+  "evidence_ineligibility": "Title; Sec. 2-3; Sec. 4 subsection list (4.1-4.4)"
+ },
+ {
+  "position": 54,
+  "arxiv_id": "2411.19421",
+  "title": "A Simple Introduction to the SiMPL Method for Density-Based Topology Optimization",
+  "first_submitted": "2024-11-29",
+  "primary_category": "math.OC",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 3.1, Problem 1: 2D MBB beam (no separate problem-definition figure; results Figs. 2-4, Tables 1-2)",
+  "statement_excerpt": "\"We discretize a $3\\times 1$ MBB beam into $768\\times 256$ elements ( $h=1/256$ ) and use a volume fraction of 30%, i.e., $\\theta=0.3$ . A horizontal roller supports the bottom right corner of the design domain, and distributed vertical rollers enforce symmetry on the left side of the domain.\"",
+  "dim": 2,
+  "geometry": {
+   "value": "rectangle 3 x 1 (half MBB with symmetry on left edge)",
+   "source": "text"
+  },
+  "supports": {
+   "value": "horizontal roller at bottom-right corner; distributed vertical (symmetry) rollers on left edge",
+   "source": "text"
+  },
+  "loads": {
+   "value": "f = (0,-1) on region within l2-distance 0.05 of top-left corner c = (0,1) (downward body-force patch)",
+   "source": "text"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "theta = 0.3",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "768 x 256 Cartesian Q1 elements (h = 1/256); also 1/64, 1/128, 1/512 in mesh study",
+   "source": "text"
+  },
+  "material": {
+   "value": "SIMP p = 3, Emin/Emax = 1e-6 ('typically'); Emax and Poisson's ratio not stated",
+   "source": "missing"
+  },
+  "filter_radius": {
+   "value": "PDE filter, r_min = 0.02 (epsilon = 0.02/(2 sqrt 3))",
+   "source": "text"
+  },
+  "ambiguous": false,
+  "ambiguous_reason": "",
+  "benchmark_family": "MBB",
+  "evidence": {
+   "geometry": "Sec. 3.1 Problem 1 para 1",
+   "supports": "Sec. 3.1 Problem 1 para 1",
+   "loads": "Sec. 3.1 Problem 1 equation for f",
+   "volume_fraction": "Sec. 3.1 Problem 1 para 1",
+   "mesh": "Sec. 3.1 Problem 1; Table 2",
+   "material": "Sec. 2.1 Problem definition (generic 'typically' values)",
+   "filter_radius": "Sec. 3 Set-up"
+  },
+  "notes": "'Horizontal roller' on the bottom-right corner is the paper's wording; read with the standard MBB set-up it restrains vertical motion. Material tagged missing because only generic 'typical' penalization values are given.",
+  "borderline": false
+ },
+ {
+  "position": 55,
+  "arxiv_id": "2111.10439",
+  "title": "Modular-topology optimization of structures and mechanisms with free material design and clustering",
+  "first_submitted": "2021-11-19",
+  "primary_category": "cond-mat.mtrl-sci",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 3.1 (MBB beam), Fig. 6(a) boundary conditions; non-modular TO design Fig. 6(c)",
+  "statement_excerpt": "\"The beam is $0.375$ in height and $1.0$ in width, and discretized by $32\\times 12$ equisized square modules as shown in Fig. 6(a). The beam is supported along $1/128$ -wide segments at the bottom corners of the beam and loaded by a distributed load with the intensity $64$ acting at a $1/64$ -wide segment at the top.\"",
+  "dim": 2,
+  "geometry": {
+   "value": "rectangle 1.0 wide x 0.375 high, 32 x 12 square modules (full beam, no symmetry)",
+   "source": "text"
+  },
+  "supports": {
+   "value": "1/128-wide segments at both bottom corners; Fig. 6(a) draws a pin at bottom-left and a roller at bottom-right",
+   "source": "figure"
+  },
+  "loads": {
+   "value": "distributed load, intensity 64 over a 1/64-wide segment at the top (resultant 1, labelled '1' in Fig. 6a), downward at mid-span",
+   "source": "text"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "V-bar = 0.4",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "each module 100 x 100 bilinear quads; 3.84 million elements in total",
+   "source": "text"
+  },
+  "material": {
+   "value": "E = 1, nu = 0.3 (solid); E = 1e-9, nu = 0.3 (void); plane stress; p = 3",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "sensitivity filter r = 3.5 h (element edge length)",
+   "source": "text"
+  },
+  "ambiguous": false,
+  "ambiguous_reason": "",
+  "benchmark_family": "MBB",
+  "evidence": {
+   "geometry": "Sec. 3.1 para 1; Fig. 6(a) dimension labels",
+   "supports": "Sec. 3.1 para 1; Fig. 6(a) inline drawing",
+   "loads": "Sec. 3.1 para 1; Fig. 6(a) arrow at mid-span",
+   "volume_fraction": "Sec. 3 para 2",
+   "mesh": "Sec. 3 para 2; Sec. 3.1 para 4",
+   "material": "Sec. 3 para 2; Sec. 2.2.2",
+   "filter_radius": "Sec. 3 para 2; Sec. 3.1 para 4"
+  },
+  "notes": "Fig. 3 (Sec. 2.1.2) shows a free-material-optimization illustration of a compressed bar; not taken as the primary example because it designs elasticity tensors, not a density topology. Primary configuration = non-modular TO (Fig. 6c). Support types and load position at mid-span are only in Fig. 6(a), an inline TikZ drawing rendered from source.html. Load position is not stated in text ('at the top').",
+  "borderline": false
+ },
+ {
+  "position": 56,
+  "arxiv_id": "2008.07487",
+  "title": "Projection-based Implicit Modeling Method (PIMM) for Functionally Graded Lattice Optimization",
+  "first_submitted": "2020-08-17",
+  "primary_category": "physics.comp-ph",
+  "source_read": "arxiv_pdf",
+  "eligible": true,
+  "example_ref": "Sec. 4.1 (compliance optimization for MBB design), Fig. 7 (PDF p. 9)",
+  "statement_excerpt": "\"The symmetry is used for design, and the right half of the beam is modelled. The design of the MBB beam with the loading and boundary conditions is illustrated in Fig. 7. The design domain is uniformly meshed by 200×200 elements with unit length. The prescribed volume fraction is set as 30%.\"",
+  "dim": 2,
+  "geometry": {
+   "value": "text: right half of MBB beam, 200 x 200 unit elements (square); Fig. 7 draws a full rectangle of about 2:1 aspect",
+   "source": "text"
+  },
+  "supports": {
+   "value": "Fig. 7: pin symbol at bottom-left corner, roller symbol at bottom-right corner (no symmetry condition drawn)",
+   "source": "figure"
+  },
+  "loads": {
+   "value": "single downward point 'Force' at top mid-span (Fig. 7); magnitude not stated",
+   "source": "figure"
+  },
+  "passive_regions": {
+   "value": "none stated",
+   "source": "missing"
+  },
+  "volume_fraction": {
+   "value": "0.3",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "200 x 200 elements, unit length",
+   "source": "text"
+  },
+  "material": {
+   "value": "E = 1, Poisson's ratio 0.3",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "no filter stated (RBF-knot parameterization, 10 x 10 knots; projection parameters a0 = 50, c0 = 0.2, a1 = 500, c1 = 0, epsilon = 0.1)",
+   "source": "missing"
+  },
+  "ambiguous": true,
+  "ambiguous_reason": "Text says right half modelled with symmetry on a square 200x200 mesh, but Fig. 7 shows a full ~2:1 beam with pin/roller and centred load; load magnitude not stated.",
+  "benchmark_family": "MBB",
+  "evidence": {
+   "geometry": "Sec. 4.1 para 1; Fig. 7",
+   "supports": "Fig. 7 (rendered PDF p. 9)",
+   "loads": "Fig. 7",
+   "volume_fraction": "Sec. 4.1 para 1",
+   "mesh": "Sec. 4.1 para 1",
+   "material": "Sec. 4.1 para 1",
+   "filter_radius": "Sec. 4 para 1 (parameters); no filter found"
+  },
+  "notes": "Functionally graded gyroid lattice design via projection-based implicit modelling; density field controlled by RBF knots.",
+  "borderline": false
+ },
+ {
+  "position": 57,
+  "arxiv_id": "2509.10277",
+  "title": "Morphogenetic mechanical metamaterials: Emerging tensor properties from self-organized structures",
+  "first_submitted": "2025-09-12",
+  "primary_category": "physics.app-ph",
+  "source_read": "arxiv_html",
+  "eligible": false,
+  "ineligible_reason": "other",
+  "ineligible_note": "Main examples are mechanical-cloak metamaterial design (displacement-matching target). The only stiffness-oriented examples (Fig. 9: 'Bridge' three-point bending and cantilever, Vf = 80%) use a one-shot heuristic mapping of a single stress field to reaction-diffusion parameters, without an optimization loop or an optimization formulation. Borderline: the paper calls this structural optimization that reduces deformation energy at fixed fill fraction, and the BCs are stated in Methods ('Stress-driven parameter mapping').",
+  "borderline": true,
+  "evidence_ineligibility": "Results: 'Design and Implementation of Mechanical Cloaking'; 'One-shot stress-guided morphogenetic growth' paras 1-3; Methods 'Stress-driven parameter mapping'"
+ },
+ {
+  "position": 58,
+  "arxiv_id": "2607.02352",
+  "title": "Topology optimized plasmonic metasurfaces for optical trapping of nanoparticles",
+  "first_submitted": "2026-07-02",
+  "primary_category": "physics.optics",
+  "source_read": "arxiv_html",
+  "eligible": false,
+  "ineligible_reason": "not structural",
+  "ineligible_note": "Electromagnetic (plasmonic metasurface) topology optimization maximizing optical trapping force computed with the Maxwell stress tensor.",
+  "borderline": false,
+  "evidence_ineligibility": "Abstract; Sec. 2.2"
+ },
+ {
+  "position": 59,
+  "arxiv_id": "2605.19110",
+  "title": "IterSIMP-σ: Evaluating LLM-Assisted Spatial Interventions in Stress-Aware Topology Optimization",
+  "first_submitted": "2026-05-18",
+  "primary_category": "cs.CE",
+  "source_read": "arxiv_html",
+  "eligible": true,
+  "example_ref": "Sec. 3.5, Fig. 2 (cantilever-with-two-voids benchmark, first problem shown with designs); definition in Table 3, ID 3 (Sec. 4.1)",
+  "statement_excerpt": "\"Figure 2 illustrates the contrast on the cantilever-with-two-voids benchmark. In this case the passive-solid intervention (left, $C=91.5$ ) outperforms the soft-seed intervention (right, $C=115.2$ ), even though the latter preserves optimizer freedom.\"",
+  "dim": 2,
+  "geometry": {
+   "value": "rectangular domain discretized 80 x 40 (physical size not stated) with 2 voids; void positions and sizes not stated",
+   "source": "text"
+  },
+  "supports": {
+   "value": "'Left fixed' (Table 3 descriptor only)",
+   "source": "text"
+  },
+  "loads": {
+   "value": "'mid-right load' (Table 3 descriptor only); type, direction and magnitude not stated",
+   "source": "text"
+  },
+  "passive_regions": {
+   "value": "2 voids (frozen void regions); location/size not stated and not visible in Fig. 2",
+   "source": "text"
+  },
+  "volume_fraction": {
+   "value": "initial target 0.25; controller raised final target to 0.28 (Table 14)",
+   "source": "text"
+  },
+  "mesh": {
+   "value": "80 x 40 plane-stress elements (3,200)",
+   "source": "text"
+  },
+  "material": {
+   "value": "E0 = 1 (nondimensionalized); SIMP p ramped 1.0 to 4.5; Poisson's ratio not stated",
+   "source": "text"
+  },
+  "filter_radius": {
+   "value": "r_min tightened during late main loop to 1.2 (initial value not stated); three-field filter + Heaviside projection beta up to 32",
+   "source": "text"
+  },
+  "ambiguous": true,
+  "ambiguous_reason": "BCs given only as short table descriptors ('Left fixed, mid-right load, 2 voids'); load direction/magnitude, void locations and domain size not stated, and Fig. 2 shows no BCs.",
+  "benchmark_family": "cantilever",
+  "evidence": {
+   "geometry": "Table 3 (ID 3)",
+   "supports": "Table 3 (ID 3)",
+   "loads": "Table 3 (ID 3)",
+   "passive_regions": "Table 3 (ID 3); Sec. 3.5 (void kind)",
+   "volume_fraction": "Table 3; Appendix A Table 14",
+   "mesh": "Table 3",
+   "material": "Sec. 3.2; Sec. 4.3 (E0 = 1)",
+   "filter_radius": "Sec. 3.2; Sec. 4.2"
+  },
+  "notes": "Inner SIMP solver minimizes compliance with a volume constraint; an outer LLM/rule loop with stress gating proposes interventions and may change the volume target. Fig. 2 results are LLM-assisted (passive-solid and soft-seed) runs. Release code reportedly holds full specifications (not checked).",
+  "borderline": false
+ },
+ {
+  "position": 60,
+  "arxiv_id": "2306.06585",
+  "title": "Tailoring high precision polynomial architected material constitutive responses via inverse design",
+  "first_submitted": "2023-06-11",
+  "primary_category": "cond-mat.mtrl-sci",
+  "source_read": "arxiv_html",
+  "eligible": false,
+  "ineligible_reason": "other",
+  "ineligible_note": "Inverse design of geometrically nonlinear springs/unit cells for a target polynomial force-displacement curve; no linear-elastic compliance-minimization example.",
+  "borderline": false,
+  "evidence_ineligibility": "Abstract; Results 'Optimization Method' and 'Examples' (Figs. 3-5)"
+ }
+]

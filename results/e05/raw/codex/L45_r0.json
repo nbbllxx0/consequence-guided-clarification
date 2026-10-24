@@ -1,0 +1,205 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"dimensional scale of the rectangular domain\",\n      \"issue\": \"missing\",\n      \"description\": \"Sections 3.1 and 4.1 specify a 2 by 1 rectangle, but give no length unit.\",\n      \"readings\": [\n        \"Length 2 m and height 1 m.\",\n        \"Length 2 mm and height 1 mm.\",\n        \"Dimensionless coordinates with length 2 and height 1.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"The two-dimensional formulation in Section 3.1 does not specify a uniform thickness or explicitly state a per-unit-thickness convention.\",\n      \"readings\": [\n        \"Use unit thickness.\",\n        \"Use uniform thickness equal to 0.01 times the beam height.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"bottom-right load\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 4.1 locates the load at the bottom right; Section 4.2 clarifies that this is the corner. Neither states its direction. Figure 6 is unavailable.\",\n      \"readings\": [\n        \"Vertical downward force.\",\n        \"Horizontal force toward the fixed edge.\",\n        \"Force directed 45 degrees downward and toward the fixed edge.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"bottom-right load footprint and distribution\",\n      \"issue\": \"vague\",\n      \"description\": \"Sections 4.1 and 4.2 identify the bottom-right corner but do not specify point loading versus a finite loaded segment, its length, or its force distribution.\",\n      \"readings\": [\n        \"Concentrated force at the bottom-right corner node.\",\n        \"Uniform traction on the lowest 0.05 of the right-edge height.\",\n        \"Triangular traction on the lowest 0.05 of the right-edge height, largest at the corner.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"resultant bottom-right force\",\n      \"issue\": \"missing\",\n      \"description\": \"No force magnitude is stated. Its magnitude scales dimensional compliance but cancels from the normalized compliance defined in Section 3.1.\",\n      \"readings\": [\n        \"Total resultant force of 1 N.\",\n        \"Total resultant force of 100 N.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"physical material protection near the support and load\",\n      \"issue\": \"missing\",\n      \"description\": \"No explicit physical passive-element mask is supplied. Appendix B's solid and void extensions concern topology counting and do not explicitly establish physical attachment pads.\",\n      \"readings\": [\n        \"All elements are designable, with no passive solid pads.\",\n        \"Keep the leftmost element column and the bottom-right corner element solid.\",\n        \"Keep a two-element-wide left support strip and a 2 by 2 element bottom-right load pad solid.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"volume constraint for a minimum-compliance rerun\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 4.1 reports multiple branches over varying volumes, rather than one designated volume cap. The bound c_max = 5 is a normalized compliance limit, not a volume fraction. Exact volumes of the selected plotted designs are not tabulated.\",\n      \"readings\": [\n        \"Set the normalized dilated-volume cap to 0.45.\",\n        \"Set the normalized dilated-volume cap to 0.60.\",\n        \"Set the normalized dilated-volume cap to 0.77.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Poisson ratio\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Section 3.3 states that the numerical examples use nu = 1/3, whereas Appendix A states that all experiments use nu = 0.3.\",\n      \"readings\": [\n        \"Use nu = 1/3.\",\n        \"Use nu = 0.3.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"two-dimensional elastic constitutive model\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 3.1 specifies linear elasticity and Appendix A specifies isotropic material, but neither selects plane stress or plane strain.\",\n      \"readings\": [\n        \"Plane stress.\",\n        \"Plane strain.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"filter radius and projection steepness\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Table 1 gives R/h = 25 for Section 4.1. Appendix A states beta = 10 for all examples and also states beta = R/(3h) or R/(5h). Neither relation agrees with R/h = 25 and beta = 10.\",\n      \"readings\": [\n        \"Use R/h = 25 and beta = 10; disregard the stated radius-to-beta relations.\",\n        \"Use R/h = 30 and beta = 10, enforcing beta = R/(3h).\",\n        \"Use R/h = 50 and beta = 10, enforcing beta = R/(5h).\",\n        \"Use R/h = 25 and beta = 25/3, enforcing beta = R/(3h).\",\n        \"Use R/h = 25 and beta = 5, enforcing beta = R/(5h).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"conversion from reported filter radius to PDE coefficient\",\n      \"issue\": \"vague\",\n      \"description\": \"Appendix A mentions rescaling the PDE-filter radius by a sqrt(3) factor, but does not write the PDE or explicitly identify whether the tabulated R precedes or follows that rescaling.\",\n      \"readings\": [\n        \"For filtered_density - ell^2 * Laplacian(filtered_density) = density, use ell = R/sqrt(3).\",\n        \"Use ell = sqrt(3)*R.\",\n        \"Treat the tabulated R as the already-rescaled PDE length and use ell = R.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"filter boundary conditions\",\n      \"issue\": \"vague\",\n      \"description\": \"Section 3.1 invokes consistent boundary conditions by reference. Appendix B identifies Robin portions near loaded and fixed boundaries, but does not supply the Robin equation, coefficient, prescribed data, or filter conditions elsewhere.\",\n      \"readings\": [\n        \"On the identified Robin portions use ell * normal_derivative(filtered_density) + filtered_density = 1, with zero normal derivative elsewhere.\",\n        \"Use twice that Robin derivative coefficient, with zero normal derivative elsewhere.\",\n        \"Use the first Robin condition near supports and loads, with zero filtered density on remaining free boundaries.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"PDE-filter discretization and transfer to element densities\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 3.1 defines elementwise design variables but does not specify the filter's discrete function space, mass-matrix treatment, or transfer between element variables and the filtered field.\",\n      \"readings\": [\n        \"Nodal bilinear finite-element Helmholtz filter with a consistent mass matrix and element-averaged output.\",\n        \"Nodal bilinear finite-element filter with a lumped mass matrix and element-averaged output.\",\n        \"Cell-centered finite-volume Helmholtz filter acting directly on element densities.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"smoothed Heaviside projection formula\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 3.1 gives projection thresholds and a steepness parameter, but supplies only a reference for the projection function. Its formula and steepness convention are not reproduced.\",\n      \"readings\": [\n        \"Use normalized tanh projection P(z) = [tanh(beta*eta) + tanh(beta*(z-eta))]/[tanh(beta*eta) + tanh(beta*(1-eta))].\",\n        \"Use endpoint-normalized logistic projection with logistic slope beta, equivalent to the preceding tanh formula with beta/2.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"elastic element stiffness integration\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 3.1 specifies square first-order elements, and Table 1 fixes their count, but the stiffness quadrature or integration treatment is not stated.\",\n      \"readings\": [\n        \"Bilinear quadrilateral elements with full 2 by 2 Gauss integration.\",\n        \"Bilinear quadrilateral elements with one-point volumetric integration and 2 by 2 deviatoric integration.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"numerical constraint-feasibility tolerance\",\n      \"issue\": \"missing\",\n      \"description\": \"Appendix A requires satisfied constraints for convergence and supplies several other stopping thresholds, but does not define the numerical tolerance used to declare constraint satisfaction.\",\n      \"readings\": [\n        \"Require normalized constraint residuals to be no greater than zero.\",\n        \"Accept normalized constraint residuals up to 1e-6.\",\n        \"Accept normalized constraint residuals up to 1e-4.\"\n      ],\n      \"effect\": \"layout\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "dimensional scale of the rectangular domain",
+    "issue": "missing",
+    "description": "Sections 3.1 and 4.1 specify a 2 by 1 rectangle, but give no length unit.",
+    "readings": [
+     "Length 2 m and height 1 m.",
+     "Length 2 mm and height 1 mm.",
+     "Dimensionless coordinates with length 2 and height 1."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "out-of-plane thickness",
+    "issue": "missing",
+    "description": "The two-dimensional formulation in Section 3.1 does not specify a uniform thickness or explicitly state a per-unit-thickness convention.",
+    "readings": [
+     "Use unit thickness.",
+     "Use uniform thickness equal to 0.01 times the beam height."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "load_direction",
+    "entity": "bottom-right load",
+    "issue": "missing",
+    "description": "Section 4.1 locates the load at the bottom right; Section 4.2 clarifies that this is the corner. Neither states its direction. Figure 6 is unavailable.",
+    "readings": [
+     "Vertical downward force.",
+     "Horizontal force toward the fixed edge.",
+     "Force directed 45 degrees downward and toward the fixed edge."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "bottom-right load footprint and distribution",
+    "issue": "vague",
+    "description": "Sections 4.1 and 4.2 identify the bottom-right corner but do not specify point loading versus a finite loaded segment, its length, or its force distribution.",
+    "readings": [
+     "Concentrated force at the bottom-right corner node.",
+     "Uniform traction on the lowest 0.05 of the right-edge height.",
+     "Triangular traction on the lowest 0.05 of the right-edge height, largest at the corner."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "resultant bottom-right force",
+    "issue": "missing",
+    "description": "No force magnitude is stated. Its magnitude scales dimensional compliance but cancels from the normalized compliance defined in Section 3.1.",
+    "readings": [
+     "Total resultant force of 1 N.",
+     "Total resultant force of 100 N."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "physical material protection near the support and load",
+    "issue": "missing",
+    "description": "No explicit physical passive-element mask is supplied. Appendix B's solid and void extensions concern topology counting and do not explicitly establish physical attachment pads.",
+    "readings": [
+     "All elements are designable, with no passive solid pads.",
+     "Keep the leftmost element column and the bottom-right corner element solid.",
+     "Keep a two-element-wide left support strip and a 2 by 2 element bottom-right load pad solid."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "volume constraint for a minimum-compliance rerun",
+    "issue": "missing",
+    "description": "Section 4.1 reports multiple branches over varying volumes, rather than one designated volume cap. The bound c_max = 5 is a normalized compliance limit, not a volume fraction. Exact volumes of the selected plotted designs are not tabulated.",
+    "readings": [
+     "Set the normalized dilated-volume cap to 0.45.",
+     "Set the normalized dilated-volume cap to 0.60.",
+     "Set the normalized dilated-volume cap to 0.77."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson ratio",
+    "issue": "conflicting",
+    "description": "Section 3.3 states that the numerical examples use nu = 1/3, whereas Appendix A states that all experiments use nu = 0.3.",
+    "readings": [
+     "Use nu = 1/3.",
+     "Use nu = 0.3."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "two-dimensional elastic constitutive model",
+    "issue": "missing",
+    "description": "Section 3.1 specifies linear elasticity and Appendix A specifies isotropic material, but neither selects plane stress or plane strain.",
+    "readings": [
+     "Plane stress.",
+     "Plane strain."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "filter radius and projection steepness",
+    "issue": "conflicting",
+    "description": "Table 1 gives R/h = 25 for Section 4.1. Appendix A states beta = 10 for all examples and also states beta = R/(3h) or R/(5h). Neither relation agrees with R/h = 25 and beta = 10.",
+    "readings": [
+     "Use R/h = 25 and beta = 10; disregard the stated radius-to-beta relations.",
+     "Use R/h = 30 and beta = 10, enforcing beta = R/(3h).",
+     "Use R/h = 50 and beta = 10, enforcing beta = R/(5h).",
+     "Use R/h = 25 and beta = 25/3, enforcing beta = R/(3h).",
+     "Use R/h = 25 and beta = 5, enforcing beta = R/(5h)."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "conversion from reported filter radius to PDE coefficient",
+    "issue": "vague",
+    "description": "Appendix A mentions rescaling the PDE-filter radius by a sqrt(3) factor, but does not write the PDE or explicitly identify whether the tabulated R precedes or follows that rescaling.",
+    "readings": [
+     "For filtered_density - ell^2 * Laplacian(filtered_density) = density, use ell = R/sqrt(3).",
+     "Use ell = sqrt(3)*R.",
+     "Treat the tabulated R as the already-rescaled PDE length and use ell = R."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "filter boundary conditions",
+    "issue": "vague",
+    "description": "Section 3.1 invokes consistent boundary conditions by reference. Appendix B identifies Robin portions near loaded and fixed boundaries, but does not supply the Robin equation, coefficient, prescribed data, or filter conditions elsewhere.",
+    "readings": [
+     "On the identified Robin portions use ell * normal_derivative(filtered_density) + filtered_density = 1, with zero normal derivative elsewhere.",
+     "Use twice that Robin derivative coefficient, with zero normal derivative elsewhere.",
+     "Use the first Robin condition near supports and loads, with zero filtered density on remaining free boundaries."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "PDE-filter discretization and transfer to element densities",
+    "issue": "missing",
+    "description": "Section 3.1 defines elementwise design variables but does not specify the filter's discrete function space, mass-matrix treatment, or transfer between element variables and the filtered field.",
+    "readings": [
+     "Nodal bilinear finite-element Helmholtz filter with a consistent mass matrix and element-averaged output.",
+     "Nodal bilinear finite-element filter with a lumped mass matrix and element-averaged output.",
+     "Cell-centered finite-volume Helmholtz filter acting directly on element densities."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "smoothed Heaviside projection formula",
+    "issue": "missing",
+    "description": "Section 3.1 gives projection thresholds and a steepness parameter, but supplies only a reference for the projection function. Its formula and steepness convention are not reproduced.",
+    "readings": [
+     "Use normalized tanh projection P(z) = [tanh(beta*eta) + tanh(beta*(z-eta))]/[tanh(beta*eta) + tanh(beta*(1-eta))].",
+     "Use endpoint-normalized logistic projection with logistic slope beta, equivalent to the preceding tanh formula with beta/2."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "elastic element stiffness integration",
+    "issue": "missing",
+    "description": "Section 3.1 specifies square first-order elements, and Table 1 fixes their count, but the stiffness quadrature or integration treatment is not stated.",
+    "readings": [
+     "Bilinear quadrilateral elements with full 2 by 2 Gauss integration.",
+     "Bilinear quadrilateral elements with one-point volumetric integration and 2 by 2 deviatoric integration."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "numerical constraint-feasibility tolerance",
+    "issue": "missing",
+    "description": "Appendix A requires satisfied constraints for convergence and supplies several other stopping thresholds, but does not define the numerical tolerance used to declare constraint satisfaction.",
+    "readings": [
+     "Require normalized constraint residuals to be no greater than zero.",
+     "Accept normalized constraint residuals up to 1e-6.",
+     "Accept normalized constraint residuals up to 1e-4."
+    ],
+    "effect": "layout"
+   }
+  ]
+ },
+ "wall_s": 1006.111873626709,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L45",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 0,
+ "locator": "Sec. 4.1, the cantilever beam (Fig. 6, Table 1)",
+ "finished": "2026-10-22T19:45:47"
+}

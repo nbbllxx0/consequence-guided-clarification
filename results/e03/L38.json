@@ -1,0 +1,128 @@
+{
+ "task": "L38",
+ "source": {
+  "arxiv": "2001.00635",
+  "position": 175
+ },
+ "dim": 2,
+ "slots": {
+  "orient": [
+   "wide",
+   "tall"
+  ],
+  "load": [
+   "corner",
+   "mid"
+  ]
+ },
+ "nominal": {
+  "orient": "wide",
+  "load": "corner"
+ },
+ "mandatory": [],
+ "reasons": {
+  "orient": "text '16 x 32 square elements', figures 32 wide x 16 high (Sec. 4; Figs. 10-11)",
+  "load": "only 'cantilever'; designs suggest a bottom-right corner load, mid-height admissible (Sec. 4; Fig. 11)"
+ },
+ "recon": [
+  "common 32x32 grid truncated at (xmax, ymax)",
+  "clamped left edge (implied by 'cantilever')",
+  "no filter in source (threshold post-filter): rmin 1.5",
+  "Poisson's ratio printed as 1.0: 0.3 used",
+  "source prints Poisson's ratio 1.0 (erratum); 0.3 used"
+ ],
+ "keys": [
+  "load=corner|orient=wide",
+  "load=mid|orient=wide",
+  "load=corner|orient=tall",
+  "load=mid|orient=tall"
+ ],
+ "C": [
+  [
+   68.20345778528018,
+   1180775.1880556524,
+   588.6543740004249,
+   29567.475236676364
+  ],
+  [
+   3068384.501156191,
+   64.12722880904732,
+   439.72536745954545,
+   29962.01336334215
+  ],
+  [
+   11051284.720516961,
+   8417448.40561025,
+   8.59980863252732,
+   1333043.336562782
+  ],
+  [
+   13141561.213624597,
+   10537196.092564065,
+   4180126.168779998,
+   4.717431689648337
+  ]
+ ],
+ "ref": {
+  "load=corner|orient=wide": 68.20345778528015,
+  "load=mid|orient=wide": 64.12722880904731,
+  "load=corner|orient=tall": 8.59980863252732,
+  "load=mid|orient=tall": 4.717431689648336
+ },
+ "ref_gap_beaten": {
+  "load=corner|orient=wide": 0.0,
+  "load=mid|orient=wide": 0.0,
+  "load=corner|orient=tall": 0.0,
+  "load=mid|orient=tall": 0.0
+ },
+ "noise": {
+  "load=corner|orient=wide": 0.0004862605302848597,
+  "load=mid|orient=wide": 0.0013501144038325663,
+  "load=corner|orient=tall": 5.358549107931361e-07,
+  "load=mid|orient=tall": 9.452400713881083e-08
+ },
+ "meta": {
+  "load=corner|orient=wide": {
+   "accepted": true,
+   "kkt": 0.195110955746862,
+   "wall_s": 2.7545152000384405,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "load=mid|orient=wide": {
+   "accepted": true,
+   "kkt": 0.025930782522171625,
+   "wall_s": 2.554665199946612,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "load=corner|orient=tall": {
+   "accepted": true,
+   "kkt": 0.30569550130464485,
+   "wall_s": 2.5509120000060648,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "load=mid|orient=tall": {
+   "accepted": true,
+   "kkt": 0.02058501880821544,
+   "wall_s": 2.2764176999917254,
+   "n_iter": [
+    201,
+    201
+   ]
+  }
+ },
+ "counter": {
+  "optimizations": 0,
+  "factorizations": 8,
+  "backsubs": 16,
+  "opt_wall_s": 0.0
+ }
+}

@@ -1,0 +1,105 @@
+{
+ "task": "L13",
+ "source": {
+  "arxiv": "2310.02069",
+  "position": 74
+ },
+ "dim": 2,
+ "slots": {
+  "load": [
+   "corner",
+   "lower",
+   "mid"
+  ],
+  "volfrac": [
+   0.2
+  ]
+ },
+ "nominal": {
+  "load": "mid",
+  "volfrac": 0.2
+ },
+ "mandatory": [
+  "volfrac"
+ ],
+ "reasons": {
+  "load": "Fig. 1(a) arrow on the lower part of the right edge near the corner vs Fig. 3(b) design converging to mid-height (Fig. 1(a); Fig. 3(b))",
+  "volfrac": "0.20 only from the image file name; caption gives no value: mandatory"
+ },
+ "recon": [
+  "point force as 4-element patch",
+  "vf fixed to 0.2 after asking"
+ ],
+ "keys": [
+  "load=corner|volfrac=0.2",
+  "load=lower|volfrac=0.2",
+  "load=mid|volfrac=0.2"
+ ],
+ "C": [
+  [
+   41.661023335759516,
+   1692058.1313254095,
+   2488573.732356202
+  ],
+  [
+   4555063.618487672,
+   37.297186229386334,
+   2114590.2141470355
+  ],
+  [
+   6260995.6899116635,
+   2476295.397435059,
+   35.275206243176605
+  ]
+ ],
+ "ref": {
+  "load=corner|volfrac=0.2": 41.66102333575949,
+  "load=lower|volfrac=0.2": 37.29718622938633,
+  "load=mid|volfrac=0.2": 35.2752062431766
+ },
+ "ref_gap_beaten": {
+  "load=corner|volfrac=0.2": 0.0,
+  "load=lower|volfrac=0.2": 0.0,
+  "load=mid|volfrac=0.2": 0.0
+ },
+ "noise": {
+  "load=corner|volfrac=0.2": 0.0024560828223096367,
+  "load=lower|volfrac=0.2": 0.0004730721995894652,
+  "load=mid|volfrac=0.2": 0.000982869654849008
+ },
+ "meta": {
+  "load=corner|volfrac=0.2": {
+   "accepted": true,
+   "kkt": 0.25135962019102986,
+   "wall_s": 117.46590680012014,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "load=lower|volfrac=0.2": {
+   "accepted": true,
+   "kkt": 0.2699824903239736,
+   "wall_s": 106.04240869998466,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "load=mid|volfrac=0.2": {
+   "accepted": true,
+   "kkt": 0.27161785580245196,
+   "wall_s": 96.18480110005476,
+   "n_iter": [
+    201,
+    201
+   ]
+  }
+ },
+ "counter": {
+  "optimizations": 0,
+  "factorizations": 3,
+  "backsubs": 9,
+  "opt_wall_s": 0.0
+ }
+}

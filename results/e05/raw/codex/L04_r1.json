@@ -1,0 +1,353 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Definition of the reference length L\",\n      \"issue\": \"figure_only\",\n      \"description\": \"The Sec. 4 overview delegates domain dimensions to Figure 9 and specifies a load-line length of 0.1L without defining L. The mesh counts and element sizes imply a 2-by-1 computational rectangle for square cells, but do not identify L with either span. Let W and H denote its width and height.\",\n      \"readings\": [\n        \"W = 2L and H = L; the loaded line has length 0.1H.\",\n        \"W = L and H = L/2; the loaded line has length 0.2H.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"Supported portion of the cantilever\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 4 refers exact boundary placement to Figure 9. The name 'Michell cantilever' does not specify the supported nodes or boundary lengths.\",\n      \"readings\": [\n        \"Support the entire left edge, x = 0.\",\n        \"Support only the two left corner nodes, (0,0) and (0,H).\",\n        \"Support two left-edge patches covering y/H in [0,0.05] and [0.95,1].\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"support_type\",\n      \"entity\": \"Displacement constraints at supports\",\n      \"issue\": \"figure_only\",\n      \"description\": \"The support degrees of freedom are not described in Sec. 4 or Sec. 4.2; the boundary-condition drawing is unavailable.\",\n      \"readings\": [\n        \"Set ux = uy = 0 at every supported node.\",\n        \"Set ux = 0 at the supported nodes and restrain uy only at one lower-left anchor node.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"Placement and orientation of the loaded line\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 4 gives the line length but delegates exact load placement to Figure 9.\",\n      \"readings\": [\n        \"A vertical segment on the right edge centered at y = H/2.\",\n        \"A vertical segment on the right edge centered at y = H/4.\",\n        \"A horizontal segment on the top edge centered at x = W/2.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"Force applied along the loaded line\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Neither Sec. 4 nor Sec. 4.2 states the force direction in words or components; loading is assigned to Figure 9.\",\n      \"readings\": [\n        \"Uniformly vertical downward.\",\n        \"Uniformly horizontal to the right.\",\n        \"Uniformly diagonal, 45 degrees downward and to the right.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"Total applied force\",\n      \"issue\": \"missing\",\n      \"description\": \"No resultant force magnitude or traction magnitude is specified in the supplied text. The reported compliances do not independently determine it.\",\n      \"readings\": [\n        \"Normalize the total resultant to 1 force unit.\",\n        \"Normalize the total resultant to 2 force units.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Force distribution along the loaded line\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 says the force is applied along a line, but does not specify its spatial profile.\",\n      \"readings\": [\n        \"Constant traction along the whole segment.\",\n        \"A symmetric triangular traction profile, zero at the endpoints and maximal at the midpoint, with the same total resultant.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Structured-grid realization of the loaded line\",\n      \"issue\": \"missing\",\n      \"description\": \"The text does not specify endpoint snapping, node selection, or consistent nodal-force assembly for the finite loaded segment.\",\n      \"readings\": [\n        \"Integrate traction over the exact segment, including partially covered element edges, using consistent nodal forces.\",\n        \"Snap the segment endpoints to the nearest boundary nodes and integrate traction over the snapped segment.\",\n        \"Select nodes inside the nominal segment and divide the resultant equally among them.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Radius of the solid neighborhood around the load\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4 specifies only a 'small radius around the load' for setting elements solid.\",\n      \"readings\": [\n        \"Radius r = hc.\",\n        \"Radius r = 3hc.\",\n        \"Radius r = 0.05L.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Geometry and rasterization of the load neighborhood\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4 does not define whether distance is measured from the load-line midpoint or the entire segment, or how intersecting grid cells are selected.\",\n      \"readings\": [\n        \"A disk centered at the loaded segment's midpoint; include cells whose centers lie inside it.\",\n        \"A distance-r neighborhood of the entire loaded segment; include cells whose centers lie inside it.\",\n        \"A distance-r neighborhood of the entire loaded segment; include every cell intersecting it.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Logical combination of the two solidification conditions\",\n      \"issue\": \"vague\",\n      \"description\": \"The Sec. 4 phrase 'all elements with a density of rho > 0.99 and in a small radius around the load' does not distinguish a conjunction from two separately solidified sets.\",\n      \"readings\": [\n        \"Solidify the union: every element with rho > 0.99, plus every element in the load neighborhood.\",\n        \"Solidify the intersection: only elements that both have rho > 0.99 and lie in the load neighborhood.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Timing and source density of solidification\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 does not identify which density field is tested against 0.99 or when the solidification rules are applied relative to optimization and de-homogenization.\",\n      \"readings\": [\n        \"Use the converged coarse homogenization density to construct a mask, transfer it to the fine grid, and impose it after de-homogenization.\",\n        \"Keep the load neighborhood solid throughout the direct single-material optimization and round final physical densities above 0.99 afterward.\",\n        \"Apply both rules only to the final fine-grid physical density.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Volume accounting for forced-solid elements\",\n      \"issue\": \"missing\",\n      \"description\": \"Figures 10\u201312 clearly give nominal targets of 0.25 and 0.40. However, Eq. 1 and Sec. 4 do not explain whether the subsequently mentioned solidification is included in that budget or adds material afterward.\",\n      \"readings\": [\n        \"Include all forced-solid elements in the total physical-volume constraint at the caption's nominal fraction.\",\n        \"Enforce the nominal fraction before solidification, then allow the solidification step to increase the final volume.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Overall stiffness scale of the solid material\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 and Sec. 4.2 provide no Young's modulus or equivalent overall multiplier for the solid elasticity tensor.\",\n      \"readings\": [\n        \"Use E = 1 in consistent units.\",\n        \"Use E = 2 in the same units, holding the dimensionless constitutive properties fixed.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Solid constitutive tensor apart from its overall scale\",\n      \"issue\": \"missing\",\n      \"description\": \"The supplied text gives no base-solid constitutive tensor, Poisson ratio, or explicit isotropy assumption.\",\n      \"readings\": [\n        \"Isotropic elasticity with Poisson ratio 0.30.\",\n        \"Isotropic elasticity with Poisson ratio 0.\",\n        \"Orthotropic plane elasticity with Ex/Ey = 2, nu_xy = 0.25, Gxy/Ey = 0.4, and material axes aligned with the grid.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Two-dimensional mechanical assumption\",\n      \"issue\": \"missing\",\n      \"description\": \"The paper identifies the examples as two-dimensional, but does not specify plane stress or plane strain.\",\n      \"readings\": [\n        \"Plane stress.\",\n        \"Plane strain.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Uniform out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"No thickness or explicit per-unit-thickness convention is stated for the two-dimensional analysis.\",\n      \"readings\": [\n        \"Unit thickness t = 1.\",\n        \"Uniform thickness t = 2, with the same prescribed total forces.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Single-material stiffness interpolation and density regularization\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. 1 uses rank-2 lamination variables and an area penalty, rather than a conventional single-material density formulation. The top88 reference in Sec. 4.2.1 is a timing comparison. Neither it nor the stated laminate parameter alpha_out = 1e-9 defines a direct density interpolation, penalization exponent, or density floor.\",\n      \"readings\": [\n        \"SIMP with p = 3, density bounds [0,1], and Emin/Esolid = 1e-9.\",\n        \"SIMP with p = 4, density bounds [0,1], and Emin/Esolid = 1e-9.\",\n        \"SIMP with p = 3, density bounds [0.001,1], and Emin/Esolid = 1e-9.\",\n        \"RAMP with q = 5, density bounds [0,1], and Emin/Esolid = 1e-9.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Units and grid scaling of the filter radius\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4 states r_min = 1.2 without units or a rule for transferring the homogenization filter to a direct fine-grid optimization.\",\n      \"readings\": [\n        \"Use radius 1.2hc and preserve that physical radius on the fine grid: 28.8hf for 24-fold refinement or 48hf for 40-fold refinement.\",\n        \"Use radius 1.2 times the spacing of whichever grid is directly optimized, including 1.2hf on a fine grid.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Filtered quantity in the single-material solver\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. 2 filters lamination variables and the material indicator. It does not specify their replacement by a density or sensitivity filter in the requested single-material solver.\",\n      \"readings\": [\n        \"Filter design densities before constructing the physical stiffness field.\",\n        \"Filter compliance sensitivities while using unfiltered design densities for stiffness.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Filter kernel\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 denotes filtered variables and Sec. 4 supplies a radius, but neither specifies the filter weights or operator.\",\n      \"readings\": [\n        \"Normalized radial cone weights max(0, r_min - distance).\",\n        \"Uniform weights inside a circular neighborhood of radius r_min.\",\n        \"A Helmholtz PDE filter with its length parameter identified with r_min.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Design-filter treatment at domain boundaries\",\n      \"issue\": \"missing\",\n      \"description\": \"No boundary treatment is given for the optimization filter. The two-pixel replication padding in Sec. 4 explicitly concerns the neural-network input.\",\n      \"readings\": [\n        \"Truncate the filter neighborhood at the domain boundary and renormalize the remaining weights.\",\n        \"Extend density by zero outside the domain and retain the full-neighborhood normalization.\",\n        \"Reflect or replicate density outside the boundary.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Projection parameters and projected density fields\",\n      \"issue\": \"missing\",\n      \"description\": \"Eqs. 1\u20134 use projected fields and superscripts d and e without specifying projection thresholds, sharpness, or their physical interpretation. No equivalent single-material projection is supplied.\",\n      \"readings\": [\n        \"One normalized tanh Heaviside projection with threshold 0.5 and sharpness beta = 8.\",\n        \"One normalized tanh Heaviside projection with threshold 0.5 and sharpness beta = 32.\",\n        \"Separate dilated and eroded projections with thresholds 0.3 and 0.7 and beta = 8.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Penalization and projection continuation schedule\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.2.1 says a conventional TO continuation strategy would be needed and mentions a typical iteration count, but gives no actual schedule for a single-material rerun.\",\n      \"readings\": [\n        \"Keep SIMP p = 3 and projection beta = 8 fixed.\",\n        \"Increase p through 1, 2, and 3 every 100 iterations, then double beta from 1 to 64 every 50 iterations.\",\n        \"Keep p = 3 fixed and double beta from 1 to 64 every 100 iterations.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Optimization algorithm and update controls\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 says Eq. 1 is solved until convergence but does not state the optimizer or move limits. The later top88 timing comparison does not specify these for the example.\",\n      \"readings\": [\n        \"Optimality-criteria updates with a density move limit of 0.2 per iteration.\",\n        \"Optimality-criteria updates with a density move limit of 0.05 per iteration.\",\n        \"MMA updates with a density move limit of 0.1 per iteration.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initial design\",\n      \"issue\": \"missing\",\n      \"description\": \"No initialization is given for the optimization in Sec. 4 or for a direct single-material replacement.\",\n      \"readings\": [\n        \"Uniform density equal to the selected nominal volume fraction.\",\n        \"Uniform density at the selected fraction plus a zero-mean 1-percent random perturbation generated with seed 0.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Optimization stopping criterion\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4 specifies only 'until convergence'; no monitored quantity, tolerance, persistence requirement, or iteration cap is supplied.\",\n      \"readings\": [\n        \"Stop when the maximum density change is below 0.01.\",\n        \"Stop when the maximum density change is below 0.001.\",\n        \"Stop when relative compliance change remains below 1e-4 for ten iterations.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Finite-element formulation and integration\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.2 and its captions specify element counts and mesh sizes, but not displacement interpolation order or quadrature.\",\n      \"readings\": [\n        \"Four-node bilinear quadrilateral elements with 2-by-2 Gauss integration.\",\n        \"Eight-node quadratic quadrilateral elements with 3-by-3 Gauss integration.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Equilibrium-solve accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. 1 specifies equilibrium, while Sec. 4.2.1 discusses possible solver costs without specifying numerical precision or residual tolerances for reproducing the results.\",\n      \"readings\": [\n        \"Double-precision sparse direct factorization.\",\n        \"Preconditioned conjugate gradients with relative residual tolerance 1e-6.\",\n        \"Preconditioned conjugate gradients with relative residual tolerance 1e-10.\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "Definition of the reference length L",
+    "issue": "figure_only",
+    "description": "The Sec. 4 overview delegates domain dimensions to Figure 9 and specifies a load-line length of 0.1L without defining L. The mesh counts and element sizes imply a 2-by-1 computational rectangle for square cells, but do not identify L with either span. Let W and H denote its width and height.",
+    "readings": [
+     "W = 2L and H = L; the loaded line has length 0.1H.",
+     "W = L and H = L/2; the loaded line has length 0.2H."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "Supported portion of the cantilever",
+    "issue": "figure_only",
+    "description": "Sec. 4 refers exact boundary placement to Figure 9. The name 'Michell cantilever' does not specify the supported nodes or boundary lengths.",
+    "readings": [
+     "Support the entire left edge, x = 0.",
+     "Support only the two left corner nodes, (0,0) and (0,H).",
+     "Support two left-edge patches covering y/H in [0,0.05] and [0.95,1]."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_type",
+    "entity": "Displacement constraints at supports",
+    "issue": "figure_only",
+    "description": "The support degrees of freedom are not described in Sec. 4 or Sec. 4.2; the boundary-condition drawing is unavailable.",
+    "readings": [
+     "Set ux = uy = 0 at every supported node.",
+     "Set ux = 0 at the supported nodes and restrain uy only at one lower-left anchor node."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "Placement and orientation of the loaded line",
+    "issue": "figure_only",
+    "description": "Sec. 4 gives the line length but delegates exact load placement to Figure 9.",
+    "readings": [
+     "A vertical segment on the right edge centered at y = H/2.",
+     "A vertical segment on the right edge centered at y = H/4.",
+     "A horizontal segment on the top edge centered at x = W/2."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Force applied along the loaded line",
+    "issue": "figure_only",
+    "description": "Neither Sec. 4 nor Sec. 4.2 states the force direction in words or components; loading is assigned to Figure 9.",
+    "readings": [
+     "Uniformly vertical downward.",
+     "Uniformly horizontal to the right.",
+     "Uniformly diagonal, 45 degrees downward and to the right."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Total applied force",
+    "issue": "missing",
+    "description": "No resultant force magnitude or traction magnitude is specified in the supplied text. The reported compliances do not independently determine it.",
+    "readings": [
+     "Normalize the total resultant to 1 force unit.",
+     "Normalize the total resultant to 2 force units."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Force distribution along the loaded line",
+    "issue": "missing",
+    "description": "Sec. 4 says the force is applied along a line, but does not specify its spatial profile.",
+    "readings": [
+     "Constant traction along the whole segment.",
+     "A symmetric triangular traction profile, zero at the endpoints and maximal at the midpoint, with the same total resultant."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Structured-grid realization of the loaded line",
+    "issue": "missing",
+    "description": "The text does not specify endpoint snapping, node selection, or consistent nodal-force assembly for the finite loaded segment.",
+    "readings": [
+     "Integrate traction over the exact segment, including partially covered element edges, using consistent nodal forces.",
+     "Snap the segment endpoints to the nearest boundary nodes and integrate traction over the snapped segment.",
+     "Select nodes inside the nominal segment and divide the resultant equally among them."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Radius of the solid neighborhood around the load",
+    "issue": "vague",
+    "description": "Sec. 4 specifies only a 'small radius around the load' for setting elements solid.",
+    "readings": [
+     "Radius r = hc.",
+     "Radius r = 3hc.",
+     "Radius r = 0.05L."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Geometry and rasterization of the load neighborhood",
+    "issue": "vague",
+    "description": "Sec. 4 does not define whether distance is measured from the load-line midpoint or the entire segment, or how intersecting grid cells are selected.",
+    "readings": [
+     "A disk centered at the loaded segment's midpoint; include cells whose centers lie inside it.",
+     "A distance-r neighborhood of the entire loaded segment; include cells whose centers lie inside it.",
+     "A distance-r neighborhood of the entire loaded segment; include every cell intersecting it."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Logical combination of the two solidification conditions",
+    "issue": "vague",
+    "description": "The Sec. 4 phrase 'all elements with a density of rho > 0.99 and in a small radius around the load' does not distinguish a conjunction from two separately solidified sets.",
+    "readings": [
+     "Solidify the union: every element with rho > 0.99, plus every element in the load neighborhood.",
+     "Solidify the intersection: only elements that both have rho > 0.99 and lie in the load neighborhood."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Timing and source density of solidification",
+    "issue": "missing",
+    "description": "Sec. 4 does not identify which density field is tested against 0.99 or when the solidification rules are applied relative to optimization and de-homogenization.",
+    "readings": [
+     "Use the converged coarse homogenization density to construct a mask, transfer it to the fine grid, and impose it after de-homogenization.",
+     "Keep the load neighborhood solid throughout the direct single-material optimization and round final physical densities above 0.99 afterward.",
+     "Apply both rules only to the final fine-grid physical density."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Volume accounting for forced-solid elements",
+    "issue": "missing",
+    "description": "Figures 10\u201312 clearly give nominal targets of 0.25 and 0.40. However, Eq. 1 and Sec. 4 do not explain whether the subsequently mentioned solidification is included in that budget or adds material afterward.",
+    "readings": [
+     "Include all forced-solid elements in the total physical-volume constraint at the caption's nominal fraction.",
+     "Enforce the nominal fraction before solidification, then allow the solidification step to increase the final volume."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Overall stiffness scale of the solid material",
+    "issue": "missing",
+    "description": "Sec. 2.1 and Sec. 4.2 provide no Young's modulus or equivalent overall multiplier for the solid elasticity tensor.",
+    "readings": [
+     "Use E = 1 in consistent units.",
+     "Use E = 2 in the same units, holding the dimensionless constitutive properties fixed."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Solid constitutive tensor apart from its overall scale",
+    "issue": "missing",
+    "description": "The supplied text gives no base-solid constitutive tensor, Poisson ratio, or explicit isotropy assumption.",
+    "readings": [
+     "Isotropic elasticity with Poisson ratio 0.30.",
+     "Isotropic elasticity with Poisson ratio 0.",
+     "Orthotropic plane elasticity with Ex/Ey = 2, nu_xy = 0.25, Gxy/Ey = 0.4, and material axes aligned with the grid."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Two-dimensional mechanical assumption",
+    "issue": "missing",
+    "description": "The paper identifies the examples as two-dimensional, but does not specify plane stress or plane strain.",
+    "readings": [
+     "Plane stress.",
+     "Plane strain."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Uniform out-of-plane thickness",
+    "issue": "missing",
+    "description": "No thickness or explicit per-unit-thickness convention is stated for the two-dimensional analysis.",
+    "readings": [
+     "Unit thickness t = 1.",
+     "Uniform thickness t = 2, with the same prescribed total forces."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Single-material stiffness interpolation and density regularization",
+    "issue": "missing",
+    "description": "Eq. 1 uses rank-2 lamination variables and an area penalty, rather than a conventional single-material density formulation. The top88 reference in Sec. 4.2.1 is a timing comparison. Neither it nor the stated laminate parameter alpha_out = 1e-9 defines a direct density interpolation, penalization exponent, or density floor.",
+    "readings": [
+     "SIMP with p = 3, density bounds [0,1], and Emin/Esolid = 1e-9.",
+     "SIMP with p = 4, density bounds [0,1], and Emin/Esolid = 1e-9.",
+     "SIMP with p = 3, density bounds [0.001,1], and Emin/Esolid = 1e-9.",
+     "RAMP with q = 5, density bounds [0,1], and Emin/Esolid = 1e-9."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Units and grid scaling of the filter radius",
+    "issue": "vague",
+    "description": "Sec. 4 states r_min = 1.2 without units or a rule for transferring the homogenization filter to a direct fine-grid optimization.",
+    "readings": [
+     "Use radius 1.2hc and preserve that physical radius on the fine grid: 28.8hf for 24-fold refinement or 48hf for 40-fold refinement.",
+     "Use radius 1.2 times the spacing of whichever grid is directly optimized, including 1.2hf on a fine grid."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Filtered quantity in the single-material solver",
+    "issue": "missing",
+    "description": "Eq. 2 filters lamination variables and the material indicator. It does not specify their replacement by a density or sensitivity filter in the requested single-material solver.",
+    "readings": [
+     "Filter design densities before constructing the physical stiffness field.",
+     "Filter compliance sensitivities while using unfiltered design densities for stiffness."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Filter kernel",
+    "issue": "missing",
+    "description": "Sec. 2.1 denotes filtered variables and Sec. 4 supplies a radius, but neither specifies the filter weights or operator.",
+    "readings": [
+     "Normalized radial cone weights max(0, r_min - distance).",
+     "Uniform weights inside a circular neighborhood of radius r_min.",
+     "A Helmholtz PDE filter with its length parameter identified with r_min."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Design-filter treatment at domain boundaries",
+    "issue": "missing",
+    "description": "No boundary treatment is given for the optimization filter. The two-pixel replication padding in Sec. 4 explicitly concerns the neural-network input.",
+    "readings": [
+     "Truncate the filter neighborhood at the domain boundary and renormalize the remaining weights.",
+     "Extend density by zero outside the domain and retain the full-neighborhood normalization.",
+     "Reflect or replicate density outside the boundary."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Projection parameters and projected density fields",
+    "issue": "missing",
+    "description": "Eqs. 1\u20134 use projected fields and superscripts d and e without specifying projection thresholds, sharpness, or their physical interpretation. No equivalent single-material projection is supplied.",
+    "readings": [
+     "One normalized tanh Heaviside projection with threshold 0.5 and sharpness beta = 8.",
+     "One normalized tanh Heaviside projection with threshold 0.5 and sharpness beta = 32.",
+     "Separate dilated and eroded projections with thresholds 0.3 and 0.7 and beta = 8."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Penalization and projection continuation schedule",
+    "issue": "vague",
+    "description": "Sec. 4.2.1 says a conventional TO continuation strategy would be needed and mentions a typical iteration count, but gives no actual schedule for a single-material rerun.",
+    "readings": [
+     "Keep SIMP p = 3 and projection beta = 8 fixed.",
+     "Increase p through 1, 2, and 3 every 100 iterations, then double beta from 1 to 64 every 50 iterations.",
+     "Keep p = 3 fixed and double beta from 1 to 64 every 100 iterations."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Optimization algorithm and update controls",
+    "issue": "missing",
+    "description": "Sec. 4 says Eq. 1 is solved until convergence but does not state the optimizer or move limits. The later top88 timing comparison does not specify these for the example.",
+    "readings": [
+     "Optimality-criteria updates with a density move limit of 0.2 per iteration.",
+     "Optimality-criteria updates with a density move limit of 0.05 per iteration.",
+     "MMA updates with a density move limit of 0.1 per iteration."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial design",
+    "issue": "missing",
+    "description": "No initialization is given for the optimization in Sec. 4 or for a direct single-material replacement.",
+    "readings": [
+     "Uniform density equal to the selected nominal volume fraction.",
+     "Uniform density at the selected fraction plus a zero-mean 1-percent random perturbation generated with seed 0."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Optimization stopping criterion",
+    "issue": "vague",
+    "description": "Sec. 4 specifies only 'until convergence'; no monitored quantity, tolerance, persistence requirement, or iteration cap is supplied.",
+    "readings": [
+     "Stop when the maximum density change is below 0.01.",
+     "Stop when the maximum density change is below 0.001.",
+     "Stop when relative compliance change remains below 1e-4 for ten iterations."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Finite-element formulation and integration",
+    "issue": "missing",
+    "description": "Sec. 4.2 and its captions specify element counts and mesh sizes, but not displacement interpolation order or quadrature.",
+    "readings": [
+     "Four-node bilinear quadrilateral elements with 2-by-2 Gauss integration.",
+     "Eight-node quadratic quadrilateral elements with 3-by-3 Gauss integration."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Equilibrium-solve accuracy",
+    "issue": "missing",
+    "description": "Eq. 1 specifies equilibrium, while Sec. 4.2.1 discusses possible solver costs without specifying numerical precision or residual tolerances for reproducing the results.",
+    "readings": [
+     "Double-precision sparse direct factorization.",
+     "Preconditioned conjugate gradients with relative residual tolerance 1e-6.",
+     "Preconditioned conjugate gradients with relative residual tolerance 1e-10."
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 808.9261264801025,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L04",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 1,
+ "locator": "Sec. 4.2, the Michell cantilever beam",
+ "finished": "2026-10-22T19:50:02"
+}

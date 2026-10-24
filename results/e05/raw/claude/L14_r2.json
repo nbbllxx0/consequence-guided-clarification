@@ -1,0 +1,287 @@
+{
+ "raw": "{\"items\": [{\"category\": \"support_location_extent\", \"entity\": \"Dirichlet support of the cantilever\", \"issue\": \"figure_only\", \"description\": \"Sec. 2 refers all boundary conditions to Fig. 1 ('standard setup for the cantilever benchmark'), which is not available. The text only mentions 'the Dirichlet boundary condition' (Sec. 3.5). Sec. 3.4 says the designs are symmetric about the horizontal mid-line (only the bottom half is coloured), so the support should be symmetric about mid-height. Its location and extent are never stated.\", \"readings\": [\"entire left edge x = 0, 0 \\u2264 y \\u2264 10 supported (classic cantilever)\", \"only a central segment of the left edge, symmetric about y = 5\", \"only the top and bottom ends/corners of the left edge\"], \"effect\": \"layout\"}, {\"category\": \"support_type\", \"entity\": \"Dirichlet support on the left edge\", \"issue\": \"figure_only\", \"description\": \"The text never says which displacement components are fixed (Fig. 1 only).\", \"readings\": [\"fully clamped: u_x = u_y = 0 on all support nodes\", \"roller u_x = 0 along the edge, with u_y = 0 at a single point (e.g. mid-height) only to remove rigid-body motion\"], \"effect\": \"layout\"}, {\"category\": \"load_position\", \"entity\": \"external traction t0 at the free end\", \"issue\": \"figure_only\", \"description\": \"Eq. (1) only says there is a traction t0 on \\u2202B; its location is shown only in Fig. 1. The symmetry remark in Sec. 3.4 points to a load at mid-height of the right edge, but common cantilever variants (e.g. the 88-line code) load a corner.\", \"readings\": [\"right edge at mid-height, y = 0.5H (x = 20, y = 5)\", \"bottom-right corner, y = 0\", \"top-right corner, y = H\"], \"effect\": \"layout\"}, {\"category\": \"load_extent_distribution\", \"entity\": \"traction t0 (loaded boundary patch)\", \"issue\": \"missing\", \"description\": \"Eq. (1) writes the compliance as \\u222b\\u2202B u\\u00b7t0 dA, which implies a surface traction. The length of the loaded segment, or whether a nodal point force was used instead, is not given anywhere. A point load is also awkward with the adaptive deal.II meshes used.\", \"readings\": [\"concentrated nodal force at the load point\", \"uniform traction on a segment of length 0.25 (one level-2 element) centred at the load point\", \"uniform traction on a segment of length 1 (one level-0 element) centred at the load point\", \"uniform traction over the whole right edge (length 10)\"], \"effect\": \"layout\"}, {\"category\": \"load_direction\", \"entity\": \"traction t0\", \"issue\": \"figure_only\", \"description\": \"The text never gives the load direction. 'Cantilever benchmark' implies a transverse (vertical) load; the arrow is only in Fig. 1. In linear compliance minimisation, reversing the sign leaves both compliance and the optimal layout unchanged, so only the transverse line of action matters.\", \"readings\": [\"vertical, downward (\\u2212y)\", \"vertical, upward (+y)\"], \"effect\": \"scale_only\"}, {\"category\": \"load_magnitude\", \"entity\": \"load magnitude |t0| / total tip force\", \"issue\": \"missing\", \"description\": \"No load value appears in Sec. 2, Table 1 or elsewhere. The Fig. 2 compliances (7.61e-5, 8.92e-5 with E = 1) are far below what a unit load would give on a 20\\u00d710 domain (rough estimate O(10^2)). That suggests a load of order 1e-3 or different units, so absolute compliances cannot be checked without this value.\", \"readings\": [\"total force F = 1\", \"traction of 1 per unit length over the loaded segment\", \"total force of order 1e-3 (back-estimated from the reported compliance with E = 1)\"], \"effect\": \"scale_only\"}, {\"category\": \"passive_region\", \"entity\": \"non-design (fixed solid/void) regions\", \"issue\": \"missing\", \"description\": \"Sec. 2 and Table 1 never mention passive elements, and Fig. 1 is unavailable. Some cantilever setups add a solid pad at the load or along the support.\", \"readings\": [\"no passive regions: the whole 20\\u00d710 rectangle is designable\", \"small solid passive patch around the load application point\", \"solid passive strip along the supported edge\"], \"effect\": \"layout\"}, {\"category\": \"material\", \"entity\": \"Table 1 material parameter '\\u03bc = 0.3'\", \"issue\": \"vague\", \"description\": \"Table 1 (Material) lists 'E 1' and '\\u03bc 0.3' without defining \\u03bc. In continuum-mechanics notation \\u03bc is usually the shear modulus, but paired with E it is presumably Poisson's ratio.\", \"readings\": [\"Poisson's ratio \\u03bd = 0.3\", \"shear modulus \\u03bc = 0.3, which with E = 1 implies \\u03bd = E/(2\\u03bc) \\u2212 1 \\u2248 0.67 (physically implausible)\"], \"effect\": \"layout\"}, {\"category\": \"material\", \"entity\": \"2D stress state\", \"issue\": \"missing\", \"description\": \"Plane stress vs. plane strain is not stated. Reading \\u03c1 as the out-of-plane thickness of an extruded sheet (Sec. 2) implies plane stress, but the deal.II implementation is not described. Plane strain changes the effective \\u03bd to \\u03bd/(1\\u2212\\u03bd) and scales E.\", \"readings\": [\"plane stress\", \"plane strain\"], \"effect\": \"layout\"}, {\"category\": \"domain_extent\", \"entity\": \"out-of-plane sheet thickness at \\u03c1 = 1\", \"issue\": \"missing\", \"description\": \"Sec. 2 interprets \\u03c1_e as out-of-plane thickness, but the reference thickness for \\u03c1 = 1 is not given. It multiplies all stiffnesses uniformly.\", \"readings\": [\"t_max = 1\", \"some other constant t_max (e.g. 0.1 or 10)\"], \"effect\": \"scale_only\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"PDE (Helmholtz) filter radius 0.375\", \"issue\": \"vague\", \"description\": \"Table 1 says 'Filter Type PDE, Radius 0.375 (1.5h2)' and Sec. 2 cites Lazarov & Sigmund (2011), but does not say how this 'radius' enters \\u2212r\\u00b2\\u2207\\u00b2\\u03c1\\u0303 + \\u03c1\\u0303 = \\u03c1. Lazarov & Sigmund map a density-filter radius R to r = R/(2\\u221a3), a factor of about 3.5 in length scale. A structured-grid code without a PDE filter would substitute a cone filter.\", \"readings\": [\"Helmholtz length r = 0.375 used directly in \\u2212r\\u00b2\\u2207\\u00b2\\u03c1\\u0303 + \\u03c1\\u0303 = \\u03c1\", \"0.375 is the equivalent density-filter radius R, so r = 0.375/(2\\u221a3) \\u2248 0.108\", \"linear cone density filter with R = 0.375 (6 elements on 320\\u00d7160, 1.5 elements on 80\\u00d740)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"PDE filter boundary conditions\", \"issue\": \"missing\", \"description\": \"The boundary conditions of the Helmholtz filter are not stated (Sec. 2 / Table 1). They change the filtered densities at the clamped, loaded and free edges.\", \"readings\": [\"homogeneous Neumann on the whole boundary (Lazarov & Sigmund default, volume-preserving)\", \"Dirichlet/Robin-type conditions, or padding the domain to remove boundary effects\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"density field used in stiffness and volume constraint\", \"issue\": \"vague\", \"description\": \"Eq. (1) writes E(\\u03c1_e) and the volume integral in terms of the design variable \\u03c1 (V0 is not defined) and never mentions the filtered field. Only later sections and Fig. 12 imply that the filtered density drives the state problem. The mapping of the filtered field to elements (cell average vs. quadrature points) is also unstated.\", \"readings\": [\"filtered \\u03c1\\u0303 (cell-averaged) in both stiffness and volume constraint, V0 = domain area at full thickness\", \"filtered \\u03c1\\u0303 in stiffness, raw \\u03c1 in the volume constraint (literal Eq. 1)\", \"filtered field evaluated at quadrature points in the stiffness\"], \"effect\": \"unsure\"}, {\"category\": \"mesh\", \"entity\": \"analysis/design mesh (adaptive vs uniform)\", \"issue\": \"vague\", \"description\": \"The reported results use adaptive refinement and coarsening (Table 1 / Sec. 2: start at level 2 = 80\\u00d740, h = 0.25; levels 0\\u20134; refine if the density jump > 0.05, coarsen if < 0.001). The adaptation frequency is deferred to Stankiewicz et al. (2025a,b). A structured grid cannot reproduce this. Remark 1 says a fixed 320\\u00d7160 grid gives 'the same resolution', while the radius is quoted as 1.5h2 relative to 80\\u00d740.\", \"readings\": [\"uniform 320\\u00d7160 grid, h = 0.0625 (Remark 1, finest level 4)\", \"uniform 80\\u00d740 grid, h = 0.25 (initial level 2, r = 1.5h)\"], \"effect\": \"layout\"}, {\"category\": \"mesh\", \"entity\": \"finest element size h4\", \"issue\": \"conflicting\", \"description\": \"Sec. 2 states h4 = 1\\u00b70.5^4 = 0.06125, but 0.5^4 = 0.0625. That value also matches 320\\u00d7160 cells on the 20\\u00d710 domain implied by 80\\u00d740 \\u00d7 0.25 (Remark 1), so 0.06125 is evidently a typo.\", \"readings\": [\"h4 = 0.0625 (consistent with 0.5^4 and with 320\\u00d7160 on 20\\u00d710)\", \"h4 = 0.06125 as printed (320 cells would then span only 19.6)\"], \"effect\": \"unsure\"}, {\"category\": \"mesh\", \"entity\": \"finite element type\", \"issue\": \"missing\", \"description\": \"The displacement interpolation order and quadrature of the deal.II implementation are not stated (Sec. 2). Only one density per cell (\\u03c1_e) is implied.\", \"readings\": [\"bilinear 4-node Q1 quadrilaterals\", \"biquadratic 9-node Q2 quadrilaterals\"], \"effect\": \"unsure\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"GOCM optimizer settings\", \"issue\": \"vague\", \"description\": \"Table 1 / Sec. 2 list GOCM (Kim et al. 2021) with initial step length 0.05, decay 0.98 per iteration, min. step length 1e-4 and an 'exponential' design update. Their meaning (move limit on \\u03c1 vs. multiplier step; form of the exponential update) and the remaining GOCM parameters are not given. The step reaches 1e-4 after about 300 iterations, so the design may freeze before full convergence even though the p = 1 problem is convex.\", \"readings\": [\"GOCM per Kim et al. (2021), step/move limit 0.05\\u00b70.98^k with floor 1e-4, multiplicative (exponential) update\", \"standard OC with move limit 0.05\\u00b70.98^k (floor 1e-4)\", \"OC or MMA with standard settings run to tight convergence\"], \"effect\": \"unsure\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"stopping criterion \\u0394\\u03c1_mean \\u2264 1e-4\", \"issue\": \"vague\", \"description\": \"Eq. (2) defines \\u0394\\u03c1_mean = \\u03a3 v_e \\u0394\\u03c1_e / \\u03a3 v_e but does not say whether \\u0394\\u03c1_e is an absolute value. A signed change averages to about 0 when the volume constraint is active. It also does not say whether raw or filtered densities are compared, and no maximum iteration count is given.\", \"readings\": [\"absolute change |\\u03c1_e^k \\u2212 \\u03c1_e^(k\\u22121)| of the raw design variables, no iteration cap\", \"absolute change of the filtered (physical) densities\", \"either of the above plus a maximum iteration count (e.g. 300\\u2013500)\"], \"effect\": \"unsure\"}, {\"category\": \"material\", \"entity\": \"standard SIMP comparison run (Fig. 2)\", \"issue\": \"missing\", \"description\": \"Sec. 2 / Fig. 2 compare VTTO with 'standard SIMP-based TO' (17.2% higher compliance) but give no penalty exponent, continuation or projection for that run. p = 3 appears only in Sec. 3.1, for the low-thickness suppression.\", \"readings\": [\"p = 3 from the start, same filter, no projection\", \"p continued from 1 to 3\", \"p = 3 plus Heaviside projection\"], \"effect\": \"layout\"}, {\"category\": \"other\", \"entity\": \"reference compliance values (Fig. 2 caption)\", \"issue\": \"conflicting\", \"description\": \"The Fig. 2 caption assigns 7.61e-5 and 8.92e-5 to 'standard SIMP-based TO and VTTO, respectively'. Read literally, VTTO would be worse, contradicting the text (penalization raises compliance by 17.2%) and Sec. 4.3 (VTTO reference \\u2248 7.628e-5). The order appears swapped.\", \"readings\": [\"VTTO = 7.61e-5, SIMP = 8.92e-5 (consistent with the text and Sec. 4.3)\", \"SIMP = 7.61e-5, VTTO = 8.92e-5 (literal caption)\"], \"effect\": \"unsure\"}]}",
+ "parsed": {
+  "items": [
+   {
+    "category": "support_location_extent",
+    "entity": "Dirichlet support of the cantilever",
+    "issue": "figure_only",
+    "description": "Sec. 2 refers all boundary conditions to Fig. 1 ('standard setup for the cantilever benchmark'), which is not available. The text only mentions 'the Dirichlet boundary condition' (Sec. 3.5). Sec. 3.4 says the designs are symmetric about the horizontal mid-line (only the bottom half is coloured), so the support should be symmetric about mid-height. Its location and extent are never stated.",
+    "readings": [
+     "entire left edge x = 0, 0 \u2264 y \u2264 10 supported (classic cantilever)",
+     "only a central segment of the left edge, symmetric about y = 5",
+     "only the top and bottom ends/corners of the left edge"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_type",
+    "entity": "Dirichlet support on the left edge",
+    "issue": "figure_only",
+    "description": "The text never says which displacement components are fixed (Fig. 1 only).",
+    "readings": [
+     "fully clamped: u_x = u_y = 0 on all support nodes",
+     "roller u_x = 0 along the edge, with u_y = 0 at a single point (e.g. mid-height) only to remove rigid-body motion"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "external traction t0 at the free end",
+    "issue": "figure_only",
+    "description": "Eq. (1) only says there is a traction t0 on \u2202B; its location is shown only in Fig. 1. The symmetry remark in Sec. 3.4 points to a load at mid-height of the right edge, but common cantilever variants (e.g. the 88-line code) load a corner.",
+    "readings": [
+     "right edge at mid-height, y = 0.5H (x = 20, y = 5)",
+     "bottom-right corner, y = 0",
+     "top-right corner, y = H"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "traction t0 (loaded boundary patch)",
+    "issue": "missing",
+    "description": "Eq. (1) writes the compliance as \u222b\u2202B u\u00b7t0 dA, which implies a surface traction. The length of the loaded segment, or whether a nodal point force was used instead, is not given anywhere. A point load is also awkward with the adaptive deal.II meshes used.",
+    "readings": [
+     "concentrated nodal force at the load point",
+     "uniform traction on a segment of length 0.25 (one level-2 element) centred at the load point",
+     "uniform traction on a segment of length 1 (one level-0 element) centred at the load point",
+     "uniform traction over the whole right edge (length 10)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "traction t0",
+    "issue": "figure_only",
+    "description": "The text never gives the load direction. 'Cantilever benchmark' implies a transverse (vertical) load; the arrow is only in Fig. 1. In linear compliance minimisation, reversing the sign leaves both compliance and the optimal layout unchanged, so only the transverse line of action matters.",
+    "readings": [
+     "vertical, downward (\u2212y)",
+     "vertical, upward (+y)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "load magnitude |t0| / total tip force",
+    "issue": "missing",
+    "description": "No load value appears in Sec. 2, Table 1 or elsewhere. The Fig. 2 compliances (7.61e-5, 8.92e-5 with E = 1) are far below what a unit load would give on a 20\u00d710 domain (rough estimate O(10^2)). That suggests a load of order 1e-3 or different units, so absolute compliances cannot be checked without this value.",
+    "readings": [
+     "total force F = 1",
+     "traction of 1 per unit length over the loaded segment",
+     "total force of order 1e-3 (back-estimated from the reported compliance with E = 1)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "non-design (fixed solid/void) regions",
+    "issue": "missing",
+    "description": "Sec. 2 and Table 1 never mention passive elements, and Fig. 1 is unavailable. Some cantilever setups add a solid pad at the load or along the support.",
+    "readings": [
+     "no passive regions: the whole 20\u00d710 rectangle is designable",
+     "small solid passive patch around the load application point",
+     "solid passive strip along the supported edge"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Table 1 material parameter '\u03bc = 0.3'",
+    "issue": "vague",
+    "description": "Table 1 (Material) lists 'E 1' and '\u03bc 0.3' without defining \u03bc. In continuum-mechanics notation \u03bc is usually the shear modulus, but paired with E it is presumably Poisson's ratio.",
+    "readings": [
+     "Poisson's ratio \u03bd = 0.3",
+     "shear modulus \u03bc = 0.3, which with E = 1 implies \u03bd = E/(2\u03bc) \u2212 1 \u2248 0.67 (physically implausible)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "2D stress state",
+    "issue": "missing",
+    "description": "Plane stress vs. plane strain is not stated. Reading \u03c1 as the out-of-plane thickness of an extruded sheet (Sec. 2) implies plane stress, but the deal.II implementation is not described. Plane strain changes the effective \u03bd to \u03bd/(1\u2212\u03bd) and scales E.",
+    "readings": [
+     "plane stress",
+     "plane strain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "out-of-plane sheet thickness at \u03c1 = 1",
+    "issue": "missing",
+    "description": "Sec. 2 interprets \u03c1_e as out-of-plane thickness, but the reference thickness for \u03c1 = 1 is not given. It multiplies all stiffnesses uniformly.",
+    "readings": [
+     "t_max = 1",
+     "some other constant t_max (e.g. 0.1 or 10)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "PDE (Helmholtz) filter radius 0.375",
+    "issue": "vague",
+    "description": "Table 1 says 'Filter Type PDE, Radius 0.375 (1.5h2)' and Sec. 2 cites Lazarov & Sigmund (2011), but does not say how this 'radius' enters \u2212r\u00b2\u2207\u00b2\u03c1\u0303 + \u03c1\u0303 = \u03c1. Lazarov & Sigmund map a density-filter radius R to r = R/(2\u221a3), a factor of about 3.5 in length scale. A structured-grid code without a PDE filter would substitute a cone filter.",
+    "readings": [
+     "Helmholtz length r = 0.375 used directly in \u2212r\u00b2\u2207\u00b2\u03c1\u0303 + \u03c1\u0303 = \u03c1",
+     "0.375 is the equivalent density-filter radius R, so r = 0.375/(2\u221a3) \u2248 0.108",
+     "linear cone density filter with R = 0.375 (6 elements on 320\u00d7160, 1.5 elements on 80\u00d740)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "PDE filter boundary conditions",
+    "issue": "missing",
+    "description": "The boundary conditions of the Helmholtz filter are not stated (Sec. 2 / Table 1). They change the filtered densities at the clamped, loaded and free edges.",
+    "readings": [
+     "homogeneous Neumann on the whole boundary (Lazarov & Sigmund default, volume-preserving)",
+     "Dirichlet/Robin-type conditions, or padding the domain to remove boundary effects"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "density field used in stiffness and volume constraint",
+    "issue": "vague",
+    "description": "Eq. (1) writes E(\u03c1_e) and the volume integral in terms of the design variable \u03c1 (V0 is not defined) and never mentions the filtered field. Only later sections and Fig. 12 imply that the filtered density drives the state problem. The mapping of the filtered field to elements (cell average vs. quadrature points) is also unstated.",
+    "readings": [
+     "filtered \u03c1\u0303 (cell-averaged) in both stiffness and volume constraint, V0 = domain area at full thickness",
+     "filtered \u03c1\u0303 in stiffness, raw \u03c1 in the volume constraint (literal Eq. 1)",
+     "filtered field evaluated at quadrature points in the stiffness"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "mesh",
+    "entity": "analysis/design mesh (adaptive vs uniform)",
+    "issue": "vague",
+    "description": "The reported results use adaptive refinement and coarsening (Table 1 / Sec. 2: start at level 2 = 80\u00d740, h = 0.25; levels 0\u20134; refine if the density jump > 0.05, coarsen if < 0.001). The adaptation frequency is deferred to Stankiewicz et al. (2025a,b). A structured grid cannot reproduce this. Remark 1 says a fixed 320\u00d7160 grid gives 'the same resolution', while the radius is quoted as 1.5h2 relative to 80\u00d740.",
+    "readings": [
+     "uniform 320\u00d7160 grid, h = 0.0625 (Remark 1, finest level 4)",
+     "uniform 80\u00d740 grid, h = 0.25 (initial level 2, r = 1.5h)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "finest element size h4",
+    "issue": "conflicting",
+    "description": "Sec. 2 states h4 = 1\u00b70.5^4 = 0.06125, but 0.5^4 = 0.0625. That value also matches 320\u00d7160 cells on the 20\u00d710 domain implied by 80\u00d740 \u00d7 0.25 (Remark 1), so 0.06125 is evidently a typo.",
+    "readings": [
+     "h4 = 0.0625 (consistent with 0.5^4 and with 320\u00d7160 on 20\u00d710)",
+     "h4 = 0.06125 as printed (320 cells would then span only 19.6)"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "mesh",
+    "entity": "finite element type",
+    "issue": "missing",
+    "description": "The displacement interpolation order and quadrature of the deal.II implementation are not stated (Sec. 2). Only one density per cell (\u03c1_e) is implied.",
+    "readings": [
+     "bilinear 4-node Q1 quadrilaterals",
+     "biquadratic 9-node Q2 quadrilaterals"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "GOCM optimizer settings",
+    "issue": "vague",
+    "description": "Table 1 / Sec. 2 list GOCM (Kim et al. 2021) with initial step length 0.05, decay 0.98 per iteration, min. step length 1e-4 and an 'exponential' design update. Their meaning (move limit on \u03c1 vs. multiplier step; form of the exponential update) and the remaining GOCM parameters are not given. The step reaches 1e-4 after about 300 iterations, so the design may freeze before full convergence even though the p = 1 problem is convex.",
+    "readings": [
+     "GOCM per Kim et al. (2021), step/move limit 0.05\u00b70.98^k with floor 1e-4, multiplicative (exponential) update",
+     "standard OC with move limit 0.05\u00b70.98^k (floor 1e-4)",
+     "OC or MMA with standard settings run to tight convergence"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "stopping criterion \u0394\u03c1_mean \u2264 1e-4",
+    "issue": "vague",
+    "description": "Eq. (2) defines \u0394\u03c1_mean = \u03a3 v_e \u0394\u03c1_e / \u03a3 v_e but does not say whether \u0394\u03c1_e is an absolute value. A signed change averages to about 0 when the volume constraint is active. It also does not say whether raw or filtered densities are compared, and no maximum iteration count is given.",
+    "readings": [
+     "absolute change |\u03c1_e^k \u2212 \u03c1_e^(k\u22121)| of the raw design variables, no iteration cap",
+     "absolute change of the filtered (physical) densities",
+     "either of the above plus a maximum iteration count (e.g. 300\u2013500)"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "material",
+    "entity": "standard SIMP comparison run (Fig. 2)",
+    "issue": "missing",
+    "description": "Sec. 2 / Fig. 2 compare VTTO with 'standard SIMP-based TO' (17.2% higher compliance) but give no penalty exponent, continuation or projection for that run. p = 3 appears only in Sec. 3.1, for the low-thickness suppression.",
+    "readings": [
+     "p = 3 from the start, same filter, no projection",
+     "p continued from 1 to 3",
+     "p = 3 plus Heaviside projection"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "reference compliance values (Fig. 2 caption)",
+    "issue": "conflicting",
+    "description": "The Fig. 2 caption assigns 7.61e-5 and 8.92e-5 to 'standard SIMP-based TO and VTTO, respectively'. Read literally, VTTO would be worse, contradicting the text (penalization raises compliance by 17.2%) and Sec. 4.3 (VTTO reference \u2248 7.628e-5). The order appears swapped.",
+    "readings": [
+     "VTTO = 7.61e-5, SIMP = 8.92e-5 (consistent with the text and Sec. 4.3)",
+     "SIMP = 7.61e-5, VTTO = 8.92e-5 (literal caption)"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 463.0851912498474,
+ "returncode": 0,
+ "meta": {
+  "model": null,
+  "num_turns": 2,
+  "is_error": false,
+  "total_cost_usd": 1.2124948000000002,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 23454,
+   "cache_read_input_tokens": 774,
+   "output_tokens": 51235,
+   "output_tokens_details": {
+    "thinking_tokens": 46094
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 23454,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 51235,
+     "cache_read_input_tokens": 774,
+     "cache_creation_input_tokens": 23454,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 23454
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard",
+   "fallback_credit": null
+  }
+ },
+ "stderr_tail": "",
+ "task": "L14",
+ "model": "claude",
+ "model_id": "claude-opus-5-5",
+ "rep": 2,
+ "locator": "Sec. 2, the cantilever benchmark of Fig. 1 and Table 1",
+ "finished": "2026-10-22T22:17:36"
+}

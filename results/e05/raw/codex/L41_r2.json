@@ -1,0 +1,332 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Physical extent of the square domain\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.6 specifies a square but gives no physical side length L or length units. The 64\u00d764 statements elsewhere describe resolution. Effects depend on how dimensional thickness and filter lengths are scaled.\",\n      \"readings\": [\n        \"Domain [0,1]\u00d7[0,1] in normalized length units\",\n        \"Domain [0,64]\u00d7[0,64], with unit-width elements if using a 64\u00d764 mesh\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 3.1 and 4.6 do not specify thickness or a per-unit-thickness convention for assembling the two-dimensional stiffness matrix.\",\n      \"readings\": [\n        \"Uniform thickness t=1 in the chosen length units\",\n        \"Uniform thickness t=0.1 in the same units, retaining the same total applied force\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"Supported portions of the bracket boundary\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.6 and the Fig. 6 caption identify a shelf bracket but give no support locations, number of mounting regions, or supported lengths.\",\n      \"readings\": [\n        \"Entire left edge x=0, 0\u2264y\u2264L\",\n        \"Only the two left corners (0,0) and (0,L)\",\n        \"Upper half of the left edge x=0, L/2\u2264y\u2264L\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"support_type\",\n      \"entity\": \"Displacement constraints at mounting locations\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither the case description nor its caption states which displacement components are restrained; Sec. 4.1 only counts boundary-condition configurations.\",\n      \"readings\": [\n        \"Both ux and uy fixed at every supported node\",\n        \"ux fixed along a vertical mounting segment, with uy fixed at one endpoint\",\n        \"Two mounting points: both components fixed at one point and only ux fixed at the other\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"Location of the prescribed load\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 permits random unconstrained boundary nodes, but Sec. 4.6 does not identify the node or boundary position used for Fig. 6.\",\n      \"readings\": [\n        \"Upper-right corner (L,L)\",\n        \"Midpoint of the right edge (L,L/2)\",\n        \"Midpoint of the top edge (L/2,L)\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Spatial distribution of the prescribed load\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.1 describes boundary-node loading for the dataset. Sec. 4.6 does not explicitly establish whether the bracket inherits a single-node load or uses a shelf-contact loading region.\",\n      \"readings\": [\n        \"Concentrated force at one boundary node\",\n        \"Same total force divided equally between two adjacent boundary nodes\",\n        \"Uniform traction on the top-edge segment 3L/4\u2264x\u2264L\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"Direction of the applied force\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 supplies an angle set but does not select the Fig. 6 direction or define its angular coordinate convention. Sec. 4.6 supplies no direction.\",\n      \"readings\": [\n        \"Vertically downward\",\n        \"Horizontally rightward\",\n        \"Downward and rightward, 60 degrees below horizontal\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"Total applied force\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Sec. 4.1 nor the Fig. 6 case description gives a force magnitude or force units.\",\n      \"readings\": [\n        \"Resultant magnitude 1 in consistent force units\",\n        \"Resultant magnitude 10 in the same units\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Prescribed volume fraction for Fig. 6\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.1 defines vf and Sec. 4.1 lists dataset values, but Sec. 4.6 does not select the bracket's value.\",\n      \"readings\": [\n        \"0.30\",\n        \"0.32\",\n        \"0.34\",\n        \"0.36\",\n        \"0.38\",\n        \"0.40\",\n        \"0.42\",\n        \"0.44\",\n        \"0.46\",\n        \"0.48\",\n        \"0.50\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Fixed-solid attachment and loading regions\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.6 does not state whether attachment or load-introduction elements are protected from removal, or give a fixed-solid mask.\",\n      \"readings\": [\n        \"No fixed-solid elements\",\n        \"Every element incident on a loaded or supported node fixed at density 1\",\n        \"A one-element-wide strip along the mounting boundary fixed at density 1\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Prescribed voids or mounting clearances\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.6 and the caption do not state whether the square contains compulsory empty regions, such as mounting holes.\",\n      \"readings\": [\n        \"No prescribed void regions\",\n        \"A circular mounting hole centered at (L/8,L/2), radius L/32, held at the minimum density\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Solid Young's modulus\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.1 introduces K without elastic constants; Sec. 4.6 reports compliance without specifying the solid modulus or its units.\",\n      \"readings\": [\n        \"E0=1 in consistent normalized units\",\n        \"E0=100 in the same units, with the same relative void stiffness\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Poisson's ratio\",\n      \"issue\": \"missing\",\n      \"description\": \"No Poisson's ratio is supplied for the Fig. 6 material or the general FEA model.\",\n      \"readings\": [\n        \"nu=0.25\",\n        \"nu=0.30\",\n        \"nu=0.35\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Two-dimensional constitutive assumption\",\n      \"issue\": \"missing\",\n      \"description\": \"The in-plane stress representation in Appendix F does not distinguish plane stress from plane strain; Sec. 4.6 does not resolve this.\",\n      \"readings\": [\n        \"Plane stress\",\n        \"Plane strain\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Case-specific grid resolution\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.7.3, Table 8, and Appendix C identify 64\u00d764 benchmark grids, but Sec. 4.6 does not explicitly assign that grid to the illustrative Fig. 6 case.\",\n      \"readings\": [\n        \"64\u00d764 elements, inheriting the native benchmark grid\",\n        \"128\u00d7128 elements, treating Fig. 6 as a separately discretized illustrative case\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Finite-element formulation and integration\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.1 specifies equilibrium and Sec. 4.2 refers to a standard FEA solver, without naming element order or quadrature.\",\n      \"readings\": [\n        \"Four-node bilinear quadrilaterals with 2\u00d72 Gauss integration\",\n        \"Four-node bilinear quadrilaterals with stabilized one-point integration\",\n        \"Eight-node serendipity quadrilaterals with 3\u00d73 Gauss integration\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Minimum relative density\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (1) requires a positive xmin but never assigns its value.\",\n      \"readings\": [\n        \"xmin=0.01\",\n        \"xmin=0.001\",\n        \"xmin=0.000001\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"SIMP stiffness interpolation, penalization, and continuation\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.6 names SIMP but supplies no stiffness interpolation, penalty exponent, added void-stiffness floor, or continuation schedule.\",\n      \"readings\": [\n        \"E(x)=E0*x^3, with fixed exponent 3 and no additive stiffness floor\",\n        \"E(x)=E0*[1e-9+(1-1e-9)*x^3], with fixed exponent 3\",\n        \"E(x)=E0*[1e-9+(1-1e-9)*x^4], with fixed exponent 4\",\n        \"Same additive-floor interpolation, with p=1 for iterations 1\u201350, p=2 for 51\u2013100, and p=3 thereafter\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Spatial filtering operator\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Sec. 3.1 nor the Fig. 6 SIMP description specifies numerical filtering or its kernel.\",\n      \"readings\": [\n        \"No spatial filter\",\n        \"Sensitivity filtering with linear distance weights\",\n        \"Density filtering with linear distance weights\",\n        \"Density filtering with Gaussian weights\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Filter length scale\",\n      \"issue\": \"missing\",\n      \"description\": \"No filter radius or smoothing length is stated for the bracket reference solution.\",\n      \"readings\": [\n        \"Linear-weight filter cutoff radius r=1.5h, where h is element width\",\n        \"Linear-weight filter cutoff radius r=2h\",\n        \"Linear-weight filter cutoff radius r=3h\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Filter treatment at domain boundaries\",\n      \"issue\": \"missing\",\n      \"description\": \"The paper gives no rule for filtering near the square boundary or attachment regions.\",\n      \"readings\": [\n        \"Truncate neighborhoods to the domain and renormalize remaining weights\",\n        \"Treat exterior cells as void and retain full-kernel normalization\",\n        \"Reflect the density field across domain boundaries\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Density projection during optimization\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.6 does not specify an optimization projection. The evaluation threshold tau=0.5 in Sec. 4.2 does not define a projection used during SIMP.\",\n      \"readings\": [\n        \"No projection during optimization\",\n        \"Smooth tanh Heaviside projection with eta=0.5 and fixed beta=1\",\n        \"Smooth tanh Heaviside projection with eta=0.5 and beta increased through 1, 2, 4, and 8\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"SIMP initial density field\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.7.2 specifies uniform densities for physics-feature preprocessing, not the initialization of the Fig. 6 SIMP optimization.\",\n      \"readings\": [\n        \"Uniform density x=vf\",\n        \"Uniform density x=1\",\n        \"Uniform x=vf plus seed-0 uniform noise in [-0.01,0.01], adjusted to preserve the initial mean vf\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"SIMP update algorithm and move control\",\n      \"issue\": \"missing\",\n      \"description\": \"Naming SIMP in Sec. 4.6 does not identify the numerical optimizer or its step restrictions.\",\n      \"readings\": [\n        \"Optimality-criteria update with maximum density change 0.2 per iteration\",\n        \"Optimality-criteria update with maximum density change 0.1 per iteration\",\n        \"MMA updates with a density move limit of 0.2\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Optimization termination\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.6 supplies no SIMP stopping rule. Table 8's timing label of 100 steps does not explicitly establish the iteration count or convergence criterion for Fig. 6.\",\n      \"readings\": [\n        \"Run exactly 100 optimization iterations\",\n        \"Stop when maximum density change is below 0.01, with a 200-iteration cap\",\n        \"Stop when maximum density change is below 0.001, with a 1000-iteration cap\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Equilibrium-solve accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (3) and the standard-FEA wording in Sec. 4.2 do not specify the linear solver or its numerical tolerance.\",\n      \"readings\": [\n        \"Double-precision sparse direct solve\",\n        \"Conjugate-gradient solve with relative residual tolerance 1e-8\",\n        \"Conjugate-gradient solve with relative residual tolerance 1e-4\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "Physical extent of the square domain",
+    "issue": "missing",
+    "description": "Sec. 4.6 specifies a square but gives no physical side length L or length units. The 64\u00d764 statements elsewhere describe resolution. Effects depend on how dimensional thickness and filter lengths are scaled.",
+    "readings": [
+     "Domain [0,1]\u00d7[0,1] in normalized length units",
+     "Domain [0,64]\u00d7[0,64], with unit-width elements if using a 64\u00d764 mesh"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "Out-of-plane thickness",
+    "issue": "missing",
+    "description": "Secs. 3.1 and 4.6 do not specify thickness or a per-unit-thickness convention for assembling the two-dimensional stiffness matrix.",
+    "readings": [
+     "Uniform thickness t=1 in the chosen length units",
+     "Uniform thickness t=0.1 in the same units, retaining the same total applied force"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "Supported portions of the bracket boundary",
+    "issue": "missing",
+    "description": "Sec. 4.6 and the Fig. 6 caption identify a shelf bracket but give no support locations, number of mounting regions, or supported lengths.",
+    "readings": [
+     "Entire left edge x=0, 0\u2264y\u2264L",
+     "Only the two left corners (0,0) and (0,L)",
+     "Upper half of the left edge x=0, L/2\u2264y\u2264L"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_type",
+    "entity": "Displacement constraints at mounting locations",
+    "issue": "missing",
+    "description": "Neither the case description nor its caption states which displacement components are restrained; Sec. 4.1 only counts boundary-condition configurations.",
+    "readings": [
+     "Both ux and uy fixed at every supported node",
+     "ux fixed along a vertical mounting segment, with uy fixed at one endpoint",
+     "Two mounting points: both components fixed at one point and only ux fixed at the other"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "Location of the prescribed load",
+    "issue": "missing",
+    "description": "Sec. 4.1 permits random unconstrained boundary nodes, but Sec. 4.6 does not identify the node or boundary position used for Fig. 6.",
+    "readings": [
+     "Upper-right corner (L,L)",
+     "Midpoint of the right edge (L,L/2)",
+     "Midpoint of the top edge (L/2,L)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Spatial distribution of the prescribed load",
+    "issue": "vague",
+    "description": "Sec. 4.1 describes boundary-node loading for the dataset. Sec. 4.6 does not explicitly establish whether the bracket inherits a single-node load or uses a shelf-contact loading region.",
+    "readings": [
+     "Concentrated force at one boundary node",
+     "Same total force divided equally between two adjacent boundary nodes",
+     "Uniform traction on the top-edge segment 3L/4\u2264x\u2264L"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Direction of the applied force",
+    "issue": "missing",
+    "description": "Sec. 4.1 supplies an angle set but does not select the Fig. 6 direction or define its angular coordinate convention. Sec. 4.6 supplies no direction.",
+    "readings": [
+     "Vertically downward",
+     "Horizontally rightward",
+     "Downward and rightward, 60 degrees below horizontal"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Total applied force",
+    "issue": "missing",
+    "description": "Neither Sec. 4.1 nor the Fig. 6 case description gives a force magnitude or force units.",
+    "readings": [
+     "Resultant magnitude 1 in consistent force units",
+     "Resultant magnitude 10 in the same units"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Prescribed volume fraction for Fig. 6",
+    "issue": "missing",
+    "description": "Sec. 3.1 defines vf and Sec. 4.1 lists dataset values, but Sec. 4.6 does not select the bracket's value.",
+    "readings": [
+     "0.30",
+     "0.32",
+     "0.34",
+     "0.36",
+     "0.38",
+     "0.40",
+     "0.42",
+     "0.44",
+     "0.46",
+     "0.48",
+     "0.50"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Fixed-solid attachment and loading regions",
+    "issue": "missing",
+    "description": "Sec. 4.6 does not state whether attachment or load-introduction elements are protected from removal, or give a fixed-solid mask.",
+    "readings": [
+     "No fixed-solid elements",
+     "Every element incident on a loaded or supported node fixed at density 1",
+     "A one-element-wide strip along the mounting boundary fixed at density 1"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Prescribed voids or mounting clearances",
+    "issue": "missing",
+    "description": "Sec. 4.6 and the caption do not state whether the square contains compulsory empty regions, such as mounting holes.",
+    "readings": [
+     "No prescribed void regions",
+     "A circular mounting hole centered at (L/8,L/2), radius L/32, held at the minimum density"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Solid Young's modulus",
+    "issue": "missing",
+    "description": "Sec. 3.1 introduces K without elastic constants; Sec. 4.6 reports compliance without specifying the solid modulus or its units.",
+    "readings": [
+     "E0=1 in consistent normalized units",
+     "E0=100 in the same units, with the same relative void stiffness"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson's ratio",
+    "issue": "missing",
+    "description": "No Poisson's ratio is supplied for the Fig. 6 material or the general FEA model.",
+    "readings": [
+     "nu=0.25",
+     "nu=0.30",
+     "nu=0.35"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Two-dimensional constitutive assumption",
+    "issue": "missing",
+    "description": "The in-plane stress representation in Appendix F does not distinguish plane stress from plane strain; Sec. 4.6 does not resolve this.",
+    "readings": [
+     "Plane stress",
+     "Plane strain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Case-specific grid resolution",
+    "issue": "vague",
+    "description": "Sec. 4.7.3, Table 8, and Appendix C identify 64\u00d764 benchmark grids, but Sec. 4.6 does not explicitly assign that grid to the illustrative Fig. 6 case.",
+    "readings": [
+     "64\u00d764 elements, inheriting the native benchmark grid",
+     "128\u00d7128 elements, treating Fig. 6 as a separately discretized illustrative case"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Finite-element formulation and integration",
+    "issue": "missing",
+    "description": "Sec. 3.1 specifies equilibrium and Sec. 4.2 refers to a standard FEA solver, without naming element order or quadrature.",
+    "readings": [
+     "Four-node bilinear quadrilaterals with 2\u00d72 Gauss integration",
+     "Four-node bilinear quadrilaterals with stabilized one-point integration",
+     "Eight-node serendipity quadrilaterals with 3\u00d73 Gauss integration"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Minimum relative density",
+    "issue": "missing",
+    "description": "Eq. (1) requires a positive xmin but never assigns its value.",
+    "readings": [
+     "xmin=0.01",
+     "xmin=0.001",
+     "xmin=0.000001"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "SIMP stiffness interpolation, penalization, and continuation",
+    "issue": "missing",
+    "description": "Sec. 4.6 names SIMP but supplies no stiffness interpolation, penalty exponent, added void-stiffness floor, or continuation schedule.",
+    "readings": [
+     "E(x)=E0*x^3, with fixed exponent 3 and no additive stiffness floor",
+     "E(x)=E0*[1e-9+(1-1e-9)*x^3], with fixed exponent 3",
+     "E(x)=E0*[1e-9+(1-1e-9)*x^4], with fixed exponent 4",
+     "Same additive-floor interpolation, with p=1 for iterations 1\u201350, p=2 for 51\u2013100, and p=3 thereafter"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Spatial filtering operator",
+    "issue": "missing",
+    "description": "Neither Sec. 3.1 nor the Fig. 6 SIMP description specifies numerical filtering or its kernel.",
+    "readings": [
+     "No spatial filter",
+     "Sensitivity filtering with linear distance weights",
+     "Density filtering with linear distance weights",
+     "Density filtering with Gaussian weights"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Filter length scale",
+    "issue": "missing",
+    "description": "No filter radius or smoothing length is stated for the bracket reference solution.",
+    "readings": [
+     "Linear-weight filter cutoff radius r=1.5h, where h is element width",
+     "Linear-weight filter cutoff radius r=2h",
+     "Linear-weight filter cutoff radius r=3h"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Filter treatment at domain boundaries",
+    "issue": "missing",
+    "description": "The paper gives no rule for filtering near the square boundary or attachment regions.",
+    "readings": [
+     "Truncate neighborhoods to the domain and renormalize remaining weights",
+     "Treat exterior cells as void and retain full-kernel normalization",
+     "Reflect the density field across domain boundaries"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Density projection during optimization",
+    "issue": "missing",
+    "description": "Sec. 4.6 does not specify an optimization projection. The evaluation threshold tau=0.5 in Sec. 4.2 does not define a projection used during SIMP.",
+    "readings": [
+     "No projection during optimization",
+     "Smooth tanh Heaviside projection with eta=0.5 and fixed beta=1",
+     "Smooth tanh Heaviside projection with eta=0.5 and beta increased through 1, 2, 4, and 8"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "SIMP initial density field",
+    "issue": "missing",
+    "description": "Sec. 4.7.2 specifies uniform densities for physics-feature preprocessing, not the initialization of the Fig. 6 SIMP optimization.",
+    "readings": [
+     "Uniform density x=vf",
+     "Uniform density x=1",
+     "Uniform x=vf plus seed-0 uniform noise in [-0.01,0.01], adjusted to preserve the initial mean vf"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "SIMP update algorithm and move control",
+    "issue": "missing",
+    "description": "Naming SIMP in Sec. 4.6 does not identify the numerical optimizer or its step restrictions.",
+    "readings": [
+     "Optimality-criteria update with maximum density change 0.2 per iteration",
+     "Optimality-criteria update with maximum density change 0.1 per iteration",
+     "MMA updates with a density move limit of 0.2"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Optimization termination",
+    "issue": "vague",
+    "description": "Sec. 4.6 supplies no SIMP stopping rule. Table 8's timing label of 100 steps does not explicitly establish the iteration count or convergence criterion for Fig. 6.",
+    "readings": [
+     "Run exactly 100 optimization iterations",
+     "Stop when maximum density change is below 0.01, with a 200-iteration cap",
+     "Stop when maximum density change is below 0.001, with a 1000-iteration cap"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Equilibrium-solve accuracy",
+    "issue": "missing",
+    "description": "Eq. (3) and the standard-FEA wording in Sec. 4.2 do not specify the linear solver or its numerical tolerance.",
+    "readings": [
+     "Double-precision sparse direct solve",
+     "Conjugate-gradient solve with relative residual tolerance 1e-8",
+     "Conjugate-gradient solve with relative residual tolerance 1e-4"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 840.2064909934998,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L41",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 2,
+ "locator": "Sec. 4.6, case study 1 (Fig. 6)",
+ "finished": "2026-10-22T23:37:56"
+}

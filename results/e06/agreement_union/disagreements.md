@@ -1,0 +1,45 @@
+# First annotation vs blind Codex re-annotation
+
+kappa = 0.751, raw agreement = 0.894 over 246 (task, group) units; 26 disagreements.
+
+- L05 [load_dir] first=True second=False
+- L07 [load_pos_ext] first=False second=True
+    - Right-edge load distribution: Apply a concentrated downward force at (1,0).; Apply uniform downward traction over x=1, -0.05<y<0.05. (Sec. 4.1.1, cantilever paragraph: downward point load at the right-edge center, with Gamma_N={1}x(-0.05,0.05). Sec. 3.2.1, Eqs. (3.16)-(3.17), integra)
+- L07 [volume_fraction] first=True second=False
+- L11 [domain] first=False second=True
+    - Rectangle aspect ratio: Lx/Ly = 2, assuming square elements.; Lx/Ly approximately 1.75, following the displayed rectangle. (Table 3, problem 3; Fig. 2.)
+- L11 [load_pos_ext] first=False second=True
+    - Spatial application of the mid-right load: A point force at the right-edge midpoint node.; The same resultant distributed equally over the midpoint node and its two adjacent right-edge nodes. (Table 3, problem 3; Fig. 2 contains no load markers.)
+- L11 [volume_fraction] first=False second=True
+    - Reference volume V0: V0 is the full rectangular volume, including prescribed-void locations.; V0 is the available volume after subtracting the two prescribed voids. (Sec. 3.2, V(ρ) ≤ vf V0; Sec. 3.5, frozen-void treatment; Table 3, problem 3.)
+    - Volume target of the retained soft-seed state in Fig. 2: The illustrated retained state was obtained at vf = 0.25.; The illustrated retained state was obtained at vf = 0.28. (Table 3, problem 3; Sec. 4.4, retained compliance definition; Fig. 2 caption; Appendix A, Table 14.)
+    - Volume target of the retained passive-solid state in Fig. 2: The passive-solid state uses the initial vf = 0.25 target.; The passive-solid state uses an increased vf = 0.28 target. (Secs. 3.4–3.5; Fig. 2 caption; Sec. 4.2; Appendix A, Table 14.)
+- L12 [support] first=True second=False
+- L19 [domain] first=True second=False
+- L20 [volume_fraction] first=False second=True
+    - Density field on which the volume constraint is enforced: Enforce the prescribed fraction on the final filtered density, using volume-preserving filtering or a subsequent bias correction.; Enforce the prescribed fraction only on the prefilter density; allow the final fraction to follow from the filter's boundary treatment. (Sec. V-A, Eqs. (11)–(12) and the following radius-2 cone-filter paragraph; Sec. V-B gives 0.4 for the baseline training designs.)
+- L21 [volume_fraction] first=True second=False
+- L24 [volume_fraction] first=False second=True
+    - Minimum admissible local relative density rho_min: rho_min = 0.2, interpreting the color-scale endpoint as the prescribed lower bound.; rho_min = 0.001, interpreting 0.2 as a display endpoint rather than an admissibility bound. (Eq. (27) density bounds; attached Fig. 9 density-field image with color scale from 0.2 to 0.8.)
+    - Maximum admissible local relative density rho_max: rho_max = 0.8, interpreting the color-scale endpoint as the prescribed upper bound.; rho_max = 1.0, interpreting 0.8 as a display endpoint rather than an admissibility bound. (Eq. (27) density bounds; attached Fig. 9 density-field image with color scale from 0.2 to 0.8.)
+- L25 [support] first=True second=False
+- L25 [load_pos_ext] first=True second=False
+- L29 [passive] first=True second=False
+- L30 [load_pos_ext] first=False second=True
+    - Discrete application of the corner load: Apply the entire downward force to the bottom-right corner node.; Divide the downward resultant equally between the two nodes of the bottom edge of the corner element.; Divide the downward resultant equally between the two nodes of the right edge of the corner element. (Fig. 1 places the arrow at the bottom-right corner; Sec. 5.1 chooses a boundary element as the load location without describing its nodal force assign)
+- L33 [volume_fraction] first=False second=True
+    - 20.25% material budget: Impose 20.25% on the designable region, excluding passive material from both numerator and denominator.; Impose 20.25% on the entire box, counting retained passive material toward the budget. (Results, 'Design of nanopillars using Nano-TO', reports 640,000 active atoms, 12,800 passive atoms, and a target mass ratio of 20.25%; the FEM compari)
+- L34 [load_pos_ext] first=True second=False
+- L37 [support] first=False second=True
+    - Inward thickness of the clamped end regions: Fix both displacement components only on the edges x = 0 and x = 150 mm.; Use 1 mm-wide passive solid end strips and fix all nodes within those strips. (Sec. 4.1 specifies fully fixed left and right sides; Fig. 8(a) labels the thin red bands 'Solid domain (fully fixed)' without giving their thickness.)
+- L38 [domain] first=True second=False
+- L40 [volume_fraction] first=False second=True
+    - Volume conservation between projected and physical densities: Constrain the intermediate densities to 30% and determine the Heaviside threshold by bisection to conserve volume across that projection.; Constrain the intermediate densities to 30% and fix the Heaviside threshold at 0.5, allowing the physical volume fraction to differ. (Appendix C specifies the 30% target; Section 5, Eq. (14) constrains the intermediate densities; the text following Eq. (17) permits either a volume-co)
+- L41 [support] first=False second=True
+    - Displacement components constrained on the left edge: Fix both in-plane displacement components at every left-edge node; Fix horizontal displacement along the left edge and fix vertical displacement only at the lower-left node (Sec. 4.6, Fig. 6(a): repeated hollow triangles mark the left edge without displacement labels; the Fig. 10 caption describes such markers only as cons)
+- L43 [support] first=False second=True
+    - Endpoint membership of the supported half-edges: Fix all nodes on the two closed half-edges, including their endpoints, plus the bottom-right corner.; Fix only nodes strictly between the corner and midpoint of each marked half-edge, plus the bottom-right corner. (Sec. 4.1 describes node sets 'between corners and midpoints'; Fig. 5, row 1 shows green support segments without identifying individual endpoint nodes)
+- L43 [load_dir] first=True second=False
+- L44 [volume_fraction] first=True second=False
+- L45 [volume_fraction] first=True second=False
+- L45 [passive] first=True second=False

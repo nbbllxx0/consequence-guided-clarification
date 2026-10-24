@@ -1,0 +1,62 @@
+{
+ "task": "L07",
+ "source": {
+  "arxiv": "2511.14623",
+  "position": 43
+ },
+ "dim": 2,
+ "slots": {
+  "volfrac": [
+   0.5
+  ]
+ },
+ "nominal": {
+  "volfrac": 0.5
+ },
+ "mandatory": [
+  "volfrac"
+ ],
+ "reasons": {
+  "volfrac": "volume penalty beta=0.5, no constraint value: mandatory"
+ },
+ "recon": [
+  "mesh-free in source; 120x60 grid",
+  "traction segment (-0.05,0.05) as 6-element patch",
+  "vf fixed to 0.5 after asking",
+  "clamp on the left edge x = -1: prose 'left boundary is clamped'; Gamma_D = {0} x (-0.5, 0.5) read as a typo (adjudicator A)"
+ ],
+ "keys": [
+  "volfrac=0.5"
+ ],
+ "C": [
+  [
+   61.522861212475995
+  ]
+ ],
+ "ref": {
+  "volfrac=0.5": 61.522861212475995
+ },
+ "ref_gap_beaten": {
+  "volfrac=0.5": 0.0
+ },
+ "noise": {
+  "volfrac=0.5": 0.00022743190573313029
+ },
+ "meta": {
+  "volfrac=0.5": {
+   "accepted": true,
+   "kkt": 0.11149691143258873,
+   "wall_s": 54.95837969996501,
+   "n_iter": [
+    201,
+    201
+   ]
+  }
+ },
+ "counter": {
+  "optimizations": 0,
+  "factorizations": 1,
+  "backsubs": 1,
+  "opt_wall_s": 0.0
+ }
+}

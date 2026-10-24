@@ -1,0 +1,124 @@
+{
+ "task": "L40",
+ "source": {
+  "arxiv": "2609.21758",
+  "position": 183
+ },
+ "dim": 2,
+ "slots": {
+  "rmin": [
+   1.5,
+   2.0
+  ],
+  "ar": [
+   "3",
+   "6"
+  ]
+ },
+ "nominal": {
+  "rmin": 2.0,
+  "ar": "3"
+ },
+ "mandatory": [],
+ "reasons": {
+  "rmin": "lower bound of the tuned filter radius: 2.0 in Sec. 5.1, 1.5 in Table 1 (conflict)",
+  "ar": "Nx x Ny = 144 x 48 without element spacing: 3:1 or 6:1 (adjudicator B)"
+ },
+ "recon": [
+  "CNN parameterization and tuned penalty/projection replaced by the standard schedule"
+ ],
+ "keys": [
+  "ar=3|rmin=1.5",
+  "ar=6|rmin=1.5",
+  "ar=3|rmin=2.0",
+  "ar=6|rmin=2.0"
+ ],
+ "C": [
+  [
+   294.206137564768,
+   149134510.05218998,
+   Infinity,
+   Infinity
+  ],
+  [
+   Infinity,
+   1679.326188722129,
+   Infinity,
+   Infinity
+  ],
+  [
+   295.616129023369,
+   149278209.00748125,
+   295.616129023369,
+   149278209.00748125
+  ],
+  [
+   Infinity,
+   1682.8076021437478,
+   Infinity,
+   1682.8076021437478
+  ]
+ ],
+ "ref": {
+  "ar=3|rmin=1.5": 294.2061375647675,
+  "ar=6|rmin=1.5": 1679.326188722129,
+  "ar=3|rmin=2.0": 295.616129023369,
+  "ar=6|rmin=2.0": 1682.8076021437478
+ },
+ "ref_gap_beaten": {
+  "ar=3|rmin=1.5": 0.0,
+  "ar=6|rmin=1.5": 0.0,
+  "ar=3|rmin=2.0": 6.661338147750939e-16,
+  "ar=6|rmin=2.0": 2.6645352591003757e-15
+ },
+ "noise": {
+  "ar=3|rmin=1.5": 0.004651579453285915,
+  "ar=6|rmin=1.5": 0.0035411660472784517,
+  "ar=3|rmin=2.0": 0.0017523497893635633,
+  "ar=6|rmin=2.0": 0.0024418219376620208
+ },
+ "meta": {
+  "ar=3|rmin=1.5": {
+   "accepted": true,
+   "kkt": 0.42505622981265545,
+   "wall_s": 53.185799899860285,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "ar=6|rmin=1.5": {
+   "accepted": true,
+   "kkt": 0.41675590360240233,
+   "wall_s": 105.54498979996424,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "ar=3|rmin=2.0": {
+   "accepted": true,
+   "kkt": 0.19897460866028294,
+   "wall_s": 52.2379672001116,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "ar=6|rmin=2.0": {
+   "accepted": true,
+   "kkt": 0.3625865148526036,
+   "wall_s": 115.48845049994998,
+   "n_iter": [
+    221,
+    201
+   ]
+  }
+ },
+ "counter": {
+  "optimizations": 0,
+  "factorizations": 8,
+  "backsubs": 16,
+  "opt_wall_s": 0.0
+ }
+}

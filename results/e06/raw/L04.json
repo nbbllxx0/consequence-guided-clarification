@@ -1,0 +1,127 @@
+{
+ "task": "L04",
+ "arxiv": "2105.04232",
+ "locator": "Sec. 4.2, the Michell cantilever beam",
+ "figures": [
+  "cantilever_BC.png"
+ ],
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"Left-boundary support node set\",\n      \"issue\": \"missing\",\n      \"description\": \"The prose does not specify the restrained nodes, and no support extent is readable in the supplied schematic.\",\n      \"readings\": [\n        \"Fix both displacement components at every node on the left edge.\",\n        \"Fix both displacement components only at the upper-left and lower-left corner nodes.\"\n      ],\n      \"effect\": \"layout\",\n      \"evidence\": \"Sec. 4 opening paragraph refers support placement to Fig. 9; Sec. 4.2 and the attached cantilever schematic provide no readable support node set.\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"Vertical center of the right-edge load line\",\n      \"issue\": \"figure_only\",\n      \"description\": \"The load is depicted near mid-height, but its center has no stated coordinate or symmetry condition. Let H denote the rectangle height.\",\n      \"readings\": [\n        \"Center the loaded line exactly at y=H/2.\",\n        \"Center it at approximately y=0.47H, following the apparent arrow attachment in the supplied image.\"\n      ],\n      \"effect\": \"layout\",\n      \"evidence\": \"Sec. 4 opening paragraph and Fig. 9(a), supplied cantilever schematic.\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Reference length L defining the loaded-line length\",\n      \"issue\": \"vague\",\n      \"description\": \"The line length is specified as L/10, but the supplied text does not define L and no dimension labels are readable in the attachment.\",\n      \"readings\": [\n        \"L is the rectangle height H, giving a loaded length of 0.1H.\",\n        \"L is the rectangle span 2H, giving a loaded length of 0.2H.\"\n      ],\n      \"effect\": \"layout\",\n      \"evidence\": \"Sec. 4 opening paragraph specifies a line of L/10; Fig. 9(a) is cited for domain dimensions.\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Force distribution along the loaded line\",\n      \"issue\": \"missing\",\n      \"description\": \"Application along a line is specified without a traction profile or nodal weighting rule.\",\n      \"readings\": [\n        \"Apply constant line traction using consistent nodal forces, with half weights at the segment endpoints.\",\n        \"Split the total force equally among all nodes on the segment, including its endpoints.\"\n      ],\n      \"effect\": \"layout\",\n      \"evidence\": \"Sec. 4 opening paragraph describes line loading but gives no distribution formula.\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"Downward load normalization\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither the total resultant nor the line-force intensity is specified.\",\n      \"readings\": [\n        \"Use unit total resultant F=1 distributed over the line.\",\n        \"Use unit line-force intensity q=1, giving total resultant F=L/10.\"\n      ],\n      \"effect\": \"scale_only\",\n      \"evidence\": \"Sec. 4 opening paragraph, Sec. 4.2, and Fig. 9(a) provide no numerical force magnitude.\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Radius of the solidified neighborhood around the load\",\n      \"issue\": \"vague\",\n      \"description\": \"The load neighborhood is described only as having a small radius; its size is not given.\",\n      \"readings\": [\n        \"Use radius r=h_c around the loaded line.\",\n        \"Use radius r=2h_c around the loaded line.\"\n      ],\n      \"effect\": \"layout\",\n      \"evidence\": \"Sec. 4 opening paragraph states that elements with density greater than 0.99 and in a small radius around the load are set to solid.\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Solid-material Young's modulus\",\n      \"issue\": \"missing\",\n      \"description\": \"The solid-phase Young's modulus is not stated.\",\n      \"readings\": [\n        \"Use E=1 in normalized units.\",\n        \"Use E=200 GPa with consistent dimensional units.\"\n      ],\n      \"effect\": \"scale_only\",\n      \"evidence\": \"Sec. 2.1.1, Eqs. (1)-(4), and Sec. 4 numerical-example settings give no solid-phase Young's modulus.\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Solid-material Poisson's ratio\",\n      \"issue\": \"missing\",\n      \"description\": \"No Poisson's ratio is supplied for the isotropic solid used in the reconstruction.\",\n      \"readings\": [\n        \"Use Poisson's ratio 0.30.\",\n        \"Use Poisson's ratio 1/3.\"\n      ],\n      \"effect\": \"layout\",\n      \"evidence\": \"Sec. 2.1.1 and Sec. 4 numerical-example settings do not specify Poisson's ratio.\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Two-dimensional constitutive assumption\",\n      \"issue\": \"missing\",\n      \"description\": \"The two-dimensional example is not explicitly identified as plane stress or plane strain.\",\n      \"readings\": [\n        \"Use plane-stress elasticity.\",\n        \"Use plane-strain elasticity.\"\n      ],\n      \"effect\": \"layout\",\n      \"evidence\": \"Sec. 2.1.1 equilibrium formulation and Sec. 4.2 mesh descriptions do not state the planar constitutive assumption.\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "support_location_extent",
+    "entity": "Left-boundary support node set",
+    "issue": "missing",
+    "description": "The prose does not specify the restrained nodes, and no support extent is readable in the supplied schematic.",
+    "readings": [
+     "Fix both displacement components at every node on the left edge.",
+     "Fix both displacement components only at the upper-left and lower-left corner nodes."
+    ],
+    "effect": "layout",
+    "evidence": "Sec. 4 opening paragraph refers support placement to Fig. 9; Sec. 4.2 and the attached cantilever schematic provide no readable support node set."
+   },
+   {
+    "category": "load_position",
+    "entity": "Vertical center of the right-edge load line",
+    "issue": "figure_only",
+    "description": "The load is depicted near mid-height, but its center has no stated coordinate or symmetry condition. Let H denote the rectangle height.",
+    "readings": [
+     "Center the loaded line exactly at y=H/2.",
+     "Center it at approximately y=0.47H, following the apparent arrow attachment in the supplied image."
+    ],
+    "effect": "layout",
+    "evidence": "Sec. 4 opening paragraph and Fig. 9(a), supplied cantilever schematic."
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Reference length L defining the loaded-line length",
+    "issue": "vague",
+    "description": "The line length is specified as L/10, but the supplied text does not define L and no dimension labels are readable in the attachment.",
+    "readings": [
+     "L is the rectangle height H, giving a loaded length of 0.1H.",
+     "L is the rectangle span 2H, giving a loaded length of 0.2H."
+    ],
+    "effect": "layout",
+    "evidence": "Sec. 4 opening paragraph specifies a line of L/10; Fig. 9(a) is cited for domain dimensions."
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Force distribution along the loaded line",
+    "issue": "missing",
+    "description": "Application along a line is specified without a traction profile or nodal weighting rule.",
+    "readings": [
+     "Apply constant line traction using consistent nodal forces, with half weights at the segment endpoints.",
+     "Split the total force equally among all nodes on the segment, including its endpoints."
+    ],
+    "effect": "layout",
+    "evidence": "Sec. 4 opening paragraph describes line loading but gives no distribution formula."
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Downward load normalization",
+    "issue": "missing",
+    "description": "Neither the total resultant nor the line-force intensity is specified.",
+    "readings": [
+     "Use unit total resultant F=1 distributed over the line.",
+     "Use unit line-force intensity q=1, giving total resultant F=L/10."
+    ],
+    "effect": "scale_only",
+    "evidence": "Sec. 4 opening paragraph, Sec. 4.2, and Fig. 9(a) provide no numerical force magnitude."
+   },
+   {
+    "category": "passive_region",
+    "entity": "Radius of the solidified neighborhood around the load",
+    "issue": "vague",
+    "description": "The load neighborhood is described only as having a small radius; its size is not given.",
+    "readings": [
+     "Use radius r=h_c around the loaded line.",
+     "Use radius r=2h_c around the loaded line."
+    ],
+    "effect": "layout",
+    "evidence": "Sec. 4 opening paragraph states that elements with density greater than 0.99 and in a small radius around the load are set to solid."
+   },
+   {
+    "category": "material",
+    "entity": "Solid-material Young's modulus",
+    "issue": "missing",
+    "description": "The solid-phase Young's modulus is not stated.",
+    "readings": [
+     "Use E=1 in normalized units.",
+     "Use E=200 GPa with consistent dimensional units."
+    ],
+    "effect": "scale_only",
+    "evidence": "Sec. 2.1.1, Eqs. (1)-(4), and Sec. 4 numerical-example settings give no solid-phase Young's modulus."
+   },
+   {
+    "category": "material",
+    "entity": "Solid-material Poisson's ratio",
+    "issue": "missing",
+    "description": "No Poisson's ratio is supplied for the isotropic solid used in the reconstruction.",
+    "readings": [
+     "Use Poisson's ratio 0.30.",
+     "Use Poisson's ratio 1/3."
+    ],
+    "effect": "layout",
+    "evidence": "Sec. 2.1.1 and Sec. 4 numerical-example settings do not specify Poisson's ratio."
+   },
+   {
+    "category": "material",
+    "entity": "Two-dimensional constitutive assumption",
+    "issue": "missing",
+    "description": "The two-dimensional example is not explicitly identified as plane stress or plane strain.",
+    "readings": [
+     "Use plane-stress elasticity.",
+     "Use plane-strain elasticity."
+    ],
+    "effect": "layout",
+    "evidence": "Sec. 2.1.1 equilibrium formulation and Sec. 4.2 mesh descriptions do not state the planar constitutive assumption."
+   }
+  ]
+ },
+ "wall_s": 233.2478382587433,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "Reading prompt from stdin...\n",
+ "model_id": "gpt-6.1-sol",
+ "finished": "2026-10-22T17:54:20"
+}

@@ -1,0 +1,78 @@
+{
+ "task": "L27",
+ "source": {
+  "arxiv": "2404.12244",
+  "position": 63
+ },
+ "dim": 2,
+ "slots": {
+  "ar": [
+   "square",
+   "wide"
+  ]
+ },
+ "nominal": {
+  "ar": "square"
+ },
+ "mandatory": [],
+ "reasons": {
+  "ar": "Fig. 6(a) and 100x100 FEs give a square; Fig. 8 target image about 1.75:1 (Sec. 7.1.1; Fig. 6(a); Fig. 8)"
+ },
+ "recon": [
+  "common 175x100 grid truncated at xmax",
+  "vf 0.25 as in Fig. 8",
+  "point load as 4-element patch"
+ ],
+ "keys": [
+  "ar=square",
+  "ar=wide"
+ ],
+ "C": [
+  [
+   13.378465827322927,
+   4173651.5407376033
+  ],
+  [
+   Infinity,
+   22.94131342033446
+  ]
+ ],
+ "ref": {
+  "ar=square": 13.378465827322927,
+  "ar=wide": 22.94131342033446
+ },
+ "ref_gap_beaten": {
+  "ar=square": 0.0,
+  "ar=wide": 0.0
+ },
+ "noise": {
+  "ar=square": 0.0014405238497299327,
+  "ar=wide": 0.002765521336616592
+ },
+ "meta": {
+  "ar=square": {
+   "accepted": true,
+   "kkt": 0.13441625191651427,
+   "wall_s": 108.16833459993359,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "ar=wide": {
+   "accepted": true,
+   "kkt": 0.3626970165139861,
+   "wall_s": 165.4866645000875,
+   "n_iter": [
+    201,
+    201
+   ]
+  }
+ },
+ "counter": {
+  "optimizations": 0,
+  "factorizations": 4,
+  "backsubs": 4,
+  "opt_wall_s": 0.0
+ }
+}

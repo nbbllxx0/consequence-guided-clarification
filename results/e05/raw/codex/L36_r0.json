@@ -1,0 +1,403 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Fig. 1 design-domain geometry\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 2.1 names Omega but gives no boundary shape or aspect ratio; Fig. 1's caption supplies neither. Here L and H denote horizontal and vertical spans.\",\n      \"readings\": [\n        \"Square: [0,L] x [0,L]\",\n        \"Rectangle: [0,L] x [0,L/2]\",\n        \"L-shaped domain: [0,L]^2 with the upper-right quarter excluded\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Absolute physical size of the domain\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 and Fig. 1's caption give no dimensional length or units. These alternatives assume geometrically similar models with all length-based settings scaled together.\",\n      \"readings\": [\n        \"L = 1 mm\",\n        \"L = 100 mm\",\n        \"L = 1 m\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Uniform out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"No thickness or unit-depth convention is specified for the Sec. 2.1 example. For fixed total nodal forces, uniform thickness multiplies stiffness.\",\n      \"readings\": [\n        \"Unit thickness in the chosen length units\",\n        \"Thickness t = 0.01L\",\n        \"Thickness t = 0.1L\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"Supported node sets\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 2.1 mentions displacement boundary conditions without locating or sizing them. Sec. 4.1's counts of boundary-condition scenarios do not identify Fig. 1's supports.\",\n      \"readings\": [\n        \"Entire left edge, x = 0\",\n        \"Only the two bottom corner nodes, (0,0) and (L,0)\",\n        \"Central quarter of the left edge, x = 0 and 3H/8 <= y <= 5H/8\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"support_type\",\n      \"entity\": \"Restrained displacement components\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Neither Sec. 2.1 nor Fig. 1's caption identifies which displacement components are restrained or distinguishes clamps, pins, and rollers.\",\n      \"readings\": [\n        \"Supported edge fully fixed: ux = uy = 0\",\n        \"One supported point pinned: ux = uy = 0; another point restrained only in uy\",\n        \"Supported edge restrained in ux, with one additional uy anchor\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"Locations of applied nodal forces\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 2.1 supplies no load coordinates. Sec. 4.1's random selection of unconstrained boundary nodes does not select positions for Fig. 1.\",\n      \"readings\": [\n        \"Right-edge midpoint, (L,H/2)\",\n        \"Lower-right corner, (L,0)\",\n        \"Top-edge midpoint, (L/2,H)\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Number and spatial extent of loaded nodes\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 2.1 says loads are applied on nodes, but does not give their number or whether they occupy points or boundary patches.\",\n      \"readings\": [\n        \"One loaded node\",\n        \"Two separated loaded nodes\",\n        \"Loaded nodes covering the central quarter of an edge\",\n        \"Loaded nodes covering an entire edge\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"Physical directions of applied forces\",\n      \"issue\": \"figure_only\",\n      \"description\": \"No force direction is specified for Fig. 1. Sec. 4.1's discrete angle range neither selects an angle for this example nor establishes its angle convention.\",\n      \"readings\": [\n        \"Horizontal force in +x\",\n        \"Vertical force in -y\",\n        \"Diagonal force in direction (+x-y)/sqrt(2)\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"Overall force amplitude\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 and Fig. 1's caption give no force amplitude. These alternatives multiply all forces by a common factor while keeping their relative magnitudes fixed.\",\n      \"readings\": [\n        \"Unit resultant force in normalized units\",\n        \"Resultant force of 1 N\",\n        \"Resultant force of 100 N\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"Relative amplitudes and nodal sharing of multiple forces\",\n      \"issue\": \"missing\",\n      \"description\": \"If several nodes are loaded, Sec. 2.1 does not specify their force ratios or nodal weighting.\",\n      \"readings\": [\n        \"Equal force magnitudes at all loaded nodes\",\n        \"Two point forces with magnitude ratio 2:1\",\n        \"Uniform edge traction represented by consistent nodal forces, with half weights at patch endpoints\",\n        \"Linearly varying edge loading, normalized to the same resultant\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"other\",\n      \"entity\": \"Load-case grouping and compliance aggregation\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1's set of loads does not establish whether multiple forces act simultaneously or belong to separate load cases, or how separate compliances are weighted.\",\n      \"readings\": [\n        \"All forces act simultaneously in one equilibrium solve; minimize F^T u\",\n        \"Separate load cases; minimize C1 + C2\",\n        \"Separate load cases; minimize C1 + 2C2\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Prescribed volume fraction for Fig. 1\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 and Fig. 1's caption name a volume fraction without giving its value. Sec. 4.1 supplies a dataset range and step, but does not identify Fig. 1's value or establish dataset membership.\",\n      \"readings\": [\n        \"Volume fraction 0.30\",\n        \"Volume fraction 0.40\",\n        \"Volume fraction 0.50\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Prescribed solid regions\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 specifies no mandatory solid mask. Sec. 4.2's load-violation metric does not establish whether solid pads were imposed during optimization.\",\n      \"readings\": [\n        \"No passive solid elements\",\n        \"One-element-thick solid pads at loaded and supported nodes\",\n        \"Solid attachment pads extending 0.05L into the domain\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Prescribed void regions\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Sec. 2.1 nor Fig. 1's caption specifies an exclusion mask or confirms that the entire domain is designable.\",\n      \"readings\": [\n        \"No passive void elements\",\n        \"Central circular exclusion of radius 0.1 min(L,H), rasterized onto the grid\",\n        \"Central rectangular exclusion of width 0.2L and height 0.2H\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Reference volume and accounting for passive regions\",\n      \"issue\": \"missing\",\n      \"description\": \"The volume-fraction condition in Sec. 2.1 does not define its reference domain or the treatment of passive material, if present.\",\n      \"readings\": [\n        \"Total solid volume, including passive solids, limited to f times the full domain volume\",\n        \"Fraction f applied only to designable elements, with passive solids added outside that budget\",\n        \"Total solid fraction measured relative to the domain after passive void regions are excluded\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Density field used in the volume constraint\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 introduces element densities and mentions filters, but does not say which density field enters the volume constraint when filtering or projection is used.\",\n      \"readings\": [\n        \"Constrain the mean unfiltered design density\",\n        \"Constrain the mean filtered physical density\",\n        \"Constrain the mean projected physical density\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Overall solid elastic stiffness scale\",\n      \"issue\": \"missing\",\n      \"description\": \"No Young's modulus or equivalent stiffness scale is supplied for Fig. 1. These alternatives hold Poisson ratio, anisotropy ratios, and void-to-solid stiffness ratio fixed.\",\n      \"readings\": [\n        \"Reference modulus E = 1 in normalized units\",\n        \"Reference modulus E = 70 GPa\",\n        \"Reference modulus E = 210 GPa\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Poisson ratio for an isotropic material\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 gives no Poisson ratio; Sec. 4.1's stress and strain definitions do not supply it.\",\n      \"readings\": [\n        \"nu = 0.20\",\n        \"nu = 0.30\",\n        \"nu = 0.45\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Elastic symmetry and material orientation\",\n      \"issue\": \"missing\",\n      \"description\": \"The text specifies no constitutive tensor or isotropy assumption. A single linear-elastic material does not uniquely determine these properties.\",\n      \"readings\": [\n        \"Homogeneous isotropic elasticity\",\n        \"Homogeneous orthotropic plane-stress elasticity with Ex/Ey = 2, nu_xy = 0.25, Gxy/Ey = 0.4, and principal axes along x and y\",\n        \"The same orthotropic material with its principal axes rotated 45 degrees\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Two-dimensional elastic analysis assumption\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2.1 gives no constitutive reduction. Sec. 4.1 describes 2D images and in-plane fields but does not explicitly identify the FEA assumption for Fig. 1.\",\n      \"readings\": [\n        \"Plane stress\",\n        \"Plane strain\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"FE mesh resolution and image-to-mesh correspondence\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.1 specifies 64x64 dataset images, not Fig. 1's element or node counts, and does not establish that image pixels correspond directly to FE elements.\",\n      \"readings\": [\n        \"64x64 elements with 65x65 corner nodes\",\n        \"64x64 nodes with 63x63 elements\",\n        \"128x128 elements with results downsampled to a 64x64 image\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Element formulation and numerical integration\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 mentions FEA without identifying element order or integration for Fig. 1; Sec. 4.1's image resolution does not determine them.\",\n      \"readings\": [\n        \"Bilinear Q4 quadrilaterals with 2x2 Gauss integration\",\n        \"Q4 quadrilaterals with 1x1 integration and hourglass stabilization\",\n        \"Biquadratic Q9 quadrilaterals with 3x3 Gauss integration\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"SIMP stiffness interpolation and void regularization\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 describes continuous densities and penalization, but gives no interpolation equation, minimum density, or residual void stiffness.\",\n      \"readings\": [\n        \"E(rho) = Emin + rho^p(Esolid-Emin), rho in [0,1], Emin/Esolid = 1e-9\",\n        \"The same interpolation with Emin/Esolid = 1e-6\",\n        \"E(rho) = Esolid*rho^p with rho constrained to [1e-3,1]\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"SIMP penalization exponent and continuation\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2.1 supplies only p > 1, not the exponent used for Fig. 1 or a continuation schedule.\",\n      \"readings\": [\n        \"Fixed p = 2\",\n        \"Fixed p = 3\",\n        \"Continue p from 2 to 3 during optimization\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Filtering method\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2.1 mentions filters as possible techniques without specifying whether or how Fig. 1 uses one.\",\n      \"readings\": [\n        \"No filter\",\n        \"Sensitivity filter\",\n        \"Density filter\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Filter support radius\",\n      \"issue\": \"missing\",\n      \"description\": \"No filter radius or length convention is given in Sec. 2.1. These alternatives apply if filtering is used; h denotes horizontal element pitch.\",\n      \"readings\": [\n        \"Radius r = 1.5h\",\n        \"Radius r = 3h\",\n        \"Radius r = 0.05L\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Filter kernel and boundary treatment\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 gives no filter weights, distance metric, or treatment of neighbors outside the domain.\",\n      \"readings\": [\n        \"Euclidean conical weights max(0,r-d) between element centers, truncated and renormalized at boundaries\",\n        \"Uniform weights inside a Euclidean disk, truncated and renormalized\",\n        \"Manhattan-distance conical weights, truncated and renormalized\",\n        \"Euclidean conical density filter with outside-domain zero-density padding\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Density projection and its continuation\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 discusses encouraging binary densities but specifies no projection, threshold, sharpness, or projection continuation.\",\n      \"readings\": [\n        \"No density projection\",\n        \"Smoothed Heaviside projection with threshold eta = 0.5 and sharpness beta = 8\",\n        \"Heaviside projection with eta = 0.5 and beta continued through 1, 2, 4, 8, and 16\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Optimization update method and move controls\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 describes methods generally, and Sec. 4.1 names ToPy for dataset generation, but neither specifies Fig. 1's optimizer or update controls.\",\n      \"readings\": [\n        \"SIMP with optimality-criteria updates, density move limit 0.2, and damping exponent 0.5\",\n        \"SIMP with optimality-criteria updates, density move limit 0.05, and damping exponent 0.5\",\n        \"SIMP with MMA updates and density move limit 0.2\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initial design\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 explicitly notes non-convexity and local optima but gives no initialization for Fig. 1.\",\n      \"readings\": [\n        \"Uniform density satisfying the available volume budget\",\n        \"Uniform density plus a deterministic zero-mean perturbation of amplitude 0.01, adjusted to satisfy the same volume budget\",\n        \"A feasible connected beam-like warm start with the same volume\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Optimization termination and feasibility tolerances\",\n      \"issue\": \"missing\",\n      \"description\": \"No convergence criterion, iteration cap, or numerical volume tolerance is reported for Fig. 1 in Sec. 2.1 or the dataset discussion.\",\n      \"readings\": [\n        \"Stop at maximum density change below 0.01, volume tolerance 1e-3, or 200 iterations\",\n        \"Stop at maximum density change below 0.001, volume tolerance 1e-6, or 1000 iterations\",\n        \"Run a fixed 100 optimization iterations\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Equilibrium-solve accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 mentions FEA but gives no equilibrium-solve accuracy. Whether numerical error changes the recovered design depends on conditioning and convergence.\",\n      \"readings\": [\n        \"Direct linear solve to floating-point accuracy\",\n        \"Iterative solve with relative residual tolerance 1e-3\",\n        \"Iterative solve with relative residual tolerance 1e-8\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "Fig. 1 design-domain geometry",
+    "issue": "figure_only",
+    "description": "Sec. 2.1 names Omega but gives no boundary shape or aspect ratio; Fig. 1's caption supplies neither. Here L and H denote horizontal and vertical spans.",
+    "readings": [
+     "Square: [0,L] x [0,L]",
+     "Rectangle: [0,L] x [0,L/2]",
+     "L-shaped domain: [0,L]^2 with the upper-right quarter excluded"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "Absolute physical size of the domain",
+    "issue": "missing",
+    "description": "Sec. 2.1 and Fig. 1's caption give no dimensional length or units. These alternatives assume geometrically similar models with all length-based settings scaled together.",
+    "readings": [
+     "L = 1 mm",
+     "L = 100 mm",
+     "L = 1 m"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "Uniform out-of-plane thickness",
+    "issue": "missing",
+    "description": "No thickness or unit-depth convention is specified for the Sec. 2.1 example. For fixed total nodal forces, uniform thickness multiplies stiffness.",
+    "readings": [
+     "Unit thickness in the chosen length units",
+     "Thickness t = 0.01L",
+     "Thickness t = 0.1L"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "Supported node sets",
+    "issue": "figure_only",
+    "description": "Sec. 2.1 mentions displacement boundary conditions without locating or sizing them. Sec. 4.1's counts of boundary-condition scenarios do not identify Fig. 1's supports.",
+    "readings": [
+     "Entire left edge, x = 0",
+     "Only the two bottom corner nodes, (0,0) and (L,0)",
+     "Central quarter of the left edge, x = 0 and 3H/8 <= y <= 5H/8"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_type",
+    "entity": "Restrained displacement components",
+    "issue": "figure_only",
+    "description": "Neither Sec. 2.1 nor Fig. 1's caption identifies which displacement components are restrained or distinguishes clamps, pins, and rollers.",
+    "readings": [
+     "Supported edge fully fixed: ux = uy = 0",
+     "One supported point pinned: ux = uy = 0; another point restrained only in uy",
+     "Supported edge restrained in ux, with one additional uy anchor"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "Locations of applied nodal forces",
+    "issue": "figure_only",
+    "description": "Sec. 2.1 supplies no load coordinates. Sec. 4.1's random selection of unconstrained boundary nodes does not select positions for Fig. 1.",
+    "readings": [
+     "Right-edge midpoint, (L,H/2)",
+     "Lower-right corner, (L,0)",
+     "Top-edge midpoint, (L/2,H)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Number and spatial extent of loaded nodes",
+    "issue": "figure_only",
+    "description": "Sec. 2.1 says loads are applied on nodes, but does not give their number or whether they occupy points or boundary patches.",
+    "readings": [
+     "One loaded node",
+     "Two separated loaded nodes",
+     "Loaded nodes covering the central quarter of an edge",
+     "Loaded nodes covering an entire edge"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Physical directions of applied forces",
+    "issue": "figure_only",
+    "description": "No force direction is specified for Fig. 1. Sec. 4.1's discrete angle range neither selects an angle for this example nor establishes its angle convention.",
+    "readings": [
+     "Horizontal force in +x",
+     "Vertical force in -y",
+     "Diagonal force in direction (+x-y)/sqrt(2)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Overall force amplitude",
+    "issue": "missing",
+    "description": "Sec. 2.1 and Fig. 1's caption give no force amplitude. These alternatives multiply all forces by a common factor while keeping their relative magnitudes fixed.",
+    "readings": [
+     "Unit resultant force in normalized units",
+     "Resultant force of 1 N",
+     "Resultant force of 100 N"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Relative amplitudes and nodal sharing of multiple forces",
+    "issue": "missing",
+    "description": "If several nodes are loaded, Sec. 2.1 does not specify their force ratios or nodal weighting.",
+    "readings": [
+     "Equal force magnitudes at all loaded nodes",
+     "Two point forces with magnitude ratio 2:1",
+     "Uniform edge traction represented by consistent nodal forces, with half weights at patch endpoints",
+     "Linearly varying edge loading, normalized to the same resultant"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "Load-case grouping and compliance aggregation",
+    "issue": "missing",
+    "description": "Sec. 2.1's set of loads does not establish whether multiple forces act simultaneously or belong to separate load cases, or how separate compliances are weighted.",
+    "readings": [
+     "All forces act simultaneously in one equilibrium solve; minimize F^T u",
+     "Separate load cases; minimize C1 + C2",
+     "Separate load cases; minimize C1 + 2C2"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Prescribed volume fraction for Fig. 1",
+    "issue": "missing",
+    "description": "Sec. 2.1 and Fig. 1's caption name a volume fraction without giving its value. Sec. 4.1 supplies a dataset range and step, but does not identify Fig. 1's value or establish dataset membership.",
+    "readings": [
+     "Volume fraction 0.30",
+     "Volume fraction 0.40",
+     "Volume fraction 0.50"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Prescribed solid regions",
+    "issue": "missing",
+    "description": "Sec. 2.1 specifies no mandatory solid mask. Sec. 4.2's load-violation metric does not establish whether solid pads were imposed during optimization.",
+    "readings": [
+     "No passive solid elements",
+     "One-element-thick solid pads at loaded and supported nodes",
+     "Solid attachment pads extending 0.05L into the domain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Prescribed void regions",
+    "issue": "missing",
+    "description": "Neither Sec. 2.1 nor Fig. 1's caption specifies an exclusion mask or confirms that the entire domain is designable.",
+    "readings": [
+     "No passive void elements",
+     "Central circular exclusion of radius 0.1 min(L,H), rasterized onto the grid",
+     "Central rectangular exclusion of width 0.2L and height 0.2H"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Reference volume and accounting for passive regions",
+    "issue": "missing",
+    "description": "The volume-fraction condition in Sec. 2.1 does not define its reference domain or the treatment of passive material, if present.",
+    "readings": [
+     "Total solid volume, including passive solids, limited to f times the full domain volume",
+     "Fraction f applied only to designable elements, with passive solids added outside that budget",
+     "Total solid fraction measured relative to the domain after passive void regions are excluded"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Density field used in the volume constraint",
+    "issue": "missing",
+    "description": "Sec. 2.1 introduces element densities and mentions filters, but does not say which density field enters the volume constraint when filtering or projection is used.",
+    "readings": [
+     "Constrain the mean unfiltered design density",
+     "Constrain the mean filtered physical density",
+     "Constrain the mean projected physical density"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Overall solid elastic stiffness scale",
+    "issue": "missing",
+    "description": "No Young's modulus or equivalent stiffness scale is supplied for Fig. 1. These alternatives hold Poisson ratio, anisotropy ratios, and void-to-solid stiffness ratio fixed.",
+    "readings": [
+     "Reference modulus E = 1 in normalized units",
+     "Reference modulus E = 70 GPa",
+     "Reference modulus E = 210 GPa"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson ratio for an isotropic material",
+    "issue": "missing",
+    "description": "Sec. 2.1 gives no Poisson ratio; Sec. 4.1's stress and strain definitions do not supply it.",
+    "readings": [
+     "nu = 0.20",
+     "nu = 0.30",
+     "nu = 0.45"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Elastic symmetry and material orientation",
+    "issue": "missing",
+    "description": "The text specifies no constitutive tensor or isotropy assumption. A single linear-elastic material does not uniquely determine these properties.",
+    "readings": [
+     "Homogeneous isotropic elasticity",
+     "Homogeneous orthotropic plane-stress elasticity with Ex/Ey = 2, nu_xy = 0.25, Gxy/Ey = 0.4, and principal axes along x and y",
+     "The same orthotropic material with its principal axes rotated 45 degrees"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Two-dimensional elastic analysis assumption",
+    "issue": "vague",
+    "description": "Sec. 2.1 gives no constitutive reduction. Sec. 4.1 describes 2D images and in-plane fields but does not explicitly identify the FEA assumption for Fig. 1.",
+    "readings": [
+     "Plane stress",
+     "Plane strain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "FE mesh resolution and image-to-mesh correspondence",
+    "issue": "vague",
+    "description": "Sec. 4.1 specifies 64x64 dataset images, not Fig. 1's element or node counts, and does not establish that image pixels correspond directly to FE elements.",
+    "readings": [
+     "64x64 elements with 65x65 corner nodes",
+     "64x64 nodes with 63x63 elements",
+     "128x128 elements with results downsampled to a 64x64 image"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Element formulation and numerical integration",
+    "issue": "missing",
+    "description": "Sec. 2.1 mentions FEA without identifying element order or integration for Fig. 1; Sec. 4.1's image resolution does not determine them.",
+    "readings": [
+     "Bilinear Q4 quadrilaterals with 2x2 Gauss integration",
+     "Q4 quadrilaterals with 1x1 integration and hourglass stabilization",
+     "Biquadratic Q9 quadrilaterals with 3x3 Gauss integration"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "SIMP stiffness interpolation and void regularization",
+    "issue": "missing",
+    "description": "Sec. 2.1 describes continuous densities and penalization, but gives no interpolation equation, minimum density, or residual void stiffness.",
+    "readings": [
+     "E(rho) = Emin + rho^p(Esolid-Emin), rho in [0,1], Emin/Esolid = 1e-9",
+     "The same interpolation with Emin/Esolid = 1e-6",
+     "E(rho) = Esolid*rho^p with rho constrained to [1e-3,1]"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "SIMP penalization exponent and continuation",
+    "issue": "vague",
+    "description": "Sec. 2.1 supplies only p > 1, not the exponent used for Fig. 1 or a continuation schedule.",
+    "readings": [
+     "Fixed p = 2",
+     "Fixed p = 3",
+     "Continue p from 2 to 3 during optimization"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Filtering method",
+    "issue": "vague",
+    "description": "Sec. 2.1 mentions filters as possible techniques without specifying whether or how Fig. 1 uses one.",
+    "readings": [
+     "No filter",
+     "Sensitivity filter",
+     "Density filter"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Filter support radius",
+    "issue": "missing",
+    "description": "No filter radius or length convention is given in Sec. 2.1. These alternatives apply if filtering is used; h denotes horizontal element pitch.",
+    "readings": [
+     "Radius r = 1.5h",
+     "Radius r = 3h",
+     "Radius r = 0.05L"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Filter kernel and boundary treatment",
+    "issue": "missing",
+    "description": "Sec. 2.1 gives no filter weights, distance metric, or treatment of neighbors outside the domain.",
+    "readings": [
+     "Euclidean conical weights max(0,r-d) between element centers, truncated and renormalized at boundaries",
+     "Uniform weights inside a Euclidean disk, truncated and renormalized",
+     "Manhattan-distance conical weights, truncated and renormalized",
+     "Euclidean conical density filter with outside-domain zero-density padding"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Density projection and its continuation",
+    "issue": "missing",
+    "description": "Sec. 2.1 discusses encouraging binary densities but specifies no projection, threshold, sharpness, or projection continuation.",
+    "readings": [
+     "No density projection",
+     "Smoothed Heaviside projection with threshold eta = 0.5 and sharpness beta = 8",
+     "Heaviside projection with eta = 0.5 and beta continued through 1, 2, 4, 8, and 16"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Optimization update method and move controls",
+    "issue": "missing",
+    "description": "Sec. 2.1 describes methods generally, and Sec. 4.1 names ToPy for dataset generation, but neither specifies Fig. 1's optimizer or update controls.",
+    "readings": [
+     "SIMP with optimality-criteria updates, density move limit 0.2, and damping exponent 0.5",
+     "SIMP with optimality-criteria updates, density move limit 0.05, and damping exponent 0.5",
+     "SIMP with MMA updates and density move limit 0.2"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial design",
+    "issue": "missing",
+    "description": "Sec. 2.1 explicitly notes non-convexity and local optima but gives no initialization for Fig. 1.",
+    "readings": [
+     "Uniform density satisfying the available volume budget",
+     "Uniform density plus a deterministic zero-mean perturbation of amplitude 0.01, adjusted to satisfy the same volume budget",
+     "A feasible connected beam-like warm start with the same volume"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Optimization termination and feasibility tolerances",
+    "issue": "missing",
+    "description": "No convergence criterion, iteration cap, or numerical volume tolerance is reported for Fig. 1 in Sec. 2.1 or the dataset discussion.",
+    "readings": [
+     "Stop at maximum density change below 0.01, volume tolerance 1e-3, or 200 iterations",
+     "Stop at maximum density change below 0.001, volume tolerance 1e-6, or 1000 iterations",
+     "Run a fixed 100 optimization iterations"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Equilibrium-solve accuracy",
+    "issue": "missing",
+    "description": "Sec. 2.1 mentions FEA but gives no equilibrium-solve accuracy. Whether numerical error changes the recovered design depends on conditioning and convergence.",
+    "readings": [
+     "Direct linear solve to floating-point accuracy",
+     "Iterative solve with relative residual tolerance 1e-3",
+     "Iterative solve with relative residual tolerance 1e-8"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 893.962236404419,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L36",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 0,
+ "locator": "Sec. 2.1, Fig. 1",
+ "finished": "2026-10-22T19:15:44"
+}

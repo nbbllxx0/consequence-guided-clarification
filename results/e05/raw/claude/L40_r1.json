@@ -1,0 +1,327 @@
+{
+ "raw": "{\"items\": [{\"category\": \"domain_extent\", \"entity\": \"design-domain physical size and element size\", \"issue\": \"missing\", \"description\": \"App. C gives only element counts (Nx \\u00d7 Ny = 144 \\u00d7 48); no length, height or element size. Square elements (a 3:1 half-beam, i.e. half of a 6:1 MBB span) are implied, not stated. r_min = 2.0 (Sec. 5.1, App. C) is a centre-to-centre distance (Eq. 16), so it equals 2 element widths only if h = 1.\", \"readings\": [\"L \\u00d7 H = 144 \\u00d7 48 with unit square elements (h = 1); r_min measured in element widths\", \"normalized half-beam L \\u00d7 H = 3 \\u00d7 1 with square elements h = 1/48; r_min = 2.0 taken as 2 element widths\"], \"effect\": \"scale_only\"}, {\"category\": \"domain_extent\", \"entity\": \"out-of-plane thickness (plane-stress Q4)\", \"issue\": \"missing\", \"description\": \"App. C specifies plane-stress Q4 elements with E = 1 and \\u03bd = 0.3 but gives no thickness. Compliance scales as 1/t; the layout is unchanged.\", \"readings\": [\"t = 1 (unit thickness)\", \"any other uniform thickness t (compliance scaled by 1/t)\"], \"effect\": \"scale_only\"}, {\"category\": \"support_location_extent\", \"entity\": \"supported nodes (half-beam symmetry edge and right-hand support)\", \"issue\": \"vague\", \"description\": \"App. C only says 'standard MBB beam boundary conditions [17] with a unit load applied at the top-left node'. The supported nodes are never listed and there is no boundary-condition figure for this example. The top-left load implies a symmetric half-beam with the symmetry line on the left edge, but the node sets have to be taken from the reference.\", \"readings\": [\"all left-edge nodes (symmetry) + the single bottom-right corner node\", \"all left-edge nodes (symmetry) + the last 2-3 bottom-edge nodes at the right end\"], \"effect\": \"layout\"}, {\"category\": \"support_type\", \"entity\": \"constrained DOFs at the symmetry edge and right-hand support\", \"issue\": \"vague\", \"description\": \"Same source (App. C, 'standard MBB ... [17]'): the constrained DOFs are not stated. The usual half-MBB has u_x = 0 on the symmetry edge and a vertical roller at the bottom-right. A pinned right support would change the load path.\", \"readings\": [\"left edge u_x = 0; bottom-right u_y = 0 only (roller)\", \"left edge u_x = 0; bottom-right pinned (u_x = u_y = 0)\"], \"effect\": \"layout\"}, {\"category\": \"load_direction\", \"entity\": \"unit point load at the top-left node\", \"issue\": \"vague\", \"description\": \"App. C says 'a unit load applied at the top-left node' but gives no direction; only 'standard MBB' implies a vertical load. In linear elasticity the sign does not change compliance or layout.\", \"readings\": [\"vertical downward (-y), magnitude 1\", \"vertical upward (+y), magnitude 1\"], \"effect\": \"scale_only\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Heaviside threshold \\u03b7_h (Eq. 17) and resulting physical volume fraction\", \"issue\": \"vague\", \"description\": \"Sec. 5, after Eq. (17): \\u03b7_h is 'either determined via bisection to enforce volume conservation across the projection or fixed to 0.5'. The text never says which option the MBB runs use. The 30% target is enforced on the pre-filter sigmoid field \\u03c1\\u0303 (Eq. 14), so this choice decides whether the physical density \\u03c1 also stays at about 30%.\", \"readings\": [\"\\u03b7_h found by bisection at every LL iteration so that \\u03a3 v_e \\u03c1_e = \\u03a3 v_e \\u03c1\\u0304_e (physical volume \\u2248 30%)\", \"\\u03b7_h fixed at 0.5 (physical volume of \\u03c1 free to drift from 30%)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"volume-constrained sigmoid projection \\u03a6\", \"issue\": \"vague\", \"description\": \"Sec. 5 calls \\u03a6 a 'parametric sigmoidal projection': the inputs 'are mapped to [0,1] and the sigmoid is adaptively shifted via bisection' to meet the volume target, with details deferred to [14]. The sigmoid slope and any scaling of the inputs are not given.\", \"readings\": [\"\\u03c1\\u0303 = 1/(1+exp(-(x+b))) with unit slope, shift b found by bisection (as in [14])\", \"\\u03c1\\u0303 = 1/(1+exp(-s(x+b))) with a non-unit slope s\", \"min-max rescaling of x to [0,1] followed by a shifted sigmoid\"], \"effect\": \"unsure\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"lower bound of the tuned filter radius r_min (= final r_min of the Fig. 5 designs)\", \"issue\": \"conflicting\", \"description\": \"Sec. 5.1 says r_min 'converges to its lower bound (set to r_min = 2.0 to prevent checkerboard patterns)'. Table 1 (App. C) gives r_min bounds of [1.5, 10.0].\", \"readings\": [\"lower bound 2.0 (final r_min = 2.0)\", \"lower bound 1.5 (final r_min = 1.5)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"initial filter radius r_min^(0) in the four-hyperparameter runs\", \"issue\": \"missing\", \"description\": \"Sec. 5.1 and the contrast drawn in Sec. 7 imply that r_min decreases steadily to its lower bound here, so it must start above the bound. The starting value is never given; r_min = 2.0 is stated only for the fixed-hyperparameter studies (Fig. 4, Fig. 13).\", \"readings\": [\"r_min^(0) = 2.0 (decaying to a 1.5 bound)\", \"r_min^(0) = 3.0\", \"r_min^(0) = 5.0\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"initial SIMP exponent p^(0) in the four-hyperparameter runs\", \"issue\": \"missing\", \"description\": \"p is tuned within [1, 10] (Table 1) for Fig. 5, but its starting value is not given. p = 3.0 is stated only for the fixed-hyperparameter studies (Fig. 4 landscape, Fig. 13). It may be readable at best approximately from Fig. 5d.\", \"readings\": [\"p^(0) = 3.0\", \"p^(0) = 1.0 (Table 1 lower bound, continuation-style start)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"the four initial Heaviside sharpness values \\u03b2^(0)\", \"issue\": \"missing\", \"description\": \"Sec. 5.1: BOTH's 20 runs are '5 neural network initializations crossed with 4 values of \\u03b2^(0)', but the four values are never listed. Only the bounds [0.05, 15] (Table 1) are given.\", \"readings\": [\"{1, 2, 4, 8}\", \"{0.5, 1, 2, 4}\", \"{0.1, 1, 5, 10}\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"learned hyperparameter schedules (p, \\u03b2, \\u03b7) behind the reported Fig. 5 designs\", \"issue\": \"figure_only\", \"description\": \"Reproducing the design with fixed settings needs the values actually used. The text gives only trends (\\u03b7 rises then decays, \\u03b2 stays small until late, r_min goes to its bound) and says nothing about p. The actual curves appear only in Fig. 5d.\", \"readings\": [\"regenerate by re-running BOTH (no numeric schedule available)\", \"approximate with p = 3, r_min at its lower bound, \\u03b2 kept low then ramped to \\u224815 at the end\", \"approximate with p = 3, r_min = 2.0, \\u03b2 = 15 throughout\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"initial LL unroll horizon t_start\", \"issue\": \"missing\", \"description\": \"Sec. 3 says t_start is 'typically set to 1 or 2' and recommends t = 2 when a UL variable shapes the LL landscape but has no direct hypergradient term. Here that is p, because F evaluates compliance at p = 1. App. C defers to App. A, which does not give the value.\", \"readings\": [\"t_start = 1\", \"t_start = 2\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"total budget B_max for BOTH (and the matched BO budget) in Fig. 5\", \"issue\": \"missing\", \"description\": \"Sec. 5.1 compares the methods 'within the same computational budget', and Alg. 1 returns the last LL iterate once B_max is reached. B_max and the number of BO trials are never stated for the MBB example; only the x-axis of Fig. 5a would show them.\", \"readings\": [\"1500 (value used for SMD-1, Fig. 3)\", \"\\u22483000 LL iterations (\\u224830 BO samples \\u00d7 ~100 LL iterations)\", \"\\u224810,000 linear solves\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"unit in which the budget B is counted\", \"issue\": \"conflicting\", \"description\": \"Sec. 3 and App. A.1 say B_max is tracked in 'cumulative LL iterations'. Alg. 1 (line 13), however, adds 4t+2 per UL iteration, which counts linear solves, consistent with App. C.3 and Fig. 5a. The same B_max therefore stops the run at different points.\", \"readings\": [\"B increases by t per UL iteration (LL iterations)\", \"B increases by 4t+2 per UL iteration (linear solves)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"allocation of the budget across annealing stages t\", \"issue\": \"vague\", \"description\": \"App. A.1 says the budget is 'distributed across the annealing stages ... according to an exponentially decaying schedule with decay factor 0.1', with 20% reserved for t = 1 and 10% for t_max. It does not say how each stage's share is computed, or whether using up a share forces a transition (on top of the plateau and oscillation triggers in A.2).\", \"readings\": [\"hard per-stage caps \\u221d 0.1^(t-1) of the non-reserved budget; transition forced when a cap is used up\", \"shares only set the 10% patience windows; transitions happen only through the plateau/oscillation triggers plus the forced final jump to t_max = 10\"], \"effect\": \"unsure\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Adam moment coefficients (\\u03b21, \\u03b22) at LL and UL\", \"issue\": \"missing\", \"description\": \"Adam is used at both levels (Alg. 1, Sec. 3) with \\u03c41 = \\u03c42 = 1e-8 (\\u03c41 = 0 at the UL), and the LL state is reset at every UL iteration. The moment decay rates are never given.\", \"readings\": [\"\\u03b21 = 0.9, \\u03b22 = 0.999 (library defaults)\", \"\\u03b21 = 0.9, \\u03b22 = 0.99\"], \"effect\": \"unsure\"}, {\"category\": \"other\", \"entity\": \"CNN decoder upsampling stages\", \"issue\": \"conflicting\", \"description\": \"App. C.1: the dense layer produces an (Nx/8, Ny/8, 32) = 18 \\u00d7 6 \\u00d7 32 tensor, followed by 'five successive hidden layers' that each 'double the spatial resolution'. That would end at 576 \\u00d7 192, not 144 \\u00d7 48. Only three doublings fit, and the mesh was chosen to be 'divisible by eight'.\", \"readings\": [\"5 conv blocks with resize factors (1, 2, 2, 2, 1) as in the code of [14]\", \"5 conv blocks with resize factors (2, 2, 2, 1, 1)\", \"only 3 conv blocks, each doubling the resolution\"], \"effect\": \"layout\"}, {\"category\": \"other\", \"entity\": \"CNN widths, kernel size, bias scaling, output activation and initializers\", \"issue\": \"missing\", \"description\": \"App. C.1 gives a latent size of 128 and 32 dense channels but defers 'full architectural details' to [14]. Not given: conv channel counts, kernel size, scale of the per-pixel bias, weight and latent initializers, and whether tanh is applied to the final output. The stated per-layer order (conv \\u2192 bias \\u2192 tanh) would bound the output to [-1, 1] before \\u03a6.\", \"readings\": [\"as in [14]'s code: filters (128, 64, 32, 16, 1), 5\\u00d75 kernels, per-pixel bias scaled by 10, orthogonal dense / variance-scaling conv init, latent ~ N(0,1), no activation on the final output\", \"same, but tanh also applied after the last layer (output in [-1, 1] before \\u03a6)\", \"other widths or kernels, e.g. 3\\u00d73 kernels\"], \"effect\": \"layout\"}, {\"category\": \"other\", \"entity\": \"random initial CNN weights (initial design)\", \"issue\": \"missing\", \"description\": \"Sec. 5.1 uses 5 network initializations for BOTH, and App. C uses 'a random network initialization' for the reference values. Seeds and initial weights are not given, so the initial density field, and the local optimum it leads to, cannot be reproduced exactly.\", \"readings\": [\"seeds 0-4 with the initializers of [14]\", \"any five random seeds (statistically comparable, different designs)\"], \"effect\": \"layout\"}, {\"category\": \"other\", \"entity\": \"UL normalization constants c_ref and d_ref\", \"issue\": \"missing\", \"description\": \"Eq. (18) and App. C: c_ref and d_ref are 'calculated based on a random network initialization and kept fixed across all runs' so that both terms start at about the same size. Their values, the initialization used, and whether c_ref is evaluated at p = 1 (like c in F) or at the initial LL p are not given. With k = 1 they set the trade-off between compliance and discreteness that drives \\u03b2, p and r_min.\", \"readings\": [\"c_ref = compliance at p = 1 and d_ref = D of the initial design of one fixed random network\", \"c_ref = compliance at the initial LL p (e.g. 3) of that design, d_ref = its D\"], \"effect\": \"layout\"}, {\"category\": \"other\", \"entity\": \"post-processing of the reported Fig. 5c designs and values\", \"issue\": \"vague\", \"description\": \"Fig. 5c reports c* (at p = 1) and D for 'typical topologies' but does not say whether the designs are evaluated as returned or first projected at a high \\u03b2. App. C.2 projects at \\u03b2 = 64, but only for the Fig. 14b ablation.\", \"readings\": [\"evaluate as returned (final learned \\u03b2 and r_min; p = 1 for c*)\", \"project at \\u03b2 = 64 before evaluating c* and D\"], \"effect\": \"unsure\"}, {\"category\": \"other\", \"entity\": \"number and structure of the BO baseline runs\", \"issue\": \"conflicting\", \"description\": \"Sec. 5.1 says BO was repeated 'with 4 random seeds and five neural network initializations per seed, giving 24 runs', but 4 \\u00d7 5 = 20. App. C.3 says '8 independent BO trials per network initialization (three initializations), giving 24 BO runs'.\", \"readings\": [\"4 GP seeds \\u00d7 5 network initializations (20 runs)\", \"8 GP seeds \\u00d7 3 network initializations (24 runs)\"], \"effect\": \"unsure\"}, {\"category\": \"other\", \"entity\": \"per-element \\u03b2_e extension of the MBB example (Fig. 6)\", \"issue\": \"vague\", \"description\": \"Sec. 5.1 and Fig. 6 say 'each element is assigned its own \\u03b2_e, giving 6915 UL hyperparameters', but the mesh has 144 \\u00d7 48 = 6912 elements. The three extra UL variables, the initial \\u03b2_e field and the 'two UL Adam learning rates' are not specified.\", \"readings\": [\"6912 \\u03b2_e + {\\u03b7, p, r_min}; \\u03b2_e initialized uniformly at a scalar \\u03b2^(0); UL learning rates 1e-1 and 1e-2\", \"6912 \\u03b2_e + {\\u03b7, p, r_min}; \\u03b2_e initialized uniformly; UL learning rates 1e-1 and 1e-3\"], \"effect\": \"layout\"}]}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "design-domain physical size and element size",
+    "issue": "missing",
+    "description": "App. C gives only element counts (Nx \u00d7 Ny = 144 \u00d7 48); no length, height or element size. Square elements (a 3:1 half-beam, i.e. half of a 6:1 MBB span) are implied, not stated. r_min = 2.0 (Sec. 5.1, App. C) is a centre-to-centre distance (Eq. 16), so it equals 2 element widths only if h = 1.",
+    "readings": [
+     "L \u00d7 H = 144 \u00d7 48 with unit square elements (h = 1); r_min measured in element widths",
+     "normalized half-beam L \u00d7 H = 3 \u00d7 1 with square elements h = 1/48; r_min = 2.0 taken as 2 element widths"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "out-of-plane thickness (plane-stress Q4)",
+    "issue": "missing",
+    "description": "App. C specifies plane-stress Q4 elements with E = 1 and \u03bd = 0.3 but gives no thickness. Compliance scales as 1/t; the layout is unchanged.",
+    "readings": [
+     "t = 1 (unit thickness)",
+     "any other uniform thickness t (compliance scaled by 1/t)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "supported nodes (half-beam symmetry edge and right-hand support)",
+    "issue": "vague",
+    "description": "App. C only says 'standard MBB beam boundary conditions [17] with a unit load applied at the top-left node'. The supported nodes are never listed and there is no boundary-condition figure for this example. The top-left load implies a symmetric half-beam with the symmetry line on the left edge, but the node sets have to be taken from the reference.",
+    "readings": [
+     "all left-edge nodes (symmetry) + the single bottom-right corner node",
+     "all left-edge nodes (symmetry) + the last 2-3 bottom-edge nodes at the right end"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_type",
+    "entity": "constrained DOFs at the symmetry edge and right-hand support",
+    "issue": "vague",
+    "description": "Same source (App. C, 'standard MBB ... [17]'): the constrained DOFs are not stated. The usual half-MBB has u_x = 0 on the symmetry edge and a vertical roller at the bottom-right. A pinned right support would change the load path.",
+    "readings": [
+     "left edge u_x = 0; bottom-right u_y = 0 only (roller)",
+     "left edge u_x = 0; bottom-right pinned (u_x = u_y = 0)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "unit point load at the top-left node",
+    "issue": "vague",
+    "description": "App. C says 'a unit load applied at the top-left node' but gives no direction; only 'standard MBB' implies a vertical load. In linear elasticity the sign does not change compliance or layout.",
+    "readings": [
+     "vertical downward (-y), magnitude 1",
+     "vertical upward (+y), magnitude 1"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Heaviside threshold \u03b7_h (Eq. 17) and resulting physical volume fraction",
+    "issue": "vague",
+    "description": "Sec. 5, after Eq. (17): \u03b7_h is 'either determined via bisection to enforce volume conservation across the projection or fixed to 0.5'. The text never says which option the MBB runs use. The 30% target is enforced on the pre-filter sigmoid field \u03c1\u0303 (Eq. 14), so this choice decides whether the physical density \u03c1 also stays at about 30%.",
+    "readings": [
+     "\u03b7_h found by bisection at every LL iteration so that \u03a3 v_e \u03c1_e = \u03a3 v_e \u03c1\u0304_e (physical volume \u2248 30%)",
+     "\u03b7_h fixed at 0.5 (physical volume of \u03c1 free to drift from 30%)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "volume-constrained sigmoid projection \u03a6",
+    "issue": "vague",
+    "description": "Sec. 5 calls \u03a6 a 'parametric sigmoidal projection': the inputs 'are mapped to [0,1] and the sigmoid is adaptively shifted via bisection' to meet the volume target, with details deferred to [14]. The sigmoid slope and any scaling of the inputs are not given.",
+    "readings": [
+     "\u03c1\u0303 = 1/(1+exp(-(x+b))) with unit slope, shift b found by bisection (as in [14])",
+     "\u03c1\u0303 = 1/(1+exp(-s(x+b))) with a non-unit slope s",
+     "min-max rescaling of x to [0,1] followed by a shifted sigmoid"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "lower bound of the tuned filter radius r_min (= final r_min of the Fig. 5 designs)",
+    "issue": "conflicting",
+    "description": "Sec. 5.1 says r_min 'converges to its lower bound (set to r_min = 2.0 to prevent checkerboard patterns)'. Table 1 (App. C) gives r_min bounds of [1.5, 10.0].",
+    "readings": [
+     "lower bound 2.0 (final r_min = 2.0)",
+     "lower bound 1.5 (final r_min = 1.5)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "initial filter radius r_min^(0) in the four-hyperparameter runs",
+    "issue": "missing",
+    "description": "Sec. 5.1 and the contrast drawn in Sec. 7 imply that r_min decreases steadily to its lower bound here, so it must start above the bound. The starting value is never given; r_min = 2.0 is stated only for the fixed-hyperparameter studies (Fig. 4, Fig. 13).",
+    "readings": [
+     "r_min^(0) = 2.0 (decaying to a 1.5 bound)",
+     "r_min^(0) = 3.0",
+     "r_min^(0) = 5.0"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "initial SIMP exponent p^(0) in the four-hyperparameter runs",
+    "issue": "missing",
+    "description": "p is tuned within [1, 10] (Table 1) for Fig. 5, but its starting value is not given. p = 3.0 is stated only for the fixed-hyperparameter studies (Fig. 4 landscape, Fig. 13). It may be readable at best approximately from Fig. 5d.",
+    "readings": [
+     "p^(0) = 3.0",
+     "p^(0) = 1.0 (Table 1 lower bound, continuation-style start)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "the four initial Heaviside sharpness values \u03b2^(0)",
+    "issue": "missing",
+    "description": "Sec. 5.1: BOTH's 20 runs are '5 neural network initializations crossed with 4 values of \u03b2^(0)', but the four values are never listed. Only the bounds [0.05, 15] (Table 1) are given.",
+    "readings": [
+     "{1, 2, 4, 8}",
+     "{0.5, 1, 2, 4}",
+     "{0.1, 1, 5, 10}"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "learned hyperparameter schedules (p, \u03b2, \u03b7) behind the reported Fig. 5 designs",
+    "issue": "figure_only",
+    "description": "Reproducing the design with fixed settings needs the values actually used. The text gives only trends (\u03b7 rises then decays, \u03b2 stays small until late, r_min goes to its bound) and says nothing about p. The actual curves appear only in Fig. 5d.",
+    "readings": [
+     "regenerate by re-running BOTH (no numeric schedule available)",
+     "approximate with p = 3, r_min at its lower bound, \u03b2 kept low then ramped to \u224815 at the end",
+     "approximate with p = 3, r_min = 2.0, \u03b2 = 15 throughout"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "initial LL unroll horizon t_start",
+    "issue": "missing",
+    "description": "Sec. 3 says t_start is 'typically set to 1 or 2' and recommends t = 2 when a UL variable shapes the LL landscape but has no direct hypergradient term. Here that is p, because F evaluates compliance at p = 1. App. C defers to App. A, which does not give the value.",
+    "readings": [
+     "t_start = 1",
+     "t_start = 2"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "total budget B_max for BOTH (and the matched BO budget) in Fig. 5",
+    "issue": "missing",
+    "description": "Sec. 5.1 compares the methods 'within the same computational budget', and Alg. 1 returns the last LL iterate once B_max is reached. B_max and the number of BO trials are never stated for the MBB example; only the x-axis of Fig. 5a would show them.",
+    "readings": [
+     "1500 (value used for SMD-1, Fig. 3)",
+     "\u22483000 LL iterations (\u224830 BO samples \u00d7 ~100 LL iterations)",
+     "\u224810,000 linear solves"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "unit in which the budget B is counted",
+    "issue": "conflicting",
+    "description": "Sec. 3 and App. A.1 say B_max is tracked in 'cumulative LL iterations'. Alg. 1 (line 13), however, adds 4t+2 per UL iteration, which counts linear solves, consistent with App. C.3 and Fig. 5a. The same B_max therefore stops the run at different points.",
+    "readings": [
+     "B increases by t per UL iteration (LL iterations)",
+     "B increases by 4t+2 per UL iteration (linear solves)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "allocation of the budget across annealing stages t",
+    "issue": "vague",
+    "description": "App. A.1 says the budget is 'distributed across the annealing stages ... according to an exponentially decaying schedule with decay factor 0.1', with 20% reserved for t = 1 and 10% for t_max. It does not say how each stage's share is computed, or whether using up a share forces a transition (on top of the plateau and oscillation triggers in A.2).",
+    "readings": [
+     "hard per-stage caps \u221d 0.1^(t-1) of the non-reserved budget; transition forced when a cap is used up",
+     "shares only set the 10% patience windows; transitions happen only through the plateau/oscillation triggers plus the forced final jump to t_max = 10"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Adam moment coefficients (\u03b21, \u03b22) at LL and UL",
+    "issue": "missing",
+    "description": "Adam is used at both levels (Alg. 1, Sec. 3) with \u03c41 = \u03c42 = 1e-8 (\u03c41 = 0 at the UL), and the LL state is reset at every UL iteration. The moment decay rates are never given.",
+    "readings": [
+     "\u03b21 = 0.9, \u03b22 = 0.999 (library defaults)",
+     "\u03b21 = 0.9, \u03b22 = 0.99"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "other",
+    "entity": "CNN decoder upsampling stages",
+    "issue": "conflicting",
+    "description": "App. C.1: the dense layer produces an (Nx/8, Ny/8, 32) = 18 \u00d7 6 \u00d7 32 tensor, followed by 'five successive hidden layers' that each 'double the spatial resolution'. That would end at 576 \u00d7 192, not 144 \u00d7 48. Only three doublings fit, and the mesh was chosen to be 'divisible by eight'.",
+    "readings": [
+     "5 conv blocks with resize factors (1, 2, 2, 2, 1) as in the code of [14]",
+     "5 conv blocks with resize factors (2, 2, 2, 1, 1)",
+     "only 3 conv blocks, each doubling the resolution"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "CNN widths, kernel size, bias scaling, output activation and initializers",
+    "issue": "missing",
+    "description": "App. C.1 gives a latent size of 128 and 32 dense channels but defers 'full architectural details' to [14]. Not given: conv channel counts, kernel size, scale of the per-pixel bias, weight and latent initializers, and whether tanh is applied to the final output. The stated per-layer order (conv \u2192 bias \u2192 tanh) would bound the output to [-1, 1] before \u03a6.",
+    "readings": [
+     "as in [14]'s code: filters (128, 64, 32, 16, 1), 5\u00d75 kernels, per-pixel bias scaled by 10, orthogonal dense / variance-scaling conv init, latent ~ N(0,1), no activation on the final output",
+     "same, but tanh also applied after the last layer (output in [-1, 1] before \u03a6)",
+     "other widths or kernels, e.g. 3\u00d73 kernels"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "random initial CNN weights (initial design)",
+    "issue": "missing",
+    "description": "Sec. 5.1 uses 5 network initializations for BOTH, and App. C uses 'a random network initialization' for the reference values. Seeds and initial weights are not given, so the initial density field, and the local optimum it leads to, cannot be reproduced exactly.",
+    "readings": [
+     "seeds 0-4 with the initializers of [14]",
+     "any five random seeds (statistically comparable, different designs)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "UL normalization constants c_ref and d_ref",
+    "issue": "missing",
+    "description": "Eq. (18) and App. C: c_ref and d_ref are 'calculated based on a random network initialization and kept fixed across all runs' so that both terms start at about the same size. Their values, the initialization used, and whether c_ref is evaluated at p = 1 (like c in F) or at the initial LL p are not given. With k = 1 they set the trade-off between compliance and discreteness that drives \u03b2, p and r_min.",
+    "readings": [
+     "c_ref = compliance at p = 1 and d_ref = D of the initial design of one fixed random network",
+     "c_ref = compliance at the initial LL p (e.g. 3) of that design, d_ref = its D"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "post-processing of the reported Fig. 5c designs and values",
+    "issue": "vague",
+    "description": "Fig. 5c reports c* (at p = 1) and D for 'typical topologies' but does not say whether the designs are evaluated as returned or first projected at a high \u03b2. App. C.2 projects at \u03b2 = 64, but only for the Fig. 14b ablation.",
+    "readings": [
+     "evaluate as returned (final learned \u03b2 and r_min; p = 1 for c*)",
+     "project at \u03b2 = 64 before evaluating c* and D"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "other",
+    "entity": "number and structure of the BO baseline runs",
+    "issue": "conflicting",
+    "description": "Sec. 5.1 says BO was repeated 'with 4 random seeds and five neural network initializations per seed, giving 24 runs', but 4 \u00d7 5 = 20. App. C.3 says '8 independent BO trials per network initialization (three initializations), giving 24 BO runs'.",
+    "readings": [
+     "4 GP seeds \u00d7 5 network initializations (20 runs)",
+     "8 GP seeds \u00d7 3 network initializations (24 runs)"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "other",
+    "entity": "per-element \u03b2_e extension of the MBB example (Fig. 6)",
+    "issue": "vague",
+    "description": "Sec. 5.1 and Fig. 6 say 'each element is assigned its own \u03b2_e, giving 6915 UL hyperparameters', but the mesh has 144 \u00d7 48 = 6912 elements. The three extra UL variables, the initial \u03b2_e field and the 'two UL Adam learning rates' are not specified.",
+    "readings": [
+     "6912 \u03b2_e + {\u03b7, p, r_min}; \u03b2_e initialized uniformly at a scalar \u03b2^(0); UL learning rates 1e-1 and 1e-2",
+     "6912 \u03b2_e + {\u03b7, p, r_min}; \u03b2_e initialized uniformly; UL learning rates 1e-1 and 1e-3"
+    ],
+    "effect": "layout"
+   }
+  ]
+ },
+ "wall_s": 768.7729296684265,
+ "returncode": 0,
+ "meta": {
+  "model": null,
+  "num_turns": 2,
+  "is_error": false,
+  "total_cost_usd": 2.1783468,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 49743,
+   "cache_read_input_tokens": 774,
+   "output_tokens": 89012,
+   "output_tokens_details": {
+    "thinking_tokens": 77820
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 49743,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 89012,
+     "cache_read_input_tokens": 774,
+     "cache_creation_input_tokens": 49743,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 49743
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard",
+   "fallback_credit": null
+  }
+ },
+ "stderr_tail": "",
+ "task": "L40",
+ "model": "claude",
+ "model_id": "claude-opus-5-5",
+ "rep": 1,
+ "locator": "Sec. 5, the MBB beam (Appendix C, Fig. 5)",
+ "finished": "2026-10-22T21:33:26"
+}

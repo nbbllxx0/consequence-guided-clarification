@@ -1,0 +1,299 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"beam envelope and aspect ratios\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 6.1.1 refers the design domain to Fig. 3(left), without specifying its boundary or side-length ratios in prose. For the candidate coordinates below, x denotes span L, y width W, and z height H.\",\n      \"readings\": [\n        \"Rectangular prism with L:W:H = 3:1:1.\",\n        \"Rectangular prism with L:W:H = 2:1:1.\",\n        \"Rectangular prism with L:W:H = 3:1:0.5.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"absolute beam dimensions\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 6.1.1 gives no physical beam dimensions. Absolute size matters because the specified Helmholtz coefficient r = 0.1 m fixes a physical smoothing length.\",\n      \"readings\": [\n        \"L = 1 m, with W and H determined by the adopted aspect ratios.\",\n        \"L = 3 m, with W and H determined by the adopted aspect ratios.\",\n        \"L = 10 m, with W and H determined by the adopted aspect ratios.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"root support region\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 6.1.1 calls the problem a cantilever but gives no supported face, patch dimensions, or node set. Taking x = 0 as the root is only a coordinate convention.\",\n      \"readings\": [\n        \"Support the entire x = 0 end face.\",\n        \"Support only the perimeter of the x = 0 end face.\",\n        \"Support only the four corner nodes of the x = 0 end face.\",\n        \"Support two mounting patches on the root face.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"support_type\",\n      \"entity\": \"root displacement constraints\",\n      \"issue\": \"vague\",\n      \"description\": \"The word 'cantilever' in Sec. 6.1.1 suggests a built-in root, but the component-level displacement conditions are not written.\",\n      \"readings\": [\n        \"Set ux = uy = uz = 0 at every supported root node.\",\n        \"Set ux = 0 across the root face; fix uy and uz at one corner and uz at a second corner separated along y, allowing the remaining in-plane root deformation.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"other\",\n      \"entity\": \"symmetry restrictions and model reduction\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 6.1.1 does not state whether the reported mesh represents the entire beam or a symmetry-reduced domain, or whether material symmetry is enforced.\",\n      \"readings\": [\n        \"Optimize the full beam without enforced material symmetry.\",\n        \"Use a half-width model with normal displacement fixed on the width symmetry plane and mirror the resulting material distribution.\",\n        \"Use the full domain but enforce reflection symmetry of the density field across the width midplane.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"cantilever applied load\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 6.1.1 gives no coordinates or named boundary entity for the loading. The Fig. 3 caption supplies no textual loading location.\",\n      \"readings\": [\n        \"Free-face center: (L, W/2, H/2).\",\n        \"Midpoint of the lower free-end edge: (L, W/2, 0).\",\n        \"Free-end corner: (L, W, 0).\",\n        \"Center of an interior cross-section: (L/2, W/2, H/2).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"spatial extent, profile, and nodal assembly of loading\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 6.1.1 does not identify a point force, loaded edge, loaded face, finite patch, or distribution rule.\",\n      \"readings\": [\n        \"Apply the entire resultant to one node.\",\n        \"Apply a uniform line load along a free-end edge using consistent nodal forces, including half weights at its endpoints.\",\n        \"Split the resultant equally among all nodes on a free-end edge.\",\n        \"Apply uniform traction over the entire free-end face.\",\n        \"Apply uniform traction over a centered free-face patch of width W/10 and height H/10.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"cantilever loading direction\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 6.1.1 specifies no force components or direction. The x- and y-direction loads in Sec. 6.1.2 belong to the blade example.\",\n      \"readings\": [\n        \"Transverse loading in the -z direction.\",\n        \"Transverse loading in the -y direction.\",\n        \"Axial loading in the +x direction.\",\n        \"Oblique loading with equal +x and -z components.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"common amplitude of prescribed cantilever loads\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 6.1.1 gives no load magnitude. These alternatives compare a common scaling of otherwise identical load patterns and unchanged relative case weights.\",\n      \"readings\": [\n        \"Reference resultant F = 1 N.\",\n        \"Reference resultant F = 10 N.\",\n        \"Reference resultant F = 1000 N.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"other\",\n      \"entity\": \"load count, case grouping, relative amplitudes, and compliance aggregation\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 6.1.1 supplies no load-case list or aggregation rule. Unlike Sec. 6.1.2, it does not explicitly identify independent right-hand sides or their weights.\",\n      \"readings\": [\n        \"One load case containing one prescribed force.\",\n        \"One load case containing simultaneous y- and z-direction forces of equal magnitude.\",\n        \"One load case containing simultaneous y- and z-direction forces with magnitude ratio 2:1.\",\n        \"Two independent transverse load cases with objective (Cy + Cz)/2.\",\n        \"Two independent transverse load cases with objective 0.8 Cy + 0.2 Cz.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"fixed-solid or fixed-void cells\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 6.1.1 does not explicitly identify passive regions, attachment-pad dimensions, or their treatment during filtering.\",\n      \"readings\": [\n        \"No passive regions; every domain cell is designable.\",\n        \"Keep the cells incident to loaded nodes fixed solid.\",\n        \"Keep one root layer and the cells incident to loaded nodes fixed solid, enforcing both raw and filtered density equal to one.\",\n        \"Fix raw density to one in those attachment cells but allow their filtered density to vary.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"meaning and normalization of the bound 0.5\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 6.1.1 calls 0.5 an upper bound on total mass without units or a normalization definition. Eq. (1), however, writes an unnormalized volume bound. No solid density is provided for a literal mass interpretation.\",\n      \"readings\": [\n        \"Normalized mass or volume fraction: sum(mu_i v_i)/volume(Omega) <= 0.5.\",\n        \"Absolute material-volume limit: sum(mu_i v_i) <= 0.5 m^3.\",\n        \"Absolute mass limit of 0.5 kg, with an adopted solid density such as 7850 kg/m^3 to convert it into a volume limit.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"solid Young's modulus\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 6.1.1 prints the modulus as '2.0 x 10^{1}1 N/m^2', leaving the final digit outside the exponent.\",\n      \"readings\": [\n        \"E0 = 2.0 x 10^11 N/m^2, interpreting the trailing 1 as the second exponent digit.\",\n        \"E0 = 2.0 x 10^1 N/m^2, interpreting the trailing 1 as an extraneous character.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"element counts along the three coordinate directions\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 6.1.1 gives 3000, 24000, and 192000 design variables and uniform first-order hexahedra. Even for a full rectangular box, these products do not determine Nx, Ny, Nz, element aspect ratios, or the refinement sequence.\",\n      \"readings\": [\n        \"Use (30,10,10), (60,20,20), and (120,40,40).\",\n        \"Use (20,15,10), (40,30,20), and (80,60,40).\",\n        \"Use (50,10,6), (100,20,12), and (200,40,24).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"elasticity element integration and stabilization\",\n      \"issue\": \"missing\",\n      \"description\": \"The first-order hexahedral specification in Sec. 6.1.1 does not state the quadrature or stabilization used to construct element stiffness matrices.\",\n      \"readings\": [\n        \"Fully integrated trilinear displacement elements with 2 x 2 x 2 Gauss quadrature.\",\n        \"One-point reduced-integration trilinear elements with hourglass stabilization.\",\n        \"Selectively reduced integration of volumetric terms.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Helmholtz filter boundary conditions\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (3) specifies the differential operator, and Sec. 6.1.1 specifies r, but neither gives boundary conditions for the filtered density.\",\n      \"readings\": [\n        \"Homogeneous Neumann condition on every domain boundary.\",\n        \"Zero filtered density on every domain boundary.\",\n        \"Filtered density equal to one on support/load attachment boundaries and homogeneous Neumann conditions elsewhere.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"discrete Helmholtz operator and density transfer\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (3) gives a continuous filter equation. Sec. 6.1.1 does not specify its assembled mass matrix, transfer of elementwise mu to the filter, or recovery of elementwise rho for Eq. (4).\",\n      \"readings\": [\n        \"Use a nodal first-order FE Helmholtz filter with consistent mass, volume-integrated elementwise input, and element-average filtered output.\",\n        \"Use a nodal first-order FE Helmholtz filter with lumped mass, lumped element-to-node input transfer, and element-average filtered output.\",\n        \"Use a separate refined first-order hexahedral filter mesh and project its solution back to the design elements.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Helmholtz filter linear-solve accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Sec. 2 nor Sec. 6.1.1 specifies how accurately the filter equation is solved. The stated elasticity PCG settings do not explicitly cover this separate solve.\",\n      \"readings\": [\n        \"Use a direct factorization of the filter matrix.\",\n        \"Use an iterative filter solve with relative residual tolerance 1e-10.\",\n        \"Use an iterative filter solve with relative residual tolerance 1e-6.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"initial density field\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3 describes starting from an initial design, but Sec. 6.1.1 never specifies that design. This matters for the nonconvex SIMP optimization and its local minima.\",\n      \"readings\": [\n        \"Initialize every designable cell with mu = 0.5.\",\n        \"Initialize every designable cell with mu = 0.9.\",\n        \"Initialize the first half-span with mu = 0.49 and the second half with mu = 0.51.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"IPOPT configuration beyond the stated convergence threshold\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 3 and 6.1.1 identify IPOPT and its KKT threshold, but do not identify Hessian treatment, barrier strategy, or internal objective/constraint scaling.\",\n      \"readings\": [\n        \"Limited-memory BFGS Hessian, monotone barrier strategy, and no automatic NLP scaling.\",\n        \"Limited-memory BFGS Hessian, adaptive barrier strategy, and automatic gradient-based NLP scaling.\",\n        \"Exact Lagrangian Hessian, monotone barrier strategy, and no automatic NLP scaling.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"absolute PCG convergence tolerance\",\n      \"issue\": \"missing\",\n      \"description\": \"Algorithm 5, line 5, uses epsilon_abs in addition to the relative tolerance. Sec. 6.1.1 supplies relative PCG parameters but never assigns epsilon_abs.\",\n      \"readings\": [\n        \"epsilon_abs = 0, disabling the absolute stopping contribution.\",\n        \"epsilon_abs = 1e-12 in Algorithm 5's residual measure.\",\n        \"epsilon_abs = 1e-8 in Algorithm 5's residual measure.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"PCG iteration cap\",\n      \"issue\": \"missing\",\n      \"description\": \"Algorithm 5, line 15, requires N_maxit, but no value is supplied for the cantilever runs.\",\n      \"readings\": [\n        \"N_maxit = 500.\",\n        \"N_maxit = 1000.\",\n        \"N_maxit = 10000.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"HYPRE AMG configuration and hierarchy reuse\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 5.2 and 6 specify HYPRE AMG but omit coarsening, interpolation, strength threshold, smoothing, cycle settings, and whether the hierarchy is rebuilt as stiffness changes.\",\n      \"readings\": [\n        \"Rebuild each solve; use HMIS coarsening, extended interpolation, strength threshold 0.25, one V-cycle, and symmetric Gauss-Seidel smoothing.\",\n        \"Rebuild each solve; use PMIS coarsening, classical interpolation, strength threshold 0.5, one V-cycle, and damped-Jacobi smoothing.\",\n        \"Reuse the previous hierarchy between stiffness updates, with one V-cycle and symmetric smoothing.\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "beam envelope and aspect ratios",
+    "issue": "figure_only",
+    "description": "Sec. 6.1.1 refers the design domain to Fig. 3(left), without specifying its boundary or side-length ratios in prose. For the candidate coordinates below, x denotes span L, y width W, and z height H.",
+    "readings": [
+     "Rectangular prism with L:W:H = 3:1:1.",
+     "Rectangular prism with L:W:H = 2:1:1.",
+     "Rectangular prism with L:W:H = 3:1:0.5."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "absolute beam dimensions",
+    "issue": "figure_only",
+    "description": "Sec. 6.1.1 gives no physical beam dimensions. Absolute size matters because the specified Helmholtz coefficient r = 0.1 m fixes a physical smoothing length.",
+    "readings": [
+     "L = 1 m, with W and H determined by the adopted aspect ratios.",
+     "L = 3 m, with W and H determined by the adopted aspect ratios.",
+     "L = 10 m, with W and H determined by the adopted aspect ratios."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "root support region",
+    "issue": "missing",
+    "description": "Sec. 6.1.1 calls the problem a cantilever but gives no supported face, patch dimensions, or node set. Taking x = 0 as the root is only a coordinate convention.",
+    "readings": [
+     "Support the entire x = 0 end face.",
+     "Support only the perimeter of the x = 0 end face.",
+     "Support only the four corner nodes of the x = 0 end face.",
+     "Support two mounting patches on the root face."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_type",
+    "entity": "root displacement constraints",
+    "issue": "vague",
+    "description": "The word 'cantilever' in Sec. 6.1.1 suggests a built-in root, but the component-level displacement conditions are not written.",
+    "readings": [
+     "Set ux = uy = uz = 0 at every supported root node.",
+     "Set ux = 0 across the root face; fix uy and uz at one corner and uz at a second corner separated along y, allowing the remaining in-plane root deformation."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "symmetry restrictions and model reduction",
+    "issue": "missing",
+    "description": "Sec. 6.1.1 does not state whether the reported mesh represents the entire beam or a symmetry-reduced domain, or whether material symmetry is enforced.",
+    "readings": [
+     "Optimize the full beam without enforced material symmetry.",
+     "Use a half-width model with normal displacement fixed on the width symmetry plane and mirror the resulting material distribution.",
+     "Use the full domain but enforce reflection symmetry of the density field across the width midplane."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "cantilever applied load",
+    "issue": "missing",
+    "description": "Sec. 6.1.1 gives no coordinates or named boundary entity for the loading. The Fig. 3 caption supplies no textual loading location.",
+    "readings": [
+     "Free-face center: (L, W/2, H/2).",
+     "Midpoint of the lower free-end edge: (L, W/2, 0).",
+     "Free-end corner: (L, W, 0).",
+     "Center of an interior cross-section: (L/2, W/2, H/2)."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "spatial extent, profile, and nodal assembly of loading",
+    "issue": "missing",
+    "description": "Sec. 6.1.1 does not identify a point force, loaded edge, loaded face, finite patch, or distribution rule.",
+    "readings": [
+     "Apply the entire resultant to one node.",
+     "Apply a uniform line load along a free-end edge using consistent nodal forces, including half weights at its endpoints.",
+     "Split the resultant equally among all nodes on a free-end edge.",
+     "Apply uniform traction over the entire free-end face.",
+     "Apply uniform traction over a centered free-face patch of width W/10 and height H/10."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "cantilever loading direction",
+    "issue": "missing",
+    "description": "Sec. 6.1.1 specifies no force components or direction. The x- and y-direction loads in Sec. 6.1.2 belong to the blade example.",
+    "readings": [
+     "Transverse loading in the -z direction.",
+     "Transverse loading in the -y direction.",
+     "Axial loading in the +x direction.",
+     "Oblique loading with equal +x and -z components."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "common amplitude of prescribed cantilever loads",
+    "issue": "missing",
+    "description": "Sec. 6.1.1 gives no load magnitude. These alternatives compare a common scaling of otherwise identical load patterns and unchanged relative case weights.",
+    "readings": [
+     "Reference resultant F = 1 N.",
+     "Reference resultant F = 10 N.",
+     "Reference resultant F = 1000 N."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "other",
+    "entity": "load count, case grouping, relative amplitudes, and compliance aggregation",
+    "issue": "missing",
+    "description": "Sec. 6.1.1 supplies no load-case list or aggregation rule. Unlike Sec. 6.1.2, it does not explicitly identify independent right-hand sides or their weights.",
+    "readings": [
+     "One load case containing one prescribed force.",
+     "One load case containing simultaneous y- and z-direction forces of equal magnitude.",
+     "One load case containing simultaneous y- and z-direction forces with magnitude ratio 2:1.",
+     "Two independent transverse load cases with objective (Cy + Cz)/2.",
+     "Two independent transverse load cases with objective 0.8 Cy + 0.2 Cz."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "fixed-solid or fixed-void cells",
+    "issue": "missing",
+    "description": "Sec. 6.1.1 does not explicitly identify passive regions, attachment-pad dimensions, or their treatment during filtering.",
+    "readings": [
+     "No passive regions; every domain cell is designable.",
+     "Keep the cells incident to loaded nodes fixed solid.",
+     "Keep one root layer and the cells incident to loaded nodes fixed solid, enforcing both raw and filtered density equal to one.",
+     "Fix raw density to one in those attachment cells but allow their filtered density to vary."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "meaning and normalization of the bound 0.5",
+    "issue": "vague",
+    "description": "Sec. 6.1.1 calls 0.5 an upper bound on total mass without units or a normalization definition. Eq. (1), however, writes an unnormalized volume bound. No solid density is provided for a literal mass interpretation.",
+    "readings": [
+     "Normalized mass or volume fraction: sum(mu_i v_i)/volume(Omega) <= 0.5.",
+     "Absolute material-volume limit: sum(mu_i v_i) <= 0.5 m^3.",
+     "Absolute mass limit of 0.5 kg, with an adopted solid density such as 7850 kg/m^3 to convert it into a volume limit."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "solid Young's modulus",
+    "issue": "vague",
+    "description": "Sec. 6.1.1 prints the modulus as '2.0 x 10^{1}1 N/m^2', leaving the final digit outside the exponent.",
+    "readings": [
+     "E0 = 2.0 x 10^11 N/m^2, interpreting the trailing 1 as the second exponent digit.",
+     "E0 = 2.0 x 10^1 N/m^2, interpreting the trailing 1 as an extraneous character."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "mesh",
+    "entity": "element counts along the three coordinate directions",
+    "issue": "missing",
+    "description": "Sec. 6.1.1 gives 3000, 24000, and 192000 design variables and uniform first-order hexahedra. Even for a full rectangular box, these products do not determine Nx, Ny, Nz, element aspect ratios, or the refinement sequence.",
+    "readings": [
+     "Use (30,10,10), (60,20,20), and (120,40,40).",
+     "Use (20,15,10), (40,30,20), and (80,60,40).",
+     "Use (50,10,6), (100,20,12), and (200,40,24)."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "elasticity element integration and stabilization",
+    "issue": "missing",
+    "description": "The first-order hexahedral specification in Sec. 6.1.1 does not state the quadrature or stabilization used to construct element stiffness matrices.",
+    "readings": [
+     "Fully integrated trilinear displacement elements with 2 x 2 x 2 Gauss quadrature.",
+     "One-point reduced-integration trilinear elements with hourglass stabilization.",
+     "Selectively reduced integration of volumetric terms."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Helmholtz filter boundary conditions",
+    "issue": "missing",
+    "description": "Eq. (3) specifies the differential operator, and Sec. 6.1.1 specifies r, but neither gives boundary conditions for the filtered density.",
+    "readings": [
+     "Homogeneous Neumann condition on every domain boundary.",
+     "Zero filtered density on every domain boundary.",
+     "Filtered density equal to one on support/load attachment boundaries and homogeneous Neumann conditions elsewhere."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "discrete Helmholtz operator and density transfer",
+    "issue": "missing",
+    "description": "Eq. (3) gives a continuous filter equation. Sec. 6.1.1 does not specify its assembled mass matrix, transfer of elementwise mu to the filter, or recovery of elementwise rho for Eq. (4).",
+    "readings": [
+     "Use a nodal first-order FE Helmholtz filter with consistent mass, volume-integrated elementwise input, and element-average filtered output.",
+     "Use a nodal first-order FE Helmholtz filter with lumped mass, lumped element-to-node input transfer, and element-average filtered output.",
+     "Use a separate refined first-order hexahedral filter mesh and project its solution back to the design elements."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Helmholtz filter linear-solve accuracy",
+    "issue": "missing",
+    "description": "Neither Sec. 2 nor Sec. 6.1.1 specifies how accurately the filter equation is solved. The stated elasticity PCG settings do not explicitly cover this separate solve.",
+    "readings": [
+     "Use a direct factorization of the filter matrix.",
+     "Use an iterative filter solve with relative residual tolerance 1e-10.",
+     "Use an iterative filter solve with relative residual tolerance 1e-6."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "initial density field",
+    "issue": "missing",
+    "description": "Sec. 3 describes starting from an initial design, but Sec. 6.1.1 never specifies that design. This matters for the nonconvex SIMP optimization and its local minima.",
+    "readings": [
+     "Initialize every designable cell with mu = 0.5.",
+     "Initialize every designable cell with mu = 0.9.",
+     "Initialize the first half-span with mu = 0.49 and the second half with mu = 0.51."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "IPOPT configuration beyond the stated convergence threshold",
+    "issue": "missing",
+    "description": "Secs. 3 and 6.1.1 identify IPOPT and its KKT threshold, but do not identify Hessian treatment, barrier strategy, or internal objective/constraint scaling.",
+    "readings": [
+     "Limited-memory BFGS Hessian, monotone barrier strategy, and no automatic NLP scaling.",
+     "Limited-memory BFGS Hessian, adaptive barrier strategy, and automatic gradient-based NLP scaling.",
+     "Exact Lagrangian Hessian, monotone barrier strategy, and no automatic NLP scaling."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "absolute PCG convergence tolerance",
+    "issue": "missing",
+    "description": "Algorithm 5, line 5, uses epsilon_abs in addition to the relative tolerance. Sec. 6.1.1 supplies relative PCG parameters but never assigns epsilon_abs.",
+    "readings": [
+     "epsilon_abs = 0, disabling the absolute stopping contribution.",
+     "epsilon_abs = 1e-12 in Algorithm 5's residual measure.",
+     "epsilon_abs = 1e-8 in Algorithm 5's residual measure."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "PCG iteration cap",
+    "issue": "missing",
+    "description": "Algorithm 5, line 15, requires N_maxit, but no value is supplied for the cantilever runs.",
+    "readings": [
+     "N_maxit = 500.",
+     "N_maxit = 1000.",
+     "N_maxit = 10000."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "HYPRE AMG configuration and hierarchy reuse",
+    "issue": "missing",
+    "description": "Secs. 5.2 and 6 specify HYPRE AMG but omit coarsening, interpolation, strength threshold, smoothing, cycle settings, and whether the hierarchy is rebuilt as stiffness changes.",
+    "readings": [
+     "Rebuild each solve; use HMIS coarsening, extended interpolation, strength threshold 0.25, one V-cycle, and symmetric Gauss-Seidel smoothing.",
+     "Rebuild each solve; use PMIS coarsening, classical interpolation, strength threshold 0.5, one V-cycle, and damped-Jacobi smoothing.",
+     "Reuse the previous hierarchy between stiffness updates, with one V-cycle and symmetric smoothing."
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 969.0405812263489,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L02",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 1,
+ "locator": "Sec. 6.1.1, Fig. 3 (left), the 3-D cantilever beam",
+ "finished": "2026-10-22T20:10:45"
+}

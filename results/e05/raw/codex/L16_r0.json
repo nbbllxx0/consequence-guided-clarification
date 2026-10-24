@@ -1,0 +1,240 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"Supported boundary \u0393u of the square plate\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 4.1.1 refers to Fig. 6a without identifying the supported edges, positions, or lengths. The prescribed zero displacement itself is unambiguous.\",\n      \"readings\": [\n        \"Entire left edge\",\n        \"Entire bottom edge\",\n        \"Two left-edge patches covering y/L in [0,0.1] and [0.9,1]\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"Traction application boundary \u0393t\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 4.1.1 describes asymmetric loading and refers to Fig. 6a, but gives neither application coordinates nor the number of loaded boundary segments.\",\n      \"readings\": [\n        \"One patch on the right edge centered at y/L=0.25\",\n        \"One patch on the right edge centered at y/L=0.75\",\n        \"One patch on the bottom edge centered at x/L=0.75\",\n        \"Two patches on the right edge centered at y/L=0.25 and 0.5\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Length and discretization of each loaded boundary segment\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Neither Sec. 4.1 nor Sec. 4.1.1 specifies the length of \u0393t. The stated traction magnitude therefore does not determine the resultant force or its distribution among grid nodes.\",\n      \"readings\": [\n        \"Uniform prescribed traction over a segment of length 0.02L\",\n        \"Uniform prescribed traction over a segment of length 0.10L\",\n        \"Uniform prescribed traction over one boundary grid edge, integrated into equivalent nodal forces\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"Traction vector on \u0393t\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 4.1 supplies the vector magnitude, but its direction for the asymmetrically loaded plate is left to Fig. 6a.\",\n      \"readings\": [\n        \"Vertically downward: t/|t|=(0,-1)\",\n        \"Horizontally leftward: t/|t|=(-1,0)\",\n        \"Diagonally downward and leftward: t/|t|=(-1,-1)/sqrt(2)\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Protection of material adjacent to loads and supports on the structured grid\",\n      \"issue\": \"missing\",\n      \"description\": \"The level-set formulation constrains a boundary set Gt, but Sec. 4.1.1 supplies no positive-area protection mask or rule for translating boundary protection into passive grid cells.\",\n      \"readings\": [\n        \"Constrain boundary level-set nodes only; no passive cells\",\n        \"Keep one cell layer adjacent to the loaded boundary solid\",\n        \"Keep one cell layer adjacent to both loaded and supported boundaries solid\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"other\",\n      \"entity\": \"Out-of-plane depth and conversion of the two-dimensional line traction\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2.1 specifies plane strain, while Sec. 4.1 gives bulk E in GPa and traction in N/m without explaining the depth or line-load conversion used for absolute compliance.\",\n      \"readings\": [\n        \"Unit depth of 1 m, with the stated traction treated as force per in-plane boundary length\",\n        \"Constant depth of 0.01 m, with stiffness multiplied by depth and the same prescribed line traction\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Individual \u03b2 experiments in Sec. 4.1.1\",\n      \"issue\": \"vague\",\n      \"description\": \"Only the range \u03b2=2 to \u03b2=8 is stated; the discrete values used for the comparison are not listed.\",\n      \"readings\": [\n        \"Separate runs at \u03b2={2,8}\",\n        \"Separate runs at \u03b2={2,4,6,8}\",\n        \"Separate runs at \u03b2={2,3,4,5,6,7,8}\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Characteristic function, Ersatz stiffness, and sensitivity in intermediate material\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Eq. (23) makes \u0398 smooth, but Sec. 4.1 subsequently invokes binary identities to derive Eq. (41). For smooth \u0398 and q=3, the derivative of Eq. (40) contains \u0398\u00b2 rather than the \u0398 printed in Eq. (41).\",\n      \"readings\": [\n        \"Use smooth \u0398 for volume and cubic Ersatz stiffness, with derivative 3(1-e)\u0398\u00b2\",\n        \"Use smooth \u0398 for volume and cubic Ersatz stiffness, with the printed derivative 3(1-e)\u0398\",\n        \"Use binary \u0398=1 for \u03c6\u22650 and zero otherwise in state and volume calculations, with Eq. (41)\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Numerical initial fields \u03c60 and \u03c6\u22121\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.1 specifies fully occupied initial geometries, but does not give the positive level-set values or explicitly specify their numerical equality for this experiment.\",\n      \"readings\": [\n        \"\u03c60=\u03c6\u22121=1 throughout the interior\",\n        \"\u03c60=\u03c6\u22121=0.5 throughout the interior\",\n        \"\u03c60=1 and \u03c6\u22121=0.5 throughout the interior, giving nonzero initial evolution velocity\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Enforcement of the level-set range [-1,1]\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 defines the bounded range, but Sec. 3 gives a linear update without specifying how those bounds are enforced.\",\n      \"readings\": [\n        \"Clip nodal values to [-1,1] after every update\",\n        \"Enforce box constraints while solving the update\",\n        \"Rescale the updated field globally into [-1,1], then restore prescribed boundary values\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Level-set Dirichlet value on Gt\",\n      \"issue\": \"conflicting\",\n      \"description\": \"The main evolution problem, Sec. 3, and the strong formulation in Appendix A.1 prescribe \u03c6=1; the standard-wave weak formulation in Appendix A.1 instead prescribes \u03c6v+1=0.\",\n      \"readings\": [\n        \"Impose \u03c6=1 on Gt\",\n        \"Impose \u03c6=0 on Gt\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"History term in the wave update\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Eq. (32), the subsequent weak and matrix forms, and Appendix A.1 use \u2212\u03c6v\u22121. Eq. (34) instead prints \u2212\u03c6v, changing the update even when m=k=0.\",\n      \"readings\": [\n        \"Use right-hand side \u2212Sv+2\u03c6v\u2212\u03c6v\u22121\",\n        \"Follow Eq. (34) literally and use right-hand side \u2212Sv+\u03c6v\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Sensitivity normalization Cv\",\n      \"issue\": \"vague\",\n      \"description\": \"Eq. (44) places an L\u00b2(D)-annotated magnitude inside another domain integral, leaving unclear whether a pointwise magnitude or a global norm is intended. Let a(x) denote the state-equation sensitivity density.\",\n      \"readings\": [\n        \"Cv=(cf V0)^\u22121 times the integral of |a(x)| over D\",\n        \"Read the inner expression as a global L\u00b2 norm, giving Cv=cf^\u22121 sqrt(integral of a(x)\u00b2 over D)\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initial augmented-Lagrangian multiplier\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 gives multiplier updates but does not specify the initial \u03bb.\",\n      \"readings\": [\n        \"\u03bb0=0\",\n        \"\u03bb0 equal to the compliance of the initially filled domain\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Augmented-Lagrangian penalty continuation\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 says r increases each iteration until rmax, but supplies neither its initial value, growth rule, nor cap.\",\n      \"readings\": [\n        \"In the chosen objective units, r0=1 and rnext=min(1.1r,100)\",\n        \"In the chosen objective units, r0=10 and rnext=min(2r,10000)\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Ordering of multiplier, penalty, and level-set updates\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 3 describes updating \u03bb and \u03c6, while Sec. 4.1 distinguishes \u03bb from its previous value without iteration-indexing the multiplier in f1 or specifying when r increases.\",\n      \"readings\": [\n        \"Evaluate f1 using the incoming multiplier and penalty, then update \u03bb, r, and \u03c6\",\n        \"Update \u03bb first and evaluate f1 using that updated multiplier before advancing \u03c6\",\n        \"Increase r first, update \u03bb with the increased penalty, then evaluate f1 and advance \u03c6\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Termination of the Sec. 4.1.1 runs\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3 mentions convergence or a predefined iteration limit, but provides no convergence measure, tolerances, observation window, or iteration cap.\",\n      \"readings\": [\n        \"Stop after 1000 iterations\",\n        \"Stop when relative compliance change and positive volume violation are below 10^\u22123 for 10 iterations, with a 500-iteration cap\",\n        \"Use corresponding tolerances of 10^\u22125 and a 2000-iteration cap\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Structured-grid dimensions and spacing\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.1 gives only minimum and maximum element sizes, and Sec. 3 uses adaptive mmg refinement. These do not specify grid counts, a spatial mesh-size distribution, or a unique equivalent fixed structured grid.\",\n      \"readings\": [\n        \"100\u00d7100 uniform cells with spacing 0.01 m\",\n        \"200\u00d7200 uniform cells with spacing 0.005 m\",\n        \"2000\u00d72000 uniform cells with spacing 0.0005 m\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Finite-element spaces and integration of projected material\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3 introduces generic shape functions but does not identify element families, polynomial degrees, quadrature, or where \u0398 is evaluated. The stated Sobolev order \u03b1=2 does not uniquely specify these choices.\",\n      \"readings\": [\n        \"Bilinear Q1 displacement and level-set fields, 2\u00d72 Gauss integration, \u0398 evaluated at Gauss points\",\n        \"Quadratic Q2 fields, 3\u00d73 Gauss integration, \u0398 evaluated at Gauss points\",\n        \"Structured cells split into P1 triangles, with \u0398 evaluated at triangle centroids\"\n      ],\n      \"effect\": \"layout\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "support_location_extent",
+    "entity": "Supported boundary \u0393u of the square plate",
+    "issue": "figure_only",
+    "description": "Sec. 4.1.1 refers to Fig. 6a without identifying the supported edges, positions, or lengths. The prescribed zero displacement itself is unambiguous.",
+    "readings": [
+     "Entire left edge",
+     "Entire bottom edge",
+     "Two left-edge patches covering y/L in [0,0.1] and [0.9,1]"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "Traction application boundary \u0393t",
+    "issue": "figure_only",
+    "description": "Sec. 4.1.1 describes asymmetric loading and refers to Fig. 6a, but gives neither application coordinates nor the number of loaded boundary segments.",
+    "readings": [
+     "One patch on the right edge centered at y/L=0.25",
+     "One patch on the right edge centered at y/L=0.75",
+     "One patch on the bottom edge centered at x/L=0.75",
+     "Two patches on the right edge centered at y/L=0.25 and 0.5"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Length and discretization of each loaded boundary segment",
+    "issue": "figure_only",
+    "description": "Neither Sec. 4.1 nor Sec. 4.1.1 specifies the length of \u0393t. The stated traction magnitude therefore does not determine the resultant force or its distribution among grid nodes.",
+    "readings": [
+     "Uniform prescribed traction over a segment of length 0.02L",
+     "Uniform prescribed traction over a segment of length 0.10L",
+     "Uniform prescribed traction over one boundary grid edge, integrated into equivalent nodal forces"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Traction vector on \u0393t",
+    "issue": "figure_only",
+    "description": "Sec. 4.1 supplies the vector magnitude, but its direction for the asymmetrically loaded plate is left to Fig. 6a.",
+    "readings": [
+     "Vertically downward: t/|t|=(0,-1)",
+     "Horizontally leftward: t/|t|=(-1,0)",
+     "Diagonally downward and leftward: t/|t|=(-1,-1)/sqrt(2)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Protection of material adjacent to loads and supports on the structured grid",
+    "issue": "missing",
+    "description": "The level-set formulation constrains a boundary set Gt, but Sec. 4.1.1 supplies no positive-area protection mask or rule for translating boundary protection into passive grid cells.",
+    "readings": [
+     "Constrain boundary level-set nodes only; no passive cells",
+     "Keep one cell layer adjacent to the loaded boundary solid",
+     "Keep one cell layer adjacent to both loaded and supported boundaries solid"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "Out-of-plane depth and conversion of the two-dimensional line traction",
+    "issue": "vague",
+    "description": "Sec. 2.1 specifies plane strain, while Sec. 4.1 gives bulk E in GPa and traction in N/m without explaining the depth or line-load conversion used for absolute compliance.",
+    "readings": [
+     "Unit depth of 1 m, with the stated traction treated as force per in-plane boundary length",
+     "Constant depth of 0.01 m, with stiffness multiplied by depth and the same prescribed line traction"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Individual \u03b2 experiments in Sec. 4.1.1",
+    "issue": "vague",
+    "description": "Only the range \u03b2=2 to \u03b2=8 is stated; the discrete values used for the comparison are not listed.",
+    "readings": [
+     "Separate runs at \u03b2={2,8}",
+     "Separate runs at \u03b2={2,4,6,8}",
+     "Separate runs at \u03b2={2,3,4,5,6,7,8}"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Characteristic function, Ersatz stiffness, and sensitivity in intermediate material",
+    "issue": "conflicting",
+    "description": "Eq. (23) makes \u0398 smooth, but Sec. 4.1 subsequently invokes binary identities to derive Eq. (41). For smooth \u0398 and q=3, the derivative of Eq. (40) contains \u0398\u00b2 rather than the \u0398 printed in Eq. (41).",
+    "readings": [
+     "Use smooth \u0398 for volume and cubic Ersatz stiffness, with derivative 3(1-e)\u0398\u00b2",
+     "Use smooth \u0398 for volume and cubic Ersatz stiffness, with the printed derivative 3(1-e)\u0398",
+     "Use binary \u0398=1 for \u03c6\u22650 and zero otherwise in state and volume calculations, with Eq. (41)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Numerical initial fields \u03c60 and \u03c6\u22121",
+    "issue": "vague",
+    "description": "Sec. 4.1 specifies fully occupied initial geometries, but does not give the positive level-set values or explicitly specify their numerical equality for this experiment.",
+    "readings": [
+     "\u03c60=\u03c6\u22121=1 throughout the interior",
+     "\u03c60=\u03c6\u22121=0.5 throughout the interior",
+     "\u03c60=1 and \u03c6\u22121=0.5 throughout the interior, giving nonzero initial evolution velocity"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Enforcement of the level-set range [-1,1]",
+    "issue": "missing",
+    "description": "Sec. 2.1 defines the bounded range, but Sec. 3 gives a linear update without specifying how those bounds are enforced.",
+    "readings": [
+     "Clip nodal values to [-1,1] after every update",
+     "Enforce box constraints while solving the update",
+     "Rescale the updated field globally into [-1,1], then restore prescribed boundary values"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Level-set Dirichlet value on Gt",
+    "issue": "conflicting",
+    "description": "The main evolution problem, Sec. 3, and the strong formulation in Appendix A.1 prescribe \u03c6=1; the standard-wave weak formulation in Appendix A.1 instead prescribes \u03c6v+1=0.",
+    "readings": [
+     "Impose \u03c6=1 on Gt",
+     "Impose \u03c6=0 on Gt"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "History term in the wave update",
+    "issue": "conflicting",
+    "description": "Eq. (32), the subsequent weak and matrix forms, and Appendix A.1 use \u2212\u03c6v\u22121. Eq. (34) instead prints \u2212\u03c6v, changing the update even when m=k=0.",
+    "readings": [
+     "Use right-hand side \u2212Sv+2\u03c6v\u2212\u03c6v\u22121",
+     "Follow Eq. (34) literally and use right-hand side \u2212Sv+\u03c6v"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Sensitivity normalization Cv",
+    "issue": "vague",
+    "description": "Eq. (44) places an L\u00b2(D)-annotated magnitude inside another domain integral, leaving unclear whether a pointwise magnitude or a global norm is intended. Let a(x) denote the state-equation sensitivity density.",
+    "readings": [
+     "Cv=(cf V0)^\u22121 times the integral of |a(x)| over D",
+     "Read the inner expression as a global L\u00b2 norm, giving Cv=cf^\u22121 sqrt(integral of a(x)\u00b2 over D)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial augmented-Lagrangian multiplier",
+    "issue": "missing",
+    "description": "Sec. 4.1 gives multiplier updates but does not specify the initial \u03bb.",
+    "readings": [
+     "\u03bb0=0",
+     "\u03bb0 equal to the compliance of the initially filled domain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Augmented-Lagrangian penalty continuation",
+    "issue": "missing",
+    "description": "Sec. 4.1 says r increases each iteration until rmax, but supplies neither its initial value, growth rule, nor cap.",
+    "readings": [
+     "In the chosen objective units, r0=1 and rnext=min(1.1r,100)",
+     "In the chosen objective units, r0=10 and rnext=min(2r,10000)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Ordering of multiplier, penalty, and level-set updates",
+    "issue": "vague",
+    "description": "Sec. 3 describes updating \u03bb and \u03c6, while Sec. 4.1 distinguishes \u03bb from its previous value without iteration-indexing the multiplier in f1 or specifying when r increases.",
+    "readings": [
+     "Evaluate f1 using the incoming multiplier and penalty, then update \u03bb, r, and \u03c6",
+     "Update \u03bb first and evaluate f1 using that updated multiplier before advancing \u03c6",
+     "Increase r first, update \u03bb with the increased penalty, then evaluate f1 and advance \u03c6"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Termination of the Sec. 4.1.1 runs",
+    "issue": "missing",
+    "description": "Sec. 3 mentions convergence or a predefined iteration limit, but provides no convergence measure, tolerances, observation window, or iteration cap.",
+    "readings": [
+     "Stop after 1000 iterations",
+     "Stop when relative compliance change and positive volume violation are below 10^\u22123 for 10 iterations, with a 500-iteration cap",
+     "Use corresponding tolerances of 10^\u22125 and a 2000-iteration cap"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Structured-grid dimensions and spacing",
+    "issue": "vague",
+    "description": "Sec. 4.1 gives only minimum and maximum element sizes, and Sec. 3 uses adaptive mmg refinement. These do not specify grid counts, a spatial mesh-size distribution, or a unique equivalent fixed structured grid.",
+    "readings": [
+     "100\u00d7100 uniform cells with spacing 0.01 m",
+     "200\u00d7200 uniform cells with spacing 0.005 m",
+     "2000\u00d72000 uniform cells with spacing 0.0005 m"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Finite-element spaces and integration of projected material",
+    "issue": "missing",
+    "description": "Sec. 3 introduces generic shape functions but does not identify element families, polynomial degrees, quadrature, or where \u0398 is evaluated. The stated Sobolev order \u03b1=2 does not uniquely specify these choices.",
+    "readings": [
+     "Bilinear Q1 displacement and level-set fields, 2\u00d72 Gauss integration, \u0398 evaluated at Gauss points",
+     "Quadratic Q2 fields, 3\u00d73 Gauss integration, \u0398 evaluated at Gauss points",
+     "Structured cells split into P1 triangles, with \u0398 evaluated at triangle centroids"
+    ],
+    "effect": "layout"
+   }
+  ]
+ },
+ "wall_s": 453.17993688583374,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L16",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 0,
+ "locator": "Sec. 4.1.1, Fig. 6",
+ "finished": "2026-10-22T18:15:05"
+}

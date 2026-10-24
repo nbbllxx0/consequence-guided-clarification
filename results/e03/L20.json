@@ -1,0 +1,80 @@
+{
+ "task": "L20",
+ "source": {
+  "arxiv": "2607.07682",
+  "position": 73
+ },
+ "dim": 2,
+ "slots": {
+  "sup": [
+   "node",
+   "block"
+  ]
+ },
+ "nominal": {
+  "sup": "node"
+ },
+ "mandatory": [],
+ "reasons": {
+  "sup": "'both lower corners supported', drawn as small blocks; size not stated (Fig. 2B)"
+ },
+ "recon": [
+  "L-BFGS in source; OC",
+  "block support = 4-element segment ending at the corner",
+  "volume constraint on the filtered density (source: prefilter field, Eq. 12)",
+  "192x64 is the optimized half (Fig. 2B 'only half of the domain is optimized'; adjudicator A)",
+  "outer lower corner restrains both components (adjudicator A; within B's set)"
+ ],
+ "keys": [
+  "sup=node",
+  "sup=block"
+ ],
+ "C": [
+  [
+   114.31676565233553,
+   102.57907397445625
+  ],
+  [
+   116.3159759009551,
+   100.90850077136724
+  ]
+ ],
+ "ref": {
+  "sup=node": 114.31676565233553,
+  "sup=block": 100.90850077136724
+ },
+ "ref_gap_beaten": {
+  "sup=node": 0.0,
+  "sup=block": 0.0
+ },
+ "noise": {
+  "sup=node": 0.0003160312775310986,
+  "sup=block": 0.00039427777743249247
+ },
+ "meta": {
+  "sup=node": {
+   "accepted": true,
+   "kkt": 0.04903576148701935,
+   "wall_s": 72.74972500000149,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "sup=block": {
+   "accepted": true,
+   "kkt": 0.09591037993850099,
+   "wall_s": 75.07567389996257,
+   "n_iter": [
+    201,
+    201
+   ]
+  }
+ },
+ "counter": {
+  "optimizations": 0,
+  "factorizations": 4,
+  "backsubs": 4,
+  "opt_wall_s": 0.0
+ }
+}

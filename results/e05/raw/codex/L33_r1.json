@@ -1,0 +1,351 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"four base-corner supports\",\n      \"issue\": \"vague\",\n      \"description\": \"Results, 'Design of nanopillars,' identifies four base corners but gives no support footprints. A.14 and Fig. S18 are referenced without their setup text being supplied.\",\n      \"readings\": [\n        \"Clamp one bottom-face node at each geometric corner.\",\n        \"Clamp four bottom-face square patches, each extending 0.05 times the base width inward from its corner.\",\n        \"Clamp four bottom-face square patches, each extending 0.10 times the base width inward from its corner.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"passive base geometry and resulting designable extent\",\n      \"issue\": \"vague\",\n      \"description\": \"Results gives 12,800 passive base atoms, and Methods fixes passive atoms in all Cartesian directions. Their coordinates, spatial arrangement, and FEM representation are not given; 'clamped base' is not reconciled geometrically with the four corner supports.\",\n      \"readings\": [\n        \"Represent the passive material as a full 162.00 by 162.00 by 8.10 angstrom bottom slab, leaving 405.00 angstrom of designable height.\",\n        \"Represent it as four corner blocks, each 40.50 by 40.50 by 32.40 angstrom, with the remaining volume designable.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"top-center loading footprint\",\n      \"issue\": \"vague\",\n      \"description\": \"Results and Methods specify loading at the center of the top surface but do not define the contact area or number of loaded nodes.\",\n      \"readings\": [\n        \"Load a single node at the exact top center.\",\n        \"Load a centered square patch with side length 0.05 times the base width.\",\n        \"Load a centered square patch with side length 0.10 times the base width.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"force distribution within a finite top contact\",\n      \"issue\": \"missing\",\n      \"description\": \"The nanopillar descriptions give a vertical displacement, without a FEM traction profile or nodal-force distribution for a force-driven compliance calculation.\",\n      \"readings\": [\n        \"Apply uniform normal traction, converted to consistent element-face nodal loads.\",\n        \"Divide the resultant force equally among selected contact nodes.\",\n        \"Apply a center-peaked parabolic normal traction normalized to the same resultant.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"other\",\n      \"entity\": \"top-contact kinematic coupling and transverse constraints\",\n      \"issue\": \"missing\",\n      \"description\": \"Methods specifies the imposed vertical displacement but does not say whether contact nodes move together or whether their transverse motions are constrained. These choices matter when translating the test into minimum compliance.\",\n      \"readings\": [\n        \"Apply independent vertical nodal forces and leave transverse contact displacements free.\",\n        \"Tie contact nodes to one common vertical displacement while leaving their transverse displacements free.\",\n        \"Tie contact nodes to one common vertical displacement and constrain their transverse displacements to zero.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"reference force for force-driven FEM compliance\",\n      \"issue\": \"missing\",\n      \"description\": \"Methods unambiguously gives the atomistic displacement amplitude as 1% of pillar height, but no fixed reference force is supplied for the requested minimum-compliance formulation.\",\n      \"readings\": [\n        \"Use a resultant force of one in normalized units.\",\n        \"Use a resultant force of 1 nN.\",\n        \"Use a resultant force of 10 nN.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"mandatory solid material beneath the top contact\",\n      \"issue\": \"missing\",\n      \"description\": \"The atomistic passive count describes base atoms. The FEM benchmark paragraph does not state whether contact material is protected against removal.\",\n      \"readings\": [\n        \"Keep all non-base material designable, including material beneath the load.\",\n        \"Keep a one-element-deep solid pad beneath the selected top-contact footprint.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"treatment of passive material in the 20.25% budget\",\n      \"issue\": \"vague\",\n      \"description\": \"Results states a target mass ratio of 20.25% but does not define its denominator or explain how passive atoms enter the FEM volume constraint.\",\n      \"readings\": [\n        \"Include passive material in a 20.25% total-domain budget; using the stated atom counts gives an active-region solid fraction of 18.655%.\",\n        \"Apply 20.25% to the active region and exclude passive material from both budget and denominator.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"density field used to evaluate the FEM volume constraint\",\n      \"issue\": \"missing\",\n      \"description\": \"The FEM benchmark paragraph provides no density formulation, so the field on which volume is measured is unspecified.\",\n      \"readings\": [\n        \"Constrain the sum of raw design densities.\",\n        \"Constrain the sum of spatially filtered densities.\",\n        \"Constrain the sum of projected physical densities.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"continuum solid stiffness scale\",\n      \"issue\": \"missing\",\n      \"description\": \"Methods names aluminum and its atomistic EAM potential but supplies no FEM Young's modulus or equivalent overall stiffness multiplier.\",\n      \"readings\": [\n        \"Use normalized solid Young's modulus E = 1.\",\n        \"Use solid Young's modulus E = 70 GPa.\",\n        \"Determine the solid modulus from the potential's relaxed bulk response at 0 K.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"continuum elastic symmetry and stiffness ratios\",\n      \"issue\": \"vague\",\n      \"description\": \"The cantilever discussion calls bulk aluminum nearly isotropic. No FEM Poisson ratio or complete elastic tensor is supplied for the nanopillar.\",\n      \"readings\": [\n        \"Use isotropic elasticity with Poisson ratio 0.30.\",\n        \"Use isotropic elasticity with Poisson ratio 0.33.\",\n        \"Use the cubic bulk elastic tensor derived from the stated EAM potential, aligned with the stated crystal axes.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"structured-grid resolution\",\n      \"issue\": \"missing\",\n      \"description\": \"The nanopillar atom count and bounding dimensions do not specify a FEM element count or grid spacing.\",\n      \"readings\": [\n        \"Mesh the stated box with 40 by 40 by 102 cubic elements, spacing 4.05 angstrom.\",\n        \"Mesh it with 80 by 80 by 204 cubic elements, spacing 2.025 angstrom.\",\n        \"Mesh it with 100 by 100 by 255 cubic elements, spacing 1.62 angstrom.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"finite-element formulation and integration\",\n      \"issue\": \"missing\",\n      \"description\": \"The FEM benchmark paragraph does not identify element order, integration rule, or stabilization.\",\n      \"readings\": [\n        \"Use fully integrated eight-node trilinear hexahedra.\",\n        \"Use reduced-integration eight-node hexahedra with hourglass stabilization.\",\n        \"Use fully integrated twenty-node quadratic hexahedra.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"placement of design variables relative to analysis elements\",\n      \"issue\": \"missing\",\n      \"description\": \"No FEM design-variable grid or design-to-analysis interpolation is described.\",\n      \"readings\": [\n        \"Assign one constant density to each analysis element.\",\n        \"Assign densities to grid nodes and interpolate them within elements.\",\n        \"Assign one density per coarse voxel and analyze each voxel using 2 by 2 by 2 finer elements.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"other\",\n      \"entity\": \"enforced symmetry of the FEM design\",\n      \"issue\": \"missing\",\n      \"description\": \"Mirror symmetry is explicitly discussed for nanocantilevers, but no nanopillar FEM symmetry restriction is specified.\",\n      \"readings\": [\n        \"Optimize the full three-dimensional box without enforced design symmetry.\",\n        \"Enforce reflection symmetry across both vertical mid-planes.\",\n        \"Enforce both vertical reflections and fourfold rotational symmetry about the loading axis.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"FEM design parameterization and stiffness interpolation\",\n      \"issue\": \"missing\",\n      \"description\": \"The FEM benchmark is named without specifying binary versus continuous variables or a stiffness penalization law.\",\n      \"readings\": [\n        \"Use binary solid/void element variables.\",\n        \"Use SIMP interpolation E(rho) = E_min + rho^3 (E_solid - E_min).\",\n        \"Use RAMP interpolation E(rho) = E_min + rho/(1 + 5(1-rho)) (E_solid - E_min).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"void stiffness and minimum design density\",\n      \"issue\": \"missing\",\n      \"description\": \"Methods describes noninteracting virtual atoms, but the FEM benchmark gives no ersatz-void stiffness or density lower bound.\",\n      \"readings\": [\n        \"Remove void elements and orphan degrees of freedom, using exactly zero void stiffness.\",\n        \"Use E_min/E_solid = 1e-9 and allow design densities down to zero.\",\n        \"Use E_min/E_solid = 1e-6 and impose a minimum design density of 1e-3.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"FEM filtering method\",\n      \"issue\": \"missing\",\n      \"description\": \"Methods describes an atom-neighborhood sensitivity filter, without identifying the filtering formulation used by FEM-TO.\",\n      \"readings\": [\n        \"Filter element sensitivities.\",\n        \"Filter design densities before assembling stiffness.\",\n        \"Use a Helmholtz density filter.\",\n        \"Use no spatial filter.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"FEM filter length scale\",\n      \"issue\": \"vague\",\n      \"description\": \"Methods gives 10.325 angstrom for the FCC atomistic filter. It does not establish whether FEM-TO inherits that physical radius or uses a grid-based radius.\",\n      \"readings\": [\n        \"Use a physical filter radius of 10.325 angstrom.\",\n        \"Use a filter radius of 1.5 element spacings.\",\n        \"Use a filter radius of 3 element spacings.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"FEM averaging-filter weights\",\n      \"issue\": \"missing\",\n      \"description\": \"Equation 9 gives distance weights for atomic neighborhoods; its transfer to a FEM averaging filter is not specified.\",\n      \"readings\": [\n        \"Use conical weights max(0, r_min - distance).\",\n        \"Use equal weights inside a spherical neighborhood.\",\n        \"Use Gaussian distance weights truncated at the selected radius.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"filter boundary normalization and passive-region participation\",\n      \"issue\": \"missing\",\n      \"description\": \"No FEM rule is supplied for filtering near exterior boundaries or across the active/passive interface.\",\n      \"readings\": [\n        \"Truncate neighborhoods to the FEM box, renormalize retained weights, and include fixed passive densities.\",\n        \"Average only over active elements and renormalize after excluding passive elements.\",\n        \"Include passive densities but zero-pad outside the box using the full-kernel normalization.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"density projection\",\n      \"issue\": \"missing\",\n      \"description\": \"The FEM benchmark does not state whether filtered densities are projected or give a projection threshold and sharpness.\",\n      \"readings\": [\n        \"Use no density projection.\",\n        \"Use a hyperbolic-tangent projection with threshold 0.5 and sharpness beta = 2.\",\n        \"Use a hyperbolic-tangent projection with threshold 0.5 and sharpness beta = 8.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"optimization update method and step limits\",\n      \"issue\": \"missing\",\n      \"description\": \"Methods supplies atom-removal/insertion rules for Nano-TO, without a FEM optimizer or update parameters.\",\n      \"readings\": [\n        \"Use optimality-criteria density updates with a per-iteration move limit of 0.2.\",\n        \"Use MMA density updates with a per-iteration move limit of 0.2.\",\n        \"Use binary evolutionary updates exchanging 1% of active elements per iteration at constant volume.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"FEM initialization, perturbations, and restart selection\",\n      \"issue\": \"missing\",\n      \"description\": \"Results specifies a uniform prismatic start and independent trials for Nano-TO. It does not specify the FEM starting field or trial-selection procedure.\",\n      \"readings\": [\n        \"Start from a uniform gray density satisfying the chosen volume budget, without perturbations or restarts.\",\n        \"Start from a centered binary square column whose area satisfies the active-volume budget.\",\n        \"Run 16 uniformly initialized trials with 1% zero-mean density perturbations, seeds 0 through 15, and retain the lowest-compliance result.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"penalization and projection continuation\",\n      \"issue\": \"missing\",\n      \"description\": \"No FEM schedule is supplied for changing stiffness penalization or projection sharpness during optimization.\",\n      \"readings\": [\n        \"Use the final penalization and projection parameters from the first iteration.\",\n        \"For SIMP, increase p from 1 to 2 to 3 at 50-iteration intervals.\",\n        \"Keep SIMP p = 3 and increase projection beta through 1, 2, 4, and 8 at 50-iteration intervals.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"FEM termination criteria\",\n      \"issue\": \"missing\",\n      \"description\": \"The period-two criterion and 3,000-iteration nanopillar budget are described for Nano-TO; no FEM stopping criterion is supplied.\",\n      \"readings\": [\n        \"Stop after 200 iterations.\",\n        \"Stop when maximum density change is below 1e-3, with a 1,000-iteration cap.\",\n        \"Stop when relative compliance change is below 1e-6 for 20 consecutive iterations, with a 3,000-iteration cap.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"FEM equilibrium-solve accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"The reported minimization tolerances belong to LAMMPS relaxation. No accuracy requirement is given for FEM equilibrium solves used to calculate compliance and sensitivities.\",\n      \"readings\": [\n        \"Use a sparse direct equilibrium solve.\",\n        \"Use conjugate gradients with relative residual tolerance 1e-8.\",\n        \"Use conjugate gradients with relative residual tolerance 1e-4.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"conversion of a continuous FEM density field into the reported solid layout\",\n      \"issue\": \"missing\",\n      \"description\": \"The FEM benchmark paragraph says the layout is mapped onto the FCC lattice, but gives no binarization or volume-repair rule. This affects reproducing the reported FEM-derived geometry if continuous densities are used.\",\n      \"readings\": [\n        \"Retain material wherever physical density is at least 0.5.\",\n        \"Retain material wherever physical density is at least 0.9.\",\n        \"Choose a density cutoff by ranking values to preserve the prescribed solid volume.\"\n      ],\n      \"effect\": \"layout\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "support_location_extent",
+    "entity": "four base-corner supports",
+    "issue": "vague",
+    "description": "Results, 'Design of nanopillars,' identifies four base corners but gives no support footprints. A.14 and Fig. S18 are referenced without their setup text being supplied.",
+    "readings": [
+     "Clamp one bottom-face node at each geometric corner.",
+     "Clamp four bottom-face square patches, each extending 0.05 times the base width inward from its corner.",
+     "Clamp four bottom-face square patches, each extending 0.10 times the base width inward from its corner."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "passive base geometry and resulting designable extent",
+    "issue": "vague",
+    "description": "Results gives 12,800 passive base atoms, and Methods fixes passive atoms in all Cartesian directions. Their coordinates, spatial arrangement, and FEM representation are not given; 'clamped base' is not reconciled geometrically with the four corner supports.",
+    "readings": [
+     "Represent the passive material as a full 162.00 by 162.00 by 8.10 angstrom bottom slab, leaving 405.00 angstrom of designable height.",
+     "Represent it as four corner blocks, each 40.50 by 40.50 by 32.40 angstrom, with the remaining volume designable."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "top-center loading footprint",
+    "issue": "vague",
+    "description": "Results and Methods specify loading at the center of the top surface but do not define the contact area or number of loaded nodes.",
+    "readings": [
+     "Load a single node at the exact top center.",
+     "Load a centered square patch with side length 0.05 times the base width.",
+     "Load a centered square patch with side length 0.10 times the base width."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "force distribution within a finite top contact",
+    "issue": "missing",
+    "description": "The nanopillar descriptions give a vertical displacement, without a FEM traction profile or nodal-force distribution for a force-driven compliance calculation.",
+    "readings": [
+     "Apply uniform normal traction, converted to consistent element-face nodal loads.",
+     "Divide the resultant force equally among selected contact nodes.",
+     "Apply a center-peaked parabolic normal traction normalized to the same resultant."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "top-contact kinematic coupling and transverse constraints",
+    "issue": "missing",
+    "description": "Methods specifies the imposed vertical displacement but does not say whether contact nodes move together or whether their transverse motions are constrained. These choices matter when translating the test into minimum compliance.",
+    "readings": [
+     "Apply independent vertical nodal forces and leave transverse contact displacements free.",
+     "Tie contact nodes to one common vertical displacement while leaving their transverse displacements free.",
+     "Tie contact nodes to one common vertical displacement and constrain their transverse displacements to zero."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "reference force for force-driven FEM compliance",
+    "issue": "missing",
+    "description": "Methods unambiguously gives the atomistic displacement amplitude as 1% of pillar height, but no fixed reference force is supplied for the requested minimum-compliance formulation.",
+    "readings": [
+     "Use a resultant force of one in normalized units.",
+     "Use a resultant force of 1 nN.",
+     "Use a resultant force of 10 nN."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "mandatory solid material beneath the top contact",
+    "issue": "missing",
+    "description": "The atomistic passive count describes base atoms. The FEM benchmark paragraph does not state whether contact material is protected against removal.",
+    "readings": [
+     "Keep all non-base material designable, including material beneath the load.",
+     "Keep a one-element-deep solid pad beneath the selected top-contact footprint."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "treatment of passive material in the 20.25% budget",
+    "issue": "vague",
+    "description": "Results states a target mass ratio of 20.25% but does not define its denominator or explain how passive atoms enter the FEM volume constraint.",
+    "readings": [
+     "Include passive material in a 20.25% total-domain budget; using the stated atom counts gives an active-region solid fraction of 18.655%.",
+     "Apply 20.25% to the active region and exclude passive material from both budget and denominator."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "density field used to evaluate the FEM volume constraint",
+    "issue": "missing",
+    "description": "The FEM benchmark paragraph provides no density formulation, so the field on which volume is measured is unspecified.",
+    "readings": [
+     "Constrain the sum of raw design densities.",
+     "Constrain the sum of spatially filtered densities.",
+     "Constrain the sum of projected physical densities."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "continuum solid stiffness scale",
+    "issue": "missing",
+    "description": "Methods names aluminum and its atomistic EAM potential but supplies no FEM Young's modulus or equivalent overall stiffness multiplier.",
+    "readings": [
+     "Use normalized solid Young's modulus E = 1.",
+     "Use solid Young's modulus E = 70 GPa.",
+     "Determine the solid modulus from the potential's relaxed bulk response at 0 K."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "continuum elastic symmetry and stiffness ratios",
+    "issue": "vague",
+    "description": "The cantilever discussion calls bulk aluminum nearly isotropic. No FEM Poisson ratio or complete elastic tensor is supplied for the nanopillar.",
+    "readings": [
+     "Use isotropic elasticity with Poisson ratio 0.30.",
+     "Use isotropic elasticity with Poisson ratio 0.33.",
+     "Use the cubic bulk elastic tensor derived from the stated EAM potential, aligned with the stated crystal axes."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "structured-grid resolution",
+    "issue": "missing",
+    "description": "The nanopillar atom count and bounding dimensions do not specify a FEM element count or grid spacing.",
+    "readings": [
+     "Mesh the stated box with 40 by 40 by 102 cubic elements, spacing 4.05 angstrom.",
+     "Mesh it with 80 by 80 by 204 cubic elements, spacing 2.025 angstrom.",
+     "Mesh it with 100 by 100 by 255 cubic elements, spacing 1.62 angstrom."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "finite-element formulation and integration",
+    "issue": "missing",
+    "description": "The FEM benchmark paragraph does not identify element order, integration rule, or stabilization.",
+    "readings": [
+     "Use fully integrated eight-node trilinear hexahedra.",
+     "Use reduced-integration eight-node hexahedra with hourglass stabilization.",
+     "Use fully integrated twenty-node quadratic hexahedra."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "placement of design variables relative to analysis elements",
+    "issue": "missing",
+    "description": "No FEM design-variable grid or design-to-analysis interpolation is described.",
+    "readings": [
+     "Assign one constant density to each analysis element.",
+     "Assign densities to grid nodes and interpolate them within elements.",
+     "Assign one density per coarse voxel and analyze each voxel using 2 by 2 by 2 finer elements."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "enforced symmetry of the FEM design",
+    "issue": "missing",
+    "description": "Mirror symmetry is explicitly discussed for nanocantilevers, but no nanopillar FEM symmetry restriction is specified.",
+    "readings": [
+     "Optimize the full three-dimensional box without enforced design symmetry.",
+     "Enforce reflection symmetry across both vertical mid-planes.",
+     "Enforce both vertical reflections and fourfold rotational symmetry about the loading axis."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "FEM design parameterization and stiffness interpolation",
+    "issue": "missing",
+    "description": "The FEM benchmark is named without specifying binary versus continuous variables or a stiffness penalization law.",
+    "readings": [
+     "Use binary solid/void element variables.",
+     "Use SIMP interpolation E(rho) = E_min + rho^3 (E_solid - E_min).",
+     "Use RAMP interpolation E(rho) = E_min + rho/(1 + 5(1-rho)) (E_solid - E_min)."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "void stiffness and minimum design density",
+    "issue": "missing",
+    "description": "Methods describes noninteracting virtual atoms, but the FEM benchmark gives no ersatz-void stiffness or density lower bound.",
+    "readings": [
+     "Remove void elements and orphan degrees of freedom, using exactly zero void stiffness.",
+     "Use E_min/E_solid = 1e-9 and allow design densities down to zero.",
+     "Use E_min/E_solid = 1e-6 and impose a minimum design density of 1e-3."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "FEM filtering method",
+    "issue": "missing",
+    "description": "Methods describes an atom-neighborhood sensitivity filter, without identifying the filtering formulation used by FEM-TO.",
+    "readings": [
+     "Filter element sensitivities.",
+     "Filter design densities before assembling stiffness.",
+     "Use a Helmholtz density filter.",
+     "Use no spatial filter."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "FEM filter length scale",
+    "issue": "vague",
+    "description": "Methods gives 10.325 angstrom for the FCC atomistic filter. It does not establish whether FEM-TO inherits that physical radius or uses a grid-based radius.",
+    "readings": [
+     "Use a physical filter radius of 10.325 angstrom.",
+     "Use a filter radius of 1.5 element spacings.",
+     "Use a filter radius of 3 element spacings."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "FEM averaging-filter weights",
+    "issue": "missing",
+    "description": "Equation 9 gives distance weights for atomic neighborhoods; its transfer to a FEM averaging filter is not specified.",
+    "readings": [
+     "Use conical weights max(0, r_min - distance).",
+     "Use equal weights inside a spherical neighborhood.",
+     "Use Gaussian distance weights truncated at the selected radius."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "filter boundary normalization and passive-region participation",
+    "issue": "missing",
+    "description": "No FEM rule is supplied for filtering near exterior boundaries or across the active/passive interface.",
+    "readings": [
+     "Truncate neighborhoods to the FEM box, renormalize retained weights, and include fixed passive densities.",
+     "Average only over active elements and renormalize after excluding passive elements.",
+     "Include passive densities but zero-pad outside the box using the full-kernel normalization."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "density projection",
+    "issue": "missing",
+    "description": "The FEM benchmark does not state whether filtered densities are projected or give a projection threshold and sharpness.",
+    "readings": [
+     "Use no density projection.",
+     "Use a hyperbolic-tangent projection with threshold 0.5 and sharpness beta = 2.",
+     "Use a hyperbolic-tangent projection with threshold 0.5 and sharpness beta = 8."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "optimization update method and step limits",
+    "issue": "missing",
+    "description": "Methods supplies atom-removal/insertion rules for Nano-TO, without a FEM optimizer or update parameters.",
+    "readings": [
+     "Use optimality-criteria density updates with a per-iteration move limit of 0.2.",
+     "Use MMA density updates with a per-iteration move limit of 0.2.",
+     "Use binary evolutionary updates exchanging 1% of active elements per iteration at constant volume."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "FEM initialization, perturbations, and restart selection",
+    "issue": "missing",
+    "description": "Results specifies a uniform prismatic start and independent trials for Nano-TO. It does not specify the FEM starting field or trial-selection procedure.",
+    "readings": [
+     "Start from a uniform gray density satisfying the chosen volume budget, without perturbations or restarts.",
+     "Start from a centered binary square column whose area satisfies the active-volume budget.",
+     "Run 16 uniformly initialized trials with 1% zero-mean density perturbations, seeds 0 through 15, and retain the lowest-compliance result."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "penalization and projection continuation",
+    "issue": "missing",
+    "description": "No FEM schedule is supplied for changing stiffness penalization or projection sharpness during optimization.",
+    "readings": [
+     "Use the final penalization and projection parameters from the first iteration.",
+     "For SIMP, increase p from 1 to 2 to 3 at 50-iteration intervals.",
+     "Keep SIMP p = 3 and increase projection beta through 1, 2, 4, and 8 at 50-iteration intervals."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "FEM termination criteria",
+    "issue": "missing",
+    "description": "The period-two criterion and 3,000-iteration nanopillar budget are described for Nano-TO; no FEM stopping criterion is supplied.",
+    "readings": [
+     "Stop after 200 iterations.",
+     "Stop when maximum density change is below 1e-3, with a 1,000-iteration cap.",
+     "Stop when relative compliance change is below 1e-6 for 20 consecutive iterations, with a 3,000-iteration cap."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "FEM equilibrium-solve accuracy",
+    "issue": "missing",
+    "description": "The reported minimization tolerances belong to LAMMPS relaxation. No accuracy requirement is given for FEM equilibrium solves used to calculate compliance and sensitivities.",
+    "readings": [
+     "Use a sparse direct equilibrium solve.",
+     "Use conjugate gradients with relative residual tolerance 1e-8.",
+     "Use conjugate gradients with relative residual tolerance 1e-4."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "conversion of a continuous FEM density field into the reported solid layout",
+    "issue": "missing",
+    "description": "The FEM benchmark paragraph says the layout is mapped onto the FCC lattice, but gives no binarization or volume-repair rule. This affects reproducing the reported FEM-derived geometry if continuous densities are used.",
+    "readings": [
+     "Retain material wherever physical density is at least 0.5.",
+     "Retain material wherever physical density is at least 0.9.",
+     "Choose a density cutoff by ranking values to preserve the prescribed solid volume."
+    ],
+    "effect": "layout"
+   }
+  ]
+ },
+ "wall_s": 655.9125919342041,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L33",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 1,
+ "locator": "Supplementary Note A.14, the nanopillar designed by FEM-TO (Fig. S18)",
+ "finished": "2026-10-22T21:09:39"
+}

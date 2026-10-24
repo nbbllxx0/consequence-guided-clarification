@@ -1,0 +1,283 @@
+{
+ "raw": "{\"items\": [{\"category\": \"support_location_extent\", \"entity\": \"wall-side supports of the shelf bracket\", \"issue\": \"figure_only\", \"description\": \"Sec. 4.6 'Square Domain Study' says only that 'a shelf bracket is considered within a standard square design domain' and defers to Fig. 6 (caption: 'Application of HPG-Diff in shelf bracket design'). Which edge or nodes form the wall attachment, and over what length, appears only in the figure. The text also doesn't say whether this is one of the 42 training or 5 test BC sets of the dataset (Sec. 4.1).\", \"readings\": [\"Entire left edge fixed (x = 0, 0 <= y <= L)\", \"Two short segments at the top and bottom of the left edge (e.g. y in [0.9L, L] and y in [0, 0.1L]) representing screws\", \"Upper half of the left edge fixed (y in [0.5L, L])\", \"Only the top-left and bottom-left corner nodes fixed\", \"Mirrored set-up with the wall on the right edge (x = L)\"], \"effect\": \"layout\"}, {\"category\": \"support_type\", \"entity\": \"wall supports (restrained DOFs)\", \"issue\": \"figure_only\", \"description\": \"No text says which DOFs are restrained at the wall (fully clamped vs. roller/contact). Sec. 4.1 mentions only '42 boundary conditions' without describing them. Only Fig. 6 shows the support symbols.\", \"readings\": [\"Clamped: u_x = u_y = 0 at every support node\", \"Roller along the wall: u_x = 0 on the wall edge, u_y = 0 at one node only (to remove rigid-body motion)\", \"Mixed: upper support pinned (u_x = u_y = 0), lower support restrains only u_x (bearing against the wall)\"], \"effect\": \"layout\"}, {\"category\": \"load_position\", \"entity\": \"shelf load application point\", \"issue\": \"figure_only\", \"description\": \"The point where the shelf load is applied isn't stated in Sec. 4.6 (only shown in Fig. 6). Sec. 4.1 says only that dataset loads act at 'random unconstrained boundary nodes'.\", \"readings\": [\"Top-right corner node (x = L, y = L), tip of the bracket arm\", \"Top-edge node at mid-span (x = 0.5L, y = L)\", \"Top-edge node near the free end (x = 0.75L, y = L)\", \"Right-edge node at mid-height (x = L, y = 0.5L)\"], \"effect\": \"layout\"}, {\"category\": \"load_extent_distribution\", \"entity\": \"shelf load (point vs. distributed)\", \"issue\": \"figure_only\", \"description\": \"The text doesn't say whether the shelf load is one nodal force or is spread along the shelf (top) edge, as a real shelf would apply it. The dataset convention is a single boundary-node load (Sec. 4.1) and Sec. 4.7.3 says the benchmark has 'single-load cases', but Sec. 4.7.3 also mentions a 'load region'. Only Fig. 6 shows it.\", \"readings\": [\"Single concentrated nodal force (dataset convention)\", \"Uniformly distributed load over the whole top edge\", \"Load spread over a few nodes / short patch at the outer end of the top edge\"], \"effect\": \"layout\"}, {\"category\": \"load_direction\", \"entity\": \"shelf load direction\", \"issue\": \"figure_only\", \"description\": \"The direction isn't stated. 'Shelf bracket' suggests vertical gravity loading, but dataset loads can point at any angle in [0, pi] in pi/6 steps (Sec. 4.1). The load arrow appears only in Fig. 6.\", \"readings\": [\"Vertical (gravity, -y), i.e. pi/2 in the dataset's [0, pi] convention\", \"Inclined at pi/3 (60 deg from +x)\", \"Inclined at 2pi/3 (120 deg from +x)\", \"Inclined at pi/6 or 5pi/6\", \"Horizontal (0 or pi)\"], \"effect\": \"layout\"}, {\"category\": \"load_magnitude\", \"entity\": \"shelf load magnitude\", \"issue\": \"missing\", \"description\": \"No force magnitude is given anywhere in the paper. The reported compliances (GT 5.0506; generated 4.9962 / 5.0398 / 5.0772, Sec. 4.6) depend on it.\", \"readings\": [\"|F| = 1 (normalized unit load)\", \"Unit total force divided among the loaded nodes (if distributed)\", \"A physical shelf load (e.g. 100 N or 1000 N)\"], \"effect\": \"scale_only\"}, {\"category\": \"volume_fraction\", \"entity\": \"shelf bracket design\", \"issue\": \"missing\", \"description\": \"Neither Sec. 4.6 nor the Fig. 6 caption gives a volume fraction for the shelf bracket. Only the dataset range of 0.3 to 0.5 in 0.02 steps (Sec. 4.1) is known. The value may be written on Fig. 6, which isn't available.\", \"readings\": [\"0.30\", \"0.32\", \"0.34\", \"0.36\", \"0.38\", \"0.40\", \"0.42\", \"0.44\", \"0.46\", \"0.48\", \"0.50\"], \"effect\": \"layout\"}, {\"category\": \"material\", \"entity\": \"Young's modulus of the solid material\", \"issue\": \"missing\", \"description\": \"Young's modulus isn't given anywhere (Eq. 1 and Sec. 4.1/4.6 contain no material data). It only scales the reported compliance of 5.0506.\", \"readings\": [\"E = 1 (normalized)\", \"E = 210 GPa (steel)\", \"E = 70 GPa (aluminium)\"], \"effect\": \"scale_only\"}, {\"category\": \"material\", \"entity\": \"Poisson's ratio of the solid material\", \"issue\": \"missing\", \"description\": \"Poisson's ratio isn't given anywhere in the paper.\", \"readings\": [\"nu = 0.3\", \"nu = 0.25\", \"nu = 1/3\"], \"effect\": \"layout\"}, {\"category\": \"material\", \"entity\": \"2D constitutive assumption\", \"issue\": \"missing\", \"description\": \"The paper doesn't say whether the 'standard FEA solver' (Sec. 4.2) and the SIMP data generator assume plane stress or plane strain.\", \"readings\": [\"Plane stress, unit thickness\", \"Plane strain\"], \"effect\": \"layout\"}, {\"category\": \"mesh\", \"entity\": \"finite-element grid of the square domain\", \"issue\": \"vague\", \"description\": \"Case 1 is described only as a 'standard square design domain'. The 64x64 resolution is stated for the benchmark and pretraining data (Sec. 4.7.3; App. C 'k=64 for the 64x64 design domain'; Table 8 '64x64 domain') but not explicitly for this case. The element type used by the 'standard FEA solver' (Sec. 4.2) isn't given.\", \"readings\": [\"64 x 64 square bilinear (Q4) elements, 65 x 65 nodes (native resolution of the pretrained model)\", \"A finer square mesh (e.g. 128 x 128) if the SIMP ground truth was run independently of the model resolution\"], \"effect\": \"layout\"}, {\"category\": \"domain_extent\", \"entity\": \"physical size of the square design domain\", \"issue\": \"vague\", \"description\": \"Only 'standard square design domain' is given (Sec. 4.6). The physical side length, element size and out-of-plane thickness aren't stated.\", \"readings\": [\"Side length 64 with unit-size elements, unit thickness\", \"Unit square (side 1, element size 1/64), unit thickness\", \"Physical bracket dimensions (e.g. 200 mm side) with a real plate thickness\"], \"effect\": \"scale_only\"}, {\"category\": \"passive_region\", \"entity\": \"non-design regions of the bracket\", \"issue\": \"missing\", \"description\": \"No non-design regions are mentioned for the bracket (e.g. wall plate, shelf seat, screw holes). The dataset and model have no passive-region input, but Fig. 6 can't be checked.\", \"readings\": [\"No passive regions (whole square is designable, as in the dataset)\", \"Solid non-design strip along the top (shelf) edge and/or along the wall edge\", \"Non-design solid pads or void holes at screw locations on the wall edge\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"SIMP penalization exponent for the ground-truth solution\", \"issue\": \"missing\", \"description\": \"The ground truth is 'obtained by SIMP' (Sec. 4.6; dataset 'collected using the SIMP method', Sec. 4.1), but no penalization exponent or interpolation law is given. Eq. (1) shows none.\", \"readings\": [\"p = 3 fixed\", \"p = 3 with continuation starting from p = 1\", \"p = 4\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"regularization filter of the SIMP ground truth\", \"issue\": \"missing\", \"description\": \"No filter type or radius is given for the SIMP ground truth anywhere in the paper.\", \"readings\": [\"Sensitivity filter, r_min = 1.5 elements\", \"Density filter, r_min = 1.5 elements\", \"Density filter, r_min = 2 elements\", \"Density filter plus Heaviside projection\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"minimum density / void stiffness x_min\", \"issue\": \"missing\", \"description\": \"Eq. (1) introduces x_min (0 < x_min <= x <= 1) but gives no value. It's also unclear whether it is a density lower bound or E_min in modified SIMP, and what void stiffness is used when binarized designs are re-analysed (Sec. 4.2).\", \"readings\": [\"x_min = 1e-3 (classic SIMP density bound)\", \"E_min = 1e-9 * E0 (modified SIMP)\", \"x_min = 1e-4\"], \"effect\": \"unsure\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"SIMP optimizer, initial design and stopping criterion\", \"issue\": \"missing\", \"description\": \"The paper doesn't give the update scheme, move limit, initial design, or stopping criterion / iteration count for the SIMP ground truth. Table 8 says '64x64 domain, 100 steps' without saying whether 100 steps means SIMP iterations or diffusion sampling steps.\", \"readings\": [\"OC update, move limit 0.2, uniform initial design x = v_f, stop when max density change < 0.01\", \"Fixed 100 SIMP iterations (one reading of '100 steps' in Table 8)\", \"MMA with uniform initial design and a similar tolerance\"], \"effect\": \"layout\"}, {\"category\": \"other\", \"entity\": \"basis of the reported ground-truth compliance (5.0506)\", \"issue\": \"vague\", \"description\": \"Sec. 4.2 says metrics are computed on binarized designs (threshold 0.5) with 'a standard FEA solver'. Sec. 4.6 doesn't say whether the GT compliance of 5.0506 is the converged grey-scale SIMP objective or the compliance of the thresholded design.\", \"readings\": [\"Compliance of the GT thresholded at 0.5 and re-analysed by FEA (solid E0, void E_min)\", \"Objective value of the converged grey-scale SIMP design (as stored in the dataset)\"], \"effect\": \"unsure\"}]}",
+ "parsed": {
+  "items": [
+   {
+    "category": "support_location_extent",
+    "entity": "wall-side supports of the shelf bracket",
+    "issue": "figure_only",
+    "description": "Sec. 4.6 'Square Domain Study' says only that 'a shelf bracket is considered within a standard square design domain' and defers to Fig. 6 (caption: 'Application of HPG-Diff in shelf bracket design'). Which edge or nodes form the wall attachment, and over what length, appears only in the figure. The text also doesn't say whether this is one of the 42 training or 5 test BC sets of the dataset (Sec. 4.1).",
+    "readings": [
+     "Entire left edge fixed (x = 0, 0 <= y <= L)",
+     "Two short segments at the top and bottom of the left edge (e.g. y in [0.9L, L] and y in [0, 0.1L]) representing screws",
+     "Upper half of the left edge fixed (y in [0.5L, L])",
+     "Only the top-left and bottom-left corner nodes fixed",
+     "Mirrored set-up with the wall on the right edge (x = L)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_type",
+    "entity": "wall supports (restrained DOFs)",
+    "issue": "figure_only",
+    "description": "No text says which DOFs are restrained at the wall (fully clamped vs. roller/contact). Sec. 4.1 mentions only '42 boundary conditions' without describing them. Only Fig. 6 shows the support symbols.",
+    "readings": [
+     "Clamped: u_x = u_y = 0 at every support node",
+     "Roller along the wall: u_x = 0 on the wall edge, u_y = 0 at one node only (to remove rigid-body motion)",
+     "Mixed: upper support pinned (u_x = u_y = 0), lower support restrains only u_x (bearing against the wall)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "shelf load application point",
+    "issue": "figure_only",
+    "description": "The point where the shelf load is applied isn't stated in Sec. 4.6 (only shown in Fig. 6). Sec. 4.1 says only that dataset loads act at 'random unconstrained boundary nodes'.",
+    "readings": [
+     "Top-right corner node (x = L, y = L), tip of the bracket arm",
+     "Top-edge node at mid-span (x = 0.5L, y = L)",
+     "Top-edge node near the free end (x = 0.75L, y = L)",
+     "Right-edge node at mid-height (x = L, y = 0.5L)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "shelf load (point vs. distributed)",
+    "issue": "figure_only",
+    "description": "The text doesn't say whether the shelf load is one nodal force or is spread along the shelf (top) edge, as a real shelf would apply it. The dataset convention is a single boundary-node load (Sec. 4.1) and Sec. 4.7.3 says the benchmark has 'single-load cases', but Sec. 4.7.3 also mentions a 'load region'. Only Fig. 6 shows it.",
+    "readings": [
+     "Single concentrated nodal force (dataset convention)",
+     "Uniformly distributed load over the whole top edge",
+     "Load spread over a few nodes / short patch at the outer end of the top edge"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "shelf load direction",
+    "issue": "figure_only",
+    "description": "The direction isn't stated. 'Shelf bracket' suggests vertical gravity loading, but dataset loads can point at any angle in [0, pi] in pi/6 steps (Sec. 4.1). The load arrow appears only in Fig. 6.",
+    "readings": [
+     "Vertical (gravity, -y), i.e. pi/2 in the dataset's [0, pi] convention",
+     "Inclined at pi/3 (60 deg from +x)",
+     "Inclined at 2pi/3 (120 deg from +x)",
+     "Inclined at pi/6 or 5pi/6",
+     "Horizontal (0 or pi)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "shelf load magnitude",
+    "issue": "missing",
+    "description": "No force magnitude is given anywhere in the paper. The reported compliances (GT 5.0506; generated 4.9962 / 5.0398 / 5.0772, Sec. 4.6) depend on it.",
+    "readings": [
+     "|F| = 1 (normalized unit load)",
+     "Unit total force divided among the loaded nodes (if distributed)",
+     "A physical shelf load (e.g. 100 N or 1000 N)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "shelf bracket design",
+    "issue": "missing",
+    "description": "Neither Sec. 4.6 nor the Fig. 6 caption gives a volume fraction for the shelf bracket. Only the dataset range of 0.3 to 0.5 in 0.02 steps (Sec. 4.1) is known. The value may be written on Fig. 6, which isn't available.",
+    "readings": [
+     "0.30",
+     "0.32",
+     "0.34",
+     "0.36",
+     "0.38",
+     "0.40",
+     "0.42",
+     "0.44",
+     "0.46",
+     "0.48",
+     "0.50"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Young's modulus of the solid material",
+    "issue": "missing",
+    "description": "Young's modulus isn't given anywhere (Eq. 1 and Sec. 4.1/4.6 contain no material data). It only scales the reported compliance of 5.0506.",
+    "readings": [
+     "E = 1 (normalized)",
+     "E = 210 GPa (steel)",
+     "E = 70 GPa (aluminium)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson's ratio of the solid material",
+    "issue": "missing",
+    "description": "Poisson's ratio isn't given anywhere in the paper.",
+    "readings": [
+     "nu = 0.3",
+     "nu = 0.25",
+     "nu = 1/3"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "2D constitutive assumption",
+    "issue": "missing",
+    "description": "The paper doesn't say whether the 'standard FEA solver' (Sec. 4.2) and the SIMP data generator assume plane stress or plane strain.",
+    "readings": [
+     "Plane stress, unit thickness",
+     "Plane strain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "finite-element grid of the square domain",
+    "issue": "vague",
+    "description": "Case 1 is described only as a 'standard square design domain'. The 64x64 resolution is stated for the benchmark and pretraining data (Sec. 4.7.3; App. C 'k=64 for the 64x64 design domain'; Table 8 '64x64 domain') but not explicitly for this case. The element type used by the 'standard FEA solver' (Sec. 4.2) isn't given.",
+    "readings": [
+     "64 x 64 square bilinear (Q4) elements, 65 x 65 nodes (native resolution of the pretrained model)",
+     "A finer square mesh (e.g. 128 x 128) if the SIMP ground truth was run independently of the model resolution"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "physical size of the square design domain",
+    "issue": "vague",
+    "description": "Only 'standard square design domain' is given (Sec. 4.6). The physical side length, element size and out-of-plane thickness aren't stated.",
+    "readings": [
+     "Side length 64 with unit-size elements, unit thickness",
+     "Unit square (side 1, element size 1/64), unit thickness",
+     "Physical bracket dimensions (e.g. 200 mm side) with a real plate thickness"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "non-design regions of the bracket",
+    "issue": "missing",
+    "description": "No non-design regions are mentioned for the bracket (e.g. wall plate, shelf seat, screw holes). The dataset and model have no passive-region input, but Fig. 6 can't be checked.",
+    "readings": [
+     "No passive regions (whole square is designable, as in the dataset)",
+     "Solid non-design strip along the top (shelf) edge and/or along the wall edge",
+     "Non-design solid pads or void holes at screw locations on the wall edge"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "SIMP penalization exponent for the ground-truth solution",
+    "issue": "missing",
+    "description": "The ground truth is 'obtained by SIMP' (Sec. 4.6; dataset 'collected using the SIMP method', Sec. 4.1), but no penalization exponent or interpolation law is given. Eq. (1) shows none.",
+    "readings": [
+     "p = 3 fixed",
+     "p = 3 with continuation starting from p = 1",
+     "p = 4"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "regularization filter of the SIMP ground truth",
+    "issue": "missing",
+    "description": "No filter type or radius is given for the SIMP ground truth anywhere in the paper.",
+    "readings": [
+     "Sensitivity filter, r_min = 1.5 elements",
+     "Density filter, r_min = 1.5 elements",
+     "Density filter, r_min = 2 elements",
+     "Density filter plus Heaviside projection"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "minimum density / void stiffness x_min",
+    "issue": "missing",
+    "description": "Eq. (1) introduces x_min (0 < x_min <= x <= 1) but gives no value. It's also unclear whether it is a density lower bound or E_min in modified SIMP, and what void stiffness is used when binarized designs are re-analysed (Sec. 4.2).",
+    "readings": [
+     "x_min = 1e-3 (classic SIMP density bound)",
+     "E_min = 1e-9 * E0 (modified SIMP)",
+     "x_min = 1e-4"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "SIMP optimizer, initial design and stopping criterion",
+    "issue": "missing",
+    "description": "The paper doesn't give the update scheme, move limit, initial design, or stopping criterion / iteration count for the SIMP ground truth. Table 8 says '64x64 domain, 100 steps' without saying whether 100 steps means SIMP iterations or diffusion sampling steps.",
+    "readings": [
+     "OC update, move limit 0.2, uniform initial design x = v_f, stop when max density change < 0.01",
+     "Fixed 100 SIMP iterations (one reading of '100 steps' in Table 8)",
+     "MMA with uniform initial design and a similar tolerance"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "basis of the reported ground-truth compliance (5.0506)",
+    "issue": "vague",
+    "description": "Sec. 4.2 says metrics are computed on binarized designs (threshold 0.5) with 'a standard FEA solver'. Sec. 4.6 doesn't say whether the GT compliance of 5.0506 is the converged grey-scale SIMP objective or the compliance of the thresholded design.",
+    "readings": [
+     "Compliance of the GT thresholded at 0.5 and re-analysed by FEA (solid E0, void E_min)",
+     "Objective value of the converged grey-scale SIMP design (as stored in the dataset)"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 278.35680985450745,
+ "returncode": 0,
+ "meta": {
+  "model": null,
+  "num_turns": 2,
+  "is_error": false,
+  "total_cost_usd": 0.8476028000000001,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 27660,
+   "cache_read_input_tokens": 774,
+   "output_tokens": 31308,
+   "output_tokens_details": {
+    "thinking_tokens": 27380
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 27660,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 31308,
+     "cache_read_input_tokens": 774,
+     "cache_creation_input_tokens": 27660,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 27660
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard",
+   "fallback_credit": null
+  }
+ },
+ "stderr_tail": "",
+ "task": "L41",
+ "model": "claude",
+ "model_id": "claude-opus-5-5",
+ "rep": 0,
+ "locator": "Sec. 4.6, case study 1 (Fig. 6)",
+ "finished": "2026-10-22T19:22:51"
+}

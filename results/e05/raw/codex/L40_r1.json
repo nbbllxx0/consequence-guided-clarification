@@ -1,0 +1,345 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"In-plane beam dimensions and element geometry\",\n      \"issue\": \"missing\",\n      \"description\": \"Appendix C gives 144\u00d748 elements but no physical dimensions, element pitches, or explicit statement that elements are square.\",\n      \"readings\": [\n        \"Uniform rectangle of length 3 and height 1, giving square elements.\",\n        \"Uniform rectangle of length 6 and height 1, giving elements twice as wide as tall.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"Appendix C specifies plane stress but does not specify the uniform thickness used to assemble stiffness and element volumes.\",\n      \"readings\": [\n        \"Uniform thickness t=1.\",\n        \"Uniform thickness t=0.1 in the same length units.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"Restrained boundary node sets\",\n      \"issue\": \"vague\",\n      \"description\": \"Appendix C supplies only 'standard MBB beam boundary conditions [17]'; the provided text does not enumerate supported edges, nodes, or bearing widths. Here L and H denote modeled length and height.\",\n      \"readings\": [\n        \"Restrain the entire left edge x=0 and a single bottom-right node (L,0).\",\n        \"Use point supports at the two bottom corners (0,0) and (L,0).\",\n        \"Restrain the entire left edge and a bottom bearing spanning x/L=143/144 to 1.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"support_type\",\n      \"entity\": \"Displacement components restrained at the supports\",\n      \"issue\": \"vague\",\n      \"description\": \"Appendix C does not translate the benchmark name into displacement boundary conditions; the referenced definition is unavailable.\",\n      \"readings\": [\n        \"Left-edge symmetry: ux=0; bottom-right roller: uy=0; remaining components free.\",\n        \"Left-edge symmetry: ux=0; bottom-right pin: ux=uy=0.\",\n        \"Bottom-left pin: ux=uy=0; bottom-right roller: uy=0; remaining boundary nodes free.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"Unit force at the top-left node\",\n      \"issue\": \"missing\",\n      \"description\": \"Appendix C fixes the magnitude and application node but supplies no force vector. Inclination can affect layout if the loaded horizontal degree of freedom is free under the chosen support interpretation.\",\n      \"readings\": [\n        \"Vertical downward force (fx,fy)=(0,-1).\",\n        \"Vertical upward force (fx,fy)=(0,1).\",\n        \"Inclined force (fx,fy)=(1/sqrt(2),-1/sqrt(2)).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Non-designable solid or void masks\",\n      \"issue\": \"missing\",\n      \"description\": \"Sections 5 and Appendix C specify no MBB passive mask, including load/support patches or void buffers. Appendix E's padding specification applies to the L-bracket.\",\n      \"readings\": [\n        \"All 144\u00d748 elements are designable.\",\n        \"Fix the element adjacent to each loaded or bearing node at density 1.\",\n        \"Fix 2\u00d72 solid patches at load and bearing locations.\",\n        \"Use solid load/support patches and a one-element fixed-void strip along otherwise free outer edges.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Filter-radius length units\",\n      \"issue\": \"missing\",\n      \"description\": \"Equation (16) uses center-to-center distances, but Appendix C and Table 1 do not specify the coordinate normalization underlying the numerical radius values.\",\n      \"readings\": [\n        \"Measure distances in element pitches, so r_min=2 spans two square-element widths.\",\n        \"Measure distances in physical domain coordinates, so r_min=2 means two physical length units.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Lower bound on the tuned filter radius\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Section 5.1 says the four-variable experiment has lower bound r_min=2.0; Appendix C, Table 1 gives 1.5.\",\n      \"readings\": [\n        \"Tune r_min within [2.0,10.0].\",\n        \"Tune r_min within [1.5,10.0].\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Heaviside threshold and resulting physical volume\",\n      \"issue\": \"vague\",\n      \"description\": \"Section 5, Equation (17), permits either a fixed threshold or volume-conserving bisection without selecting one for Fig. 5. Equation (14) explicitly enforces 30% before filtering; these threshold choices need not produce the same physical volume.\",\n      \"readings\": [\n        \"Fix eta_h=0.5.\",\n        \"Bisect eta_h so the Heaviside output preserves the volume of its filtered input.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Sigmoidal volume projection Phi\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 5 describes an adaptively shifted sigmoidal projection but does not give its formula or steepness, distinct from the later Heaviside beta.\",\n      \"readings\": [\n        \"For network output z, use tilde_rho=1/(1+exp(-(z+b))), choosing b by volume bisection.\",\n        \"Use tilde_rho=1/(1+exp(-4*(z+b))), choosing b by volume bisection.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Projection bisection numerical settings\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 5 gives no brackets, iteration caps, or numerical volume tolerances for Phi or the optional adaptive Heaviside threshold.\",\n      \"readings\": [\n        \"Expand brackets as necessary and stop at relative volume residual below 1e-6.\",\n        \"Use shift bracket [-40,40] and Heaviside-threshold bracket [0,1], with 60 bisection iterations.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Differentiation through volume-enforcing thresholds\",\n      \"issue\": \"missing\",\n      \"description\": \"Sections 3 and 5 specify automatic differentiation but not the derivative implementation for thresholds obtained by bisection.\",\n      \"readings\": [\n        \"Implicitly differentiate the volume equation defining each threshold.\",\n        \"Automatically differentiate a fixed sequence of bisection operations and branch decisions.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Q4 stiffness integration\",\n      \"issue\": \"missing\",\n      \"description\": \"Appendix C specifies bilinear Q4 plane-stress elements but does not specify quadrature or stabilization.\",\n      \"readings\": [\n        \"Fully integrated Q4 elements using 2\u00d72 Gauss quadrature.\",\n        \"One-point reduced integration with hourglass stabilization.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"FEA numerical precision and direct factorization\",\n      \"issue\": \"missing\",\n      \"description\": \"Appendix C specifies a direct solver and Appendix A specifies JAX, but neither gives floating-point precision or the factorization implementation.\",\n      \"readings\": [\n        \"64-bit assembly and direct Cholesky factorization.\",\n        \"32-bit assembly and direct LU factorization.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"CNN hidden-layer and upsampling schedule\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Appendix C.1 starts at 18\u00d76 and says five hidden layers each double resolution, which yields 576\u00d7192; reaching 144\u00d748 requires only three doublings.\",\n      \"readings\": [\n        \"Use three doubling hidden layers.\",\n        \"Use five hidden layers, with only three layers doubling resolution and two preserving it.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"CNN convolution widths, kernels, padding, and output head\",\n      \"issue\": \"missing\",\n      \"description\": \"Appendix C.1 specifies the initial 32-channel tensor but delegates full architecture details to unavailable reference [14] and code.\",\n      \"readings\": [\n        \"Use 32 channels throughout, 3\u00d73 same-padded convolutions, and a 1\u00d71 single-channel output head.\",\n        \"Use progressively narrower hidden layers, 5\u00d75 same-padded convolutions, and a 3\u00d73 single-channel output head.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"CNN normalization and bilinear interpolation conventions\",\n      \"issue\": \"missing\",\n      \"description\": \"Appendix C.1 does not specify layer-normalization axes, numerical epsilon, affine parameters, or interpolation coordinate alignment.\",\n      \"readings\": [\n        \"Normalize across spatial and channel axes with epsilon=1e-5 and trainable affine parameters; use half-pixel bilinear coordinates.\",\n        \"Normalize across channels at each pixel with epsilon=1e-6 and no affine parameters; align interpolation corners.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"CNN and latent-vector initial states\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 5.1 uses five CNN initializations for BOTH, but gives neither their random states nor initialization distributions for weights, biases, and the latent vector.\",\n      \"readings\": [\n        \"Seeds {0,1,2,3,4}, Glorot-uniform weights, zero biases, and a standard-normal latent vector.\",\n        \"Seeds {10,11,12,13,14}, Glorot-normal weights, zero biases, and a latent vector uniform on [-1,1].\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Four initial Heaviside sharpness values\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 5.1 crosses five CNN initializations with four beta initializations but does not provide those four values.\",\n      \"readings\": [\n        \"beta_initial in {0.05,0.5,5,15}.\",\n        \"beta_initial in {0.1,1,5,10}.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initial SIMP exponent and filter radius for BOTH\",\n      \"issue\": \"missing\",\n      \"description\": \"Appendix C supplies tuning bounds but no initial p or r_min for Fig. 5. Its fixed p=3 and r_min=2 explicitly concern the separate two-dimensional landscape experiment.\",\n      \"readings\": [\n        \"Initialize (p,r_min)=(3,2).\",\n        \"Initialize (p,r_min)=(1,2).\",\n        \"Initialize (p,r_min)=(3,4).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Exact initial learning rate and probe grid\",\n      \"issue\": \"vague\",\n      \"description\": \"Appendix C gives only eta_initial approximately 1e-8. Appendix A.4 leaves the geometric-grid size N unspecified, subject to a maximum of 20 scan trials.\",\n      \"readings\": [\n        \"Set eta_initial exactly to 1e-8.\",\n        \"Use 20 geometric candidates and eight logarithmic bisections, then initialize at half the final passing endpoint.\",\n        \"Use 10 geometric candidates and eight logarithmic bisections, then initialize at half the final passing endpoint.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Upper-level normalization constants\",\n      \"issue\": \"missing\",\n      \"description\": \"Equation (18) and Appendix C do not give c_ref, d_ref, or the random reference state and filter settings used to calculate them. Their ratio sets the effective compliance\u2013discreteness tradeoff.\",\n      \"readings\": [\n        \"Set c_ref=c_initial evaluated at p=1 and d_ref=D_initial using reference seed 0, beta=0.1, and r_min=2.\",\n        \"Use the same normalization rule with reference seed 1, beta=1, and r_min=2.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Adam moment-decay coefficients\",\n      \"issue\": \"missing\",\n      \"description\": \"Sections 3 and Appendix A specify Adam, learning rates, clipping, and denominator safeguards but do not specify either level's moment-decay coefficients.\",\n      \"readings\": [\n        \"Use Adam coefficients (beta1,beta2)=(0.9,0.999) at both levels.\",\n        \"Use Adam coefficients (beta1,beta2)=(0.9,0.99) at both levels.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initial LL unrolling horizon\",\n      \"issue\": \"vague\",\n      \"description\": \"Section 3 allows t_start=1 or 2 and recommends 2 for loss hyperparameters, whereas Appendix A.1 reserves budget for t=1. Appendix C supplies no explicit MBB choice.\",\n      \"readings\": [\n        \"Start at t=1 and use the stated t=1 reserve.\",\n        \"Start at t=2, applying the initial-stage reserve there.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Total Fig. 5 computational budget\",\n      \"issue\": \"missing\",\n      \"description\": \"Algorithm 1 requires B_max, but Sections 5 and Appendix C give no numerical budget for the comparison.\",\n      \"readings\": [\n        \"Allow 1500 linear solves per run.\",\n        \"Allow 10000 linear solves per run.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Computational-budget accounting unit\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Sections 3, 5.1, and Appendix A describe cumulative LL iterations, while Fig. 5(a), Appendix C.3, and Algorithm 1 use linear-solve accounting, including 4t+2 per BOTH update.\",\n      \"readings\": [\n        \"Charge 4t+2 solves per BOTH update and 2t+1 per BO sample.\",\n        \"Charge t actual LL optimizer steps per update or sample.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Annealing-stage budget allocation\",\n      \"issue\": \"vague\",\n      \"description\": \"Appendix A.1 specifies exponential allocation and 20%/10% reserve floors but gives no formula for combining and renormalizing those allocations.\",\n      \"readings\": [\n        \"Assign the reserves first, then distribute the remaining 70% using exponential weights.\",\n        \"Normalize exponential weights first, impose reserve floors, then renormalize the other stage allocations.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Oscillation-trigger sign convention\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Appendix A.2 uses signed change F_current\u2212F_previous and triggers when r<0.5. Monotonic decrease gives r=-1 and therefore triggers, conflicting with the stated oscillation/stagnation interpretation.\",\n      \"readings\": [\n        \"Implement the literal signed ratio and r<0.5 test.\",\n        \"Detect cancellation using absolute value of the signed-to-absolute EMA ratio below 0.5.\",\n        \"Reverse the signed-change convention so decreases are positive, then test r<0.5.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"BO sample LL stopping test\",\n      \"issue\": \"vague\",\n      \"description\": \"Appendix C.3 specifies 0.1% improvement over five iterations and a 150-iteration cap, but not the precise windowed comparison.\",\n      \"readings\": [\n        \"Stop when net improvement from five iterations earlier is at most 0.1% of that earlier objective.\",\n        \"Stop when each of the last five consecutive relative improvements is at most 0.1%.\",\n        \"Stop when the best objective has not improved by more than 0.1% during five iterations.\"\n      ],\n      \"effect\": \"layout\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "In-plane beam dimensions and element geometry",
+    "issue": "missing",
+    "description": "Appendix C gives 144\u00d748 elements but no physical dimensions, element pitches, or explicit statement that elements are square.",
+    "readings": [
+     "Uniform rectangle of length 3 and height 1, giving square elements.",
+     "Uniform rectangle of length 6 and height 1, giving elements twice as wide as tall."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "Out-of-plane thickness",
+    "issue": "missing",
+    "description": "Appendix C specifies plane stress but does not specify the uniform thickness used to assemble stiffness and element volumes.",
+    "readings": [
+     "Uniform thickness t=1.",
+     "Uniform thickness t=0.1 in the same length units."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "Restrained boundary node sets",
+    "issue": "vague",
+    "description": "Appendix C supplies only 'standard MBB beam boundary conditions [17]'; the provided text does not enumerate supported edges, nodes, or bearing widths. Here L and H denote modeled length and height.",
+    "readings": [
+     "Restrain the entire left edge x=0 and a single bottom-right node (L,0).",
+     "Use point supports at the two bottom corners (0,0) and (L,0).",
+     "Restrain the entire left edge and a bottom bearing spanning x/L=143/144 to 1."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_type",
+    "entity": "Displacement components restrained at the supports",
+    "issue": "vague",
+    "description": "Appendix C does not translate the benchmark name into displacement boundary conditions; the referenced definition is unavailable.",
+    "readings": [
+     "Left-edge symmetry: ux=0; bottom-right roller: uy=0; remaining components free.",
+     "Left-edge symmetry: ux=0; bottom-right pin: ux=uy=0.",
+     "Bottom-left pin: ux=uy=0; bottom-right roller: uy=0; remaining boundary nodes free."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Unit force at the top-left node",
+    "issue": "missing",
+    "description": "Appendix C fixes the magnitude and application node but supplies no force vector. Inclination can affect layout if the loaded horizontal degree of freedom is free under the chosen support interpretation.",
+    "readings": [
+     "Vertical downward force (fx,fy)=(0,-1).",
+     "Vertical upward force (fx,fy)=(0,1).",
+     "Inclined force (fx,fy)=(1/sqrt(2),-1/sqrt(2))."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Non-designable solid or void masks",
+    "issue": "missing",
+    "description": "Sections 5 and Appendix C specify no MBB passive mask, including load/support patches or void buffers. Appendix E's padding specification applies to the L-bracket.",
+    "readings": [
+     "All 144\u00d748 elements are designable.",
+     "Fix the element adjacent to each loaded or bearing node at density 1.",
+     "Fix 2\u00d72 solid patches at load and bearing locations.",
+     "Use solid load/support patches and a one-element fixed-void strip along otherwise free outer edges."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Filter-radius length units",
+    "issue": "missing",
+    "description": "Equation (16) uses center-to-center distances, but Appendix C and Table 1 do not specify the coordinate normalization underlying the numerical radius values.",
+    "readings": [
+     "Measure distances in element pitches, so r_min=2 spans two square-element widths.",
+     "Measure distances in physical domain coordinates, so r_min=2 means two physical length units."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Lower bound on the tuned filter radius",
+    "issue": "conflicting",
+    "description": "Section 5.1 says the four-variable experiment has lower bound r_min=2.0; Appendix C, Table 1 gives 1.5.",
+    "readings": [
+     "Tune r_min within [2.0,10.0].",
+     "Tune r_min within [1.5,10.0]."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Heaviside threshold and resulting physical volume",
+    "issue": "vague",
+    "description": "Section 5, Equation (17), permits either a fixed threshold or volume-conserving bisection without selecting one for Fig. 5. Equation (14) explicitly enforces 30% before filtering; these threshold choices need not produce the same physical volume.",
+    "readings": [
+     "Fix eta_h=0.5.",
+     "Bisect eta_h so the Heaviside output preserves the volume of its filtered input."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Sigmoidal volume projection Phi",
+    "issue": "missing",
+    "description": "Section 5 describes an adaptively shifted sigmoidal projection but does not give its formula or steepness, distinct from the later Heaviside beta.",
+    "readings": [
+     "For network output z, use tilde_rho=1/(1+exp(-(z+b))), choosing b by volume bisection.",
+     "Use tilde_rho=1/(1+exp(-4*(z+b))), choosing b by volume bisection."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Projection bisection numerical settings",
+    "issue": "missing",
+    "description": "Section 5 gives no brackets, iteration caps, or numerical volume tolerances for Phi or the optional adaptive Heaviside threshold.",
+    "readings": [
+     "Expand brackets as necessary and stop at relative volume residual below 1e-6.",
+     "Use shift bracket [-40,40] and Heaviside-threshold bracket [0,1], with 60 bisection iterations."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Differentiation through volume-enforcing thresholds",
+    "issue": "missing",
+    "description": "Sections 3 and 5 specify automatic differentiation but not the derivative implementation for thresholds obtained by bisection.",
+    "readings": [
+     "Implicitly differentiate the volume equation defining each threshold.",
+     "Automatically differentiate a fixed sequence of bisection operations and branch decisions."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Q4 stiffness integration",
+    "issue": "missing",
+    "description": "Appendix C specifies bilinear Q4 plane-stress elements but does not specify quadrature or stabilization.",
+    "readings": [
+     "Fully integrated Q4 elements using 2\u00d72 Gauss quadrature.",
+     "One-point reduced integration with hourglass stabilization."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "FEA numerical precision and direct factorization",
+    "issue": "missing",
+    "description": "Appendix C specifies a direct solver and Appendix A specifies JAX, but neither gives floating-point precision or the factorization implementation.",
+    "readings": [
+     "64-bit assembly and direct Cholesky factorization.",
+     "32-bit assembly and direct LU factorization."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "CNN hidden-layer and upsampling schedule",
+    "issue": "conflicting",
+    "description": "Appendix C.1 starts at 18\u00d76 and says five hidden layers each double resolution, which yields 576\u00d7192; reaching 144\u00d748 requires only three doublings.",
+    "readings": [
+     "Use three doubling hidden layers.",
+     "Use five hidden layers, with only three layers doubling resolution and two preserving it."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "CNN convolution widths, kernels, padding, and output head",
+    "issue": "missing",
+    "description": "Appendix C.1 specifies the initial 32-channel tensor but delegates full architecture details to unavailable reference [14] and code.",
+    "readings": [
+     "Use 32 channels throughout, 3\u00d73 same-padded convolutions, and a 1\u00d71 single-channel output head.",
+     "Use progressively narrower hidden layers, 5\u00d75 same-padded convolutions, and a 3\u00d73 single-channel output head."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "CNN normalization and bilinear interpolation conventions",
+    "issue": "missing",
+    "description": "Appendix C.1 does not specify layer-normalization axes, numerical epsilon, affine parameters, or interpolation coordinate alignment.",
+    "readings": [
+     "Normalize across spatial and channel axes with epsilon=1e-5 and trainable affine parameters; use half-pixel bilinear coordinates.",
+     "Normalize across channels at each pixel with epsilon=1e-6 and no affine parameters; align interpolation corners."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "CNN and latent-vector initial states",
+    "issue": "missing",
+    "description": "Section 5.1 uses five CNN initializations for BOTH, but gives neither their random states nor initialization distributions for weights, biases, and the latent vector.",
+    "readings": [
+     "Seeds {0,1,2,3,4}, Glorot-uniform weights, zero biases, and a standard-normal latent vector.",
+     "Seeds {10,11,12,13,14}, Glorot-normal weights, zero biases, and a latent vector uniform on [-1,1]."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Four initial Heaviside sharpness values",
+    "issue": "missing",
+    "description": "Section 5.1 crosses five CNN initializations with four beta initializations but does not provide those four values.",
+    "readings": [
+     "beta_initial in {0.05,0.5,5,15}.",
+     "beta_initial in {0.1,1,5,10}."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial SIMP exponent and filter radius for BOTH",
+    "issue": "missing",
+    "description": "Appendix C supplies tuning bounds but no initial p or r_min for Fig. 5. Its fixed p=3 and r_min=2 explicitly concern the separate two-dimensional landscape experiment.",
+    "readings": [
+     "Initialize (p,r_min)=(3,2).",
+     "Initialize (p,r_min)=(1,2).",
+     "Initialize (p,r_min)=(3,4)."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Exact initial learning rate and probe grid",
+    "issue": "vague",
+    "description": "Appendix C gives only eta_initial approximately 1e-8. Appendix A.4 leaves the geometric-grid size N unspecified, subject to a maximum of 20 scan trials.",
+    "readings": [
+     "Set eta_initial exactly to 1e-8.",
+     "Use 20 geometric candidates and eight logarithmic bisections, then initialize at half the final passing endpoint.",
+     "Use 10 geometric candidates and eight logarithmic bisections, then initialize at half the final passing endpoint."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Upper-level normalization constants",
+    "issue": "missing",
+    "description": "Equation (18) and Appendix C do not give c_ref, d_ref, or the random reference state and filter settings used to calculate them. Their ratio sets the effective compliance\u2013discreteness tradeoff.",
+    "readings": [
+     "Set c_ref=c_initial evaluated at p=1 and d_ref=D_initial using reference seed 0, beta=0.1, and r_min=2.",
+     "Use the same normalization rule with reference seed 1, beta=1, and r_min=2."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Adam moment-decay coefficients",
+    "issue": "missing",
+    "description": "Sections 3 and Appendix A specify Adam, learning rates, clipping, and denominator safeguards but do not specify either level's moment-decay coefficients.",
+    "readings": [
+     "Use Adam coefficients (beta1,beta2)=(0.9,0.999) at both levels.",
+     "Use Adam coefficients (beta1,beta2)=(0.9,0.99) at both levels."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial LL unrolling horizon",
+    "issue": "vague",
+    "description": "Section 3 allows t_start=1 or 2 and recommends 2 for loss hyperparameters, whereas Appendix A.1 reserves budget for t=1. Appendix C supplies no explicit MBB choice.",
+    "readings": [
+     "Start at t=1 and use the stated t=1 reserve.",
+     "Start at t=2, applying the initial-stage reserve there."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Total Fig. 5 computational budget",
+    "issue": "missing",
+    "description": "Algorithm 1 requires B_max, but Sections 5 and Appendix C give no numerical budget for the comparison.",
+    "readings": [
+     "Allow 1500 linear solves per run.",
+     "Allow 10000 linear solves per run."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Computational-budget accounting unit",
+    "issue": "conflicting",
+    "description": "Sections 3, 5.1, and Appendix A describe cumulative LL iterations, while Fig. 5(a), Appendix C.3, and Algorithm 1 use linear-solve accounting, including 4t+2 per BOTH update.",
+    "readings": [
+     "Charge 4t+2 solves per BOTH update and 2t+1 per BO sample.",
+     "Charge t actual LL optimizer steps per update or sample."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Annealing-stage budget allocation",
+    "issue": "vague",
+    "description": "Appendix A.1 specifies exponential allocation and 20%/10% reserve floors but gives no formula for combining and renormalizing those allocations.",
+    "readings": [
+     "Assign the reserves first, then distribute the remaining 70% using exponential weights.",
+     "Normalize exponential weights first, impose reserve floors, then renormalize the other stage allocations."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Oscillation-trigger sign convention",
+    "issue": "conflicting",
+    "description": "Appendix A.2 uses signed change F_current\u2212F_previous and triggers when r<0.5. Monotonic decrease gives r=-1 and therefore triggers, conflicting with the stated oscillation/stagnation interpretation.",
+    "readings": [
+     "Implement the literal signed ratio and r<0.5 test.",
+     "Detect cancellation using absolute value of the signed-to-absolute EMA ratio below 0.5.",
+     "Reverse the signed-change convention so decreases are positive, then test r<0.5."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "BO sample LL stopping test",
+    "issue": "vague",
+    "description": "Appendix C.3 specifies 0.1% improvement over five iterations and a 150-iteration cap, but not the precise windowed comparison.",
+    "readings": [
+     "Stop when net improvement from five iterations earlier is at most 0.1% of that earlier objective.",
+     "Stop when each of the last five consecutive relative improvements is at most 0.1%.",
+     "Stop when the best objective has not improved by more than 0.1% during five iterations."
+    ],
+    "effect": "layout"
+   }
+  ]
+ },
+ "wall_s": 1027.6710641384125,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L40",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 1,
+ "locator": "Sec. 5, the MBB beam (Appendix C, Fig. 5)",
+ "finished": "2026-10-22T21:36:05"
+}

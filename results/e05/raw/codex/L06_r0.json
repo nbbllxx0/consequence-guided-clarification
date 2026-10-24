@@ -1,0 +1,176 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"other\",\n      \"entity\": \"BVP identified as configuration 1\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Sec. 4.1 references Fig. 1(A,D) for the cantilever BVPs, but the Figure 2 caption identifies configuration 1 with panel 2(A). Figure 1(A) instead belongs to the uniform-tension benchmark in Sec. 3.\",\n      \"readings\": [\n        \"Treat the reference as a numbering error and use the unavailable cantilever BVP in Figure 2(A).\",\n        \"Follow the literal Figure 1(A) reference and adopt uniform tension on the face opposite the clamp.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"Load application sites within the face opposite the clamp\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 4.1 specifies the opposite face but gives neither application coordinates nor the number of loaded sites. The Figure 2(A) caption only says 'Initial BVP'. For coordinates below, name the fixed face x=0 and the opposite face x=1 in the unit cube.\",\n      \"readings\": [\n        \"One load centered at (1, 1/2, 1/2).\",\n        \"One load at the edge midpoint (1, 1/2, 0).\",\n        \"One load at the corner (1, 0, 0).\",\n        \"Two loads at (1, 0, 1/2) and (1, 1, 1/2).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Footprint and spatial distribution of the configuration 1 load\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 4.1 and the Figure 2 caption do not describe whether the loading is concentrated, distributed along an edge, or distributed over a surface patch, nor its spatial profile.\",\n      \"readings\": [\n        \"A concentrated force assigned to one boundary node.\",\n        \"Uniform traction over one voxel face, of side length 1/64.\",\n        \"A uniform line load along an edge of the opposite face.\",\n        \"Uniform traction over a centered square patch of side length 1/8.\",\n        \"Uniform traction over the entire opposite face.\",\n        \"Traction over the opposite face varying linearly with z.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"Configuration 1 force or traction vectors\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 4.1 gives no load vector or direction relative to the fixed face; these would have to come from the unavailable initial-BVP drawing.\",\n      \"readings\": [\n        \"Transverse loading in direction (0, 0, -1).\",\n        \"Axial tension in direction (1, 0, 0).\",\n        \"Oblique loading in direction (1, 0, -1)/sqrt(2).\",\n        \"If two sites are loaded, opposite transverse forces forming a couple.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"Common multiplicative scale of the configuration 1 loading\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Sec. 4.1 nor its figure caption supplies a force magnitude, traction amplitude, or total resultant. This item concerns overall scale with the load pattern and relative amplitudes held fixed.\",\n      \"readings\": [\n        \"Normalize the total resultant force magnitude to 1.\",\n        \"Normalize the total resultant force magnitude to 2.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"Relative amplitudes if configuration 1 contains multiple loaded sites\",\n      \"issue\": \"figure_only\",\n      \"description\": \"The unavailable BVP drawing is needed to establish whether multiple forces or patches exist and, if so, their relative amplitudes. Sec. 4.1 provides no ratios.\",\n      \"readings\": [\n        \"Two loaded sites with equal resultant magnitudes, 1:1.\",\n        \"Two loaded sites with resultant magnitudes in the ratio 2:1.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Solid material retained around supports and load application sites\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 specifies no protected solid pads or layers. Algorithm 1 thresholds all voxels without explaining whether support or loaded voxels are exempt.\",\n      \"readings\": [\n        \"No protected solid voxels; apply the threshold to every material voxel.\",\n        \"Protect one voxel layer adjacent to the fixed face and one voxel layer beneath each loaded patch.\",\n        \"Protect two voxel layers adjacent to the fixed face and beneath each loaded patch.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Loading when material removal changes the loaded boundary\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.3 reconstructs the boundary and its boundary conditions each iteration, but does not explain how loads persist if material at the original loaded region is removed.\",\n      \"readings\": [\n        \"Retain the original loaded material and keep the original load footprint unchanged.\",\n        \"Apply constant traction to surviving portions of the original loaded region, allowing the resultant to decrease.\",\n        \"Renormalize traction on surviving loaded portions to preserve the original resultant.\",\n        \"Transfer a concentrated force to the nearest surviving boundary location.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Topological-derivative removal threshold parameter C\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.3 gives the threshold formula and a typical range of 0.001\u20130.1, and Sec. 5 says C controls structural detail. Sec. 4.1 does not give the value used for configuration 1.\",\n      \"readings\": [\n        \"Use constant C=0.001.\",\n        \"Use constant C=0.01.\",\n        \"Use constant C=0.1.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Removal of isolated material\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2.3 says post-processing excludes isolated voxels, but does not define connectivity or whether entire disconnected components are removed.\",\n      \"readings\": [\n        \"Delete only individual voxels having no solid face-neighbor.\",\n        \"Delete every component not connected to the fixed face through 6-neighbor connectivity.\",\n        \"Delete every component not connected to the fixed face through 26-neighbor connectivity.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Removal of surface irregularities during optimization\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2.3 includes removal of 'surface irregularities' before computing volume and checking termination, but supplies no geometric rule, neighborhood, or number of passes.\",\n      \"readings\": [\n        \"Remove one-voxel protrusions having only one solid face-neighbor.\",\n        \"Remove boundary voxels having at most two solid face-neighbors.\",\n        \"Apply one binary morphological opening with a 3-by-3-by-3 voxel neighborhood.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Laplacian smoothing of the configuration 1 output surface\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.1 and Figure 2(C) specify final Laplacian smoothing, but omit its weights, step size, iteration count, boundary constraints, and volume-preservation rule.\",\n      \"readings\": [\n        \"One uniform-weight Laplacian iteration with step size 0.1 and support/load vertices fixed.\",\n        \"Ten uniform-weight Laplacian iterations with step size 0.5 and support/load vertices fixed.\",\n        \"Ten iterations with step size 0.5 followed by rescaling to restore the pre-smoothing volume.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Elasticity-solve convergence criterion\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 reports 100\u2013200 GMRES iterations but no stopping tolerance or residual definition. The tolerance of 10^-4 in Sec. 3 is stated for its separate tension benchmark.\",\n      \"readings\": [\n        \"Carry over a relative residual tolerance of 10^-4.\",\n        \"Use a relative residual tolerance of 10^-6.\",\n        \"Use an absolute residual tolerance of 10^-4.\"\n      ],\n      \"effect\": \"layout\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "other",
+    "entity": "BVP identified as configuration 1",
+    "issue": "conflicting",
+    "description": "Sec. 4.1 references Fig. 1(A,D) for the cantilever BVPs, but the Figure 2 caption identifies configuration 1 with panel 2(A). Figure 1(A) instead belongs to the uniform-tension benchmark in Sec. 3.",
+    "readings": [
+     "Treat the reference as a numbering error and use the unavailable cantilever BVP in Figure 2(A).",
+     "Follow the literal Figure 1(A) reference and adopt uniform tension on the face opposite the clamp."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "Load application sites within the face opposite the clamp",
+    "issue": "figure_only",
+    "description": "Sec. 4.1 specifies the opposite face but gives neither application coordinates nor the number of loaded sites. The Figure 2(A) caption only says 'Initial BVP'. For coordinates below, name the fixed face x=0 and the opposite face x=1 in the unit cube.",
+    "readings": [
+     "One load centered at (1, 1/2, 1/2).",
+     "One load at the edge midpoint (1, 1/2, 0).",
+     "One load at the corner (1, 0, 0).",
+     "Two loads at (1, 0, 1/2) and (1, 1, 1/2)."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Footprint and spatial distribution of the configuration 1 load",
+    "issue": "figure_only",
+    "description": "Sec. 4.1 and the Figure 2 caption do not describe whether the loading is concentrated, distributed along an edge, or distributed over a surface patch, nor its spatial profile.",
+    "readings": [
+     "A concentrated force assigned to one boundary node.",
+     "Uniform traction over one voxel face, of side length 1/64.",
+     "A uniform line load along an edge of the opposite face.",
+     "Uniform traction over a centered square patch of side length 1/8.",
+     "Uniform traction over the entire opposite face.",
+     "Traction over the opposite face varying linearly with z."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Configuration 1 force or traction vectors",
+    "issue": "figure_only",
+    "description": "Sec. 4.1 gives no load vector or direction relative to the fixed face; these would have to come from the unavailable initial-BVP drawing.",
+    "readings": [
+     "Transverse loading in direction (0, 0, -1).",
+     "Axial tension in direction (1, 0, 0).",
+     "Oblique loading in direction (1, 0, -1)/sqrt(2).",
+     "If two sites are loaded, opposite transverse forces forming a couple."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Common multiplicative scale of the configuration 1 loading",
+    "issue": "missing",
+    "description": "Neither Sec. 4.1 nor its figure caption supplies a force magnitude, traction amplitude, or total resultant. This item concerns overall scale with the load pattern and relative amplitudes held fixed.",
+    "readings": [
+     "Normalize the total resultant force magnitude to 1.",
+     "Normalize the total resultant force magnitude to 2."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Relative amplitudes if configuration 1 contains multiple loaded sites",
+    "issue": "figure_only",
+    "description": "The unavailable BVP drawing is needed to establish whether multiple forces or patches exist and, if so, their relative amplitudes. Sec. 4.1 provides no ratios.",
+    "readings": [
+     "Two loaded sites with equal resultant magnitudes, 1:1.",
+     "Two loaded sites with resultant magnitudes in the ratio 2:1."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Solid material retained around supports and load application sites",
+    "issue": "missing",
+    "description": "Sec. 4.1 specifies no protected solid pads or layers. Algorithm 1 thresholds all voxels without explaining whether support or loaded voxels are exempt.",
+    "readings": [
+     "No protected solid voxels; apply the threshold to every material voxel.",
+     "Protect one voxel layer adjacent to the fixed face and one voxel layer beneath each loaded patch.",
+     "Protect two voxel layers adjacent to the fixed face and beneath each loaded patch."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Loading when material removal changes the loaded boundary",
+    "issue": "missing",
+    "description": "Sec. 2.3 reconstructs the boundary and its boundary conditions each iteration, but does not explain how loads persist if material at the original loaded region is removed.",
+    "readings": [
+     "Retain the original loaded material and keep the original load footprint unchanged.",
+     "Apply constant traction to surviving portions of the original loaded region, allowing the resultant to decrease.",
+     "Renormalize traction on surviving loaded portions to preserve the original resultant.",
+     "Transfer a concentrated force to the nearest surviving boundary location."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Topological-derivative removal threshold parameter C",
+    "issue": "missing",
+    "description": "Sec. 2.3 gives the threshold formula and a typical range of 0.001\u20130.1, and Sec. 5 says C controls structural detail. Sec. 4.1 does not give the value used for configuration 1.",
+    "readings": [
+     "Use constant C=0.001.",
+     "Use constant C=0.01.",
+     "Use constant C=0.1."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Removal of isolated material",
+    "issue": "vague",
+    "description": "Sec. 2.3 says post-processing excludes isolated voxels, but does not define connectivity or whether entire disconnected components are removed.",
+    "readings": [
+     "Delete only individual voxels having no solid face-neighbor.",
+     "Delete every component not connected to the fixed face through 6-neighbor connectivity.",
+     "Delete every component not connected to the fixed face through 26-neighbor connectivity."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Removal of surface irregularities during optimization",
+    "issue": "vague",
+    "description": "Sec. 2.3 includes removal of 'surface irregularities' before computing volume and checking termination, but supplies no geometric rule, neighborhood, or number of passes.",
+    "readings": [
+     "Remove one-voxel protrusions having only one solid face-neighbor.",
+     "Remove boundary voxels having at most two solid face-neighbors.",
+     "Apply one binary morphological opening with a 3-by-3-by-3 voxel neighborhood."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Laplacian smoothing of the configuration 1 output surface",
+    "issue": "vague",
+    "description": "Sec. 4.1 and Figure 2(C) specify final Laplacian smoothing, but omit its weights, step size, iteration count, boundary constraints, and volume-preservation rule.",
+    "readings": [
+     "One uniform-weight Laplacian iteration with step size 0.1 and support/load vertices fixed.",
+     "Ten uniform-weight Laplacian iterations with step size 0.5 and support/load vertices fixed.",
+     "Ten iterations with step size 0.5 followed by rescaling to restore the pre-smoothing volume."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Elasticity-solve convergence criterion",
+    "issue": "missing",
+    "description": "Sec. 4.1 reports 100\u2013200 GMRES iterations but no stopping tolerance or residual definition. The tolerance of 10^-4 in Sec. 3 is stated for its separate tension benchmark.",
+    "readings": [
+     "Carry over a relative residual tolerance of 10^-4.",
+     "Use a relative residual tolerance of 10^-6.",
+     "Use an absolute residual tolerance of 10^-4."
+    ],
+    "effect": "layout"
+   }
+  ]
+ },
+ "wall_s": 344.412579536438,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L06",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 0,
+ "locator": "Sec. 4.1 'Cantilever supports', configuration 1",
+ "finished": "2026-10-22T17:32:37"
+}

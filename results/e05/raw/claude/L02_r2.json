@@ -1,0 +1,309 @@
+{
+ "raw": "{\"items\": [{\"category\": \"domain_extent\", \"entity\": \"design domain box (L x W x H) and axis orientation\", \"issue\": \"figure_only\", \"description\": \"Sec. 6.1.1 gives no dimensions. It only says the problem is 'the same as the numerical examples considered in [64]' and that the design domain is 'shown in Figure 3' (left), which is not available. Length, width, height, aspect ratio and which axis is vertical are all unknown. The absolute size matters too, because the filter radius is given in metres (r = 0.1 m).\", \"readings\": [\"3 m x 1 m x 1 m (3:1:1; 30x10x10 cubic 0.1 m elements at 3,000 variables)\", \"2 m x 1.5 m x 1 m (20x15x10 cubic 0.1 m elements), with height 1 m or 1.5 m\", \"2 m x 1 m x 1 m (common 2:1:1 proportion; needs non-cubic uniform elements, e.g. 25x12x10)\", \"3:1:1 proportions in element units, i.e. 30 m x 10 m x 10 m (h = 1 m), so r = 0.1 m is smaller than one element\"], \"effect\": \"layout\"}, {\"category\": \"domain_extent\", \"entity\": \"modelled portion (full beam vs symmetry-reduced half)\", \"issue\": \"missing\", \"description\": \"Sec. 6.1.1 does not say whether the 3,000/24,000/192,000 elements cover the whole beam or a half-model using the mid-width symmetry plane. This changes the effective resolution and adds a symmetry boundary condition.\", \"readings\": [\"full beam, no symmetry condition\", \"half beam cut at mid-width (y/W = 0.5) with u_y = 0 on the cut plane\"], \"effect\": \"layout\"}, {\"category\": \"mesh\", \"entity\": \"element counts per direction for the 3,000 / 24,000 / 192,000 meshes\", \"issue\": \"missing\", \"description\": \"Sec. 6.1.1 gives only the total number of design variables (one per element, Sec. 2) and says 'structured mesh with uniform hexahedral first-order finite elements'. nx x ny x nz is never given. The 8x steps imply h is halved in every direction, but several factorizations fit.\", \"readings\": [\"30x10x10 / 60x20x20 / 120x40x40 (cubic elements, 3:1:1 box)\", \"20x15x10 / 40x30x20 / 80x60x40 (or with height and width swapped)\", \"25x12x10 / 50x24x20 / 100x48x40 (non-cubic elements, e.g. a 2:1:1 box)\", \"30x20x5 / 60x40x10 / 120x80x20 (plate-like box)\"], \"effect\": \"layout\"}, {\"category\": \"mesh\", \"entity\": \"resolution of the optimal design shown in Fig. 3 (right)\", \"issue\": \"vague\", \"description\": \"Three resolutions are run, but the Fig. 3 caption shows 'an optimal design' without saying which mesh or which method produced it. At 3,000 variables the SVD run reached a different local minimum (13.63 vs 13.59, Table 1).\", \"readings\": [\"3,000 elements\", \"24,000 elements\", \"192,000 elements\"], \"effect\": \"layout\"}, {\"category\": \"support_location_extent\", \"entity\": \"fixed end of the cantilever\", \"issue\": \"figure_only\", \"description\": \"Sec. 6.1.1 says nothing about supports (compare the blade, Sec. 6.1.2: 'fixed boundary condition ... thicker end'). Only the word 'cantilever' and Fig. 3 (left)/[64] imply one fixed end, so the extent of the fixed region is unknown.\", \"readings\": [\"entire end face x/L = 0 (y/W in [0,1], z/H in [0,1])\", \"central patch of the x/L = 0 face (e.g. y/W and z/H in [0.25, 0.75])\", \"only the top and bottom edges of the x/L = 0 face (z/H = 0 and z/H = 1)\"], \"effect\": \"layout\"}, {\"category\": \"support_type\", \"entity\": \"constrained DOFs at the fixed end\", \"issue\": \"figure_only\", \"description\": \"The text does not say which displacement components are fixed at the support. 'Cantilever' suggests a full clamp, but this is never stated.\", \"readings\": [\"u_x = u_y = u_z = 0 at every support node (fully clamped)\", \"only u_x fixed on the face, plus the minimum extra constraints needed to remove rigid-body modes (sliding wall)\"], \"effect\": \"layout\"}, {\"category\": \"load_position\", \"entity\": \"point of application of the tip load\", \"issue\": \"figure_only\", \"description\": \"Sec. 6.1.1 does not mention any load. Where it acts on the free end must come from Fig. 3 (left), whose caption only says 'design domain', or from [64]. Positions use fractions x/L, y/W, z/H, with the clamp at x = 0 and the load assumed to act along z.\", \"readings\": [\"free end x/L = 1, along the bottom edge z/H = 0, spanning y/W in [0,1]\", \"free end x/L = 1, bottom-centre point y/W = 0.5, z/H = 0\", \"free end x/L = 1, centre of the end face y/W = 0.5, z/H = 0.5\", \"free end x/L = 1, along the mid-height line z/H = 0.5, spanning y/W in [0,1]\"], \"effect\": \"layout\"}, {\"category\": \"load_extent_distribution\", \"entity\": \"tip load distribution type\", \"issue\": \"figure_only\", \"description\": \"Sec. 6.1.1 does not say whether the tip load is a point, line or surface load. For a distributed load it is also unknown how the force is split among nodes and whether the total force is held fixed across the three meshes. The nearly constant compliance across meshes (13.59 / 13.2 / 13.6, Tables 1-3) hints at a mesh-consistent load but does not settle it.\", \"readings\": [\"single nodal point force\", \"line load along an edge with fixed total force and consistent nodal weights (end nodes get half)\", \"line load with the same force on every node of the edge\", \"uniform traction over the whole free-end face\", \"uniform traction over a small patch (e.g. one element face) at the load point\"], \"effect\": \"layout\"}, {\"category\": \"load_direction\", \"entity\": \"direction of the tip load\", \"issue\": \"figure_only\", \"description\": \"The load direction is not given. It is presumably transverse to the beam axis, but which transverse axis is unknown. This matters if the cross-section is not square or the load sits on an edge. The sign does not matter for a single-load compliance problem.\", \"readings\": [\"transverse, along the height (-z)\", \"transverse, along the width (-y)\", \"inclined in the y-z plane\"], \"effect\": \"layout\"}, {\"category\": \"load_magnitude\", \"entity\": \"tip load magnitude\", \"issue\": \"missing\", \"description\": \"Sec. 6.1.1 gives no force value, so the reported compliances (13.59, 13.2, 13.6; Tables 1-3) cannot be reproduced. The magnitude only scales the compliance.\", \"readings\": [\"1 N total (unit load)\", \"about 1e5 N total (the order needed for C ~ 13.6 with E0 = 2e11 Pa on a roughly 3 m x 1 m x 1 m beam)\", \"1 N on each loaded node (total grows with mesh refinement)\"], \"effect\": \"scale_only\"}, {\"category\": \"load_extent_distribution\", \"entity\": \"body force / self-weight\", \"issue\": \"missing\", \"description\": \"Eq. (2) allows a design-dependent right-hand side b(mu), and Sec. 6.1.1 calls the constraint a 'mass' constraint. The text does not say whether gravity or self-weight is included. No density is given, which suggests it is not.\", \"readings\": [\"no body force; b is the design-independent tip load only\", \"self-weight proportional to rho added to the tip load (needs a density, e.g. 7850 kg/m^3, and g = 9.81 m/s^2)\"], \"effect\": \"layout\"}, {\"category\": \"passive_region\", \"entity\": \"non-design (fixed solid or void) regions\", \"issue\": \"missing\", \"description\": \"Sec. 6.1.1 mentions no passive regions. Whether Fig. 3 (left)/[64] includes solid pads at the load or at the support is unknown.\", \"readings\": [\"none; every element is a design variable\", \"solid non-design pad (e.g. one element layer) under the load\", \"solid non-design layer next to the clamped face\"], \"effect\": \"layout\"}, {\"category\": \"volume_fraction\", \"entity\": \"mass-constraint upper bound 0.5\", \"issue\": \"vague\", \"description\": \"Sec. 6.1.1 says 'The upper bound for the mass constraint is 0.5'. In Eq. (1), v_u is an absolute upper bound on total material volume, yet 0.5 reads like a fraction. It is also called 'mass', and no density is given.\", \"readings\": [\"v_u = 0.5 x domain volume (50% volume fraction)\", \"v_u = 0.5 m^3 absolute (fraction = 0.5 / V_domain, e.g. 1/6 for a 3 m^3 box)\", \"absolute mass of 0.5 (units not given) with a density that is not given\"], \"effect\": \"layout\"}, {\"category\": \"material\", \"entity\": \"Young's modulus E0\", \"issue\": \"vague\", \"description\": \"Printed as '2.0x10^{1}1 N/m^2' in Sec. 6.1.1 (and again in 6.1.2). This is a typesetting error.\", \"readings\": [\"E0 = 2.0e11 N/m^2 (reading '10^{1}1' as 10^11; steel-like, consistent with nu = 0.29)\", \"E0 = 2.0e1 = 20 N/m^2 (literal reading)\"], \"effect\": \"scale_only\"}, {\"category\": \"material\", \"entity\": \"void / minimum stiffness in the SIMP law\", \"issue\": \"missing\", \"description\": \"Eq. (4), E = rho^s E0, has no void stiffness, and the only bounds are 0 <= mu <= 1 (Eq. 1). No E_min or lower density bound is given, but a standard structured-grid solver needs one.\", \"readings\": [\"E_min = 0 (pure Eq. 4; the interior-point method keeps mu > 0)\", \"E_min = 1e-9 E0 (modified SIMP)\", \"E_min = 1e-3 E0, or a lower bound mu_min = 1e-3\"], \"effect\": \"unsure\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"filter radius relative to the mesh/domain; equivalent radius for a density filter\", \"issue\": \"vague\", \"description\": \"Sec. 6.1.1 says 'Helmholtz filter with r = 0.1 m' (Eq. 3). Because the domain size and element size h are unknown, r cannot be expressed in elements or relative to the beam. If the target solver has only a classic density (cone) filter, the text gives no conversion; the usual equivalence is r = R/(2*sqrt(3)).\", \"readings\": [\"Helmholtz PDE filter, r = 0.1 m (1, 2 and 4 elements on the three meshes if h = 0.1, 0.05, 0.025 m)\", \"cone density filter with R = 2*sqrt(3)*r, about 0.35 m\", \"cone density filter with R = 0.1 m (r used directly as the cone radius)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Helmholtz filter boundary conditions and discretization\", \"issue\": \"missing\", \"description\": \"Eq. (3) is given without boundary conditions. The text also does not say whether rho is a nodal (Q1) field or element-wise, or how the element values rho_i used in Eq. (4) are formed.\", \"readings\": [\"homogeneous Neumann BC; nodal trilinear rho averaged to each element\", \"homogeneous Neumann BC; element-wise rho\", \"Dirichlet BC (rho = 0) on the outer boundary\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"initial design for IPOPT\", \"issue\": \"missing\", \"description\": \"The starting mu is not stated. The problem is non-convex: Sec. 6.1.1 notes that the 3,000-variable SVD run converged to a different local minimum.\", \"readings\": [\"uniform mu = 0.5 (equal to the mass bound)\", \"uniform mu = 1 (fully solid)\", \"uniform 0.5 with a small random perturbation\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"IPOPT options other than the tolerance\", \"issue\": \"missing\", \"description\": \"The text gives only 'IPOPT ... convergence threshold of 10^-6' (Sec. 6.1.1) and s_max = 100 (Sec. 3). The Hessian treatment, barrier-update strategy, scaling and iteration limit are not given. These affect the optimization path and which local optimum is reached (297 / 180 / 132 iterations).\", \"readings\": [\"limited-memory BFGS Hessian, IPOPT defaults otherwise (6 pairs, monotone barrier, gradient-based scaling)\", \"exact Hessian (second-order adjoint)\", \"limited-memory BFGS with mu_strategy = adaptive\"], \"effect\": \"unsure\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"accuracy of the state/adjoint linear solves (default method)\", \"issue\": \"missing\", \"description\": \"The default method uses PCG with HYPRE AMG, a zero initial guess and epsilon_pcg = 1e-4 (Sec. 6, Alg. 5, line 5). epsilon_abs, N_maxit and the AMG settings are not given. These inexact solves feed the gradients, which a direct solver would not reproduce.\", \"readings\": [\"exact (direct) linear solves\", \"PCG + AMG, relative tolerance 1e-4, epsilon_abs = 0, no iteration cap\", \"PCG + AMG, relative tolerance 1e-4, epsilon_abs about 1e-12, N_maxit about 1000\"], \"effect\": \"unsure\"}, {\"category\": \"other\", \"entity\": \"number of problems / load cases in the cantilever example\", \"issue\": \"conflicting\", \"description\": \"Sec. 6.1.1 says 'The design domains and optimal designs for two problems are shown in Figure 3' and cites the 'numerical examples' (plural) of [64]. Yet the Fig. 3 caption shows one design domain and one design for the cantilever. The number of load cases is never stated.\", \"readings\": [\"one cantilever problem with a single load case (Fig. 3 left)\", \"two cantilever variants from [64] (e.g. two load configurations), with only one shown\", \"wording slip: the 'two problems' are the cantilever (Fig. 3) and the blade (Fig. 4)\"], \"effect\": \"unsure\"}]}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "design domain box (L x W x H) and axis orientation",
+    "issue": "figure_only",
+    "description": "Sec. 6.1.1 gives no dimensions. It only says the problem is 'the same as the numerical examples considered in [64]' and that the design domain is 'shown in Figure 3' (left), which is not available. Length, width, height, aspect ratio and which axis is vertical are all unknown. The absolute size matters too, because the filter radius is given in metres (r = 0.1 m).",
+    "readings": [
+     "3 m x 1 m x 1 m (3:1:1; 30x10x10 cubic 0.1 m elements at 3,000 variables)",
+     "2 m x 1.5 m x 1 m (20x15x10 cubic 0.1 m elements), with height 1 m or 1.5 m",
+     "2 m x 1 m x 1 m (common 2:1:1 proportion; needs non-cubic uniform elements, e.g. 25x12x10)",
+     "3:1:1 proportions in element units, i.e. 30 m x 10 m x 10 m (h = 1 m), so r = 0.1 m is smaller than one element"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "modelled portion (full beam vs symmetry-reduced half)",
+    "issue": "missing",
+    "description": "Sec. 6.1.1 does not say whether the 3,000/24,000/192,000 elements cover the whole beam or a half-model using the mid-width symmetry plane. This changes the effective resolution and adds a symmetry boundary condition.",
+    "readings": [
+     "full beam, no symmetry condition",
+     "half beam cut at mid-width (y/W = 0.5) with u_y = 0 on the cut plane"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "element counts per direction for the 3,000 / 24,000 / 192,000 meshes",
+    "issue": "missing",
+    "description": "Sec. 6.1.1 gives only the total number of design variables (one per element, Sec. 2) and says 'structured mesh with uniform hexahedral first-order finite elements'. nx x ny x nz is never given. The 8x steps imply h is halved in every direction, but several factorizations fit.",
+    "readings": [
+     "30x10x10 / 60x20x20 / 120x40x40 (cubic elements, 3:1:1 box)",
+     "20x15x10 / 40x30x20 / 80x60x40 (or with height and width swapped)",
+     "25x12x10 / 50x24x20 / 100x48x40 (non-cubic elements, e.g. a 2:1:1 box)",
+     "30x20x5 / 60x40x10 / 120x80x20 (plate-like box)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "resolution of the optimal design shown in Fig. 3 (right)",
+    "issue": "vague",
+    "description": "Three resolutions are run, but the Fig. 3 caption shows 'an optimal design' without saying which mesh or which method produced it. At 3,000 variables the SVD run reached a different local minimum (13.63 vs 13.59, Table 1).",
+    "readings": [
+     "3,000 elements",
+     "24,000 elements",
+     "192,000 elements"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "fixed end of the cantilever",
+    "issue": "figure_only",
+    "description": "Sec. 6.1.1 says nothing about supports (compare the blade, Sec. 6.1.2: 'fixed boundary condition ... thicker end'). Only the word 'cantilever' and Fig. 3 (left)/[64] imply one fixed end, so the extent of the fixed region is unknown.",
+    "readings": [
+     "entire end face x/L = 0 (y/W in [0,1], z/H in [0,1])",
+     "central patch of the x/L = 0 face (e.g. y/W and z/H in [0.25, 0.75])",
+     "only the top and bottom edges of the x/L = 0 face (z/H = 0 and z/H = 1)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_type",
+    "entity": "constrained DOFs at the fixed end",
+    "issue": "figure_only",
+    "description": "The text does not say which displacement components are fixed at the support. 'Cantilever' suggests a full clamp, but this is never stated.",
+    "readings": [
+     "u_x = u_y = u_z = 0 at every support node (fully clamped)",
+     "only u_x fixed on the face, plus the minimum extra constraints needed to remove rigid-body modes (sliding wall)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "point of application of the tip load",
+    "issue": "figure_only",
+    "description": "Sec. 6.1.1 does not mention any load. Where it acts on the free end must come from Fig. 3 (left), whose caption only says 'design domain', or from [64]. Positions use fractions x/L, y/W, z/H, with the clamp at x = 0 and the load assumed to act along z.",
+    "readings": [
+     "free end x/L = 1, along the bottom edge z/H = 0, spanning y/W in [0,1]",
+     "free end x/L = 1, bottom-centre point y/W = 0.5, z/H = 0",
+     "free end x/L = 1, centre of the end face y/W = 0.5, z/H = 0.5",
+     "free end x/L = 1, along the mid-height line z/H = 0.5, spanning y/W in [0,1]"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "tip load distribution type",
+    "issue": "figure_only",
+    "description": "Sec. 6.1.1 does not say whether the tip load is a point, line or surface load. For a distributed load it is also unknown how the force is split among nodes and whether the total force is held fixed across the three meshes. The nearly constant compliance across meshes (13.59 / 13.2 / 13.6, Tables 1-3) hints at a mesh-consistent load but does not settle it.",
+    "readings": [
+     "single nodal point force",
+     "line load along an edge with fixed total force and consistent nodal weights (end nodes get half)",
+     "line load with the same force on every node of the edge",
+     "uniform traction over the whole free-end face",
+     "uniform traction over a small patch (e.g. one element face) at the load point"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "direction of the tip load",
+    "issue": "figure_only",
+    "description": "The load direction is not given. It is presumably transverse to the beam axis, but which transverse axis is unknown. This matters if the cross-section is not square or the load sits on an edge. The sign does not matter for a single-load compliance problem.",
+    "readings": [
+     "transverse, along the height (-z)",
+     "transverse, along the width (-y)",
+     "inclined in the y-z plane"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "tip load magnitude",
+    "issue": "missing",
+    "description": "Sec. 6.1.1 gives no force value, so the reported compliances (13.59, 13.2, 13.6; Tables 1-3) cannot be reproduced. The magnitude only scales the compliance.",
+    "readings": [
+     "1 N total (unit load)",
+     "about 1e5 N total (the order needed for C ~ 13.6 with E0 = 2e11 Pa on a roughly 3 m x 1 m x 1 m beam)",
+     "1 N on each loaded node (total grows with mesh refinement)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "body force / self-weight",
+    "issue": "missing",
+    "description": "Eq. (2) allows a design-dependent right-hand side b(mu), and Sec. 6.1.1 calls the constraint a 'mass' constraint. The text does not say whether gravity or self-weight is included. No density is given, which suggests it is not.",
+    "readings": [
+     "no body force; b is the design-independent tip load only",
+     "self-weight proportional to rho added to the tip load (needs a density, e.g. 7850 kg/m^3, and g = 9.81 m/s^2)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "non-design (fixed solid or void) regions",
+    "issue": "missing",
+    "description": "Sec. 6.1.1 mentions no passive regions. Whether Fig. 3 (left)/[64] includes solid pads at the load or at the support is unknown.",
+    "readings": [
+     "none; every element is a design variable",
+     "solid non-design pad (e.g. one element layer) under the load",
+     "solid non-design layer next to the clamped face"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "mass-constraint upper bound 0.5",
+    "issue": "vague",
+    "description": "Sec. 6.1.1 says 'The upper bound for the mass constraint is 0.5'. In Eq. (1), v_u is an absolute upper bound on total material volume, yet 0.5 reads like a fraction. It is also called 'mass', and no density is given.",
+    "readings": [
+     "v_u = 0.5 x domain volume (50% volume fraction)",
+     "v_u = 0.5 m^3 absolute (fraction = 0.5 / V_domain, e.g. 1/6 for a 3 m^3 box)",
+     "absolute mass of 0.5 (units not given) with a density that is not given"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Young's modulus E0",
+    "issue": "vague",
+    "description": "Printed as '2.0x10^{1}1 N/m^2' in Sec. 6.1.1 (and again in 6.1.2). This is a typesetting error.",
+    "readings": [
+     "E0 = 2.0e11 N/m^2 (reading '10^{1}1' as 10^11; steel-like, consistent with nu = 0.29)",
+     "E0 = 2.0e1 = 20 N/m^2 (literal reading)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "void / minimum stiffness in the SIMP law",
+    "issue": "missing",
+    "description": "Eq. (4), E = rho^s E0, has no void stiffness, and the only bounds are 0 <= mu <= 1 (Eq. 1). No E_min or lower density bound is given, but a standard structured-grid solver needs one.",
+    "readings": [
+     "E_min = 0 (pure Eq. 4; the interior-point method keeps mu > 0)",
+     "E_min = 1e-9 E0 (modified SIMP)",
+     "E_min = 1e-3 E0, or a lower bound mu_min = 1e-3"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "filter radius relative to the mesh/domain; equivalent radius for a density filter",
+    "issue": "vague",
+    "description": "Sec. 6.1.1 says 'Helmholtz filter with r = 0.1 m' (Eq. 3). Because the domain size and element size h are unknown, r cannot be expressed in elements or relative to the beam. If the target solver has only a classic density (cone) filter, the text gives no conversion; the usual equivalence is r = R/(2*sqrt(3)).",
+    "readings": [
+     "Helmholtz PDE filter, r = 0.1 m (1, 2 and 4 elements on the three meshes if h = 0.1, 0.05, 0.025 m)",
+     "cone density filter with R = 2*sqrt(3)*r, about 0.35 m",
+     "cone density filter with R = 0.1 m (r used directly as the cone radius)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Helmholtz filter boundary conditions and discretization",
+    "issue": "missing",
+    "description": "Eq. (3) is given without boundary conditions. The text also does not say whether rho is a nodal (Q1) field or element-wise, or how the element values rho_i used in Eq. (4) are formed.",
+    "readings": [
+     "homogeneous Neumann BC; nodal trilinear rho averaged to each element",
+     "homogeneous Neumann BC; element-wise rho",
+     "Dirichlet BC (rho = 0) on the outer boundary"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "initial design for IPOPT",
+    "issue": "missing",
+    "description": "The starting mu is not stated. The problem is non-convex: Sec. 6.1.1 notes that the 3,000-variable SVD run converged to a different local minimum.",
+    "readings": [
+     "uniform mu = 0.5 (equal to the mass bound)",
+     "uniform mu = 1 (fully solid)",
+     "uniform 0.5 with a small random perturbation"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "IPOPT options other than the tolerance",
+    "issue": "missing",
+    "description": "The text gives only 'IPOPT ... convergence threshold of 10^-6' (Sec. 6.1.1) and s_max = 100 (Sec. 3). The Hessian treatment, barrier-update strategy, scaling and iteration limit are not given. These affect the optimization path and which local optimum is reached (297 / 180 / 132 iterations).",
+    "readings": [
+     "limited-memory BFGS Hessian, IPOPT defaults otherwise (6 pairs, monotone barrier, gradient-based scaling)",
+     "exact Hessian (second-order adjoint)",
+     "limited-memory BFGS with mu_strategy = adaptive"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "accuracy of the state/adjoint linear solves (default method)",
+    "issue": "missing",
+    "description": "The default method uses PCG with HYPRE AMG, a zero initial guess and epsilon_pcg = 1e-4 (Sec. 6, Alg. 5, line 5). epsilon_abs, N_maxit and the AMG settings are not given. These inexact solves feed the gradients, which a direct solver would not reproduce.",
+    "readings": [
+     "exact (direct) linear solves",
+     "PCG + AMG, relative tolerance 1e-4, epsilon_abs = 0, no iteration cap",
+     "PCG + AMG, relative tolerance 1e-4, epsilon_abs about 1e-12, N_maxit about 1000"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "other",
+    "entity": "number of problems / load cases in the cantilever example",
+    "issue": "conflicting",
+    "description": "Sec. 6.1.1 says 'The design domains and optimal designs for two problems are shown in Figure 3' and cites the 'numerical examples' (plural) of [64]. Yet the Fig. 3 caption shows one design domain and one design for the cantilever. The number of load cases is never stated.",
+    "readings": [
+     "one cantilever problem with a single load case (Fig. 3 left)",
+     "two cantilever variants from [64] (e.g. two load configurations), with only one shown",
+     "wording slip: the 'two problems' are the cantilever (Fig. 3) and the blade (Fig. 4)"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 423.4654493331909,
+ "returncode": 0,
+ "meta": {
+  "model": null,
+  "num_turns": 2,
+  "is_error": false,
+  "total_cost_usd": 1.2116228,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 35785,
+   "cache_read_input_tokens": 774,
+   "output_tokens": 46259,
+   "output_tokens_details": {
+    "thinking_tokens": 41340
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 35785,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 46259,
+     "cache_read_input_tokens": 774,
+     "cache_creation_input_tokens": 35785,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 35785
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard",
+   "fallback_credit": null
+  }
+ },
+ "stderr_tail": "",
+ "task": "L02",
+ "model": "claude",
+ "model_id": "claude-opus-5-5",
+ "rep": 2,
+ "locator": "Sec. 6.1.1, Fig. 3 (left), the 3-D cantilever beam",
+ "finished": "2026-10-22T22:05:49"
+}

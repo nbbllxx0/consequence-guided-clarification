@@ -1,0 +1,331 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Rectangular beam domain\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 4.1 assigns the structural dimensions to Fig. 8(a). The prose gives only a rectangle whose width exceeds its length; numerical extents and aspect ratio are unavailable.\",\n      \"readings\": [\n        \"Horizontal span W = 2, vertical height H = 1\",\n        \"Horizontal span W = 3, vertical height H = 1\",\n        \"Horizontal span W = 4, vertical height H = 1\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"Force at the top center\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Sec. 4.1 describes a 'horizontally downward force', combining incompatible directional descriptions.\",\n      \"readings\": [\n        \"Vertical downward force: F = (0, -P)\",\n        \"Horizontal force: F = (P, 0)\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Application of the top-center force\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.1 fixes the load center but does not specify its footprint or how the resultant is assigned to grid nodes.\",\n      \"readings\": [\n        \"Entire resultant P applied to one node at (W/2, H)\",\n        \"Resultant P split equally between the two top-edge nodes bracketing W/2\",\n        \"Uniform traction with resultant P over x/W in [0.49, 0.51] on the top edge\",\n        \"Uniform traction with resultant P over x/W in [0.45, 0.55] on the top edge\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"Top-center force resultant\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Sec. 4.1 nor Sec. 4.1.1 states the low-fidelity force magnitude.\",\n      \"readings\": [\n        \"P = 1 in consistent force units\",\n        \"P = 10 in the same force units\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Mandatory solid or excluded design cells\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 4.1\u20134.1.1 do not identify a passive-region mask, including whether material must remain around the supports or load.\",\n      \"readings\": [\n        \"Every element in the rectangle is designable\",\n        \"Fully solid clamp strips occupying x/W in [0, 0.02] and [0.98, 1]\",\n        \"Fully solid loading pad occupying x/W in [0.49, 0.51] and y/H in [0.98, 1]\",\n        \"Both the clamp strips and loading pad are mandatory solid\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Schedule of 160 prescribed volume fractions\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1.1 specifies 160 volume-fraction cases between 0.25 and 0.50, but does not specify their spacing.\",\n      \"readings\": [\n        \"V0(i) = 0.25 + 0.25(i/159), i = 0,...,159\",\n        \"V0(i) = 0.25 + 0.25(i/159)^2, i = 0,...,159\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Volume constraints of the 15 displayed initial designs\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1.1 states that Fig. 8(b) contains five designs per stated L_min value in increasing volume-fraction order, but gives neither their V0 values nor their sample indices.\",\n      \"readings\": [\n        \"For an equally spaced 160-case sweep, select indices {0, 40, 80, 120, 159} for each L_min\",\n        \"For an equally spaced 160-case sweep, select indices {10, 45, 80, 115, 150} for each L_min\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Local material-volume function\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (33) uses V(mu1, mu2, rho) without defining it. Scaling both bar widths by rho and multiplying the unscaled lattice density by rho give different volume measures.\",\n      \"readings\": [\n        \"Local solid fraction = rho*mu1 + rho*mu2 - rho^2*mu1*mu2\",\n        \"Local solid fraction = rho*(mu1 + mu2 - mu1*mu2)\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Volume accounting if passive material is present\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (33) does not explain whether mandatory solid material, if used, consumes the volume budget or whether the fraction is normalized over the entire rectangle or only designable cells.\",\n      \"readings\": [\n        \"(Designable material volume + passive material volume)/full domain volume <= V0\",\n        \"Designable material volume/designable domain volume <= V0, with passive material outside the budget\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Two-dimensional constitutive assumption\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 2.1 and 3.2 specify a two-dimensional elastic model and base-material constants, but do not identify plane stress or plane strain.\",\n      \"readings\": [\n        \"Plane stress\",\n        \"Plane strain\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Uniform out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"No thickness or per-unit-thickness convention is reported. With fixed resultant force and normalized volume fraction, a uniform thickness changes the compliance scale.\",\n      \"readings\": [\n        \"Unit thickness t = 1\",\n        \"Uniform thickness t = 0.1 in the same length units\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Numerical homogenized elasticity tensor\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1, Eq. (4), supplies neither the fitted coefficients, polynomial orders, nor the homogenization dataset and its discretization. Eq. (31) requires this orthotropic tensor; replacing it with ordinary isotropic SIMP is not a specified equivalent.\",\n      \"readings\": [\n        \"Periodic cell homogenization on a 100-by-100 cell mesh, a 21-by-21 width-parameter grid, and q_max = r_max = 3\",\n        \"Periodic cell homogenization on a 200-by-200 cell mesh, a 41-by-41 width-parameter grid, and q_max = r_max = 5\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Upper bar-width bound L_max\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (33) leaves L_max symbolic. The interpolation domain [0,1]^2 in Sec. 2.1 does not expressly identify whether the optimization uses its full upper extent.\",\n      \"readings\": [\n        \"L_max = 1\",\n        \"L_max = 0.8\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Void stiffness and singularity handling\",\n      \"issue\": \"missing\",\n      \"description\": \"Although the nominal rho range is stated, Eqs. (31)\u2013(33) do not specify a residual stiffness or how zero-width, zero-stiffness regions are handled numerically.\",\n      \"readings\": [\n        \"Exactly zero void stiffness, with inactive degrees of freedom removed\",\n        \"Residual isotropic stiffness with E_void/E_solid = 1e-9\",\n        \"Residual isotropic stiffness with E_void/E_solid = 1e-6\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Spatial filter type and filtered fields\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 3.2 and 4.1.1 report no low-fidelity spatial filtering scheme or fields to which it applies.\",\n      \"readings\": [\n        \"No spatial filtering\",\n        \"Conical density filter applied only to rho\",\n        \"Helmholtz filter applied to mu1, mu2, and rho, with theta unfiltered\",\n        \"Conical sensitivity filter applied to the material variables\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Spatial filter radius\",\n      \"issue\": \"missing\",\n      \"description\": \"No filter radius is reported. The stated L_min values bound bar variables in Eq. (33); they do not specify a spatial filter radius on the beam grid.\",\n      \"readings\": [\n        \"r = 1.5h, where h is the uniform element width\",\n        \"r = 3h\",\n        \"r = 0.05H\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Filter treatment at domain boundaries\",\n      \"issue\": \"missing\",\n      \"description\": \"If filtering is used, the text does not specify its treatment near the rectangular boundary, clamps, or loading point.\",\n      \"readings\": [\n        \"Truncate the filter neighborhood to the domain and renormalize weights\",\n        \"Pad outside the domain with zero density\",\n        \"Reflect the field across the boundary\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Projection of relaxed material variables\",\n      \"issue\": \"missing\",\n      \"description\": \"The low-fidelity implementation does not state whether filtered variables undergo a projection or whether projection sharpness is continued during optimization.\",\n      \"readings\": [\n        \"No projection\",\n        \"Tanh projection of rho with threshold eta = 0.5 and beta = 8\",\n        \"Tanh projection of rho with eta = 0.5 and beta continued through {1, 2, 4, 8, 16, 32}\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Field used to evaluate the volume constraint\",\n      \"issue\": \"missing\",\n      \"description\": \"If filtering or projection is introduced, Eq. (33) does not identify whether V is evaluated using raw, filtered, or projected variables.\",\n      \"readings\": [\n        \"Evaluate V using raw optimization variables\",\n        \"Evaluate V using filtered variables\",\n        \"Evaluate V using projected physical variables\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Low-fidelity macro grid resolution and spacing\",\n      \"issue\": \"missing\",\n      \"description\": \"No macro-element counts or spacing distribution are reported for Fig. 8. The triangular-mesh discussion in Sec. 2.2.2 concerns high-fidelity geometry evaluation.\",\n      \"readings\": [\n        \"Uniform 120-by-40 element grid\",\n        \"Uniform 240-by-80 element grid\",\n        \"Structured 240-by-80 grid with spacing concentrated near the load\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Macro finite-element formulation\",\n      \"issue\": \"missing\",\n      \"description\": \"The text does not specify the low-fidelity element order, interpolation, or integration scheme.\",\n      \"readings\": [\n        \"Bilinear Q4 displacement elements with 2-by-2 Gauss integration\",\n        \"Q4 elements with reduced integration and hourglass stabilization\",\n        \"Quadratic Q8 elements with 3-by-3 Gauss integration\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"other\",\n      \"entity\": \"Exact low-fidelity stiffness objective\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 3.2 describes stiffness optimization, but Eqs. (22) and (33) retain an undefined obj. The text does not explicitly identify the Fig. 8 objective as compliance; minimum compliance is an assumption supplied by the requested rerun.\",\n      \"readings\": [\n        \"Minimize compliance F^T U\",\n        \"Minimize the maximum nodal displacement magnitude\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Optimization algorithm and update limits\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 3.2 and 4.1.1 provide the mathematical constraints but not the algorithm or move limits used to solve the low-fidelity problems.\",\n      \"readings\": [\n        \"MMA with maximum changes of 0.1 in mu1, mu2, rho and pi/8 in theta\",\n        \"MMA with maximum changes of 0.2 in mu1, mu2, rho and pi/4 in theta\",\n        \"Sequential quadratic programming with a line search\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initial optimization fields and random seed\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1.1 does not give the starting mu1, mu2, theta, and rho fields or state whether random perturbations are used. These can select different local optima.\",\n      \"readings\": [\n        \"Uniform mu1 = mu2 = 0.5 and theta = 0, with uniform rho chosen to meet V0\",\n        \"Uniform mu1 = mu2 = 0.5 and theta = pi/4, with uniform rho chosen to meet V0\",\n        \"Perturb uniform material fields by zero-mean values in [-0.01, 0.01], using random seed 1\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Enforced design symmetry\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1.1 does not report whether the initial-design optimization permits asymmetric material fields or enforces reflection about the beam's vertical centerline.\",\n      \"readings\": [\n        \"Optimize the full rectangle without a symmetry constraint\",\n        \"Enforce reflection symmetry of the physical material distribution about x = W/2\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Low-fidelity convergence and iteration limits\",\n      \"issue\": \"missing\",\n      \"description\": \"No stopping tolerances or maximum iteration count are given for generating the Fig. 8 designs. The later evolutionary iteration counts do not specify this stage.\",\n      \"readings\": [\n        \"Stop when maximum normalized design-variable change is below 1e-3, with a 200-iteration cap\",\n        \"Stop when relative compliance change is below 1e-6 for ten iterations, with a 1000-iteration cap\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Low-fidelity equilibrium solver accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"The solution method and residual tolerance for K U = F are not reported for the low-fidelity stage.\",\n      \"readings\": [\n        \"Double-precision sparse direct factorization\",\n        \"Preconditioned conjugate gradients with relative residual tolerance 1e-8\",\n        \"Preconditioned conjugate gradients with relative residual tolerance 1e-4\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "Rectangular beam domain",
+    "issue": "figure_only",
+    "description": "Sec. 4.1 assigns the structural dimensions to Fig. 8(a). The prose gives only a rectangle whose width exceeds its length; numerical extents and aspect ratio are unavailable.",
+    "readings": [
+     "Horizontal span W = 2, vertical height H = 1",
+     "Horizontal span W = 3, vertical height H = 1",
+     "Horizontal span W = 4, vertical height H = 1"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Force at the top center",
+    "issue": "conflicting",
+    "description": "Sec. 4.1 describes a 'horizontally downward force', combining incompatible directional descriptions.",
+    "readings": [
+     "Vertical downward force: F = (0, -P)",
+     "Horizontal force: F = (P, 0)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Application of the top-center force",
+    "issue": "vague",
+    "description": "Sec. 4.1 fixes the load center but does not specify its footprint or how the resultant is assigned to grid nodes.",
+    "readings": [
+     "Entire resultant P applied to one node at (W/2, H)",
+     "Resultant P split equally between the two top-edge nodes bracketing W/2",
+     "Uniform traction with resultant P over x/W in [0.49, 0.51] on the top edge",
+     "Uniform traction with resultant P over x/W in [0.45, 0.55] on the top edge"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Top-center force resultant",
+    "issue": "missing",
+    "description": "Neither Sec. 4.1 nor Sec. 4.1.1 states the low-fidelity force magnitude.",
+    "readings": [
+     "P = 1 in consistent force units",
+     "P = 10 in the same force units"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Mandatory solid or excluded design cells",
+    "issue": "missing",
+    "description": "Secs. 4.1\u20134.1.1 do not identify a passive-region mask, including whether material must remain around the supports or load.",
+    "readings": [
+     "Every element in the rectangle is designable",
+     "Fully solid clamp strips occupying x/W in [0, 0.02] and [0.98, 1]",
+     "Fully solid loading pad occupying x/W in [0.49, 0.51] and y/H in [0.98, 1]",
+     "Both the clamp strips and loading pad are mandatory solid"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Schedule of 160 prescribed volume fractions",
+    "issue": "missing",
+    "description": "Sec. 4.1.1 specifies 160 volume-fraction cases between 0.25 and 0.50, but does not specify their spacing.",
+    "readings": [
+     "V0(i) = 0.25 + 0.25(i/159), i = 0,...,159",
+     "V0(i) = 0.25 + 0.25(i/159)^2, i = 0,...,159"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Volume constraints of the 15 displayed initial designs",
+    "issue": "missing",
+    "description": "Sec. 4.1.1 states that Fig. 8(b) contains five designs per stated L_min value in increasing volume-fraction order, but gives neither their V0 values nor their sample indices.",
+    "readings": [
+     "For an equally spaced 160-case sweep, select indices {0, 40, 80, 120, 159} for each L_min",
+     "For an equally spaced 160-case sweep, select indices {10, 45, 80, 115, 150} for each L_min"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Local material-volume function",
+    "issue": "missing",
+    "description": "Eq. (33) uses V(mu1, mu2, rho) without defining it. Scaling both bar widths by rho and multiplying the unscaled lattice density by rho give different volume measures.",
+    "readings": [
+     "Local solid fraction = rho*mu1 + rho*mu2 - rho^2*mu1*mu2",
+     "Local solid fraction = rho*(mu1 + mu2 - mu1*mu2)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Volume accounting if passive material is present",
+    "issue": "missing",
+    "description": "Eq. (33) does not explain whether mandatory solid material, if used, consumes the volume budget or whether the fraction is normalized over the entire rectangle or only designable cells.",
+    "readings": [
+     "(Designable material volume + passive material volume)/full domain volume <= V0",
+     "Designable material volume/designable domain volume <= V0, with passive material outside the budget"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Two-dimensional constitutive assumption",
+    "issue": "missing",
+    "description": "Secs. 2.1 and 3.2 specify a two-dimensional elastic model and base-material constants, but do not identify plane stress or plane strain.",
+    "readings": [
+     "Plane stress",
+     "Plane strain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Uniform out-of-plane thickness",
+    "issue": "missing",
+    "description": "No thickness or per-unit-thickness convention is reported. With fixed resultant force and normalized volume fraction, a uniform thickness changes the compliance scale.",
+    "readings": [
+     "Unit thickness t = 1",
+     "Uniform thickness t = 0.1 in the same length units"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Numerical homogenized elasticity tensor",
+    "issue": "missing",
+    "description": "Sec. 2.1, Eq. (4), supplies neither the fitted coefficients, polynomial orders, nor the homogenization dataset and its discretization. Eq. (31) requires this orthotropic tensor; replacing it with ordinary isotropic SIMP is not a specified equivalent.",
+    "readings": [
+     "Periodic cell homogenization on a 100-by-100 cell mesh, a 21-by-21 width-parameter grid, and q_max = r_max = 3",
+     "Periodic cell homogenization on a 200-by-200 cell mesh, a 41-by-41 width-parameter grid, and q_max = r_max = 5"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Upper bar-width bound L_max",
+    "issue": "missing",
+    "description": "Eq. (33) leaves L_max symbolic. The interpolation domain [0,1]^2 in Sec. 2.1 does not expressly identify whether the optimization uses its full upper extent.",
+    "readings": [
+     "L_max = 1",
+     "L_max = 0.8"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Void stiffness and singularity handling",
+    "issue": "missing",
+    "description": "Although the nominal rho range is stated, Eqs. (31)\u2013(33) do not specify a residual stiffness or how zero-width, zero-stiffness regions are handled numerically.",
+    "readings": [
+     "Exactly zero void stiffness, with inactive degrees of freedom removed",
+     "Residual isotropic stiffness with E_void/E_solid = 1e-9",
+     "Residual isotropic stiffness with E_void/E_solid = 1e-6"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Spatial filter type and filtered fields",
+    "issue": "missing",
+    "description": "Secs. 3.2 and 4.1.1 report no low-fidelity spatial filtering scheme or fields to which it applies.",
+    "readings": [
+     "No spatial filtering",
+     "Conical density filter applied only to rho",
+     "Helmholtz filter applied to mu1, mu2, and rho, with theta unfiltered",
+     "Conical sensitivity filter applied to the material variables"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Spatial filter radius",
+    "issue": "missing",
+    "description": "No filter radius is reported. The stated L_min values bound bar variables in Eq. (33); they do not specify a spatial filter radius on the beam grid.",
+    "readings": [
+     "r = 1.5h, where h is the uniform element width",
+     "r = 3h",
+     "r = 0.05H"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Filter treatment at domain boundaries",
+    "issue": "missing",
+    "description": "If filtering is used, the text does not specify its treatment near the rectangular boundary, clamps, or loading point.",
+    "readings": [
+     "Truncate the filter neighborhood to the domain and renormalize weights",
+     "Pad outside the domain with zero density",
+     "Reflect the field across the boundary"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Projection of relaxed material variables",
+    "issue": "missing",
+    "description": "The low-fidelity implementation does not state whether filtered variables undergo a projection or whether projection sharpness is continued during optimization.",
+    "readings": [
+     "No projection",
+     "Tanh projection of rho with threshold eta = 0.5 and beta = 8",
+     "Tanh projection of rho with eta = 0.5 and beta continued through {1, 2, 4, 8, 16, 32}"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Field used to evaluate the volume constraint",
+    "issue": "missing",
+    "description": "If filtering or projection is introduced, Eq. (33) does not identify whether V is evaluated using raw, filtered, or projected variables.",
+    "readings": [
+     "Evaluate V using raw optimization variables",
+     "Evaluate V using filtered variables",
+     "Evaluate V using projected physical variables"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Low-fidelity macro grid resolution and spacing",
+    "issue": "missing",
+    "description": "No macro-element counts or spacing distribution are reported for Fig. 8. The triangular-mesh discussion in Sec. 2.2.2 concerns high-fidelity geometry evaluation.",
+    "readings": [
+     "Uniform 120-by-40 element grid",
+     "Uniform 240-by-80 element grid",
+     "Structured 240-by-80 grid with spacing concentrated near the load"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Macro finite-element formulation",
+    "issue": "missing",
+    "description": "The text does not specify the low-fidelity element order, interpolation, or integration scheme.",
+    "readings": [
+     "Bilinear Q4 displacement elements with 2-by-2 Gauss integration",
+     "Q4 elements with reduced integration and hourglass stabilization",
+     "Quadratic Q8 elements with 3-by-3 Gauss integration"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "Exact low-fidelity stiffness objective",
+    "issue": "vague",
+    "description": "Sec. 3.2 describes stiffness optimization, but Eqs. (22) and (33) retain an undefined obj. The text does not explicitly identify the Fig. 8 objective as compliance; minimum compliance is an assumption supplied by the requested rerun.",
+    "readings": [
+     "Minimize compliance F^T U",
+     "Minimize the maximum nodal displacement magnitude"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Optimization algorithm and update limits",
+    "issue": "missing",
+    "description": "Secs. 3.2 and 4.1.1 provide the mathematical constraints but not the algorithm or move limits used to solve the low-fidelity problems.",
+    "readings": [
+     "MMA with maximum changes of 0.1 in mu1, mu2, rho and pi/8 in theta",
+     "MMA with maximum changes of 0.2 in mu1, mu2, rho and pi/4 in theta",
+     "Sequential quadratic programming with a line search"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial optimization fields and random seed",
+    "issue": "missing",
+    "description": "Sec. 4.1.1 does not give the starting mu1, mu2, theta, and rho fields or state whether random perturbations are used. These can select different local optima.",
+    "readings": [
+     "Uniform mu1 = mu2 = 0.5 and theta = 0, with uniform rho chosen to meet V0",
+     "Uniform mu1 = mu2 = 0.5 and theta = pi/4, with uniform rho chosen to meet V0",
+     "Perturb uniform material fields by zero-mean values in [-0.01, 0.01], using random seed 1"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Enforced design symmetry",
+    "issue": "missing",
+    "description": "Sec. 4.1.1 does not report whether the initial-design optimization permits asymmetric material fields or enforces reflection about the beam's vertical centerline.",
+    "readings": [
+     "Optimize the full rectangle without a symmetry constraint",
+     "Enforce reflection symmetry of the physical material distribution about x = W/2"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Low-fidelity convergence and iteration limits",
+    "issue": "missing",
+    "description": "No stopping tolerances or maximum iteration count are given for generating the Fig. 8 designs. The later evolutionary iteration counts do not specify this stage.",
+    "readings": [
+     "Stop when maximum normalized design-variable change is below 1e-3, with a 200-iteration cap",
+     "Stop when relative compliance change is below 1e-6 for ten iterations, with a 1000-iteration cap"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Low-fidelity equilibrium solver accuracy",
+    "issue": "missing",
+    "description": "The solution method and residual tolerance for K U = F are not reported for the low-fidelity stage.",
+    "readings": [
+     "Double-precision sparse direct factorization",
+     "Preconditioned conjugate gradients with relative residual tolerance 1e-8",
+     "Preconditioned conjugate gradients with relative residual tolerance 1e-4"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 659.1109659671783,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L37",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 1,
+ "locator": "Sec. 4.1.1, the double-clamped beam, low-fidelity stiffness designs (Fig. 8)",
+ "finished": "2026-10-22T21:20:38"
+}

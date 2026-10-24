@@ -1,0 +1,267 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"absolute in-plane dimensions\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 specifies Lx:Ly = 6:1 but gives no absolute lengths or coordinate normalization. Its significance depends on the unresolved length units of the filter radius.\",\n      \"readings\": [\n        \"Full beam Lx = 6, Ly = 1; optimized half occupies x/Lx from 1/2 to 1.\",\n        \"Full beam Lx = 180, Ly = 30; optimized half occupies x/Lx from 1/2 to 1.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"element counts on the optimized half\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.1.1 gives 180 by 30 elements before saying that the right half is optimized, without explicitly assigning those counts to the full or half domain. Appendix B explicitly uses a 90 by 30 half mesh and repeats the single-material CASE III objective and non-discreteness values.\",\n      \"readings\": [\n        \"180 by 30 describes the full beam; optimize a 90 by 30 right half, with square cells on a uniform grid.\",\n        \"180 by 30 describes the optimized right half; the equivalent full mesh is 360 by 30, with cell width half the cell height on a uniform grid.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"spatial grid spacing\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 specifies bilinear quadrilateral elements, and Sec. 4.1.1 supplies counts, but neither explicitly specifies uniform nodal spacing.\",\n      \"readings\": [\n        \"Uniform Cartesian spacing in both directions.\",\n        \"Uniform y spacing; the half of the x columns nearest the loaded midspan have half the width of the remaining columns, preserving the same total width and counts.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"physical support coordinates\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 4.1 calls the beam simply supported and refers to Fig. 2a, but the prose supplies no support coordinates. The figure is unavailable.\",\n      \"readings\": [\n        \"Full-beam supports at the lower corners: (0, 0) and (Lx, 0).\",\n        \"Full-beam supports at the end-face midpoints: (0, Ly/2) and (Lx, Ly/2).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"support footprint on the mesh\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 4.1 and 4.1.1 do not state whether each physical support constrains one node or a finite boundary patch.\",\n      \"readings\": [\n        \"Constrain a single boundary node at each support.\",\n        \"Constrain the nodes spanning one boundary element at each support.\",\n        \"Constrain the nodes spanning two boundary elements at each support.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"support_type\",\n      \"entity\": \"physical support retained in the right-half model\",\n      \"issue\": \"vague\",\n      \"description\": \"The description 'simply supported' and later references to rollers and hinges do not identify the support retained on the right or give its constrained displacement components.\",\n      \"readings\": [\n        \"Retained support is a vertical-reaction roller: uy = 0, with ux free.\",\n        \"Retained support is a hinge: ux = uy = 0.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"midspan point load in the half model\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.1 specifies F = 10^-3, while Sec. 4.1.1 uses a symmetric half. The text does not explicitly identify the stated force as the full-beam resultant or the force entered into the half-model load vector.\",\n      \"readings\": [\n        \"Full-beam resultant is 10^-3; apply 5 \u00d7 10^-4 to the half model.\",\n        \"Apply 10^-3 to the half model; the corresponding mirrored full-beam resultant is 2 \u00d7 10^-3.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"prescribed solid regions at load and support locations\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1.1 describes material occupying load and support portions as a result, but never explicitly specifies whether any such cells are fixed solid rather than designable.\",\n      \"readings\": [\n        \"No passive cells; all cells are designable.\",\n        \"Keep every cell incident on a load or physical-support node fixed solid.\",\n        \"Keep a 2 by 2 element solid pad abutting each load and physical-support location.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"solid Poisson ratio\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 fixes the single solid's normalized Young's modulus, but no Poisson ratio is supplied anywhere in the example.\",\n      \"readings\": [\n        \"Poisson ratio 0.25.\",\n        \"Poisson ratio 0.30.\",\n        \"Poisson ratio 1/3.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"two-dimensional constitutive assumption\",\n      \"issue\": \"missing\",\n      \"description\": \"The paper specifies a 2-D elastic analysis with bilinear quadrilaterals but does not choose plane stress or plane strain.\",\n      \"readings\": [\n        \"Plane stress.\",\n        \"Plane strain.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"uniform out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"No thickness or per-unit-thickness convention is given for the 2-D stiffness and volume calculations.\",\n      \"readings\": [\n        \"Unit thickness, t = 1 in the chosen length units.\",\n        \"Uniform thickness t = 0.1 in the same length units.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"void stiffness floor\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 3.1 and Eq. 33 describe Emin only as a very small stiffness used to avoid singularity; its numerical value is absent.\",\n      \"readings\": [\n        \"Emin/Esolid = 10^-9.\",\n        \"Emin/Esolid = 10^-6.\",\n        \"Emin/Esolid = 10^-3.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"bilinear-quadrilateral stiffness integration\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 names bilinear quadrilateral elements but gives no quadrature rule or stabilization specification, which matters particularly for the checkerboard assessment in Table 2.\",\n      \"readings\": [\n        \"Full 2 by 2 Gauss integration.\",\n        \"Reduced 1-point integration with hourglass stabilization.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"length units of the density-filter radius\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.1.1 gives rmin = 3.6, and Eqs. 27\u201328 use center distances, but no coordinate units or reference element pitch are defined.\",\n      \"readings\": [\n        \"Physical Euclidean radius 3.6 times the vertical cell pitch, giving rmin/Ly = 0.12 on 30 uniform rows.\",\n        \"Physical Euclidean radius 3.6 times the horizontal cell pitch.\",\n        \"Radius 3.6 in coordinates normalized to Ly = 1.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"density filtering across the symmetry cut\",\n      \"issue\": \"missing\",\n      \"description\": \"Eqs. 27\u201329 define normalized neighborhood filtering, but Sec. 4.1.1 does not state whether the filter neighborhood is constructed on the computational half or on a mirrored full beam.\",\n      \"readings\": [\n        \"Build the filter on the right half only; truncate and renormalize neighborhoods at the symmetry cut.\",\n        \"Mirror design values across the symmetry cut and filter using full-beam neighborhoods.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"initial single-material design field\",\n      \"issue\": \"missing\",\n      \"description\": \"No initial natural-coordinate or density field is specified for Table 2. The initial guesses discussed in Sec. 4.4.2 concern other material counts and the cantilever.\",\n      \"readings\": [\n        \"Uniform unfiltered solid density 0.30.\",\n        \"Uniform unfiltered solid density 0.50, corresponding to natural coordinate zero.\",\n        \"Uniform projected solid density 0.30, obtained by inverting the initial projection for CASE III.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"external optimization move limit\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.3 names MMA and Eq. 34 supplies global variable bounds, but no additional per-iteration move limit is reported.\",\n      \"readings\": [\n        \"No external move limit beyond MMA's internal bounds.\",\n        \"Limit each natural-coordinate change to 0.2 per iteration.\",\n        \"Limit each natural-coordinate change to 0.4 per iteration.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"MMA asymptote and subproblem parameters\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.3 does not report initial asymptote distances, shrink/growth factors, or constraint penalty parameters.\",\n      \"readings\": [\n        \"Initial asymptote distance 0.5 of the variable range; shrink/growth factors 0.7/1.2; constraint penalty c = 1000 and d = 0.\",\n        \"Initial asymptote distance 0.25 of the variable range; shrink/growth factors 0.5/1.1; constraint penalty c = 10000 and d = 1.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"MMA history at projection-continuation updates\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1.1 specifies the projection continuation values and interval, but does not state whether MMA's asymptote history is retained when the projection sharpness changes.\",\n      \"readings\": [\n        \"Retain MMA history and asymptotes through every projection update.\",\n        \"Restart MMA asymptotes and history whenever projection sharpness doubles.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"optimization stopping criterion\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 specifies a maximum of 400 MMA iterations, but gives no early stopping criterion or convergence tolerance.\",\n      \"readings\": [\n        \"Run exactly 400 MMA updates.\",\n        \"Stop earlier when maximum unfiltered solid-density change is below 10^-3, subject to the 400-iteration cap.\",\n        \"Stop earlier when relative objective change remains below 10^-4 for ten iterations, subject to the 400-iteration cap.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"numerical solution tolerances\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 3.2\u20133.3 specify equilibrium and MMA but give no equilibrium residual or MMA-subproblem convergence tolerances.\",\n      \"readings\": [\n        \"Relative equilibrium residual tolerance 10^-10 and MMA-subproblem KKT tolerance 10^-8.\",\n        \"Relative equilibrium residual tolerance 10^-6 and MMA-subproblem KKT tolerance 10^-5.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"other\",\n      \"entity\": \"domain represented by the reported Table 2 objective\",\n      \"issue\": \"vague\",\n      \"description\": \"Eq. 42 defines f0 as strain energy, but Table 2 does not explicitly state whether its reported value belongs to the optimized half or the reconstructed full beam.\",\n      \"readings\": [\n        \"Report half-model strain energy: f0 = 0.5 Fhalf^T Uhalf.\",\n        \"Report reconstructed full-beam strain energy: f0 = 2 times the half-model strain energy.\"\n      ],\n      \"effect\": \"scale_only\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "absolute in-plane dimensions",
+    "issue": "missing",
+    "description": "Sec. 4.1 specifies Lx:Ly = 6:1 but gives no absolute lengths or coordinate normalization. Its significance depends on the unresolved length units of the filter radius.",
+    "readings": [
+     "Full beam Lx = 6, Ly = 1; optimized half occupies x/Lx from 1/2 to 1.",
+     "Full beam Lx = 180, Ly = 30; optimized half occupies x/Lx from 1/2 to 1."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "mesh",
+    "entity": "element counts on the optimized half",
+    "issue": "vague",
+    "description": "Sec. 4.1.1 gives 180 by 30 elements before saying that the right half is optimized, without explicitly assigning those counts to the full or half domain. Appendix B explicitly uses a 90 by 30 half mesh and repeats the single-material CASE III objective and non-discreteness values.",
+    "readings": [
+     "180 by 30 describes the full beam; optimize a 90 by 30 right half, with square cells on a uniform grid.",
+     "180 by 30 describes the optimized right half; the equivalent full mesh is 360 by 30, with cell width half the cell height on a uniform grid."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "spatial grid spacing",
+    "issue": "missing",
+    "description": "Sec. 4 specifies bilinear quadrilateral elements, and Sec. 4.1.1 supplies counts, but neither explicitly specifies uniform nodal spacing.",
+    "readings": [
+     "Uniform Cartesian spacing in both directions.",
+     "Uniform y spacing; the half of the x columns nearest the loaded midspan have half the width of the remaining columns, preserving the same total width and counts."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "physical support coordinates",
+    "issue": "figure_only",
+    "description": "Sec. 4.1 calls the beam simply supported and refers to Fig. 2a, but the prose supplies no support coordinates. The figure is unavailable.",
+    "readings": [
+     "Full-beam supports at the lower corners: (0, 0) and (Lx, 0).",
+     "Full-beam supports at the end-face midpoints: (0, Ly/2) and (Lx, Ly/2)."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "support footprint on the mesh",
+    "issue": "missing",
+    "description": "Secs. 4.1 and 4.1.1 do not state whether each physical support constrains one node or a finite boundary patch.",
+    "readings": [
+     "Constrain a single boundary node at each support.",
+     "Constrain the nodes spanning one boundary element at each support.",
+     "Constrain the nodes spanning two boundary elements at each support."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_type",
+    "entity": "physical support retained in the right-half model",
+    "issue": "vague",
+    "description": "The description 'simply supported' and later references to rollers and hinges do not identify the support retained on the right or give its constrained displacement components.",
+    "readings": [
+     "Retained support is a vertical-reaction roller: uy = 0, with ux free.",
+     "Retained support is a hinge: ux = uy = 0."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "midspan point load in the half model",
+    "issue": "vague",
+    "description": "Sec. 4.1 specifies F = 10^-3, while Sec. 4.1.1 uses a symmetric half. The text does not explicitly identify the stated force as the full-beam resultant or the force entered into the half-model load vector.",
+    "readings": [
+     "Full-beam resultant is 10^-3; apply 5 \u00d7 10^-4 to the half model.",
+     "Apply 10^-3 to the half model; the corresponding mirrored full-beam resultant is 2 \u00d7 10^-3."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "prescribed solid regions at load and support locations",
+    "issue": "missing",
+    "description": "Sec. 4.1.1 describes material occupying load and support portions as a result, but never explicitly specifies whether any such cells are fixed solid rather than designable.",
+    "readings": [
+     "No passive cells; all cells are designable.",
+     "Keep every cell incident on a load or physical-support node fixed solid.",
+     "Keep a 2 by 2 element solid pad abutting each load and physical-support location."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "solid Poisson ratio",
+    "issue": "missing",
+    "description": "Sec. 4 fixes the single solid's normalized Young's modulus, but no Poisson ratio is supplied anywhere in the example.",
+    "readings": [
+     "Poisson ratio 0.25.",
+     "Poisson ratio 0.30.",
+     "Poisson ratio 1/3."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "two-dimensional constitutive assumption",
+    "issue": "missing",
+    "description": "The paper specifies a 2-D elastic analysis with bilinear quadrilaterals but does not choose plane stress or plane strain.",
+    "readings": [
+     "Plane stress.",
+     "Plane strain."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "uniform out-of-plane thickness",
+    "issue": "missing",
+    "description": "No thickness or per-unit-thickness convention is given for the 2-D stiffness and volume calculations.",
+    "readings": [
+     "Unit thickness, t = 1 in the chosen length units.",
+     "Uniform thickness t = 0.1 in the same length units."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "void stiffness floor",
+    "issue": "vague",
+    "description": "Sec. 3.1 and Eq. 33 describe Emin only as a very small stiffness used to avoid singularity; its numerical value is absent.",
+    "readings": [
+     "Emin/Esolid = 10^-9.",
+     "Emin/Esolid = 10^-6.",
+     "Emin/Esolid = 10^-3."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "bilinear-quadrilateral stiffness integration",
+    "issue": "missing",
+    "description": "Sec. 4 names bilinear quadrilateral elements but gives no quadrature rule or stabilization specification, which matters particularly for the checkerboard assessment in Table 2.",
+    "readings": [
+     "Full 2 by 2 Gauss integration.",
+     "Reduced 1-point integration with hourglass stabilization."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "length units of the density-filter radius",
+    "issue": "vague",
+    "description": "Sec. 4.1.1 gives rmin = 3.6, and Eqs. 27\u201328 use center distances, but no coordinate units or reference element pitch are defined.",
+    "readings": [
+     "Physical Euclidean radius 3.6 times the vertical cell pitch, giving rmin/Ly = 0.12 on 30 uniform rows.",
+     "Physical Euclidean radius 3.6 times the horizontal cell pitch.",
+     "Radius 3.6 in coordinates normalized to Ly = 1."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "density filtering across the symmetry cut",
+    "issue": "missing",
+    "description": "Eqs. 27\u201329 define normalized neighborhood filtering, but Sec. 4.1.1 does not state whether the filter neighborhood is constructed on the computational half or on a mirrored full beam.",
+    "readings": [
+     "Build the filter on the right half only; truncate and renormalize neighborhoods at the symmetry cut.",
+     "Mirror design values across the symmetry cut and filter using full-beam neighborhoods."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "initial single-material design field",
+    "issue": "missing",
+    "description": "No initial natural-coordinate or density field is specified for Table 2. The initial guesses discussed in Sec. 4.4.2 concern other material counts and the cantilever.",
+    "readings": [
+     "Uniform unfiltered solid density 0.30.",
+     "Uniform unfiltered solid density 0.50, corresponding to natural coordinate zero.",
+     "Uniform projected solid density 0.30, obtained by inverting the initial projection for CASE III."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "external optimization move limit",
+    "issue": "missing",
+    "description": "Sec. 3.3 names MMA and Eq. 34 supplies global variable bounds, but no additional per-iteration move limit is reported.",
+    "readings": [
+     "No external move limit beyond MMA's internal bounds.",
+     "Limit each natural-coordinate change to 0.2 per iteration.",
+     "Limit each natural-coordinate change to 0.4 per iteration."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "MMA asymptote and subproblem parameters",
+    "issue": "missing",
+    "description": "Sec. 3.3 does not report initial asymptote distances, shrink/growth factors, or constraint penalty parameters.",
+    "readings": [
+     "Initial asymptote distance 0.5 of the variable range; shrink/growth factors 0.7/1.2; constraint penalty c = 1000 and d = 0.",
+     "Initial asymptote distance 0.25 of the variable range; shrink/growth factors 0.5/1.1; constraint penalty c = 10000 and d = 1."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "MMA history at projection-continuation updates",
+    "issue": "missing",
+    "description": "Sec. 4.1.1 specifies the projection continuation values and interval, but does not state whether MMA's asymptote history is retained when the projection sharpness changes.",
+    "readings": [
+     "Retain MMA history and asymptotes through every projection update.",
+     "Restart MMA asymptotes and history whenever projection sharpness doubles."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "optimization stopping criterion",
+    "issue": "missing",
+    "description": "Sec. 4 specifies a maximum of 400 MMA iterations, but gives no early stopping criterion or convergence tolerance.",
+    "readings": [
+     "Run exactly 400 MMA updates.",
+     "Stop earlier when maximum unfiltered solid-density change is below 10^-3, subject to the 400-iteration cap.",
+     "Stop earlier when relative objective change remains below 10^-4 for ten iterations, subject to the 400-iteration cap."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "numerical solution tolerances",
+    "issue": "missing",
+    "description": "Secs. 3.2\u20133.3 specify equilibrium and MMA but give no equilibrium residual or MMA-subproblem convergence tolerances.",
+    "readings": [
+     "Relative equilibrium residual tolerance 10^-10 and MMA-subproblem KKT tolerance 10^-8.",
+     "Relative equilibrium residual tolerance 10^-6 and MMA-subproblem KKT tolerance 10^-5."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "other",
+    "entity": "domain represented by the reported Table 2 objective",
+    "issue": "vague",
+    "description": "Eq. 42 defines f0 as strain energy, but Table 2 does not explicitly state whether its reported value belongs to the optimized half or the reconstructed full beam.",
+    "readings": [
+     "Report half-model strain energy: f0 = 0.5 Fhalf^T Uhalf.",
+     "Report reconstructed full-beam strain energy: f0 = 2 times the half-model strain energy."
+    ],
+    "effect": "scale_only"
+   }
+  ]
+ },
+ "wall_s": 798.3234803676605,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L19",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 0,
+ "locator": "Sec. 4.1.1, the 2-D MBB beam, single-material case (Table 2, m = 1)",
+ "finished": "2026-10-22T18:29:26"
+}

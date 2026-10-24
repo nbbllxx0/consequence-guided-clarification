@@ -1,0 +1,64 @@
+# First annotation vs blind Codex re-annotation
+
+kappa = 0.610, raw agreement = 0.838 over 216 (task, group) units; 35 disagreements.
+
+- L02 [volume_fraction] first=False second=True
+    - Material allowance corresponding to the bound 0.5: A normalized material-volume fraction of 0.5, allowing 1.5 m³ in the 3 m³ box.; An absolute material-volume bound of 0.5 m³ in Eq. (1), giving a volume fraction of 1/6. (Sec. 6.1.1 states that the upper bound for the mass constraint is 0.5. Eq. (1) defines the constraint as sum_i(mu_i v_i) <= v_u. Fig. 3 (left) gives d)
+- L04 [support] first=False second=True
+    - Left-boundary support node set: Fix both displacement components at every node on the left edge.; Fix both displacement components only at the upper-left and lower-left corner nodes. (Sec. 4 opening paragraph refers support placement to Fig. 9; Sec. 4.2 and the attached cantilever schematic provide no readable support node set.)
+- L04 [passive] first=False second=True
+    - Radius of the solidified neighborhood around the load: Use radius r=h_c around the loaded line.; Use radius r=2h_c around the loaded line. (Sec. 4 opening paragraph states that elements with density greater than 0.99 and in a small radius around the load are set to solid.)
+- L05 [load_dir] first=True second=False
+- L07 [support] first=False second=True
+    - Cantilever clamp location: Clamp the full left edge x=-1, -0.5<y<0.5.; Clamp the internal full-height line x=0, -0.5<y<0.5, following the stated Gamma_D literally. (Sec. 4.1.1 specifies Omega=(-1,1)x(-0.5,0.5), but the cantilever paragraph gives Gamma_D={0}x(-0.5,0.5). Fig. 4(a) shows the left edge clamped.)
+- L07 [load_pos_ext] first=False second=True
+    - Right-edge load distribution: Apply a concentrated downward force at (1,0).; Apply uniform downward traction over x=1, -0.05<y<0.05. (Sec. 4.1.1, cantilever paragraph: downward point load at the right-edge center, with Gamma_N={1}x(-0.05,0.05). Sec. 3.2.1, Eqs. (3.16)-(3.17), integra)
+- L07 [volume_fraction] first=True second=False
+- L11 [domain] first=False second=True
+    - Rectangle aspect ratio: Lx/Ly = 2, assuming square elements.; Lx/Ly approximately 1.75, following the displayed rectangle. (Table 3, problem 3; Fig. 2.)
+- L11 [load_pos_ext] first=False second=True
+    - Spatial application of the mid-right load: A point force at the right-edge midpoint node.; The same resultant distributed equally over the midpoint node and its two adjacent right-edge nodes. (Table 3, problem 3; Fig. 2 contains no load markers.)
+- L11 [volume_fraction] first=False second=True
+    - Reference volume V0: V0 is the full rectangular volume, including prescribed-void locations.; V0 is the available volume after subtracting the two prescribed voids. (Sec. 3.2, V(ρ) ≤ vf V0; Sec. 3.5, frozen-void treatment; Table 3, problem 3.)
+    - Volume target of the retained soft-seed state in Fig. 2: The illustrated retained state was obtained at vf = 0.25.; The illustrated retained state was obtained at vf = 0.28. (Table 3, problem 3; Sec. 4.4, retained compliance definition; Fig. 2 caption; Appendix A, Table 14.)
+    - Volume target of the retained passive-solid state in Fig. 2: The passive-solid state uses the initial vf = 0.25 target.; The passive-solid state uses an increased vf = 0.28 target. (Secs. 3.4–3.5; Fig. 2 caption; Sec. 4.2; Appendix A, Table 14.)
+- L12 [support] first=True second=False
+- L12 [passive] first=False second=True
+    - Voxel extent of the top loading shell: An external loading fixture with no fixed-solid shell voxels inside the unit-cube design domain.; One complete top voxel layer held solid, with thickness 1/40 of the cube side.; Two complete top voxel layers held solid, with thickness 2/40 of the cube side. (Results, Structures optimization, first paragraph specifies a 40 × 40 × 40 voxel domain and a thin shell at its top; Fig. 6 right provides no shell di)
+- L20 [domain] first=False second=True
+    - Full-beam versus half-beam dimensions: 192×64 describes the half-domain; with square pixels, the full beam is 384×64.; 192×64 describes the full domain; the symmetry-reduced domain is 96×64. (Sec. V-A, structural setup and Eq. (11); Fig. 2B caption states that only half is optimized; Fig. 2B and the attached MBB result image show full beams)
+- L20 [volume_fraction] first=False second=True
+    - Density field on which the volume constraint is enforced: Enforce the prescribed fraction on the final filtered density, using volume-preserving filtering or a subsequent bias correction.; Enforce the prescribed fraction only on the prefilter density; allow the final fraction to follow from the filter's boundary treatment. (Sec. V-A, Eqs. (11)–(12) and the following radius-2 cone-filter paragraph; Sec. V-B gives 0.4 for the baseline training designs.)
+- L21 [volume_fraction] first=True second=False
+- L24 [volume_fraction] first=False second=True
+    - Minimum admissible local relative density rho_min: rho_min = 0.2, interpreting the color-scale endpoint as the prescribed lower bound.; rho_min = 0.001, interpreting 0.2 as a display endpoint rather than an admissibility bound. (Eq. (27) density bounds; attached Fig. 9 density-field image with color scale from 0.2 to 0.8.)
+    - Maximum admissible local relative density rho_max: rho_max = 0.8, interpreting the color-scale endpoint as the prescribed upper bound.; rho_max = 1.0, interpreting 0.8 as a display endpoint rather than an admissibility bound. (Eq. (27) density bounds; attached Fig. 9 density-field image with color scale from 0.2 to 0.8.)
+- L25 [support] first=True second=False
+- L25 [load_pos_ext] first=True second=False
+- L29 [passive] first=True second=False
+- L30 [load_pos_ext] first=False second=True
+    - Discrete application of the corner load: Apply the entire downward force to the bottom-right corner node.; Divide the downward resultant equally between the two nodes of the bottom edge of the corner element.; Divide the downward resultant equally between the two nodes of the right edge of the corner element. (Fig. 1 places the arrow at the bottom-right corner; Sec. 5.1 chooses a boundary element as the load location without describing its nodal force assign)
+- L31 [support] first=False second=True
+    - Clamped nodes at the left end: Fix both displacement components at every node on the left edge.; Fix both displacement components at the upper-left and lower-left corner nodes. (Sec. 5.2 and Fig. 1a caption describe a cantilever; Fig. 1a has no support-node markings.)
+- L33 [support] first=False second=True
+    - Four corner support regions: Clamp only the four bottom corner nodes.; Clamp bottom-face nodes in four square corner patches, approximately one fifth of the base width as suggested by S17.; Clamp finite corner blocks extending above those patches. (Results, 'Design of nanopillars using Nano-TO'; Methods, 'Atomistic modeling, visualization, and analysis'; attached Fig. S17.)
+- L33 [volume_fraction] first=False second=True
+    - 20.25% material budget: Impose 20.25% on the designable region, excluding passive material from both numerator and denominator.; Impose 20.25% on the entire box, counting retained passive material toward the budget. (Results, 'Design of nanopillars using Nano-TO', reports 640,000 active atoms, 12,800 passive atoms, and a target mass ratio of 20.25%; the FEM compari)
+- L34 [load_pos_ext] first=True second=False
+- L37 [support] first=False second=True
+    - Inward thickness of the clamped end regions: Fix both displacement components only on the edges x = 0 and x = 150 mm.; Use 1 mm-wide passive solid end strips and fix all nodes within those strips. (Sec. 4.1 specifies fully fixed left and right sides; Fig. 8(a) labels the thin red bands 'Solid domain (fully fixed)' without giving their thickness.)
+- L38 [domain] first=True second=False
+- L38 [support] first=False second=True
+    - Clamped node set: Fix both displacement components at every node on the left short edge.; Fix both displacement components only at the upper and lower corner nodes of the left short edge. (Section 4 specifies only a cantilever boundary condition; Fig. 11(a)-(d) contains no support symbols.)
+- L38 [load_dir] first=False second=True
+    - Applied force orientation: A transverse vertical force with direction (0,-1).; An oblique force with direction (1,-1)/sqrt(2), taking the span toward the free end as positive x. (Section 4 supplies no force components or angle; Fig. 11 contains no force arrows.)
+- L41 [support] first=False second=True
+    - Displacement components constrained on the left edge: Fix both in-plane displacement components at every left-edge node; Fix horizontal displacement along the left edge and fix vertical displacement only at the lower-left node (Sec. 4.6, Fig. 6(a): repeated hollow triangles mark the left edge without displacement labels; the Fig. 10 caption describes such markers only as cons)
+- L43 [support] first=False second=True
+    - Endpoint membership of the supported half-edges: Fix all nodes on the two closed half-edges, including their endpoints, plus the bottom-right corner.; Fix only nodes strictly between the corner and midpoint of each marked half-edge, plus the bottom-right corner. (Sec. 4.1 describes node sets 'between corners and midpoints'; Fig. 5, row 1 shows green support segments without identifying individual endpoint nodes)
+- L43 [load_dir] first=True second=False
+- L44 [volume_fraction] first=True second=False
+- L45 [load_dir] first=False second=True
+    - Bottom-right load direction: Vertical transverse force, proportional to (0, -1).; Horizontal axial force, proportional to (1, 0). (Sec. 4.1 and Fig. 10 caption specify bottom-right loading without vector components; supplied Fig. 6.)
+- L45 [volume_fraction] first=True second=False
+- L45 [passive] first=True second=False

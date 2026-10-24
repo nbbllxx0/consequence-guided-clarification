@@ -1,0 +1,254 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"physical size of the cantilever domain\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 7 determines the aspect ratio through 16 x 2 x 2 equal coarse cubes, but never gives their physical edge length.\",\n      \"readings\": [\n        \"Coarse cube edge a=1: domain dimensions (16,2,2).\",\n        \"Coarse cube edge a=0.5: domain dimensions (8,1,1).\",\n        \"Normalize the cantilever length to 1: domain dimensions (1,0.125,0.125).\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"z-directed load centered on the right-hand face\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 7 says the load is applied 'in the middle' of the right-hand face and refers to Fig. 2(a). The prose does not specify its footprint or distribution among nodes.\",\n      \"readings\": [\n        \"A concentrated force on the central node at (Lx,Ly/2,Lz/2).\",\n        \"A uniform line load across 0<=y<=Ly at x=Lx, z=Lz/2.\",\n        \"A uniform traction on the centered patch x=Lx, 3Ly/8<=y<=5Ly/8, 3Lz/8<=z<=5Lz/8.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"signed sense of the right-face load\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 7 specifies direction z without explicitly stating its signed sense. Reversing this sole load leaves the linear-elastic compliance and optimal density unchanged.\",\n      \"readings\": [\n        \"Load acts in +z.\",\n        \"Load acts in -z.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"resultant right-face force\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Sec. 7, the CANT example, nor Table 1 specifies the force magnitude or its units.\",\n      \"readings\": [\n        \"Total resultant force magnitude F=1 in consistent units.\",\n        \"Total resultant force magnitude F=2 in the same units.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"allowed material volume V\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (1) defines sum(rho_i)=V, but no numerical V or volume fraction is supplied for CANT-16-2-2-5. The later 0.8V concerns visualization.\",\n      \"readings\": [\n        \"With unit upper density, V=0.1m: volume fraction 0.1.\",\n        \"With unit upper density, V=0.2m: volume fraction 0.2.\",\n        \"With unit upper density, V=0.5m: volume fraction 0.5.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"upper density bounds\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (1) supplies upper bounds only symbolically. Sec. 7.1 specifies numerical lower bounds but never assigns numerical upper bounds.\",\n      \"readings\": [\n        \"Uniform upper bound rho_max=1.\",\n        \"Uniform upper bound rho_max=2.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"uniform elastic stiffness scale\",\n      \"issue\": \"missing\",\n      \"description\": \"The stiffness matrices in Eq. (1) are not accompanied by a numerical reference modulus, such as Young's modulus.\",\n      \"readings\": [\n        \"Reference Young's modulus E=1 in consistent units.\",\n        \"Reference Young's modulus E=2 in the same units, with all other stiffness ratios unchanged.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"elastic constitutive tensor apart from its overall scale\",\n      \"issue\": \"missing\",\n      \"description\": \"The text gives neither Poisson's ratio nor an explicit isotropy assumption or constitutive tensor.\",\n      \"readings\": [\n        \"Homogeneous isotropic elasticity with Poisson's ratio 0.25.\",\n        \"Homogeneous isotropic elasticity with Poisson's ratio 0.30.\",\n        \"Homogeneous orthotropic elasticity aligned with x,y,z: Ex=2Ey=2Ez, nu_xy=nu_xz=nu_yz=0.25, Gxy=Gxz=Gyz=0.4Ey, with reciprocal Poisson ratios.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"element stiffness integration\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 6.2 specifies trilinear hexahedral displacement elements and elementwise constant densities, but does not specify the integration rule used to construct their stiffness matrices.\",\n      \"readings\": [\n        \"Full 2 x 2 x 2 Gauss integration.\",\n        \"Selective reduced integration: full integration of deviatoric terms and one-point integration of volumetric terms.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"initial PBM penalty parameters\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.2 gives initial primal variables, multipliers, penalty floors, and update factors, but no initial values for p, q_lower, or q_upper.\",\n      \"readings\": [\n        \"Initialize every p_i, q_lower_i, and q_upper_i to 1.\",\n        \"Initialize every p_i, q_lower_i, and q_upper_i to 0.1.\",\n        \"Initialize p_i=1 and q_lower_i=q_upper_i=0.01.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"PBM Newton backtracking line search\",\n      \"issue\": \"missing\",\n      \"description\": \"Algorithm 2 names backtracking with the Armijo rule but supplies no sufficient-decrease constant, contraction factor, or initial trial step.\",\n      \"readings\": [\n        \"Initial step 1, Armijo constant 0.0001, contraction factor 0.5.\",\n        \"Initial step 1, Armijo constant 0.01, contraction factor 0.8.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"multigrid smoothing schedule\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 6.1 specifies a Gauss-Seidel smoother and one V-cycle per preconditioner application, but not the numbers or directions of smoothing sweeps.\",\n      \"readings\": [\n        \"One forward presweep and one backward postsweep.\",\n        \"Two forward presweeps and two backward postsweeps.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"ordering used by Gauss-Seidel\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 6.2 mentions a 'reasonably good numbering' without fixing node or displacement-component ordering, which affects Gauss-Seidel and iteration counts.\",\n      \"readings\": [\n        \"Lexicographic nodes with x varying fastest and displacement components interleaved.\",\n        \"Lexicographic nodes with z varying fastest and displacement components interleaved.\",\n        \"Lexicographic nodes with displacement components stored in separate blocks.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"coarsest-grid linear solve\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 6 defines the Galerkin coarse operators but does not state how accurately or by which method the coarsest system is solved.\",\n      \"readings\": [\n        \"Direct Cholesky solve to working precision.\",\n        \"Iterative coarse solve with relative residual tolerance 1e-10.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"initial guesses for MINRES solves\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 6 specifies MINRES tolerances but does not specify the starting vector for each linear solve. The outer-variable initializations do not uniquely determine these vectors.\",\n      \"readings\": [\n        \"Start every MINRES solve from zero.\",\n        \"Warm-start equilibrium solves with the previous displacement and Newton solves with the previous increment.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"initial DOC density\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 3.2 and 4.1 explicitly initialize PBM and IP densities, but Sec. 5 and Algorithm 4 do not initialize DOC.\",\n      \"readings\": [\n        \"Uniform initial density rho_i=V/m.\",\n        \"A feasible nonuniform initial density: equal x-halves at the mean plus and minus half the distance from the mean to the nearest density bound.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"initial delayed IP barrier values\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 initializes r=s=0.01, but Algorithm 3 first assigns r=r_plus and s=s_plus before showing any initialization of r_plus and s_plus.\",\n      \"readings\": [\n        \"Initialize r_plus=s_plus=0.01, preserving the initial barrier values through the first delayed update.\",\n        \"Initialize r_plus and s_plus from the initial complementarity averages using the stated factor 0.2.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"PBM lower-bound multiplier update\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Algorithm 1, line 7 uses phi_prime(+nu_lower/q_lower), whereas Eq. (11) applied to the constraint in Eq. (16) requires phi_prime(-nu_lower/q_lower).\",\n      \"readings\": [\n        \"Update mu_lower with the negative argument required by Eqs. (11) and (16).\",\n        \"Update mu_lower with the positive argument printed in Algorithm 1.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"PBM lower-nu residual in the reduced Newton solve\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Eq. (17) contains -mu_lower_prime in the lower-nu residual, but the corresponding expressions in Eqs. (20) and (21) contain +mu_lower_prime.\",\n      \"readings\": [\n        \"Construct the reduced right-hand side and reconstruction from Eq. (17), using -mu_lower_prime.\",\n        \"Use +mu_lower_prime as printed in Eqs. (20) and (21).\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"IP stationarity and complementarity residuals\",\n      \"issue\": \"conflicting\",\n      \"description\": \"The displayed residual in Sec. 4.1 adds upper nu positively to stationarity and places its complementarity term in residual block 4. The preceding KKT equations and Eq. (23) instead require a negative stationarity term and upper complementarity in block 5.\",\n      \"readings\": [\n        \"Follow the KKT equations and Eq. (23): negative upper-nu stationarity contribution, with separate lower and upper complementarity blocks.\",\n        \"Follow the displayed residual literally: positive upper-nu stationarity contribution, both complementarity contributions in block 4, and block 5 equal to -s.\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"IP volume-multiplier sign used in the duality gap\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Sec. 4 says alpha has the same meaning as in the dual problem, but its KKT stationarity uses +alpha where Eq. (2) implies -alpha. Algorithm 3 then evaluates the gap using Eq. (7).\",\n      \"readings\": [\n        \"Treat alpha_IP as -alpha_dual and convert its sign when evaluating Eq. (7).\",\n        \"Retain the dual meaning of alpha and change the IP stationarity and corresponding Newton equations to use -alpha.\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "physical size of the cantilever domain",
+    "issue": "missing",
+    "description": "Sec. 7 determines the aspect ratio through 16 x 2 x 2 equal coarse cubes, but never gives their physical edge length.",
+    "readings": [
+     "Coarse cube edge a=1: domain dimensions (16,2,2).",
+     "Coarse cube edge a=0.5: domain dimensions (8,1,1).",
+     "Normalize the cantilever length to 1: domain dimensions (1,0.125,0.125)."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "z-directed load centered on the right-hand face",
+    "issue": "vague",
+    "description": "Sec. 7 says the load is applied 'in the middle' of the right-hand face and refers to Fig. 2(a). The prose does not specify its footprint or distribution among nodes.",
+    "readings": [
+     "A concentrated force on the central node at (Lx,Ly/2,Lz/2).",
+     "A uniform line load across 0<=y<=Ly at x=Lx, z=Lz/2.",
+     "A uniform traction on the centered patch x=Lx, 3Ly/8<=y<=5Ly/8, 3Lz/8<=z<=5Lz/8."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "signed sense of the right-face load",
+    "issue": "vague",
+    "description": "Sec. 7 specifies direction z without explicitly stating its signed sense. Reversing this sole load leaves the linear-elastic compliance and optimal density unchanged.",
+    "readings": [
+     "Load acts in +z.",
+     "Load acts in -z."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "resultant right-face force",
+    "issue": "missing",
+    "description": "Neither Sec. 7, the CANT example, nor Table 1 specifies the force magnitude or its units.",
+    "readings": [
+     "Total resultant force magnitude F=1 in consistent units.",
+     "Total resultant force magnitude F=2 in the same units."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "allowed material volume V",
+    "issue": "missing",
+    "description": "Eq. (1) defines sum(rho_i)=V, but no numerical V or volume fraction is supplied for CANT-16-2-2-5. The later 0.8V concerns visualization.",
+    "readings": [
+     "With unit upper density, V=0.1m: volume fraction 0.1.",
+     "With unit upper density, V=0.2m: volume fraction 0.2.",
+     "With unit upper density, V=0.5m: volume fraction 0.5."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "upper density bounds",
+    "issue": "missing",
+    "description": "Eq. (1) supplies upper bounds only symbolically. Sec. 7.1 specifies numerical lower bounds but never assigns numerical upper bounds.",
+    "readings": [
+     "Uniform upper bound rho_max=1.",
+     "Uniform upper bound rho_max=2."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "uniform elastic stiffness scale",
+    "issue": "missing",
+    "description": "The stiffness matrices in Eq. (1) are not accompanied by a numerical reference modulus, such as Young's modulus.",
+    "readings": [
+     "Reference Young's modulus E=1 in consistent units.",
+     "Reference Young's modulus E=2 in the same units, with all other stiffness ratios unchanged."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "elastic constitutive tensor apart from its overall scale",
+    "issue": "missing",
+    "description": "The text gives neither Poisson's ratio nor an explicit isotropy assumption or constitutive tensor.",
+    "readings": [
+     "Homogeneous isotropic elasticity with Poisson's ratio 0.25.",
+     "Homogeneous isotropic elasticity with Poisson's ratio 0.30.",
+     "Homogeneous orthotropic elasticity aligned with x,y,z: Ex=2Ey=2Ez, nu_xy=nu_xz=nu_yz=0.25, Gxy=Gxz=Gyz=0.4Ey, with reciprocal Poisson ratios."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "element stiffness integration",
+    "issue": "missing",
+    "description": "Sec. 6.2 specifies trilinear hexahedral displacement elements and elementwise constant densities, but does not specify the integration rule used to construct their stiffness matrices.",
+    "readings": [
+     "Full 2 x 2 x 2 Gauss integration.",
+     "Selective reduced integration: full integration of deviatoric terms and one-point integration of volumetric terms."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "initial PBM penalty parameters",
+    "issue": "missing",
+    "description": "Sec. 3.2 gives initial primal variables, multipliers, penalty floors, and update factors, but no initial values for p, q_lower, or q_upper.",
+    "readings": [
+     "Initialize every p_i, q_lower_i, and q_upper_i to 1.",
+     "Initialize every p_i, q_lower_i, and q_upper_i to 0.1.",
+     "Initialize p_i=1 and q_lower_i=q_upper_i=0.01."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "PBM Newton backtracking line search",
+    "issue": "missing",
+    "description": "Algorithm 2 names backtracking with the Armijo rule but supplies no sufficient-decrease constant, contraction factor, or initial trial step.",
+    "readings": [
+     "Initial step 1, Armijo constant 0.0001, contraction factor 0.5.",
+     "Initial step 1, Armijo constant 0.01, contraction factor 0.8."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "multigrid smoothing schedule",
+    "issue": "missing",
+    "description": "Sec. 6.1 specifies a Gauss-Seidel smoother and one V-cycle per preconditioner application, but not the numbers or directions of smoothing sweeps.",
+    "readings": [
+     "One forward presweep and one backward postsweep.",
+     "Two forward presweeps and two backward postsweeps."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "ordering used by Gauss-Seidel",
+    "issue": "vague",
+    "description": "Sec. 6.2 mentions a 'reasonably good numbering' without fixing node or displacement-component ordering, which affects Gauss-Seidel and iteration counts.",
+    "readings": [
+     "Lexicographic nodes with x varying fastest and displacement components interleaved.",
+     "Lexicographic nodes with z varying fastest and displacement components interleaved.",
+     "Lexicographic nodes with displacement components stored in separate blocks."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "coarsest-grid linear solve",
+    "issue": "missing",
+    "description": "Sec. 6 defines the Galerkin coarse operators but does not state how accurately or by which method the coarsest system is solved.",
+    "readings": [
+     "Direct Cholesky solve to working precision.",
+     "Iterative coarse solve with relative residual tolerance 1e-10."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "initial guesses for MINRES solves",
+    "issue": "missing",
+    "description": "Sec. 6 specifies MINRES tolerances but does not specify the starting vector for each linear solve. The outer-variable initializations do not uniquely determine these vectors.",
+    "readings": [
+     "Start every MINRES solve from zero.",
+     "Warm-start equilibrium solves with the previous displacement and Newton solves with the previous increment."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "initial DOC density",
+    "issue": "missing",
+    "description": "Secs. 3.2 and 4.1 explicitly initialize PBM and IP densities, but Sec. 5 and Algorithm 4 do not initialize DOC.",
+    "readings": [
+     "Uniform initial density rho_i=V/m.",
+     "A feasible nonuniform initial density: equal x-halves at the mean plus and minus half the distance from the mean to the nearest density bound."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "initial delayed IP barrier values",
+    "issue": "missing",
+    "description": "Sec. 4.1 initializes r=s=0.01, but Algorithm 3 first assigns r=r_plus and s=s_plus before showing any initialization of r_plus and s_plus.",
+    "readings": [
+     "Initialize r_plus=s_plus=0.01, preserving the initial barrier values through the first delayed update.",
+     "Initialize r_plus and s_plus from the initial complementarity averages using the stated factor 0.2."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "PBM lower-bound multiplier update",
+    "issue": "conflicting",
+    "description": "Algorithm 1, line 7 uses phi_prime(+nu_lower/q_lower), whereas Eq. (11) applied to the constraint in Eq. (16) requires phi_prime(-nu_lower/q_lower).",
+    "readings": [
+     "Update mu_lower with the negative argument required by Eqs. (11) and (16).",
+     "Update mu_lower with the positive argument printed in Algorithm 1."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "PBM lower-nu residual in the reduced Newton solve",
+    "issue": "conflicting",
+    "description": "Eq. (17) contains -mu_lower_prime in the lower-nu residual, but the corresponding expressions in Eqs. (20) and (21) contain +mu_lower_prime.",
+    "readings": [
+     "Construct the reduced right-hand side and reconstruction from Eq. (17), using -mu_lower_prime.",
+     "Use +mu_lower_prime as printed in Eqs. (20) and (21)."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "IP stationarity and complementarity residuals",
+    "issue": "conflicting",
+    "description": "The displayed residual in Sec. 4.1 adds upper nu positively to stationarity and places its complementarity term in residual block 4. The preceding KKT equations and Eq. (23) instead require a negative stationarity term and upper complementarity in block 5.",
+    "readings": [
+     "Follow the KKT equations and Eq. (23): negative upper-nu stationarity contribution, with separate lower and upper complementarity blocks.",
+     "Follow the displayed residual literally: positive upper-nu stationarity contribution, both complementarity contributions in block 4, and block 5 equal to -s."
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "IP volume-multiplier sign used in the duality gap",
+    "issue": "conflicting",
+    "description": "Sec. 4 says alpha has the same meaning as in the dual problem, but its KKT stationarity uses +alpha where Eq. (2) implies -alpha. Algorithm 3 then evaluates the gap using Eq. (7).",
+    "readings": [
+     "Treat alpha_IP as -alpha_dual and convert its sign when evaluating Eq. (7).",
+     "Retain the dual meaning of alpha and change the IP stationarity and corresponding Newton equations to use -alpha."
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 703.5846304893494,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L34",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 2,
+ "locator": "Sec. 7.1, example CANT-16-2-2-5 (Fig. 2(a), Table 1)",
+ "finished": "2026-10-22T23:11:38"
+}

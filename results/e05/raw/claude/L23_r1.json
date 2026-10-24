@@ -1,0 +1,262 @@
+{
+ "raw": "{\"items\": [{\"category\": \"domain_extent\", \"entity\": \"Design domain (Fig. 5): width, height, aspect ratio\", \"issue\": \"figure_only\", \"description\": \"Sec. 3.1 refers only to 'the design domain in Figure 5' discretized by 200x200 bilinear quads; physical width/height are never stated, although the load width (0.04) and pad width (0.025) are absolute lengths and filter radii are in element sizes \\u0394x. A unit square gives integer element counts (\\u0394x=0.005: load = 8 el., pad = 5 el.), and the L-beam is evidently unit-sized (R_x\\u22480.015 with 100 el.), but this is not stated for Sec. 3.1; any other features drawn in Fig. 5 cannot be checked.\", \"readings\": [\"1 x 1 square, square elements with \\u0394x = 0.005\", \"Square of another size (e.g. 2 x 2 with \\u0394x = 0.01, or 0.5 x 0.5), changing load/pad size relative to domain and filter\", \"Non-square rectangle (e.g. 2 x 1) meshed with 200 x 200 stretched elements\"], \"effect\": \"layout\"}, {\"category\": \"load_position\", \"entity\": \"Two inward compressive loads - edges and placement\", \"issue\": \"figure_only\", \"description\": \"Sec. 3.1: 'Two inward pointing distributed loads are applied around the horizontal symmetry axis'; the edges carrying them are only drawn in Fig. 5. The remark that the shell 'only has to carry the horizontal load' and the support set (mid-side nodes fixed vertically, centre node fixed horizontally) imply horizontal loads on the left and right edges.\", \"readings\": [\"Left and right edges, each centred at mid-height (spanning H/2 \\u00b1 0.02), pointing horizontally inward\", \"Top and bottom edges, symmetric about the horizontal axis, pointing vertically inward (rotated set-up; less consistent with the text)\"], \"effect\": \"layout\"}, {\"category\": \"load_magnitude\", \"entity\": \"Magnitude '10^-3 at each load'\", \"issue\": \"vague\", \"description\": \"Sec. 3.1 gives 'a magnitude of 10^-3 at each load' without saying whether this is the resultant of the 0.04-wide load, a traction per unit length, or a force per node. Reported compliances (\\u22488.5e-6 at \\u03c9=0.5; a straight solid bar would give F^2/(E0\\u00b70.15) \\u2248 6.7e-6) favour a 1e-3 resultant on a unit-thickness model.\", \"readings\": [\"Resultant force 1e-3 per load (uniform traction 0.025 per unit length over 0.04)\", \"Traction 1e-3 per unit length (resultant 4e-5 per load)\", \"1e-3 applied to each loaded node (resultant \\u2248 9e-3 for 9 nodes)\"], \"effect\": \"scale_only\"}, {\"category\": \"load_extent_distribution\", \"entity\": \"Distribution of each load over L_load = 0.04\", \"issue\": \"vague\", \"description\": \"Sec. 3.1 calls the loads 'distributed' with width L_load = 0.04 centred on the horizontal axis, but the load profile and the way it is lumped to nodes are not given.\", \"readings\": [\"Uniform traction with consistent nodal forces (end nodes half weight; 9 nodes if \\u0394x = 0.005)\", \"Equal point forces on every node inside the 0.04 segment\"], \"effect\": \"unsure\"}, {\"category\": \"passive_region\", \"entity\": \"Passive solid pads at the two loads\", \"issue\": \"vague\", \"description\": \"Sec. 3.1: 'Passive solid regions are located at the loads with a width of 0.025' gives only one dimension. 0.025 may be the depth into the domain (pad spanning the 0.04 load) or the extent along the edge, since 'width' is used for the load and in Sec. 3.2 (pad has 'the same width as the load and a height of 0.05'). In that case the pad is narrower than the load and its depth is missing. On a 1x1, 200-element mesh, 0.025 = 5 elements cannot be centred on the mid-height line, which favours the depth reading.\", \"readings\": [\"0.025 deep (normal to the edge) x 0.04 tall (same as the load), centred on the load\", \"0.025 x 0.025 square centred on the load\", \"0.025 along the edge x another depth (e.g. 0.05 as in the L-beam)\"], \"effect\": \"layout\"}, {\"category\": \"support_location_extent\", \"entity\": \"Vertical restraints at 'the center nodes on each side'\", \"issue\": \"vague\", \"description\": \"Sec. 3.1: 'The center nodes on each side of the domain are restricted against vertical displacements'. 'Each side' may mean only the two loaded (left/right) edges or all four edges; the centre-node horizontal restraint is clear. In pure compliance, symmetry means the left/right restraints carry no reaction, and top/bottom restraints matter only if material connects to them.\", \"readings\": [\"Mid-height nodes of the left and right edges fixed in y; domain-centre node fixed in x\", \"Mid-side nodes of all four edges fixed in y; domain-centre node fixed in x\"], \"effect\": \"unsure\"}, {\"category\": \"material\", \"entity\": \"Out-of-plane thickness (2D plane-stress model)\", \"issue\": \"missing\", \"description\": \"E0 = 1, \\u03bd0 = \\u03bdmin = 0.3 and Emin = 1e-6 E0 are given (Secs. 2.1, 3), but no thickness is given; plane stress is only implied by \\u03ba0 = E0/(2(1-\\u03bd0)) in Eq. (8).\", \"readings\": [\"Plane stress, unit thickness\", \"Plane stress, other thickness t (compliance scales with 1/t)\"], \"effect\": \"scale_only\"}, {\"category\": \"material\", \"entity\": \"SIMP penalisation in the singlescale run\", \"issue\": \"missing\", \"description\": \"Sec. 3.1 says the singlescale run uses 'SIMP as stiffness interpolation, performed using the code from [18]' but gives no penalty exponent or Emin form. Only the Fig. 1 comparison in the Introduction mentions 'standard SIMP (p=3)'.\", \"readings\": [\"p = 3 with E = Emin + \\u03c1^3 (E0 - Emin), Emin = 1e-6 E0\", \"Penalty continuation as in code [18] (schedule not given)\"], \"effect\": \"layout\"}, {\"category\": \"material\", \"entity\": \"Stiffness interpolation of the reference pure-compliance run\", \"issue\": \"vague\", \"description\": \"For \\u03c9 = 1, Sec. 3.1 optimizes both a singlescale SIMP design and a multiscale design with the Hashin-Shtrikman upper bound (Eq. 8). HS-S adds the buckling stress constraint, so it is not a pure-compliance problem. Which run is 'the' example is not fixed; the text says they reach similar designs with almost identical performance.\", \"readings\": [\"SIMP singlescale run\", \"Hashin-Shtrikman upper-bound interpolation (Eq. 8) on \\u03c1 = x\\u0303\\u00b7H(s\\u0303), Emin = 1e-6 E0, \\u03bd = 0.3\"], \"effect\": \"unsure\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Density-filter radius for a single design field\", \"issue\": \"vague\", \"description\": \"Sec. 2.1 gives R_x = 1.5\\u0394x for the density field x and R_s = 4.5\\u0394x for the void-indicator field s, 'throughout', with linear hat weights. A single-field solver needs one radius, and the radius used in the singlescale SIMP run (code [18]) is not stated.\", \"readings\": [\"R = 1.5\\u0394x\", \"R = 4.5\\u0394x (the projected field that controls topology)\", \"Two fields: x filtered with 1.5\\u0394x, s filtered with 4.5\\u0394x and projected, \\u03c1 = x\\u0303\\u00b7H(s\\u0303)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Robust projection (\\u0394\\u03b7 = 0.25) in a single-field / SIMP run\", \"issue\": \"vague\", \"description\": \"Sec. 3.1 sets \\u0394\\u03b7 = 0.25 (\\u03b7 = 0.25/0.5/0.75) for all three runs, but in the paper's two-field scheme only s is projected and x is only filtered. The text does not say how the eroded/blueprint/dilated min-max is applied in the SIMP run (code [18]) or in a single-field solver.\", \"readings\": [\"Min-max compliance over three projections (\\u03b7 = 0.75/0.5/0.25) of one filtered field; volume on the dilated design with V*_d adapted so the blueprint = 0.15\", \"Two-field: only s projected at \\u03b7 = 0.5 \\u00b1 0.25, x only filtered; \\u03c1^m = x\\u0303\\u00b7H_m(s\\u0303)\", \"No robust formulation: one design projected at \\u03b7 = 0.5 with \\u03b2-continuation, volume fraction 0.15\"], \"effect\": \"layout\"}, {\"category\": \"volume_fraction\", \"entity\": \"Update of the dilated volume bound V*_d\", \"issue\": \"missing\", \"description\": \"Sec. 2 states V*_d 'is continuously updated' so that the blueprint meets V*_b = 0.15 (given in Sec. 3.1), but gives no update rule or frequency.\", \"readings\": [\"Every iteration: V*_d = 0.15\\u00b7V(\\u03c1^d)/V(\\u03c1^b)\", \"Every N iterations (e.g. 20) or at each \\u03b2 doubling\"], \"effect\": \"unsure\"}, {\"category\": \"other\", \"entity\": \"Normalisation C0 in max_m C(\\u03c1^m)/C0 (Eq. 19, \\u03c9 = 1)\", \"issue\": \"vague\", \"description\": \"Eq. (19) normalizes by C0, 'the value for the initial design'. The text does not say whether one C0 is shared by the eroded, blueprint and dilated designs or each uses its own, which changes which design governs the max.\", \"readings\": [\"One common C0 (e.g. initial blueprint compliance)\", \"Design-specific C0^m for the eroded, blueprint and dilated designs\"], \"effect\": \"unsure\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Lower bound x_min on the density field x\", \"issue\": \"missing\", \"description\": \"Eq. (19) has x_min \\u2264 x_j \\u2264 1, but x_min is given only for the L-beam (0.27, chosen for de-homogenization, Sec. 3.2). The Sec. 3.1 designs are also de-homogenized, yet no value is stated.\", \"readings\": [\"x_min = 0 (or very small, e.g. 1e-3)\", \"x_min = 0.27 as in Sec. 3.2\", \"Another manufacturing-based value\"], \"effect\": \"unsure\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Initial design for the \\u03c9 = 1 runs\", \"issue\": \"missing\", \"description\": \"Sec. 3.1 describes warm starts for the later \\u03c9 steps and for HS-S, but not the starting design of the pure-compliance runs. Sec. 3.2, by contrast, explicitly uses uniform initial guesses.\", \"readings\": [\"Uniform density 0.15 (or x = 0.15, s = 1)\", \"x = 1 with uniform s giving volume 0.15\", \"Other uniform or random start\"], \"effect\": \"unsure\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"\\u03b2-continuation timing\", \"issue\": \"vague\", \"description\": \"Sec. 3: 'After the first 125 iterations \\u03b2 is doubled every 75 iterations until \\u03b2_max = 256'. The first doubling may occur at iteration 125 or at 200.\", \"readings\": [\"\\u03b2 = 2 until iteration 125, doubled at 125, 200, ..., 575 (\\u03b2 = 256 from \\u2248 iteration 575)\", \"\\u03b2 = 2 until iteration 200, doubled at 200, 275, ..., 650 (\\u03b2 = 256 from \\u2248 iteration 650)\"], \"effect\": \"unsure\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Termination criterion / total iterations\", \"issue\": \"missing\", \"description\": \"Only the \\u03b2 schedule is given (Sec. 3); there is no maximum iteration count or convergence tolerance.\", \"readings\": [\"Stop one 75-iteration block after \\u03b2 reaches 256\", \"Stop when the max design change < tolerance (e.g. 1e-2 or 1e-3) at \\u03b2 = 256\", \"Fixed budget (e.g. 1000 iterations)\"], \"effect\": \"unsure\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"MMA optimizer parameters\", \"issue\": \"missing\", \"description\": \"MMA [40] is the optimizer (Sec. 2.2.3, App. B), but move limits and asymptote settings are not given.\", \"readings\": [\"Svanberg's default MMA parameters\", \"Reduced move limit (e.g. 0.1-0.2), as is common with projection continuation\"], \"effect\": \"unsure\"}]}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "Design domain (Fig. 5): width, height, aspect ratio",
+    "issue": "figure_only",
+    "description": "Sec. 3.1 refers only to 'the design domain in Figure 5' discretized by 200x200 bilinear quads; physical width/height are never stated, although the load width (0.04) and pad width (0.025) are absolute lengths and filter radii are in element sizes \u0394x. A unit square gives integer element counts (\u0394x=0.005: load = 8 el., pad = 5 el.), and the L-beam is evidently unit-sized (R_x\u22480.015 with 100 el.), but this is not stated for Sec. 3.1; any other features drawn in Fig. 5 cannot be checked.",
+    "readings": [
+     "1 x 1 square, square elements with \u0394x = 0.005",
+     "Square of another size (e.g. 2 x 2 with \u0394x = 0.01, or 0.5 x 0.5), changing load/pad size relative to domain and filter",
+     "Non-square rectangle (e.g. 2 x 1) meshed with 200 x 200 stretched elements"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "Two inward compressive loads - edges and placement",
+    "issue": "figure_only",
+    "description": "Sec. 3.1: 'Two inward pointing distributed loads are applied around the horizontal symmetry axis'; the edges carrying them are only drawn in Fig. 5. The remark that the shell 'only has to carry the horizontal load' and the support set (mid-side nodes fixed vertically, centre node fixed horizontally) imply horizontal loads on the left and right edges.",
+    "readings": [
+     "Left and right edges, each centred at mid-height (spanning H/2 \u00b1 0.02), pointing horizontally inward",
+     "Top and bottom edges, symmetric about the horizontal axis, pointing vertically inward (rotated set-up; less consistent with the text)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Magnitude '10^-3 at each load'",
+    "issue": "vague",
+    "description": "Sec. 3.1 gives 'a magnitude of 10^-3 at each load' without saying whether this is the resultant of the 0.04-wide load, a traction per unit length, or a force per node. Reported compliances (\u22488.5e-6 at \u03c9=0.5; a straight solid bar would give F^2/(E0\u00b70.15) \u2248 6.7e-6) favour a 1e-3 resultant on a unit-thickness model.",
+    "readings": [
+     "Resultant force 1e-3 per load (uniform traction 0.025 per unit length over 0.04)",
+     "Traction 1e-3 per unit length (resultant 4e-5 per load)",
+     "1e-3 applied to each loaded node (resultant \u2248 9e-3 for 9 nodes)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Distribution of each load over L_load = 0.04",
+    "issue": "vague",
+    "description": "Sec. 3.1 calls the loads 'distributed' with width L_load = 0.04 centred on the horizontal axis, but the load profile and the way it is lumped to nodes are not given.",
+    "readings": [
+     "Uniform traction with consistent nodal forces (end nodes half weight; 9 nodes if \u0394x = 0.005)",
+     "Equal point forces on every node inside the 0.04 segment"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Passive solid pads at the two loads",
+    "issue": "vague",
+    "description": "Sec. 3.1: 'Passive solid regions are located at the loads with a width of 0.025' gives only one dimension. 0.025 may be the depth into the domain (pad spanning the 0.04 load) or the extent along the edge, since 'width' is used for the load and in Sec. 3.2 (pad has 'the same width as the load and a height of 0.05'). In that case the pad is narrower than the load and its depth is missing. On a 1x1, 200-element mesh, 0.025 = 5 elements cannot be centred on the mid-height line, which favours the depth reading.",
+    "readings": [
+     "0.025 deep (normal to the edge) x 0.04 tall (same as the load), centred on the load",
+     "0.025 x 0.025 square centred on the load",
+     "0.025 along the edge x another depth (e.g. 0.05 as in the L-beam)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "Vertical restraints at 'the center nodes on each side'",
+    "issue": "vague",
+    "description": "Sec. 3.1: 'The center nodes on each side of the domain are restricted against vertical displacements'. 'Each side' may mean only the two loaded (left/right) edges or all four edges; the centre-node horizontal restraint is clear. In pure compliance, symmetry means the left/right restraints carry no reaction, and top/bottom restraints matter only if material connects to them.",
+    "readings": [
+     "Mid-height nodes of the left and right edges fixed in y; domain-centre node fixed in x",
+     "Mid-side nodes of all four edges fixed in y; domain-centre node fixed in x"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "material",
+    "entity": "Out-of-plane thickness (2D plane-stress model)",
+    "issue": "missing",
+    "description": "E0 = 1, \u03bd0 = \u03bdmin = 0.3 and Emin = 1e-6 E0 are given (Secs. 2.1, 3), but no thickness is given; plane stress is only implied by \u03ba0 = E0/(2(1-\u03bd0)) in Eq. (8).",
+    "readings": [
+     "Plane stress, unit thickness",
+     "Plane stress, other thickness t (compliance scales with 1/t)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "SIMP penalisation in the singlescale run",
+    "issue": "missing",
+    "description": "Sec. 3.1 says the singlescale run uses 'SIMP as stiffness interpolation, performed using the code from [18]' but gives no penalty exponent or Emin form. Only the Fig. 1 comparison in the Introduction mentions 'standard SIMP (p=3)'.",
+    "readings": [
+     "p = 3 with E = Emin + \u03c1^3 (E0 - Emin), Emin = 1e-6 E0",
+     "Penalty continuation as in code [18] (schedule not given)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Stiffness interpolation of the reference pure-compliance run",
+    "issue": "vague",
+    "description": "For \u03c9 = 1, Sec. 3.1 optimizes both a singlescale SIMP design and a multiscale design with the Hashin-Shtrikman upper bound (Eq. 8). HS-S adds the buckling stress constraint, so it is not a pure-compliance problem. Which run is 'the' example is not fixed; the text says they reach similar designs with almost identical performance.",
+    "readings": [
+     "SIMP singlescale run",
+     "Hashin-Shtrikman upper-bound interpolation (Eq. 8) on \u03c1 = x\u0303\u00b7H(s\u0303), Emin = 1e-6 E0, \u03bd = 0.3"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Density-filter radius for a single design field",
+    "issue": "vague",
+    "description": "Sec. 2.1 gives R_x = 1.5\u0394x for the density field x and R_s = 4.5\u0394x for the void-indicator field s, 'throughout', with linear hat weights. A single-field solver needs one radius, and the radius used in the singlescale SIMP run (code [18]) is not stated.",
+    "readings": [
+     "R = 1.5\u0394x",
+     "R = 4.5\u0394x (the projected field that controls topology)",
+     "Two fields: x filtered with 1.5\u0394x, s filtered with 4.5\u0394x and projected, \u03c1 = x\u0303\u00b7H(s\u0303)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Robust projection (\u0394\u03b7 = 0.25) in a single-field / SIMP run",
+    "issue": "vague",
+    "description": "Sec. 3.1 sets \u0394\u03b7 = 0.25 (\u03b7 = 0.25/0.5/0.75) for all three runs, but in the paper's two-field scheme only s is projected and x is only filtered. The text does not say how the eroded/blueprint/dilated min-max is applied in the SIMP run (code [18]) or in a single-field solver.",
+    "readings": [
+     "Min-max compliance over three projections (\u03b7 = 0.75/0.5/0.25) of one filtered field; volume on the dilated design with V*_d adapted so the blueprint = 0.15",
+     "Two-field: only s projected at \u03b7 = 0.5 \u00b1 0.25, x only filtered; \u03c1^m = x\u0303\u00b7H_m(s\u0303)",
+     "No robust formulation: one design projected at \u03b7 = 0.5 with \u03b2-continuation, volume fraction 0.15"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Update of the dilated volume bound V*_d",
+    "issue": "missing",
+    "description": "Sec. 2 states V*_d 'is continuously updated' so that the blueprint meets V*_b = 0.15 (given in Sec. 3.1), but gives no update rule or frequency.",
+    "readings": [
+     "Every iteration: V*_d = 0.15\u00b7V(\u03c1^d)/V(\u03c1^b)",
+     "Every N iterations (e.g. 20) or at each \u03b2 doubling"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "other",
+    "entity": "Normalisation C0 in max_m C(\u03c1^m)/C0 (Eq. 19, \u03c9 = 1)",
+    "issue": "vague",
+    "description": "Eq. (19) normalizes by C0, 'the value for the initial design'. The text does not say whether one C0 is shared by the eroded, blueprint and dilated designs or each uses its own, which changes which design governs the max.",
+    "readings": [
+     "One common C0 (e.g. initial blueprint compliance)",
+     "Design-specific C0^m for the eroded, blueprint and dilated designs"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Lower bound x_min on the density field x",
+    "issue": "missing",
+    "description": "Eq. (19) has x_min \u2264 x_j \u2264 1, but x_min is given only for the L-beam (0.27, chosen for de-homogenization, Sec. 3.2). The Sec. 3.1 designs are also de-homogenized, yet no value is stated.",
+    "readings": [
+     "x_min = 0 (or very small, e.g. 1e-3)",
+     "x_min = 0.27 as in Sec. 3.2",
+     "Another manufacturing-based value"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial design for the \u03c9 = 1 runs",
+    "issue": "missing",
+    "description": "Sec. 3.1 describes warm starts for the later \u03c9 steps and for HS-S, but not the starting design of the pure-compliance runs. Sec. 3.2, by contrast, explicitly uses uniform initial guesses.",
+    "readings": [
+     "Uniform density 0.15 (or x = 0.15, s = 1)",
+     "x = 1 with uniform s giving volume 0.15",
+     "Other uniform or random start"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "\u03b2-continuation timing",
+    "issue": "vague",
+    "description": "Sec. 3: 'After the first 125 iterations \u03b2 is doubled every 75 iterations until \u03b2_max = 256'. The first doubling may occur at iteration 125 or at 200.",
+    "readings": [
+     "\u03b2 = 2 until iteration 125, doubled at 125, 200, ..., 575 (\u03b2 = 256 from \u2248 iteration 575)",
+     "\u03b2 = 2 until iteration 200, doubled at 200, 275, ..., 650 (\u03b2 = 256 from \u2248 iteration 650)"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Termination criterion / total iterations",
+    "issue": "missing",
+    "description": "Only the \u03b2 schedule is given (Sec. 3); there is no maximum iteration count or convergence tolerance.",
+    "readings": [
+     "Stop one 75-iteration block after \u03b2 reaches 256",
+     "Stop when the max design change < tolerance (e.g. 1e-2 or 1e-3) at \u03b2 = 256",
+     "Fixed budget (e.g. 1000 iterations)"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "MMA optimizer parameters",
+    "issue": "missing",
+    "description": "MMA [40] is the optimizer (Sec. 2.2.3, App. B), but move limits and asymptote settings are not given.",
+    "readings": [
+     "Svanberg's default MMA parameters",
+     "Reduced move limit (e.g. 0.1-0.2), as is common with projection continuation"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 503.6453070640564,
+ "returncode": 0,
+ "meta": {
+  "model": null,
+  "num_turns": 2,
+  "is_error": false,
+  "total_cost_usd": 1.4609228,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 43780,
+   "cache_read_input_tokens": 774,
+   "output_tokens": 55526,
+   "output_tokens_details": {
+    "thinking_tokens": 50923
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 43780,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 55526,
+     "cache_read_input_tokens": 774,
+     "cache_creation_input_tokens": 43780,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 43780
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard",
+   "fallback_credit": null
+  }
+ },
+ "stderr_tail": "",
+ "task": "L23",
+ "model": "claude",
+ "model_id": "claude-opus-5-5",
+ "rep": 1,
+ "locator": "Sec. 3.1, the uni-axial compression example (Fig. 5), pure-compliance case",
+ "finished": "2026-10-22T20:44:06"
+}

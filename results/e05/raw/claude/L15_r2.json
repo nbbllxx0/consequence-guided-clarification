@@ -1,0 +1,332 @@
+{
+ "raw": "{\"items\": [{\"category\": \"domain_extent\", \"entity\": \"Design domain size and orientation (120\\u00d760, Table 4 'Long' preset)\", \"issue\": \"vague\", \"description\": \"Tables 4 and 5 give only '120\\u00d760' for the cantilever. The text never says which count runs along the beam axis (from the fixed left edge to the loaded tip) and which runs through the depth. The usual nelx\\u00d7nely convention gives a 2:1 beam.\", \"readings\": [\"120 elements along x (beam length) \\u00d7 60 elements along y (depth), L:H = 2:1\", \"60 elements along x \\u00d7 120 elements along y (L:H = 1:2, deep cantilever)\"], \"effect\": \"layout\"}, {\"category\": \"domain_extent\", \"entity\": \"Physical dimensions, element size and length units\", \"issue\": \"missing\", \"description\": \"No physical length, element size or units are given (Sec. 3.5, Table 4). The filter radii (1.5 for the fixed controller, 1.2 in the tail, range 1.1\\u20134.0 in Table 2) only make sense in element widths. For 2-D unit-thickness elements with r_min in element units, element size does not change the layout and at most rescales C.\", \"readings\": [\"Unit square elements; domain 120 \\u00d7 60 length units\", \"Normalized domain 2 \\u00d7 1 (h = 1/60), with r_min still counted in element widths\"], \"effect\": \"scale_only\"}, {\"category\": \"mesh\", \"entity\": \"Finite-element type\", \"issue\": \"missing\", \"description\": \"Sec. 3.1 and Sec. 3.5 mention only a 2-D mesh solved by direct sparse factorization (SciPy). Element type, interpolation order and integration rule are not stated.\", \"readings\": [\"4-node bilinear square (Q4) elements with 2\\u00d72 Gauss integration (88-line-code element stiffness)\", \"8- or 9-node quadratic quadrilateral elements\"], \"effect\": \"layout\"}, {\"category\": \"load_position\", \"entity\": \"Tip load on the right (free) edge\", \"issue\": \"vague\", \"description\": \"Sec. 3.5 says only 'cantilever beam (tip load, fixed left edge)'. The height of the load on the right edge is never stated. It could only be inferred from the final topologies in Fig. 6, which is unavailable.\", \"readings\": [\"x = L, y = 0.5H (mid-height of the right edge)\", \"x = L, y = 0 (bottom-right corner)\", \"x = L, y = H (top-right corner)\"], \"effect\": \"layout\"}, {\"category\": \"load_extent_distribution\", \"entity\": \"Extent of the tip load\", \"issue\": \"missing\", \"description\": \"Sec. 3.5 does not say whether the tip load is a single nodal force or is spread over several nodes or applied as a traction along the right edge.\", \"readings\": [\"Single concentrated nodal force\", \"Force spread uniformly over a few nodes (about 3\\u20135) centred on the load point\", \"Shear traction distributed over the whole right edge\"], \"effect\": \"layout\"}, {\"category\": \"load_direction\", \"entity\": \"Direction of the tip load\", \"issue\": \"missing\", \"description\": \"No direction is given for the 'tip load' (Sec. 3.5). The cantilever benchmark implies a transverse (vertical) load. With a single load case the sign does not matter: reversing the load (u \\u2192 \\u2212u) leaves the sensitivities, the layout and C unchanged.\", \"readings\": [\"Vertical, downward (\\u2212y)\", \"Vertical, upward (+y)\"], \"effect\": \"scale_only\"}, {\"category\": \"load_magnitude\", \"entity\": \"Magnitude of the tip load\", \"issue\": \"missing\", \"description\": \"No force magnitude is given anywhere. The size of the reported C \\u2248 76\\u201381 (Table 5) suggests normalized |F| = 1 with E0 = 1, but the text does not say so.\", \"readings\": [\"|F| = 1 (unit load)\", \"Another magnitude, e.g. |F| = 1000 (C \\u221d |F|\\u00b2)\"], \"effect\": \"scale_only\"}, {\"category\": \"material\", \"entity\": \"Solid Young's modulus E0 and out-of-plane thickness\", \"issue\": \"missing\", \"description\": \"Sec. 3.1 and Sec. 3.5 give only E_min/E0 = 1e-9 and \\u03bd = 0.3. The value of E0 and the plate thickness are never given.\", \"readings\": [\"E0 = 1 and thickness t = 1 (normalized)\", \"Physical E0 (e.g. 210 GPa) and/or t \\u2260 1 (C \\u221d 1/(E0\\u00b7t))\"], \"effect\": \"scale_only\"}, {\"category\": \"material\", \"entity\": \"2-D elasticity assumption\", \"issue\": \"missing\", \"description\": \"Plane stress vs. plane strain is not stated; Sec. 3.5 gives only \\u03bd = 0.3. Plane strain behaves like plane stress with \\u03bd_eff = \\u03bd/(1\\u2212\\u03bd) \\u2248 0.43, which changes the element stiffness.\", \"readings\": [\"Plane stress\", \"Plane strain\"], \"effect\": \"layout\"}, {\"category\": \"passive_region\", \"entity\": \"Non-design (passive) elements\", \"issue\": \"missing\", \"description\": \"Sec. 3.5 mentions no passive solid or void regions for the cantilever. It also does not say whether a solid pad is placed at the load point.\", \"readings\": [\"None: all 120\\u00d760 elements are designable\", \"Small solid (\\u03c1 = 1) patch around the loaded node(s)\"], \"effect\": \"layout\"}, {\"category\": \"volume_fraction\", \"entity\": \"Volume constraint V_f = 0.40\", \"issue\": \"missing\", \"description\": \"V_f = 0.40 is given (Sec. 3.5, Tables 4\\u20135), but not which field it applies to (design \\u03c1, filtered \\u03c1\\u0304 or projected \\u03c1\\u0303). The tolerance used when the tail snapshot must be 'satisfying the volume constraint' (Sec. 3.5) is also missing. With \\u03b7 = 0.5 projection and \\u03b2 up to 32, these fields have clearly different volumes.\", \"readings\": [\"Mean projected density \\u03c1\\u0303 = 0.40, enforced in the OC bisection through the filter and projection\", \"Mean design density \\u03c1 = 0.40\", \"Mean filtered density \\u03c1\\u0304 = 0.40\"], \"effect\": \"layout\"}, {\"category\": \"other\", \"entity\": \"Initial design and role of the random seeds\", \"issue\": \"missing\", \"description\": \"The starting density field is never given. Results are averaged over 'n = 5 independent random seeds' (Sec. 3.5), and Sec. 1.2 speaks of runs 'perturbed by different random seeds'. Yet Sec. 4.1 calls the fixed and schedule-only controllers fully deterministic, while schedule-only has a non-integer mean best iteration (267.6), which implies the runs depend on the seed.\", \"readings\": [\"Uniform \\u03c1 = 0.40 in every element (seed irrelevant)\", \"Uniform 0.40 plus a small seeded random perturbation\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"OC update details\", \"issue\": \"missing\", \"description\": \"Sec. 3.1 says only 'OC method with move limit \\u03b4'. The damping exponent, density bounds, and the range and tolerance of the Lagrange-multiplier bisection are not given.\", \"readings\": [\"88-line-code OC: damping exponent 0.5, \\u03c1 \\u2208 [0,1], bisection to 1e-3 relative tolerance\", \"OC with damping exponent 0.3 and/or lower bound \\u03c1_min = 1e-3\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Best valid snapshot \\u03c1* that starts the 40-iteration tail\", \"issue\": \"conflicting\", \"description\": \"Sec. 3.5 defines \\u03c1* as the lowest-compliance field 'satisfying the volume constraint'. The Table 7 footnote and Sec. 4.5 instead define validity as p \\u2265 3.0 and G < 0.25. The text also does not say whether \\u03c1 or \\u03c1\\u0303 is stored, or how compliances obtained under different p and \\u03b2 are compared.\", \"readings\": [\"Lowest-C iterate that satisfies the volume constraint only\", \"Lowest-C iterate with p \\u2265 3.0 and G < 0.25\", \"Lowest-C iterate that meets both conditions\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Snapshot restart (LLM agent and expert heuristic)\", \"issue\": \"vague\", \"description\": \"A restart 'reloads the best valid snapshot' (Table 2, Sec. 3.4). The text does not say whether only \\u03c1 is restored or also p, \\u03b2, r_min and \\u03b4, nor whether restart iterations count toward N = 300. Sec. 5.3 refers to 'additional restart iterations' and a reduced 'effective run length'.\", \"readings\": [\"Reload \\u03c1* only, keep the current parameters, iteration counter continues (300 main iterations in total)\", \"Reload \\u03c1* together with the parameters active at the snapshot; counter continues\", \"Reload \\u03c1* and re-run, so restarts extend the run beyond 300 iterations\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Three-field continuation: \\u03b2 schedule\", \"issue\": \"figure_only\", \"description\": \"Sec. 3.4 says only '\\u03b2 doubles every 10 iterations after the ramp'. The maximum \\u03b2 is not given, and uncapped doubling over 270 iterations is not workable. The actual \\u03b2(t) appears only in Fig. 9, whose caption says only that \\u03b2 \\u2265 16 by iteration 80.\", \"readings\": [\"\\u03b2 = 1 up to iteration 30, doubled at 40, 50, \\u2026, capped at 32 (reached at iteration 80)\", \"Same doubling, capped at 64 (Table 2 upper bound)\", \"Same doubling, capped at 16\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Three-field continuation: filter radius schedule\", \"issue\": \"figure_only\", \"description\": \"Sec. 3.4 says only 'r_min is tightened in the late stage'. Start value, end value and timing appear only in Fig. 9 (r_min(t) panel).\", \"readings\": [\"1.5 throughout, stepped to 1.2 at about 75% of N (iteration 225)\", \"1.5 reduced linearly to 1.2 over iterations 150\\u2013300\", \"1.5 reduced to 1.2 once \\u03b2 reaches its maximum (about iteration 80)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Three-field continuation: move limit \\u03b4\", \"issue\": \"figure_only\", \"description\": \"Sec. 3.4 gives no move limit value or schedule for this controller. It appears only in the \\u03b4(t) panel of Fig. 9.\", \"readings\": [\"\\u03b4 = 0.20 constant\", \"\\u03b4 = 0.20, reduced to about 0.05 in the late stage\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Expert heuristic: p ramp\", \"issue\": \"figure_only\", \"description\": \"Sec. 3.4 gives only 'step-wise p ramp (+0.75 per 10 iterations)'. Initial and maximum p appear only in Fig. 9.\", \"readings\": [\"Start p = 1.0 (1.75, 2.5, 3.25, \\u2026), capped at 4.5\", \"Start p = 1.5, reaching 4.5 at iteration 40\", \"Same ramp capped at 5.0 (Table 2 bound)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Expert heuristic: \\u03b2 schedule\", \"issue\": \"figure_only\", \"description\": \"Sec. 3.4 says only '\\u03b2 raised only once p \\u2265 3.0'. The increment rule, period and maximum \\u03b2 appear only in Fig. 9.\", \"readings\": [\"Double \\u03b2 every 10 iterations once p \\u2265 3.0, cap 32\", \"Double every 10 iterations, cap 64\", \"Double every 20 iterations, cap 32\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Expert heuristic: r_min and \\u03b4\", \"issue\": \"figure_only\", \"description\": \"Sec. 3.4 gives no filter radius or move limit for the expert heuristic. These appear only in Fig. 9.\", \"readings\": [\"r_min = 1.5 and \\u03b4 = 0.2 constant\", \"Late reduction to r_min = 1.2 and \\u03b4 = 0.05 (Table 1 / tail values)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Schedule-only ablation: stage timing\", \"issue\": \"conflicting\", \"description\": \"Sec. 3.4 and Sec. 4.3 say schedule-only uses Table 1's budget breakpoints (8/50/75% of N), which gives \\u03b2 = 32 only from iteration 225 at N = 300. But Sec. 4.3 and the Fig. 9 caption say it 'commits to \\u03b2 = 32 by iteration 80'. The Table 3 phase constants (22 and 16 iterations) might set the actual stage lengths.\", \"readings\": [\"Breakpoints at iterations 24/150/225 (N = 300); \\u03b2 = 32 from iteration 225\", \"Stage 2 = 22 and Stage 3 = 16 iterations after iteration 24; \\u03b2 = 32 from about iteration 62\", \"Breakpoints computed for N = 100 (iterations 8/50/75); \\u03b2 = 32 from iteration 75\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Schedule-only ablation: how values change within a stage\", \"issue\": \"figure_only\", \"description\": \"Table 1 gives only ranges per stage (p 1.0\\u20132.0 and 2.0\\u20134.5; \\u03b2 1\\u20134 and 4\\u201316). How values move within a stage is shown only in Fig. 9.\", \"readings\": [\"Linear ramp between the stage endpoints\", \"p linear; \\u03b2 doubled at equal sub-intervals (1\\u21922\\u21924, 4\\u21928\\u219216)\", \"Jump to each stage's upper value at the start of the stage\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"LLM agent parameter trajectory\", \"issue\": \"missing\", \"description\": \"The agent depends on an unpublished system prompt and a preview Gemini model (Sec. 3.2, Sec. 5.5). Table 6 lists only excerpted calls from one run, and the full trajectory is shown only in Fig. 9. Table 6 also contradicts the text in places: the gate is said to 'silently cap' \\u03b2 requests, yet \\u03b2 stays at 4 while the cap is 8; and its stage budget ranges (45\\u201355%, 67\\u2013100%) differ from Table 1.\", \"readings\": [\"Re-query an LLM (gemini-3.1-flash-lite-preview, T = 0, k = 5) with a reconstructed prompt and the Sec. 3.2 safety rails\", \"Replay the Table 6 values for run 4, held constant between listed calls, with restarts at iterations 165/200/225/300 and Stage-1 values p = 1.0, \\u03b2 = 1, r_min = 1.5, \\u03b4 = 0.2 before iteration 5\", \"Use the deterministic fallback ramp that follows Table 1\"], \"effect\": \"layout\"}]}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "Design domain size and orientation (120\u00d760, Table 4 'Long' preset)",
+    "issue": "vague",
+    "description": "Tables 4 and 5 give only '120\u00d760' for the cantilever. The text never says which count runs along the beam axis (from the fixed left edge to the loaded tip) and which runs through the depth. The usual nelx\u00d7nely convention gives a 2:1 beam.",
+    "readings": [
+     "120 elements along x (beam length) \u00d7 60 elements along y (depth), L:H = 2:1",
+     "60 elements along x \u00d7 120 elements along y (L:H = 1:2, deep cantilever)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "Physical dimensions, element size and length units",
+    "issue": "missing",
+    "description": "No physical length, element size or units are given (Sec. 3.5, Table 4). The filter radii (1.5 for the fixed controller, 1.2 in the tail, range 1.1\u20134.0 in Table 2) only make sense in element widths. For 2-D unit-thickness elements with r_min in element units, element size does not change the layout and at most rescales C.",
+    "readings": [
+     "Unit square elements; domain 120 \u00d7 60 length units",
+     "Normalized domain 2 \u00d7 1 (h = 1/60), with r_min still counted in element widths"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "mesh",
+    "entity": "Finite-element type",
+    "issue": "missing",
+    "description": "Sec. 3.1 and Sec. 3.5 mention only a 2-D mesh solved by direct sparse factorization (SciPy). Element type, interpolation order and integration rule are not stated.",
+    "readings": [
+     "4-node bilinear square (Q4) elements with 2\u00d72 Gauss integration (88-line-code element stiffness)",
+     "8- or 9-node quadratic quadrilateral elements"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "Tip load on the right (free) edge",
+    "issue": "vague",
+    "description": "Sec. 3.5 says only 'cantilever beam (tip load, fixed left edge)'. The height of the load on the right edge is never stated. It could only be inferred from the final topologies in Fig. 6, which is unavailable.",
+    "readings": [
+     "x = L, y = 0.5H (mid-height of the right edge)",
+     "x = L, y = 0 (bottom-right corner)",
+     "x = L, y = H (top-right corner)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Extent of the tip load",
+    "issue": "missing",
+    "description": "Sec. 3.5 does not say whether the tip load is a single nodal force or is spread over several nodes or applied as a traction along the right edge.",
+    "readings": [
+     "Single concentrated nodal force",
+     "Force spread uniformly over a few nodes (about 3\u20135) centred on the load point",
+     "Shear traction distributed over the whole right edge"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Direction of the tip load",
+    "issue": "missing",
+    "description": "No direction is given for the 'tip load' (Sec. 3.5). The cantilever benchmark implies a transverse (vertical) load. With a single load case the sign does not matter: reversing the load (u \u2192 \u2212u) leaves the sensitivities, the layout and C unchanged.",
+    "readings": [
+     "Vertical, downward (\u2212y)",
+     "Vertical, upward (+y)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Magnitude of the tip load",
+    "issue": "missing",
+    "description": "No force magnitude is given anywhere. The size of the reported C \u2248 76\u201381 (Table 5) suggests normalized |F| = 1 with E0 = 1, but the text does not say so.",
+    "readings": [
+     "|F| = 1 (unit load)",
+     "Another magnitude, e.g. |F| = 1000 (C \u221d |F|\u00b2)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Solid Young's modulus E0 and out-of-plane thickness",
+    "issue": "missing",
+    "description": "Sec. 3.1 and Sec. 3.5 give only E_min/E0 = 1e-9 and \u03bd = 0.3. The value of E0 and the plate thickness are never given.",
+    "readings": [
+     "E0 = 1 and thickness t = 1 (normalized)",
+     "Physical E0 (e.g. 210 GPa) and/or t \u2260 1 (C \u221d 1/(E0\u00b7t))"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "2-D elasticity assumption",
+    "issue": "missing",
+    "description": "Plane stress vs. plane strain is not stated; Sec. 3.5 gives only \u03bd = 0.3. Plane strain behaves like plane stress with \u03bd_eff = \u03bd/(1\u2212\u03bd) \u2248 0.43, which changes the element stiffness.",
+    "readings": [
+     "Plane stress",
+     "Plane strain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Non-design (passive) elements",
+    "issue": "missing",
+    "description": "Sec. 3.5 mentions no passive solid or void regions for the cantilever. It also does not say whether a solid pad is placed at the load point.",
+    "readings": [
+     "None: all 120\u00d760 elements are designable",
+     "Small solid (\u03c1 = 1) patch around the loaded node(s)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Volume constraint V_f = 0.40",
+    "issue": "missing",
+    "description": "V_f = 0.40 is given (Sec. 3.5, Tables 4\u20135), but not which field it applies to (design \u03c1, filtered \u03c1\u0304 or projected \u03c1\u0303). The tolerance used when the tail snapshot must be 'satisfying the volume constraint' (Sec. 3.5) is also missing. With \u03b7 = 0.5 projection and \u03b2 up to 32, these fields have clearly different volumes.",
+    "readings": [
+     "Mean projected density \u03c1\u0303 = 0.40, enforced in the OC bisection through the filter and projection",
+     "Mean design density \u03c1 = 0.40",
+     "Mean filtered density \u03c1\u0304 = 0.40"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "Initial design and role of the random seeds",
+    "issue": "missing",
+    "description": "The starting density field is never given. Results are averaged over 'n = 5 independent random seeds' (Sec. 3.5), and Sec. 1.2 speaks of runs 'perturbed by different random seeds'. Yet Sec. 4.1 calls the fixed and schedule-only controllers fully deterministic, while schedule-only has a non-integer mean best iteration (267.6), which implies the runs depend on the seed.",
+    "readings": [
+     "Uniform \u03c1 = 0.40 in every element (seed irrelevant)",
+     "Uniform 0.40 plus a small seeded random perturbation"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "OC update details",
+    "issue": "missing",
+    "description": "Sec. 3.1 says only 'OC method with move limit \u03b4'. The damping exponent, density bounds, and the range and tolerance of the Lagrange-multiplier bisection are not given.",
+    "readings": [
+     "88-line-code OC: damping exponent 0.5, \u03c1 \u2208 [0,1], bisection to 1e-3 relative tolerance",
+     "OC with damping exponent 0.3 and/or lower bound \u03c1_min = 1e-3"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Best valid snapshot \u03c1* that starts the 40-iteration tail",
+    "issue": "conflicting",
+    "description": "Sec. 3.5 defines \u03c1* as the lowest-compliance field 'satisfying the volume constraint'. The Table 7 footnote and Sec. 4.5 instead define validity as p \u2265 3.0 and G < 0.25. The text also does not say whether \u03c1 or \u03c1\u0303 is stored, or how compliances obtained under different p and \u03b2 are compared.",
+    "readings": [
+     "Lowest-C iterate that satisfies the volume constraint only",
+     "Lowest-C iterate with p \u2265 3.0 and G < 0.25",
+     "Lowest-C iterate that meets both conditions"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Snapshot restart (LLM agent and expert heuristic)",
+    "issue": "vague",
+    "description": "A restart 'reloads the best valid snapshot' (Table 2, Sec. 3.4). The text does not say whether only \u03c1 is restored or also p, \u03b2, r_min and \u03b4, nor whether restart iterations count toward N = 300. Sec. 5.3 refers to 'additional restart iterations' and a reduced 'effective run length'.",
+    "readings": [
+     "Reload \u03c1* only, keep the current parameters, iteration counter continues (300 main iterations in total)",
+     "Reload \u03c1* together with the parameters active at the snapshot; counter continues",
+     "Reload \u03c1* and re-run, so restarts extend the run beyond 300 iterations"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Three-field continuation: \u03b2 schedule",
+    "issue": "figure_only",
+    "description": "Sec. 3.4 says only '\u03b2 doubles every 10 iterations after the ramp'. The maximum \u03b2 is not given, and uncapped doubling over 270 iterations is not workable. The actual \u03b2(t) appears only in Fig. 9, whose caption says only that \u03b2 \u2265 16 by iteration 80.",
+    "readings": [
+     "\u03b2 = 1 up to iteration 30, doubled at 40, 50, \u2026, capped at 32 (reached at iteration 80)",
+     "Same doubling, capped at 64 (Table 2 upper bound)",
+     "Same doubling, capped at 16"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Three-field continuation: filter radius schedule",
+    "issue": "figure_only",
+    "description": "Sec. 3.4 says only 'r_min is tightened in the late stage'. Start value, end value and timing appear only in Fig. 9 (r_min(t) panel).",
+    "readings": [
+     "1.5 throughout, stepped to 1.2 at about 75% of N (iteration 225)",
+     "1.5 reduced linearly to 1.2 over iterations 150\u2013300",
+     "1.5 reduced to 1.2 once \u03b2 reaches its maximum (about iteration 80)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Three-field continuation: move limit \u03b4",
+    "issue": "figure_only",
+    "description": "Sec. 3.4 gives no move limit value or schedule for this controller. It appears only in the \u03b4(t) panel of Fig. 9.",
+    "readings": [
+     "\u03b4 = 0.20 constant",
+     "\u03b4 = 0.20, reduced to about 0.05 in the late stage"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Expert heuristic: p ramp",
+    "issue": "figure_only",
+    "description": "Sec. 3.4 gives only 'step-wise p ramp (+0.75 per 10 iterations)'. Initial and maximum p appear only in Fig. 9.",
+    "readings": [
+     "Start p = 1.0 (1.75, 2.5, 3.25, \u2026), capped at 4.5",
+     "Start p = 1.5, reaching 4.5 at iteration 40",
+     "Same ramp capped at 5.0 (Table 2 bound)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Expert heuristic: \u03b2 schedule",
+    "issue": "figure_only",
+    "description": "Sec. 3.4 says only '\u03b2 raised only once p \u2265 3.0'. The increment rule, period and maximum \u03b2 appear only in Fig. 9.",
+    "readings": [
+     "Double \u03b2 every 10 iterations once p \u2265 3.0, cap 32",
+     "Double every 10 iterations, cap 64",
+     "Double every 20 iterations, cap 32"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Expert heuristic: r_min and \u03b4",
+    "issue": "figure_only",
+    "description": "Sec. 3.4 gives no filter radius or move limit for the expert heuristic. These appear only in Fig. 9.",
+    "readings": [
+     "r_min = 1.5 and \u03b4 = 0.2 constant",
+     "Late reduction to r_min = 1.2 and \u03b4 = 0.05 (Table 1 / tail values)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Schedule-only ablation: stage timing",
+    "issue": "conflicting",
+    "description": "Sec. 3.4 and Sec. 4.3 say schedule-only uses Table 1's budget breakpoints (8/50/75% of N), which gives \u03b2 = 32 only from iteration 225 at N = 300. But Sec. 4.3 and the Fig. 9 caption say it 'commits to \u03b2 = 32 by iteration 80'. The Table 3 phase constants (22 and 16 iterations) might set the actual stage lengths.",
+    "readings": [
+     "Breakpoints at iterations 24/150/225 (N = 300); \u03b2 = 32 from iteration 225",
+     "Stage 2 = 22 and Stage 3 = 16 iterations after iteration 24; \u03b2 = 32 from about iteration 62",
+     "Breakpoints computed for N = 100 (iterations 8/50/75); \u03b2 = 32 from iteration 75"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Schedule-only ablation: how values change within a stage",
+    "issue": "figure_only",
+    "description": "Table 1 gives only ranges per stage (p 1.0\u20132.0 and 2.0\u20134.5; \u03b2 1\u20134 and 4\u201316). How values move within a stage is shown only in Fig. 9.",
+    "readings": [
+     "Linear ramp between the stage endpoints",
+     "p linear; \u03b2 doubled at equal sub-intervals (1\u21922\u21924, 4\u21928\u219216)",
+     "Jump to each stage's upper value at the start of the stage"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "LLM agent parameter trajectory",
+    "issue": "missing",
+    "description": "The agent depends on an unpublished system prompt and a preview Gemini model (Sec. 3.2, Sec. 5.5). Table 6 lists only excerpted calls from one run, and the full trajectory is shown only in Fig. 9. Table 6 also contradicts the text in places: the gate is said to 'silently cap' \u03b2 requests, yet \u03b2 stays at 4 while the cap is 8; and its stage budget ranges (45\u201355%, 67\u2013100%) differ from Table 1.",
+    "readings": [
+     "Re-query an LLM (gemini-3.1-flash-lite-preview, T = 0, k = 5) with a reconstructed prompt and the Sec. 3.2 safety rails",
+     "Replay the Table 6 values for run 4, held constant between listed calls, with restarts at iterations 165/200/225/300 and Stage-1 values p = 1.0, \u03b2 = 1, r_min = 1.5, \u03b4 = 0.2 before iteration 5",
+     "Use the deterministic fallback ramp that follows Table 1"
+    ],
+    "effect": "layout"
+   }
+  ]
+ },
+ "wall_s": 551.6137146949768,
+ "returncode": 0,
+ "meta": {
+  "model": null,
+  "num_turns": 2,
+  "is_error": false,
+  "total_cost_usd": 1.4956148,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 31274,
+   "cache_read_input_tokens": 774,
+   "output_tokens": 62263,
+   "output_tokens_details": {
+    "thinking_tokens": 57232
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 31274,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 62263,
+     "cache_read_input_tokens": 774,
+     "cache_creation_input_tokens": 31274,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 31274
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard",
+   "fallback_credit": null
+  }
+ },
+ "stderr_tail": "",
+ "task": "L15",
+ "model": "claude",
+ "model_id": "claude-opus-5-5",
+ "rep": 2,
+ "locator": "Sec. 3.5 'Benchmark problems' and Sec. 4.1, the cantilever beam, 120 x 60 'Long' preset",
+ "finished": "2026-10-22T22:21:51"
+}

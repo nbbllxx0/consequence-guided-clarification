@@ -1,0 +1,276 @@
+{
+ "raw": "{\"items\": [{\"category\": \"domain_extent\", \"entity\": \"MBB half-beam design domain (length, height, aspect ratio)\", \"issue\": \"missing\", \"description\": \"Sec. 3.4 gives only element counts HNex\\u00d7HNey (60\\u00d720, 120\\u00d740, 300\\u00d7100). No physical length, height or hexagon size is stated. 'rfill = 2.4\\u221a3 \\u2026 i.e., 0.04 times the maximum length' implies a length of HNex\\u00b7\\u221a3, but the height (the hexagon row pitch set on lines 20\\u201322, which is deferred to [1]) is not given. Fig. 1(a) shows the domain but cannot be seen, so the rectangle aspect ratio for a structured grid is not fixed.\", \"readings\": [\"L:H = 3:1, taking HNex:HNey literally (e.g. 60\\u00d720 square cells)\", \"L = HNex\\u00b7\\u221a3, H = 1.5\\u00b7HNey (regular unit-side hexagons): L:H = 2\\u221a3 \\u2248 3.46:1 (\\u2248103.9\\u00d730 for 60\\u00d720)\", \"Full bounding box of the zigzag honeycomb: L = HNex\\u00b7\\u221a3, H = 1.5\\u00b7HNey+0.5 (\\u2248103.9\\u00d730.5, \\u22483.41:1)\"], \"effect\": \"layout\"}, {\"category\": \"mesh\", \"entity\": \"Hexagonal element geometry and the equivalent structured-grid resolution\", \"issue\": \"missing\", \"description\": \"Sec. 3.1 sends the reader to [1] and Fig. 1(b) for the hexagon shape and size, row staggering, boundary shape and the removal of hanging nodes for even HNey (all three meshes have even HNey). No node coordinates are given. The structured-grid cell size and count must therefore be chosen, and the text says the ft=0 result (Fig. 2(a)) is mesh-dependent. That checkerboard-free ft=0 result also depends on hexagonal edge connectivity.\", \"readings\": [\"One square cell per hexagon: 60\\u00d720 (120\\u00d740, 300\\u00d7100)\", \"Square cell = hexagon side length: \\u2248104\\u00d730 (208\\u00d760, 520\\u00d7150)\", \"Keep HNey rows with the hexagon aspect ratio: \\u224869\\u00d720 (139\\u00d740, 346\\u00d7100)\", \"Square cell = half hexagon width (\\u221a3/2): \\u2248120\\u00d735 (240\\u00d769, 600\\u00d7173)\"], \"effect\": \"layout\"}, {\"category\": \"mesh\", \"entity\": \"Mesh (and rfill) used for Fig. 2(a)\", \"issue\": \"vague\", \"description\": \"Sec. 3.4 lists three meshes. The Fig. 2 caption assigns only the rows to ft=0/1/2 and never says which column belongs to which mesh. Fig. 2(a) is presumably the coarsest mesh, but this is not stated.\", \"readings\": [\"60\\u00d720 hexagons, rfill = 2.4\\u221a3\", \"120\\u00d740 hexagons, rfill = 4.8\\u221a3\", \"300\\u00d7100 hexagons, rfill = 12\\u221a3\"], \"effect\": \"layout\"}, {\"category\": \"support_location_extent\", \"entity\": \"Symmetry-plane boundary (ux = 0)\", \"issue\": \"figure_only\", \"description\": \"Sec. 2 says only that Fig. 1(a) shows 'the symmetric half-design domain \\u2026 with the pertinent boundary conditions'. fixeddofs (line 37) is not listed for the MBB. The text does not say which vertical edge is the symmetry cut, or which nodes of the staggered honeycomb edge are constrained. The mirrored choice gives a mirror-image layout.\", \"readings\": [\"Left edge: ux = 0 at every node on x = 0\", \"Right edge: ux = 0 at every node on x = L (mirrored set-up)\"], \"effect\": \"layout\"}, {\"category\": \"support_type\", \"entity\": \"Support at the outer-end bottom corner\", \"issue\": \"figure_only\", \"description\": \"The end support type appears only in Fig. 1(a). The text does not say whether it is a vertical roller (the classical MBB) or a pin. A pin adds horizontal restraint and changes the load path.\", \"readings\": [\"Roller: uy = 0 only\", \"Pin: ux = uy = 0\"], \"effect\": \"layout\"}, {\"category\": \"support_location_extent\", \"entity\": \"Location and extent of the outer-end bottom support\", \"issue\": \"figure_only\", \"description\": \"Shown only in Fig. 1(a). It could be the single bottom corner node opposite the symmetry edge. On the zigzag hexagon bottom edge it could also be the lowest nearby node or a few nodes.\", \"readings\": [\"Single bottom corner node at x = L\", \"Lowest bottom-edge node nearest x = L (half a hexagon in from the corner)\", \"Several bottom-edge nodes near x = L\"], \"effect\": \"layout\"}, {\"category\": \"load_position\", \"entity\": \"External load F\", \"issue\": \"figure_only\", \"description\": \"Sec. 2 places the load only through Fig. 1(a), and the force indices (row/col/data, line 34) are not given for the MBB. All three meshes have even HNey, so hanging nodes are removed (Sec. 3.1), but the text does not say where they are. If the top corner node is one of them, the load must go on a neighbouring node.\", \"readings\": [\"Top corner node on the symmetry edge (x = 0, y = H)\", \"Top corner on the opposite edge (mirrored set-up)\", \"Nearest remaining top node, half a hexagon width from the symmetry edge\"], \"effect\": \"layout\"}, {\"category\": \"load_extent_distribution\", \"entity\": \"External load F\", \"issue\": \"figure_only\", \"description\": \"Fig. 1(a) only. Sec. 3.2 describes setting 'a non-zero force value' at given indices, which suggests a single nodal force, but the MBB force vector is never written out.\", \"readings\": [\"Single nodal point force\", \"Force spread over a few top-edge nodes next to the symmetry edge\"], \"effect\": \"layout\"}, {\"category\": \"load_direction\", \"entity\": \"External load F\", \"issue\": \"figure_only\", \"description\": \"The direction and sign of F appear only in Fig. 1(a). The MBB convention is vertical and downward. Reversing the sign changes neither the compliance nor the layout.\", \"readings\": [\"Vertical downward (\\u2212y)\", \"Vertical upward (+y)\"], \"effect\": \"scale_only\"}, {\"category\": \"load_magnitude\", \"entity\": \"External load F\", \"issue\": \"missing\", \"description\": \"|F| is not stated for the MBB (the Sec. 4 examples use \\u00b11 and \\u00b12). The reported C values (e.g. 298.92) scale with |F|\\u00b2.\", \"readings\": [\"|F| = 1 on the half model\", \"|F| = 0.5 (half of a unit full-beam load at the symmetry plane)\"], \"effect\": \"scale_only\"}, {\"category\": \"material\", \"entity\": \"Young's moduli E0 and Emin\", \"issue\": \"missing\", \"description\": \"Sec. 3.2 says E0 and Emin are 'stored' on lines 12\\u201313 but gives no values. Sec. 2 gives only Emin/E0 = 1e-9 and 'k0 \\u2026 with E(\\u03c1j)=1'.\", \"readings\": [\"E0 = 1, Emin = 1e-9\", \"Another E0 (e.g. 210e9) with Emin = 1e-9\\u00b7E0\"], \"effect\": \"scale_only\"}, {\"category\": \"material\", \"entity\": \"Poisson's ratio\", \"issue\": \"missing\", \"description\": \"Sec. 3.2 says KE is built from Wachspress shape functions under plane stress, but \\u03bd is never given.\", \"readings\": [\"\\u03bd = 0.3\", \"\\u03bd = 0.25\", \"\\u03bd = 1/3\"], \"effect\": \"layout\"}, {\"category\": \"material\", \"entity\": \"Plane-stress thickness\", \"issue\": \"missing\", \"description\": \"The out-of-plane thickness is not stated. It only scales K and C.\", \"readings\": [\"t = 1\", \"Another constant t (C \\u221d 1/t), e.g. t = 0.1\"], \"effect\": \"scale_only\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Filter switch ft (sensitivity vs density filter)\", \"issue\": \"conflicting\", \"description\": \"Sec. 3.3 says 'sensitivity filtering (ft=1), density filtering (ft=1)', but later says xPhys is filtered only for ft=2. Sec. 3.4 and Fig. 2 use ft = 0, 1, 2. This affects Fig. 2(d\\u2013i); Fig. 2(a) is ft=0 (no filter).\", \"readings\": [\"ft=1 sensitivity filter, ft=2 density filter\", \"ft=1 density filter, ft=2 sensitivity filter\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Filter radius rfill in structured-grid units\", \"issue\": \"vague\", \"description\": \"In Sec. 3.4, rfill = 2.4\\u221a3 / 4.8\\u221a3 / 12\\u221a3 is given in hexagon coordinate units that are never defined, and explained as '0.04 times the maximum length'. How many cells it covers depends on the cell size chosen. It is not used for Fig. 2(a) (ft=0).\", \"readings\": [\"rmin = 0.04\\u00b7L (2.4 cells on a 60-cell length, 4.16 cells on a 104-cell length)\", \"rmin = 2.4\\u221a3 \\u2248 4.16 cell widths on a 60-cell-long grid (literal value)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Filter weights and filtered-sensitivity formulas\", \"issue\": \"missing\", \"description\": \"Lines 76\\u201377 build HHs 'with indices based on the distances in DD', and dc is 'updated as per different ft'. The weight function, the neighbour test (< or \\u2264 rfill) and the form of the sensitivity filter (density weighting, small lower bound in the denominator) are only cited from [7] and [10]. Not relevant for ft=0.\", \"readings\": [\"Linear cone weights max(0, rfill\\u2212d); 99-line sensitivity filter dc = H(x\\u00b7dc)/(Hs\\u00b7max(1e-3,x)); density filter with chain rule on dc and dv\", \"Linear cone weights; sensitivity filter without density weighting\", \"Gaussian weights\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"OC move limit\", \"issue\": \"missing\", \"description\": \"Sec. 3.3 says 'move' is defined on line 80 but gives no value.\", \"readings\": [\"move = 0.2\", \"move = 0.1\", \"move = 0.05\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Stopping criteria (maxiter and tolerance on change)\", \"issue\": \"missing\", \"description\": \"maxiter and change are defined on line 80, and 'termination conditions are monitored by change', but neither the threshold nor the iteration limit is given. This matters most for the slowly converging unfiltered run (Fig. 2(a)).\", \"readings\": [\"change < 0.01, maxiter = 200\", \"change < 0.01, maxiter = 500\", \"change < 0.001, maxiter = 1000\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"OC update details (damping, Lagrange-multiplier bisection)\", \"issue\": \"missing\", \"description\": \"OcC and the search interval inL (lines 101\\u2013114) are described only in words. The damping exponent, the initial bracket and the bisection tolerance are not given.\", \"readings\": [\"x\\u00b7(\\u2212dc/(\\u03bb\\u00b7dv))^0.5, bisection to relative tolerance 1e-3\", \"Same update with tighter bisection (1e-6)\", \"Damping exponent 0.3\"], \"effect\": \"unsure\"}]}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "MBB half-beam design domain (length, height, aspect ratio)",
+    "issue": "missing",
+    "description": "Sec. 3.4 gives only element counts HNex\u00d7HNey (60\u00d720, 120\u00d740, 300\u00d7100). No physical length, height or hexagon size is stated. 'rfill = 2.4\u221a3 \u2026 i.e., 0.04 times the maximum length' implies a length of HNex\u00b7\u221a3, but the height (the hexagon row pitch set on lines 20\u201322, which is deferred to [1]) is not given. Fig. 1(a) shows the domain but cannot be seen, so the rectangle aspect ratio for a structured grid is not fixed.",
+    "readings": [
+     "L:H = 3:1, taking HNex:HNey literally (e.g. 60\u00d720 square cells)",
+     "L = HNex\u00b7\u221a3, H = 1.5\u00b7HNey (regular unit-side hexagons): L:H = 2\u221a3 \u2248 3.46:1 (\u2248103.9\u00d730 for 60\u00d720)",
+     "Full bounding box of the zigzag honeycomb: L = HNex\u00b7\u221a3, H = 1.5\u00b7HNey+0.5 (\u2248103.9\u00d730.5, \u22483.41:1)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Hexagonal element geometry and the equivalent structured-grid resolution",
+    "issue": "missing",
+    "description": "Sec. 3.1 sends the reader to [1] and Fig. 1(b) for the hexagon shape and size, row staggering, boundary shape and the removal of hanging nodes for even HNey (all three meshes have even HNey). No node coordinates are given. The structured-grid cell size and count must therefore be chosen, and the text says the ft=0 result (Fig. 2(a)) is mesh-dependent. That checkerboard-free ft=0 result also depends on hexagonal edge connectivity.",
+    "readings": [
+     "One square cell per hexagon: 60\u00d720 (120\u00d740, 300\u00d7100)",
+     "Square cell = hexagon side length: \u2248104\u00d730 (208\u00d760, 520\u00d7150)",
+     "Keep HNey rows with the hexagon aspect ratio: \u224869\u00d720 (139\u00d740, 346\u00d7100)",
+     "Square cell = half hexagon width (\u221a3/2): \u2248120\u00d735 (240\u00d769, 600\u00d7173)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Mesh (and rfill) used for Fig. 2(a)",
+    "issue": "vague",
+    "description": "Sec. 3.4 lists three meshes. The Fig. 2 caption assigns only the rows to ft=0/1/2 and never says which column belongs to which mesh. Fig. 2(a) is presumably the coarsest mesh, but this is not stated.",
+    "readings": [
+     "60\u00d720 hexagons, rfill = 2.4\u221a3",
+     "120\u00d740 hexagons, rfill = 4.8\u221a3",
+     "300\u00d7100 hexagons, rfill = 12\u221a3"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "Symmetry-plane boundary (ux = 0)",
+    "issue": "figure_only",
+    "description": "Sec. 2 says only that Fig. 1(a) shows 'the symmetric half-design domain \u2026 with the pertinent boundary conditions'. fixeddofs (line 37) is not listed for the MBB. The text does not say which vertical edge is the symmetry cut, or which nodes of the staggered honeycomb edge are constrained. The mirrored choice gives a mirror-image layout.",
+    "readings": [
+     "Left edge: ux = 0 at every node on x = 0",
+     "Right edge: ux = 0 at every node on x = L (mirrored set-up)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_type",
+    "entity": "Support at the outer-end bottom corner",
+    "issue": "figure_only",
+    "description": "The end support type appears only in Fig. 1(a). The text does not say whether it is a vertical roller (the classical MBB) or a pin. A pin adds horizontal restraint and changes the load path.",
+    "readings": [
+     "Roller: uy = 0 only",
+     "Pin: ux = uy = 0"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "Location and extent of the outer-end bottom support",
+    "issue": "figure_only",
+    "description": "Shown only in Fig. 1(a). It could be the single bottom corner node opposite the symmetry edge. On the zigzag hexagon bottom edge it could also be the lowest nearby node or a few nodes.",
+    "readings": [
+     "Single bottom corner node at x = L",
+     "Lowest bottom-edge node nearest x = L (half a hexagon in from the corner)",
+     "Several bottom-edge nodes near x = L"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "External load F",
+    "issue": "figure_only",
+    "description": "Sec. 2 places the load only through Fig. 1(a), and the force indices (row/col/data, line 34) are not given for the MBB. All three meshes have even HNey, so hanging nodes are removed (Sec. 3.1), but the text does not say where they are. If the top corner node is one of them, the load must go on a neighbouring node.",
+    "readings": [
+     "Top corner node on the symmetry edge (x = 0, y = H)",
+     "Top corner on the opposite edge (mirrored set-up)",
+     "Nearest remaining top node, half a hexagon width from the symmetry edge"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "External load F",
+    "issue": "figure_only",
+    "description": "Fig. 1(a) only. Sec. 3.2 describes setting 'a non-zero force value' at given indices, which suggests a single nodal force, but the MBB force vector is never written out.",
+    "readings": [
+     "Single nodal point force",
+     "Force spread over a few top-edge nodes next to the symmetry edge"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "External load F",
+    "issue": "figure_only",
+    "description": "The direction and sign of F appear only in Fig. 1(a). The MBB convention is vertical and downward. Reversing the sign changes neither the compliance nor the layout.",
+    "readings": [
+     "Vertical downward (\u2212y)",
+     "Vertical upward (+y)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "External load F",
+    "issue": "missing",
+    "description": "|F| is not stated for the MBB (the Sec. 4 examples use \u00b11 and \u00b12). The reported C values (e.g. 298.92) scale with |F|\u00b2.",
+    "readings": [
+     "|F| = 1 on the half model",
+     "|F| = 0.5 (half of a unit full-beam load at the symmetry plane)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Young's moduli E0 and Emin",
+    "issue": "missing",
+    "description": "Sec. 3.2 says E0 and Emin are 'stored' on lines 12\u201313 but gives no values. Sec. 2 gives only Emin/E0 = 1e-9 and 'k0 \u2026 with E(\u03c1j)=1'.",
+    "readings": [
+     "E0 = 1, Emin = 1e-9",
+     "Another E0 (e.g. 210e9) with Emin = 1e-9\u00b7E0"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson's ratio",
+    "issue": "missing",
+    "description": "Sec. 3.2 says KE is built from Wachspress shape functions under plane stress, but \u03bd is never given.",
+    "readings": [
+     "\u03bd = 0.3",
+     "\u03bd = 0.25",
+     "\u03bd = 1/3"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Plane-stress thickness",
+    "issue": "missing",
+    "description": "The out-of-plane thickness is not stated. It only scales K and C.",
+    "readings": [
+     "t = 1",
+     "Another constant t (C \u221d 1/t), e.g. t = 0.1"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Filter switch ft (sensitivity vs density filter)",
+    "issue": "conflicting",
+    "description": "Sec. 3.3 says 'sensitivity filtering (ft=1), density filtering (ft=1)', but later says xPhys is filtered only for ft=2. Sec. 3.4 and Fig. 2 use ft = 0, 1, 2. This affects Fig. 2(d\u2013i); Fig. 2(a) is ft=0 (no filter).",
+    "readings": [
+     "ft=1 sensitivity filter, ft=2 density filter",
+     "ft=1 density filter, ft=2 sensitivity filter"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Filter radius rfill in structured-grid units",
+    "issue": "vague",
+    "description": "In Sec. 3.4, rfill = 2.4\u221a3 / 4.8\u221a3 / 12\u221a3 is given in hexagon coordinate units that are never defined, and explained as '0.04 times the maximum length'. How many cells it covers depends on the cell size chosen. It is not used for Fig. 2(a) (ft=0).",
+    "readings": [
+     "rmin = 0.04\u00b7L (2.4 cells on a 60-cell length, 4.16 cells on a 104-cell length)",
+     "rmin = 2.4\u221a3 \u2248 4.16 cell widths on a 60-cell-long grid (literal value)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Filter weights and filtered-sensitivity formulas",
+    "issue": "missing",
+    "description": "Lines 76\u201377 build HHs 'with indices based on the distances in DD', and dc is 'updated as per different ft'. The weight function, the neighbour test (< or \u2264 rfill) and the form of the sensitivity filter (density weighting, small lower bound in the denominator) are only cited from [7] and [10]. Not relevant for ft=0.",
+    "readings": [
+     "Linear cone weights max(0, rfill\u2212d); 99-line sensitivity filter dc = H(x\u00b7dc)/(Hs\u00b7max(1e-3,x)); density filter with chain rule on dc and dv",
+     "Linear cone weights; sensitivity filter without density weighting",
+     "Gaussian weights"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "OC move limit",
+    "issue": "missing",
+    "description": "Sec. 3.3 says 'move' is defined on line 80 but gives no value.",
+    "readings": [
+     "move = 0.2",
+     "move = 0.1",
+     "move = 0.05"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Stopping criteria (maxiter and tolerance on change)",
+    "issue": "missing",
+    "description": "maxiter and change are defined on line 80, and 'termination conditions are monitored by change', but neither the threshold nor the iteration limit is given. This matters most for the slowly converging unfiltered run (Fig. 2(a)).",
+    "readings": [
+     "change < 0.01, maxiter = 200",
+     "change < 0.01, maxiter = 500",
+     "change < 0.001, maxiter = 1000"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "OC update details (damping, Lagrange-multiplier bisection)",
+    "issue": "missing",
+    "description": "OcC and the search interval inL (lines 101\u2013114) are described only in words. The damping exponent, the initial bracket and the bisection tolerance are not given.",
+    "readings": [
+     "x\u00b7(\u2212dc/(\u03bb\u00b7dv))^0.5, bisection to relative tolerance 1e-3",
+     "Same update with tighter bisection (1e-6)",
+     "Damping exponent 0.3"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 521.3447680473328,
+ "returncode": 0,
+ "meta": {
+  "model": null,
+  "num_turns": 2,
+  "is_error": false,
+  "total_cost_usd": 1.2110388,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 9072,
+   "cache_read_input_tokens": 774,
+   "output_tokens": 56915,
+   "output_tokens_details": {
+    "thinking_tokens": 53067
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 9072,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 56915,
+     "cache_read_input_tokens": 774,
+     "cache_creation_input_tokens": 9072,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 9072
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard",
+   "fallback_credit": null
+  }
+ },
+ "stderr_tail": "",
+ "task": "L39",
+ "model": "claude",
+ "model_id": "claude-opus-5-5",
+ "rep": 0,
+ "locator": "Sec. 3.4, the MBB beam (Fig. 1(a), Fig. 2(a))",
+ "finished": "2026-10-22T19:21:18"
+}

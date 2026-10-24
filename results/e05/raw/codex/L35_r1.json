@@ -1,0 +1,311 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Cantilever box dimensions and grid orientation\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 gives 40\u00d720\u00d78 element counts, but no side lengths, cell aspect ratios, or assignment to span and transverse directions. Below, x spans root-to-tip length L, y spans height H, and z spans width B.\",\n      \"readings\": [\n        \"Cubic cells: 40 cells along the span, 20 along y, and 8 along z; L:H:B=40:20:8.\",\n        \"Cubic cells: 40 cells along the span, 8 along y, and 20 along z; L:H:B=40:8:20.\",\n        \"Rectangular cells on a 40\u00d720\u00d78 grid with L:H:B=2:1:1.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Absolute physical length scale\",\n      \"issue\": \"missing\",\n      \"description\": \"No physical domain size or length unit is supplied. The coordinate normalization in Sec. 3.4 does not establish the physical dimensions used in FEA.\",\n      \"readings\": [\n        \"L=1 mm, with the chosen aspect ratios held fixed.\",\n        \"L=40 mm, with the same aspect ratios.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"Root attachment region\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 4.1 names a cantilever boundary condition; Fig. 3(a), whose image is unavailable, is captioned 'Boundary condition'. The supported node set is not described.\",\n      \"readings\": [\n        \"Clamp every node on the complete root face x=0.\",\n        \"Clamp only the perimeter nodes of the root face.\",\n        \"Clamp a central root-face patch spanning y/H and z/B from 1/4 to 3/4.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"support_type\",\n      \"entity\": \"Displacement components constrained at the root\",\n      \"issue\": \"figure_only\",\n      \"description\": \"The cantilever label establishes a fixed-root intent, but Sec. 4.1 and the available caption do not enumerate the three-dimensional nodal displacement constraints.\",\n      \"readings\": [\n        \"Set ux=uy=uz=0 at every supported node.\",\n        \"Set ux=uy=0 across the root, with uz=0 only along the root mid-width line, allowing lateral contraction elsewhere.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"Location of the applied load\",\n      \"issue\": \"figure_only\",\n      \"description\": \"The load position is not stated in Sec. 4.1 or the Fig. 3 caption; the boundary-condition image is unavailable.\",\n      \"readings\": [\n        \"Free-end face center: (L,H/2,B/2).\",\n        \"Free-end lower-edge midpoint: (L,0,B/2).\",\n        \"Free-end corner: (L,0,0).\",\n        \"Half-span lower-edge midpoint: (L/2,0,B/2).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Spatial extent and nodal distribution of the load\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Neither Sec. 4.1 nor the available Fig. 3 caption specifies whether the load occupies a node, edge, patch, or face, or how distributed loading becomes nodal forces.\",\n      \"readings\": [\n        \"Apply the complete resultant to one node.\",\n        \"Apply a uniform line load across a full-width edge, using consistent nodal forces with half weights at the endpoints.\",\n        \"Apply equal forces to every node on a full-width edge.\",\n        \"Apply uniform traction over the complete free-end face, using consistent nodal forces.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"Force orientation\",\n      \"issue\": \"figure_only\",\n      \"description\": \"No force vector or direction relative to the span and transverse axes is given outside the unavailable Fig. 3(a).\",\n      \"readings\": [\n        \"Force parallel to -ey.\",\n        \"Force parallel to -ez.\",\n        \"Force parallel to -(ey+ez)/sqrt(2).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"Overall force scale\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (7) introduces F, but Sec. 4.1 and the Fig. 3 caption provide no numerical force magnitude or force unit.\",\n      \"readings\": [\n        \"Normalize the complete load vector to a resultant magnitude of 1.\",\n        \"Use a resultant magnitude of 10 in the same force units, preserving the spatial distribution.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Example-specific non-design mask\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.2 describes passive voids for some problems, but Sec. 4.1 supplies no mask or explicit statement that none exist. Fixed-solid attachment or loading pads are also unspecified.\",\n      \"readings\": [\n        \"All 6400 elements are designable; no prescribed-density regions.\",\n        \"Keep one element layer at the root face permanently solid; all other cells are designable.\",\n        \"Keep one element layer at both root and loaded faces permanently solid.\",\n        \"Prescribe a one-element-thick void skin on unsupported, unloaded exterior faces.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Target volume fraction V*\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.5 defines the equality target V*, but no numerical value is assigned to the Fig. 3 validation example.\",\n      \"readings\": [\n        \"V*=0.20.\",\n        \"V*=0.30.\",\n        \"V*=0.50.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Volume accounting if non-design cells exist\",\n      \"issue\": \"vague\",\n      \"description\": \"Eq. (20) uses mean density without specifying its averaging set when passive or fixed-solid regions are present.\",\n      \"readings\": [\n        \"Compute material fraction over all 6400 cells, including prescribed-density cells.\",\n        \"Apply V* only to designable cells, with fixed-solid material outside that budget.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Solid Young's modulus E0\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (6) introduces E0 but supplies no value. Isotropy is stated in Sec. 3.2.\",\n      \"readings\": [\n        \"E0=1 in consistent units, holding Emin/E0 fixed.\",\n        \"E0=100 in the same units, holding the same Emin/E0 fixed.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Poisson's ratio\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.2 states isotropic elasticity but never specifies Poisson's ratio; the cited solver's defaults are not included.\",\n      \"readings\": [\n        \"Poisson's ratio=0.20.\",\n        \"Poisson's ratio=0.30.\",\n        \"Poisson's ratio=0.45.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Void-to-solid stiffness ratio Emin/E0\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (6) includes a residual modulus Emin without assigning its value relative to E0.\",\n      \"readings\": [\n        \"Emin/E0=1e-9.\",\n        \"Emin/E0=1e-6.\",\n        \"Emin/E0=1e-3.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"SIMP penalization exponent\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (6) introduces p, but neither its value nor any continuation schedule is specified for validation.\",\n      \"readings\": [\n        \"Hold p=2 throughout.\",\n        \"Hold p=3 throughout.\",\n        \"Increase p linearly from 1 to 3 over the 300 iterations.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Enforced density symmetry\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.2 offers symmetry enforcement through Eq. (10), but Sec. 4.1 does not say whether it is enabled or identify a symmetry plane.\",\n      \"readings\": [\n        \"Enforce no density symmetry.\",\n        \"Mirror and average the density about the mid-width plane z=B/2.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Regularization of the elementwise SIMP comparator\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 discusses avoiding filtering for the topology-network result, but does not specify the SIMP comparator's filter or projection treatment.\",\n      \"readings\": [\n        \"Use raw element densities with no filter or projection.\",\n        \"Use a linear density filter with radius 1.5 cell widths and no projection.\",\n        \"Use a sensitivity filter with radius 1.5 cell widths and no projection.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Topology-network basis and implicit length scale\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.1 specifies a linear three-dimensional kernel grid, but not its dimensions, frequency range, phases, or trainability. These determine the implicit regularization of Fig. 3(b).\",\n      \"readings\": [\n        \"Use 64 fixed features on a 4\u00d74\u00d74 frequency grid spanning [-pi,pi]^3, zero phases, and train only W and the dense bias.\",\n        \"Use 512 fixed features on an 8\u00d78\u00d78 frequency grid spanning [-4pi,4pi]^3, phases sampled uniformly from [0,2pi] with seed 0, and train only W and the dense bias.\",\n        \"Initialize 64 features on a 4\u00d74\u00d74 grid spanning [-pi,pi]^3 with zero phases, then train frequencies and phases along with W and the dense bias.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initial design and random initialization\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.5 defines a uniform-density reference for c0, which does not uniquely specify the initial optimization variables. Initial densities, dense weights, dense bias, and random seed are not supplied.\",\n      \"readings\": [\n        \"Initialize uniform density V*; for the topology network set W=0 and dense bias=log(V*/(1-V*)).\",\n        \"Initialize uniform density 0.5; for the topology network set W=0 and dense bias=0.\",\n        \"Initialize SIMP densities with uniform perturbations of \u00b10.01 around V*, clipped to [0,1]; initialize topology-network weights from Normal(0,0.01), with dense bias=log(V*/(1-V*)) and seed 0.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"SGD and Adam learning rates\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 fixes the optimizer switch and total iterations, but supplies neither learning rate nor any learning-rate schedule.\",\n      \"readings\": [\n        \"Constant SGD learning rate 0.01, followed by constant Adam learning rate 0.001.\",\n        \"Constant SGD learning rate 0.1, followed by constant Adam learning rate 0.01.\",\n        \"SGD learning rate 0.01, followed by Adam learning rate decreasing linearly from 0.001 to 0.0001.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Remaining optimizer hyperparameters\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 3.5 and 4.1 name SGD and Adam without specifying momentum, Adam moment coefficients, or numerical epsilon.\",\n      \"readings\": [\n        \"SGD momentum=0; Adam beta1=0.9, beta2=0.999, epsilon=1e-7.\",\n        \"SGD momentum=0.9; Adam beta1=0.9, beta2=0.99, epsilon=1e-8.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Volume-penalty continuation\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 3.5 specifies alpha1 initially zero, increasing every iteration, with a maximum of 100; it does not specify the increment or when the maximum is reached.\",\n      \"readings\": [\n        \"For iteration index t=0,...,299, use alpha1=min(100,t).\",\n        \"For iteration index t=0,...,299, use alpha1=100t/299.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Density update and bound enforcement in the SIMP comparator\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 describes a one-layer network storing element variables, but does not specify its output activation, clipping, or move limits. The topology network's sigmoid does not settle this comparator's implementation.\",\n      \"readings\": [\n        \"Store physical densities and clip each optimizer update to [0,1], without a move limit.\",\n        \"Store logits and map them to densities through a sigmoid.\",\n        \"Store physical densities, clip to [0,1], and limit each iteration's density change to 0.2.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Integration and stabilization of the eight-node hexahedra\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.2 specifies eight-node hexahedral elements but does not state the quadrature or any reduced-integration stabilization.\",\n      \"readings\": [\n        \"Trilinear displacement hexahedra with full 2\u00d72\u00d72 Gauss integration.\",\n        \"Trilinear displacement hexahedra with one-point integration and hourglass stabilization.\",\n        \"Hexahedra with selective reduced integration of the volumetric stiffness.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Finite-element linear-solver accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.2 mentions a CUDA sparse iterative solver but supplies no algorithm, preconditioner, residual tolerance, iteration cap, or arithmetic precision.\",\n      \"readings\": [\n        \"Conjugate gradient with Jacobi preconditioning, relative residual tolerance 1e-6, maximum 10000 iterations, and float32 arithmetic.\",\n        \"Conjugate gradient with incomplete-Cholesky preconditioning, relative residual tolerance 1e-10, maximum 50000 iterations, and float64 arithmetic.\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "Cantilever box dimensions and grid orientation",
+    "issue": "missing",
+    "description": "Sec. 4.1 gives 40\u00d720\u00d78 element counts, but no side lengths, cell aspect ratios, or assignment to span and transverse directions. Below, x spans root-to-tip length L, y spans height H, and z spans width B.",
+    "readings": [
+     "Cubic cells: 40 cells along the span, 20 along y, and 8 along z; L:H:B=40:20:8.",
+     "Cubic cells: 40 cells along the span, 8 along y, and 20 along z; L:H:B=40:8:20.",
+     "Rectangular cells on a 40\u00d720\u00d78 grid with L:H:B=2:1:1."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "Absolute physical length scale",
+    "issue": "missing",
+    "description": "No physical domain size or length unit is supplied. The coordinate normalization in Sec. 3.4 does not establish the physical dimensions used in FEA.",
+    "readings": [
+     "L=1 mm, with the chosen aspect ratios held fixed.",
+     "L=40 mm, with the same aspect ratios."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "Root attachment region",
+    "issue": "figure_only",
+    "description": "Sec. 4.1 names a cantilever boundary condition; Fig. 3(a), whose image is unavailable, is captioned 'Boundary condition'. The supported node set is not described.",
+    "readings": [
+     "Clamp every node on the complete root face x=0.",
+     "Clamp only the perimeter nodes of the root face.",
+     "Clamp a central root-face patch spanning y/H and z/B from 1/4 to 3/4."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_type",
+    "entity": "Displacement components constrained at the root",
+    "issue": "figure_only",
+    "description": "The cantilever label establishes a fixed-root intent, but Sec. 4.1 and the available caption do not enumerate the three-dimensional nodal displacement constraints.",
+    "readings": [
+     "Set ux=uy=uz=0 at every supported node.",
+     "Set ux=uy=0 across the root, with uz=0 only along the root mid-width line, allowing lateral contraction elsewhere."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "Location of the applied load",
+    "issue": "figure_only",
+    "description": "The load position is not stated in Sec. 4.1 or the Fig. 3 caption; the boundary-condition image is unavailable.",
+    "readings": [
+     "Free-end face center: (L,H/2,B/2).",
+     "Free-end lower-edge midpoint: (L,0,B/2).",
+     "Free-end corner: (L,0,0).",
+     "Half-span lower-edge midpoint: (L/2,0,B/2)."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Spatial extent and nodal distribution of the load",
+    "issue": "figure_only",
+    "description": "Neither Sec. 4.1 nor the available Fig. 3 caption specifies whether the load occupies a node, edge, patch, or face, or how distributed loading becomes nodal forces.",
+    "readings": [
+     "Apply the complete resultant to one node.",
+     "Apply a uniform line load across a full-width edge, using consistent nodal forces with half weights at the endpoints.",
+     "Apply equal forces to every node on a full-width edge.",
+     "Apply uniform traction over the complete free-end face, using consistent nodal forces."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Force orientation",
+    "issue": "figure_only",
+    "description": "No force vector or direction relative to the span and transverse axes is given outside the unavailable Fig. 3(a).",
+    "readings": [
+     "Force parallel to -ey.",
+     "Force parallel to -ez.",
+     "Force parallel to -(ey+ez)/sqrt(2)."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Overall force scale",
+    "issue": "missing",
+    "description": "Eq. (7) introduces F, but Sec. 4.1 and the Fig. 3 caption provide no numerical force magnitude or force unit.",
+    "readings": [
+     "Normalize the complete load vector to a resultant magnitude of 1.",
+     "Use a resultant magnitude of 10 in the same force units, preserving the spatial distribution."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Example-specific non-design mask",
+    "issue": "missing",
+    "description": "Sec. 3.2 describes passive voids for some problems, but Sec. 4.1 supplies no mask or explicit statement that none exist. Fixed-solid attachment or loading pads are also unspecified.",
+    "readings": [
+     "All 6400 elements are designable; no prescribed-density regions.",
+     "Keep one element layer at the root face permanently solid; all other cells are designable.",
+     "Keep one element layer at both root and loaded faces permanently solid.",
+     "Prescribe a one-element-thick void skin on unsupported, unloaded exterior faces."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Target volume fraction V*",
+    "issue": "missing",
+    "description": "Sec. 3.5 defines the equality target V*, but no numerical value is assigned to the Fig. 3 validation example.",
+    "readings": [
+     "V*=0.20.",
+     "V*=0.30.",
+     "V*=0.50."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Volume accounting if non-design cells exist",
+    "issue": "vague",
+    "description": "Eq. (20) uses mean density without specifying its averaging set when passive or fixed-solid regions are present.",
+    "readings": [
+     "Compute material fraction over all 6400 cells, including prescribed-density cells.",
+     "Apply V* only to designable cells, with fixed-solid material outside that budget."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Solid Young's modulus E0",
+    "issue": "missing",
+    "description": "Eq. (6) introduces E0 but supplies no value. Isotropy is stated in Sec. 3.2.",
+    "readings": [
+     "E0=1 in consistent units, holding Emin/E0 fixed.",
+     "E0=100 in the same units, holding the same Emin/E0 fixed."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson's ratio",
+    "issue": "missing",
+    "description": "Sec. 3.2 states isotropic elasticity but never specifies Poisson's ratio; the cited solver's defaults are not included.",
+    "readings": [
+     "Poisson's ratio=0.20.",
+     "Poisson's ratio=0.30.",
+     "Poisson's ratio=0.45."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Void-to-solid stiffness ratio Emin/E0",
+    "issue": "missing",
+    "description": "Eq. (6) includes a residual modulus Emin without assigning its value relative to E0.",
+    "readings": [
+     "Emin/E0=1e-9.",
+     "Emin/E0=1e-6.",
+     "Emin/E0=1e-3."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "SIMP penalization exponent",
+    "issue": "missing",
+    "description": "Eq. (6) introduces p, but neither its value nor any continuation schedule is specified for validation.",
+    "readings": [
+     "Hold p=2 throughout.",
+     "Hold p=3 throughout.",
+     "Increase p linearly from 1 to 3 over the 300 iterations."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Enforced density symmetry",
+    "issue": "missing",
+    "description": "Sec. 3.2 offers symmetry enforcement through Eq. (10), but Sec. 4.1 does not say whether it is enabled or identify a symmetry plane.",
+    "readings": [
+     "Enforce no density symmetry.",
+     "Mirror and average the density about the mid-width plane z=B/2."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Regularization of the elementwise SIMP comparator",
+    "issue": "missing",
+    "description": "Sec. 4.1 discusses avoiding filtering for the topology-network result, but does not specify the SIMP comparator's filter or projection treatment.",
+    "readings": [
+     "Use raw element densities with no filter or projection.",
+     "Use a linear density filter with radius 1.5 cell widths and no projection.",
+     "Use a sensitivity filter with radius 1.5 cell widths and no projection."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Topology-network basis and implicit length scale",
+    "issue": "missing",
+    "description": "Sec. 3.1 specifies a linear three-dimensional kernel grid, but not its dimensions, frequency range, phases, or trainability. These determine the implicit regularization of Fig. 3(b).",
+    "readings": [
+     "Use 64 fixed features on a 4\u00d74\u00d74 frequency grid spanning [-pi,pi]^3, zero phases, and train only W and the dense bias.",
+     "Use 512 fixed features on an 8\u00d78\u00d78 frequency grid spanning [-4pi,4pi]^3, phases sampled uniformly from [0,2pi] with seed 0, and train only W and the dense bias.",
+     "Initialize 64 features on a 4\u00d74\u00d74 grid spanning [-pi,pi]^3 with zero phases, then train frequencies and phases along with W and the dense bias."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial design and random initialization",
+    "issue": "missing",
+    "description": "Sec. 3.5 defines a uniform-density reference for c0, which does not uniquely specify the initial optimization variables. Initial densities, dense weights, dense bias, and random seed are not supplied.",
+    "readings": [
+     "Initialize uniform density V*; for the topology network set W=0 and dense bias=log(V*/(1-V*)).",
+     "Initialize uniform density 0.5; for the topology network set W=0 and dense bias=0.",
+     "Initialize SIMP densities with uniform perturbations of \u00b10.01 around V*, clipped to [0,1]; initialize topology-network weights from Normal(0,0.01), with dense bias=log(V*/(1-V*)) and seed 0."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "SGD and Adam learning rates",
+    "issue": "missing",
+    "description": "Sec. 4.1 fixes the optimizer switch and total iterations, but supplies neither learning rate nor any learning-rate schedule.",
+    "readings": [
+     "Constant SGD learning rate 0.01, followed by constant Adam learning rate 0.001.",
+     "Constant SGD learning rate 0.1, followed by constant Adam learning rate 0.01.",
+     "SGD learning rate 0.01, followed by Adam learning rate decreasing linearly from 0.001 to 0.0001."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Remaining optimizer hyperparameters",
+    "issue": "missing",
+    "description": "Secs. 3.5 and 4.1 name SGD and Adam without specifying momentum, Adam moment coefficients, or numerical epsilon.",
+    "readings": [
+     "SGD momentum=0; Adam beta1=0.9, beta2=0.999, epsilon=1e-7.",
+     "SGD momentum=0.9; Adam beta1=0.9, beta2=0.99, epsilon=1e-8."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Volume-penalty continuation",
+    "issue": "vague",
+    "description": "Sec. 3.5 specifies alpha1 initially zero, increasing every iteration, with a maximum of 100; it does not specify the increment or when the maximum is reached.",
+    "readings": [
+     "For iteration index t=0,...,299, use alpha1=min(100,t).",
+     "For iteration index t=0,...,299, use alpha1=100t/299."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Density update and bound enforcement in the SIMP comparator",
+    "issue": "missing",
+    "description": "Sec. 4.1 describes a one-layer network storing element variables, but does not specify its output activation, clipping, or move limits. The topology network's sigmoid does not settle this comparator's implementation.",
+    "readings": [
+     "Store physical densities and clip each optimizer update to [0,1], without a move limit.",
+     "Store logits and map them to densities through a sigmoid.",
+     "Store physical densities, clip to [0,1], and limit each iteration's density change to 0.2."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Integration and stabilization of the eight-node hexahedra",
+    "issue": "missing",
+    "description": "Sec. 3.2 specifies eight-node hexahedral elements but does not state the quadrature or any reduced-integration stabilization.",
+    "readings": [
+     "Trilinear displacement hexahedra with full 2\u00d72\u00d72 Gauss integration.",
+     "Trilinear displacement hexahedra with one-point integration and hourglass stabilization.",
+     "Hexahedra with selective reduced integration of the volumetric stiffness."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Finite-element linear-solver accuracy",
+    "issue": "missing",
+    "description": "Sec. 3.2 mentions a CUDA sparse iterative solver but supplies no algorithm, preconditioner, residual tolerance, iteration cap, or arithmetic precision.",
+    "readings": [
+     "Conjugate gradient with Jacobi preconditioning, relative residual tolerance 1e-6, maximum 10000 iterations, and float32 arithmetic.",
+     "Conjugate gradient with incomplete-Cholesky preconditioning, relative residual tolerance 1e-10, maximum 50000 iterations, and float64 arithmetic."
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 802.2886979579926,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L35",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 1,
+ "locator": "Sec. 4.1 'Validation', the 3-D cantilever (Fig. 3)",
+ "finished": "2026-10-22T21:18:57"
+}

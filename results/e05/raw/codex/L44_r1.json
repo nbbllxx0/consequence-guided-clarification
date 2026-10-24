@@ -1,0 +1,303 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"in-plane cantilever domain\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Table 3 nor Sec. 5.1 gives Lx and Ly for cantilever_basic. Mesh counts and the dimensions of other examples do not determine its physical dimensions or aspect ratio.\",\n      \"readings\": [\n        \"Lx = 2, Ly = 1\",\n        \"Lx = 3, Ly = 1\",\n        \"Lx = 60, Ly = 30\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"out-of-plane thickness of the 2-D cantilever\",\n      \"issue\": \"missing\",\n      \"description\": \"The 2-D formulation in Sec. 3.3 does not specify thickness or a per-unit-depth convention. A constant thickness changes compliance scaling for fixed resultant forces.\",\n      \"readings\": [\n        \"Unit thickness t = 1\",\n        \"Uniform thickness t = 0.1 in the chosen length units\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"element counts assigned to cantilever_basic\",\n      \"issue\": \"vague\",\n      \"description\": \"Table 3 does not explicitly identify this case's mesh. Algorithm 2's default and the matching compliance in Table 5 strongly suggest 60 \u00d7 30, but the case-to-mesh mapping is not stated; Sec. 4.1 also lists 120 \u00d7 40 standard cantilevers.\",\n      \"readings\": [\n        \"60 \u00d7 30 elements, using the default and inferred Table 5 correspondence\",\n        \"120 \u00d7 40 elements, using the other listed standard cantilever resolution\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"finite elements and integration rule\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.3 refers to the earlier solver without specifying the 2-D element interpolation or quadrature. A structured grid alone does not determine these.\",\n      \"readings\": [\n        \"Four-node bilinear quadrilaterals with 2 \u00d7 2 Gauss integration\",\n        \"Eight-node serendipity quadrilaterals with 3 \u00d7 3 Gauss integration\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"tip load location on the free right edge\",\n      \"issue\": \"vague\",\n      \"description\": \"Algorithm 2 maps 'cantilever' to a tip load without specifying its y-coordinate. The mid-right prompt in Sec. 4.1 is an illustrative hole example, not an explicitly identified cantilever_basic prompt.\",\n      \"readings\": [\n        \"Right-edge midpoint: (Lx, Ly/2)\",\n        \"Lower-right corner: (Lx, 0)\",\n        \"Upper-right corner: (Lx, Ly)\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"spatial distribution of the tip load\",\n      \"issue\": \"vague\",\n      \"description\": \"The case's load specification is absent. Algorithm 2 says only 'tip load', while Secs. 3.1\u20133.2 support both point forces and distributed edge loads.\",\n      \"readings\": [\n        \"One concentrated force assembled at the nearest right-edge node\",\n        \"Uniform traction over the entire right edge, with the same total resultant and trapezoidal nodal weighting\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"cantilever_basic applied force\",\n      \"issue\": \"missing\",\n      \"description\": \"No force vector is given specifically for this row. Algorithm 2 does not specify direction, and the downward force described in Sec. 4.1 belongs to an illustrative prompt.\",\n      \"readings\": [\n        \"Transverse downward force: (Fx, Fy) = (0, -F)\",\n        \"Axial force: (Fx, Fy) = (F, 0)\",\n        \"Diagonal force: (Fx, Fy) = (F/sqrt(2), -F/sqrt(2))\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"total applied force\",\n      \"issue\": \"missing\",\n      \"description\": \"Table 3 gives no force magnitude. The Fy = -1 example in Sec. 4.1 is not explicitly assigned to cantilever_basic.\",\n      \"readings\": [\n        \"Resultant magnitude F = 1 in consistent force units\",\n        \"Resultant magnitude F = 10 in the same units\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"passive mask, particularly support and load attachment cells\",\n      \"issue\": \"missing\",\n      \"description\": \"The passive-region list for this row is not printed. Separate hole and insert cases suggest a plain beam, but the text does not explicitly establish an empty mask or specify whether attachment cells are frozen solid.\",\n      \"readings\": [\n        \"No passive elements; all cells are designable\",\n        \"Freeze the first element column adjacent to the clamp at density 1\",\n        \"Freeze the clamp-adjacent column and cells incident to the loaded node at density 1\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"target volume fraction for cantilever_basic\",\n      \"issue\": \"vague\",\n      \"description\": \"Algorithm 2 states a default Vf = 0.5, but the actual prompt and ProblemSpec for this row are absent. Sec. 4.1 lists explicit volume-fraction variants without assigning a value to cantilever_basic.\",\n      \"readings\": [\n        \"Vf = 0.50, applying the configurator default\",\n        \"Vf = 0.40, treating the case as explicitly configured at a listed benchmark fraction\",\n        \"Vf = 0.60, treating the case as explicitly configured at another listed benchmark fraction\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"solid-material elastic stiffness scale\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.3 supplies no Young's modulus or equivalent reference stiffness for this example.\",\n      \"readings\": [\n        \"Normalized Young's modulus E0 = 1\",\n        \"Young's modulus E0 = 210 GPa with consistent physical units\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"elastic constitutive law and stiffness ratios\",\n      \"issue\": \"missing\",\n      \"description\": \"The paper does not give a Poisson ratio or constitutive tensor for cantilever_basic, nor explicitly state isotropy.\",\n      \"readings\": [\n        \"Isotropic linear elasticity with Poisson ratio 0.30\",\n        \"Isotropic linear elasticity with Poisson ratio 0.25\",\n        \"Orthotropic linear elasticity aligned with the grid: Ex/Ey = 2, Gxy/Ey = 0.4, nu_xy = 0.25 and nu_yx = 0.125\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"2-D elastic idealization\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 3.3 and 4.1 identify a 2-D problem but do not specify plane stress or plane strain.\",\n      \"readings\": [\n        \"Plane stress\",\n        \"Plane strain\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"continuation controller used for the configuration-accuracy example\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Sec. 4.4 and Table 3 specify the LLM controller, while the associated Figure 5 caption says both configurations were solved with the schedule controller.\",\n      \"readings\": [\n        \"Use the LLM agent, following the Table 3 protocol\",\n        \"Use the deterministic schedule, following the Figure 5 caption\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"initial exploration parameters\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.3 says controller initialization returns p, beta, r_min and delta, but gives no starting tuple for this run. The published tail tuple does not determine exploration initialization.\",\n      \"readings\": [\n        \"Start with (p, beta, r_min, delta) = (1, 1, 3, 0.20)\",\n        \"Start with (p, beta, r_min, delta) = (3, 1, 1.5, 0.10)\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"LLM controller observation interval\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.2 says the LLM observes the solver every k iterations without giving k.\",\n      \"readings\": [\n        \"k = 1\",\n        \"k = 5\",\n        \"k = 10\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"exploration update policy and realized parameter/restart history\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 3.3 and 4.2 do not provide the controller prompt, state representation, grayness-gate rule or actual sequence of parameter updates and restarts. Model identity, temperature and seed do not specify that sequence; Sec. 6.5 acknowledges API variability.\",\n      \"readings\": [\n        \"Increase p to 3 early; permit beta increases once grayness is at most 0.15; hold r_min = 1.5 and delta = 0.10 during exploration; perform no exploration restarts\",\n        \"Delay p = 3 until mid-exploration; permit beta increases once grayness is at most 0.05; tighten r_min from 3 to 1.5 and delta from 0.20 to 0.05; restart from the best valid snapshot after a twofold compliance spike\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"density-filter radius units and distance convention\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.3 gives the tail radius r_min = 1.20 without defining its units or whether distances use grid indices or physical centroid coordinates.\",\n      \"readings\": [\n        \"Euclidean distance in element-index coordinates; tail radius 1.20 cells\",\n        \"Euclidean distance between physical centroids; tail radius 1.20 domain-coordinate units\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"density-filter weights\",\n      \"issue\": \"missing\",\n      \"description\": \"Equation 5 specifies a normalized weighted average within r_min but does not define w_ej.\",\n      \"readings\": [\n        \"Conical weights w_ej = max(0, r_min - d_ej)\",\n        \"Uniform weights w_ej = 1 for d_ej < r_min and zero otherwise\",\n        \"Truncated Gaussian weights exp(-d_ej^2/(2*(r_min/2)^2)) inside r_min\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Heaviside projection definition\",\n      \"issue\": \"missing\",\n      \"description\": \"Equation 5 names H_beta but gives neither its formula nor a projection threshold. These are delegated to references whose contents are not supplied.\",\n      \"readings\": [\n        \"Normalized tanh projection with fixed threshold eta = 0.50\",\n        \"Normalized tanh projection with fixed threshold eta = 0.30\",\n        \"Exponential projection H_beta(s) = 1 - exp(-beta*s) + s*exp(-beta)\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"SIMP stiffness interpolation and residual stiffness\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.3 names SIMP interpolation without specifying its precise law or any additive stiffness floor. The stated density lower bound does not determine a separate residual modulus.\",\n      \"readings\": [\n        \"E(rho_tilde) = E0*rho_tilde^p, with no additive stiffness floor\",\n        \"E(rho_tilde) = E0*[10^-9 + (1 - 10^-9)*rho_tilde^p]\",\n        \"E(rho_tilde) = E0*[10^-6 + (1 - 10^-6)*rho_tilde^p]\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"initial design density field\",\n      \"issue\": \"missing\",\n      \"description\": \"Equation 6 specifies uniform initialization only for a tail lacking a valid snapshot. The initial density field for the ordinary exploration solve is not stated.\",\n      \"readings\": [\n        \"Uniform design density rho_e = Vf\",\n        \"Seed-42 perturbations within Vf \u00b1 0.01, recentered to mean Vf\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"optimality-criteria update formula\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.3 specifies OC with a move limit but does not give the multiplicative update or damping exponent.\",\n      \"readings\": [\n        \"Multiply density by the square root of the sensitivity-to-multiplier ratio, then apply bounds and move limits\",\n        \"Multiply density by the cube root of that ratio, then apply bounds and move limits\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"OC multiplier-bisection accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 3.2\u20133.3 mention OC bisection without specifying its stopping tolerance. The evaluator's volume-fidelity tolerance is a separate post-solve criterion.\",\n      \"readings\": [\n        \"Terminate when relative volume residual is at most 10^-3\",\n        \"Terminate when relative volume residual is at most 10^-8\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"early stopping and convergence window\",\n      \"issue\": \"missing\",\n      \"description\": \"The main iteration budget and tail length are given, but Secs. 3.4 and 4.3 also mention early exit, compliance stability and functional convergence without a complete stopping rule or stability-window length.\",\n      \"readings\": [\n        \"Execute all 300 main iterations and all 40 tail iterations\",\n        \"Stop exploration early when relative compliance range is below 0.005 over 10 iterations, then execute the 40-iteration tail\",\n        \"Use the same early-stop threshold over 20 iterations, then execute the 40-iteration tail\"\n      ],\n      \"effect\": \"layout\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "in-plane cantilever domain",
+    "issue": "missing",
+    "description": "Neither Table 3 nor Sec. 5.1 gives Lx and Ly for cantilever_basic. Mesh counts and the dimensions of other examples do not determine its physical dimensions or aspect ratio.",
+    "readings": [
+     "Lx = 2, Ly = 1",
+     "Lx = 3, Ly = 1",
+     "Lx = 60, Ly = 30"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "out-of-plane thickness of the 2-D cantilever",
+    "issue": "missing",
+    "description": "The 2-D formulation in Sec. 3.3 does not specify thickness or a per-unit-depth convention. A constant thickness changes compliance scaling for fixed resultant forces.",
+    "readings": [
+     "Unit thickness t = 1",
+     "Uniform thickness t = 0.1 in the chosen length units"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "mesh",
+    "entity": "element counts assigned to cantilever_basic",
+    "issue": "vague",
+    "description": "Table 3 does not explicitly identify this case's mesh. Algorithm 2's default and the matching compliance in Table 5 strongly suggest 60 \u00d7 30, but the case-to-mesh mapping is not stated; Sec. 4.1 also lists 120 \u00d7 40 standard cantilevers.",
+    "readings": [
+     "60 \u00d7 30 elements, using the default and inferred Table 5 correspondence",
+     "120 \u00d7 40 elements, using the other listed standard cantilever resolution"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "finite elements and integration rule",
+    "issue": "missing",
+    "description": "Sec. 3.3 refers to the earlier solver without specifying the 2-D element interpolation or quadrature. A structured grid alone does not determine these.",
+    "readings": [
+     "Four-node bilinear quadrilaterals with 2 \u00d7 2 Gauss integration",
+     "Eight-node serendipity quadrilaterals with 3 \u00d7 3 Gauss integration"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "tip load location on the free right edge",
+    "issue": "vague",
+    "description": "Algorithm 2 maps 'cantilever' to a tip load without specifying its y-coordinate. The mid-right prompt in Sec. 4.1 is an illustrative hole example, not an explicitly identified cantilever_basic prompt.",
+    "readings": [
+     "Right-edge midpoint: (Lx, Ly/2)",
+     "Lower-right corner: (Lx, 0)",
+     "Upper-right corner: (Lx, Ly)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "spatial distribution of the tip load",
+    "issue": "vague",
+    "description": "The case's load specification is absent. Algorithm 2 says only 'tip load', while Secs. 3.1\u20133.2 support both point forces and distributed edge loads.",
+    "readings": [
+     "One concentrated force assembled at the nearest right-edge node",
+     "Uniform traction over the entire right edge, with the same total resultant and trapezoidal nodal weighting"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "cantilever_basic applied force",
+    "issue": "missing",
+    "description": "No force vector is given specifically for this row. Algorithm 2 does not specify direction, and the downward force described in Sec. 4.1 belongs to an illustrative prompt.",
+    "readings": [
+     "Transverse downward force: (Fx, Fy) = (0, -F)",
+     "Axial force: (Fx, Fy) = (F, 0)",
+     "Diagonal force: (Fx, Fy) = (F/sqrt(2), -F/sqrt(2))"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "total applied force",
+    "issue": "missing",
+    "description": "Table 3 gives no force magnitude. The Fy = -1 example in Sec. 4.1 is not explicitly assigned to cantilever_basic.",
+    "readings": [
+     "Resultant magnitude F = 1 in consistent force units",
+     "Resultant magnitude F = 10 in the same units"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "passive mask, particularly support and load attachment cells",
+    "issue": "missing",
+    "description": "The passive-region list for this row is not printed. Separate hole and insert cases suggest a plain beam, but the text does not explicitly establish an empty mask or specify whether attachment cells are frozen solid.",
+    "readings": [
+     "No passive elements; all cells are designable",
+     "Freeze the first element column adjacent to the clamp at density 1",
+     "Freeze the clamp-adjacent column and cells incident to the loaded node at density 1"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "target volume fraction for cantilever_basic",
+    "issue": "vague",
+    "description": "Algorithm 2 states a default Vf = 0.5, but the actual prompt and ProblemSpec for this row are absent. Sec. 4.1 lists explicit volume-fraction variants without assigning a value to cantilever_basic.",
+    "readings": [
+     "Vf = 0.50, applying the configurator default",
+     "Vf = 0.40, treating the case as explicitly configured at a listed benchmark fraction",
+     "Vf = 0.60, treating the case as explicitly configured at another listed benchmark fraction"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "solid-material elastic stiffness scale",
+    "issue": "missing",
+    "description": "Sec. 3.3 supplies no Young's modulus or equivalent reference stiffness for this example.",
+    "readings": [
+     "Normalized Young's modulus E0 = 1",
+     "Young's modulus E0 = 210 GPa with consistent physical units"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "elastic constitutive law and stiffness ratios",
+    "issue": "missing",
+    "description": "The paper does not give a Poisson ratio or constitutive tensor for cantilever_basic, nor explicitly state isotropy.",
+    "readings": [
+     "Isotropic linear elasticity with Poisson ratio 0.30",
+     "Isotropic linear elasticity with Poisson ratio 0.25",
+     "Orthotropic linear elasticity aligned with the grid: Ex/Ey = 2, Gxy/Ey = 0.4, nu_xy = 0.25 and nu_yx = 0.125"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "2-D elastic idealization",
+    "issue": "missing",
+    "description": "Secs. 3.3 and 4.1 identify a 2-D problem but do not specify plane stress or plane strain.",
+    "readings": [
+     "Plane stress",
+     "Plane strain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "continuation controller used for the configuration-accuracy example",
+    "issue": "conflicting",
+    "description": "Sec. 4.4 and Table 3 specify the LLM controller, while the associated Figure 5 caption says both configurations were solved with the schedule controller.",
+    "readings": [
+     "Use the LLM agent, following the Table 3 protocol",
+     "Use the deterministic schedule, following the Figure 5 caption"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "initial exploration parameters",
+    "issue": "missing",
+    "description": "Sec. 3.3 says controller initialization returns p, beta, r_min and delta, but gives no starting tuple for this run. The published tail tuple does not determine exploration initialization.",
+    "readings": [
+     "Start with (p, beta, r_min, delta) = (1, 1, 3, 0.20)",
+     "Start with (p, beta, r_min, delta) = (3, 1, 1.5, 0.10)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "LLM controller observation interval",
+    "issue": "missing",
+    "description": "Sec. 4.2 says the LLM observes the solver every k iterations without giving k.",
+    "readings": [
+     "k = 1",
+     "k = 5",
+     "k = 10"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "exploration update policy and realized parameter/restart history",
+    "issue": "missing",
+    "description": "Secs. 3.3 and 4.2 do not provide the controller prompt, state representation, grayness-gate rule or actual sequence of parameter updates and restarts. Model identity, temperature and seed do not specify that sequence; Sec. 6.5 acknowledges API variability.",
+    "readings": [
+     "Increase p to 3 early; permit beta increases once grayness is at most 0.15; hold r_min = 1.5 and delta = 0.10 during exploration; perform no exploration restarts",
+     "Delay p = 3 until mid-exploration; permit beta increases once grayness is at most 0.05; tighten r_min from 3 to 1.5 and delta from 0.20 to 0.05; restart from the best valid snapshot after a twofold compliance spike"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "density-filter radius units and distance convention",
+    "issue": "missing",
+    "description": "Sec. 3.3 gives the tail radius r_min = 1.20 without defining its units or whether distances use grid indices or physical centroid coordinates.",
+    "readings": [
+     "Euclidean distance in element-index coordinates; tail radius 1.20 cells",
+     "Euclidean distance between physical centroids; tail radius 1.20 domain-coordinate units"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "density-filter weights",
+    "issue": "missing",
+    "description": "Equation 5 specifies a normalized weighted average within r_min but does not define w_ej.",
+    "readings": [
+     "Conical weights w_ej = max(0, r_min - d_ej)",
+     "Uniform weights w_ej = 1 for d_ej < r_min and zero otherwise",
+     "Truncated Gaussian weights exp(-d_ej^2/(2*(r_min/2)^2)) inside r_min"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Heaviside projection definition",
+    "issue": "missing",
+    "description": "Equation 5 names H_beta but gives neither its formula nor a projection threshold. These are delegated to references whose contents are not supplied.",
+    "readings": [
+     "Normalized tanh projection with fixed threshold eta = 0.50",
+     "Normalized tanh projection with fixed threshold eta = 0.30",
+     "Exponential projection H_beta(s) = 1 - exp(-beta*s) + s*exp(-beta)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "SIMP stiffness interpolation and residual stiffness",
+    "issue": "missing",
+    "description": "Sec. 3.3 names SIMP interpolation without specifying its precise law or any additive stiffness floor. The stated density lower bound does not determine a separate residual modulus.",
+    "readings": [
+     "E(rho_tilde) = E0*rho_tilde^p, with no additive stiffness floor",
+     "E(rho_tilde) = E0*[10^-9 + (1 - 10^-9)*rho_tilde^p]",
+     "E(rho_tilde) = E0*[10^-6 + (1 - 10^-6)*rho_tilde^p]"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "initial design density field",
+    "issue": "missing",
+    "description": "Equation 6 specifies uniform initialization only for a tail lacking a valid snapshot. The initial density field for the ordinary exploration solve is not stated.",
+    "readings": [
+     "Uniform design density rho_e = Vf",
+     "Seed-42 perturbations within Vf \u00b1 0.01, recentered to mean Vf"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "optimality-criteria update formula",
+    "issue": "missing",
+    "description": "Sec. 3.3 specifies OC with a move limit but does not give the multiplicative update or damping exponent.",
+    "readings": [
+     "Multiply density by the square root of the sensitivity-to-multiplier ratio, then apply bounds and move limits",
+     "Multiply density by the cube root of that ratio, then apply bounds and move limits"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "OC multiplier-bisection accuracy",
+    "issue": "missing",
+    "description": "Secs. 3.2\u20133.3 mention OC bisection without specifying its stopping tolerance. The evaluator's volume-fidelity tolerance is a separate post-solve criterion.",
+    "readings": [
+     "Terminate when relative volume residual is at most 10^-3",
+     "Terminate when relative volume residual is at most 10^-8"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "early stopping and convergence window",
+    "issue": "missing",
+    "description": "The main iteration budget and tail length are given, but Secs. 3.4 and 4.3 also mention early exit, compliance stability and functional convergence without a complete stopping rule or stability-window length.",
+    "readings": [
+     "Execute all 300 main iterations and all 40 tail iterations",
+     "Stop exploration early when relative compliance range is below 0.005 over 10 iterations, then execute the 40-iteration tail",
+     "Use the same early-stop threshold over 20 iterations, then execute the 40-iteration tail"
+    ],
+    "effect": "layout"
+   }
+  ]
+ },
+ "wall_s": 474.10720109939575,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L44",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 1,
+ "locator": "Sec. 5.1, Table 3, row cantilever_basic",
+ "finished": "2026-10-22T21:38:28"
+}

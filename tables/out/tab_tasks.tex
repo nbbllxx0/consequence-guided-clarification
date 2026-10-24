@@ -1,0 +1,47 @@
+\begin{table}[t]
+\centering\small
+\caption{Literature-derived tasks: ambiguity slots, admissible readings and the consequence of the nominal (silent-default) design under the exhaustive table.}
+\label{tab:tab_tasks}
+\begin{tabular}{lllllrll}
+\toprule
+Task & arXiv & Frame pos. & Dim. & Slots and admissible values & Readings & Default-design class & Default-design worst loss \\
+\midrule
+L01 & 2403.04937 & 1 & 2-D & arm: 0.4, 0.5; load: 0.1, 0.5, 0.9; volfrac: 0.4 (mandatory) & 6 & large\_loss & 3.7e+04 \\
+L04 & 2105.04232 & 36 & 2-D & c: 0.4, 0.45, 0.5, 0.55, 0.6 & 5 & large\_loss & 6.3e+03 \\
+L05 & 1708.07364 & 38 & 2-D & dir: down, up (mandatory) & 2 & harmless & -0.000 \\
+L07 & 2511.14623 & 43 & 2-D & volfrac: 0.5 (mandatory) & 1 & harmless & -0.000 \\
+L08 & 2305.04107 & 48 & 2-D & ar: 2.5, 3.0, 3.5 & 3 & infeasible & infeasible \\
+L09 & 2605.02158 & 49 & 2-D & load: 0.1, 0.25, 0.4; volfrac: 0.4 (mandatory) & 3 & large\_loss & 2.4e+05 \\
+L11 & 2605.19110 & 59 & 2-D & voids: horizontal, vertical, diagonal; dir: down (mandatory) & 3 & large\_loss & 1.6e+02 \\
+L02 & 1909.11320 & 5 & 3-D & strip: line, quarter, half & 3 & large\_loss & 80 \\
+L06 & 1612.04082 & 40 & 3-D & h: 0.4, 0.5, 0.6; width: line, strip & 6 & large\_loss & 13 \\
+L12 & 2410.23295 & 23 & 3-D & sup: corners, full; load: full, central & 4 & consequential & 0.905 \\
+L13 & 2310.02069 & 74 & 2-D & load: corner, lower, mid; volfrac: 0.2 (mandatory) & 3 & large\_loss & 1.5e+05 \\
+L14 & 2603.09780 & 78 & 2-D & c: 0.4, 0.5, 0.6 & 3 & large\_loss & 4.9e+03 \\
+L15 & 2603.25099 & 79 & 2-D & pos: corner, mid; dir: down (mandatory) & 2 & large\_loss & 6.2e+04 \\
+L16 & 2504.14892 & 101 & 2-D & sup: 0.05, 0.1, 0.2; load: 0.05, 0.1, 0.2 & 9 & harmless & 0.022 \\
+L18 & 2603.22889 & 129 & 2-D & patch: corner, right6, bottom6 & 3 & harmless & 0.048 \\
+L20 & 2607.07682 & 73 & 2-D & sup: node, block & 2 & harmless & 0.016 \\
+L21 & 2608.22606 & 77 & 2-D & load: corner, upper; volfrac: 0.469 (mandatory) & 2 & harmless & 0.011 \\
+L22 & 2009.06245 & 98 & 2-D & pos: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18 & 18 & large\_loss & 1.8e+05 \\
+L23 & 2210.11477 & 115 & 2-D & solid: load, double & 2 & infeasible & infeasible \\
+L25 & 2002.01927 & 47 & 2-D & sup: elem, node; load: elem, corner & 4 & large\_loss & 3.4e+05 \\
+L28 & 2609.25976 & 92 & 2-D & ar: 2.0, 2.2, 2.31; volfrac: 0.5 (mandatory) & 3 & infeasible & infeasible \\
+L29 & 2308.06734 & 106 & 2-D & strip: none, solid & 2 & infeasible & infeasible \\
+L30 & 2508.05624 & 114 & 2-D & volfrac: 0.4 (mandatory) & 1 & harmless & -0.000 \\
+L31 & 1807.10787 & 108 & 2-D & dir: down (mandatory); volfrac: 0.4 (mandatory) & 1 & harmless & -0.002 \\
+L24 & 2402.12076 & 135 & 3-D & sup: 1, 2, 4; load: line, strip & 6 & consequential & 0.056 \\
+L33 & 2604.03276 & 146 & 3-D & load: node, patch & 2 & consequential & 2.797 \\
+L34 & 1904.06556 & 156 & 3-D & load: node, patch; volfrac: 0.2 (mandatory) & 2 & large\_loss & 21 \\
+L35 & 2210.01315 & 172 & 3-D & load: line, corners; volfrac: 0.3 (mandatory) & 2 & consequential & 0.082 \\
+L36 & 2208.09591 & 164 & 2-D & roller: full, lower60; load: 0.12, 0.15, 0.18 & 6 & harmless & 0.017 \\
+L37 & 2510.08830 & 171 & 2-D & strip: 1.0, 3.0; patch: 2.0, 6.0; volfrac: 0.35 (mandatory) & 4 & infeasible & infeasible \\
+L38 & 2001.00635 & 175 & 2-D & orient: wide, tall; load: corner, mid & 4 & large\_loss & 1.8e+04 \\
+L39 & 2310.01968 & 181 & 2-D & ar: 3.0, 3.46 & 2 & infeasible & infeasible \\
+L41 & 2607.07233 & 187 & 2-D & load: 0.4, 0.45, 0.5 & 3 & large\_loss & 4e+03 \\
+L43 & 2509.05800 & 204 & 2-D & pos: 0.75, 0.8, 0.85; angle: 210, 240 & 6 & harmless & 0.003 \\
+L44 & 2603.27000 & 219 & 2-D & pos: mid, corner; volfrac: 0.5 (mandatory) & 2 & large\_loss & 5.1e+04 \\
+L45 & 2609.07149 & 241 & 2-D & pos: corner, mid; b: 0.05, 0.1; volfrac: 0.4 (mandatory) & 4 & infeasible & infeasible \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,361 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"2D design-domain outline and aspect ratio\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. II.1 and Fig. 1(a)'s caption name a design domain without describing its outline or dimensions. In the alternatives below, L is the span, H is the root height, and x=0 denotes the supported end.\",\n      \"readings\": [\n        \"Full rectangular domain with L/H=2\",\n        \"Full rectangular domain with L/H=3\",\n        \"Tapered domain with L/H=3 and height decreasing from H at the root to H/2 at the free end\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Absolute geometric scale and length units\",\n      \"issue\": \"missing\",\n      \"description\": \"No physical dimensions or length units are supplied. Under similarity scaling of all lengths, including thickness and filter length, with fixed force resultants, this changes the compliance scale rather than the normalized topology.\",\n      \"readings\": [\n        \"H=1 m, with other lengths specified proportionally\",\n        \"H=1 mm, with other lengths specified proportionally\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"Set of fixed nodes\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Fig. 1(a) mentions Fixed Nodes, and Sec. II.1 refers to fixed sites, but neither identifies their coordinates or extent. Fixity itself is stated; the constrained node set is not.\",\n      \"readings\": [\n        \"Fix both displacement components at every node on x=0\",\n        \"Fix both displacement components only at the two root corners\",\n        \"Fix both displacement components on the root segment H/4<=y<=3H/4\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"other\",\n      \"entity\": \"Number of applied forces and grouping into load cases\",\n      \"issue\": \"missing\",\n      \"description\": \"Fig. 1(a)'s generic Applied Forces label does not establish the number of forces, whether they act simultaneously, or whether separate load cases are optimized.\",\n      \"readings\": [\n        \"One force in one static load case\",\n        \"Two forces acting simultaneously in one static load case\",\n        \"Two independent load cases with a sum of their compliances as the objective\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"Application point or center of each load\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. II.1 mentions load-bearing nodes, but no coordinates are given in the prose or Fig. 1 caption.\",\n      \"readings\": [\n        \"Free-end midpoint: (x/L,y/H)=(1,1/2)\",\n        \"Free-end lower corner: (x/L,y/H)=(1,0)\",\n        \"Free-end upper corner: (x/L,y/H)=(1,1)\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Spatial extent and distribution of each applied load\",\n      \"issue\": \"figure_only\",\n      \"description\": \"The Applied Forces label does not specify whether a resultant is concentrated at a node or spread over a finite boundary region.\",\n      \"readings\": [\n        \"Concentrated force at one mesh node\",\n        \"Uniform traction over a boundary patch of height H/10 centered at the load location\",\n        \"Uniform traction over the entire free-end edge, with the same total resultant\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"Direction of each applied force\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Neither Sec. II.1 nor the Fig. 1 caption states force components or angles.\",\n      \"readings\": [\n        \"Transverse force in the negative y direction\",\n        \"Axial force in the positive x direction\",\n        \"Oblique force proportional to (1,-1)\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"Common magnitude scale of the prescribed loads\",\n      \"issue\": \"missing\",\n      \"description\": \"No force magnitude or force unit is supplied. Uniformly scaling a fixed set of prescribed loads scales linear-elastic compliance quadratically.\",\n      \"readings\": [\n        \"Reference resultant F=1 N\",\n        \"Reference resultant F=10 N\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"Relative force amplitudes or load-case weights, if multiple loads are used\",\n      \"issue\": \"missing\",\n      \"description\": \"The text supplies neither relative magnitudes for multiple forces nor weights for a multiple-load-case compliance objective.\",\n      \"readings\": [\n        \"Two loads with amplitude ratio 1:1 and equal case weights if evaluated independently\",\n        \"Two loads with amplitude ratio 2:1 and equal case weights if evaluated independently\",\n        \"Equal-amplitude independent load cases with objective weights 4:1\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Non-designable regions, particularly support and load attachment pads\",\n      \"issue\": \"missing\",\n      \"description\": \"No passage specifies whether every cell is designable or whether any cells have prescribed densities, nor gives passive-region extents.\",\n      \"readings\": [\n        \"No passive regions; every domain cell is designable\",\n        \"Prescribed solid one-cell-wide root strip and one-cell load attachment pad\",\n        \"Prescribed solid root pad of width 0.05L and load pad of dimensions 0.05H by 0.05H\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Elastic symmetry and material orientation\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. IV.1 refers to a stiffness equation but supplies no constitutive tensor or statement of isotropy. Single-material linear elasticity does not determine elastic symmetry.\",\n      \"readings\": [\n        \"Homogeneous isotropic solid\",\n        \"Homogeneous orthotropic solid with its stiffest axis along the span\",\n        \"Homogeneous orthotropic solid with its stiffest axis across the span\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Overall solid stiffness scale\",\n      \"issue\": \"missing\",\n      \"description\": \"No solid Young's modulus or equivalent stiffness scale is stated. Scaling the entire constitutive tensor, including any relative void-stiffness prescription, only rescales compliance under fixed forces.\",\n      \"readings\": [\n        \"E0=1 in normalized stiffness units\",\n        \"E0=70 GPa\",\n        \"E0=210 GPa\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Poisson's ratio for an isotropic material\",\n      \"issue\": \"missing\",\n      \"description\": \"No Poisson's ratio is given anywhere in the supplied text.\",\n      \"readings\": [\n        \"nu=0.25\",\n        \"nu=0.30\",\n        \"nu=1/3\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"2D constitutive reduction\",\n      \"issue\": \"missing\",\n      \"description\": \"The example is identified as 2D, but Sec. IV.1 does not distinguish plane stress from plane strain.\",\n      \"readings\": [\n        \"Plane stress\",\n        \"Plane strain\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Uniform out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"No thickness or per-unit-thickness convention is stated for the 2D stiffness and compliance. With prescribed total force resultants and uniform thickness, this affects only compliance scale.\",\n      \"readings\": [\n        \"Unit thickness in the adopted length units\",\n        \"Thickness t=0.01H\",\n        \"Thickness t=0.1H\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Density-to-stiffness interpolation and penalization\",\n      \"issue\": \"missing\",\n      \"description\": \"Fig. 1 says higher density reduces compliance, but neither Sec. IV.1 nor the implementation discussion defines the stiffness interpolation. Here rho denotes the density supplied to the elasticity model.\",\n      \"readings\": [\n        \"Linear interpolation: E(rho)=Emin+(E0-Emin)rho\",\n        \"SIMP interpolation with exponent p=3\",\n        \"RAMP interpolation: E(rho)=Emin+(E0-Emin)rho/[1+5(1-rho)]\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Numerical stiffness assigned to void\",\n      \"issue\": \"missing\",\n      \"description\": \"Although x=0 denotes no material, the text does not specify the numerical stiffness floor used to keep the equilibrium system solvable.\",\n      \"readings\": [\n        \"Emin/E0=1e-9\",\n        \"Emin/E0=1e-6\",\n        \"Emin/E0=1e-3\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Density-filter length scale\",\n      \"issue\": \"missing\",\n      \"description\": \"Appendix C explicitly states that a density filter is used but gives no radius or length scale. Here h denotes the cell width for a square-cell grid.\",\n      \"readings\": [\n        \"Filter support radius r=1.5h\",\n        \"Filter support radius r=3h\",\n        \"Filter support radius r=0.1H\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Density-filter kernel and mathematical implementation\",\n      \"issue\": \"missing\",\n      \"description\": \"Appendix C names a density filter without defining its weights or operator.\",\n      \"readings\": [\n        \"Normalized circular neighborhood with linear weights max(0,r-distance)\",\n        \"Normalized uniform average over a circular neighborhood\",\n        \"Helmholtz PDE density filter with a prescribed smoothing length\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Filter treatment at domain boundaries and passive cells\",\n      \"issue\": \"missing\",\n      \"description\": \"Appendix C and Fig. A3 mention interactions between filtering and boundaries, but do not give the boundary rule or treatment of non-designable cells.\",\n      \"readings\": [\n        \"Truncate the kernel at the domain boundary and renormalize over existing cells\",\n        \"Use zero density outside the domain with the full kernel denominator\",\n        \"Reflect densities across domain boundaries\",\n        \"Exclude passive cells from filter neighborhoods and renormalize over designable cells\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Relationship between optimization variables, filtered densities, stiffness, and volume\",\n      \"issue\": \"vague\",\n      \"description\": \"Eqs. (3) and (5) constrain x, while Appendix C introduces density filtering without distinguishing control variables from physical densities. The stated volume fraction is 0.5; the filtering convention used to enforce it is unclear.\",\n      \"readings\": [\n        \"Filter control densities; use filtered densities for both stiffness and the volume constraint\",\n        \"Filter control densities for stiffness, but enforce the volume constraint on unfiltered controls\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Projection following density filtering\",\n      \"issue\": \"missing\",\n      \"description\": \"The implementation discussion does not state whether filtered densities are used directly or passed through a projection, nor supply projection parameters.\",\n      \"readings\": [\n        \"No projection; use filtered densities directly\",\n        \"Smooth Heaviside projection with threshold eta=0.5 and sharpness beta=1\",\n        \"Smooth Heaviside projection with threshold eta=0.5 and sharpness beta=8\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Structured-grid resolution and cell dimensions\",\n      \"issue\": \"missing\",\n      \"description\": \"The text introduces sites, cells, elements, and a symbolic element count N without supplying grid counts or cell dimensions. The alternatives illustrate a fixed 3:1 rectangular domain.\",\n      \"readings\": [\n        \"Uniform 60 by 20 grid of square cells\",\n        \"Uniform 120 by 40 grid of square cells\",\n        \"Uniform 60 by 40 grid of rectangular cells\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Finite-element interpolation and integration\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. IV.1 mentions finite-element approximation but specifies neither element order nor quadrature.\",\n      \"readings\": [\n        \"Four-node bilinear quadrilaterals with 2 by 2 Gauss integration\",\n        \"Eight-node quadratic quadrilaterals with 3 by 3 Gauss integration\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Optimization update method and update controls\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. IV.1 mentions gradient-based algorithms, and Fig. 3(a) cites [17], but the supplied text gives no deterministic optimizer, move limit, or damping parameters for reproducing the minimum-compliance design.\",\n      \"readings\": [\n        \"Optimality-criteria updates with move limit 0.2 and damping exponent 0.5\",\n        \"Optimality-criteria updates with move limit 0.05 and damping exponent 0.5\",\n        \"MMA updates with density move limit 0.1\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initial density field\",\n      \"issue\": \"missing\",\n      \"description\": \"No initial design for minimum-compliance optimization is supplied. Different feasible starts can lead to different local minima. These alternatives assume a fully designable rectangular domain.\",\n      \"readings\": [\n        \"Uniform initial density x=0.5\",\n        \"Initial density 0.8 in the outer quarter-height bands and 0.2 in the middle half-height band, giving mean density 0.5\",\n        \"A feasible truss-like warm start with mean density 0.5\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Continuation schedule\",\n      \"issue\": \"missing\",\n      \"description\": \"No schedule is given for changing stiffness penalization or projection sharpness during optimization.\",\n      \"readings\": [\n        \"Use SIMP p=3 throughout, with fixed filter and projection parameters\",\n        \"Increase SIMP p from 1 to 2 to 3 at 50-iteration intervals\",\n        \"Keep p=3 and increase projection beta from 1 to 2 to 4 to 8 at 50-iteration intervals\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Optimization termination criteria and iteration limit\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither the Methods nor the optimized-solution caption gives convergence tolerances or an iteration cap.\",\n      \"readings\": [\n        \"Stop when maximum density change is below 0.01, with a 200-iteration cap\",\n        \"Stop when maximum density change is below 0.001, with a 2000-iteration cap\",\n        \"Stop when relative compliance change stays below 1e-6 for ten iterations, with a 10000-iteration cap\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Equilibrium linear solver and solution accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. IV.1 requires solving the stiffness equation but gives no linear-solver method or residual tolerance. The influence on a reproduced optimization depends on numerical conditioning and convergence.\",\n      \"readings\": [\n        \"Sparse direct factorization at every optimization iteration\",\n        \"Preconditioned conjugate gradients with relative residual tolerance 1e-6\",\n        \"Preconditioned conjugate gradients with relative residual tolerance 1e-10\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "2D design-domain outline and aspect ratio",
+    "issue": "figure_only",
+    "description": "Sec. II.1 and Fig. 1(a)'s caption name a design domain without describing its outline or dimensions. In the alternatives below, L is the span, H is the root height, and x=0 denotes the supported end.",
+    "readings": [
+     "Full rectangular domain with L/H=2",
+     "Full rectangular domain with L/H=3",
+     "Tapered domain with L/H=3 and height decreasing from H at the root to H/2 at the free end"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "Absolute geometric scale and length units",
+    "issue": "missing",
+    "description": "No physical dimensions or length units are supplied. Under similarity scaling of all lengths, including thickness and filter length, with fixed force resultants, this changes the compliance scale rather than the normalized topology.",
+    "readings": [
+     "H=1 m, with other lengths specified proportionally",
+     "H=1 mm, with other lengths specified proportionally"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "Set of fixed nodes",
+    "issue": "figure_only",
+    "description": "Fig. 1(a) mentions Fixed Nodes, and Sec. II.1 refers to fixed sites, but neither identifies their coordinates or extent. Fixity itself is stated; the constrained node set is not.",
+    "readings": [
+     "Fix both displacement components at every node on x=0",
+     "Fix both displacement components only at the two root corners",
+     "Fix both displacement components on the root segment H/4<=y<=3H/4"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "Number of applied forces and grouping into load cases",
+    "issue": "missing",
+    "description": "Fig. 1(a)'s generic Applied Forces label does not establish the number of forces, whether they act simultaneously, or whether separate load cases are optimized.",
+    "readings": [
+     "One force in one static load case",
+     "Two forces acting simultaneously in one static load case",
+     "Two independent load cases with a sum of their compliances as the objective"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "Application point or center of each load",
+    "issue": "figure_only",
+    "description": "Sec. II.1 mentions load-bearing nodes, but no coordinates are given in the prose or Fig. 1 caption.",
+    "readings": [
+     "Free-end midpoint: (x/L,y/H)=(1,1/2)",
+     "Free-end lower corner: (x/L,y/H)=(1,0)",
+     "Free-end upper corner: (x/L,y/H)=(1,1)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Spatial extent and distribution of each applied load",
+    "issue": "figure_only",
+    "description": "The Applied Forces label does not specify whether a resultant is concentrated at a node or spread over a finite boundary region.",
+    "readings": [
+     "Concentrated force at one mesh node",
+     "Uniform traction over a boundary patch of height H/10 centered at the load location",
+     "Uniform traction over the entire free-end edge, with the same total resultant"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Direction of each applied force",
+    "issue": "figure_only",
+    "description": "Neither Sec. II.1 nor the Fig. 1 caption states force components or angles.",
+    "readings": [
+     "Transverse force in the negative y direction",
+     "Axial force in the positive x direction",
+     "Oblique force proportional to (1,-1)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Common magnitude scale of the prescribed loads",
+    "issue": "missing",
+    "description": "No force magnitude or force unit is supplied. Uniformly scaling a fixed set of prescribed loads scales linear-elastic compliance quadratically.",
+    "readings": [
+     "Reference resultant F=1 N",
+     "Reference resultant F=10 N"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Relative force amplitudes or load-case weights, if multiple loads are used",
+    "issue": "missing",
+    "description": "The text supplies neither relative magnitudes for multiple forces nor weights for a multiple-load-case compliance objective.",
+    "readings": [
+     "Two loads with amplitude ratio 1:1 and equal case weights if evaluated independently",
+     "Two loads with amplitude ratio 2:1 and equal case weights if evaluated independently",
+     "Equal-amplitude independent load cases with objective weights 4:1"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Non-designable regions, particularly support and load attachment pads",
+    "issue": "missing",
+    "description": "No passage specifies whether every cell is designable or whether any cells have prescribed densities, nor gives passive-region extents.",
+    "readings": [
+     "No passive regions; every domain cell is designable",
+     "Prescribed solid one-cell-wide root strip and one-cell load attachment pad",
+     "Prescribed solid root pad of width 0.05L and load pad of dimensions 0.05H by 0.05H"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Elastic symmetry and material orientation",
+    "issue": "missing",
+    "description": "Sec. IV.1 refers to a stiffness equation but supplies no constitutive tensor or statement of isotropy. Single-material linear elasticity does not determine elastic symmetry.",
+    "readings": [
+     "Homogeneous isotropic solid",
+     "Homogeneous orthotropic solid with its stiffest axis along the span",
+     "Homogeneous orthotropic solid with its stiffest axis across the span"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Overall solid stiffness scale",
+    "issue": "missing",
+    "description": "No solid Young's modulus or equivalent stiffness scale is stated. Scaling the entire constitutive tensor, including any relative void-stiffness prescription, only rescales compliance under fixed forces.",
+    "readings": [
+     "E0=1 in normalized stiffness units",
+     "E0=70 GPa",
+     "E0=210 GPa"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson's ratio for an isotropic material",
+    "issue": "missing",
+    "description": "No Poisson's ratio is given anywhere in the supplied text.",
+    "readings": [
+     "nu=0.25",
+     "nu=0.30",
+     "nu=1/3"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "2D constitutive reduction",
+    "issue": "missing",
+    "description": "The example is identified as 2D, but Sec. IV.1 does not distinguish plane stress from plane strain.",
+    "readings": [
+     "Plane stress",
+     "Plane strain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Uniform out-of-plane thickness",
+    "issue": "missing",
+    "description": "No thickness or per-unit-thickness convention is stated for the 2D stiffness and compliance. With prescribed total force resultants and uniform thickness, this affects only compliance scale.",
+    "readings": [
+     "Unit thickness in the adopted length units",
+     "Thickness t=0.01H",
+     "Thickness t=0.1H"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Density-to-stiffness interpolation and penalization",
+    "issue": "missing",
+    "description": "Fig. 1 says higher density reduces compliance, but neither Sec. IV.1 nor the implementation discussion defines the stiffness interpolation. Here rho denotes the density supplied to the elasticity model.",
+    "readings": [
+     "Linear interpolation: E(rho)=Emin+(E0-Emin)rho",
+     "SIMP interpolation with exponent p=3",
+     "RAMP interpolation: E(rho)=Emin+(E0-Emin)rho/[1+5(1-rho)]"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Numerical stiffness assigned to void",
+    "issue": "missing",
+    "description": "Although x=0 denotes no material, the text does not specify the numerical stiffness floor used to keep the equilibrium system solvable.",
+    "readings": [
+     "Emin/E0=1e-9",
+     "Emin/E0=1e-6",
+     "Emin/E0=1e-3"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Density-filter length scale",
+    "issue": "missing",
+    "description": "Appendix C explicitly states that a density filter is used but gives no radius or length scale. Here h denotes the cell width for a square-cell grid.",
+    "readings": [
+     "Filter support radius r=1.5h",
+     "Filter support radius r=3h",
+     "Filter support radius r=0.1H"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Density-filter kernel and mathematical implementation",
+    "issue": "missing",
+    "description": "Appendix C names a density filter without defining its weights or operator.",
+    "readings": [
+     "Normalized circular neighborhood with linear weights max(0,r-distance)",
+     "Normalized uniform average over a circular neighborhood",
+     "Helmholtz PDE density filter with a prescribed smoothing length"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Filter treatment at domain boundaries and passive cells",
+    "issue": "missing",
+    "description": "Appendix C and Fig. A3 mention interactions between filtering and boundaries, but do not give the boundary rule or treatment of non-designable cells.",
+    "readings": [
+     "Truncate the kernel at the domain boundary and renormalize over existing cells",
+     "Use zero density outside the domain with the full kernel denominator",
+     "Reflect densities across domain boundaries",
+     "Exclude passive cells from filter neighborhoods and renormalize over designable cells"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Relationship between optimization variables, filtered densities, stiffness, and volume",
+    "issue": "vague",
+    "description": "Eqs. (3) and (5) constrain x, while Appendix C introduces density filtering without distinguishing control variables from physical densities. The stated volume fraction is 0.5; the filtering convention used to enforce it is unclear.",
+    "readings": [
+     "Filter control densities; use filtered densities for both stiffness and the volume constraint",
+     "Filter control densities for stiffness, but enforce the volume constraint on unfiltered controls"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Projection following density filtering",
+    "issue": "missing",
+    "description": "The implementation discussion does not state whether filtered densities are used directly or passed through a projection, nor supply projection parameters.",
+    "readings": [
+     "No projection; use filtered densities directly",
+     "Smooth Heaviside projection with threshold eta=0.5 and sharpness beta=1",
+     "Smooth Heaviside projection with threshold eta=0.5 and sharpness beta=8"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Structured-grid resolution and cell dimensions",
+    "issue": "missing",
+    "description": "The text introduces sites, cells, elements, and a symbolic element count N without supplying grid counts or cell dimensions. The alternatives illustrate a fixed 3:1 rectangular domain.",
+    "readings": [
+     "Uniform 60 by 20 grid of square cells",
+     "Uniform 120 by 40 grid of square cells",
+     "Uniform 60 by 40 grid of rectangular cells"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Finite-element interpolation and integration",
+    "issue": "missing",
+    "description": "Sec. IV.1 mentions finite-element approximation but specifies neither element order nor quadrature.",
+    "readings": [
+     "Four-node bilinear quadrilaterals with 2 by 2 Gauss integration",
+     "Eight-node quadratic quadrilaterals with 3 by 3 Gauss integration"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Optimization update method and update controls",
+    "issue": "missing",
+    "description": "Sec. IV.1 mentions gradient-based algorithms, and Fig. 3(a) cites [17], but the supplied text gives no deterministic optimizer, move limit, or damping parameters for reproducing the minimum-compliance design.",
+    "readings": [
+     "Optimality-criteria updates with move limit 0.2 and damping exponent 0.5",
+     "Optimality-criteria updates with move limit 0.05 and damping exponent 0.5",
+     "MMA updates with density move limit 0.1"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial density field",
+    "issue": "missing",
+    "description": "No initial design for minimum-compliance optimization is supplied. Different feasible starts can lead to different local minima. These alternatives assume a fully designable rectangular domain.",
+    "readings": [
+     "Uniform initial density x=0.5",
+     "Initial density 0.8 in the outer quarter-height bands and 0.2 in the middle half-height band, giving mean density 0.5",
+     "A feasible truss-like warm start with mean density 0.5"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Continuation schedule",
+    "issue": "missing",
+    "description": "No schedule is given for changing stiffness penalization or projection sharpness during optimization.",
+    "readings": [
+     "Use SIMP p=3 throughout, with fixed filter and projection parameters",
+     "Increase SIMP p from 1 to 2 to 3 at 50-iteration intervals",
+     "Keep p=3 and increase projection beta from 1 to 2 to 4 to 8 at 50-iteration intervals"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Optimization termination criteria and iteration limit",
+    "issue": "missing",
+    "description": "Neither the Methods nor the optimized-solution caption gives convergence tolerances or an iteration cap.",
+    "readings": [
+     "Stop when maximum density change is below 0.01, with a 200-iteration cap",
+     "Stop when maximum density change is below 0.001, with a 2000-iteration cap",
+     "Stop when relative compliance change stays below 1e-6 for ten iterations, with a 10000-iteration cap"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Equilibrium linear solver and solution accuracy",
+    "issue": "missing",
+    "description": "Sec. IV.1 requires solving the stiffness equation but gives no linear-solver method or residual tolerance. The influence on a reproduced optimization depends on numerical conditioning and convergence.",
+    "readings": [
+     "Sparse direct factorization at every optimization iteration",
+     "Preconditioned conjugate gradients with relative residual tolerance 1e-6",
+     "Preconditioned conjugate gradients with relative residual tolerance 1e-10"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 565.8830995559692,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L42",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 1,
+ "locator": "Sec. II.1, the 2-D cantilever of Fig. 1",
+ "finished": "2026-10-22T21:33:51"
+}

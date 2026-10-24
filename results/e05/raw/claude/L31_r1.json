@@ -1,0 +1,283 @@
+{
+ "raw": "{\"items\": [{\"category\": \"domain_extent\", \"entity\": \"design domain orientation (40-by-120 mesh)\", \"issue\": \"vague\", \"description\": \"Sec. 5.2 only says 'a 2D structure represented by a 40-by-120 mesh' (matches N = 4800 in Sec. 3.2), and the Fig. 1 caption calls it a cantilever beam. The text never says which of 40/120 is the beam length (support to tip) and which is the depth. It also doesn't say whether the beam is drawn horizontally, which decides how the global load angle relates to the beam axis. Only Fig. 1a shows this.\", \"readings\": [\"Horizontal beam: 120 elements along the beam axis (support to tip) x 40 elements deep (L:H = 3:1)\", \"Vertical beam: 40 elements wide x 120 tall, fixed on a 40-element short edge (beam axis along global y, so the angle frame is rotated 90 degrees relative to the beam)\", \"40 elements along the beam axis x 120 elements deep (deep cantilever fixed along a 120-element edge)\"], \"effect\": \"layout\"}, {\"category\": \"mesh\", \"entity\": \"element type, shape and physical size\", \"issue\": \"missing\", \"description\": \"Only the element count (40x120) is given. The element formulation (e.g. bilinear Q4), element aspect ratio and physical domain size are never stated (Sec. 3.2, Sec. 5.2). With square 2D elements the size doesn't change compliance. It does matter if r_e/R_e are in physical units or if the elements aren't square.\", \"readings\": [\"Unit-square bilinear Q4 elements (domain 120 x 40 units, radii in element widths)\", \"Square Q4 elements on a physical 3 x 1 domain (h = 1/40), radii converted to match\", \"Non-square elements (physical aspect ratio other than 3:1)\"], \"effect\": \"unsure\"}, {\"category\": \"support_location_extent\", \"entity\": \"fixed end of the cantilever (and therefore which edge is the loaded tip)\", \"issue\": \"figure_only\", \"description\": \"The text never describes the supports. Only the Fig. 1 caption ('cantilever beam', load at 'the tip') implies that the end opposite the tip is fixed. Which short edge is fixed, and whether the whole edge is held, is visible only in Fig. 1a. Because \\u03b8 is defined in a global frame, swapping the fixed side turns the optimal design by 180 degrees for a given \\u03b8.\", \"readings\": [\"All nodes of the left short edge fixed; load at the mid-node of the right edge\", \"All nodes of the right short edge fixed; load at the mid-node of the left edge\", \"Only part of the end edge fixed (e.g. a central segment)\"], \"effect\": \"layout\"}, {\"category\": \"support_type\", \"entity\": \"restrained DOFs at the fixed end\", \"issue\": \"vague\", \"description\": \"'Cantilever' (Fig. 1 caption) suggests full clamping, but the text never says which DOFs are restrained at the end-edge nodes (Sec. 5.2).\", \"readings\": [\"Fully clamped: u_x = u_y = 0 at every node of the fixed edge\", \"u_x = 0 along the edge, with u_y = 0 at a single node only (roller-type)\", \"Pins (u_x = u_y = 0) at the two corner nodes of the edge only\"], \"effect\": \"layout\"}, {\"category\": \"load_direction\", \"entity\": \"definition of the load angle \\u03b8 (reference axis and sense)\", \"issue\": \"vague\", \"description\": \"Sec. 5.2 gives \\u03b8 uniform in [0, \\u03c0], and Sec. 5.3 says the generator input is the x/y components of the load. The reference axis, rotation sense and y-axis orientation (y up vs image rows with y down) are never defined; the arrows appear only in the figures. Clockwise vs counter-clockwise gives mirror-image designs. Measuring from the vertical gives genuinely different load cases for the stated angles.\", \"readings\": [\"\\u03b8 counter-clockwise from +x (beam axis pointing from support to tip), y up: F \\u221d (cos \\u03b8, sin \\u03b8)\", \"\\u03b8 clockwise from +x (image/array convention, y down): F \\u221d (cos \\u03b8, -sin \\u03b8), the mirror image of the first reading\", \"\\u03b8 measured from the vertical: F \\u221d (sin \\u03b8, -cos \\u03b8) (\\u03b8 = 0 transverse, \\u03b8 = \\u03c0/2 axial)\"], \"effect\": \"layout\"}, {\"category\": \"load_direction\", \"entity\": \"specific load angle(s) of the Case 1 example in Fig. 1a\", \"issue\": \"conflicting\", \"description\": \"Fig. 1a shows 'sample solutions' but the text doesn't give their angles. The Case 1 results in Sec. 5.4 say four test loads (0.3\\u03c0, 0.4\\u03c0, 0.45\\u03c0, 0.55\\u03c0) are shown 'in Fig. 1', with arrows in 'the last row'. However, the Fig. 4 caption describes exactly this four-row comparison (Benchmark I, Benchmark II, proposed method, ground truth). So it is unclear whether Fig. 1a uses these angles or others.\", \"readings\": [\"\\u03b8 = 0.3\\u03c0, 0.4\\u03c0, 0.45\\u03c0, 0.55\\u03c0\", \"Other sample angle(s) shown only in Fig. 1a (e.g. a single representative \\u03b8 such as \\u03c0/2)\", \"The whole family \\u03b8 ~ U[0, \\u03c0] (e.g. 100 random test angles, as in S_t)\"], \"effect\": \"layout\"}, {\"category\": \"load_magnitude\", \"entity\": \"point load at the tip mid-node\", \"issue\": \"missing\", \"description\": \"The load magnitude is never given (Sec. 5.2, Fig. 1 caption). The x/y-component input in Sec. 5.3 hints at a unit vector but doesn't say so. Reported compliance values scale with |F|^2.\", \"readings\": [\"|F| = 1 (unit vector (cos \\u03b8, sin \\u03b8))\", \"|F| = some other constant (e.g. 10 or 100)\"], \"effect\": \"scale_only\"}, {\"category\": \"volume_fraction\", \"entity\": \"threshold \\u03b1 (global constraint g0 and local constraint g1)\", \"issue\": \"missing\", \"description\": \"(TO) in Sec. 3.2 uses one \\u03b1 for both the global volume constraint g0 and the local p-norm density constraint g1, and Alg. 2 starts from x = \\u03b1\\u00b71. No value of \\u03b1 is given for Case 1 (Sec. 5.2, Appendix).\", \"readings\": [\"\\u03b1 = 0.3\", \"\\u03b1 = 0.4\", \"\\u03b1 = 0.5\", \"\\u03b1 = 0.6\"], \"effect\": \"layout\"}, {\"category\": \"volume_fraction\", \"entity\": \"local density constraint g1: neighbourhood radius R_e\", \"issue\": \"missing\", \"description\": \"Sec. 3.2 defines the local average \\u03c1\\u0304_e over a neighbourhood N_e of radius R_e (explicitly different from r_e, with p = 16), but never gives R_e or its units. N_e is also written with ||x_i - x_e|| (design variables) instead of element coordinates z, which is presumably a typo. R_e controls how porous the design is, and a plain volume-constrained solver would need this constraint added.\", \"readings\": [\"R_e = 6 element widths\", \"R_e = 8 element widths\", \"R_e = 12 element widths\", \"R_e at least the domain size (local constraint reduces to the global one)\"], \"effect\": \"layout\"}, {\"category\": \"volume_fraction\", \"entity\": \"how strictly the volume constraint is met in the reference (ground-truth) design\", \"issue\": \"conflicting\", \"description\": \"(TO) requires g0 <= 0, and the inner loop of Alg. 2 only exits when g0 <= 0 and g1 <= 0. Yet Sec. 5.4 reports a mean global-volume violation of 4.89% for the Case 1 ground truths, attributed to 'non-zero error thresholds'. The text doesn't say whether this is absolute or relative. It may come from re-projecting the design after the final doubling of \\u03b2.\", \"readings\": [\"Enforce g0 <= 0 strictly (final volume fraction = \\u03b1)\", \"Allow about 0.049 absolute excess (volume about \\u03b1 + 0.049)\", \"Allow about 4.9% relative excess (volume about 1.049 \\u03b1)\"], \"effect\": \"layout\"}, {\"category\": \"passive_region\", \"entity\": \"non-design (solid/void) regions\", \"issue\": \"missing\", \"description\": \"No passive elements are mentioned for Case 1 (Sec. 5.2, Fig. 1 caption). Presumably the whole 40x120 domain is designable, but something like a solid pad at the load node could be visible only in Fig. 1a.\", \"readings\": [\"None: all 4800 elements are designable\", \"Small solid region around the loaded node\", \"Solid layer of elements along the fixed edge\"], \"effect\": \"layout\"}, {\"category\": \"material\", \"entity\": \"Young's modulus E and out-of-plane thickness\", \"issue\": \"missing\", \"description\": \"The paper only assumes a 'linear elastic material' (Sec. 3.2). E and thickness are never given.\", \"readings\": [\"E = 1, thickness = 1 (normalized)\", \"A physical value, e.g. E = 210 GPa or 70 GPa, with unit thickness\"], \"effect\": \"scale_only\"}, {\"category\": \"material\", \"entity\": \"Poisson's ratio \\u03bd\", \"issue\": \"missing\", \"description\": \"Poisson's ratio isn't given anywhere in the paper (Sec. 3.2, Sec. 5.2, Appendix).\", \"readings\": [\"\\u03bd = 0.3\", \"\\u03bd = 1/3\", \"\\u03bd = 0.25\"], \"effect\": \"layout\"}, {\"category\": \"material\", \"entity\": \"2D stress state\", \"issue\": \"missing\", \"description\": \"Sec. 5.2 says '2D structure' but doesn't say plane stress or plane strain. This changes the effective constitutive matrix (effective Poisson's ratio).\", \"readings\": [\"Plane stress\", \"Plane strain\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"stiffness interpolation / SIMP penalty exponent\", \"issue\": \"missing\", \"description\": \"Sec. 3.2 only says K is built 'through the density vector \\u03c1'. No interpolation law or penalty exponent is given. The p = 16 is the p-norm exponent of g1, not a SIMP penalty.\", \"readings\": [\"SIMP: E(\\u03c1) = E_min + \\u03c1^3 (E - E_min)\", \"Linear (penalty 1): E(\\u03c1) = E_min + \\u03c1 (E - E_min), relying on the Heaviside projection for 0/1 designs\", \"SIMP with the penalty raised gradually from 1 to 3\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"void (minimum) stiffness E_min\", \"issue\": \"missing\", \"description\": \"Eq. (2) gives \\u03c1 = 0 exactly when x\\u0303 = 0, and x is allowed in [0, 1]. Some lower stiffness bound is therefore needed to keep K non-singular, but none is stated.\", \"readings\": [\"E_min = 1e-9 E\", \"E_min = 1e-6 E\", \"E_min = 1e-3 E\"], \"effect\": \"unsure\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"density filter radius r_e\", \"issue\": \"missing\", \"description\": \"Eqs. (3)-(4) define a linear-hat density filter with radius r_e (an input to Alg. 2), but no value or units are given. M_e is only called 'neighbours' (presumably elements whose centroid distance is less than r_e).\", \"readings\": [\"r_e = 1.5 element widths\", \"r_e = 2 element widths\", \"r_e = 3 element widths\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Heaviside projection sharpness: starting \\u03b2 and final \\u03b2_t\", \"issue\": \"missing\", \"description\": \"Eq. (2) uses a threshold of 0.5. Alg. 2 doubles \\u03b2 after each converged stage while \\u03b2 < \\u03b2_t, but neither the starting \\u03b2 nor \\u03b2_t is given. It is also unclear whether the final design and compliance are evaluated at the last \\u03b2 used in optimization or at the doubled value.\", \"readings\": [\"Start \\u03b2 = 1, \\u03b2_t = 16 (stages \\u03b2 = 1, 2, 4, 8)\", \"Start \\u03b2 = 1, \\u03b2_t = 32 (stages up to 16)\", \"Start \\u03b2 = 1, \\u03b2_t = 64 (stages up to 32)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"augmented-Lagrangian optimizer (Alg. 2) and stopping rules\", \"issue\": \"vague\", \"description\": \"Alg. 2 in the Appendix is incomplete or inconsistent in several places. The line-search 'while 1' loop has no exit. x is never projected back to [0, 1] even though x_e must stay in [0, 1]. \\u03b5_opt = 1e-3 is set but never used. Line 10 uses 2g/r while L in lines 15-16 uses 0.5g^2/r. The tolerances \\u03b5 = \\u03b5_al = 1 are absolute, so they depend on load and E scaling. There are no iteration limits. All of this affects which local optimum the 'ground truth' reaches.\", \"readings\": [\"Follow Alg. 2 literally, but leave the line search once L' <= L, clip x to [0, 1], and keep \\u03b5 = \\u03b5_al = 1\", \"Standard OC or MMA on the same filtered/projected problem with \\u03b2-continuation, stopping at a maximum design change of about 0.01\", \"MMA with an optimality (KKT) tolerance of \\u03b5_opt = 1e-3\"], \"effect\": \"unsure\"}]}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "design domain orientation (40-by-120 mesh)",
+    "issue": "vague",
+    "description": "Sec. 5.2 only says 'a 2D structure represented by a 40-by-120 mesh' (matches N = 4800 in Sec. 3.2), and the Fig. 1 caption calls it a cantilever beam. The text never says which of 40/120 is the beam length (support to tip) and which is the depth. It also doesn't say whether the beam is drawn horizontally, which decides how the global load angle relates to the beam axis. Only Fig. 1a shows this.",
+    "readings": [
+     "Horizontal beam: 120 elements along the beam axis (support to tip) x 40 elements deep (L:H = 3:1)",
+     "Vertical beam: 40 elements wide x 120 tall, fixed on a 40-element short edge (beam axis along global y, so the angle frame is rotated 90 degrees relative to the beam)",
+     "40 elements along the beam axis x 120 elements deep (deep cantilever fixed along a 120-element edge)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "element type, shape and physical size",
+    "issue": "missing",
+    "description": "Only the element count (40x120) is given. The element formulation (e.g. bilinear Q4), element aspect ratio and physical domain size are never stated (Sec. 3.2, Sec. 5.2). With square 2D elements the size doesn't change compliance. It does matter if r_e/R_e are in physical units or if the elements aren't square.",
+    "readings": [
+     "Unit-square bilinear Q4 elements (domain 120 x 40 units, radii in element widths)",
+     "Square Q4 elements on a physical 3 x 1 domain (h = 1/40), radii converted to match",
+     "Non-square elements (physical aspect ratio other than 3:1)"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "fixed end of the cantilever (and therefore which edge is the loaded tip)",
+    "issue": "figure_only",
+    "description": "The text never describes the supports. Only the Fig. 1 caption ('cantilever beam', load at 'the tip') implies that the end opposite the tip is fixed. Which short edge is fixed, and whether the whole edge is held, is visible only in Fig. 1a. Because \u03b8 is defined in a global frame, swapping the fixed side turns the optimal design by 180 degrees for a given \u03b8.",
+    "readings": [
+     "All nodes of the left short edge fixed; load at the mid-node of the right edge",
+     "All nodes of the right short edge fixed; load at the mid-node of the left edge",
+     "Only part of the end edge fixed (e.g. a central segment)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_type",
+    "entity": "restrained DOFs at the fixed end",
+    "issue": "vague",
+    "description": "'Cantilever' (Fig. 1 caption) suggests full clamping, but the text never says which DOFs are restrained at the end-edge nodes (Sec. 5.2).",
+    "readings": [
+     "Fully clamped: u_x = u_y = 0 at every node of the fixed edge",
+     "u_x = 0 along the edge, with u_y = 0 at a single node only (roller-type)",
+     "Pins (u_x = u_y = 0) at the two corner nodes of the edge only"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "definition of the load angle \u03b8 (reference axis and sense)",
+    "issue": "vague",
+    "description": "Sec. 5.2 gives \u03b8 uniform in [0, \u03c0], and Sec. 5.3 says the generator input is the x/y components of the load. The reference axis, rotation sense and y-axis orientation (y up vs image rows with y down) are never defined; the arrows appear only in the figures. Clockwise vs counter-clockwise gives mirror-image designs. Measuring from the vertical gives genuinely different load cases for the stated angles.",
+    "readings": [
+     "\u03b8 counter-clockwise from +x (beam axis pointing from support to tip), y up: F \u221d (cos \u03b8, sin \u03b8)",
+     "\u03b8 clockwise from +x (image/array convention, y down): F \u221d (cos \u03b8, -sin \u03b8), the mirror image of the first reading",
+     "\u03b8 measured from the vertical: F \u221d (sin \u03b8, -cos \u03b8) (\u03b8 = 0 transverse, \u03b8 = \u03c0/2 axial)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "specific load angle(s) of the Case 1 example in Fig. 1a",
+    "issue": "conflicting",
+    "description": "Fig. 1a shows 'sample solutions' but the text doesn't give their angles. The Case 1 results in Sec. 5.4 say four test loads (0.3\u03c0, 0.4\u03c0, 0.45\u03c0, 0.55\u03c0) are shown 'in Fig. 1', with arrows in 'the last row'. However, the Fig. 4 caption describes exactly this four-row comparison (Benchmark I, Benchmark II, proposed method, ground truth). So it is unclear whether Fig. 1a uses these angles or others.",
+    "readings": [
+     "\u03b8 = 0.3\u03c0, 0.4\u03c0, 0.45\u03c0, 0.55\u03c0",
+     "Other sample angle(s) shown only in Fig. 1a (e.g. a single representative \u03b8 such as \u03c0/2)",
+     "The whole family \u03b8 ~ U[0, \u03c0] (e.g. 100 random test angles, as in S_t)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "point load at the tip mid-node",
+    "issue": "missing",
+    "description": "The load magnitude is never given (Sec. 5.2, Fig. 1 caption). The x/y-component input in Sec. 5.3 hints at a unit vector but doesn't say so. Reported compliance values scale with |F|^2.",
+    "readings": [
+     "|F| = 1 (unit vector (cos \u03b8, sin \u03b8))",
+     "|F| = some other constant (e.g. 10 or 100)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "threshold \u03b1 (global constraint g0 and local constraint g1)",
+    "issue": "missing",
+    "description": "(TO) in Sec. 3.2 uses one \u03b1 for both the global volume constraint g0 and the local p-norm density constraint g1, and Alg. 2 starts from x = \u03b1\u00b71. No value of \u03b1 is given for Case 1 (Sec. 5.2, Appendix).",
+    "readings": [
+     "\u03b1 = 0.3",
+     "\u03b1 = 0.4",
+     "\u03b1 = 0.5",
+     "\u03b1 = 0.6"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "local density constraint g1: neighbourhood radius R_e",
+    "issue": "missing",
+    "description": "Sec. 3.2 defines the local average \u03c1\u0304_e over a neighbourhood N_e of radius R_e (explicitly different from r_e, with p = 16), but never gives R_e or its units. N_e is also written with ||x_i - x_e|| (design variables) instead of element coordinates z, which is presumably a typo. R_e controls how porous the design is, and a plain volume-constrained solver would need this constraint added.",
+    "readings": [
+     "R_e = 6 element widths",
+     "R_e = 8 element widths",
+     "R_e = 12 element widths",
+     "R_e at least the domain size (local constraint reduces to the global one)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "how strictly the volume constraint is met in the reference (ground-truth) design",
+    "issue": "conflicting",
+    "description": "(TO) requires g0 <= 0, and the inner loop of Alg. 2 only exits when g0 <= 0 and g1 <= 0. Yet Sec. 5.4 reports a mean global-volume violation of 4.89% for the Case 1 ground truths, attributed to 'non-zero error thresholds'. The text doesn't say whether this is absolute or relative. It may come from re-projecting the design after the final doubling of \u03b2.",
+    "readings": [
+     "Enforce g0 <= 0 strictly (final volume fraction = \u03b1)",
+     "Allow about 0.049 absolute excess (volume about \u03b1 + 0.049)",
+     "Allow about 4.9% relative excess (volume about 1.049 \u03b1)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "non-design (solid/void) regions",
+    "issue": "missing",
+    "description": "No passive elements are mentioned for Case 1 (Sec. 5.2, Fig. 1 caption). Presumably the whole 40x120 domain is designable, but something like a solid pad at the load node could be visible only in Fig. 1a.",
+    "readings": [
+     "None: all 4800 elements are designable",
+     "Small solid region around the loaded node",
+     "Solid layer of elements along the fixed edge"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Young's modulus E and out-of-plane thickness",
+    "issue": "missing",
+    "description": "The paper only assumes a 'linear elastic material' (Sec. 3.2). E and thickness are never given.",
+    "readings": [
+     "E = 1, thickness = 1 (normalized)",
+     "A physical value, e.g. E = 210 GPa or 70 GPa, with unit thickness"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson's ratio \u03bd",
+    "issue": "missing",
+    "description": "Poisson's ratio isn't given anywhere in the paper (Sec. 3.2, Sec. 5.2, Appendix).",
+    "readings": [
+     "\u03bd = 0.3",
+     "\u03bd = 1/3",
+     "\u03bd = 0.25"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "2D stress state",
+    "issue": "missing",
+    "description": "Sec. 5.2 says '2D structure' but doesn't say plane stress or plane strain. This changes the effective constitutive matrix (effective Poisson's ratio).",
+    "readings": [
+     "Plane stress",
+     "Plane strain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "stiffness interpolation / SIMP penalty exponent",
+    "issue": "missing",
+    "description": "Sec. 3.2 only says K is built 'through the density vector \u03c1'. No interpolation law or penalty exponent is given. The p = 16 is the p-norm exponent of g1, not a SIMP penalty.",
+    "readings": [
+     "SIMP: E(\u03c1) = E_min + \u03c1^3 (E - E_min)",
+     "Linear (penalty 1): E(\u03c1) = E_min + \u03c1 (E - E_min), relying on the Heaviside projection for 0/1 designs",
+     "SIMP with the penalty raised gradually from 1 to 3"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "void (minimum) stiffness E_min",
+    "issue": "missing",
+    "description": "Eq. (2) gives \u03c1 = 0 exactly when x\u0303 = 0, and x is allowed in [0, 1]. Some lower stiffness bound is therefore needed to keep K non-singular, but none is stated.",
+    "readings": [
+     "E_min = 1e-9 E",
+     "E_min = 1e-6 E",
+     "E_min = 1e-3 E"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "density filter radius r_e",
+    "issue": "missing",
+    "description": "Eqs. (3)-(4) define a linear-hat density filter with radius r_e (an input to Alg. 2), but no value or units are given. M_e is only called 'neighbours' (presumably elements whose centroid distance is less than r_e).",
+    "readings": [
+     "r_e = 1.5 element widths",
+     "r_e = 2 element widths",
+     "r_e = 3 element widths"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Heaviside projection sharpness: starting \u03b2 and final \u03b2_t",
+    "issue": "missing",
+    "description": "Eq. (2) uses a threshold of 0.5. Alg. 2 doubles \u03b2 after each converged stage while \u03b2 < \u03b2_t, but neither the starting \u03b2 nor \u03b2_t is given. It is also unclear whether the final design and compliance are evaluated at the last \u03b2 used in optimization or at the doubled value.",
+    "readings": [
+     "Start \u03b2 = 1, \u03b2_t = 16 (stages \u03b2 = 1, 2, 4, 8)",
+     "Start \u03b2 = 1, \u03b2_t = 32 (stages up to 16)",
+     "Start \u03b2 = 1, \u03b2_t = 64 (stages up to 32)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "augmented-Lagrangian optimizer (Alg. 2) and stopping rules",
+    "issue": "vague",
+    "description": "Alg. 2 in the Appendix is incomplete or inconsistent in several places. The line-search 'while 1' loop has no exit. x is never projected back to [0, 1] even though x_e must stay in [0, 1]. \u03b5_opt = 1e-3 is set but never used. Line 10 uses 2g/r while L in lines 15-16 uses 0.5g^2/r. The tolerances \u03b5 = \u03b5_al = 1 are absolute, so they depend on load and E scaling. There are no iteration limits. All of this affects which local optimum the 'ground truth' reaches.",
+    "readings": [
+     "Follow Alg. 2 literally, but leave the line search once L' <= L, clip x to [0, 1], and keep \u03b5 = \u03b5_al = 1",
+     "Standard OC or MMA on the same filtered/projected problem with \u03b2-continuation, stopping at a maximum design change of about 0.01",
+     "MMA with an optimality (KKT) tolerance of \u03b5_opt = 1e-3"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 474.7865128517151,
+ "returncode": 0,
+ "meta": {
+  "model": null,
+  "num_turns": 2,
+  "is_error": false,
+  "total_cost_usd": 1.1774508,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 19261,
+   "cache_read_input_tokens": 774,
+   "output_tokens": 51160,
+   "output_tokens_details": {
+    "thinking_tokens": 46556
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 19261,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 51160,
+     "cache_read_input_tokens": 774,
+     "cache_creation_input_tokens": 19261,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 19261
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard",
+   "fallback_credit": null
+  }
+ },
+ "stderr_tail": "",
+ "task": "L31",
+ "model": "claude",
+ "model_id": "claude-opus-5-5",
+ "rep": 1,
+ "locator": "Sec. 5.2, Case 1, Fig. 1",
+ "finished": "2026-10-22T21:01:17"
+}

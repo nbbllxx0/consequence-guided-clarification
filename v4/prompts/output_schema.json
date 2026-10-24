@@ -1,0 +1,74 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "items"
+  ],
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "category",
+          "entity",
+          "issue",
+          "description",
+          "readings",
+          "effect"
+        ],
+        "properties": {
+          "category": {
+            "type": "string",
+            "enum": [
+              "domain_extent",
+              "support_location_extent",
+              "support_type",
+              "load_position",
+              "load_extent_distribution",
+              "load_direction",
+              "load_magnitude",
+              "volume_fraction",
+              "passive_region",
+              "material",
+              "filter_or_solver_setting",
+              "mesh",
+              "other"
+            ]
+          },
+          "entity": {
+            "type": "string"
+          },
+          "issue": {
+            "type": "string",
+            "enum": [
+              "missing",
+              "vague",
+              "conflicting",
+              "figure_only"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "readings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1
+          },
+          "effect": {
+            "type": "string",
+            "enum": [
+              "layout",
+              "scale_only",
+              "unsure"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

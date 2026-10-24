@@ -1,0 +1,595 @@
+{
+ "tasks": 41,
+ "units": 246,
+ "kappa": 0.750662716357399,
+ "raw_agreement": 0.8943089430894309,
+ "first_positive": 76,
+ "second_positive": 74,
+ "both_positive": 62,
+ "disagreements": 26,
+ "outside_convention_items": 52,
+ "outside_by_category": {
+  "filter_or_solver_setting": 1,
+  "material": 51
+ },
+ "runs_with_commands": 0,
+ "disagreement_list": [
+  {
+   "task": "L05",
+   "category": "load_dir",
+   "first": true,
+   "second": false,
+   "second_items": []
+  },
+  {
+   "task": "L07",
+   "category": "load_pos_ext",
+   "first": false,
+   "second": true,
+   "second_items": [
+    {
+     "entity": "Right-edge load distribution",
+     "readings": [
+      "Apply a concentrated downward force at (1,0).",
+      "Apply uniform downward traction over x=1, -0.05<y<0.05."
+     ],
+     "evidence": "Sec. 4.1.1, cantilever paragraph: downward point load at the right-edge center, with Gamma_N={1}x(-0.05,0.05). Sec. 3.2.1, Eqs. (3.16)-(3.17), integrates traction over Gamma_N."
+    }
+   ]
+  },
+  {
+   "task": "L07",
+   "category": "volume_fraction",
+   "first": true,
+   "second": false,
+   "second_items": []
+  },
+  {
+   "task": "L11",
+   "category": "domain",
+   "first": false,
+   "second": true,
+   "second_items": [
+    {
+     "entity": "Rectangle aspect ratio",
+     "readings": [
+      "Lx/Ly = 2, assuming square elements.",
+      "Lx/Ly approximately 1.75, following the displayed rectangle."
+     ],
+     "evidence": "Table 3, problem 3; Fig. 2."
+    }
+   ]
+  },
+  {
+   "task": "L11",
+   "category": "load_pos_ext",
+   "first": false,
+   "second": true,
+   "second_items": [
+    {
+     "entity": "Spatial application of the mid-right load",
+     "readings": [
+      "A point force at the right-edge midpoint node.",
+      "The same resultant distributed equally over the midpoint node and its two adjacent right-edge nodes."
+     ],
+     "evidence": "Table 3, problem 3; Fig. 2 contains no load markers."
+    }
+   ]
+  },
+  {
+   "task": "L11",
+   "category": "volume_fraction",
+   "first": false,
+   "second": true,
+   "second_items": [
+    {
+     "entity": "Reference volume V0",
+     "readings": [
+      "V0 is the full rectangular volume, including prescribed-void locations.",
+      "V0 is the available volume after subtracting the two prescribed voids."
+     ],
+     "evidence": "Sec. 3.2, V(\u03c1) \u2264 vf V0; Sec. 3.5, frozen-void treatment; Table 3, problem 3."
+    },
+    {
+     "entity": "Volume target of the retained soft-seed state in Fig. 2",
+     "readings": [
+      "The illustrated retained state was obtained at vf = 0.25.",
+      "The illustrated retained state was obtained at vf = 0.28."
+     ],
+     "evidence": "Table 3, problem 3; Sec. 4.4, retained compliance definition; Fig. 2 caption; Appendix A, Table 14."
+    },
+    {
+     "entity": "Volume target of the retained passive-solid state in Fig. 2",
+     "readings": [
+      "The passive-solid state uses the initial vf = 0.25 target.",
+      "The passive-solid state uses an increased vf = 0.28 target."
+     ],
+     "evidence": "Secs. 3.4\u20133.5; Fig. 2 caption; Sec. 4.2; Appendix A, Table 14."
+    }
+   ]
+  },
+  {
+   "task": "L12",
+   "category": "support",
+   "first": true,
+   "second": false,
+   "second_items": []
+  },
+  {
+   "task": "L19",
+   "category": "domain",
+   "first": true,
+   "second": false,
+   "second_items": []
+  },
+  {
+   "task": "L20",
+   "category": "volume_fraction",
+   "first": false,
+   "second": true,
+   "second_items": [
+    {
+     "entity": "Density field on which the volume constraint is enforced",
+     "readings": [
+      "Enforce the prescribed fraction on the final filtered density, using volume-preserving filtering or a subsequent bias correction.",
+      "Enforce the prescribed fraction only on the prefilter density; allow the final fraction to follow from the filter's boundary treatment."
+     ],
+     "evidence": "Sec. V-A, Eqs. (11)\u2013(12) and the following radius-2 cone-filter paragraph; Sec. V-B gives 0.4 for the baseline training designs."
+    }
+   ]
+  },
+  {
+   "task": "L21",
+   "category": "volume_fraction",
+   "first": true,
+   "second": false,
+   "second_items": []
+  },
+  {
+   "task": "L24",
+   "category": "volume_fraction",
+   "first": false,
+   "second": true,
+   "second_items": [
+    {
+     "entity": "Minimum admissible local relative density rho_min",
+     "readings": [
+      "rho_min = 0.2, interpreting the color-scale endpoint as the prescribed lower bound.",
+      "rho_min = 0.001, interpreting 0.2 as a display endpoint rather than an admissibility bound."
+     ],
+     "evidence": "Eq. (27) density bounds; attached Fig. 9 density-field image with color scale from 0.2 to 0.8."
+    },
+    {
+     "entity": "Maximum admissible local relative density rho_max",
+     "readings": [
+      "rho_max = 0.8, interpreting the color-scale endpoint as the prescribed upper bound.",
+      "rho_max = 1.0, interpreting 0.8 as a display endpoint rather than an admissibility bound."
+     ],
+     "evidence": "Eq. (27) density bounds; attached Fig. 9 density-field image with color scale from 0.2 to 0.8."
+    }
+   ]
+  },
+  {
+   "task": "L25",
+   "category": "support",
+   "first": true,
+   "second": false,
+   "second_items": []
+  },
+  {
+   "task": "L25",
+   "category": "load_pos_ext",
+   "first": true,
+   "second": false,
+   "second_items": []
+  },
+  {
+   "task": "L29",
+   "category": "passive",
+   "first": true,
+   "second": false,
+   "second_items": []
+  },
+  {
+   "task": "L30",
+   "category": "load_pos_ext",
+   "first": false,
+   "second": true,
+   "second_items": [
+    {
+     "entity": "Discrete application of the corner load",
+     "readings": [
+      "Apply the entire downward force to the bottom-right corner node.",
+      "Divide the downward resultant equally between the two nodes of the bottom edge of the corner element.",
+      "Divide the downward resultant equally between the two nodes of the right edge of the corner element."
+     ],
+     "evidence": "Fig. 1 places the arrow at the bottom-right corner; Sec. 5.1 chooses a boundary element as the load location without describing its nodal force assignment."
+    }
+   ]
+  },
+  {
+   "task": "L33",
+   "category": "volume_fraction",
+   "first": false,
+   "second": true,
+   "second_items": [
+    {
+     "entity": "20.25% material budget",
+     "readings": [
+      "Impose 20.25% on the designable region, excluding passive material from both numerator and denominator.",
+      "Impose 20.25% on the entire box, counting retained passive material toward the budget."
+     ],
+     "evidence": "Results, 'Design of nanopillars using Nano-TO', reports 640,000 active atoms, 12,800 passive atoms, and a target mass ratio of 20.25%; the FEM comparison calls this the same nanopillar problem."
+    }
+   ]
+  },
+  {
+   "task": "L34",
+   "category": "load_pos_ext",
+   "first": true,
+   "second": false,
+   "second_items": []
+  },
+  {
+   "task": "L37",
+   "category": "support",
+   "first": false,
+   "second": true,
+   "second_items": [
+    {
+     "entity": "Inward thickness of the clamped end regions",
+     "readings": [
+      "Fix both displacement components only on the edges x = 0 and x = 150 mm.",
+      "Use 1 mm-wide passive solid end strips and fix all nodes within those strips."
+     ],
+     "evidence": "Sec. 4.1 specifies fully fixed left and right sides; Fig. 8(a) labels the thin red bands 'Solid domain (fully fixed)' without giving their thickness."
+    }
+   ]
+  },
+  {
+   "task": "L38",
+   "category": "domain",
+   "first": true,
+   "second": false,
+   "second_items": []
+  },
+  {
+   "task": "L40",
+   "category": "volume_fraction",
+   "first": false,
+   "second": true,
+   "second_items": [
+    {
+     "entity": "Volume conservation between projected and physical densities",
+     "readings": [
+      "Constrain the intermediate densities to 30% and determine the Heaviside threshold by bisection to conserve volume across that projection.",
+      "Constrain the intermediate densities to 30% and fix the Heaviside threshold at 0.5, allowing the physical volume fraction to differ."
+     ],
+     "evidence": "Appendix C specifies the 30% target; Section 5, Eq. (14) constrains the intermediate densities; the text following Eq. (17) permits either a volume-conserving threshold or a fixed threshold of 0.5 without selecting one for Fig. 5."
+    }
+   ]
+  },
+  {
+   "task": "L41",
+   "category": "support",
+   "first": false,
+   "second": true,
+   "second_items": [
+    {
+     "entity": "Displacement components constrained on the left edge",
+     "readings": [
+      "Fix both in-plane displacement components at every left-edge node",
+      "Fix horizontal displacement along the left edge and fix vertical displacement only at the lower-left node"
+     ],
+     "evidence": "Sec. 4.6, Fig. 6(a): repeated hollow triangles mark the left edge without displacement labels; the Fig. 10 caption describes such markers only as constrained boundary supports."
+    }
+   ]
+  },
+  {
+   "task": "L43",
+   "category": "support",
+   "first": false,
+   "second": true,
+   "second_items": [
+    {
+     "entity": "Endpoint membership of the supported half-edges",
+     "readings": [
+      "Fix all nodes on the two closed half-edges, including their endpoints, plus the bottom-right corner.",
+      "Fix only nodes strictly between the corner and midpoint of each marked half-edge, plus the bottom-right corner."
+     ],
+     "evidence": "Sec. 4.1 describes node sets 'between corners and midpoints'; Fig. 5, row 1 shows green support segments without identifying individual endpoint nodes."
+    }
+   ]
+  },
+  {
+   "task": "L43",
+   "category": "load_dir",
+   "first": true,
+   "second": false,
+   "second_items": []
+  },
+  {
+   "task": "L44",
+   "category": "volume_fraction",
+   "first": true,
+   "second": false,
+   "second_items": []
+  },
+  {
+   "task": "L45",
+   "category": "volume_fraction",
+   "first": true,
+   "second": false,
+   "second_items": []
+  },
+  {
+   "task": "L45",
+   "category": "passive",
+   "first": true,
+   "second": false,
+   "second_items": []
+  }
+ ],
+ "outside": [
+  {
+   "task": "L04",
+   "category": "material",
+   "entity": "Solid-material Poisson's ratio"
+  },
+  {
+   "task": "L04",
+   "category": "material",
+   "entity": "Two-dimensional constitutive assumption"
+  },
+  {
+   "task": "L05",
+   "category": "material",
+   "entity": "Two-dimensional constitutive assumption"
+  },
+  {
+   "task": "L08",
+   "category": "material",
+   "entity": "Two-dimensional constitutive assumption"
+  },
+  {
+   "task": "L09",
+   "category": "material",
+   "entity": "Poisson ratio"
+  },
+  {
+   "task": "L09",
+   "category": "material",
+   "entity": "Two-dimensional constitutive assumption"
+  },
+  {
+   "task": "L09",
+   "category": "material",
+   "entity": "Void-to-solid stiffness ratio Emin/E0"
+  },
+  {
+   "task": "L11",
+   "category": "material",
+   "entity": "Poisson ratio"
+  },
+  {
+   "task": "L13",
+   "category": "material",
+   "entity": "Poisson's ratio"
+  },
+  {
+   "task": "L13",
+   "category": "material",
+   "entity": "Two-dimensional constitutive assumption"
+  },
+  {
+   "task": "L14",
+   "category": "material",
+   "entity": "Two-dimensional constitutive assumption"
+  },
+  {
+   "task": "L15",
+   "category": "material",
+   "entity": "Two-dimensional constitutive assumption"
+  },
+  {
+   "task": "L18",
+   "category": "material",
+   "entity": "Poisson's ratio"
+  },
+  {
+   "task": "L18",
+   "category": "material",
+   "entity": "Two-dimensional constitutive assumption"
+  },
+  {
+   "task": "L19",
+   "category": "material",
+   "entity": "Solid-material Poisson ratio"
+  },
+  {
+   "task": "L19",
+   "category": "material",
+   "entity": "Two-dimensional constitutive assumption"
+  },
+  {
+   "task": "L19",
+   "category": "material",
+   "entity": "Void-to-solid stiffness ratio"
+  },
+  {
+   "task": "L20",
+   "category": "material",
+   "entity": "Poisson's ratio"
+  },
+  {
+   "task": "L20",
+   "category": "material",
+   "entity": "Two-dimensional constitutive reduction"
+  },
+  {
+   "task": "L21",
+   "category": "material",
+   "entity": "Poisson's ratio"
+  },
+  {
+   "task": "L21",
+   "category": "material",
+   "entity": "Two-dimensional constitutive assumption"
+  },
+  {
+   "task": "L22",
+   "category": "material",
+   "entity": "Two-dimensional constitutive assumption"
+  },
+  {
+   "task": "L24",
+   "category": "material",
+   "entity": "Poisson ratio for the isotropic rebuild"
+  },
+  {
+   "task": "L25",
+   "category": "material",
+   "entity": "Residual stiffness ratio \u03b5/Y0"
+  },
+  {
+   "task": "L25",
+   "category": "material",
+   "entity": "Poisson's ratio"
+  },
+  {
+   "task": "L25",
+   "category": "material",
+   "entity": "Two-dimensional constitutive assumption"
+  },
+  {
+   "task": "L27",
+   "category": "material",
+   "entity": "Void-to-solid stiffness ratio E0/E1"
+  },
+  {
+   "task": "L27",
+   "category": "material",
+   "entity": "Poisson's ratio"
+  },
+  {
+   "task": "L27",
+   "category": "material",
+   "entity": "Two-dimensional constitutive assumption"
+  },
+  {
+   "task": "L28",
+   "category": "material",
+   "entity": "Solid Poisson ratio"
+  },
+  {
+   "task": "L28",
+   "category": "material",
+   "entity": "Two-dimensional constitutive assumption"
+  },
+  {
+   "task": "L29",
+   "category": "material",
+   "entity": "Two-dimensional constitutive assumption"
+  },
+  {
+   "task": "L30",
+   "category": "material",
+   "entity": "Two-dimensional constitutive assumption"
+  },
+  {
+   "task": "L30",
+   "category": "filter_or_solver_setting",
+   "entity": "Density-filter weight metric"
+  },
+  {
+   "task": "L31",
+   "category": "material",
+   "entity": "Poisson's ratio"
+  },
+  {
+   "task": "L31",
+   "category": "material",
+   "entity": "Two-dimensional constitutive assumption"
+  },
+  {
+   "task": "L33",
+   "category": "material",
+   "entity": "Continuum Poisson's ratio"
+  },
+  {
+   "task": "L34",
+   "category": "material",
+   "entity": "Poisson's ratio"
+  },
+  {
+   "task": "L35",
+   "category": "material",
+   "entity": "Poisson's ratio"
+  },
+  {
+   "task": "L36",
+   "category": "material",
+   "entity": "Poisson's ratio"
+  },
+  {
+   "task": "L37",
+   "category": "material",
+   "entity": "Two-dimensional constitutive assumption"
+  },
+  {
+   "task": "L38",
+   "category": "material",
+   "entity": "Two-dimensional constitutive reduction"
+  },
+  {
+   "task": "L39",
+   "category": "material",
+   "entity": "Poisson's ratio"
+  },
+  {
+   "task": "L41",
+   "category": "material",
+   "entity": "Poisson's ratio"
+  },
+  {
+   "task": "L41",
+   "category": "material",
+   "entity": "Two-dimensional constitutive assumption"
+  },
+  {
+   "task": "L42",
+   "category": "material",
+   "entity": "Poisson's ratio"
+  },
+  {
+   "task": "L42",
+   "category": "material",
+   "entity": "Two-dimensional elastic reduction"
+  },
+  {
+   "task": "L43",
+   "category": "material",
+   "entity": "Two-dimensional elastic constitutive assumption"
+  },
+  {
+   "task": "L44",
+   "category": "material",
+   "entity": "Poisson's ratio"
+  },
+  {
+   "task": "L44",
+   "category": "material",
+   "entity": "Two-dimensional constitutive assumption"
+  },
+  {
+   "task": "L45",
+   "category": "material",
+   "entity": "Poisson ratio"
+  },
+  {
+   "task": "L45",
+   "category": "material",
+   "entity": "Two-dimensional elastic constitutive assumption"
+  }
+ ]
+}

@@ -1,0 +1,414 @@
+shaoliang.txt — full check record for guide/2026-10-22-adjudication-sheet.md
+Checked: 2026-10-22 | checked by: shaoliang ____ | Sources: tasks/sources/<arXiv id>/text.txt (local)
+Legend: KEEP = retain encoded value; CHANGE = replace with stated value; DROP = remove slot.
+[SV] checked against local source text; [SE] adjudicated from sheet-recorded Codex evidence only.
+
+SUMMARY
+- 41 tasks: all slots boxed (KEEP/CHANGE/DROP); no DROPs; one missing slot added (L02 volfrac).
+- Resolved conflicts: L05 rmin -> 1.5 (Fig. 7 caption "minimum thickness of 1.5" overrides Sec. 4 default 2, "if not explicitly specified"); L07 clamp -> left edge x=-1 (prose "left boundary is clamped"; Gamma_D={0}x(-0.5,0.5) is a formula typo — the 3D analogue uses {-1}); L17 len -> full right edge, uniform 100 MPa (Sec. 4.1 text governs over Fig. 3 short-segment schematic); L19 extent -> half model (180x30 IS the optimized right symmetric half; full beam 360x30); L20 extent -> half-model optimized, full beam 384x64 (Fig. 2B: "Using symmetry, only half of the domain is optimized"; 192x64 = 12,288 design variables) + volume bias b enforces V0 on the prefilter field v-tilde (Eq. 12), cone filter r=2 applied after; L27 ar -> square (100x100 FEs; Fig. 8 is a stretched rendering); L30 filter -> literal density-difference weights w_ei = 2 - |x_i - x_e| (Eq. 6 verbatim, x = element density); L33 support -> four ~8x8 corner patches (~1/5 base width per S17) + 20.25% budget on the designable region; L40 rmin -> 1.5 (Table 1 governs the shown MBB case; Sec. 5.1 says 2.0 — conflict noted); L42 sup -> two corner pins (Fig. 1(a) "Fixed Nodes" only at the two left corners).
+- Recurring Codex [material] plane-stress/strain + Poisson items are outside the six encoded groups: no missing-slot action unless constitutive assumptions get encoded. Exceptions where the source states something: L11 (plane stress, Table 3), L17 (plane stress + 1 mm out-of-plane thickness, Sec. 4), L39 (plane stress for KE in Sec. 3.2, per sheet evidence).
+- Unchecked surfaces: L37-L45 local re-checks and all 16 exclusion arXiv spot-checks deferred to a later pass; those rows rest on [SE] evidence.
+
+============================================================
+TASKS
+============================================================
+
+L01 — arXiv:2403.04937 (frame 1, 2-D) L-shaped bracket, Fig. 4  [SV]
+  Our slots: arm=0.4/0.5 | load=0.1/0.5/0.9 (right edge) | volfrac=0.4 (mandatory)
+  Reconstruction: 64x64; point load as 4-element patch -> OK
+  Codex items: [domain_extent] cut 39x39 vs 38x38 — mask "randomly applied ... position randomly assigned along one of the edges" (Dataset); size NOT stated -> keep our reading (arms 25 wide / 39x39 cut).
+               [load_position] node (64,12) vs (64,13) — caption: "downward point load applied at the right edge"; no coordinates -> keep (64,12).
+               [volume_fraction] V0=0.30*L-region vs 0.20*enclosing square — not stated for this instance (training vf ~ U[0.12,0.5]) -> keep our mandatory fix.
+  Disagreements: none on encoded slots; 3 Codex-only items unresolvable from source.
+  Boxes: arm KEEP | load KEEP | volfrac KEEP | reconstruction OK
+  Missing slot: none. Context: sims per 88-line code, E0=1, Emin=1e-9, nu=0.3, cone filter r=2 px.
+
+L04 — arXiv:2105.04232 (frame 36, 2-D) Michell cantilever, Sec. 4.2  [SV]
+  Our slots: c=0.4-0.6 (line load "around mid-height")
+  Reconstruction: 60x30 homogenization mesh in source; 120x60 used -> OK
+  Codex items: [support_location_extent] left edge vs corner nodes — text defers to Fig. 9(a) -> keep full left edge (schematic); no missing slot.
+               [load_position] y=H/2 vs ~0.47H — figure-based -> KEEP centered.
+               [load_extent_distribution] L reference: Sec. 4 "force is applied along a line of 1/10 L"; domain 60x30 (2:1), classical Michell span:height=2:1 -> pick B, L = span 2H, loaded length 0.2H (= 6 rows of the 30-row mesh).
+               [load_extent_distribution] force distribution — not stated in source -> keep ours (consistent nodal forces, half weights at endpoints).
+               [passive_region] r=h_c vs 2h_c — "in a small radius around the load" unquantified -> keep ours.
+               [material] nu / plane stress-strain — not stated in source -> outside groups, no action.
+  Boxes: c KEEP | reconstruction OK
+  Missing slot: none.
+
+L05 — arXiv:1708.07364 (frame 38, 2-D) rectangular cantilever, Fig. 7  [SV]
+  Our slots: dir=down (mandatory) | rmin=1.5/2.0
+  Reconstruction: point force as 4-element patch -> OK
+  Codex items: [material] plane stress vs plane strain (E=1, nu=0.3) — E=1 and nu=0.3 CONFIRMED (Sec. 4); reduction not stated -> outside groups; keep our plane-stress assumption.
+  Disagreements: rmin conflict resolved in source: Sec. 4 default "minimal thickness ... set to be 2, ... if not explicitly specified" vs Fig. 7 caption "with a minimum thickness of 1.5".
+  Boxes: dir KEEP (mandatory) | rmin CHANGE -> 1.5 (Fig. 7 caption governs) | reconstruction OK
+  Missing slot: none.
+
+L07 — arXiv:2511.14623 (frame 43, 2-D) cantilever, Sec. 4.1.1  [SV]
+  Our slots: clamp=left_edge/midline | volfrac=0.5 (mandatory)
+  Reconstruction: mesh-free in source; 120x60; traction segment (-0.05,0.05) as 6-element patch; vf fixed to 0.5 after asking -> OK
+  Codex items: [support_location_extent] left edge x=-1 vs internal line x=0 — text: "the left boundary is clamped on Gamma_D={0}x(-0.5,0.5)"; domain Omega=(-1,1)x(-0.5,0.5); 3D analogue clamps {-1} -> pick A (left edge; {0} is a formula typo).
+               [load_extent_distribution] point force at (1,0) vs uniform traction on x=1, -0.05<y<0.05 — text: "a downward point load t=(0,-1)^T is applied to the center of the right boundary on Gamma_N={1}x(-0.05,0.05)"; traction defined over the segment (3D case says "at the point") -> keep our 6-element patch (uniform over segment); "point load" wording loose.
+  Boxes: clamp CHANGE -> left edge x=-1 | volfrac KEEP (Sec. 4.1.1: beta=0.5 in 2D cases) | reconstruction OK
+  Missing slot: none.
+
+L08 — arXiv:2305.04107 (frame 48, 2-D) cantilever, Table 1 / Sec. 4.1  [SV]
+  Our slots: ar=2.5/3.0/3.5
+  Reconstruction: common 140x40 grid truncated at x=ar*40; corner point load as 4-element patch -> OK
+  Codex items: [domain_extent] height 1/3 mm vs ~1/3.1 mm — Sec. 4.5 "normalize the domain with the longest side = 1mm"; schematic ~3:1 -> pick A (height 1/3 mm).
+               [material] plane stress vs plane strain (E=1000, nu=0.3) — E=1000 N/mm^2 and nu=0.3 CONFIRMED (Sec. 4.5); reduction not stated -> outside groups; keep ours.
+  Boxes: ar KEEP (3.0) | reconstruction OK
+  Missing slot: none.
+
+L09 — arXiv:2605.02158 (frame 49, 2-D) dataset row 1, Fig. 3  [SV]
+  Our slots: sup=0.5/0.75 | load=0.1-0.4 | volfrac=0.4 (mandatory)
+  Reconstruction: 64x64 stated; vf fixed to 0.4 after asking; right-edge support full edge -> OK
+  Codex items: [load_position] (0,8L/64) vs (0,9L/64) — Sec. 4.1: "A single external load was applied along the edge ... unit magnitude with a direction sampled randomly"; no sample values -> figure-based, keep ours.
+               [volume_fraction] f=0.36 vs 0.37 — "f was randomly sampled from a uniform distribution in the range 0.3 to 0.5"; Fig. 3 reports error, not target -> keep our mandatory 0.4.
+               [material] nu / plane stress-strain / Emin-E0 — E_min appears in Eq. (2) with no value; nu not stated -> outside groups; keep defaults.
+  Boxes: sup KEEP | load KEEP | volfrac KEEP | reconstruction OK
+  Missing slot: none.
+
+L11 — arXiv:2605.19110 (frame 59, 2-D) cantilever with two voids, Table 3 ID 3 / Fig. 2  [SV]
+  Our slots: voids=horizontal/vertical/diagonal | dir=down (mandatory)
+  Reconstruction: void radius 6 elements assumed for all layouts -> OK
+  Codex items: [domain_extent] Lx/Ly=2 vs ~1.75 — Table 3: mesh 80x40, vf=0.25, "Left fixed, mid-right load, 2 voids" -> pick A (Lx/Ly = 2).
+               [passive_region] shape/centers/sizes of the two voids — figure-based (Fig. 2) -> keep ours (circular, radius 6 elements; centers per Fig. 2).
+               [load_direction] mid-right load direction — not stated in source -> keep vertical downward (standard cantilever).
+               [load_extent_distribution] point vs distributed — not stated in source -> keep our point force.
+               [material] nu — not stated; plane stress CONFIRMED (Table 3: "All 2D problems use plane-stress elements") — consistent with our encoding.
+               [volume_fraction] V0 — pick A: full rectangular volume (standard V(rho) <= vf*V0 over the whole domain).
+               [volume_fraction] soft-seed retained state in Fig. 2 — Table 14: initial 0.25, final 0.28 (LLM and rule traces alike); task value stays 0.25 (Table 3 benchmark target); 0.28 is a result, not an input -> KEEP 0.25.
+               [volume_fraction] passive-solid state — frozen elements "counted in the reported physical volume-fraction check, but ... not redistributed by the OC bisection"; final vf of the passive-solid trace NOT stated -> keep initial target 0.25.
+  Boxes: voids KEEP | dir KEEP (mandatory) | reconstruction OK
+  Missing slot: none (vf=0.25 is given in Table 3).
+
+L02 — arXiv:1909.11320 (frame 5, 3-D) 3-D cantilever, Sec. 6.1.1 / Fig. 3  [SV]
+  Our slots: strip=line/quarter/half
+  Reconstruction: 36x12x12 mesh; full-width strip, raised-cosine in height -> OK
+  Codex items: [load_extent_distribution] entire 1x1 face vs line load along lower edge — Fig. 3(left): arrow row along the lower free-end edge, label in N/m^2 (pressure units exclude a pure line load) -> keep our full-width strip reading (neither Codex option exact).
+               [volume_fraction] fraction 0.5 vs absolute bound — text: "The upper bound for the mass constraint is 0.5" with Eq. (1) sum(mu_i v_i) <= v_u -> pick B: absolute 0.5 m^3; box = 3 m^3 per Fig. 3 (figure) -> equivalent fraction ~0.17.
+  Boxes: strip KEEP | reconstruction OK
+  Missing slot: volfrac — not encoded; ADD vf ~= 0.17 (v_u = 0.5 m^3 / 3 m^3 box per figure).
+
+L06 — arXiv:1612.04082 (frame 40, 3-D) cantilever supports, Sec. 4.1 config 1  [SV]
+  Our slots: h=0.4/0.5/0.6 | width=line/strip
+  Reconstruction: 64^3 voxels in source; 24^3 used -> OK
+  Codex items: [load_position] z=0.5 vs ~0.52 (e.g. 33/64) — Sec. 4.1: loading on the face opposite the fixed face; Fig. 2(A) undimensioned -> figure-based, keep ours (mid-height).
+  Boxes: h KEEP | width KEEP | reconstruction OK
+  Missing slot: none.
+
+L12 — arXiv:2410.23295 (frame 23, 3-D) voxel scaffold, Fig. 6/7  [SV prior]
+  Our slots: sup=corners/full | load=full/central
+  Reconstruction: 40^3 voxels in source; 24^3 used; vf 0.3 = first of five stated targets -> OK
+  Codex items: [load_extent_distribution] uniform traction vs equal nodal forces vs force on loading shell — "thin shell at its top" + single F arrow (Fig. 6 right) -> keep ours (force through the modeled shell).
+               [passive_region] no shell voxels vs 1/40 vs 2/40 layer — thickness NOT stated in source -> keep ours.
+  Boxes: sup KEEP | load KEEP | reconstruction OK
+  Missing slot: none.
+
+L13 — arXiv:2310.02069 (frame 74, 2-D) cantilever, Fig. 1(a)/Fig. 3(b)  [SV]
+  Our slots: load=corner/lower/mid | volfrac=0.2 (mandatory)
+  Reconstruction: point force as 4-element patch; vf fixed to 0.2 after asking -> OK
+  Codex items: [load_position] y/H = 0.50/0.49/0.51 — no load coordinate in Secs. 2.1/3.1 -> figure-based, keep ours.
+               [volume_fraction] Vf=0.19/0.20/0.21 — sweep "0.01 to 0.95 with an increment of 0.01" (Sec. 2.3); caption gives no value -> keep our mandatory 0.20 (image file name only).
+               [material] nu / plane stress-strain — not stated in source -> outside groups; keep ours.
+  Boxes: load KEEP | volfrac KEEP (mandatory) | reconstruction OK
+  Missing slot: none.
+
+L14 — arXiv:2603.09780 (frame 78, 2-D) cantilever benchmark, Fig. 1 / Table 1  [SV]
+  Our slots: c=0.4/0.5/0.6
+  Reconstruction: adaptive mesh in source; fixed 80x40 grid (level 2); PDE filter radius 0.375 = 1.5 elements -> OK
+  Codex items: [load_extent_distribution] uniform vs triangular traction — Sec. 2 gives no distribution -> keep ours (uniform over the segment).
+               [material] plane stress vs plane strain (E=1, nu=0.3) — Table 1: "Linear elastic, E 1, mu 0.3"; reduction not stated -> outside groups; keep ours (VTTO sheet with out-of-plane thickness).
+  Boxes: c KEEP | reconstruction OK
+  Missing slot: none.
+
+L15 — arXiv:2603.25099 (frame 79, 2-D) cantilever 120x60, Sec. 3.5 / Fig. 6  [SV]
+  Our slots: pos=corner/mid | dir=down (mandatory)
+  Reconstruction: square elements assumed; point force as 4-element patch -> OK
+  Codex items: [load_position] midpoint vs +/-1 node — "tip load, fixed left edge" only; Fig. 6 symmetric designs -> keep midpoint.
+               [load_extent_distribution] single node vs 3-node split — not stated in source -> keep ours (single node).
+               [load_direction] transverse/axial/inclined — not stated in source -> keep vertical downward (standard cantilever).
+               [material] plane stress vs plane strain (nu=0.3) — reduction not stated -> outside groups; keep ours. Context (Sec. 4): all benchmarks use Vf=0.40, nu=0.3, Emin/E0=1e-9 — consistent with our encoding.
+  Boxes: pos KEEP (mid) | dir KEEP (mandatory) | reconstruction OK
+  Missing slot: none.
+
+L16 — arXiv:2504.14892 (frame 101, 2-D) asymmetrically loaded plate, Fig. 6(a)  [SV]
+  Our slots: sup=0.05/0.1/0.2 L | load=0.05/0.1/0.2 L
+  Reconstruction: level-set evolution in source; density SIMP on 80x80; rmin 1.5 (no filter in source) -> OK
+  Codex items: [support_location_extent] 0.10L vs ~0.12L — Eq. (39) u=0 on Gamma_u; spans undimensioned in text and figure -> keep 0.10L.
+               [load_extent_distribution] 0.10L vs 0.12L patches — "three arrows at each loaded corner without patch dimensions"; |t|=1e3 N/m, L=1 m (Sec. 4.1) -> keep 0.10L.
+  Boxes: sup KEEP (0.10L) | load KEEP (0.10L) | reconstruction OK
+  Missing slot: none.
+
+L17 — arXiv:2607.22833 (frame 128, 2-D) structural cantilever, Sec. 4.1 / Fig. 3  [SV]
+  Our slots: len=short/quarter/full
+  Reconstruction: RAMP+MMA in source; SIMP+OC; traction as raised-cosine patch of the stated length -> OK (length now = full edge)
+  Codex items: [load_position] lower-corner patch vs midheight center — Sec. 4.1: "apply a 100 MPa traction to the right edge of the beam"; Sec. 4.4: "traction applied at the center of the right edge" (resultant location) -> keep centered reading; text governs over Fig. 3 schematic.
+               [load_extent_distribution] full 100 mm edge vs ~20 mm segment — pick A: uniform 100 MPa over the entire right edge.
+  Context confirmed: plane stress, 1 mm out-of-plane thickness; E=160 GPa, nu=0.3; domain 200x100 mm, 200x100 Q4 elements; V*=0.5.
+  Boxes: len CHANGE -> full right edge (uniform 100 MPa) | reconstruction OK
+  Missing slot: none.
+
+L18 — arXiv:2603.22889 (frame 129, 2-D) 2-D cantilever, Fig. 1  [SV]
+  Our slots: patch=corner/right6/bottom6
+  Reconstruction: MMA in source; OC -> OK
+  Codex items: [load_extent_distribution] corner node vs lowest right-edge element vs rightmost bottom-edge element — Fig. 1 caption: "a downward distributed load of 1 N is applied at the lower-right corner" (domain 30x60, left boundary fixed); no nodal weights in source -> keep ours (up to 6 elements on either edge).
+               [material] nu / plane stress-strain — not stated in source -> outside groups; keep ours.
+  Boxes: patch KEEP | reconstruction OK
+  Missing slot: none.
+
+L19 — arXiv:2607.20784 (frame 133, 2-D) MBB beam, Sec. 4.1.1 / Table 2 (m=1)  [SV]
+  Our slots: extent=full/half
+  Reconstruction: common 180x30 half-model grid truncated at xmax; mid-span point load as 2-element patch at the symmetry edge -> OK
+  Codex items: [material] nu / plane stress-strain / Emin-E_solid — not stated in source (Emin "a very small stiffness") -> outside groups; keep ours.
+  Disagreements resolved in source: "The domain is parameterized using Nex=180 FEs and Ney=30 FEs ... The right symmetric half section is optimized" -> 180x30 IS the half model; full beam 360x30.
+  Boxes: extent CHANGE -> half (180x30 = optimized right half; full beam 360x30) | reconstruction OK
+  Missing slot: none.
+
+L20 — arXiv:2607.07682 (frame 73, 2-D) MBB beam, Sec. V-A / Fig. 2B  [SV]
+  Our slots: extent=full/half | sup=node/block
+  Reconstruction: L-BFGS in source; OC; block support = 4-element segment ending at the corner -> OK
+  Codex items: [domain_extent] half vs full — Fig. 2B caption: "Full-view of the 2D MBB beam ... A downward force is applied at the center, while both lower corners are supported. Using symmetry, only half of the domain is optimized"; Sec. V-A: 192x64 = 12,288 design variables -> pick A: 192x64 is the optimized half-domain; full beam 384x64.
+               [support_type] corner restraint components — physical corner support -> pick B: u_x=0 on the symmetry cut; outer lower corner restrains both components.
+               [material] nu / plane stress-strain — not stated (framework follows Ref. [35]) -> outside groups; keep ours.
+               [volume_fraction] constraint field — Eq. (12): bias b by binary search "such that V(v-tilde)=V0", then cone filter r=2 applied to v-tilde; no post-filter correction stated -> pick B: enforced on the prefilter density; final fraction follows from the filter's boundary treatment.
+  Boxes: extent CHANGE -> half-model (full beam 384x64) | sup KEEP | reconstruction OK
+  Missing slot: none.
+
+L21 — arXiv:2608.22606 (frame 77, 2-D) SIMP reference, Sec. 5.1 / Fig. 5(c)  [SV]
+  Our slots: load=corner/upper | volfrac=0.469 (mandatory)
+  Reconstruction: sensitivity filter in source; density filter rmin 1.5; unit nodal load as 2-element patch -> OK
+  Codex items: [load_position] node 15 vs 16 of 20 vs corner — Sec. 5.1: "unit downward load to a randomly selected admissible node on the lower, upper, or right boundary region"; Fig. 5(c) instance -> figure-based, keep ours.
+               [material] nu / plane stress-strain — not stated in source -> outside groups; keep ours.
+  Boxes: load KEEP (upper right edge) | volfrac KEEP (mandatory; dataset samples U[0.3,0.7]) | reconstruction OK
+  Missing slot: none.
+
+L22 — arXiv:2009.06245 (frame 98, 2-D) Fig. 7(a)  [SV]
+  Our slots: pos=1..18 (nominal 9)
+  Reconstruction: sensitivity filter r=4 px in source; density filter r=2; 2x2 area load as 2-element edge patch -> OK
+  Codex items: [load_position] index 5/6/7 — Sec. 3.3: "the force location is indexed by integer numbers from 1 to 18 when it moves from the top four elements to the bottom four elements" (index i = rows 2i-1..2i from the top); Fig. 7(a) index NOT stated ("same loading condition") -> keep our nominal 9 (rows 17-18, mid-height).
+               [material] plane stress vs plane strain (E=69 GPa, nu=0.3) — E and nu stated in Sec. 4.1; reduction not stated -> outside groups; keep ours.
+  Boxes: pos KEEP (9) | reconstruction OK
+  Missing slot: none.
+
+L23 — arXiv:2210.11477 (frame 115, 2-D) uni-axial compression, Sec. 3.1 / Fig. 5  [SV]
+  Our slots: solid=load/double (pad height ~0.04 vs 2x)
+  Reconstruction: 200x200 in source; 100x100; robust eroded/dilated replaced by nominal SIMP -> OK
+  Codex items: [passive_region] pad height 0.04 vs ~0.10 — text: "Two inward pointing distributed loads ... widths L_load=0.04 ... Passive solid regions are located at the loads with a width of 0.025"; height not stated -> pick A (height 0.04, matching the load span, centered on the symmetry axis).
+  Boxes: solid KEEP (0.04) | reconstruction OK
+  Missing slot: none.
+
+L25 — arXiv:2002.01927 (frame 47, 2-D) first problem, Fig. 2a  [SV prior]
+  Our slots: sup=elem/node | load=elem/corner
+  Reconstruction: 4x4 COMSOL elements in source; 40x40 grid; rmin 1.5 -> OK
+  Codex items: [material] eps/Y0 = 1e-3/1e-6/1e-9 — Eq. (6): "eps is a small number to avoid numerical singularity"; no value -> unresolvable, keep ours.
+               [material] nu / plane stress-strain — not stated in source -> outside groups; keep ours.
+  Boxes: sup KEEP | load KEEP | reconstruction OK
+  Missing slot: none.
+
+L27 — arXiv:2404.12244 (frame 63, 2-D) mid-load problem, Fig. 6(a)/Fig. 8  [SV prior]
+  Our slots: ar=square/wide
+  Reconstruction: common 175x100 grid truncated at xmax; vf 0.25 as in Fig. 8; point load as 4-element patch -> OK
+  Codex items: [domain_extent] W/H=1 vs ~1.75 — Sec. 5: 100x100 elements, square domain (Fig. 6(a)); Fig. 8 target is a stretched rendering -> pick A (square).
+               [material] E0/E1 / nu / plane stress-strain — not stated in source -> outside groups; keep ours.
+  Boxes: ar CHANGE -> square | reconstruction OK
+  Missing slot: none.
+
+L28 — arXiv:2609.25976 (frame 92, 2-D) hexagonal cantilever, Fig. 1 / Sec. 4  [SV prior]
+  Our slots: ar=2.0/2.2/2.31 | volfrac=0.5 (mandatory)
+  Reconstruction: hexagonal mesh replaced by square grid 139x60 truncated at xmax; r_fill=4; rmin 2.0 elements; vf fixed to 0.5 after asking -> OK
+  Codex items: [domain_extent] L/H=2.25 vs 2.30 — Fig. 1 undimensioned; only 120x60 hexagons stated -> figure-based, keep ours (~2.2-2.3).
+               [volume_fraction] V_f1 = 0.3/0.4/0.5 — V_fm symbolic only (Eq. (1)); no numerical limit in Sec. 4/Table 2 -> keep our mandatory 0.5.
+               [material] nu / plane stress-strain — not stated in source -> outside groups; keep ours.
+  Boxes: ar KEEP | volfrac KEEP (mandatory) | reconstruction OK
+  Missing slot: none.
+
+L29 — arXiv:2308.06734 (frame 106, 2-D) cantilever plate, Fig. 2  [SV prior]
+  Our slots: strip=none/solid
+  Reconstruction: filter R=1.2 without units; rmin 1.5 elements; point force as 4-element patch -> OK
+  Codex items: [material] plane stress vs plane strain (stated E, nu) — Sec. 2.1 + Fig. 2 caption give the constants; Sec. 2.4 identifies the problem as 2-D without the constitutive reduction -> outside groups; keep ours.
+  Boxes: strip KEEP | reconstruction OK
+  Missing slot: none.
+
+L30 — arXiv:2508.05624 (frame 114, 2-D) Fig. 1  [SV prior]
+  Our slots: volfrac=0.4 (mandatory)
+  Reconstruction: dataset mesh 64x64 and filter 2.0 assumed; vf fixed to 0.4 after asking -> OK
+  Codex items: [volume_fraction] f = 0.3/0.4/0.5 — symbol f only (Eq. (4)); dataset range 30-50% (Sec. 5.1); this example's value not stated -> keep our mandatory 0.4.
+               [load_extent_distribution] corner node vs 2-node splits — Sec. 5.1 chooses a boundary element without nodal assignment -> keep ours.
+               [material] plane stress vs plane strain (E=1, nu=0.3) — reduction not stated -> outside groups; keep ours.
+               [filter_or_solver_setting] weight metric — pick A: literal density-difference weights w_ei = 2 - |x_i - x_e| (Eq. 6 verbatim; x = element density).
+  Boxes: volfrac KEEP (mandatory) | reconstruction OK
+  Missing slot: none.
+
+L31 — arXiv:1807.10787 (frame 108, 2-D) Case 1 cantilever, Fig. 1  [SV prior]
+  Our slots: dir=down (mandatory) | volfrac=0.4 (mandatory)
+  Reconstruction: local p-norm density constraint omitted; rmin 1.5 (solver setting); angle fixed to vertical after asking; vf fixed to 0.4 after asking -> OK
+  Codex items: [support_location_extent] full left edge vs corner nodes — no support-node markings in Fig. 1a -> keep ours (full left edge).
+               [load_direction] angle reference (upper vs lower limit = 0) — fan unlabeled -> keep our convention.
+               [volume_fraction] alpha = 0.4 vs 0.5 — Algorithm 2 lists alpha as input; no Case 1 value -> unresolvable, keep ours.
+               [volume_fraction] R_e = 6 vs 10 — no value in Sec. 5.2 -> unresolvable, keep ours.
+               [material] nu / plane stress-strain — not stated in source -> outside groups; keep ours.
+  Boxes: dir KEEP (mandatory) | volfrac KEEP (mandatory) | reconstruction OK
+  Missing slot: none.
+
+L24 — arXiv:2402.12076 (frame 135, 3-D) 3-D beam, Sec. 5.4 / Fig. 9  [SV]
+  Our slots: sup=1/2/4 (strip width) | load=line/strip
+  Reconstruction: IGA porous-unit model in source; solid SIMP on 40x16x16 (3 mm voxels); FE domain = manufactured size -> OK
+  Codex items: [support_location_extent] 9 mm vs 12 mm strips — "The bottom sides are fixed" (Fig. 9 caption); widths only in the schematic -> figure-based, keep ours (manufactured model 120x48x48 mm^3).
+               [load_extent_distribution] full-depth line at midspan vs 3 mm strip — "the force is uniformly applied at the center of the beam top" -> keep ours (line across the full depth).
+               [material] nu = 0.30 vs 0.35 — not stated in source (symbolic tensors) -> outside groups; keep ours.
+               [volume_fraction] rho_min/rho_max = 0.2/0.8 vs display endpoints — Eq. (27) bounds stated symbolically; Fig. 9 color scale 0.2-0.8 -> keep our reading (0.2/0.8).
+  Boxes: sup KEEP | load KEEP | reconstruction OK
+  Missing slot: none.
+
+L33 — arXiv:2604.03276 (frame 146, 3-D) nanopillar, Suppl. Note A.14 / Fig. S18  [SV prior]
+  Our slots: load=node/patch
+  Reconstruction: 40x40x100 in source; 16x40x16; force reading only; rmin 1.5 (2.549 at source resolution) -> OK
+  Codex items: [support_location_extent] corner nodes vs patches vs blocks — pick B: bottom-face nodes in four square corner patches, ~one fifth of the base width (8x8 on the 40-wide base, per S17).
+               [load_extent_distribution] single node vs 4-element patch — Methods: displacement of 1% of pillar height at the top center; Fig. S18 marks nothing -> keep ours (single top-center node in the compliance reconstruction).
+               [volume_fraction] 20.25% accounting — pick A: imposed on the designable region, excluding passive material from numerator and denominator.
+               [material] nu = 0.30 vs 0.33 — not stated in source (aluminum "nearly isotropic") -> outside groups; keep ours.
+  Boxes: load KEEP | reconstruction OK
+  Missing slot: none.
+
+L34 — arXiv:1904.06556 (frame 156, 3-D) CANT-16-2-2-5, Sec. 7.1 / Fig. 2(a)  [SV prior]
+  Our slots: load=node/patch | volfrac=0.2 (mandatory)
+  Reconstruction: variable-thickness-sheet model in source; SIMP p=3; rho_bar not representable; 96x12x12; vf fixed to 0.2 after asking -> OK
+  Codex items: [volume_fraction] 0.1/0.3/0.5 — Eq. (1) sum(rho_i)=V; no numerical V in Sec. 7.1/Table 1 -> keep our mandatory 0.2.
+               [material] nu = 0.25/0.30/0.35 — not stated in source -> outside groups; keep ours.
+  Boxes: load KEEP | volfrac KEEP (mandatory) | reconstruction OK
+  Missing slot: none.
+
+L35 — arXiv:2210.01315 (frame 172, 3-D) 3-D cantilever, Sec. 4.1 / Fig. 3  [SV partial]
+  Our slots: load=line/corners | volfrac=0.3 (mandatory)
+  Reconstruction: neural density field in source; SIMP; line load as raised-cosine strip across the depth; p=3 (solver setting); vf fixed to 0.3 after asking -> OK
+  Codex items: [load_extent_distribution] two corner point forces vs uniform line load vs equal nodal forces — Sec. 4.1 does not define the distribution; Fig. 3(a) shows two arrows + one F label -> keep ours (line load, raised cosine).
+               [volume_fraction] V* = 0.3/0.4/0.5 — Eq. (20) defines V* symbolically; no value in Sec. 4.1/Fig. 3 caption -> keep our mandatory 0.3.
+               [material] nu = 0.25/0.30/1-3 — not stated (Sec. 3.2 isotropic, hex8) -> outside groups; keep ours.
+  Boxes: load KEEP | volfrac KEEP (mandatory) | reconstruction OK
+  Missing slot: none. Status: partial — all three Codex items unresolvable from source; verdicts rest on figure + mandatory-fix convention.
+
+L36 — arXiv:2208.09591 (frame 164, 2-D) Fig. 1  [SV partial]
+  Our slots: roller=full/lower60 | load=0.12/0.15/0.18
+  Reconstruction: ToPy filter/penalty not stated: rmin 1.5, p=3; direction taken as drawn (up) -> OK
+  Codex items: [support_location_extent] full left edge vs 5 isolated nodes vs 3 isolated nodes — legend specifies the restrained direction only; no node set in text/caption -> keep ours (u_x=0 on the entire left edge).
+               [load_position] 10L/64 vs 11L/64 vs L/6 — figure-based -> keep ours (~0.15W).
+               [material] nu = 0.30 vs 0.25 — not stated in source -> outside groups; keep ours.
+  Boxes: roller KEEP (full edge) | load KEEP | reconstruction OK
+  Missing slot: none. Status: partial — all items figure-based.
+
+L37 — arXiv:2510.08830 (frame 171, 2-D) double-clamped beam, Sec. 4.1.1 / Fig. 8  [SE]
+  Our slots: strip=1-3 elements | patch=2-6 elements | volfrac=0.35 (mandatory)
+  Reconstruction: homogenization multiscale in source; single-scale SIMP; 150x40 (1 mm); rmin 1.5; vf fixed to 0.35 after asking -> OK
+  Codex items: [support_location_extent] edge-only fix vs 1 mm passive strips — Fig. 8(a) red bands "Solid domain (fully fixed)" without thickness -> keep ours.
+               [load_extent_distribution] center node vs 3 mm vs 4 mm segment — blue segment undimensioned -> figure-based, keep ours.
+               [passive_region] no pad vs 0.5 mm vs 1 mm pad — "Solid domain (force applied)"; depth not stated -> figure-based, keep ours.
+               [volume_fraction] representative budgets — pick A: [0.25, 0.3125, 0.375, 0.4375, 0.50] (evenly spaced representatives of the 160-budget sweep 0.25->0.50).
+               [volume_fraction] passive accounting — no explicit formula in source (Eqs. (22)/(33) global limit; Fig. 8(a) distinguishes solid from green design domain) -> keep ours; unresolved.
+               [material] plane stress vs plane strain (E=1, nu=0.3) — reduction not stated -> outside groups; keep ours.
+  Boxes: strip KEEP | patch KEEP | volfrac KEEP (mandatory) | reconstruction OK
+  Missing slot: none.
+
+L38 — arXiv:2001.00635 (frame 175, 2-D) cantilever, Sec. 4 / Fig. 11  [SE]
+  Our slots: orient=wide/tall | load=corner/mid
+  Reconstruction: common 32x32 grid truncated at (xmax, ymax); clamped left edge; rmin 1.5; Poisson printed as 1.0 in source -> 0.3 used -> OK
+  Codex items: [support_location_extent] full left short edge vs corner nodes — "cantilever boundary condition" only; no support symbols in Fig. 11 -> keep ours (full left short edge).
+               [load_position] (32,0) vs (32,1) — not stated in source -> keep ours (corner node).
+               [load_extent_distribution] single node vs 2-node split — Eq. (4) load vector undefined for this example -> keep ours.
+               [load_direction] vertical vs oblique — no components given -> keep vertical downward.
+               [material] plane stress vs plane strain — not stated in source -> outside groups; keep ours. Note: Poisson's ratio printed as 1.0 in the source; we used 0.3.
+  Boxes: orient KEEP (wide, 32x16 per Figs. 10-11) | load KEEP (corner) | reconstruction OK
+  Missing slot: none.
+
+L39 — arXiv:2310.01968 (frame 181, 2-D) MBB beam, Sec. 3.4 / Fig. 1(a)  [SE]
+  Our slots: ar=3.0/3.46
+  Reconstruction: hexagonal mesh replaced by square grid 69x20 truncated at xmax; ft=0 in source -> rmin 1.5 -> OK
+  Codex items: [domain_extent] Lx/Ly = 3 vs ~3.4 — Fig. 1(a) labels only Lx, Ly; HNex x HNey = 60 x 20 (Sec. 3.4); schematic ~3:1 -> pick A (3.0; count ratio governs over hexagonal-spacing conversion).
+               [material] nu = 0.30 vs 0.33 — not stated in source -> outside groups; keep ours. Note: plane-stress assumption for KE is stated in Sec. 3.2 (per sheet evidence) — consistent with our encoding.
+  Boxes: ar KEEP (3.0) | reconstruction OK
+  Missing slot: none.
+
+L40 — arXiv:2609.21758 (frame 183, 2-D) MBB beam, Sec. 5 / Appendix C  [SE]
+  Our slots: rmin=1.5/2.0
+  Reconstruction: CNN parameterization and tuned penalty/projection replaced by the standard schedule -> OK
+  Codex items: [domain_extent] 3:1 vs 6:1 — "Nx by Ny = 144 by 48 without physical dimensions or element spacings" -> pick A (square elements; 3:1).
+               [volume_fraction] bisection-conserved vs fixed threshold 0.5 — text following Eq. (17) permits either a volume-conserving threshold or a fixed one -> keep ours (bisection conserving 30% across the Heaviside projection).
+  Disagreements: rmin conflict in source — Sec. 5.1 lower bound 2.0 vs Table 1 value 1.5 -> CHANGE to 1.5 (Table 1 governs the shown MBB case; conflict noted).
+  Boxes: rmin CHANGE -> 1.5 | reconstruction OK
+  Missing slot: none.
+
+L41 — arXiv:2607.07233 (frame 187, 2-D) case study 1, Sec. 4.6 / Fig. 6  [SE]
+  Our slots: load=0.4/0.45/0.5
+  Reconstruction: grid not stated: 64x64; rmin 1.5, p=3; x-only roller reading excluded (mechanism) -> OK
+  Codex items: [load_position] x=29L/64 vs L/2 — "the square has side L, but the load position has no coordinate or dimension" -> figure-based, keep ours (29L/64 ~ 0.45L).
+               [support_type] both components at all left nodes vs hybrid — "repeated hollow triangles mark the left edge without displacement labels" -> keep ours (standard clamp, both components).
+               [material] nu / plane stress-strain — not stated in source -> outside groups; keep ours.
+  Boxes: load KEEP (0.45L) | reconstruction OK
+  Missing slot: none.
+
+L42 — arXiv:2503.16211 (frame 202, 2-D) 2-D cantilever, Fig. 1  [SE]
+  Our slots: sup=pins/clamp
+  Reconstruction: 20x8 drawn grid refined 3x to 60x24; rmin 1.5 -> OK
+  Codex items: [domain_extent] L/H = 3 vs 2.6 — no dimensions in text/caption -> figure-based, keep ours.
+               [support_location_extent] full left edge vs corner nodes only — Fig. 1(a) "Fixed Nodes" drawn only at the two left corners -> pick B (upper-left and lower-left corner nodes).
+               [material] nu / plane stress-strain — not stated in source -> outside groups; keep ours.
+  Boxes: sup CHANGE -> two corner pins (Fig. 1(a) marks only the two left corners) | reconstruction OK
+  Missing slot: none.
+
+L43 — arXiv:2509.05800 (frame 204, 2-D) Fig. 5 row 1  [SE]
+  Our slots: pos=0.75/0.8/0.85 | angle=210/240 deg
+  Reconstruction: support node sets as read from the green marks; rmin 1.5 -> OK
+  Codex items: [support_location_extent] closed vs open half-edges — Sec. 4.1: node sets "between corners and midpoints"; Fig. 5 row 1 green segments don't identify endpoint nodes -> keep ours (as read from the green marks).
+               [load_position] element row 13 vs 14 — figure-based -> keep ours.
+               [load_extent_distribution] concentrated at one node vs uniform traction over the element edge — "Eq. (24) uses element-associated force components but does not define their assembly" -> unresolvable, keep ours.
+               [material] plane stress vs plane strain (E=1, nu=0.3) — reduction not stated (nu=0.3 confirmed in Sec. 4.1) -> outside groups; keep ours.
+  Boxes: pos KEEP (0.8) | angle KEEP (210/240) | reconstruction OK
+  Missing slot: none.
+
+L44 — arXiv:2603.27000 (frame 219, 2-D) cantilever_basic, Table 3 row / Alg. 2  [SE]
+  Our slots: pos=mid/corner | volfrac=0.5 (mandatory)
+  Reconstruction: r_min schedule not stated: rmin 1.5; vf fixed to 0.5 after asking -> OK
+  Codex items: [load_position] midpoint vs +/-1 node — "Table 3 omits coordinates"; symmetric design -> keep ours (midpoint).
+               [material] nu / plane stress-strain — not stated in source -> outside groups; keep ours.
+  Boxes: pos KEEP (mid) | volfrac KEEP (mandatory; configurator default assumed, suite lists 0.3/0.4/0.6) | reconstruction OK
+  Missing slot: none.
+
+L45 — arXiv:2609.07149 (frame 241, 2-D) cantilever, Sec. 4.1 / Fig. 6  [SE]
+  Our slots: pos=corner/mid | b=0.05/0.1 | volfrac=0.4 (mandatory)
+  Reconstruction: 200x100 in source; 100x50 with R halved (25 -> 12.5); robust projection replaced by nominal SIMP; vf fixed to 0.4 after asking; final move limit 0.01 -> OK
+  Codex items: [load_direction] vertical vs horizontal — "Sec. 4.1 and Fig. 10 caption specify bottom-right loading without vector components" -> keep vertical downward (standard transverse cantilever).
+               [load_extent_distribution] corner node vs lowest right-edge element — "no footprint or nodal weighting is given"; Table 1: 200x100 mesh -> keep ours (b x b block, 0.05-0.1H).
+               [material] nu = 1/3 vs 0.3 — SOURCE CONFLICT: Sec. 3.3 states nu=1/3 for the numerical examples; Appendix A states nu=0.3 for all experiments -> unresolved; keep our encoded value with the conflict noted.
+               [material] plane stress vs plane strain — "Appendix A gives E and nu without specifying the plane assumption" -> outside groups; keep ours.
+               [filter_or_solver_setting] R/h = 25 vs 30 vs 50 — pick A: Table 1 gives R = 25 element widths for Sec. 4.1 (consistent with our halved R=12.5 at half resolution).
+  Boxes: pos KEEP (bottom-right per text) | b KEEP | volfrac KEEP (mandatory) | reconstruction OK
+  Missing slot: none.
+
+============================================================
+EXCLUSIONS (16) — in scope and ambiguous, not encoded
+(arXiv spot-checks deferred in this pass; reasons as recorded on the sheet)
+============================================================
+- arXiv:2502.01830 (#4): random task; support/load only as unlabeled markers in a result image -> [x] EXCLUDE (agree)
+- arXiv:2407.07288 (#11): random task; domain size, support extent, load position and angle only from an illegible plot -> [x] EXCLUDE (agree)
+- arXiv:2008.07487 (#56): both readings define the same problem under a vertical mid-span load -> [x] EXCLUDE (agree)
+- arXiv:1801.05463 (#69): random task; load node, angle and volume fraction absent for the instance -> [x] EXCLUDE (agree)
+- arXiv:2108.03654 (#75): 1000 random load scenarios; realizations not given -> [x] EXCLUDE (agree)
+- arXiv:2610.16051 (#120): OAT dataset problem 1961; full definition resolvable by reference to the cited dataset -> [x] EXCLUDE (agree)
+- arXiv:2507.19388 (#148): Sec. 2 runs differ only in mesh resolution -> [x] EXCLUDE (agree)
+- arXiv:2201.11513 (#165): deterministic load; mean vs interval bounds only scales the load; uniform-traction patch type not implemented in solver -> [x] EXCLUDE (agree)
+- arXiv:2103.04594 (#179): 1000 random load scenarios; realizations not given -> [x] EXCLUDE (agree)
+- arXiv:2211.15358 (#184): volume fraction swept with no displayed instance; sensitivity-filter reading not representable -> [x] EXCLUDE (agree)
+- arXiv:1808.10367 (#185): random horizontal load at 148 quadrature points not listed; V and lambda not stated -> [x] EXCLUDE (agree)
+- arXiv:2510.23667 (#200): random OAT instance; everything drawn or symbolic; no finite admissible set at screen resolution -> [x] EXCLUDE (agree)
+- arXiv:2604.18020 (#209): filter units — physical-unit reading gives r_min = 3/4 of domain length; only element-unit reading plausible -> [x] EXCLUDE (agree)
+- arXiv:2004.05461 (#215): random instance; loads neither drawn nor stated -> [x] EXCLUDE (agree)
+- arXiv:2012.05359 (#217): random instance; grid, volume fraction, support nodes and four random loads not stated -> [x] EXCLUDE (agree)
+- arXiv:2608.30499 (#239): Fig. 1 settings taken from Sec. 6.1 of the same benchmark; no alternative values; load acts through a passive solid block -> [x] EXCLUDE (agree)
+
+============================================================
+FINAL TALLY
+- KEEP: all remaining slots across L01-L45 (no DROPs).
+- CHANGE (8): L05 rmin->1.5 | L07 clamp->left edge x=-1 | L17 len->full right edge, uniform 100 MPa | L19 extent->half model (full beam 360x30) | L20 extent->half-model optimized (full beam 384x64) | L27 ar->square | L40 rmin->1.5 | L42 sup->two corner pins. (L30 filter and L33 support/budget: Codex items resolved in favor of our encoding — no slot change.)
+- Missing slots added (1): L02 volfrac ~= 0.17 (v_u = 0.5 m^3 absolute over the 3 m^3 box per Fig. 3).
+- Unresolved source conflicts noted: L45 nu (Sec. 3.3: 1/3 vs Appendix A: 0.3); L37 passive-solid volume accounting; L25 eps/Y0 and L31 alpha/R_e (values absent from source — kept at our defaults).
+- Unchecked surfaces: L37-L45 local re-checks ([SE] rows) and the 16 exclusion arXiv spot-checks.

@@ -1,0 +1,306 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Square domain side length\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 specifies a square and its element count, but gives no physical side length or units. These readings preserve all relative lengths, including filter lengths.\",\n      \"readings\": [\n        \"Domain [0,1] \u00d7 [0,1], with element width 1/64\",\n        \"Domain [0,64] \u00d7 [0,64], with element width 1\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"The two-dimensional model in Secs. 2 and 4.1 has no stated thickness or unit-depth convention. A uniform thickness multiplies stiffness without changing the layout under prescribed forces.\",\n      \"readings\": [\n        \"Uniform thickness t=1 in the chosen length units\",\n        \"Uniform thickness t=0.01L, where L is the square side length\",\n        \"Uniform thickness t=0.1L\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"All fixed supports for Fig. 3, row 1\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 allows one to four fixed points or segments at specified boundary landmarks, but neither Sec. 5 nor the Fig. 3 caption identifies row 1's count, locations, or segment endpoints. Coordinates below use [0,L] \u00d7 [0,L].\",\n      \"readings\": [\n        \"One fixed segment covering the entire left edge\",\n        \"One fixed segment from (0,0) to (0,L/2)\",\n        \"Two fixed points at (0,0) and (0,L)\",\n        \"Three fixed points at (0,0), (0,L), and (L,0)\",\n        \"Four fixed points, one at each corner\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"Single external load for Fig. 3, row 1\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 places the load somewhere on a domain edge, and Eq. 25 names its coordinates, but row 1's coordinates are not supplied.\",\n      \"readings\": [\n        \"Right-edge midpoint: (L,L/2)\",\n        \"Right edge at quarter height: (L,L/4)\",\n        \"Top-edge midpoint: (L/2,L)\",\n        \"Bottom-edge midpoint: (L/2,0)\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Spatial application and discretization of the single load\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.1 says a single unit load is applied 'along the edge'; the load coordinates in Sec. 4.2 do not establish its footprint or nodal distribution.\",\n      \"readings\": [\n        \"Apply the entire unit resultant at one boundary node\",\n        \"Represent a point force between two boundary nodes using linear nodal interpolation, preserving the unit resultant\",\n        \"Apply uniform traction over an edge patch of length L/16 centered at the load coordinate, with unit resultant\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"Direction of the unit external load for Fig. 3, row 1\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 says direction is randomly sampled; neither Sec. 5 nor the Fig. 3 caption supplies this instance's direction or force components.\",\n      \"readings\": [\n        \"(Fx,Fy)=(0,-1)\",\n        \"(Fx,Fy)=(-1,0)\",\n        \"(Fx,Fy)=(-1/sqrt(2),-1/sqrt(2))\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Prescribed volume fraction for Fig. 3, row 1\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 gives the sampling interval 0.3\u20130.5, but no row-specific target appears in Sec. 5 or the Fig. 3 caption.\",\n      \"readings\": [\n        \"f=0.30\",\n        \"f=0.40\",\n        \"f=0.50\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Non-design elements, particularly near loads and supports\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 2 and 4.1 do not explicitly identify passive solid or void masks, or establish that every element remains designable.\",\n      \"readings\": [\n        \"No passive regions; every element is designable\",\n        \"Elements incident to the load application point are forced solid; all others are designable\",\n        \"One element layer incident to supported boundaries and the load application region is forced solid; all remaining elements are designable\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Solid Young's modulus E0\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2, Eq. 2 introduces E0 symbolically, but no value is reported. These alternatives hold Emin/E0 and other dimensionless parameters fixed.\",\n      \"readings\": [\n        \"E0=1 in a nondimensional model\",\n        \"E0=70 GPa\",\n        \"E0=210 GPa\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Poisson's ratio\",\n      \"issue\": \"missing\",\n      \"description\": \"The elastic formulation in Sec. 2 and dataset description in Sec. 4.1 give no Poisson's ratio.\",\n      \"readings\": [\n        \"nu=0.25\",\n        \"nu=0.30\",\n        \"nu=0.35\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Two-dimensional constitutive reduction\",\n      \"issue\": \"missing\",\n      \"description\": \"The paper calls the problem two-dimensional without specifying plane stress or plane strain.\",\n      \"readings\": [\n        \"Isotropic plane stress\",\n        \"Isotropic plane strain\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Residual void stiffness Emin/E0\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2, Eq. 2 requires a minimum modulus Emin, but neither its value nor its ratio to E0 is supplied.\",\n      \"readings\": [\n        \"Emin/E0=1e-9\",\n        \"Emin/E0=1e-6\",\n        \"Emin/E0=1e-3\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Finite-element interpolation and quadrature\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 4.1\u20134.2 determine the structured array of square elements, but not their displacement interpolation, node count, or integration rule.\",\n      \"readings\": [\n        \"Four-node bilinear quadrilaterals with 2\u00d72 Gauss integration\",\n        \"Eight-node quadratic quadrilaterals with 3\u00d73 Gauss integration\",\n        \"Nine-node quadratic quadrilaterals with 3\u00d73 Gauss integration\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Minimum permitted design density\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2, Eq. 9 introduces rho_min without assigning a value; the general bounds in Eq. 6 do not select it.\",\n      \"readings\": [\n        \"rho_min=0, using positive Emin to regularize void stiffness\",\n        \"rho_min=1e-3\",\n        \"rho_min=1e-2\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Filtering method and affected quantities\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither the SIMP description in Sec. 2 nor dataset generation in Sec. 4.1 specifies whether filtering is used or how it enters the formulation.\",\n      \"readings\": [\n        \"No filtering\",\n        \"Sensitivity filtering, with element densities used directly for stiffness and volume\",\n        \"Density filtering, with filtered physical densities used for both stiffness and volume\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Filter radius\",\n      \"issue\": \"missing\",\n      \"description\": \"If filtering is used, Secs. 2 and 4.1 give no radius or length convention. Here h denotes element width.\",\n      \"readings\": [\n        \"r=1.5h\",\n        \"r=3h\",\n        \"r=5h\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Filter kernel\",\n      \"issue\": \"missing\",\n      \"description\": \"If filtering is used, its weighting kernel is not reported in Secs. 2 or 4.1.\",\n      \"readings\": [\n        \"Conical weights w=max(0,r-d), using Euclidean distance d between element centers\",\n        \"Equal weights for element centers within Euclidean distance r\",\n        \"Gaussian weights with standard deviation r/3, truncated at distance r\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Filter treatment at domain boundaries\",\n      \"issue\": \"missing\",\n      \"description\": \"If filtering is used, the text does not specify how a filter neighborhood extending outside the square is handled.\",\n      \"readings\": [\n        \"Truncate the neighborhood to in-domain elements and renormalize\",\n        \"Extend outside the domain with zero density and retain those weights in the normalization\",\n        \"Mirror the density field across domain boundaries\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Density projection during optimization\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2 mentions final thresholding, but does not establish whether a smooth projection also acts during optimization or give its parameters.\",\n      \"readings\": [\n        \"No projection during optimization\",\n        \"Smooth Heaviside projection with beta=2 and projection threshold 0.5\",\n        \"Smooth Heaviside projection with threshold 0.5 and beta=1,2,4,8 over successive blocks of 25 iterations\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Update parameters m and eta\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2, Eq. 10 specifies only that m and eta are positive; Sec. 4.1 supplies neither value for dataset generation.\",\n      \"readings\": [\n        \"Use Eq. 10 with m=1 and eta=0.5\",\n        \"Use Eq. 10 with m=1 and eta=1\",\n        \"Use Eq. 10 with m=0.5 and eta=0.25\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initial optimization density field\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1's fully solid initial domain is specified for conditioning-field FEA, but the starting densities for the SIMP optimization itself are not stated.\",\n      \"readings\": [\n        \"Uniform initial density rho_e=f\",\n        \"Uniform initial density rho_e=1\",\n        \"A fixed-seed random perturbation about f, adjusted to satisfy the initial volume constraint\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Numerical solution for the volume multiplier lambda\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2 says lambda is adjusted to enforce Eq. 11, but gives no search method or numerical tolerance.\",\n      \"readings\": [\n        \"Bisection until absolute volume-fraction residual is below 1e-8\",\n        \"Bisection until absolute volume-fraction residual is below 1e-4\",\n        \"Safeguarded Newton iteration until absolute volume-fraction residual is below 1e-8\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Finite-element equilibrium solver accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2 requires KU=F, but the numerical solver and equilibrium tolerance used to generate the finite-iteration reference design are not reported.\",\n      \"readings\": [\n        \"Double-precision sparse direct solution\",\n        \"Preconditioned conjugate gradients with relative residual tolerance 1e-8\",\n        \"Preconditioned conjugate gradients with relative residual tolerance 1e-4\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Conversion of optimized densities to the binary SIMP topology\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2 mentions thresholding and Sec. 4.1 says samples contain binary topology maps, but neither gives the threshold or a volume-preserving binarization rule.\",\n      \"readings\": [\n        \"After optimization, mark elements solid when rho_e>=0.5\",\n        \"After optimization, mark elements solid when rho_e>=0.3\",\n        \"After optimization, retain the highest-density elements until the solid element count is nearest to f\u00d74096\"\n      ],\n      \"effect\": \"layout\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "Square domain side length",
+    "issue": "missing",
+    "description": "Sec. 4.1 specifies a square and its element count, but gives no physical side length or units. These readings preserve all relative lengths, including filter lengths.",
+    "readings": [
+     "Domain [0,1] \u00d7 [0,1], with element width 1/64",
+     "Domain [0,64] \u00d7 [0,64], with element width 1"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "Out-of-plane thickness",
+    "issue": "missing",
+    "description": "The two-dimensional model in Secs. 2 and 4.1 has no stated thickness or unit-depth convention. A uniform thickness multiplies stiffness without changing the layout under prescribed forces.",
+    "readings": [
+     "Uniform thickness t=1 in the chosen length units",
+     "Uniform thickness t=0.01L, where L is the square side length",
+     "Uniform thickness t=0.1L"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "All fixed supports for Fig. 3, row 1",
+    "issue": "missing",
+    "description": "Sec. 4.1 allows one to four fixed points or segments at specified boundary landmarks, but neither Sec. 5 nor the Fig. 3 caption identifies row 1's count, locations, or segment endpoints. Coordinates below use [0,L] \u00d7 [0,L].",
+    "readings": [
+     "One fixed segment covering the entire left edge",
+     "One fixed segment from (0,0) to (0,L/2)",
+     "Two fixed points at (0,0) and (0,L)",
+     "Three fixed points at (0,0), (0,L), and (L,0)",
+     "Four fixed points, one at each corner"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "Single external load for Fig. 3, row 1",
+    "issue": "missing",
+    "description": "Sec. 4.1 places the load somewhere on a domain edge, and Eq. 25 names its coordinates, but row 1's coordinates are not supplied.",
+    "readings": [
+     "Right-edge midpoint: (L,L/2)",
+     "Right edge at quarter height: (L,L/4)",
+     "Top-edge midpoint: (L/2,L)",
+     "Bottom-edge midpoint: (L/2,0)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Spatial application and discretization of the single load",
+    "issue": "vague",
+    "description": "Sec. 4.1 says a single unit load is applied 'along the edge'; the load coordinates in Sec. 4.2 do not establish its footprint or nodal distribution.",
+    "readings": [
+     "Apply the entire unit resultant at one boundary node",
+     "Represent a point force between two boundary nodes using linear nodal interpolation, preserving the unit resultant",
+     "Apply uniform traction over an edge patch of length L/16 centered at the load coordinate, with unit resultant"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Direction of the unit external load for Fig. 3, row 1",
+    "issue": "missing",
+    "description": "Sec. 4.1 says direction is randomly sampled; neither Sec. 5 nor the Fig. 3 caption supplies this instance's direction or force components.",
+    "readings": [
+     "(Fx,Fy)=(0,-1)",
+     "(Fx,Fy)=(-1,0)",
+     "(Fx,Fy)=(-1/sqrt(2),-1/sqrt(2))"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Prescribed volume fraction for Fig. 3, row 1",
+    "issue": "missing",
+    "description": "Sec. 4.1 gives the sampling interval 0.3\u20130.5, but no row-specific target appears in Sec. 5 or the Fig. 3 caption.",
+    "readings": [
+     "f=0.30",
+     "f=0.40",
+     "f=0.50"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Non-design elements, particularly near loads and supports",
+    "issue": "missing",
+    "description": "Secs. 2 and 4.1 do not explicitly identify passive solid or void masks, or establish that every element remains designable.",
+    "readings": [
+     "No passive regions; every element is designable",
+     "Elements incident to the load application point are forced solid; all others are designable",
+     "One element layer incident to supported boundaries and the load application region is forced solid; all remaining elements are designable"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Solid Young's modulus E0",
+    "issue": "missing",
+    "description": "Sec. 2, Eq. 2 introduces E0 symbolically, but no value is reported. These alternatives hold Emin/E0 and other dimensionless parameters fixed.",
+    "readings": [
+     "E0=1 in a nondimensional model",
+     "E0=70 GPa",
+     "E0=210 GPa"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson's ratio",
+    "issue": "missing",
+    "description": "The elastic formulation in Sec. 2 and dataset description in Sec. 4.1 give no Poisson's ratio.",
+    "readings": [
+     "nu=0.25",
+     "nu=0.30",
+     "nu=0.35"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Two-dimensional constitutive reduction",
+    "issue": "missing",
+    "description": "The paper calls the problem two-dimensional without specifying plane stress or plane strain.",
+    "readings": [
+     "Isotropic plane stress",
+     "Isotropic plane strain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Residual void stiffness Emin/E0",
+    "issue": "missing",
+    "description": "Sec. 2, Eq. 2 requires a minimum modulus Emin, but neither its value nor its ratio to E0 is supplied.",
+    "readings": [
+     "Emin/E0=1e-9",
+     "Emin/E0=1e-6",
+     "Emin/E0=1e-3"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Finite-element interpolation and quadrature",
+    "issue": "missing",
+    "description": "Secs. 4.1\u20134.2 determine the structured array of square elements, but not their displacement interpolation, node count, or integration rule.",
+    "readings": [
+     "Four-node bilinear quadrilaterals with 2\u00d72 Gauss integration",
+     "Eight-node quadratic quadrilaterals with 3\u00d73 Gauss integration",
+     "Nine-node quadratic quadrilaterals with 3\u00d73 Gauss integration"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Minimum permitted design density",
+    "issue": "missing",
+    "description": "Sec. 2, Eq. 9 introduces rho_min without assigning a value; the general bounds in Eq. 6 do not select it.",
+    "readings": [
+     "rho_min=0, using positive Emin to regularize void stiffness",
+     "rho_min=1e-3",
+     "rho_min=1e-2"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Filtering method and affected quantities",
+    "issue": "missing",
+    "description": "Neither the SIMP description in Sec. 2 nor dataset generation in Sec. 4.1 specifies whether filtering is used or how it enters the formulation.",
+    "readings": [
+     "No filtering",
+     "Sensitivity filtering, with element densities used directly for stiffness and volume",
+     "Density filtering, with filtered physical densities used for both stiffness and volume"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Filter radius",
+    "issue": "missing",
+    "description": "If filtering is used, Secs. 2 and 4.1 give no radius or length convention. Here h denotes element width.",
+    "readings": [
+     "r=1.5h",
+     "r=3h",
+     "r=5h"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Filter kernel",
+    "issue": "missing",
+    "description": "If filtering is used, its weighting kernel is not reported in Secs. 2 or 4.1.",
+    "readings": [
+     "Conical weights w=max(0,r-d), using Euclidean distance d between element centers",
+     "Equal weights for element centers within Euclidean distance r",
+     "Gaussian weights with standard deviation r/3, truncated at distance r"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Filter treatment at domain boundaries",
+    "issue": "missing",
+    "description": "If filtering is used, the text does not specify how a filter neighborhood extending outside the square is handled.",
+    "readings": [
+     "Truncate the neighborhood to in-domain elements and renormalize",
+     "Extend outside the domain with zero density and retain those weights in the normalization",
+     "Mirror the density field across domain boundaries"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Density projection during optimization",
+    "issue": "missing",
+    "description": "Sec. 2 mentions final thresholding, but does not establish whether a smooth projection also acts during optimization or give its parameters.",
+    "readings": [
+     "No projection during optimization",
+     "Smooth Heaviside projection with beta=2 and projection threshold 0.5",
+     "Smooth Heaviside projection with threshold 0.5 and beta=1,2,4,8 over successive blocks of 25 iterations"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Update parameters m and eta",
+    "issue": "missing",
+    "description": "Sec. 2, Eq. 10 specifies only that m and eta are positive; Sec. 4.1 supplies neither value for dataset generation.",
+    "readings": [
+     "Use Eq. 10 with m=1 and eta=0.5",
+     "Use Eq. 10 with m=1 and eta=1",
+     "Use Eq. 10 with m=0.5 and eta=0.25"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial optimization density field",
+    "issue": "missing",
+    "description": "Sec. 4.1's fully solid initial domain is specified for conditioning-field FEA, but the starting densities for the SIMP optimization itself are not stated.",
+    "readings": [
+     "Uniform initial density rho_e=f",
+     "Uniform initial density rho_e=1",
+     "A fixed-seed random perturbation about f, adjusted to satisfy the initial volume constraint"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Numerical solution for the volume multiplier lambda",
+    "issue": "missing",
+    "description": "Sec. 2 says lambda is adjusted to enforce Eq. 11, but gives no search method or numerical tolerance.",
+    "readings": [
+     "Bisection until absolute volume-fraction residual is below 1e-8",
+     "Bisection until absolute volume-fraction residual is below 1e-4",
+     "Safeguarded Newton iteration until absolute volume-fraction residual is below 1e-8"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Finite-element equilibrium solver accuracy",
+    "issue": "missing",
+    "description": "Sec. 2 requires KU=F, but the numerical solver and equilibrium tolerance used to generate the finite-iteration reference design are not reported.",
+    "readings": [
+     "Double-precision sparse direct solution",
+     "Preconditioned conjugate gradients with relative residual tolerance 1e-8",
+     "Preconditioned conjugate gradients with relative residual tolerance 1e-4"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Conversion of optimized densities to the binary SIMP topology",
+    "issue": "missing",
+    "description": "Sec. 2 mentions thresholding and Sec. 4.1 says samples contain binary topology maps, but neither gives the threshold or a volume-preserving binarization rule.",
+    "readings": [
+     "After optimization, mark elements solid when rho_e>=0.5",
+     "After optimization, mark elements solid when rho_e>=0.3",
+     "After optimization, retain the highest-density elements until the solid element count is nearest to f\u00d74096"
+    ],
+    "effect": "layout"
+   }
+  ]
+ },
+ "wall_s": 506.89820194244385,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L09",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 1,
+ "locator": "Sec. 5, Fig. 3, row 1 (the first dataset instance shown with a SIMP design)",
+ "finished": "2026-10-22T19:57:39"
+}

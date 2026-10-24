@@ -1,0 +1,285 @@
+{
+ "raw": "{\"items\": [{\"category\": \"domain_extent\", \"entity\": \"2-D rectangular design domain (length L \\u00d7 height H)\", \"issue\": \"figure_only\", \"description\": \"Sec. II.1 and the Fig. 1(a) caption only name a 'Design Domain'. No dimensions or aspect ratio appear anywhere in the text. The 2-D domain is visible only in Figs. 1(a,d), 2(a\\u2013c), 3(a,b,d) and A1(b).\", \"readings\": [\"L:H = 2:1 (e.g. matching a 2:1:1 3-D cantilever)\", \"L:H = 1.6:1 (as in the 32\\u00d720 short-cantilever example of the 99-line code)\", \"L:H = 3:1\", \"L:H = 1:1\"], \"effect\": \"layout\"}, {\"category\": \"mesh\", \"entity\": \"structured-grid resolution (nelx \\u00d7 nely) and element type\", \"issue\": \"figure_only\", \"description\": \"Element counts are never given. Sites are finite-element cells with one density each (Sec. IV.7; App. A, 'N is the number of elements'). Sec. II.4 and Figs. A1\\u2013A3 plot every 2-D site individually, which points to a coarse grid, but the size can only be read off those figures. Element type and shape are not stated either (square bilinear Q4 is the usual assumption).\", \"readings\": [\"20 \\u00d7 10 elements\", \"32 \\u00d7 20 elements\", \"40 \\u00d7 20 elements\", \"60 \\u00d7 20 elements\", \"60 \\u00d7 30 elements\"], \"effect\": \"layout\"}, {\"category\": \"support_location_extent\", \"entity\": \"fixed nodes (support)\", \"issue\": \"figure_only\", \"description\": \"Only 'Fixed Nodes' (Fig. 1a caption) and 'fixed sites/nodes' (Secs. II.1, II.3) are mentioned. The text never says which edge or nodes are fixed, or over what length; this is shown only in Fig. 1(a).\", \"readings\": [\"entire left edge, x = 0, 0 \\u2264 y \\u2264 H (standard cantilever)\", \"only part of the left edge (e.g. its central 50% of H)\", \"a few discrete nodes on the left edge (e.g. top and bottom corners)\"], \"effect\": \"layout\"}, {\"category\": \"support_type\", \"entity\": \"fixed nodes \\u2013 restrained degrees of freedom\", \"issue\": \"vague\", \"description\": \"'Fixed' suggests both in-plane displacement components are zero, but the restrained DOFs are never stated (Fig. 1a caption, Sec. II.1).\", \"readings\": [\"clamped: u_x = u_y = 0 at every fixed node\", \"u_x = 0 along the support edge, with u_y restrained at one node only (roller-type)\"], \"effect\": \"layout\"}, {\"category\": \"load_position\", \"entity\": \"applied force on the free end\", \"issue\": \"figure_only\", \"description\": \"'Applied Forces' (Fig. 1a caption) and 'load-bearing nodes' (Sec. II.1, Fig. 2c caption) are mentioned, but the text never gives their location, not even that the load sits on the edge opposite the support.\", \"readings\": [\"bottom corner of the free (right) edge: x = L, y = 0\", \"mid-height of the free edge: x = L, y = 0.5H\", \"top corner of the free edge: x = L, y = H\"], \"effect\": \"layout\"}, {\"category\": \"load_extent_distribution\", \"entity\": \"applied force \\u2013 point vs distributed\", \"issue\": \"vague\", \"description\": \"The plural wording 'Applied Forces' / 'load-bearing nodes' (Fig. 1a caption, Sec. II.1) leaves open whether the load is one nodal point load or is spread over several nodes.\", \"readings\": [\"single nodal point load\", \"load spread evenly over a few adjacent nodes (short patch \\u22480.1H) on the free edge\", \"uniform shear traction over the whole free edge\"], \"effect\": \"layout\"}, {\"category\": \"load_direction\", \"entity\": \"applied force direction\", \"issue\": \"figure_only\", \"description\": \"The direction is never stated in the text; only the arrows in Fig. 1(a) would show it. 'Cantilever beam' implies a transverse load. Reversing the sign of a single load gives the same layout and compliance.\", \"readings\": [\"vertical, downward (\\u2212y)\", \"vertical, upward (+y), same result as downward\", \"inclined or horizontal (axial component)\"], \"effect\": \"layout\"}, {\"category\": \"load_magnitude\", \"entity\": \"applied force magnitude\", \"issue\": \"missing\", \"description\": \"The load magnitude is not given. Temperatures are quoted 'in units of compliance' (Sec. II.1), so the cited thresholds T \\u2248 20.7, 17.2 and 3.3 depend on this normalization.\", \"readings\": [\"|F| = 1 (unit load, as in [17])\", \"total |F| = 1 split over the load-bearing nodes\", \"other or physical magnitude\"], \"effect\": \"scale_only\"}, {\"category\": \"passive_region\", \"entity\": \"non-design (solid/void) regions\", \"issue\": \"missing\", \"description\": \"No passive regions are mentioned. The phrase 'fixed sites' (Secs. II.1, II.3) most likely means elements at the displacement supports, not elements with a fixed density, but this is never said explicitly.\", \"readings\": [\"none (all elements designable)\", \"solid non-design elements next to the fixed nodes\", \"solid non-design pad around the load-bearing node(s)\"], \"effect\": \"layout\"}, {\"category\": \"volume_fraction\", \"entity\": \"volume constraint V_f = 0.5 \\u2013 which density field it applies to\", \"issue\": \"vague\", \"description\": \"V_f = 0.5 is stated (Sec. II.1). Eq. (5) and App. A impose it on the raw particle positions x_e, yet a density filter is used (App. C). It is unclear whether the constraint applies to filtered (physical) or unfiltered densities.\", \"readings\": [\"sum of filtered/physical densities = 0.5\\u00b7N (standard density-filter practice)\", \"sum of raw design variables x_e = 0.5\\u00b7N (literal reading of Eq. (5) and App. A)\"], \"effect\": \"unsure\"}, {\"category\": \"material\", \"entity\": \"Young's modulus E0 (and out-of-plane thickness)\", \"issue\": \"missing\", \"description\": \"Neither E0 nor the thickness is given anywhere. Both scale the compliance, and therefore the 'compliance-unit' temperature scale.\", \"readings\": [\"E0 = 1, t = 1 (normalized, as in [17])\", \"physical values (e.g. E0 = 210 GPa, t \\u2260 1)\"], \"effect\": \"scale_only\"}, {\"category\": \"material\", \"entity\": \"Poisson's ratio and 2-D stress state\", \"issue\": \"missing\", \"description\": \"Neither Poisson's ratio nor plane stress vs plane strain is stated anywhere in the text.\", \"readings\": [\"\\u03bd = 0.3, plane stress (default of the 88/99-line codes)\", \"\\u03bd = 0.3, plane strain\", \"other \\u03bd (e.g. 0.25 or 1/3), plane stress\"], \"effect\": \"layout\"}, {\"category\": \"material\", \"entity\": \"void stiffness / lower density bound\", \"issue\": \"missing\", \"description\": \"Sites may reach x = 0, 'void' (Secs. II.1, IV.7). A non-singular stiffness matrix needs E_min > 0 or x_min > 0, and no value is given.\", \"readings\": [\"modified SIMP, E_min = 1e-9\\u00b7E0 (88-line code)\", \"classic SIMP with density lower bound x_min = 1e-3 (99-line code)\", \"E_min = 1e-3\\u00b7E0\"], \"effect\": \"unsure\"}, {\"category\": \"material\", \"entity\": \"stiffness\\u2013density interpolation (SIMP penalty exponent p)\", \"issue\": \"missing\", \"description\": \"The text says only that higher density lowers compliance (Fig. 1 caption). No interpolation law or penalty exponent is given, either for the sampled solutions or for the reference optimum of Fig. 3a ('as solved by [17]', references removed).\", \"readings\": [\"SIMP, p = 3 (default of the 88/99-line codes)\", \"p = 1 (unpenalized, variable-thickness sheet)\", \"continuation p = 1 \\u2192 3\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"filter type\", \"issue\": \"vague\", \"description\": \"App. C says a density filter was used for the sampled solutions, and the Fig. A3 caption notes a filter\\u2013boundary interaction. The Fig. 3a optimum is 'as solved by [17]', and the filter used there is not stated.\", \"readings\": [\"density filter with linear cone weights, kernel truncated at the domain boundary\", \"sensitivity filter (99-line default; ft = 1 in the 88-line code)\", \"density filter for the sampled solutions, sensitivity filter for the Fig. 3a optimum\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"filter radius r_min\", \"issue\": \"missing\", \"description\": \"No filter radius appears anywhere in the text (App. C mentions the density filter only).\", \"readings\": [\"r_min = 1.2 elements\", \"r_min = 1.5 elements\", \"r_min = 2.0 elements\", \"r_min = 3.0 elements\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"optimizer, initial design and stopping rule for the deterministic optimum\", \"issue\": \"missing\", \"description\": \"Fig. 3a is 'an optimized solution as solved by [17]', with no optimizer, move limit, starting design or convergence criterion given. Sec. III says conventional topology optimization is the zero-temperature limit of the molecular-dynamics sampling.\", \"readings\": [\"OC (move 0.2, damping 0.5), uniform start x = 0.5, stop when max |\\u0394x| < 0.01 (defaults of [17])\", \"MMA with a fixed iteration budget\", \"annealing the Nos\\u00e9\\u2013Hoover sampling to T \\u2192 0 from a uniform or random start\"], \"effect\": \"unsure\"}, {\"category\": \"other\", \"entity\": \"compliance definition (objective normalization)\", \"issue\": \"vague\", \"description\": \"Sec. IV.1 defines compliance as the integral of the strain-energy density (= \\u00bd u\\u1d40Ku). The usual compliance in [17] is F\\u1d40u = u\\u1d40Ku, twice that. This changes C values and the 'compliance-unit' temperatures, not the layout.\", \"readings\": [\"C = F\\u1d40u = u\\u1d40Ku (standard)\", \"C = \\u00bd u\\u1d40Ku (literal reading of Sec. IV.1)\"], \"effect\": \"scale_only\"}, {\"category\": \"other\", \"entity\": \"Nos\\u00e9\\u2013Hoover sampling parameters (finite-temperature runs)\", \"issue\": \"missing\", \"description\": \"Not given: thermostat type ('Nos\\u00e9\\u2013Hoover' in Sec. II.1 vs 'Nos\\u00e9\\u2013Hoover chain' in App. A), chain length (written N_c, N_x and M in App. A), Nos\\u00e9 masses Q_k, time step, temperature grid, and equilibration and sampling lengths. These are needed only to reproduce Figs. 1(d), 2 and 4, not the zero-temperature optimum.\", \"readings\": [\"not needed: solve only the deterministic minimum-compliance problem\", \"single Nos\\u00e9\\u2013Hoover thermostat (N_c = 1), as worded in Sec. II.1\", \"Nos\\u00e9\\u2013Hoover chain with N_c = 3\\u20135 (common default), as in App. A\", \"temperature sweep \\u2248 0\\u201325 compliance units (values cited in Sec. II.1 and Fig. 4)\"], \"effect\": \"unsure\"}]}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "2-D rectangular design domain (length L \u00d7 height H)",
+    "issue": "figure_only",
+    "description": "Sec. II.1 and the Fig. 1(a) caption only name a 'Design Domain'. No dimensions or aspect ratio appear anywhere in the text. The 2-D domain is visible only in Figs. 1(a,d), 2(a\u2013c), 3(a,b,d) and A1(b).",
+    "readings": [
+     "L:H = 2:1 (e.g. matching a 2:1:1 3-D cantilever)",
+     "L:H = 1.6:1 (as in the 32\u00d720 short-cantilever example of the 99-line code)",
+     "L:H = 3:1",
+     "L:H = 1:1"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "structured-grid resolution (nelx \u00d7 nely) and element type",
+    "issue": "figure_only",
+    "description": "Element counts are never given. Sites are finite-element cells with one density each (Sec. IV.7; App. A, 'N is the number of elements'). Sec. II.4 and Figs. A1\u2013A3 plot every 2-D site individually, which points to a coarse grid, but the size can only be read off those figures. Element type and shape are not stated either (square bilinear Q4 is the usual assumption).",
+    "readings": [
+     "20 \u00d7 10 elements",
+     "32 \u00d7 20 elements",
+     "40 \u00d7 20 elements",
+     "60 \u00d7 20 elements",
+     "60 \u00d7 30 elements"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "fixed nodes (support)",
+    "issue": "figure_only",
+    "description": "Only 'Fixed Nodes' (Fig. 1a caption) and 'fixed sites/nodes' (Secs. II.1, II.3) are mentioned. The text never says which edge or nodes are fixed, or over what length; this is shown only in Fig. 1(a).",
+    "readings": [
+     "entire left edge, x = 0, 0 \u2264 y \u2264 H (standard cantilever)",
+     "only part of the left edge (e.g. its central 50% of H)",
+     "a few discrete nodes on the left edge (e.g. top and bottom corners)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_type",
+    "entity": "fixed nodes \u2013 restrained degrees of freedom",
+    "issue": "vague",
+    "description": "'Fixed' suggests both in-plane displacement components are zero, but the restrained DOFs are never stated (Fig. 1a caption, Sec. II.1).",
+    "readings": [
+     "clamped: u_x = u_y = 0 at every fixed node",
+     "u_x = 0 along the support edge, with u_y restrained at one node only (roller-type)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "applied force on the free end",
+    "issue": "figure_only",
+    "description": "'Applied Forces' (Fig. 1a caption) and 'load-bearing nodes' (Sec. II.1, Fig. 2c caption) are mentioned, but the text never gives their location, not even that the load sits on the edge opposite the support.",
+    "readings": [
+     "bottom corner of the free (right) edge: x = L, y = 0",
+     "mid-height of the free edge: x = L, y = 0.5H",
+     "top corner of the free edge: x = L, y = H"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "applied force \u2013 point vs distributed",
+    "issue": "vague",
+    "description": "The plural wording 'Applied Forces' / 'load-bearing nodes' (Fig. 1a caption, Sec. II.1) leaves open whether the load is one nodal point load or is spread over several nodes.",
+    "readings": [
+     "single nodal point load",
+     "load spread evenly over a few adjacent nodes (short patch \u22480.1H) on the free edge",
+     "uniform shear traction over the whole free edge"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "applied force direction",
+    "issue": "figure_only",
+    "description": "The direction is never stated in the text; only the arrows in Fig. 1(a) would show it. 'Cantilever beam' implies a transverse load. Reversing the sign of a single load gives the same layout and compliance.",
+    "readings": [
+     "vertical, downward (\u2212y)",
+     "vertical, upward (+y), same result as downward",
+     "inclined or horizontal (axial component)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "applied force magnitude",
+    "issue": "missing",
+    "description": "The load magnitude is not given. Temperatures are quoted 'in units of compliance' (Sec. II.1), so the cited thresholds T \u2248 20.7, 17.2 and 3.3 depend on this normalization.",
+    "readings": [
+     "|F| = 1 (unit load, as in [17])",
+     "total |F| = 1 split over the load-bearing nodes",
+     "other or physical magnitude"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "non-design (solid/void) regions",
+    "issue": "missing",
+    "description": "No passive regions are mentioned. The phrase 'fixed sites' (Secs. II.1, II.3) most likely means elements at the displacement supports, not elements with a fixed density, but this is never said explicitly.",
+    "readings": [
+     "none (all elements designable)",
+     "solid non-design elements next to the fixed nodes",
+     "solid non-design pad around the load-bearing node(s)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "volume constraint V_f = 0.5 \u2013 which density field it applies to",
+    "issue": "vague",
+    "description": "V_f = 0.5 is stated (Sec. II.1). Eq. (5) and App. A impose it on the raw particle positions x_e, yet a density filter is used (App. C). It is unclear whether the constraint applies to filtered (physical) or unfiltered densities.",
+    "readings": [
+     "sum of filtered/physical densities = 0.5\u00b7N (standard density-filter practice)",
+     "sum of raw design variables x_e = 0.5\u00b7N (literal reading of Eq. (5) and App. A)"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "material",
+    "entity": "Young's modulus E0 (and out-of-plane thickness)",
+    "issue": "missing",
+    "description": "Neither E0 nor the thickness is given anywhere. Both scale the compliance, and therefore the 'compliance-unit' temperature scale.",
+    "readings": [
+     "E0 = 1, t = 1 (normalized, as in [17])",
+     "physical values (e.g. E0 = 210 GPa, t \u2260 1)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson's ratio and 2-D stress state",
+    "issue": "missing",
+    "description": "Neither Poisson's ratio nor plane stress vs plane strain is stated anywhere in the text.",
+    "readings": [
+     "\u03bd = 0.3, plane stress (default of the 88/99-line codes)",
+     "\u03bd = 0.3, plane strain",
+     "other \u03bd (e.g. 0.25 or 1/3), plane stress"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "void stiffness / lower density bound",
+    "issue": "missing",
+    "description": "Sites may reach x = 0, 'void' (Secs. II.1, IV.7). A non-singular stiffness matrix needs E_min > 0 or x_min > 0, and no value is given.",
+    "readings": [
+     "modified SIMP, E_min = 1e-9\u00b7E0 (88-line code)",
+     "classic SIMP with density lower bound x_min = 1e-3 (99-line code)",
+     "E_min = 1e-3\u00b7E0"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "material",
+    "entity": "stiffness\u2013density interpolation (SIMP penalty exponent p)",
+    "issue": "missing",
+    "description": "The text says only that higher density lowers compliance (Fig. 1 caption). No interpolation law or penalty exponent is given, either for the sampled solutions or for the reference optimum of Fig. 3a ('as solved by [17]', references removed).",
+    "readings": [
+     "SIMP, p = 3 (default of the 88/99-line codes)",
+     "p = 1 (unpenalized, variable-thickness sheet)",
+     "continuation p = 1 \u2192 3"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "filter type",
+    "issue": "vague",
+    "description": "App. C says a density filter was used for the sampled solutions, and the Fig. A3 caption notes a filter\u2013boundary interaction. The Fig. 3a optimum is 'as solved by [17]', and the filter used there is not stated.",
+    "readings": [
+     "density filter with linear cone weights, kernel truncated at the domain boundary",
+     "sensitivity filter (99-line default; ft = 1 in the 88-line code)",
+     "density filter for the sampled solutions, sensitivity filter for the Fig. 3a optimum"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "filter radius r_min",
+    "issue": "missing",
+    "description": "No filter radius appears anywhere in the text (App. C mentions the density filter only).",
+    "readings": [
+     "r_min = 1.2 elements",
+     "r_min = 1.5 elements",
+     "r_min = 2.0 elements",
+     "r_min = 3.0 elements"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "optimizer, initial design and stopping rule for the deterministic optimum",
+    "issue": "missing",
+    "description": "Fig. 3a is 'an optimized solution as solved by [17]', with no optimizer, move limit, starting design or convergence criterion given. Sec. III says conventional topology optimization is the zero-temperature limit of the molecular-dynamics sampling.",
+    "readings": [
+     "OC (move 0.2, damping 0.5), uniform start x = 0.5, stop when max |\u0394x| < 0.01 (defaults of [17])",
+     "MMA with a fixed iteration budget",
+     "annealing the Nos\u00e9\u2013Hoover sampling to T \u2192 0 from a uniform or random start"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "other",
+    "entity": "compliance definition (objective normalization)",
+    "issue": "vague",
+    "description": "Sec. IV.1 defines compliance as the integral of the strain-energy density (= \u00bd u\u1d40Ku). The usual compliance in [17] is F\u1d40u = u\u1d40Ku, twice that. This changes C values and the 'compliance-unit' temperatures, not the layout.",
+    "readings": [
+     "C = F\u1d40u = u\u1d40Ku (standard)",
+     "C = \u00bd u\u1d40Ku (literal reading of Sec. IV.1)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "other",
+    "entity": "Nos\u00e9\u2013Hoover sampling parameters (finite-temperature runs)",
+    "issue": "missing",
+    "description": "Not given: thermostat type ('Nos\u00e9\u2013Hoover' in Sec. II.1 vs 'Nos\u00e9\u2013Hoover chain' in App. A), chain length (written N_c, N_x and M in App. A), Nos\u00e9 masses Q_k, time step, temperature grid, and equilibration and sampling lengths. These are needed only to reproduce Figs. 1(d), 2 and 4, not the zero-temperature optimum.",
+    "readings": [
+     "not needed: solve only the deterministic minimum-compliance problem",
+     "single Nos\u00e9\u2013Hoover thermostat (N_c = 1), as worded in Sec. II.1",
+     "Nos\u00e9\u2013Hoover chain with N_c = 3\u20135 (common default), as in App. A",
+     "temperature sweep \u2248 0\u201325 compliance units (values cited in Sec. II.1 and Fig. 4)"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 359.04883432388306,
+ "returncode": 0,
+ "meta": {
+  "model": null,
+  "num_turns": 2,
+  "is_error": false,
+  "total_cost_usd": 0.9216268000000001,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 17503,
+   "cache_read_input_tokens": 774,
+   "output_tokens": 39072,
+   "output_tokens_details": {
+    "thinking_tokens": 34867
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 17503,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 39072,
+     "cache_read_input_tokens": 774,
+     "cache_creation_input_tokens": 17503,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 17503
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard",
+   "fallback_credit": null
+  }
+ },
+ "stderr_tail": "",
+ "task": "L42",
+ "model": "claude",
+ "model_id": "claude-opus-5-5",
+ "rep": 1,
+ "locator": "Sec. II.1, the 2-D cantilever of Fig. 1",
+ "finished": "2026-10-22T21:30:32"
+}

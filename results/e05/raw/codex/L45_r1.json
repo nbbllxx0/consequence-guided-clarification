@@ -1,0 +1,254 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"physical units of the 2 by 1 domain\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 gives dimensions 2 by 1 without length units. Appendix A supplies dimensional units for Young's modulus.\",\n      \"readings\": [\n        \"2 m by 1 m\",\n        \"2 mm by 1 mm\",\n        \"A nondimensional 2 by 1 domain\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"The two-dimensional formulation in Secs. 2.4 and 3.1 does not specify thickness or a per-unit-depth convention.\",\n      \"readings\": [\n        \"Unit thickness\",\n        \"Uniform thickness of 0.01 length units\",\n        \"Report compliance and volume per unit out-of-plane depth\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"load at the bottom-right corner\",\n      \"issue\": \"vague\",\n      \"description\": \"Secs. 4.1 and 4.2 establish the nominal corner location, but neither specifies whether the force is concentrated or spread over a boundary patch, its patch length, or its distribution. Fig. 6 is unavailable.\",\n      \"readings\": [\n        \"A concentrated nodal force at the bottom-right corner\",\n        \"Uniform traction over the lowest one-element segment of the right edge\",\n        \"Uniform traction over the lowest 0.1 of the right-edge height\",\n        \"Linearly tapered traction over the lowest 0.1 of the right-edge height\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"bottom-right load\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 and the Fig. 6 caption do not state the force direction or its components.\",\n      \"readings\": [\n        \"Vertical downward\",\n        \"Horizontal rightward\",\n        \"Diagonal downward and rightward with equal components\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"bottom-right load\",\n      \"issue\": \"missing\",\n      \"description\": \"No resultant force or traction magnitude is supplied. Sec. 3.1's solid-design normalization cancels a common nonzero load multiplier.\",\n      \"readings\": [\n        \"Resultant force of 1 N\",\n        \"Resultant force of 10 N\",\n        \"Unit resultant in nondimensional units\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"material around the load and support\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 3.1 and 4.1 do not explicitly identify an in-domain passive mask. Appendix B's exterior solid extension for counting holes does not establish whether interior attachment elements are held solid.\",\n      \"readings\": [\n        \"All in-domain elements are designable\",\n        \"The loaded corner element is held solid\",\n        \"One-element solid attachment pads are imposed at both the load and support\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"volume bound for a minimum-compliance rerun\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 maps multiple branches rather than prescribing one volume-constrained problem. Its c_max = 5 and reported volume coordinates do not select a unique epsilon_v. The bound is explicitly on dilated volume.\",\n      \"readings\": [\n        \"Dilated volume fraction at most 0.45\",\n        \"Dilated volume fraction at most 0.70\",\n        \"Dilated volume fraction at most 0.77\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Poisson ratio\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Sec. 3.3 states that the numerical examples use nu = 1/3; Appendix A states that all experiments use nu = 0.3.\",\n      \"readings\": [\n        \"nu = 1/3\",\n        \"nu = 0.3\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"two-dimensional elastic constitutive model\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.1 specifies linear elasticity and Appendix A specifies isotropic material, but neither selects plane stress or plane strain.\",\n      \"readings\": [\n        \"Plane stress\",\n        \"Plane strain\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"filter radius and projection steepness\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Table 1 gives R/h = 25 for Sec. 4.1. Appendix A fixes beta = 10 while asserting beta = R/(3h) or R/(5h), which instead requires R/h = 30 or 50.\",\n      \"readings\": [\n        \"Keep Table 1's R/h = 25 and Appendix A's beta = 10\",\n        \"Keep beta = 10 and enforce beta = R/(3h), giving R/h = 30\",\n        \"Keep beta = 10 and enforce beta = R/(5h), giving R/h = 50\",\n        \"Keep R/h = 25 and enforce beta = R/(3h), giving beta = 25/3\",\n        \"Keep R/h = 25 and enforce beta = R/(5h), giving beta = 5\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"conversion of reported radius to the PDE coefficient\",\n      \"issue\": \"vague\",\n      \"description\": \"Appendix A mentions rescaling by sqrt(3), but supplies neither the PDE nor an explicit before/after definition of Table 1's R.\",\n      \"readings\": [\n        \"For -ell^2 Laplacian(q) + q = x, use ell = R/sqrt(3)\",\n        \"Use ell = R because the reported radius already incorporates the conversion\",\n        \"For the same PDE, use ell = sqrt(3) R\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"PDE-filter boundary conditions\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.1 cites consistent boundary conditions without equations. Appendix B identifies Robin neighborhoods near loaded and fixed boundaries, but does not give their coefficients or the filter conditions on the remaining boundaries.\",\n      \"readings\": [\n        \"On those neighborhoods impose q + ell times its outward normal derivative = 1; use zero flux elsewhere\",\n        \"On those neighborhoods impose q + 2 ell times its outward normal derivative = 1; use zero flux elsewhere\",\n        \"Use the first Robin condition near attachments and impose q = 0 on the remaining boundaries\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"smoothed Heaviside projection function\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.1 supplies the projection thresholds and Appendix A supplies beta, but the projection function itself is only cited. Its mathematical definition is absent from the supplied text.\",\n      \"readings\": [\n        \"Endpoint-normalized tanh projection using tanh(beta times (q - eta))\",\n        \"Endpoint-normalized logistic projection using 1/(1 + exp(-beta times (q - eta)))\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"PDE-filter discretization\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.1 assigns design variables to elements but does not specify how the PDE filter is discretized or how element densities are transferred to and from a nodal filter field.\",\n      \"readings\": [\n        \"Nodal finite-element Helmholtz filter with a consistent mass matrix and element-node averaging\",\n        \"Nodal finite-element Helmholtz filter with a lumped mass matrix\",\n        \"Cell-centered finite-volume Helmholtz filter acting directly on element densities\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"stiffness integration for square first-order elements\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.1 fixes square first-order elements and Table 1 fixes their counts, but the stiffness quadrature and any stabilization are not specified.\",\n      \"readings\": [\n        \"Four-node bilinear quadrilaterals with full 2 by 2 Gauss integration\",\n        \"Four-node bilinear quadrilaterals with one-point integration and hourglass stabilization\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"candidate grid and puncture locations for nonzero-hole branches\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.1 locates the first hole only on the fixed left edge and does not locate the second. Appendix B's center-left traversal does not give exact candidate coordinates or resolve the two central element rows of the 200 by 100 mesh. Fig. 8 illustrates a different, symmetric R/h = 15 setup.\",\n      \"readings\": [\n        \"Generate the candidate grid from the lower central element row, y/l_y = 0.495, proceeding rightward first\",\n        \"Generate the candidate grid from the upper central element row, y/l_y = 0.505, proceeding rightward first\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"minimum feature size and puncture radius\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 3.3 describes a hole diameter b_min, whereas Appendix B uses a minimum-length-scale quantity r_min directly as a radius. Their relation and the cited calculation are not supplied. Fig. 8's numerical length scale belongs to R/h = 15 rather than Sec. 4.1.\",\n      \"readings\": [\n        \"Scale Fig. 8's 0.095 by 25/15 and interpret it as a diameter: puncture radius approximately 0.07917 l_y\",\n        \"Scale Fig. 8's 0.095 by 25/15 and interpret it as Appendix B's radius: puncture radius approximately 0.15833 l_y\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"acceptance rule for hole nucleation\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Sec. 3.3 requires punctures to increase genus. Appendix B instead says a puncture is accepted only if it does not change topology.\",\n      \"readings\": [\n        \"Accept a puncture only when it increases the hole count\",\n        \"Accept a puncture only when the hole count remains unchanged\",\n        \"Interpret Appendix B as preserving solid connectivity while allowing the hole count to increase\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"strictness and role of the compliance ceiling\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Equation 5 requires c < c_max, but the volume-minimization scalarization permits c <= epsilon_c <= c_max and Sec. 4.1 reports endpoints at c = 5.\",\n      \"readings\": [\n        \"Enforce c < 5 and exclude the equality endpoint\",\n        \"Enforce c <= 5 and retain equality endpoints\",\n        \"Use 5 as a tracing cutoff, with no separate compliance constraint in individual minimum-compliance solves\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"operational definition of convergence\",\n      \"issue\": \"vague\",\n      \"description\": \"Appendix A gives stopping thresholds and iteration windows, but does not identify the KKT-residual norm, whether residual change means change of its norm or norm of its vector change, or a numerical constraint-feasibility tolerance.\",\n      \"readings\": [\n        \"Euclidean residual norm, absolute change of that norm, and exact nonpositive constraint residuals\",\n        \"Maximum-component residual norm, absolute change of that norm, and constraint tolerance 1e-6\",\n        \"Euclidean residual norm, Euclidean norm of the residual-vector change, and constraint tolerance 1e-6\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "physical units of the 2 by 1 domain",
+    "issue": "missing",
+    "description": "Sec. 4.1 gives dimensions 2 by 1 without length units. Appendix A supplies dimensional units for Young's modulus.",
+    "readings": [
+     "2 m by 1 m",
+     "2 mm by 1 mm",
+     "A nondimensional 2 by 1 domain"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "out-of-plane thickness",
+    "issue": "missing",
+    "description": "The two-dimensional formulation in Secs. 2.4 and 3.1 does not specify thickness or a per-unit-depth convention.",
+    "readings": [
+     "Unit thickness",
+     "Uniform thickness of 0.01 length units",
+     "Report compliance and volume per unit out-of-plane depth"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "load at the bottom-right corner",
+    "issue": "vague",
+    "description": "Secs. 4.1 and 4.2 establish the nominal corner location, but neither specifies whether the force is concentrated or spread over a boundary patch, its patch length, or its distribution. Fig. 6 is unavailable.",
+    "readings": [
+     "A concentrated nodal force at the bottom-right corner",
+     "Uniform traction over the lowest one-element segment of the right edge",
+     "Uniform traction over the lowest 0.1 of the right-edge height",
+     "Linearly tapered traction over the lowest 0.1 of the right-edge height"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "bottom-right load",
+    "issue": "missing",
+    "description": "Sec. 4.1 and the Fig. 6 caption do not state the force direction or its components.",
+    "readings": [
+     "Vertical downward",
+     "Horizontal rightward",
+     "Diagonal downward and rightward with equal components"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "bottom-right load",
+    "issue": "missing",
+    "description": "No resultant force or traction magnitude is supplied. Sec. 3.1's solid-design normalization cancels a common nonzero load multiplier.",
+    "readings": [
+     "Resultant force of 1 N",
+     "Resultant force of 10 N",
+     "Unit resultant in nondimensional units"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "material around the load and support",
+    "issue": "missing",
+    "description": "Secs. 3.1 and 4.1 do not explicitly identify an in-domain passive mask. Appendix B's exterior solid extension for counting holes does not establish whether interior attachment elements are held solid.",
+    "readings": [
+     "All in-domain elements are designable",
+     "The loaded corner element is held solid",
+     "One-element solid attachment pads are imposed at both the load and support"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "volume bound for a minimum-compliance rerun",
+    "issue": "missing",
+    "description": "Sec. 4.1 maps multiple branches rather than prescribing one volume-constrained problem. Its c_max = 5 and reported volume coordinates do not select a unique epsilon_v. The bound is explicitly on dilated volume.",
+    "readings": [
+     "Dilated volume fraction at most 0.45",
+     "Dilated volume fraction at most 0.70",
+     "Dilated volume fraction at most 0.77"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson ratio",
+    "issue": "conflicting",
+    "description": "Sec. 3.3 states that the numerical examples use nu = 1/3; Appendix A states that all experiments use nu = 0.3.",
+    "readings": [
+     "nu = 1/3",
+     "nu = 0.3"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "two-dimensional elastic constitutive model",
+    "issue": "missing",
+    "description": "Sec. 3.1 specifies linear elasticity and Appendix A specifies isotropic material, but neither selects plane stress or plane strain.",
+    "readings": [
+     "Plane stress",
+     "Plane strain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "filter radius and projection steepness",
+    "issue": "conflicting",
+    "description": "Table 1 gives R/h = 25 for Sec. 4.1. Appendix A fixes beta = 10 while asserting beta = R/(3h) or R/(5h), which instead requires R/h = 30 or 50.",
+    "readings": [
+     "Keep Table 1's R/h = 25 and Appendix A's beta = 10",
+     "Keep beta = 10 and enforce beta = R/(3h), giving R/h = 30",
+     "Keep beta = 10 and enforce beta = R/(5h), giving R/h = 50",
+     "Keep R/h = 25 and enforce beta = R/(3h), giving beta = 25/3",
+     "Keep R/h = 25 and enforce beta = R/(5h), giving beta = 5"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "conversion of reported radius to the PDE coefficient",
+    "issue": "vague",
+    "description": "Appendix A mentions rescaling by sqrt(3), but supplies neither the PDE nor an explicit before/after definition of Table 1's R.",
+    "readings": [
+     "For -ell^2 Laplacian(q) + q = x, use ell = R/sqrt(3)",
+     "Use ell = R because the reported radius already incorporates the conversion",
+     "For the same PDE, use ell = sqrt(3) R"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "PDE-filter boundary conditions",
+    "issue": "missing",
+    "description": "Sec. 3.1 cites consistent boundary conditions without equations. Appendix B identifies Robin neighborhoods near loaded and fixed boundaries, but does not give their coefficients or the filter conditions on the remaining boundaries.",
+    "readings": [
+     "On those neighborhoods impose q + ell times its outward normal derivative = 1; use zero flux elsewhere",
+     "On those neighborhoods impose q + 2 ell times its outward normal derivative = 1; use zero flux elsewhere",
+     "Use the first Robin condition near attachments and impose q = 0 on the remaining boundaries"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "smoothed Heaviside projection function",
+    "issue": "missing",
+    "description": "Sec. 3.1 supplies the projection thresholds and Appendix A supplies beta, but the projection function itself is only cited. Its mathematical definition is absent from the supplied text.",
+    "readings": [
+     "Endpoint-normalized tanh projection using tanh(beta times (q - eta))",
+     "Endpoint-normalized logistic projection using 1/(1 + exp(-beta times (q - eta)))"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "PDE-filter discretization",
+    "issue": "missing",
+    "description": "Sec. 3.1 assigns design variables to elements but does not specify how the PDE filter is discretized or how element densities are transferred to and from a nodal filter field.",
+    "readings": [
+     "Nodal finite-element Helmholtz filter with a consistent mass matrix and element-node averaging",
+     "Nodal finite-element Helmholtz filter with a lumped mass matrix",
+     "Cell-centered finite-volume Helmholtz filter acting directly on element densities"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "stiffness integration for square first-order elements",
+    "issue": "missing",
+    "description": "Sec. 3.1 fixes square first-order elements and Table 1 fixes their counts, but the stiffness quadrature and any stabilization are not specified.",
+    "readings": [
+     "Four-node bilinear quadrilaterals with full 2 by 2 Gauss integration",
+     "Four-node bilinear quadrilaterals with one-point integration and hourglass stabilization"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "candidate grid and puncture locations for nonzero-hole branches",
+    "issue": "vague",
+    "description": "Sec. 4.1 locates the first hole only on the fixed left edge and does not locate the second. Appendix B's center-left traversal does not give exact candidate coordinates or resolve the two central element rows of the 200 by 100 mesh. Fig. 8 illustrates a different, symmetric R/h = 15 setup.",
+    "readings": [
+     "Generate the candidate grid from the lower central element row, y/l_y = 0.495, proceeding rightward first",
+     "Generate the candidate grid from the upper central element row, y/l_y = 0.505, proceeding rightward first"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "minimum feature size and puncture radius",
+    "issue": "vague",
+    "description": "Sec. 3.3 describes a hole diameter b_min, whereas Appendix B uses a minimum-length-scale quantity r_min directly as a radius. Their relation and the cited calculation are not supplied. Fig. 8's numerical length scale belongs to R/h = 15 rather than Sec. 4.1.",
+    "readings": [
+     "Scale Fig. 8's 0.095 by 25/15 and interpret it as a diameter: puncture radius approximately 0.07917 l_y",
+     "Scale Fig. 8's 0.095 by 25/15 and interpret it as Appendix B's radius: puncture radius approximately 0.15833 l_y"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "acceptance rule for hole nucleation",
+    "issue": "conflicting",
+    "description": "Sec. 3.3 requires punctures to increase genus. Appendix B instead says a puncture is accepted only if it does not change topology.",
+    "readings": [
+     "Accept a puncture only when it increases the hole count",
+     "Accept a puncture only when the hole count remains unchanged",
+     "Interpret Appendix B as preserving solid connectivity while allowing the hole count to increase"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "strictness and role of the compliance ceiling",
+    "issue": "conflicting",
+    "description": "Equation 5 requires c < c_max, but the volume-minimization scalarization permits c <= epsilon_c <= c_max and Sec. 4.1 reports endpoints at c = 5.",
+    "readings": [
+     "Enforce c < 5 and exclude the equality endpoint",
+     "Enforce c <= 5 and retain equality endpoints",
+     "Use 5 as a tracing cutoff, with no separate compliance constraint in individual minimum-compliance solves"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "operational definition of convergence",
+    "issue": "vague",
+    "description": "Appendix A gives stopping thresholds and iteration windows, but does not identify the KKT-residual norm, whether residual change means change of its norm or norm of its vector change, or a numerical constraint-feasibility tolerance.",
+    "readings": [
+     "Euclidean residual norm, absolute change of that norm, and exact nonpositive constraint residuals",
+     "Maximum-component residual norm, absolute change of that norm, and constraint tolerance 1e-6",
+     "Euclidean residual norm, Euclidean norm of the residual-vector change, and constraint tolerance 1e-6"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 751.7099735736847,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L45",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 1,
+ "locator": "Sec. 4.1, the cantilever beam (Fig. 6, Table 1)",
+ "finished": "2026-10-22T21:46:23"
+}

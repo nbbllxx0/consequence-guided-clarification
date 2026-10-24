@@ -1,0 +1,205 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Computational design domain\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 5.4 delegates the design domain to Fig. 9(a). The 120\u00d748\u00d748 mm dimensions explicitly describe manufactured models; the text does not establish when the unit-cube scaling of Sec. 2.2 enters the mechanical analysis. Below, x, y, z denote span, width, and height, with extents L, W, H.\",\n      \"readings\": [\n        \"Analyze the full rectangular prism [0,120]\u00d7[0,48]\u00d7[0,48] mm.\",\n        \"Analyze [0,1]^3 and apply the directional scaling to 120\u00d748\u00d748 mm only when generating the manufactured geometry.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"Fixed bottom support regions\",\n      \"issue\": \"vague\",\n      \"description\": \"The Fig. 9 caption says 'the bottom sides are fixed' without specifying support stations, support span, or contact footprints. These readings retain zero displacement in all three directions.\",\n      \"readings\": [\n        \"Fix the full-width bottom edges x=0 and x=L, z=0.\",\n        \"Fix full-width bottom lines at x=0.1L and x=0.9L, z=0.\",\n        \"Fix full-width bottom strips x\u2208[0,0.05L] and x\u2208[0.95L,L], z=0.\",\n        \"Fix bottom patches x\u2208[0.075L,0.125L] and x\u2208[0.875L,0.925L], y\u2208[0.45W,0.55W], z=0.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Central top load footprint\",\n      \"issue\": \"vague\",\n      \"description\": \"The Fig. 9 caption fixes the load centrally on the top but does not define the region over which it is 'uniformly applied.'\",\n      \"readings\": [\n        \"A concentrated force at (L/2,W/2,H).\",\n        \"A uniform line load across the full width at x=L/2, z=H.\",\n        \"A uniform traction on the full-width top strip x\u2208[0.45L,0.55L].\",\n        \"A uniform traction on the top patch x\u2208[0.45L,0.55L], y\u2208[0.45W,0.55W].\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"Central top force vector\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 5.4 and the Fig. 9 caption do not state a force vector. Three-point bending suggests a downward normal force, but its direction is not explicitly specified in the supplied text.\",\n      \"readings\": [\n        \"Downward normal to the top: direction (0,0,-1).\",\n        \"An inclined force in the span-height plane: direction (1,0,-1)/sqrt(2).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"Resultant central load\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Sec. 5.4 nor the Fig. 9 caption gives the optimization load magnitude or traction intensity.\",\n      \"readings\": [\n        \"Normalize the total resultant to 1 N.\",\n        \"Use a total resultant of 100 N, keeping its footprint and direction unchanged.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Non-design solid or void regions\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 5.4 does not identify passive masks, including whether loading and support contacts contain mandatory solid material.\",\n      \"readings\": [\n        \"All cells in the domain are designable; no passive solid or void cells.\",\n        \"Keep one cell layer beneath the loading footprint and above the support footprints fully solid.\",\n        \"Keep solid support blocks of longitudinal extent 0.05L at both ends and a solid central loading pad.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Overall constituent stiffness scale\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.3 introduces the base elastic tensor C* but supplies no Young's modulus or overall stiffness scale for the Sec. 5.4 models.\",\n      \"readings\": [\n        \"Use E0=1 MPa with all dimensionless elastic ratios fixed.\",\n        \"Use E0=2000 MPa with the same dimensionless elastic ratios.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Dimensionless constituent elastic tensor\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Sec. 4.3 nor Sec. 5.4 specifies the base material's Poisson ratio, constitutive symmetry, or stiffness ratios.\",\n      \"readings\": [\n        \"Isotropic material with Poisson ratio 0.30.\",\n        \"Isotropic material with Poisson ratio 0.45.\",\n        \"Orthotropic material with Ex=2E0, Ey=Ez=E0, all Poisson ratios zero, and all shear moduli 0.4E0.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Density-dependent homogenized stiffness for each porous unit\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.3, Eq. (26), requires fitted a1 and a2 for the independent tensor entries. These data are absent for both Table 2(a) and Table 2(c), which define different material runs in Sec. 5.4. A single-material solver needs the corresponding constitutive response for each run.\",\n      \"readings\": [\n        \"For every nonzero base tensor entry, use a2=1 and a1=1/(exp(1)-1), giving C^H(rho)=[(exp(rho)-1)/(exp(1)-1)]C*.\",\n        \"For every nonzero base tensor entry, use a2=3 and a1=1/(exp(3)-1), giving C^H(rho)=[(exp(3rho)-1)/(exp(3)-1)]C*.\",\n        \"Use separately fitted normal and shear responses, for example normalized exponent 1 for the normal block and exponent 3 for shear entries.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Orientation of the porous material axes\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.3 permits an orthotropic homogenized tensor with nine independent coefficients. Sec. 5.4 does not specify the unit axes relative to the beam span, width, and height.\",\n      \"readings\": [\n        \"Align unit axes (u,v,w) with beam axes (x,y,z).\",\n        \"Rotate the unit by 90 degrees about the beam width axis, exchanging its span and height material directions.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Admissible relative-density bounds\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (27) introduces rho_min and rho_max as bounds on the density control coefficients, but Sec. 5.4 gives neither value.\",\n      \"readings\": [\n        \"rho_min=0.001 and rho_max=1.\",\n        \"rho_min=0.1 and rho_max=0.9.\",\n        \"rho_min=0.2 and rho_max=0.8.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"B-spline density parameterization and smoothing scale\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.3 smooths the density through a B-spline field but does not give its degree, control-lattice dimensions, or knot vectors for the beam. The unit-fitting settings in Secs. 5.1 and 5.3 do not determine this field.\",\n      \"readings\": [\n        \"Quadratic tensor-product density field with 21\u00d79\u00d79 controls and open uniform knots.\",\n        \"Cubic tensor-product density field with 31\u00d713\u00d713 controls and open uniform knots.\",\n        \"Cubic tensor-product density field with 61\u00d725\u00d725 controls and open uniform knots.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Beam analysis-grid resolution\",\n      \"issue\": \"missing\",\n      \"description\": \"No beam element or knot-span counts are supplied in Sec. 5.4. The voxel and control-grid counts elsewhere concern porous-unit construction.\",\n      \"readings\": [\n        \"30\u00d712\u00d712 analysis cells along span, width, and height.\",\n        \"60\u00d724\u00d724 analysis cells.\",\n        \"120\u00d748\u00d748 analysis cells.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Analysis basis, continuity, and quadrature\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.3 identifies IGA as the analysis method but gives no beam-specific displacement basis degree, interior knot continuity, or integration rule. These choices are needed to reproduce its discretization on a structured grid.\",\n      \"readings\": [\n        \"Quadratic tensor-product B-spline IGA, C1 interior continuity, and 3\u00d73\u00d73 Gauss points per span.\",\n        \"Cubic tensor-product B-spline IGA, C2 interior continuity, and 4\u00d74\u00d74 Gauss points per span.\",\n        \"Cubic tensor-product B-spline IGA, C1 interior continuity, and 4\u00d74\u00d74 Gauss points per span.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Optimality Criteria update parameters\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.3 names OC but gives no update formula, move limit, damping exponent, or multiplier-search tolerance.\",\n      \"readings\": [\n        \"Multiplicative OC with exponent 0.5, density move limit 0.2, and relative multiplier-bisection tolerance 1e-6.\",\n        \"Multiplicative OC with exponent 0.3, density move limit 0.05, and relative multiplier-bisection tolerance 1e-4.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Topology-optimization termination\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 4.3 and 5.4 provide no convergence tolerance or iteration cap for topology optimization. The L<0 criterion in Sec. 4.2 applies to unit connectivity optimization.\",\n      \"readings\": [\n        \"Stop when the maximum density-control change is below 0.01.\",\n        \"Stop when the maximum density-control change is below 0.001.\",\n        \"Stop after 200 OC iterations.\"\n      ],\n      \"effect\": \"layout\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "Computational design domain",
+    "issue": "figure_only",
+    "description": "Sec. 5.4 delegates the design domain to Fig. 9(a). The 120\u00d748\u00d748 mm dimensions explicitly describe manufactured models; the text does not establish when the unit-cube scaling of Sec. 2.2 enters the mechanical analysis. Below, x, y, z denote span, width, and height, with extents L, W, H.",
+    "readings": [
+     "Analyze the full rectangular prism [0,120]\u00d7[0,48]\u00d7[0,48] mm.",
+     "Analyze [0,1]^3 and apply the directional scaling to 120\u00d748\u00d748 mm only when generating the manufactured geometry."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "Fixed bottom support regions",
+    "issue": "vague",
+    "description": "The Fig. 9 caption says 'the bottom sides are fixed' without specifying support stations, support span, or contact footprints. These readings retain zero displacement in all three directions.",
+    "readings": [
+     "Fix the full-width bottom edges x=0 and x=L, z=0.",
+     "Fix full-width bottom lines at x=0.1L and x=0.9L, z=0.",
+     "Fix full-width bottom strips x\u2208[0,0.05L] and x\u2208[0.95L,L], z=0.",
+     "Fix bottom patches x\u2208[0.075L,0.125L] and x\u2208[0.875L,0.925L], y\u2208[0.45W,0.55W], z=0."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Central top load footprint",
+    "issue": "vague",
+    "description": "The Fig. 9 caption fixes the load centrally on the top but does not define the region over which it is 'uniformly applied.'",
+    "readings": [
+     "A concentrated force at (L/2,W/2,H).",
+     "A uniform line load across the full width at x=L/2, z=H.",
+     "A uniform traction on the full-width top strip x\u2208[0.45L,0.55L].",
+     "A uniform traction on the top patch x\u2208[0.45L,0.55L], y\u2208[0.45W,0.55W]."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Central top force vector",
+    "issue": "missing",
+    "description": "Sec. 5.4 and the Fig. 9 caption do not state a force vector. Three-point bending suggests a downward normal force, but its direction is not explicitly specified in the supplied text.",
+    "readings": [
+     "Downward normal to the top: direction (0,0,-1).",
+     "An inclined force in the span-height plane: direction (1,0,-1)/sqrt(2)."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Resultant central load",
+    "issue": "missing",
+    "description": "Neither Sec. 5.4 nor the Fig. 9 caption gives the optimization load magnitude or traction intensity.",
+    "readings": [
+     "Normalize the total resultant to 1 N.",
+     "Use a total resultant of 100 N, keeping its footprint and direction unchanged."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Non-design solid or void regions",
+    "issue": "missing",
+    "description": "Sec. 5.4 does not identify passive masks, including whether loading and support contacts contain mandatory solid material.",
+    "readings": [
+     "All cells in the domain are designable; no passive solid or void cells.",
+     "Keep one cell layer beneath the loading footprint and above the support footprints fully solid.",
+     "Keep solid support blocks of longitudinal extent 0.05L at both ends and a solid central loading pad."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Overall constituent stiffness scale",
+    "issue": "missing",
+    "description": "Sec. 4.3 introduces the base elastic tensor C* but supplies no Young's modulus or overall stiffness scale for the Sec. 5.4 models.",
+    "readings": [
+     "Use E0=1 MPa with all dimensionless elastic ratios fixed.",
+     "Use E0=2000 MPa with the same dimensionless elastic ratios."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Dimensionless constituent elastic tensor",
+    "issue": "missing",
+    "description": "Neither Sec. 4.3 nor Sec. 5.4 specifies the base material's Poisson ratio, constitutive symmetry, or stiffness ratios.",
+    "readings": [
+     "Isotropic material with Poisson ratio 0.30.",
+     "Isotropic material with Poisson ratio 0.45.",
+     "Orthotropic material with Ex=2E0, Ey=Ez=E0, all Poisson ratios zero, and all shear moduli 0.4E0."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Density-dependent homogenized stiffness for each porous unit",
+    "issue": "missing",
+    "description": "Sec. 4.3, Eq. (26), requires fitted a1 and a2 for the independent tensor entries. These data are absent for both Table 2(a) and Table 2(c), which define different material runs in Sec. 5.4. A single-material solver needs the corresponding constitutive response for each run.",
+    "readings": [
+     "For every nonzero base tensor entry, use a2=1 and a1=1/(exp(1)-1), giving C^H(rho)=[(exp(rho)-1)/(exp(1)-1)]C*.",
+     "For every nonzero base tensor entry, use a2=3 and a1=1/(exp(3)-1), giving C^H(rho)=[(exp(3rho)-1)/(exp(3)-1)]C*.",
+     "Use separately fitted normal and shear responses, for example normalized exponent 1 for the normal block and exponent 3 for shear entries."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Orientation of the porous material axes",
+    "issue": "missing",
+    "description": "Sec. 4.3 permits an orthotropic homogenized tensor with nine independent coefficients. Sec. 5.4 does not specify the unit axes relative to the beam span, width, and height.",
+    "readings": [
+     "Align unit axes (u,v,w) with beam axes (x,y,z).",
+     "Rotate the unit by 90 degrees about the beam width axis, exchanging its span and height material directions."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Admissible relative-density bounds",
+    "issue": "missing",
+    "description": "Eq. (27) introduces rho_min and rho_max as bounds on the density control coefficients, but Sec. 5.4 gives neither value.",
+    "readings": [
+     "rho_min=0.001 and rho_max=1.",
+     "rho_min=0.1 and rho_max=0.9.",
+     "rho_min=0.2 and rho_max=0.8."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "B-spline density parameterization and smoothing scale",
+    "issue": "missing",
+    "description": "Sec. 4.3 smooths the density through a B-spline field but does not give its degree, control-lattice dimensions, or knot vectors for the beam. The unit-fitting settings in Secs. 5.1 and 5.3 do not determine this field.",
+    "readings": [
+     "Quadratic tensor-product density field with 21\u00d79\u00d79 controls and open uniform knots.",
+     "Cubic tensor-product density field with 31\u00d713\u00d713 controls and open uniform knots.",
+     "Cubic tensor-product density field with 61\u00d725\u00d725 controls and open uniform knots."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Beam analysis-grid resolution",
+    "issue": "missing",
+    "description": "No beam element or knot-span counts are supplied in Sec. 5.4. The voxel and control-grid counts elsewhere concern porous-unit construction.",
+    "readings": [
+     "30\u00d712\u00d712 analysis cells along span, width, and height.",
+     "60\u00d724\u00d724 analysis cells.",
+     "120\u00d748\u00d748 analysis cells."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Analysis basis, continuity, and quadrature",
+    "issue": "missing",
+    "description": "Sec. 4.3 identifies IGA as the analysis method but gives no beam-specific displacement basis degree, interior knot continuity, or integration rule. These choices are needed to reproduce its discretization on a structured grid.",
+    "readings": [
+     "Quadratic tensor-product B-spline IGA, C1 interior continuity, and 3\u00d73\u00d73 Gauss points per span.",
+     "Cubic tensor-product B-spline IGA, C2 interior continuity, and 4\u00d74\u00d74 Gauss points per span.",
+     "Cubic tensor-product B-spline IGA, C1 interior continuity, and 4\u00d74\u00d74 Gauss points per span."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Optimality Criteria update parameters",
+    "issue": "missing",
+    "description": "Sec. 4.3 names OC but gives no update formula, move limit, damping exponent, or multiplier-search tolerance.",
+    "readings": [
+     "Multiplicative OC with exponent 0.5, density move limit 0.2, and relative multiplier-bisection tolerance 1e-6.",
+     "Multiplicative OC with exponent 0.3, density move limit 0.05, and relative multiplier-bisection tolerance 1e-4."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Topology-optimization termination",
+    "issue": "missing",
+    "description": "Secs. 4.3 and 5.4 provide no convergence tolerance or iteration cap for topology optimization. The L<0 criterion in Sec. 4.2 applies to unit connectivity optimization.",
+    "readings": [
+     "Stop when the maximum density-control change is below 0.01.",
+     "Stop when the maximum density-control change is below 0.001.",
+     "Stop after 200 OC iterations."
+    ],
+    "effect": "layout"
+   }
+  ]
+ },
+ "wall_s": 684.0041637420654,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L24",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 2,
+ "locator": "Sec. 5.4, the 3-D beam (Fig. 9)",
+ "finished": "2026-10-22T23:05:49"
+}

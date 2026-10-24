@@ -1,0 +1,302 @@
+{
+ "raw": "{\"items\": [{\"category\": \"load_position\", \"entity\": \"tip load on the free (right) edge\", \"issue\": \"vague\", \"description\": \"Sec. 3.5 only says 'cantilever beam (tip load, fixed left edge)'. Where on the 60-element right edge the load acts is not stated; it would only be visible in the unavailable Fig. 6 density plots. Mid-height and bottom-corner loading are both standard cantilever conventions.\", \"readings\": [\"right edge at mid-height (y = 0.5*H)\", \"bottom-right corner (y = 0), a common convention, e.g. the 88-line-code cantilever\", \"top-right corner (y = H); mirror image of the bottom-corner case\"], \"effect\": \"layout\"}, {\"category\": \"load_extent_distribution\", \"entity\": \"tip load application\", \"issue\": \"vague\", \"description\": \"'Tip load' (Sec. 3.5) suggests a concentrated load, but the text does not say whether it acts on one node or is spread over several nodes or a short edge segment.\", \"readings\": [\"point load on a single node\", \"load split equally over 2-3 adjacent tip nodes (about 1-2 element lengths)\", \"uniform traction over a short right-edge segment (e.g. ~5% of H) centred on the tip point\"], \"effect\": \"layout\"}, {\"category\": \"load_direction\", \"entity\": \"tip load direction\", \"issue\": \"missing\", \"description\": \"No load direction is given anywhere (Sec. 3.5). A transverse (vertical) load is the conventional cantilever reading. Flipping the sign of this single linear load leaves compliance and layout unchanged; an axial or inclined load would be a different problem and is not a natural reading of 'tip load'.\", \"readings\": [\"vertical, downward (-y)\", \"vertical, upward (+y)\"], \"effect\": \"scale_only\"}, {\"category\": \"load_magnitude\", \"entity\": \"tip load magnitude\", \"issue\": \"missing\", \"description\": \"No load value is given (Sec. 3.5, Table 4). The reported compliances (~76-81 in Table 5) look like normalized units, but this is never stated.\", \"readings\": [\"|F| = 1 (normalized)\", \"a physical value, e.g. 1 kN\"], \"effect\": \"scale_only\"}, {\"category\": \"material\", \"entity\": \"solid Young's modulus E0\", \"issue\": \"missing\", \"description\": \"Only the ratio E_min/E0 = 1e-9 and nu = 0.3 are given (Sec. 3.1, Sec. 3.5). E0 itself is never stated.\", \"readings\": [\"E0 = 1 (normalized)\", \"a physical value, e.g. 210 GPa (steel) or 70 GPa (aluminium)\"], \"effect\": \"scale_only\"}, {\"category\": \"material\", \"entity\": \"2-D elasticity assumption (plane stress vs plane strain)\", \"issue\": \"missing\", \"description\": \"The 2-D benchmarks (Sec. 3.5) do not say whether plane stress or plane strain is used. With nu = 0.3, plane strain acts like plane stress with an effective nu of about 0.43 and a different stiffness, which can slightly change the optimum.\", \"readings\": [\"plane stress\", \"plane strain\"], \"effect\": \"layout\"}, {\"category\": \"domain_extent\", \"entity\": \"out-of-plane thickness of the 2-D domain\", \"issue\": \"missing\", \"description\": \"No thickness is given for the 2-D cantilever (Sec. 3.5, Table 4). Compliance scales with 1/t.\", \"readings\": [\"t = 1 (unit thickness)\", \"another value\"], \"effect\": \"scale_only\"}, {\"category\": \"domain_extent\", \"entity\": \"design domain physical size and element size\", \"issue\": \"missing\", \"description\": \"Table 4 gives only the grid '120x60'. Physical length, height and element size are not stated. By convention there are 120 square elements along the beam axis x and 60 through the depth (aspect 2:1), and the r_min values (1.1-4.0) are in element widths. With square plane-stress Q4 elements, a point load and r_min in element units, uniformly scaling the domain changes nothing in the layout.\", \"readings\": [\"L x H = 120 x 60 with unit square elements\", \"L x H = 2 x 1 with element size 1/60\", \"L x H = 1 x 0.5 with element size 1/120\"], \"effect\": \"scale_only\"}, {\"category\": \"mesh\", \"entity\": \"finite element type\", \"issue\": \"missing\", \"description\": \"The element formulation is not stated anywhere. Sec. 3.5 'Linear solver' only mentions SciPy direct sparse factorization for the 2-D problems.\", \"readings\": [\"4-node bilinear quadrilateral (Q4), 2x2 Gauss integration (88/99-line standard)\", \"Q4 with reduced/selective integration\", \"8- or 9-node quadratic quadrilateral\"], \"effect\": \"layout\"}, {\"category\": \"volume_fraction\", \"entity\": \"volume constraint Vf = 0.40\", \"issue\": \"vague\", \"description\": \"Sec. 3.5 states Vf = 0.40 but not which field it is applied to (design rho, filtered rho-bar or projected rho-tilde from Eqs. 3-4). In three-field SIMP these volumes can differ a lot at beta = 32 (main loop and tail). 'Satisfying the volume constraint' is also used as a validity test for snapshots, with no tolerance given.\", \"readings\": [\"mean of physical (projected) density rho-tilde = 0.40\", \"mean of design density rho = 0.40\", \"mean of filtered density rho-bar = 0.40\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"initial design / role of the random seeds\", \"issue\": \"missing\", \"description\": \"The starting density field is not given. Results are averaged 'over n = 5 independent random seeds' (Sec. 3.5), and Sec. 1.2 mentions runs 'perturbed by different random seeds'. Yet the fixed and schedule-only controllers show sigma = 0.000 (Table 5), which points to a deterministic uniform start.\", \"readings\": [\"uniform rho = 0.40 in all elements\", \"uniform 0.40 plus a small seed-dependent random perturbation\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"OC update rule\", \"issue\": \"missing\", \"description\": \"Sec. 3.1 says only 'OC method with move limit delta'. The damping exponent and the Lagrange-multiplier bisection bounds and tolerance are not given.\", \"readings\": [\"standard OC (top88/top99neo): damping exponent 0.5, lambda bisection to ~1e-3 relative tolerance\", \"OC with damping exponent 0.3\", \"standard OC with a much tighter bisection tolerance (e.g. 1e-6)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"best valid snapshot rho* that seeds the 40-iteration tail\", \"issue\": \"conflicting\", \"description\": \"Sec. 3.5 defines rho* as the lowest-compliance field 'satisfying the volume constraint'. The Table 7 footnote and Sec. 4.5 define validity as p >= 3.0 and G < 0.25, while the grayness-gate threshold is 0.20 (Table 3). The text also does not say how compliances computed at different p/beta are compared when picking the 'best' one. This decides where the tail starts for all four continuation controllers.\", \"readings\": [\"valid = volume constraint met; best = lowest raw compliance at the current p, beta\", \"valid = p >= 3.0 and G < 0.25 (plus volume met); best = lowest raw compliance\", \"valid = p >= 3.0 and G < 0.20 (plus volume met)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"three-field continuation baseline: r_min schedule\", \"issue\": \"vague\", \"description\": \"Sec. 3.4 says only that 'r_min is tightened in the late stage'. The start value, end value and timing are not given (they appear only in Fig. 9).\", \"readings\": [\"r_min = 1.5 until iteration 225, then 1.2 (last 25% of N)\", \"r_min = 1.5 until beta reaches its cap (~iteration 80), then 1.2\", \"linear decrease 1.5 -> 1.2 over iterations 225-300\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"three-field continuation baseline: beta start, first doubling and cap\", \"issue\": \"figure_only\", \"description\": \"Sec. 3.4: 'beta doubles every 10 iterations after the ramp'. The start value, the first doubling iteration and the cap are not given. Doubling without a cap up to iteration 300 is impossible. Only Fig. 9 shows the trajectory (beta >= 16 by iteration 80).\", \"readings\": [\"beta = 1 until iteration 30, doubled at 40, 50, 60, 70, 80, capped at 32\", \"same, but capped at 64 (Table 2 upper bound)\", \"first doubling right at iteration 30 (beta = 2), capped at 32\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"three-field continuation baseline: move limit delta\", \"issue\": \"figure_only\", \"description\": \"The move limit for this baseline is never given in the text (Sec. 3.4). It is only plotted in Fig. 9.\", \"readings\": [\"delta = 0.2 constant (as in the fixed controller)\", \"delta = 0.2, reduced to 0.05 in the late stage along with r_min\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"expert heuristic: p ramp\", \"issue\": \"vague\", \"description\": \"Sec. 3.4 gives 'step-wise p ramp (+0.75 per 10 iterations)' with no start value or cap.\", \"readings\": [\"p from 1.0, +0.75 every 10 iterations, capped at 4.5 (reached ~iteration 50)\", \"p from 1.5: 3.0 at iteration 20, 4.5 at iteration 40\", \"same ramp but capped at 5.0 (Table 2 bound)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"expert heuristic: beta schedule\", \"issue\": \"vague\", \"description\": \"Sec. 3.4 says only 'beta raised only once p >= 3.0'. The increment rule, rate and cap are not given (Fig. 8 shows G crossing 0.20 near iteration 60).\", \"readings\": [\"beta doubled every 10 iterations once p >= 3.0, capped at 32\", \"same, capped at 64\", \"beta follows the Table 1 targets (1 -> 4 -> 16 -> 32) once p >= 3.0\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"expert heuristic: r_min and move limit delta\", \"issue\": \"figure_only\", \"description\": \"The text gives no r_min or move-limit values for the expert heuristic (Sec. 3.4). They are only in Fig. 9.\", \"readings\": [\"r_min = 1.5 and delta = 0.2 constant\", \"r_min 1.5 -> 1.2 and delta 0.2 -> 0.05 in the late stage\", \"Table 1 stage values (1.50/0.20 -> 1.35/0.15 -> 1.25/0.08 -> 1.20/0.05)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"schedule-only ablation: stage timing and interpolation\", \"issue\": \"conflicting\", \"description\": \"Sec. 3.4 and Sec. 4.3 say it uses Table 1 with 'the same budget breakpoints' (beta <= 4 until 50% = iteration 150; beta = 32 only from 75% = iteration 225). But Sec. 4.3 also says it 'commits to beta = 32 by iteration 80', and the Fig. 9 caption says beta >= 16 by iteration 80. How p and beta are interpolated inside the Table 1 ranges is not stated either.\", \"readings\": [\"Table 1 breakpoints at iterations 24/150/225, linear interpolation inside each stage\", \"Table 1 values applied piecewise-constant per stage (steps at iterations 24/150/225)\", \"compressed timing reaching beta = 32 by ~iteration 80 (e.g. stages advanced after the minimum lengths PHASE.penal = 22 and PHASE.sharp = 16 iterations)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"LLM agent parameter trajectory (p, beta, r_min, delta, restarts)\", \"issue\": \"missing\", \"description\": \"The system prompt is not provided and the preview Gemini model cannot be pinned. Table 6 lists only excerpted calls of one run; the full trajectory is only in Fig. 9. The text also contradicts itself on the gate period (iterations 85-134 in Sec. 4.2, 90-130 in Table 6, G > 0.20 until ~150 in Fig. 8). It is also unspecified which parameters stay active after a snapshot reload.\", \"readings\": [\"replay Table 6 values piecewise-constant between listed calls, with restarts at iterations 165, 200, 225 and 300\", \"linearly interpolate between the listed Table 6 calls\", \"re-implement a controller from Table 1 plus the hard gate beta <= 8 while G > 0.20 (trajectory will differ)\", \"deterministic fallback ramp (PENAL_RAMP = 12, BETA_DOUBLE = 10)\"], \"effect\": \"layout\"}]}",
+ "parsed": {
+  "items": [
+   {
+    "category": "load_position",
+    "entity": "tip load on the free (right) edge",
+    "issue": "vague",
+    "description": "Sec. 3.5 only says 'cantilever beam (tip load, fixed left edge)'. Where on the 60-element right edge the load acts is not stated; it would only be visible in the unavailable Fig. 6 density plots. Mid-height and bottom-corner loading are both standard cantilever conventions.",
+    "readings": [
+     "right edge at mid-height (y = 0.5*H)",
+     "bottom-right corner (y = 0), a common convention, e.g. the 88-line-code cantilever",
+     "top-right corner (y = H); mirror image of the bottom-corner case"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "tip load application",
+    "issue": "vague",
+    "description": "'Tip load' (Sec. 3.5) suggests a concentrated load, but the text does not say whether it acts on one node or is spread over several nodes or a short edge segment.",
+    "readings": [
+     "point load on a single node",
+     "load split equally over 2-3 adjacent tip nodes (about 1-2 element lengths)",
+     "uniform traction over a short right-edge segment (e.g. ~5% of H) centred on the tip point"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "tip load direction",
+    "issue": "missing",
+    "description": "No load direction is given anywhere (Sec. 3.5). A transverse (vertical) load is the conventional cantilever reading. Flipping the sign of this single linear load leaves compliance and layout unchanged; an axial or inclined load would be a different problem and is not a natural reading of 'tip load'.",
+    "readings": [
+     "vertical, downward (-y)",
+     "vertical, upward (+y)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "tip load magnitude",
+    "issue": "missing",
+    "description": "No load value is given (Sec. 3.5, Table 4). The reported compliances (~76-81 in Table 5) look like normalized units, but this is never stated.",
+    "readings": [
+     "|F| = 1 (normalized)",
+     "a physical value, e.g. 1 kN"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "solid Young's modulus E0",
+    "issue": "missing",
+    "description": "Only the ratio E_min/E0 = 1e-9 and nu = 0.3 are given (Sec. 3.1, Sec. 3.5). E0 itself is never stated.",
+    "readings": [
+     "E0 = 1 (normalized)",
+     "a physical value, e.g. 210 GPa (steel) or 70 GPa (aluminium)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "2-D elasticity assumption (plane stress vs plane strain)",
+    "issue": "missing",
+    "description": "The 2-D benchmarks (Sec. 3.5) do not say whether plane stress or plane strain is used. With nu = 0.3, plane strain acts like plane stress with an effective nu of about 0.43 and a different stiffness, which can slightly change the optimum.",
+    "readings": [
+     "plane stress",
+     "plane strain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "out-of-plane thickness of the 2-D domain",
+    "issue": "missing",
+    "description": "No thickness is given for the 2-D cantilever (Sec. 3.5, Table 4). Compliance scales with 1/t.",
+    "readings": [
+     "t = 1 (unit thickness)",
+     "another value"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "design domain physical size and element size",
+    "issue": "missing",
+    "description": "Table 4 gives only the grid '120x60'. Physical length, height and element size are not stated. By convention there are 120 square elements along the beam axis x and 60 through the depth (aspect 2:1), and the r_min values (1.1-4.0) are in element widths. With square plane-stress Q4 elements, a point load and r_min in element units, uniformly scaling the domain changes nothing in the layout.",
+    "readings": [
+     "L x H = 120 x 60 with unit square elements",
+     "L x H = 2 x 1 with element size 1/60",
+     "L x H = 1 x 0.5 with element size 1/120"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "mesh",
+    "entity": "finite element type",
+    "issue": "missing",
+    "description": "The element formulation is not stated anywhere. Sec. 3.5 'Linear solver' only mentions SciPy direct sparse factorization for the 2-D problems.",
+    "readings": [
+     "4-node bilinear quadrilateral (Q4), 2x2 Gauss integration (88/99-line standard)",
+     "Q4 with reduced/selective integration",
+     "8- or 9-node quadratic quadrilateral"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "volume constraint Vf = 0.40",
+    "issue": "vague",
+    "description": "Sec. 3.5 states Vf = 0.40 but not which field it is applied to (design rho, filtered rho-bar or projected rho-tilde from Eqs. 3-4). In three-field SIMP these volumes can differ a lot at beta = 32 (main loop and tail). 'Satisfying the volume constraint' is also used as a validity test for snapshots, with no tolerance given.",
+    "readings": [
+     "mean of physical (projected) density rho-tilde = 0.40",
+     "mean of design density rho = 0.40",
+     "mean of filtered density rho-bar = 0.40"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "initial design / role of the random seeds",
+    "issue": "missing",
+    "description": "The starting density field is not given. Results are averaged 'over n = 5 independent random seeds' (Sec. 3.5), and Sec. 1.2 mentions runs 'perturbed by different random seeds'. Yet the fixed and schedule-only controllers show sigma = 0.000 (Table 5), which points to a deterministic uniform start.",
+    "readings": [
+     "uniform rho = 0.40 in all elements",
+     "uniform 0.40 plus a small seed-dependent random perturbation"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "OC update rule",
+    "issue": "missing",
+    "description": "Sec. 3.1 says only 'OC method with move limit delta'. The damping exponent and the Lagrange-multiplier bisection bounds and tolerance are not given.",
+    "readings": [
+     "standard OC (top88/top99neo): damping exponent 0.5, lambda bisection to ~1e-3 relative tolerance",
+     "OC with damping exponent 0.3",
+     "standard OC with a much tighter bisection tolerance (e.g. 1e-6)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "best valid snapshot rho* that seeds the 40-iteration tail",
+    "issue": "conflicting",
+    "description": "Sec. 3.5 defines rho* as the lowest-compliance field 'satisfying the volume constraint'. The Table 7 footnote and Sec. 4.5 define validity as p >= 3.0 and G < 0.25, while the grayness-gate threshold is 0.20 (Table 3). The text also does not say how compliances computed at different p/beta are compared when picking the 'best' one. This decides where the tail starts for all four continuation controllers.",
+    "readings": [
+     "valid = volume constraint met; best = lowest raw compliance at the current p, beta",
+     "valid = p >= 3.0 and G < 0.25 (plus volume met); best = lowest raw compliance",
+     "valid = p >= 3.0 and G < 0.20 (plus volume met)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "three-field continuation baseline: r_min schedule",
+    "issue": "vague",
+    "description": "Sec. 3.4 says only that 'r_min is tightened in the late stage'. The start value, end value and timing are not given (they appear only in Fig. 9).",
+    "readings": [
+     "r_min = 1.5 until iteration 225, then 1.2 (last 25% of N)",
+     "r_min = 1.5 until beta reaches its cap (~iteration 80), then 1.2",
+     "linear decrease 1.5 -> 1.2 over iterations 225-300"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "three-field continuation baseline: beta start, first doubling and cap",
+    "issue": "figure_only",
+    "description": "Sec. 3.4: 'beta doubles every 10 iterations after the ramp'. The start value, the first doubling iteration and the cap are not given. Doubling without a cap up to iteration 300 is impossible. Only Fig. 9 shows the trajectory (beta >= 16 by iteration 80).",
+    "readings": [
+     "beta = 1 until iteration 30, doubled at 40, 50, 60, 70, 80, capped at 32",
+     "same, but capped at 64 (Table 2 upper bound)",
+     "first doubling right at iteration 30 (beta = 2), capped at 32"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "three-field continuation baseline: move limit delta",
+    "issue": "figure_only",
+    "description": "The move limit for this baseline is never given in the text (Sec. 3.4). It is only plotted in Fig. 9.",
+    "readings": [
+     "delta = 0.2 constant (as in the fixed controller)",
+     "delta = 0.2, reduced to 0.05 in the late stage along with r_min"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "expert heuristic: p ramp",
+    "issue": "vague",
+    "description": "Sec. 3.4 gives 'step-wise p ramp (+0.75 per 10 iterations)' with no start value or cap.",
+    "readings": [
+     "p from 1.0, +0.75 every 10 iterations, capped at 4.5 (reached ~iteration 50)",
+     "p from 1.5: 3.0 at iteration 20, 4.5 at iteration 40",
+     "same ramp but capped at 5.0 (Table 2 bound)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "expert heuristic: beta schedule",
+    "issue": "vague",
+    "description": "Sec. 3.4 says only 'beta raised only once p >= 3.0'. The increment rule, rate and cap are not given (Fig. 8 shows G crossing 0.20 near iteration 60).",
+    "readings": [
+     "beta doubled every 10 iterations once p >= 3.0, capped at 32",
+     "same, capped at 64",
+     "beta follows the Table 1 targets (1 -> 4 -> 16 -> 32) once p >= 3.0"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "expert heuristic: r_min and move limit delta",
+    "issue": "figure_only",
+    "description": "The text gives no r_min or move-limit values for the expert heuristic (Sec. 3.4). They are only in Fig. 9.",
+    "readings": [
+     "r_min = 1.5 and delta = 0.2 constant",
+     "r_min 1.5 -> 1.2 and delta 0.2 -> 0.05 in the late stage",
+     "Table 1 stage values (1.50/0.20 -> 1.35/0.15 -> 1.25/0.08 -> 1.20/0.05)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "schedule-only ablation: stage timing and interpolation",
+    "issue": "conflicting",
+    "description": "Sec. 3.4 and Sec. 4.3 say it uses Table 1 with 'the same budget breakpoints' (beta <= 4 until 50% = iteration 150; beta = 32 only from 75% = iteration 225). But Sec. 4.3 also says it 'commits to beta = 32 by iteration 80', and the Fig. 9 caption says beta >= 16 by iteration 80. How p and beta are interpolated inside the Table 1 ranges is not stated either.",
+    "readings": [
+     "Table 1 breakpoints at iterations 24/150/225, linear interpolation inside each stage",
+     "Table 1 values applied piecewise-constant per stage (steps at iterations 24/150/225)",
+     "compressed timing reaching beta = 32 by ~iteration 80 (e.g. stages advanced after the minimum lengths PHASE.penal = 22 and PHASE.sharp = 16 iterations)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "LLM agent parameter trajectory (p, beta, r_min, delta, restarts)",
+    "issue": "missing",
+    "description": "The system prompt is not provided and the preview Gemini model cannot be pinned. Table 6 lists only excerpted calls of one run; the full trajectory is only in Fig. 9. The text also contradicts itself on the gate period (iterations 85-134 in Sec. 4.2, 90-130 in Table 6, G > 0.20 until ~150 in Fig. 8). It is also unspecified which parameters stay active after a snapshot reload.",
+    "readings": [
+     "replay Table 6 values piecewise-constant between listed calls, with restarts at iterations 165, 200, 225 and 300",
+     "linearly interpolate between the listed Table 6 calls",
+     "re-implement a controller from Table 1 plus the hard gate beta <= 8 while G > 0.20 (trajectory will differ)",
+     "deterministic fallback ramp (PENAL_RAMP = 12, BETA_DOUBLE = 10)"
+    ],
+    "effect": "layout"
+   }
+  ]
+ },
+ "wall_s": 487.64681029319763,
+ "returncode": 0,
+ "meta": {
+  "model": null,
+  "num_turns": 2,
+  "is_error": false,
+  "total_cost_usd": 1.3459988,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 31277,
+   "cache_read_input_tokens": 774,
+   "output_tokens": 54781,
+   "output_tokens_details": {
+    "thinking_tokens": 49445
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 31277,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 54781,
+     "cache_read_input_tokens": 774,
+     "cache_creation_input_tokens": 31277,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 31277
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard",
+   "fallback_credit": null
+  }
+ },
+ "stderr_tail": "",
+ "task": "L15",
+ "model": "claude",
+ "model_id": "claude-opus-5-5",
+ "rep": 0,
+ "locator": "Sec. 3.5 'Benchmark problems' and Sec. 4.1, the cantilever beam, 120 x 60 'Long' preset",
+ "finished": "2026-10-22T18:12:46"
+}

@@ -1,0 +1,43 @@
+{
+ "task": "L23",
+ "arxiv": "2210.11477",
+ "locator": "Sec. 3.1, the uni-axial compression example (Fig. 5), pure-compliance case",
+ "figures": [
+  "UniaxialDomain_converted.png"
+ ],
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Vertical extent of each passive-solid load pad\",\n      \"issue\": \"figure_only\",\n      \"description\": \"The text specifies a pad width of 0.025 but no height. The drawing aligns the pads with the load envelopes without dimensioning their vertical extent.\",\n      \"readings\": [\n        \"Height 0.04, matching the stated load span and centered on the horizontal symmetry axis.\",\n        \"Height approximately 0.10, centered on the horizontal symmetry axis, estimated from the black rectangles relative to the unit-square domain.\"\n      ],\n      \"effect\": \"layout\",\n      \"evidence\": \"Sec. 3.1, paragraph following Fig. 5: passive solid regions have width 0.025; Fig. 5 shows their undimensioned rectangular footprints.\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"Common magnitude of the two opposing distributed loads\",\n      \"issue\": \"vague\",\n      \"description\": \"The stated magnitude does not explicitly distinguish a resultant force from a distributed-load intensity.\",\n      \"readings\": [\n        \"Each loaded side has total resultant 0.001 distributed over its length of 0.04.\",\n        \"Each loaded side has uniform line-load intensity 0.001, giving resultant 0.00004.\"\n      ],\n      \"effect\": \"scale_only\",\n      \"evidence\": \"Sec. 3.1, paragraph following Fig. 5: two distributed loads have width L_load = 0.04 and magnitude 0.001 at each load; Fig. 5 provides no force-normalization label.\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "passive_region",
+    "entity": "Vertical extent of each passive-solid load pad",
+    "issue": "figure_only",
+    "description": "The text specifies a pad width of 0.025 but no height. The drawing aligns the pads with the load envelopes without dimensioning their vertical extent.",
+    "readings": [
+     "Height 0.04, matching the stated load span and centered on the horizontal symmetry axis.",
+     "Height approximately 0.10, centered on the horizontal symmetry axis, estimated from the black rectangles relative to the unit-square domain."
+    ],
+    "effect": "layout",
+    "evidence": "Sec. 3.1, paragraph following Fig. 5: passive solid regions have width 0.025; Fig. 5 shows their undimensioned rectangular footprints."
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Common magnitude of the two opposing distributed loads",
+    "issue": "vague",
+    "description": "The stated magnitude does not explicitly distinguish a resultant force from a distributed-load intensity.",
+    "readings": [
+     "Each loaded side has total resultant 0.001 distributed over its length of 0.04.",
+     "Each loaded side has uniform line-load intensity 0.001, giving resultant 0.00004."
+    ],
+    "effect": "scale_only",
+    "evidence": "Sec. 3.1, paragraph following Fig. 5: two distributed loads have width L_load = 0.04 and magnitude 0.001 at each load; Fig. 5 provides no force-normalization label."
+   }
+  ]
+ },
+ "wall_s": 147.84522771835327,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "Reading prompt from stdin...\n",
+ "model_id": "gpt-6.1-sol",
+ "finished": "2026-10-22T18:22:37"
+}

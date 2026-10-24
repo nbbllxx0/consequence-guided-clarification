@@ -1,0 +1,371 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Cantilever domain dimensions and cell aspect ratio\",\n      \"issue\": \"missing\",\n      \"description\": \"Table 3 specifies 80 by 40 elements, but neither the nondimensional spans Lx and Ly nor square elements.\",\n      \"readings\": [\n        \"Lx=80, Ly=40, with unit square elements\",\n        \"Lx=2, Ly=1, with square elements of side 0.025\",\n        \"Lx=1, Ly=1, with rectangular elements of size 1/80 by 1/40\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Mid-right load\",\n      \"issue\": \"vague\",\n      \"description\": \"Table 3 locates the load at mid-right but does not specify whether it is concentrated or distributed.\",\n      \"readings\": [\n        \"One nodal force at (Lx, Ly/2)\",\n        \"Equal forces at the right-edge nodes immediately above and below the midpoint\",\n        \"Uniform traction over the right-edge segment from y=0.45Ly to y=0.55Ly\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"Mid-right load\",\n      \"issue\": \"missing\",\n      \"description\": \"Table 3 and the Figure 2 caption give no load direction.\",\n      \"readings\": [\n        \"Vertically downward\",\n        \"Horizontally outward\",\n        \"Obliquely downward and outward, with equal horizontal and vertical components\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"Mid-right load resultant\",\n      \"issue\": \"missing\",\n      \"description\": \"No numerical force or traction magnitude is supplied for problem 3. Nondimensionalization and E0=1 do not determine it.\",\n      \"readings\": [\n        \"Total resultant magnitude 1\",\n        \"Total resultant magnitude 10\",\n        \"Total resultant magnitude 100\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Shapes and orientations of the two initial voids\",\n      \"issue\": \"missing\",\n      \"description\": \"Table 3 says only '2 voids'; Section 3.5 and the Figure 2 caption supply no shapes or orientations.\",\n      \"readings\": [\n        \"Two circular voids\",\n        \"Two axis-aligned rectangular voids\",\n        \"One circular void and one axis-aligned rectangular void\",\n        \"Two rectangular voids rotated 45 degrees\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Locations of the two initial voids\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Table 3 nor Section 3.5 gives void centers or boundary coordinates.\",\n      \"readings\": [\n        \"Centers at (Lx/3, Ly/2) and (2Lx/3, Ly/2)\",\n        \"Centers at (Lx/2, Ly/3) and (Lx/2, 2Ly/3)\",\n        \"Centers at (0.35Lx, 0.35Ly) and (0.65Lx, 0.65Ly)\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Sizes of the two initial voids\",\n      \"issue\": \"missing\",\n      \"description\": \"No radii, widths, heights, or equality of void sizes are specified in Table 3 or the Figure 2 caption.\",\n      \"readings\": [\n        \"Both voids have bounding boxes 0.2Ly by 0.2Ly\",\n        \"Both voids have bounding boxes 0.3Ly by 0.3Ly\",\n        \"The first void has a 0.2Ly by 0.2Ly bounding box and the second a 0.3Ly by 0.3Ly bounding box\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Volume target at the retained soft-seed state in Figure 2\",\n      \"issue\": \"missing\",\n      \"description\": \"Table 3 gives the initial target 0.25 and Table 14 gives the soft-seed final target 0.28. Figure 2 shows a retained-best state without identifying its step or target.\",\n      \"readings\": [\n        \"The retained state was solved at target 0.25 before the increase\",\n        \"The retained state was solved at target 0.28 after the increase\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Volume target for the passive-solid state in Figure 2\",\n      \"issue\": \"missing\",\n      \"description\": \"Table 14 omits the passive-solid condition, and Figure 2 does not report its retained-state volume target.\",\n      \"readings\": [\n        \"Target remains at the initial 0.25\",\n        \"Target is increased to 0.28\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Reference volume V0\",\n      \"issue\": \"vague\",\n      \"description\": \"Section 3.2 writes V(rho)<=vf V0 without defining whether V0 includes the prescribed void regions.\",\n      \"readings\": [\n        \"V0 is the entire rectangular bounding-domain volume, including the two void regions\",\n        \"V0 is the available domain volume after subtracting the two prescribed void regions\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Poisson ratio\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 3.3 specifies plane stress and Section 4.3 establishes E0=1, but no Poisson ratio is given.\",\n      \"readings\": [\n        \"Poisson ratio 0.25\",\n        \"Poisson ratio 0.30\",\n        \"Poisson ratio 0.33\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Uniform out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"The plane-stress model has no stated thickness for stiffness and force normalization.\",\n      \"readings\": [\n        \"Unit nondimensional thickness\",\n        \"Nondimensional thickness 0.1\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Minimum density rho_min\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 3.5 uses rho_min for void locks and the OC lower bound without assigning its value. The stress modulus floor Emin/E0=1e-9 does not specify this density bound.\",\n      \"readings\": [\n        \"rho_min=1e-3\",\n        \"rho_min=1e-6\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initial filter radius and tightening schedule\",\n      \"issue\": \"vague\",\n      \"description\": \"Section 3.2 specifies tightening toward 1.2 and fixing 1.2 in the tail, but gives neither the starting radius nor the tightening law.\",\n      \"readings\": [\n        \"Start at 1.5 and decrease linearly to 1.2 during the last 20 main iterations\",\n        \"Start at 3.0 and decrease linearly to 1.2 during the last 20 main iterations\",\n        \"Start at 3.0 and switch directly to 1.2 late in the main solve\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Filter-radius units and distance metric\",\n      \"issue\": \"vague\",\n      \"description\": \"Sections 3.2 and 4.2 report r_min=1.2 without relating it to domain lengths or element spacings.\",\n      \"readings\": [\n        \"Radius 1.2 measured in element-index coordinates\",\n        \"Radius 1.2 measured in nondimensional physical coordinates\",\n        \"Radius 1.2 times the horizontal element spacing, using physical Euclidean distances\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Density-filter kernel and outer-boundary treatment\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 3.2 names density filtering but provides no weighting formula or boundary-extension rule.\",\n      \"readings\": [\n        \"Conical weights max(0, r_min-distance), renormalized over available neighbors\",\n        \"Uniform weights within r_min, renormalized over available neighbors\",\n        \"Gaussian weights with standard deviation r_min/2, truncated at r_min, with reflected boundary padding\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Filtering near passive voids and frozen solids\",\n      \"issue\": \"missing\",\n      \"description\": \"Sections 3.2 and 3.5 do not specify whether fixed cells participate in neighboring filter averages or normalization.\",\n      \"readings\": [\n        \"Include fixed cells at rho_min or 1 in filter averages and reimpose their locks\",\n        \"Exclude fixed cells from filter averages and renormalize over free cells\",\n        \"Prevent filtering across passive-void boundaries\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Heaviside projection threshold\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 3.2 supplies the tanh projection sharpness schedule but no projection threshold. The eta=0.5 in Section 3.5 is the OC damping exponent.\",\n      \"readings\": [\n        \"Fixed projection threshold 0.5\",\n        \"Fixed projection threshold 0.3\",\n        \"Adaptively choose the threshold to preserve filtered volume\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Density field used by the OC volume constraint\",\n      \"issue\": \"vague\",\n      \"description\": \"Section 3.2 names three density fields but does not identify which field enters V(rho) or the bisection volume calculation.\",\n      \"readings\": [\n        \"Constrain the sum of projected physical densities\",\n        \"Constrain the sum of filtered densities before projection\",\n        \"Constrain the sum of raw design densities\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Penalization ramp timing and shape\",\n      \"issue\": \"vague\",\n      \"description\": \"Section 3.2 gives endpoints p=1 and p=4.5 but no ramp duration or interpolation rule. This also leaves the start iteration of the subsequent beta doubling unspecified.\",\n      \"readings\": [\n        \"Ramp p linearly from 1 to 4.5 over the first 20 main iterations\",\n        \"Ramp p linearly from 1 to 4.5 over the first 30 main iterations\",\n        \"Increase p in discrete stages during the first 30 main iterations\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Main-loop OC move limit\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 3.5 assigns move limit 0.05 only to the standardized tail; the main-loop value or schedule is absent.\",\n      \"readings\": [\n        \"Main-loop move limit 0.1\",\n        \"Main-loop move limit 0.2\",\n        \"Main-loop move limit 0.05\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Main-solve stopping criterion and transition to the tail\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 3.2 gives a 120-iteration per-step maximum and a 40-iteration tail, but no main-loop convergence tolerance or transition criterion.\",\n      \"readings\": [\n        \"Run 80 main iterations followed by 40 tail iterations\",\n        \"After continuation completes, stop the main loop when maximum density change is below 0.01, then run the 40-iteration tail within the 120-iteration cap\",\n        \"Use a maximum density-change tolerance of 0.001 under the same cap\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"OC multiplier bisection settings\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 3.5 says lambda is found by bisection but supplies neither its initial bracket nor its stopping tolerance.\",\n      \"readings\": [\n        \"Bracket lambda in [0, 1e9] and stop at relative bracket width 1e-3\",\n        \"Expand the upper bound until a valid bracket is found and stop when volume error is below 1e-6 V0\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Rasterization of void, solid, and seed regions\",\n      \"issue\": \"vague\",\n      \"description\": \"Section 3.5 refers to elements enclosed by circular or rectangular regions without defining the element-inclusion test.\",\n      \"readings\": [\n        \"Select an element when its centroid lies inside the region\",\n        \"Select every element intersecting the region\",\n        \"Select only elements wholly contained in the region\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Quadrature used to construct quadrilateral stiffness matrices\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 3.3 specifies bilinear quadrilaterals and centroid stress evaluation, but does not state the stiffness-integration rule.\",\n      \"readings\": [\n        \"Full 2-by-2 Gauss integration\",\n        \"One-point reduced integration with hourglass stabilization\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Finite-element linear solver and accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"Sections 3.2 and 3.3 require displacement solves but give no linear-solver algorithm or residual tolerance for numerical replay.\",\n      \"readings\": [\n        \"Sparse direct factorization\",\n        \"Preconditioned conjugate gradients with relative residual tolerance 1e-6\",\n        \"Preconditioned conjugate gradients with relative residual tolerance 1e-10\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Inserted frozen-solid regions in the left Figure 2 trace\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 3.5 and Figure 2 identify the frozen-solid treatment but provide no realized region coordinates, sizes, shapes, or counts.\",\n      \"readings\": [\n        \"One circular reinforcement patch around a stress hotspot\",\n        \"A chain of overlapping circular patches along a stressed member\",\n        \"One rectangular reinforcement patch\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"other\",\n      \"entity\": \"Soft-seed initialization masks in the right Figure 2 trace\",\n      \"issue\": \"missing\",\n      \"description\": \"Figure 2 does not identify the soft-seeded element sets. Its caption explicitly says the two traces have different realized action sequences.\",\n      \"readings\": [\n        \"A hotspot-centered circle of radius two element spacings\",\n        \"Overlapping radius-two-element circles along a stressed member\",\n        \"A four-by-four-element rectangular patch around a hotspot\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Realized soft-seed density values\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 3.5 gives defaults and reported ranges, but not the values used in the Figure 2 soft-seed trace.\",\n      \"readings\": [\n        \"Use 0.85 for hotspot or redistribution seeds and 0.80 for member-widening seeds\",\n        \"Use 0.95 for hotspot or redistribution seeds and 0.90 for member-widening seeds\",\n        \"Use different permitted values for successive seed actions\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"other\",\n      \"entity\": \"Ordered modifications and retained solver call for each Figure 2 trace\",\n      \"issue\": \"missing\",\n      \"description\": \"The Figure 2 caption acknowledges different action sequences but reports neither sequence nor the retained call index. Spatial actions can also add voids and accompany volume, filter, or penalty changes.\",\n      \"readings\": [\n        \"Hotspot reinforcement precedes a volume-target increase, with an earlier modified solve retained\",\n        \"A volume-target increase precedes member widening, with a later modified solve retained\",\n        \"Redistribution inserts an additional passive void and a soft seed before the retained solve\"\n      ],\n      \"effect\": \"layout\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "Cantilever domain dimensions and cell aspect ratio",
+    "issue": "missing",
+    "description": "Table 3 specifies 80 by 40 elements, but neither the nondimensional spans Lx and Ly nor square elements.",
+    "readings": [
+     "Lx=80, Ly=40, with unit square elements",
+     "Lx=2, Ly=1, with square elements of side 0.025",
+     "Lx=1, Ly=1, with rectangular elements of size 1/80 by 1/40"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Mid-right load",
+    "issue": "vague",
+    "description": "Table 3 locates the load at mid-right but does not specify whether it is concentrated or distributed.",
+    "readings": [
+     "One nodal force at (Lx, Ly/2)",
+     "Equal forces at the right-edge nodes immediately above and below the midpoint",
+     "Uniform traction over the right-edge segment from y=0.45Ly to y=0.55Ly"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Mid-right load",
+    "issue": "missing",
+    "description": "Table 3 and the Figure 2 caption give no load direction.",
+    "readings": [
+     "Vertically downward",
+     "Horizontally outward",
+     "Obliquely downward and outward, with equal horizontal and vertical components"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Mid-right load resultant",
+    "issue": "missing",
+    "description": "No numerical force or traction magnitude is supplied for problem 3. Nondimensionalization and E0=1 do not determine it.",
+    "readings": [
+     "Total resultant magnitude 1",
+     "Total resultant magnitude 10",
+     "Total resultant magnitude 100"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Shapes and orientations of the two initial voids",
+    "issue": "missing",
+    "description": "Table 3 says only '2 voids'; Section 3.5 and the Figure 2 caption supply no shapes or orientations.",
+    "readings": [
+     "Two circular voids",
+     "Two axis-aligned rectangular voids",
+     "One circular void and one axis-aligned rectangular void",
+     "Two rectangular voids rotated 45 degrees"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Locations of the two initial voids",
+    "issue": "missing",
+    "description": "Neither Table 3 nor Section 3.5 gives void centers or boundary coordinates.",
+    "readings": [
+     "Centers at (Lx/3, Ly/2) and (2Lx/3, Ly/2)",
+     "Centers at (Lx/2, Ly/3) and (Lx/2, 2Ly/3)",
+     "Centers at (0.35Lx, 0.35Ly) and (0.65Lx, 0.65Ly)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Sizes of the two initial voids",
+    "issue": "missing",
+    "description": "No radii, widths, heights, or equality of void sizes are specified in Table 3 or the Figure 2 caption.",
+    "readings": [
+     "Both voids have bounding boxes 0.2Ly by 0.2Ly",
+     "Both voids have bounding boxes 0.3Ly by 0.3Ly",
+     "The first void has a 0.2Ly by 0.2Ly bounding box and the second a 0.3Ly by 0.3Ly bounding box"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Volume target at the retained soft-seed state in Figure 2",
+    "issue": "missing",
+    "description": "Table 3 gives the initial target 0.25 and Table 14 gives the soft-seed final target 0.28. Figure 2 shows a retained-best state without identifying its step or target.",
+    "readings": [
+     "The retained state was solved at target 0.25 before the increase",
+     "The retained state was solved at target 0.28 after the increase"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Volume target for the passive-solid state in Figure 2",
+    "issue": "missing",
+    "description": "Table 14 omits the passive-solid condition, and Figure 2 does not report its retained-state volume target.",
+    "readings": [
+     "Target remains at the initial 0.25",
+     "Target is increased to 0.28"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Reference volume V0",
+    "issue": "vague",
+    "description": "Section 3.2 writes V(rho)<=vf V0 without defining whether V0 includes the prescribed void regions.",
+    "readings": [
+     "V0 is the entire rectangular bounding-domain volume, including the two void regions",
+     "V0 is the available domain volume after subtracting the two prescribed void regions"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson ratio",
+    "issue": "missing",
+    "description": "Section 3.3 specifies plane stress and Section 4.3 establishes E0=1, but no Poisson ratio is given.",
+    "readings": [
+     "Poisson ratio 0.25",
+     "Poisson ratio 0.30",
+     "Poisson ratio 0.33"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Uniform out-of-plane thickness",
+    "issue": "missing",
+    "description": "The plane-stress model has no stated thickness for stiffness and force normalization.",
+    "readings": [
+     "Unit nondimensional thickness",
+     "Nondimensional thickness 0.1"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Minimum density rho_min",
+    "issue": "missing",
+    "description": "Section 3.5 uses rho_min for void locks and the OC lower bound without assigning its value. The stress modulus floor Emin/E0=1e-9 does not specify this density bound.",
+    "readings": [
+     "rho_min=1e-3",
+     "rho_min=1e-6"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial filter radius and tightening schedule",
+    "issue": "vague",
+    "description": "Section 3.2 specifies tightening toward 1.2 and fixing 1.2 in the tail, but gives neither the starting radius nor the tightening law.",
+    "readings": [
+     "Start at 1.5 and decrease linearly to 1.2 during the last 20 main iterations",
+     "Start at 3.0 and decrease linearly to 1.2 during the last 20 main iterations",
+     "Start at 3.0 and switch directly to 1.2 late in the main solve"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Filter-radius units and distance metric",
+    "issue": "vague",
+    "description": "Sections 3.2 and 4.2 report r_min=1.2 without relating it to domain lengths or element spacings.",
+    "readings": [
+     "Radius 1.2 measured in element-index coordinates",
+     "Radius 1.2 measured in nondimensional physical coordinates",
+     "Radius 1.2 times the horizontal element spacing, using physical Euclidean distances"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Density-filter kernel and outer-boundary treatment",
+    "issue": "missing",
+    "description": "Section 3.2 names density filtering but provides no weighting formula or boundary-extension rule.",
+    "readings": [
+     "Conical weights max(0, r_min-distance), renormalized over available neighbors",
+     "Uniform weights within r_min, renormalized over available neighbors",
+     "Gaussian weights with standard deviation r_min/2, truncated at r_min, with reflected boundary padding"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Filtering near passive voids and frozen solids",
+    "issue": "missing",
+    "description": "Sections 3.2 and 3.5 do not specify whether fixed cells participate in neighboring filter averages or normalization.",
+    "readings": [
+     "Include fixed cells at rho_min or 1 in filter averages and reimpose their locks",
+     "Exclude fixed cells from filter averages and renormalize over free cells",
+     "Prevent filtering across passive-void boundaries"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Heaviside projection threshold",
+    "issue": "missing",
+    "description": "Section 3.2 supplies the tanh projection sharpness schedule but no projection threshold. The eta=0.5 in Section 3.5 is the OC damping exponent.",
+    "readings": [
+     "Fixed projection threshold 0.5",
+     "Fixed projection threshold 0.3",
+     "Adaptively choose the threshold to preserve filtered volume"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Density field used by the OC volume constraint",
+    "issue": "vague",
+    "description": "Section 3.2 names three density fields but does not identify which field enters V(rho) or the bisection volume calculation.",
+    "readings": [
+     "Constrain the sum of projected physical densities",
+     "Constrain the sum of filtered densities before projection",
+     "Constrain the sum of raw design densities"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Penalization ramp timing and shape",
+    "issue": "vague",
+    "description": "Section 3.2 gives endpoints p=1 and p=4.5 but no ramp duration or interpolation rule. This also leaves the start iteration of the subsequent beta doubling unspecified.",
+    "readings": [
+     "Ramp p linearly from 1 to 4.5 over the first 20 main iterations",
+     "Ramp p linearly from 1 to 4.5 over the first 30 main iterations",
+     "Increase p in discrete stages during the first 30 main iterations"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Main-loop OC move limit",
+    "issue": "missing",
+    "description": "Section 3.5 assigns move limit 0.05 only to the standardized tail; the main-loop value or schedule is absent.",
+    "readings": [
+     "Main-loop move limit 0.1",
+     "Main-loop move limit 0.2",
+     "Main-loop move limit 0.05"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Main-solve stopping criterion and transition to the tail",
+    "issue": "missing",
+    "description": "Section 3.2 gives a 120-iteration per-step maximum and a 40-iteration tail, but no main-loop convergence tolerance or transition criterion.",
+    "readings": [
+     "Run 80 main iterations followed by 40 tail iterations",
+     "After continuation completes, stop the main loop when maximum density change is below 0.01, then run the 40-iteration tail within the 120-iteration cap",
+     "Use a maximum density-change tolerance of 0.001 under the same cap"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "OC multiplier bisection settings",
+    "issue": "missing",
+    "description": "Section 3.5 says lambda is found by bisection but supplies neither its initial bracket nor its stopping tolerance.",
+    "readings": [
+     "Bracket lambda in [0, 1e9] and stop at relative bracket width 1e-3",
+     "Expand the upper bound until a valid bracket is found and stop when volume error is below 1e-6 V0"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Rasterization of void, solid, and seed regions",
+    "issue": "vague",
+    "description": "Section 3.5 refers to elements enclosed by circular or rectangular regions without defining the element-inclusion test.",
+    "readings": [
+     "Select an element when its centroid lies inside the region",
+     "Select every element intersecting the region",
+     "Select only elements wholly contained in the region"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Quadrature used to construct quadrilateral stiffness matrices",
+    "issue": "missing",
+    "description": "Section 3.3 specifies bilinear quadrilaterals and centroid stress evaluation, but does not state the stiffness-integration rule.",
+    "readings": [
+     "Full 2-by-2 Gauss integration",
+     "One-point reduced integration with hourglass stabilization"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Finite-element linear solver and accuracy",
+    "issue": "missing",
+    "description": "Sections 3.2 and 3.3 require displacement solves but give no linear-solver algorithm or residual tolerance for numerical replay.",
+    "readings": [
+     "Sparse direct factorization",
+     "Preconditioned conjugate gradients with relative residual tolerance 1e-6",
+     "Preconditioned conjugate gradients with relative residual tolerance 1e-10"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Inserted frozen-solid regions in the left Figure 2 trace",
+    "issue": "missing",
+    "description": "Section 3.5 and Figure 2 identify the frozen-solid treatment but provide no realized region coordinates, sizes, shapes, or counts.",
+    "readings": [
+     "One circular reinforcement patch around a stress hotspot",
+     "A chain of overlapping circular patches along a stressed member",
+     "One rectangular reinforcement patch"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "Soft-seed initialization masks in the right Figure 2 trace",
+    "issue": "missing",
+    "description": "Figure 2 does not identify the soft-seeded element sets. Its caption explicitly says the two traces have different realized action sequences.",
+    "readings": [
+     "A hotspot-centered circle of radius two element spacings",
+     "Overlapping radius-two-element circles along a stressed member",
+     "A four-by-four-element rectangular patch around a hotspot"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Realized soft-seed density values",
+    "issue": "missing",
+    "description": "Section 3.5 gives defaults and reported ranges, but not the values used in the Figure 2 soft-seed trace.",
+    "readings": [
+     "Use 0.85 for hotspot or redistribution seeds and 0.80 for member-widening seeds",
+     "Use 0.95 for hotspot or redistribution seeds and 0.90 for member-widening seeds",
+     "Use different permitted values for successive seed actions"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "Ordered modifications and retained solver call for each Figure 2 trace",
+    "issue": "missing",
+    "description": "The Figure 2 caption acknowledges different action sequences but reports neither sequence nor the retained call index. Spatial actions can also add voids and accompany volume, filter, or penalty changes.",
+    "readings": [
+     "Hotspot reinforcement precedes a volume-target increase, with an earlier modified solve retained",
+     "A volume-target increase precedes member widening, with a later modified solve retained",
+     "Redistribution inserts an additional passive void and a soft seed before the retained solve"
+    ],
+    "effect": "layout"
+   }
+  ]
+ },
+ "wall_s": 1069.1173648834229,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L11",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 1,
+ "locator": "Sec. 3.5, Fig. 2, benchmark problem ID 3 of Table 3",
+ "finished": "2026-10-22T20:10:09"
+}

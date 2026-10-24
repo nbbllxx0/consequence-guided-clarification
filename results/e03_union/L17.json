@@ -1,0 +1,150 @@
+{
+ "task": "L17",
+ "source": {
+  "arxiv": "2607.22833",
+  "position": 128
+ },
+ "dim": 2,
+ "slots": {
+  "len": [
+   "short",
+   "quarter",
+   "full"
+  ],
+  "pos": [
+   "lower",
+   "mid"
+  ]
+ },
+ "nominal": {
+  "len": "full",
+  "pos": "lower"
+ },
+ "mandatory": [],
+ "reasons": {
+  "len": "text 'to the right edge' vs Fig. 3 short segment at the bottom; length not stated (Sec. 4.1; Fig. 3)",
+  "pos": "position along the right edge of a partial patch: lower corner (Fig. 3) or centred (adjudicator B)"
+ },
+ "recon": [
+  "RAMP+MMA in source; SIMP+OC",
+  "traction as raised-cosine patch of the stated length"
+ ],
+ "keys": [
+  "len=short|pos=lower",
+  "len=short|pos=mid",
+  "len=quarter|pos=lower",
+  "len=quarter|pos=mid",
+  "len=full|pos=lower"
+ ],
+ "C": [
+  [
+   64.85794924912571,
+   1790269.5795676028,
+   919.9643482506104,
+   1244834.513520444,
+   562319.7640326642
+  ],
+  [
+   4158565.975286523,
+   61.334792890394766,
+   2240453.827605073,
+   1296.393938483332,
+   136861.63370748865
+  ],
+  [
+   66.56767448031677,
+   1674183.7208542095,
+   63.212785847166785,
+   1134230.723570069,
+   488354.56219972647
+  ],
+  [
+   4119875.08756955,
+   61.38359139567324,
+   2202364.1677483805,
+   61.01721104427258,
+   101885.4949266607
+  ],
+  [
+   2326.200792909872,
+   62.48290027596551,
+   131.8796698100981,
+   62.02806488767463,
+   62.482300576484064
+  ]
+ ],
+ "ref": {
+  "len=short|pos=lower": 64.85794924912571,
+  "len=short|pos=mid": 61.334792890394766,
+  "len=quarter|pos=lower": 63.212785847166785,
+  "len=quarter|pos=mid": 61.01721104427253,
+  "len=full|pos=lower": 62.482300576484064
+ },
+ "ref_gap_beaten": {
+  "len=short|pos=lower": 6.661338147750939e-16,
+  "len=short|pos=mid": 4.440892098500626e-16,
+  "len=quarter|pos=lower": 2.220446049250313e-16,
+  "len=quarter|pos=mid": 0.0,
+  "len=full|pos=lower": 0.0
+ },
+ "noise": {
+  "len=short|pos=lower": 0.002829372589483719,
+  "len=short|pos=mid": 0.000567930908465233,
+  "len=quarter|pos=lower": 0.0010064453287357068,
+  "len=quarter|pos=mid": 0.0006761936277116325,
+  "len=full|pos=lower": 0.001104311387893445
+ },
+ "meta": {
+  "len=short|pos=lower": {
+   "accepted": true,
+   "kkt": 0.17839038713039965,
+   "wall_s": 244.89279479999095,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "len=short|pos=mid": {
+   "accepted": true,
+   "kkt": 0.1511515165585599,
+   "wall_s": 352.3835997999413,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "len=quarter|pos=lower": {
+   "accepted": true,
+   "kkt": 0.5228218652723297,
+   "wall_s": 243.12945000000764,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "len=quarter|pos=mid": {
+   "accepted": true,
+   "kkt": 0.4868701910382377,
+   "wall_s": 341.0019627000438,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "len=full|pos=lower": {
+   "accepted": true,
+   "kkt": 0.4930703110649005,
+   "wall_s": 222.572289200034,
+   "n_iter": [
+    201,
+    201
+   ]
+  }
+ },
+ "counter": {
+  "optimizations": 0,
+  "factorizations": 5,
+  "backsubs": 25,
+  "opt_wall_s": 0.0
+ }
+}

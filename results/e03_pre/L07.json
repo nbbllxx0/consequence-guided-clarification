@@ -1,0 +1,85 @@
+{
+ "task": "L07",
+ "source": {
+  "arxiv": "2511.14623",
+  "position": 43
+ },
+ "dim": 2,
+ "slots": {
+  "clamp": [
+   "left_edge",
+   "midline"
+  ],
+  "volfrac": [
+   0.5
+  ]
+ },
+ "nominal": {
+  "clamp": "left_edge",
+  "volfrac": 0.5
+ },
+ "mandatory": [
+  "volfrac"
+ ],
+ "reasons": {
+  "clamp": "text Gamma_D = {0} x (-0.5,0.5) (mid-line) vs prose and Fig. 4(a) left edge x=-1",
+  "volfrac": "volume penalty beta=0.5, no constraint value: mandatory"
+ },
+ "recon": [
+  "mesh-free in source; 120x60 grid",
+  "traction segment (-0.05,0.05) as 6-element patch",
+  "vf fixed to 0.5 after asking"
+ ],
+ "keys": [
+  "clamp=left_edge|volfrac=0.5",
+  "clamp=midline|volfrac=0.5"
+ ],
+ "C": [
+  [
+   61.522861212475995,
+   16.977110056924257
+  ],
+  [
+   30356796.75069066,
+   8.192261616170883
+  ]
+ ],
+ "ref": {
+  "clamp=left_edge|volfrac=0.5": 61.522861212475995,
+  "clamp=midline|volfrac=0.5": 8.192261616170883
+ },
+ "ref_gap_beaten": {
+  "clamp=left_edge|volfrac=0.5": 0.0,
+  "clamp=midline|volfrac=0.5": 0.0
+ },
+ "noise": {
+  "clamp=left_edge|volfrac=0.5": 0.00022743190573313029,
+  "clamp=midline|volfrac=0.5": 2.783318298441639e-11
+ },
+ "meta": {
+  "clamp=left_edge|volfrac=0.5": {
+   "accepted": true,
+   "kkt": 0.11149691143258873,
+   "wall_s": 54.95837969996501,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "clamp=midline|volfrac=0.5": {
+   "accepted": true,
+   "kkt": 0.00167005770709692,
+   "wall_s": 51.31762580003124,
+   "n_iter": [
+    201,
+    201
+   ]
+  }
+ },
+ "counter": {
+  "optimizations": 0,
+  "factorizations": 4,
+  "backsubs": 4,
+  "opt_wall_s": 0.0
+ }
+}

@@ -1,0 +1,195 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"2-D cantilever domain\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 and Table 1 give no in-plane dimensions or aspect ratio. Sec. 4.5 fixes the longest side at 1 mm. Let L be the span and H the in-plane height.\",\n      \"readings\": [\n        \"Rectangular domain with L = 1 mm and H = 0.5 mm.\",\n        \"Rectangular domain with L = 1 mm and H = 1/3 mm.\",\n        \"Rectangular domain with L = 1 mm and H = 0.25 mm.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"uniform thickness normal to the 2-D plane\",\n      \"issue\": \"missing\",\n      \"description\": \"No thickness or unit-thickness convention is specified for Table 1. With the stated force interpreted as a total force, uniform thickness scales stiffness and compliance.\",\n      \"readings\": [\n        \"Thickness = 1 mm.\",\n        \"Thickness = 0.1 mm.\",\n        \"Thickness = 0.01 mm.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"clamped region of the cantilever\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Table 1 refers to boundary conditions graphically; Sec. 4.1 gives no support coordinates or extent. 'Cantilever' identifies a clamped end but does not specify its grid implementation.\",\n      \"readings\": [\n        \"Both displacement components fixed along the entire end edge.\",\n        \"Both displacement components fixed only at the two end-corner nodes.\",\n        \"Both displacement components fixed along the central half of the end edge.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"external loading on the cantilever\",\n      \"issue\": \"figure_only\",\n      \"description\": \"The unavailable Table 1 boundary-condition graphic is the only example-specific indication of load location. Sec. 4.1 supplies no coordinates.\",\n      \"readings\": [\n        \"Load at the midpoint of the free end: x/L = 1, y/H = 0.5, measured from the lower clamped corner.\",\n        \"Load at the lower corner of the free end: x/L = 1, y/H = 0.\",\n        \"Load at the upper corner of the free end: x/L = 1, y/H = 1.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"spatial distribution and number of applied forces\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 4.5 states Force = 0.1 N, but the text does not specify whether Table 1 uses a point force, a loaded segment, or several simultaneous forces.\",\n      \"readings\": [\n        \"One nodal point force of 0.1 N.\",\n        \"Uniform traction over the full free edge, with resultant 0.1 N.\",\n        \"Uniform traction over a segment of length 0.1H centered at the load location, with resultant 0.1 N.\",\n        \"Two simultaneous parallel forces of 0.05 N at y/H = 0.25 and 0.75 on the free edge.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"applied force vector\",\n      \"issue\": \"figure_only\",\n      \"description\": \"The global force magnitude is specified, but neither Sec. 4.1 nor Table 1's textual content states its direction.\",\n      \"readings\": [\n        \"Transverse downward force: F = (0, -0.1) N.\",\n        \"Axial force toward the free end: F = (0.1, 0) N.\",\n        \"Oblique force: F = (0.1/sqrt(2), -0.1/sqrt(2)) N.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"non-design cells at supports or loads\",\n      \"issue\": \"missing\",\n      \"description\": \"No passive-region specification is given for Table 1. Sec. 4.5 describes passive regions for other examples but does not establish whether the 2-D cantilever has solid attachment pads.\",\n      \"readings\": [\n        \"No passive cells; the whole rectangular domain is designable.\",\n        \"A one-element-thick strip at the clamp and cells incident to loaded nodes are fixed solid, with their material counted in the 0.5 total-domain volume budget.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"2-D constitutive assumption\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.5 specifies E and Poisson's ratio, but not plane stress versus plane strain. The energy and Lame-parameter formulas in Sec. 3.2.2 are explicitly introduced for 3-D problems.\",\n      \"readings\": [\n        \"Plane stress: stress normal to the plane is zero.\",\n        \"Plane strain: strain normal to the plane is zero.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Table 1 structured-grid resolution\",\n      \"issue\": \"missing\",\n      \"description\": \"No 2-D element counts are supplied. Sec. 4.6 gives only a greater-than-6000-point condition; the explicit meshes elsewhere concern other examples.\",\n      \"readings\": [\n        \"For L/H = 2, use 120 by 60 elements.\",\n        \"For L/H = 2, use 160 by 80 elements.\",\n        \"For L/H = 2, use 240 by 120 elements.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"2-D finite-element formulation and integration\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 names an external SIMP implementation and a common FE solver, but the supplied text does not describe the 2-D element interpolation or quadrature.\",\n      \"readings\": [\n        \"Four-node bilinear quadrilaterals with 2 by 2 Gauss integration and one constant density per element.\",\n        \"Nine-node quadratic quadrilaterals with 3 by 3 Gauss integration and one constant density per element.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"minimum density and void stiffness in the FE solver\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.3 gives the cubic interpolation used in the neural method, but does not specify the Table 1 SIMP density floor or FE regularization, including treatment of binary zero-density cells.\",\n      \"readings\": [\n        \"Allow rho = 0 with E = E0*rho^3; remove exact voids and treat disconnected loaded designs as infeasible.\",\n        \"Impose rho_min = 0.001 and use E = E0*rho^3.\",\n        \"Allow rho = 0 and use E = Emin + (E0 - Emin)*rho^3 with Emin/E0 = 1e-9.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"complete SIMP density-filter operator\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 specifies a density filter with radius 1.5 element sizes, but supplies neither its weighting kernel nor treatment of neighbors outside the domain.\",\n      \"readings\": [\n        \"Linear-distance weights within radius 1.5h, normalized over existing in-domain neighbors.\",\n        \"Uniform weights within radius 1.5h, normalized over existing in-domain neighbors.\",\n        \"Linear-distance weights within radius 1.5h, retaining the full-stencil denominator and treating outside-domain densities as zero.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"initial density field\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3 initializes a domain without giving a Table 1 density field. The uniform 0.5 initialization in Sec. 4.2 is explicitly for the 3-D example.\",\n      \"readings\": [\n        \"Uniform initial density rho = 0.5.\",\n        \"Initial densities alternating between 0.49 and 0.51 on an even-sized grid, preserving mean density 0.5.\",\n        \"Initial density 0.75 in the lower half and 0.25 in the upper half, preserving mean density 0.5.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"structured-grid optimization update and move limit\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 cites the SIMP code without giving its update rule or move limit in the supplied text. The stated Adam settings apply to the neural networks.\",\n      \"readings\": [\n        \"Optimality-criteria updates with a maximum density change of 0.2 per iteration.\",\n        \"Optimality-criteria updates with a maximum density change of 0.1 per iteration.\",\n        \"MMA updates with a maximum density change of 0.2 per iteration.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"SIMP termination criterion\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.1 says 'default convergence criterion' without stating its tolerance, monitored quantity, or iteration cap. The explicit 2000 iterations concern DMF-TONN; Sec. 4.4's numerical stopping settings concern Top3D.\",\n      \"readings\": [\n        \"Stop when maximum element-density change is below 0.01, with a cap of 200 iterations.\",\n        \"Stop when maximum element-density change is below 0.001, with a cap of 2000 iterations.\",\n        \"Stop when relative compliance change is below 1e-4 for five consecutive iterations, with a cap of 2000 iterations.\"\n      ],\n      \"effect\": \"layout\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "2-D cantilever domain",
+    "issue": "missing",
+    "description": "Sec. 4.1 and Table 1 give no in-plane dimensions or aspect ratio. Sec. 4.5 fixes the longest side at 1 mm. Let L be the span and H the in-plane height.",
+    "readings": [
+     "Rectangular domain with L = 1 mm and H = 0.5 mm.",
+     "Rectangular domain with L = 1 mm and H = 1/3 mm.",
+     "Rectangular domain with L = 1 mm and H = 0.25 mm."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "uniform thickness normal to the 2-D plane",
+    "issue": "missing",
+    "description": "No thickness or unit-thickness convention is specified for Table 1. With the stated force interpreted as a total force, uniform thickness scales stiffness and compliance.",
+    "readings": [
+     "Thickness = 1 mm.",
+     "Thickness = 0.1 mm.",
+     "Thickness = 0.01 mm."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "clamped region of the cantilever",
+    "issue": "figure_only",
+    "description": "Table 1 refers to boundary conditions graphically; Sec. 4.1 gives no support coordinates or extent. 'Cantilever' identifies a clamped end but does not specify its grid implementation.",
+    "readings": [
+     "Both displacement components fixed along the entire end edge.",
+     "Both displacement components fixed only at the two end-corner nodes.",
+     "Both displacement components fixed along the central half of the end edge."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "external loading on the cantilever",
+    "issue": "figure_only",
+    "description": "The unavailable Table 1 boundary-condition graphic is the only example-specific indication of load location. Sec. 4.1 supplies no coordinates.",
+    "readings": [
+     "Load at the midpoint of the free end: x/L = 1, y/H = 0.5, measured from the lower clamped corner.",
+     "Load at the lower corner of the free end: x/L = 1, y/H = 0.",
+     "Load at the upper corner of the free end: x/L = 1, y/H = 1."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "spatial distribution and number of applied forces",
+    "issue": "figure_only",
+    "description": "Sec. 4.5 states Force = 0.1 N, but the text does not specify whether Table 1 uses a point force, a loaded segment, or several simultaneous forces.",
+    "readings": [
+     "One nodal point force of 0.1 N.",
+     "Uniform traction over the full free edge, with resultant 0.1 N.",
+     "Uniform traction over a segment of length 0.1H centered at the load location, with resultant 0.1 N.",
+     "Two simultaneous parallel forces of 0.05 N at y/H = 0.25 and 0.75 on the free edge."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "applied force vector",
+    "issue": "figure_only",
+    "description": "The global force magnitude is specified, but neither Sec. 4.1 nor Table 1's textual content states its direction.",
+    "readings": [
+     "Transverse downward force: F = (0, -0.1) N.",
+     "Axial force toward the free end: F = (0.1, 0) N.",
+     "Oblique force: F = (0.1/sqrt(2), -0.1/sqrt(2)) N."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "non-design cells at supports or loads",
+    "issue": "missing",
+    "description": "No passive-region specification is given for Table 1. Sec. 4.5 describes passive regions for other examples but does not establish whether the 2-D cantilever has solid attachment pads.",
+    "readings": [
+     "No passive cells; the whole rectangular domain is designable.",
+     "A one-element-thick strip at the clamp and cells incident to loaded nodes are fixed solid, with their material counted in the 0.5 total-domain volume budget."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "2-D constitutive assumption",
+    "issue": "missing",
+    "description": "Sec. 4.5 specifies E and Poisson's ratio, but not plane stress versus plane strain. The energy and Lame-parameter formulas in Sec. 3.2.2 are explicitly introduced for 3-D problems.",
+    "readings": [
+     "Plane stress: stress normal to the plane is zero.",
+     "Plane strain: strain normal to the plane is zero."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Table 1 structured-grid resolution",
+    "issue": "missing",
+    "description": "No 2-D element counts are supplied. Sec. 4.6 gives only a greater-than-6000-point condition; the explicit meshes elsewhere concern other examples.",
+    "readings": [
+     "For L/H = 2, use 120 by 60 elements.",
+     "For L/H = 2, use 160 by 80 elements.",
+     "For L/H = 2, use 240 by 120 elements."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "2-D finite-element formulation and integration",
+    "issue": "missing",
+    "description": "Sec. 4 names an external SIMP implementation and a common FE solver, but the supplied text does not describe the 2-D element interpolation or quadrature.",
+    "readings": [
+     "Four-node bilinear quadrilaterals with 2 by 2 Gauss integration and one constant density per element.",
+     "Nine-node quadratic quadrilaterals with 3 by 3 Gauss integration and one constant density per element."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "minimum density and void stiffness in the FE solver",
+    "issue": "missing",
+    "description": "Sec. 3.3 gives the cubic interpolation used in the neural method, but does not specify the Table 1 SIMP density floor or FE regularization, including treatment of binary zero-density cells.",
+    "readings": [
+     "Allow rho = 0 with E = E0*rho^3; remove exact voids and treat disconnected loaded designs as infeasible.",
+     "Impose rho_min = 0.001 and use E = E0*rho^3.",
+     "Allow rho = 0 and use E = Emin + (E0 - Emin)*rho^3 with Emin/E0 = 1e-9."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "complete SIMP density-filter operator",
+    "issue": "missing",
+    "description": "Sec. 4 specifies a density filter with radius 1.5 element sizes, but supplies neither its weighting kernel nor treatment of neighbors outside the domain.",
+    "readings": [
+     "Linear-distance weights within radius 1.5h, normalized over existing in-domain neighbors.",
+     "Uniform weights within radius 1.5h, normalized over existing in-domain neighbors.",
+     "Linear-distance weights within radius 1.5h, retaining the full-stencil denominator and treating outside-domain densities as zero."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "initial density field",
+    "issue": "missing",
+    "description": "Sec. 3 initializes a domain without giving a Table 1 density field. The uniform 0.5 initialization in Sec. 4.2 is explicitly for the 3-D example.",
+    "readings": [
+     "Uniform initial density rho = 0.5.",
+     "Initial densities alternating between 0.49 and 0.51 on an even-sized grid, preserving mean density 0.5.",
+     "Initial density 0.75 in the lower half and 0.25 in the upper half, preserving mean density 0.5."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "structured-grid optimization update and move limit",
+    "issue": "missing",
+    "description": "Sec. 4.1 cites the SIMP code without giving its update rule or move limit in the supplied text. The stated Adam settings apply to the neural networks.",
+    "readings": [
+     "Optimality-criteria updates with a maximum density change of 0.2 per iteration.",
+     "Optimality-criteria updates with a maximum density change of 0.1 per iteration.",
+     "MMA updates with a maximum density change of 0.2 per iteration."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "SIMP termination criterion",
+    "issue": "vague",
+    "description": "Sec. 4.1 says 'default convergence criterion' without stating its tolerance, monitored quantity, or iteration cap. The explicit 2000 iterations concern DMF-TONN; Sec. 4.4's numerical stopping settings concern Top3D.",
+    "readings": [
+     "Stop when maximum element-density change is below 0.01, with a cap of 200 iterations.",
+     "Stop when maximum element-density change is below 0.001, with a cap of 2000 iterations.",
+     "Stop when relative compliance change is below 1e-4 for five consecutive iterations, with a cap of 2000 iterations."
+    ],
+    "effect": "layout"
+   }
+  ]
+ },
+ "wall_s": 446.7115423679352,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L08",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 2,
+ "locator": "Sec. 4.1, the 2-D cantilever beam of Table 1",
+ "finished": "2026-10-22T21:55:37"
+}

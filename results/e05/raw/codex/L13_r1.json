@@ -1,0 +1,325 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"In-plane domain outline and aspect ratio\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sections 2.1 and 3.1 delegate the geometry to Fig. 1(a). Section 2.3 specifies 100\u00d7100 finite elements, which does not establish physical bounding dimensions L and H or the domain outline.\",\n      \"readings\": [\n        \"Full rectangular domain with L/H=1.\",\n        \"Full rectangular domain with L/H=2.\",\n        \"A tapered cantilever region within a rectangular background grid, with root height H and tip height H/2.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Absolute geometric scale\",\n      \"issue\": \"missing\",\n      \"description\": \"No physical length or length unit is given. This ambiguity concerns a geometrically similar problem with mesh-relative boundary conditions and filter dimensions preserved.\",\n      \"readings\": [\n        \"Use L=1 m and scale all geometric lengths consistently.\",\n        \"Use L=0.1 m and scale all geometric lengths consistently.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"The cantilever description gives no thickness or statement that compliance is evaluated per unit thickness. For a fixed 2D idealization and prescribed resultant forces, uniform thickness changes scale compliance.\",\n      \"readings\": [\n        \"Use unit thickness.\",\n        \"Use a uniform thickness of 1 mm.\",\n        \"Use a uniform thickness of 10 mm.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"Location of the cantilever root\",\n      \"issue\": \"figure_only\",\n      \"description\": \"The word 'cantilever' identifies a built-in root qualitatively, but Sections 2.1 and 3.1 do not identify its side; they refer to Fig. 1(a).\",\n      \"readings\": [\n        \"Root at x=0.\",\n        \"Root at x=L.\",\n        \"Root at y=0.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"Nodes or segments attached to the root clamp\",\n      \"issue\": \"figure_only\",\n      \"description\": \"No supported node set or supported edge interval is written. For a root at x=0, the extent of the attachment therefore remains unresolved.\",\n      \"readings\": [\n        \"Fix both in-plane translations at every node on x=0.\",\n        \"Fix both translations only at the two corner nodes (0,0) and (0,H).\",\n        \"Fix both translations on root patches 0\u2264y\u22640.1H and 0.9H\u2264y\u2264H.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"Cantilever load location\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sections 2.1 and 3.1 provide no force coordinates or loaded boundary. For a root at x=0, the position must be recovered from the unavailable Fig. 1(a).\",\n      \"readings\": [\n        \"Load centered at the free-edge midpoint (L,H/2).\",\n        \"Load at the free-edge corner (L,0).\",\n        \"Load centered on the upper edge at (L/2,H).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Spatial distribution of the prescribed load\",\n      \"issue\": \"figure_only\",\n      \"description\": \"No nodal force pattern, loaded edge length, or traction profile is written for the cantilever.\",\n      \"readings\": [\n        \"A concentrated force at one node.\",\n        \"A uniform traction over the entire free edge, normalized to a specified total force.\",\n        \"A uniform traction over the central 10% of the free edge, normalized to the same total force.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"Direction of cantilever loading\",\n      \"issue\": \"figure_only\",\n      \"description\": \"The text identifies constant loading but gives no force components or angle. Taking x along the beam, several directions remain possible.\",\n      \"readings\": [\n        \"Transverse downward loading: direction (0,-1).\",\n        \"Axial loading: direction (1,0).\",\n        \"Oblique loading: direction (1,-1)/sqrt(2).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"Overall force amplitude\",\n      \"issue\": \"missing\",\n      \"description\": \"No cantilever force magnitude or force unit appears in Sections 2.1, 2.3, 3.1, or the supplied captions. This item concerns uniform scaling of the prescribed loading.\",\n      \"readings\": [\n        \"Total resultant force of 1 N.\",\n        \"Total resultant force of 1000 N.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"other\",\n      \"entity\": \"Load-case count and compliance aggregation\",\n      \"issue\": \"missing\",\n      \"description\": \"The cantilever description does not state how many load cases are solved or whether different forces act simultaneously. Constant loading does not determine this grouping.\",\n      \"readings\": [\n        \"One static load case.\",\n        \"Transverse and axial forces acting simultaneously in one case.\",\n        \"Separate transverse and axial cases, minimizing their equally weighted mean compliance.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Fixed-solid and fixed-void element masks\",\n      \"issue\": \"missing\",\n      \"description\": \"Sections 2.1, 2.3, and 3.1 do not say whether every element is designable or identify any passive regions.\",\n      \"readings\": [\n        \"All 100\u00d7100 elements are designable.\",\n        \"One element column adjacent to a left root is held solid.\",\n        \"A solid loading pad occupies the last two columns and the central ten rows.\",\n        \"A central 10\u00d710 element block is held void.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Volume fraction of the specific target in Fig. 3(b)\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 2.3 specifies a family from 0.01 to 0.95 in steps of 0.01, and Table 1 identifies four tested fractions. Neither Section 3.1 nor the Fig. 3 caption selects the fraction represented by Fig. 3(b).\",\n      \"readings\": [\n        \"Vf=0.03.\",\n        \"Vf=0.25.\",\n        \"Vf=0.50.\",\n        \"Vf=0.75.\",\n        \"Another member of the stated 0.01-spaced grid from 0.01 through 0.95.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Reference volume and passive-region accounting\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 2.3 gives fraction values without defining their denominator or how passive material would enter the budget. These distinctions matter if the domain is masked or contains passive regions.\",\n      \"readings\": [\n        \"Constrain total material, including passive solids, to Vf times the bounding-rectangle volume.\",\n        \"Apply Vf only to the designable region, with passive solids outside that budget.\",\n        \"Normalize total material by the actual admissible beam-domain volume, excluding exterior masked cells.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Elastic constitutive matrix and 2D idealization\",\n      \"issue\": \"missing\",\n      \"description\": \"The paper prints no constitutive matrix or plane-stress/plane-strain assumption for the cantilever. Naming top88 does not supply these definitions within the provided text.\",\n      \"readings\": [\n        \"Isotropic plane-stress elasticity.\",\n        \"Isotropic plane-strain elasticity.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Overall solid stiffness scale\",\n      \"issue\": \"missing\",\n      \"description\": \"No solid Young's modulus is given. With Poisson's ratio and all stiffness ratios held fixed, changing this overall scale only rescales compliance.\",\n      \"readings\": [\n        \"E0=1 in consistent nondimensional units.\",\n        \"E0=210 GPa, with the same dimensionless void-to-solid stiffness ratio.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Poisson's ratio\",\n      \"issue\": \"missing\",\n      \"description\": \"No Poisson's ratio is stated in the cantilever description or the top88 inputs listed in Section 2.3.\",\n      \"readings\": [\n        \"nu=0.20.\",\n        \"nu=0.30.\",\n        \"nu=0.45.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Void stiffness and density-to-stiffness interpolation\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 2.3 fixes penal=3 but does not print the interpolation equation or the minimum stiffness used to represent void.\",\n      \"readings\": [\n        \"E(rho)=Emin+(E0-Emin)rho^3 with Emin/E0=1e-9.\",\n        \"E(rho)=Emin+(E0-Emin)rho^3 with Emin/E0=1e-3.\",\n        \"E(rho)=E0 rho^3 with a positive density lower bound of 1e-3.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Minimum design density\",\n      \"issue\": \"missing\",\n      \"description\": \"The listed top88 inputs do not state whether densities may reach zero or are bounded away from zero.\",\n      \"readings\": [\n        \"0\u2264rho\u22641, with positive ersatz stiffness.\",\n        \"1e-6\u2264rho\u22641.\",\n        \"1e-3\u2264rho\u22641.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Finite-element formulation and integration\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 2.3 fixes the element counts at 100\u00d7100 but does not describe element order, shape functions, or integration.\",\n      \"readings\": [\n        \"Four-node bilinear quadrilaterals with full 2\u00d72 Gauss integration.\",\n        \"Four-node quadrilaterals with stabilized reduced integration.\",\n        \"Eight-node quadratic quadrilaterals with full integration.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Physical node spacing on the structured grid\",\n      \"issue\": \"missing\",\n      \"description\": \"The 100\u00d7100 counts and image dimensions do not explicitly give physical node coordinates or require uniform spacing.\",\n      \"readings\": [\n        \"Uniform spacing: x_i=L i/100 and y_j=H j/100.\",\n        \"A graded structured grid: x_i=L(i/100)^2 and y_j=H j/100.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Units and distance metric of rmin\",\n      \"issue\": \"vague\",\n      \"description\": \"Section 2.3 unambiguously gives rmin=2.4, but provides no length convention or distance metric for reproducing that setting in another solver.\",\n      \"readings\": [\n        \"Radius 2.4 in Euclidean element-index coordinates.\",\n        \"Radius 2.4 in physical length units, using physical centroid distances.\",\n        \"Physical radius 2.4 times the horizontal element pitch.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Mathematical implementation of the selected ft=1 filter\",\n      \"issue\": \"vague\",\n      \"description\": \"Section 2.3 fixes ft=1 but supplies no filter equation, kernel, density weighting, or small-density denominator guard. The implementation is delegated to code whose contents are not provided.\",\n      \"readings\": [\n        \"Conical weights max(0,rmin-d_ij), density-weighted sensitivities, and denominator max(rho_i,1e-3) times the weight sum.\",\n        \"The same conical sensitivity filter with denominator guard 1e-6.\",\n        \"Uniform sensitivity averaging over neighbors within rmin.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Filter treatment at domain and mask boundaries\",\n      \"issue\": \"missing\",\n      \"description\": \"No topology-optimization filter boundary rule is printed. The padding described in Section 2.2 concerns the CNN and does not define this rule.\",\n      \"readings\": [\n        \"Truncate the neighborhood to valid domain cells and renormalize retained weights.\",\n        \"Use zero values outside the domain with full-kernel normalization.\",\n        \"Reflect the density or sensitivity field across the boundary.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Optimization update rule and numerical controls\",\n      \"issue\": \"missing\",\n      \"description\": \"The paper names top88 but prints no update equation, move limit, damping, multiplier-search tolerance, or account of local changes. These affect reproduction of a nonconvex optimization trajectory.\",\n      \"readings\": [\n        \"Optimality-criteria update with move limit 0.2, damping exponent 0.5, and relative multiplier tolerance 1e-3.\",\n        \"Optimality-criteria update with move limit 0.1, damping exponent 0.5, and relative multiplier tolerance 1e-6.\",\n        \"MMA update with move limit 0.2 and initial asymptote distance 0.5.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initial design\",\n      \"issue\": \"missing\",\n      \"description\": \"Sections 2.1, 2.3, and 3.1 do not specify the initial density field or any random seed. Different initializations can select different local solutions.\",\n      \"readings\": [\n        \"Uniform initial density rho=Vf on designable cells.\",\n        \"A volume-preserving random perturbation of amplitude 0.001 around Vf, using seed 0 and respecting density bounds.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Cantilever stopping criterion and iteration cap\",\n      \"issue\": \"missing\",\n      \"description\": \"No convergence tolerance or iteration cap is assigned to top88. The maxit=100 setting in Section 2.3 belongs to TOPress, not the cantilever.\",\n      \"readings\": [\n        \"Stop when the maximum element-density change is below 0.01, without a fixed iteration cap.\",\n        \"Stop when the maximum element-density change is below 0.001 or after 1000 iterations.\"\n      ],\n      \"effect\": \"layout\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "In-plane domain outline and aspect ratio",
+    "issue": "figure_only",
+    "description": "Sections 2.1 and 3.1 delegate the geometry to Fig. 1(a). Section 2.3 specifies 100\u00d7100 finite elements, which does not establish physical bounding dimensions L and H or the domain outline.",
+    "readings": [
+     "Full rectangular domain with L/H=1.",
+     "Full rectangular domain with L/H=2.",
+     "A tapered cantilever region within a rectangular background grid, with root height H and tip height H/2."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "Absolute geometric scale",
+    "issue": "missing",
+    "description": "No physical length or length unit is given. This ambiguity concerns a geometrically similar problem with mesh-relative boundary conditions and filter dimensions preserved.",
+    "readings": [
+     "Use L=1 m and scale all geometric lengths consistently.",
+     "Use L=0.1 m and scale all geometric lengths consistently."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "Out-of-plane thickness",
+    "issue": "missing",
+    "description": "The cantilever description gives no thickness or statement that compliance is evaluated per unit thickness. For a fixed 2D idealization and prescribed resultant forces, uniform thickness changes scale compliance.",
+    "readings": [
+     "Use unit thickness.",
+     "Use a uniform thickness of 1 mm.",
+     "Use a uniform thickness of 10 mm."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "Location of the cantilever root",
+    "issue": "figure_only",
+    "description": "The word 'cantilever' identifies a built-in root qualitatively, but Sections 2.1 and 3.1 do not identify its side; they refer to Fig. 1(a).",
+    "readings": [
+     "Root at x=0.",
+     "Root at x=L.",
+     "Root at y=0."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "Nodes or segments attached to the root clamp",
+    "issue": "figure_only",
+    "description": "No supported node set or supported edge interval is written. For a root at x=0, the extent of the attachment therefore remains unresolved.",
+    "readings": [
+     "Fix both in-plane translations at every node on x=0.",
+     "Fix both translations only at the two corner nodes (0,0) and (0,H).",
+     "Fix both translations on root patches 0\u2264y\u22640.1H and 0.9H\u2264y\u2264H."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "Cantilever load location",
+    "issue": "figure_only",
+    "description": "Sections 2.1 and 3.1 provide no force coordinates or loaded boundary. For a root at x=0, the position must be recovered from the unavailable Fig. 1(a).",
+    "readings": [
+     "Load centered at the free-edge midpoint (L,H/2).",
+     "Load at the free-edge corner (L,0).",
+     "Load centered on the upper edge at (L/2,H)."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Spatial distribution of the prescribed load",
+    "issue": "figure_only",
+    "description": "No nodal force pattern, loaded edge length, or traction profile is written for the cantilever.",
+    "readings": [
+     "A concentrated force at one node.",
+     "A uniform traction over the entire free edge, normalized to a specified total force.",
+     "A uniform traction over the central 10% of the free edge, normalized to the same total force."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "Direction of cantilever loading",
+    "issue": "figure_only",
+    "description": "The text identifies constant loading but gives no force components or angle. Taking x along the beam, several directions remain possible.",
+    "readings": [
+     "Transverse downward loading: direction (0,-1).",
+     "Axial loading: direction (1,0).",
+     "Oblique loading: direction (1,-1)/sqrt(2)."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Overall force amplitude",
+    "issue": "missing",
+    "description": "No cantilever force magnitude or force unit appears in Sections 2.1, 2.3, 3.1, or the supplied captions. This item concerns uniform scaling of the prescribed loading.",
+    "readings": [
+     "Total resultant force of 1 N.",
+     "Total resultant force of 1000 N."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "other",
+    "entity": "Load-case count and compliance aggregation",
+    "issue": "missing",
+    "description": "The cantilever description does not state how many load cases are solved or whether different forces act simultaneously. Constant loading does not determine this grouping.",
+    "readings": [
+     "One static load case.",
+     "Transverse and axial forces acting simultaneously in one case.",
+     "Separate transverse and axial cases, minimizing their equally weighted mean compliance."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Fixed-solid and fixed-void element masks",
+    "issue": "missing",
+    "description": "Sections 2.1, 2.3, and 3.1 do not say whether every element is designable or identify any passive regions.",
+    "readings": [
+     "All 100\u00d7100 elements are designable.",
+     "One element column adjacent to a left root is held solid.",
+     "A solid loading pad occupies the last two columns and the central ten rows.",
+     "A central 10\u00d710 element block is held void."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Volume fraction of the specific target in Fig. 3(b)",
+    "issue": "missing",
+    "description": "Section 2.3 specifies a family from 0.01 to 0.95 in steps of 0.01, and Table 1 identifies four tested fractions. Neither Section 3.1 nor the Fig. 3 caption selects the fraction represented by Fig. 3(b).",
+    "readings": [
+     "Vf=0.03.",
+     "Vf=0.25.",
+     "Vf=0.50.",
+     "Vf=0.75.",
+     "Another member of the stated 0.01-spaced grid from 0.01 through 0.95."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Reference volume and passive-region accounting",
+    "issue": "missing",
+    "description": "Section 2.3 gives fraction values without defining their denominator or how passive material would enter the budget. These distinctions matter if the domain is masked or contains passive regions.",
+    "readings": [
+     "Constrain total material, including passive solids, to Vf times the bounding-rectangle volume.",
+     "Apply Vf only to the designable region, with passive solids outside that budget.",
+     "Normalize total material by the actual admissible beam-domain volume, excluding exterior masked cells."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Elastic constitutive matrix and 2D idealization",
+    "issue": "missing",
+    "description": "The paper prints no constitutive matrix or plane-stress/plane-strain assumption for the cantilever. Naming top88 does not supply these definitions within the provided text.",
+    "readings": [
+     "Isotropic plane-stress elasticity.",
+     "Isotropic plane-strain elasticity."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Overall solid stiffness scale",
+    "issue": "missing",
+    "description": "No solid Young's modulus is given. With Poisson's ratio and all stiffness ratios held fixed, changing this overall scale only rescales compliance.",
+    "readings": [
+     "E0=1 in consistent nondimensional units.",
+     "E0=210 GPa, with the same dimensionless void-to-solid stiffness ratio."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson's ratio",
+    "issue": "missing",
+    "description": "No Poisson's ratio is stated in the cantilever description or the top88 inputs listed in Section 2.3.",
+    "readings": [
+     "nu=0.20.",
+     "nu=0.30.",
+     "nu=0.45."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Void stiffness and density-to-stiffness interpolation",
+    "issue": "missing",
+    "description": "Section 2.3 fixes penal=3 but does not print the interpolation equation or the minimum stiffness used to represent void.",
+    "readings": [
+     "E(rho)=Emin+(E0-Emin)rho^3 with Emin/E0=1e-9.",
+     "E(rho)=Emin+(E0-Emin)rho^3 with Emin/E0=1e-3.",
+     "E(rho)=E0 rho^3 with a positive density lower bound of 1e-3."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Minimum design density",
+    "issue": "missing",
+    "description": "The listed top88 inputs do not state whether densities may reach zero or are bounded away from zero.",
+    "readings": [
+     "0\u2264rho\u22641, with positive ersatz stiffness.",
+     "1e-6\u2264rho\u22641.",
+     "1e-3\u2264rho\u22641."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Finite-element formulation and integration",
+    "issue": "missing",
+    "description": "Section 2.3 fixes the element counts at 100\u00d7100 but does not describe element order, shape functions, or integration.",
+    "readings": [
+     "Four-node bilinear quadrilaterals with full 2\u00d72 Gauss integration.",
+     "Four-node quadrilaterals with stabilized reduced integration.",
+     "Eight-node quadratic quadrilaterals with full integration."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Physical node spacing on the structured grid",
+    "issue": "missing",
+    "description": "The 100\u00d7100 counts and image dimensions do not explicitly give physical node coordinates or require uniform spacing.",
+    "readings": [
+     "Uniform spacing: x_i=L i/100 and y_j=H j/100.",
+     "A graded structured grid: x_i=L(i/100)^2 and y_j=H j/100."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Units and distance metric of rmin",
+    "issue": "vague",
+    "description": "Section 2.3 unambiguously gives rmin=2.4, but provides no length convention or distance metric for reproducing that setting in another solver.",
+    "readings": [
+     "Radius 2.4 in Euclidean element-index coordinates.",
+     "Radius 2.4 in physical length units, using physical centroid distances.",
+     "Physical radius 2.4 times the horizontal element pitch."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Mathematical implementation of the selected ft=1 filter",
+    "issue": "vague",
+    "description": "Section 2.3 fixes ft=1 but supplies no filter equation, kernel, density weighting, or small-density denominator guard. The implementation is delegated to code whose contents are not provided.",
+    "readings": [
+     "Conical weights max(0,rmin-d_ij), density-weighted sensitivities, and denominator max(rho_i,1e-3) times the weight sum.",
+     "The same conical sensitivity filter with denominator guard 1e-6.",
+     "Uniform sensitivity averaging over neighbors within rmin."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Filter treatment at domain and mask boundaries",
+    "issue": "missing",
+    "description": "No topology-optimization filter boundary rule is printed. The padding described in Section 2.2 concerns the CNN and does not define this rule.",
+    "readings": [
+     "Truncate the neighborhood to valid domain cells and renormalize retained weights.",
+     "Use zero values outside the domain with full-kernel normalization.",
+     "Reflect the density or sensitivity field across the boundary."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Optimization update rule and numerical controls",
+    "issue": "missing",
+    "description": "The paper names top88 but prints no update equation, move limit, damping, multiplier-search tolerance, or account of local changes. These affect reproduction of a nonconvex optimization trajectory.",
+    "readings": [
+     "Optimality-criteria update with move limit 0.2, damping exponent 0.5, and relative multiplier tolerance 1e-3.",
+     "Optimality-criteria update with move limit 0.1, damping exponent 0.5, and relative multiplier tolerance 1e-6.",
+     "MMA update with move limit 0.2 and initial asymptote distance 0.5."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial design",
+    "issue": "missing",
+    "description": "Sections 2.1, 2.3, and 3.1 do not specify the initial density field or any random seed. Different initializations can select different local solutions.",
+    "readings": [
+     "Uniform initial density rho=Vf on designable cells.",
+     "A volume-preserving random perturbation of amplitude 0.001 around Vf, using seed 0 and respecting density bounds."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Cantilever stopping criterion and iteration cap",
+    "issue": "missing",
+    "description": "No convergence tolerance or iteration cap is assigned to top88. The maxit=100 setting in Section 2.3 belongs to TOPress, not the cantilever.",
+    "readings": [
+     "Stop when the maximum element-density change is below 0.01, without a fixed iteration cap.",
+     "Stop when the maximum element-density change is below 0.001 or after 1000 iterations."
+    ],
+    "effect": "layout"
+   }
+  ]
+ },
+ "wall_s": 798.1901965141296,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L13",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 1,
+ "locator": "Sec. 2.1 / 3.1, the cantilever beam (Fig. 1(a), Fig. 3(b))",
+ "finished": "2026-10-22T20:16:36"
+}

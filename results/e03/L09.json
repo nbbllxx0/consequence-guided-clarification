@@ -1,0 +1,107 @@
+{
+ "task": "L09",
+ "source": {
+  "arxiv": "2605.02158",
+  "position": 49
+ },
+ "dim": 2,
+ "slots": {
+  "load": [
+   0.1,
+   0.25,
+   0.4
+  ],
+  "volfrac": [
+   0.4
+  ]
+ },
+ "nominal": {
+  "load": 0.25,
+  "volfrac": 0.4
+ },
+ "mandatory": [
+  "volfrac"
+ ],
+ "reasons": {
+  "load": "load 'on lower part of left edge'; position not given (figure)",
+  "volfrac": "not stated for this sample (0.3-0.5): mandatory"
+ },
+ "recon": [
+  "64x64 stated",
+  "vf fixed to 0.4 after asking",
+  "right-edge support taken as full edge",
+  "left-edge support from the midpoint to the top corner: the source allows supports only at corners or edge midpoints, or segments connecting them (Sec. 4.1), so the 0.75 reading is inadmissible (evidence correction, authors 2026-10-23)"
+ ],
+ "keys": [
+  "load=0.1|volfrac=0.4",
+  "load=0.25|volfrac=0.4",
+  "load=0.4|volfrac=0.4"
+ ],
+ "C": [
+  [
+   3.960250686206168,
+   11.298598459776803,
+   5.419909257470324
+  ],
+  [
+   967674.1277039986,
+   3.1886195758998115,
+   544944.7123717788
+  ],
+  [
+   1920657.1809637772,
+   768293.4821620986,
+   2.397979911981323
+  ]
+ ],
+ "ref": {
+  "load=0.1|volfrac=0.4": 3.960250686206168,
+  "load=0.25|volfrac=0.4": 3.1886195758998115,
+  "load=0.4|volfrac=0.4": 2.397979911981323
+ },
+ "ref_gap_beaten": {
+  "load=0.1|volfrac=0.4": 2.220446049250313e-16,
+  "load=0.25|volfrac=0.4": 0.0,
+  "load=0.4|volfrac=0.4": 2.220446049250313e-16
+ },
+ "noise": {
+  "load=0.1|volfrac=0.4": 2.0861254290019023e-05,
+  "load=0.25|volfrac=0.4": 2.7840449643459464e-05,
+  "load=0.4|volfrac=0.4": 0.0012412903434627367
+ },
+ "meta": {
+  "load=0.1|volfrac=0.4": {
+   "accepted": true,
+   "kkt": 0.040656791147760704,
+   "wall_s": 28.8456916998839,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "load=0.25|volfrac=0.4": {
+   "accepted": true,
+   "kkt": 0.01824694388692979,
+   "wall_s": 24.55920369992964,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "load=0.4|volfrac=0.4": {
+   "accepted": true,
+   "kkt": 0.016554449571362883,
+   "wall_s": 32.92936629999895,
+   "n_iter": [
+    201,
+    201
+   ]
+  }
+ },
+ "counter": {
+  "optimizations": 0,
+  "factorizations": 3,
+  "backsubs": 9,
+  "opt_wall_s": 0.0
+ }
+}

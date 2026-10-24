@@ -1,0 +1,279 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"design-domain outline and aspect ratio\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Fig. 1(a) identifies the domain by dark-gray shading. The caption gives 30\u00d760 elements but no verbal outline, physical dimensions, or assumption of square elements.\",\n      \"readings\": [\n        \"Full rectangle with width/height = 2\",\n        \"Full rectangle with width/height = 1/2\",\n        \"Full rectangle with width/height = 1, using rectangular elements\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"absolute in-plane length scale\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Fig. 1's caption nor the structural settings specify physical lengths or a length unit.\",\n      \"readings\": [\n        \"Height = 1 in normalized units\",\n        \"Height = 30 mm, with width set by the chosen aspect ratio\",\n        \"Height = 300 mm, with width set by the chosen aspect ratio\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"axis assignment and coordinates of the 30\u00d760 grid\",\n      \"issue\": \"vague\",\n      \"description\": \"Figs. 1 and 2 give element counts without assigning them to horizontal and vertical directions or specifying uniform spacing.\",\n      \"readings\": [\n        \"60 columns and 30 rows, uniformly spaced\",\n        \"30 columns and 60 rows, uniformly spaced\",\n        \"60 columns and 30 rows, with x_i/L = (i/60)^2 and uniformly spaced rows\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"finite-element formulation and integration\",\n      \"issue\": \"missing\",\n      \"description\": \"The text specifies finite elements and elementwise densities but gives no element order, displacement interpolation, or quadrature for Fig. 1.\",\n      \"readings\": [\n        \"Four-node bilinear quadrilaterals with 2\u00d72 Gauss integration\",\n        \"Four-node quadrilaterals with one-point integration and hourglass stabilization\",\n        \"Nine-node quadratic quadrilaterals with 3\u00d73 Gauss integration\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"spatial support of the lower-right load\",\n      \"issue\": \"vague\",\n      \"description\": \"Fig. 1 calls the load distributed while locating it at a corner, without defining a loaded edge, patch length, or set of nodes.\",\n      \"readings\": [\n        \"A lumped force at the lower-right corner node\",\n        \"A load over the lowest one-element segment of the right edge\",\n        \"A load over the lowest 10% of the right edge\",\n        \"A load over the rightmost one-element segment of the bottom edge\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"load profile and equivalent nodal forces\",\n      \"issue\": \"missing\",\n      \"description\": \"For the distributed interpretation of Fig. 1, no traction profile or rule for assembling nodal forces is supplied.\",\n      \"readings\": [\n        \"Uniform traction, assembled with consistent equivalent nodal forces\",\n        \"Equal downward forces at every selected boundary node\",\n        \"Triangular traction increasing toward the lower-right corner\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"normalization of the distributed 1 N load\",\n      \"issue\": \"vague\",\n      \"description\": \"Fig. 1 gives 1 N but does not explicitly distinguish the resultant of the distributed load from the force assigned to each loaded node.\",\n      \"readings\": [\n        \"Total resultant = 1 N across the selected nodes\",\n        \"Each of m equally loaded nodes receives 1 N, giving a resultant of m N\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"non-design material at the clamp or load attachment\",\n      \"issue\": \"missing\",\n      \"description\": \"No passive-cell mask or attachment-pad rule is stated for Fig. 1; the unavailable image cannot be checked for such regions.\",\n      \"readings\": [\n        \"All domain cells are designable; no passive regions\",\n        \"A one-element solid pad at the lower-right load attachment\",\n        \"A one-element-wide solid strip along the fixed left boundary\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"solid elastic stiffness scale\",\n      \"issue\": \"missing\",\n      \"description\": \"Section 3.1 and Appendix A supply no Young's modulus or equivalent overall stiffness scale for Fig. 1.\",\n      \"readings\": [\n        \"E0 = 1 in consistent normalized units\",\n        \"E0 = 70 GPa\",\n        \"E0 = 210 GPa\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"elastic symmetry and dimensionless constitutive properties\",\n      \"issue\": \"missing\",\n      \"description\": \"No constitutive tensor, isotropy statement, or Poisson ratio is given for the structural example.\",\n      \"readings\": [\n        \"Isotropic material with Poisson ratio 0.3\",\n        \"Isotropic material with Poisson ratio 0.25\",\n        \"Grid-aligned orthotropic material with Ex/Ey = 2, nu_xy = 0.25, nu_yx = 0.125, and Gxy/Ey = 0.4\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"two-dimensional elastic reduction\",\n      \"issue\": \"missing\",\n      \"description\": \"The Introduction calls Fig. 1 a 2-D cantilever, but neither the caption nor Section 3.1 specifies its constitutive reduction.\",\n      \"readings\": [\n        \"Plane stress\",\n        \"Plane strain\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"uniform out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"No thickness or per-unit-thickness convention is stated for Fig. 1. The later five-element thickness concerns a separate 3-D experiment.\",\n      \"readings\": [\n        \"Unit thickness in the chosen consistent units\",\n        \"Uniform thickness of 1 mm\",\n        \"Uniform thickness of 5 mm\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"density-to-stiffness interpolation and penalization schedule\",\n      \"issue\": \"vague\",\n      \"description\": \"The Introduction mentions SIMP as common practice, but Eq. (13) leaves K(rho) unspecified and gives no interpolation parameters for Fig. 1.\",\n      \"readings\": [\n        \"SIMP with fixed exponent 3\",\n        \"SIMP with fixed exponent 4\",\n        \"SIMP with the exponent increased from 1 to 3 during optimization\",\n        \"RAMP interpolation with parameter 5\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"void or ersatz stiffness\",\n      \"issue\": \"missing\",\n      \"description\": \"The density lower bound is discussed, but no independent stiffness floor or solid-to-void stiffness ratio is specified.\",\n      \"readings\": [\n        \"No independent floor: E(rho) = E0 rho^q\",\n        \"E(rho) = Emin + (E0 - Emin) rho^q, with Emin/E0 = 1e-9\",\n        \"The same additive-floor law with Emin/E0 = 1e-6\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"minimum admissible element density\",\n      \"issue\": \"vague\",\n      \"description\": \"Section 2 gives approximately 1e-6 only as an example; Section 3.1 requires a small positive lower bound without fixing its value.\",\n      \"readings\": [\n        \"rho_min = 1e-6\",\n        \"rho_min = 1e-3\",\n        \"rho_min = 1e-9\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"density-filter kernel and distance metric\",\n      \"issue\": \"missing\",\n      \"description\": \"Fig. 1 fixes the radius at 2.5 element sizes, but supplies no filter formula or distance metric.\",\n      \"readings\": [\n        \"Normalized conical weights max(0, 2.5 - d), using Euclidean distance in grid units\",\n        \"Normalized constant weights within Euclidean radius 2.5\",\n        \"Normalized constant weights within Chebyshev distance 2.5\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"density-filter treatment at domain boundaries\",\n      \"issue\": \"missing\",\n      \"description\": \"No rule is given for filter neighborhoods that extend beyond the design domain.\",\n      \"readings\": [\n        \"Truncate the neighborhood and renormalize the retained weights\",\n        \"Extend density by zero outside the domain and retain the full-kernel normalization\",\n        \"Reflect the density field across the boundary before filtering\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"density field used in the 0.5 volume constraint\",\n      \"issue\": \"vague\",\n      \"description\": \"Eq. (13) writes volume using rho, while Section 3 distinguishes unfiltered variables from filtered material densities. No separate notation resolves which field enters the implemented volume constraint.\",\n      \"readings\": [\n        \"Constrain the mean unfiltered design density to at most 0.5; use filtered density for stiffness\",\n        \"Constrain the mean filtered physical density to at most 0.5; use that density for stiffness\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"MMA move limit for the Fig. 1 optimization\",\n      \"issue\": \"missing\",\n      \"description\": \"Fig. 1 does not specify a move limit. Fig. 3 explicitly introduces a later reduction, while Section 3.1 assigns 0.2 specifically to the Fig. 10 solutions.\",\n      \"readings\": [\n        \"Constant move limit 0.2\",\n        \"Constant move limit 0.1\",\n        \"Constant move limit 0.5\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"remaining MMA parameter choices\",\n      \"issue\": \"missing\",\n      \"description\": \"The caption and Appendix A name MMA and its original code, but do not give the asymptote parameters or approximation coefficients used for Fig. 1.\",\n      \"readings\": [\n        \"Initial asymptote span 0.5, expansion factor 1.2, contraction factor 0.7, constraint coefficients c = 1000 and d = 0\",\n        \"Initial asymptote span 0.25, expansion factor 1.1, contraction factor 0.7, constraint coefficients c = 100 and d = 0\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"early stopping and convergence criterion\",\n      \"issue\": \"missing\",\n      \"description\": \"Fig. 1 specifies a maximum of 100 iterations, but gives no earlier stopping criterion or tolerance.\",\n      \"readings\": [\n        \"Perform exactly 100 optimization updates\",\n        \"Stop when the maximum element-density change is below 0.01, or after 100 updates\",\n        \"Stop when relative compliance change is below 1e-3, or after 100 updates\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"linear-elastic state solver accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"The text gives K(rho)u = f but no linear solution method or residual tolerance; Appendix A supplies only implementation attributions.\",\n      \"readings\": [\n        \"Sparse direct solution to machine precision\",\n        \"Conjugate gradients with relative residual tolerance 1e-8\",\n        \"Conjugate gradients with relative residual tolerance 1e-3\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "design-domain outline and aspect ratio",
+    "issue": "figure_only",
+    "description": "Fig. 1(a) identifies the domain by dark-gray shading. The caption gives 30\u00d760 elements but no verbal outline, physical dimensions, or assumption of square elements.",
+    "readings": [
+     "Full rectangle with width/height = 2",
+     "Full rectangle with width/height = 1/2",
+     "Full rectangle with width/height = 1, using rectangular elements"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "absolute in-plane length scale",
+    "issue": "missing",
+    "description": "Neither Fig. 1's caption nor the structural settings specify physical lengths or a length unit.",
+    "readings": [
+     "Height = 1 in normalized units",
+     "Height = 30 mm, with width set by the chosen aspect ratio",
+     "Height = 300 mm, with width set by the chosen aspect ratio"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "mesh",
+    "entity": "axis assignment and coordinates of the 30\u00d760 grid",
+    "issue": "vague",
+    "description": "Figs. 1 and 2 give element counts without assigning them to horizontal and vertical directions or specifying uniform spacing.",
+    "readings": [
+     "60 columns and 30 rows, uniformly spaced",
+     "30 columns and 60 rows, uniformly spaced",
+     "60 columns and 30 rows, with x_i/L = (i/60)^2 and uniformly spaced rows"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "finite-element formulation and integration",
+    "issue": "missing",
+    "description": "The text specifies finite elements and elementwise densities but gives no element order, displacement interpolation, or quadrature for Fig. 1.",
+    "readings": [
+     "Four-node bilinear quadrilaterals with 2\u00d72 Gauss integration",
+     "Four-node quadrilaterals with one-point integration and hourglass stabilization",
+     "Nine-node quadratic quadrilaterals with 3\u00d73 Gauss integration"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "spatial support of the lower-right load",
+    "issue": "vague",
+    "description": "Fig. 1 calls the load distributed while locating it at a corner, without defining a loaded edge, patch length, or set of nodes.",
+    "readings": [
+     "A lumped force at the lower-right corner node",
+     "A load over the lowest one-element segment of the right edge",
+     "A load over the lowest 10% of the right edge",
+     "A load over the rightmost one-element segment of the bottom edge"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "load profile and equivalent nodal forces",
+    "issue": "missing",
+    "description": "For the distributed interpretation of Fig. 1, no traction profile or rule for assembling nodal forces is supplied.",
+    "readings": [
+     "Uniform traction, assembled with consistent equivalent nodal forces",
+     "Equal downward forces at every selected boundary node",
+     "Triangular traction increasing toward the lower-right corner"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "normalization of the distributed 1 N load",
+    "issue": "vague",
+    "description": "Fig. 1 gives 1 N but does not explicitly distinguish the resultant of the distributed load from the force assigned to each loaded node.",
+    "readings": [
+     "Total resultant = 1 N across the selected nodes",
+     "Each of m equally loaded nodes receives 1 N, giving a resultant of m N"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "non-design material at the clamp or load attachment",
+    "issue": "missing",
+    "description": "No passive-cell mask or attachment-pad rule is stated for Fig. 1; the unavailable image cannot be checked for such regions.",
+    "readings": [
+     "All domain cells are designable; no passive regions",
+     "A one-element solid pad at the lower-right load attachment",
+     "A one-element-wide solid strip along the fixed left boundary"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "solid elastic stiffness scale",
+    "issue": "missing",
+    "description": "Section 3.1 and Appendix A supply no Young's modulus or equivalent overall stiffness scale for Fig. 1.",
+    "readings": [
+     "E0 = 1 in consistent normalized units",
+     "E0 = 70 GPa",
+     "E0 = 210 GPa"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "elastic symmetry and dimensionless constitutive properties",
+    "issue": "missing",
+    "description": "No constitutive tensor, isotropy statement, or Poisson ratio is given for the structural example.",
+    "readings": [
+     "Isotropic material with Poisson ratio 0.3",
+     "Isotropic material with Poisson ratio 0.25",
+     "Grid-aligned orthotropic material with Ex/Ey = 2, nu_xy = 0.25, nu_yx = 0.125, and Gxy/Ey = 0.4"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "two-dimensional elastic reduction",
+    "issue": "missing",
+    "description": "The Introduction calls Fig. 1 a 2-D cantilever, but neither the caption nor Section 3.1 specifies its constitutive reduction.",
+    "readings": [
+     "Plane stress",
+     "Plane strain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "uniform out-of-plane thickness",
+    "issue": "missing",
+    "description": "No thickness or per-unit-thickness convention is stated for Fig. 1. The later five-element thickness concerns a separate 3-D experiment.",
+    "readings": [
+     "Unit thickness in the chosen consistent units",
+     "Uniform thickness of 1 mm",
+     "Uniform thickness of 5 mm"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "density-to-stiffness interpolation and penalization schedule",
+    "issue": "vague",
+    "description": "The Introduction mentions SIMP as common practice, but Eq. (13) leaves K(rho) unspecified and gives no interpolation parameters for Fig. 1.",
+    "readings": [
+     "SIMP with fixed exponent 3",
+     "SIMP with fixed exponent 4",
+     "SIMP with the exponent increased from 1 to 3 during optimization",
+     "RAMP interpolation with parameter 5"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "void or ersatz stiffness",
+    "issue": "missing",
+    "description": "The density lower bound is discussed, but no independent stiffness floor or solid-to-void stiffness ratio is specified.",
+    "readings": [
+     "No independent floor: E(rho) = E0 rho^q",
+     "E(rho) = Emin + (E0 - Emin) rho^q, with Emin/E0 = 1e-9",
+     "The same additive-floor law with Emin/E0 = 1e-6"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "minimum admissible element density",
+    "issue": "vague",
+    "description": "Section 2 gives approximately 1e-6 only as an example; Section 3.1 requires a small positive lower bound without fixing its value.",
+    "readings": [
+     "rho_min = 1e-6",
+     "rho_min = 1e-3",
+     "rho_min = 1e-9"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "density-filter kernel and distance metric",
+    "issue": "missing",
+    "description": "Fig. 1 fixes the radius at 2.5 element sizes, but supplies no filter formula or distance metric.",
+    "readings": [
+     "Normalized conical weights max(0, 2.5 - d), using Euclidean distance in grid units",
+     "Normalized constant weights within Euclidean radius 2.5",
+     "Normalized constant weights within Chebyshev distance 2.5"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "density-filter treatment at domain boundaries",
+    "issue": "missing",
+    "description": "No rule is given for filter neighborhoods that extend beyond the design domain.",
+    "readings": [
+     "Truncate the neighborhood and renormalize the retained weights",
+     "Extend density by zero outside the domain and retain the full-kernel normalization",
+     "Reflect the density field across the boundary before filtering"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "density field used in the 0.5 volume constraint",
+    "issue": "vague",
+    "description": "Eq. (13) writes volume using rho, while Section 3 distinguishes unfiltered variables from filtered material densities. No separate notation resolves which field enters the implemented volume constraint.",
+    "readings": [
+     "Constrain the mean unfiltered design density to at most 0.5; use filtered density for stiffness",
+     "Constrain the mean filtered physical density to at most 0.5; use that density for stiffness"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "MMA move limit for the Fig. 1 optimization",
+    "issue": "missing",
+    "description": "Fig. 1 does not specify a move limit. Fig. 3 explicitly introduces a later reduction, while Section 3.1 assigns 0.2 specifically to the Fig. 10 solutions.",
+    "readings": [
+     "Constant move limit 0.2",
+     "Constant move limit 0.1",
+     "Constant move limit 0.5"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "remaining MMA parameter choices",
+    "issue": "missing",
+    "description": "The caption and Appendix A name MMA and its original code, but do not give the asymptote parameters or approximation coefficients used for Fig. 1.",
+    "readings": [
+     "Initial asymptote span 0.5, expansion factor 1.2, contraction factor 0.7, constraint coefficients c = 1000 and d = 0",
+     "Initial asymptote span 0.25, expansion factor 1.1, contraction factor 0.7, constraint coefficients c = 100 and d = 0"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "early stopping and convergence criterion",
+    "issue": "missing",
+    "description": "Fig. 1 specifies a maximum of 100 iterations, but gives no earlier stopping criterion or tolerance.",
+    "readings": [
+     "Perform exactly 100 optimization updates",
+     "Stop when the maximum element-density change is below 0.01, or after 100 updates",
+     "Stop when relative compliance change is below 1e-3, or after 100 updates"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "linear-elastic state solver accuracy",
+    "issue": "missing",
+    "description": "The text gives K(rho)u = f but no linear solution method or residual tolerance; Appendix A supplies only implementation attributions.",
+    "readings": [
+     "Sparse direct solution to machine precision",
+     "Conjugate gradients with relative residual tolerance 1e-8",
+     "Conjugate gradients with relative residual tolerance 1e-3"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 461.83998107910156,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L18",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 0,
+ "locator": "Introduction, the 2-D cantilever of Fig. 1",
+ "finished": "2026-10-22T18:20:28"
+}

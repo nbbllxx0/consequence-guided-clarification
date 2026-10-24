@@ -1,0 +1,266 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"In-plane design-domain dimensions and element aspect ratio\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 specifies a 20 \u00d7 60 element grid, but gives no physical dimensions or statement that the cells are square.\",\n      \"readings\": [\n        \"Width L = 60 and height H = 20, with square cells.\",\n        \"Width L = 3 and height H = 1, with square cells.\",\n        \"Width L = 1 and height H = 1, with rectangular cells.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Assignment of the 20 \u00d7 60 element counts to physical axes\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4 does not explicitly identify which grid count is horizontal. Sec. 5.1's reference to the complete horizontal span does not provide that mapping.\",\n      \"readings\": [\n        \"60 elements horizontally and 20 vertically.\",\n        \"20 elements horizontally and 60 vertically.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Uniform out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 2.1 and 4 do not specify a thickness or an explicit unit-thickness convention for the two-dimensional analysis.\",\n      \"readings\": [\n        \"Unit thickness in the chosen length units.\",\n        \"Uniform thickness of 0.1 length units.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"Loaded node on the right boundary\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 describes a randomly selected admissible boundary node; Sec. 5.1 narrows this example to the right edge but supplies no vertical coordinate or node index.\",\n      \"readings\": [\n        \"Load at (L, H/4).\",\n        \"Load at (L, H/2).\",\n        \"Load at (L, 3H/4).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Target volume fraction for the Fig. 5(c) reference\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 gives only the sampling interval [0.3, 0.7]. Sec. 5.1 says the target is shared across rows without reporting its value. Appendix A.5's value of 0.5 belongs to its separate half-MBB control.\",\n      \"readings\": [\n        \"Target volume fraction 0.4.\",\n        \"Target volume fraction 0.5.\",\n        \"Target volume fraction 0.6.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Non-design cells and their treatment in the volume budget\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 4 and 5.1 identify no passive solid or void masks and do not explicitly state that every grid cell is designable.\",\n      \"readings\": [\n        \"Every cell is designable; no passive regions.\",\n        \"Cells incident to the loaded node are fixed solid and count toward the total volume budget.\",\n        \"The leftmost cell column and cells incident to the loaded node are fixed solid and count toward the total volume budget.\",\n        \"Those support and load pads are fixed solid, with the target fraction enforced only over the remaining cells.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Solid Young's modulus E0\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 introduces E0 symbolically but gives no numerical value or normalization.\",\n      \"readings\": [\n        \"E0 = 1 in normalized units, holding Emin/E0 fixed.\",\n        \"E0 = 210 GPa, holding Emin/E0 fixed.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Poisson's ratio\",\n      \"issue\": \"missing\",\n      \"description\": \"The material description in Sec. 2.1 supplies no Poisson's ratio.\",\n      \"readings\": [\n        \"Poisson's ratio 0.25.\",\n        \"Poisson's ratio 0.30.\",\n        \"Poisson's ratio 0.35.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Near-void stiffness relative to solid stiffness\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. 2 defines Emin as a near-void Young's modulus without specifying Emin/E0.\",\n      \"readings\": [\n        \"Emin/E0 = 1e-9.\",\n        \"Emin/E0 = 1e-6.\",\n        \"Emin/E0 = 1e-3.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Two-dimensional elastic constitutive assumption\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 2.1 and 4 do not identify a plane-stress or plane-strain formulation.\",\n      \"readings\": [\n        \"Plane stress.\",\n        \"Plane strain.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Finite-element displacement interpolation and integration\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 specifies the element counts but not the element order, nodal arrangement, or quadrature. The Top88 designation in Appendix A.5 does not explicitly specify the main example's implementation.\",\n      \"readings\": [\n        \"Four-node bilinear quadrilaterals with 2 \u00d7 2 Gauss integration.\",\n        \"Eight-node quadratic quadrilaterals with 3 \u00d7 3 Gauss integration.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Actual clean initialization used for the SIMP reference\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 describes randomized initialization, and Fig. 5(c) includes a shared init column, but the numerical field, initialization RNG seed, and realization index are absent. The reported seed 0 specifies the dataset split.\",\n      \"readings\": [\n        \"First noise realization from initialization seed 0, using a fixed noise-generation recipe.\",\n        \"First noise realization from initialization seed 1, using the same recipe.\",\n        \"Second noise realization from initialization seed 0, using the same recipe.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initialization-noise distribution and meaning of amplitude\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4 specifies Gaussian-smoothed random variation with amplitude 0.05, without defining the underlying distribution or whether amplitude is measured before or after smoothing.\",\n      \"readings\": [\n        \"Uniform noise in [-0.05, 0.05], followed by Gaussian smoothing.\",\n        \"Gaussian noise with standard deviation 0.05, followed by Gaussian smoothing.\",\n        \"Smoothed noise rescaled to standard deviation 0.05.\",\n        \"Smoothed noise rescaled to maximum absolute deviation 0.05.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Gaussian smoothing of the initialization noise\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 gives no Gaussian width, kernel truncation, or boundary-extension rule.\",\n      \"readings\": [\n        \"Standard deviation 0.5 cell, 3 \u00d7 3 kernel, reflected boundaries.\",\n        \"Standard deviation 1 cell, 7 \u00d7 7 kernel, reflected boundaries.\",\n        \"Standard deviation 2 cells, 13 \u00d7 13 kernel, zero padding.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Compliance-sensitivity filter kernel\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2.1 specifies standard convolution filtering of sensitivities without stating the kernel weights.\",\n      \"readings\": [\n        \"Linearly decreasing distance weights: max(0, r - distance).\",\n        \"Uniform weights within radius r.\",\n        \"Gaussian weights truncated at radius r.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Sensitivity-filter radius and distance convention\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 gives no filter radius, units, or distinction between distances in element-index space and physical coordinates.\",\n      \"readings\": [\n        \"Radius 1.5 using Euclidean distances between element indices.\",\n        \"Radius 3 using Euclidean distances between element indices.\",\n        \"Radius 0.1H using physical distances between element centers.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Sensitivity-filter density weighting and normalization\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2.1 does not define whether convolution acts directly on sensitivities or uses a density-weighted sensitivity-filter formula.\",\n      \"readings\": [\n        \"Normalized weighted average of the raw sensitivities.\",\n        \"Average rho_j times sensitivity_j, divided by max(rho_i, 0.001).\",\n        \"Average rho_j times sensitivity_j, divided by max(rho_i, 0.01).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Sensitivity-filter treatment at domain boundaries\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 does not specify how convolution neighborhoods crossing the domain boundary are extended or normalized.\",\n      \"readings\": [\n        \"Truncate to existing neighbors and renormalize their weights.\",\n        \"Zero-pad sensitivities and retain the full-kernel normalization.\",\n        \"Reflect sensitivities across domain boundaries.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Optimality-criteria update parameters\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 names optimality-criteria updates but supplies no update exponent, move limit, or multiplier-search tolerance.\",\n      \"readings\": [\n        \"Multiplicative OC exponent 0.5, density move limit 0.2, relative multiplier-bisection tolerance 1e-3.\",\n        \"Multiplicative OC exponent 0.5, density move limit 0.1, relative multiplier-bisection tolerance 1e-6.\",\n        \"Multiplicative OC exponent 1, density move limit 0.05, relative multiplier-bisection tolerance 1e-6.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Reference-run stopping criterion and iteration limit\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 2.1 and 5.1 describe a converged SIMP reference without giving convergence tolerances or an iteration cap. Appendix A.5's iteration counts concern its separate control.\",\n      \"readings\": [\n        \"Stop when maximum density change is below 0.01; cap at 100 iterations.\",\n        \"Stop when maximum density change is below 0.001; cap at 1000 iterations.\",\n        \"Stop after relative compliance change stays below 1e-4 for five iterations; cap at 1000 iterations.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Finite-element equilibrium solver and numerical accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 states the equilibrium equation but does not identify the linear-system solution method or its tolerances.\",\n      \"readings\": [\n        \"Sparse direct factorization in double precision.\",\n        \"Preconditioned conjugate gradients with relative residual tolerance 1e-8.\",\n        \"Preconditioned conjugate gradients with relative residual tolerance 1e-4.\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "In-plane design-domain dimensions and element aspect ratio",
+    "issue": "missing",
+    "description": "Sec. 4 specifies a 20 \u00d7 60 element grid, but gives no physical dimensions or statement that the cells are square.",
+    "readings": [
+     "Width L = 60 and height H = 20, with square cells.",
+     "Width L = 3 and height H = 1, with square cells.",
+     "Width L = 1 and height H = 1, with rectangular cells."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Assignment of the 20 \u00d7 60 element counts to physical axes",
+    "issue": "vague",
+    "description": "Sec. 4 does not explicitly identify which grid count is horizontal. Sec. 5.1's reference to the complete horizontal span does not provide that mapping.",
+    "readings": [
+     "60 elements horizontally and 20 vertically.",
+     "20 elements horizontally and 60 vertically."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "Uniform out-of-plane thickness",
+    "issue": "missing",
+    "description": "Secs. 2.1 and 4 do not specify a thickness or an explicit unit-thickness convention for the two-dimensional analysis.",
+    "readings": [
+     "Unit thickness in the chosen length units.",
+     "Uniform thickness of 0.1 length units."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "load_position",
+    "entity": "Loaded node on the right boundary",
+    "issue": "missing",
+    "description": "Sec. 4 describes a randomly selected admissible boundary node; Sec. 5.1 narrows this example to the right edge but supplies no vertical coordinate or node index.",
+    "readings": [
+     "Load at (L, H/4).",
+     "Load at (L, H/2).",
+     "Load at (L, 3H/4)."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Target volume fraction for the Fig. 5(c) reference",
+    "issue": "missing",
+    "description": "Sec. 4 gives only the sampling interval [0.3, 0.7]. Sec. 5.1 says the target is shared across rows without reporting its value. Appendix A.5's value of 0.5 belongs to its separate half-MBB control.",
+    "readings": [
+     "Target volume fraction 0.4.",
+     "Target volume fraction 0.5.",
+     "Target volume fraction 0.6."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Non-design cells and their treatment in the volume budget",
+    "issue": "missing",
+    "description": "Secs. 4 and 5.1 identify no passive solid or void masks and do not explicitly state that every grid cell is designable.",
+    "readings": [
+     "Every cell is designable; no passive regions.",
+     "Cells incident to the loaded node are fixed solid and count toward the total volume budget.",
+     "The leftmost cell column and cells incident to the loaded node are fixed solid and count toward the total volume budget.",
+     "Those support and load pads are fixed solid, with the target fraction enforced only over the remaining cells."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Solid Young's modulus E0",
+    "issue": "missing",
+    "description": "Sec. 2.1 introduces E0 symbolically but gives no numerical value or normalization.",
+    "readings": [
+     "E0 = 1 in normalized units, holding Emin/E0 fixed.",
+     "E0 = 210 GPa, holding Emin/E0 fixed."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson's ratio",
+    "issue": "missing",
+    "description": "The material description in Sec. 2.1 supplies no Poisson's ratio.",
+    "readings": [
+     "Poisson's ratio 0.25.",
+     "Poisson's ratio 0.30.",
+     "Poisson's ratio 0.35."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Near-void stiffness relative to solid stiffness",
+    "issue": "missing",
+    "description": "Eq. 2 defines Emin as a near-void Young's modulus without specifying Emin/E0.",
+    "readings": [
+     "Emin/E0 = 1e-9.",
+     "Emin/E0 = 1e-6.",
+     "Emin/E0 = 1e-3."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Two-dimensional elastic constitutive assumption",
+    "issue": "missing",
+    "description": "Secs. 2.1 and 4 do not identify a plane-stress or plane-strain formulation.",
+    "readings": [
+     "Plane stress.",
+     "Plane strain."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Finite-element displacement interpolation and integration",
+    "issue": "missing",
+    "description": "Sec. 4 specifies the element counts but not the element order, nodal arrangement, or quadrature. The Top88 designation in Appendix A.5 does not explicitly specify the main example's implementation.",
+    "readings": [
+     "Four-node bilinear quadrilaterals with 2 \u00d7 2 Gauss integration.",
+     "Eight-node quadratic quadrilaterals with 3 \u00d7 3 Gauss integration."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Actual clean initialization used for the SIMP reference",
+    "issue": "missing",
+    "description": "Sec. 4 describes randomized initialization, and Fig. 5(c) includes a shared init column, but the numerical field, initialization RNG seed, and realization index are absent. The reported seed 0 specifies the dataset split.",
+    "readings": [
+     "First noise realization from initialization seed 0, using a fixed noise-generation recipe.",
+     "First noise realization from initialization seed 1, using the same recipe.",
+     "Second noise realization from initialization seed 0, using the same recipe."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initialization-noise distribution and meaning of amplitude",
+    "issue": "vague",
+    "description": "Sec. 4 specifies Gaussian-smoothed random variation with amplitude 0.05, without defining the underlying distribution or whether amplitude is measured before or after smoothing.",
+    "readings": [
+     "Uniform noise in [-0.05, 0.05], followed by Gaussian smoothing.",
+     "Gaussian noise with standard deviation 0.05, followed by Gaussian smoothing.",
+     "Smoothed noise rescaled to standard deviation 0.05.",
+     "Smoothed noise rescaled to maximum absolute deviation 0.05."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Gaussian smoothing of the initialization noise",
+    "issue": "missing",
+    "description": "Sec. 4 gives no Gaussian width, kernel truncation, or boundary-extension rule.",
+    "readings": [
+     "Standard deviation 0.5 cell, 3 \u00d7 3 kernel, reflected boundaries.",
+     "Standard deviation 1 cell, 7 \u00d7 7 kernel, reflected boundaries.",
+     "Standard deviation 2 cells, 13 \u00d7 13 kernel, zero padding."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Compliance-sensitivity filter kernel",
+    "issue": "vague",
+    "description": "Sec. 2.1 specifies standard convolution filtering of sensitivities without stating the kernel weights.",
+    "readings": [
+     "Linearly decreasing distance weights: max(0, r - distance).",
+     "Uniform weights within radius r.",
+     "Gaussian weights truncated at radius r."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Sensitivity-filter radius and distance convention",
+    "issue": "missing",
+    "description": "Sec. 2.1 gives no filter radius, units, or distinction between distances in element-index space and physical coordinates.",
+    "readings": [
+     "Radius 1.5 using Euclidean distances between element indices.",
+     "Radius 3 using Euclidean distances between element indices.",
+     "Radius 0.1H using physical distances between element centers."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Sensitivity-filter density weighting and normalization",
+    "issue": "vague",
+    "description": "Sec. 2.1 does not define whether convolution acts directly on sensitivities or uses a density-weighted sensitivity-filter formula.",
+    "readings": [
+     "Normalized weighted average of the raw sensitivities.",
+     "Average rho_j times sensitivity_j, divided by max(rho_i, 0.001).",
+     "Average rho_j times sensitivity_j, divided by max(rho_i, 0.01)."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Sensitivity-filter treatment at domain boundaries",
+    "issue": "missing",
+    "description": "Sec. 2.1 does not specify how convolution neighborhoods crossing the domain boundary are extended or normalized.",
+    "readings": [
+     "Truncate to existing neighbors and renormalize their weights.",
+     "Zero-pad sensitivities and retain the full-kernel normalization.",
+     "Reflect sensitivities across domain boundaries."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Optimality-criteria update parameters",
+    "issue": "missing",
+    "description": "Sec. 2.1 names optimality-criteria updates but supplies no update exponent, move limit, or multiplier-search tolerance.",
+    "readings": [
+     "Multiplicative OC exponent 0.5, density move limit 0.2, relative multiplier-bisection tolerance 1e-3.",
+     "Multiplicative OC exponent 0.5, density move limit 0.1, relative multiplier-bisection tolerance 1e-6.",
+     "Multiplicative OC exponent 1, density move limit 0.05, relative multiplier-bisection tolerance 1e-6."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Reference-run stopping criterion and iteration limit",
+    "issue": "missing",
+    "description": "Secs. 2.1 and 5.1 describe a converged SIMP reference without giving convergence tolerances or an iteration cap. Appendix A.5's iteration counts concern its separate control.",
+    "readings": [
+     "Stop when maximum density change is below 0.01; cap at 100 iterations.",
+     "Stop when maximum density change is below 0.001; cap at 1000 iterations.",
+     "Stop after relative compliance change stays below 1e-4 for five iterations; cap at 1000 iterations."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Finite-element equilibrium solver and numerical accuracy",
+    "issue": "missing",
+    "description": "Sec. 2.1 states the equilibrium equation but does not identify the linear-system solution method or its tolerances.",
+    "readings": [
+     "Sparse direct factorization in double precision.",
+     "Preconditioned conjugate gradients with relative residual tolerance 1e-8.",
+     "Preconditioned conjugate gradients with relative residual tolerance 1e-4."
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 532.7286369800568,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L21",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 0,
+ "locator": "Sec. 5.1, Fig. 5(c), 'SIMP reference'",
+ "finished": "2026-10-22T18:29:21"
+}

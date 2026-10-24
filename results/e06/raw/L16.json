@@ -1,0 +1,43 @@
+{
+ "task": "L16",
+ "arxiv": "2504.14892",
+ "locator": "Sec. 4.1.1, Fig. 6",
+ "figures": [
+  "TIKZ_PDF_testcases.png"
+ ],
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"Fig. 6a: common length of the upper and lower clamped segments\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Both supports are centered on the horizontal edges, but their lengths are shown only by undimensioned bars.\",\n      \"readings\": [\n        \"Clamp both displacement components over a centered segment of length 0.10L on each edge.\",\n        \"Clamp both displacement components over a centered segment of length approximately 0.12L on each edge, following the drawn bar widths.\"\n      ],\n      \"effect\": \"layout\",\n      \"evidence\": \"Sec. 4.1.1 refers to the supports in Fig. 6a. Eq. (39) specifies u = 0 on Gamma_u, but neither the text nor Fig. 6a dimensions the support spans.\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Fig. 6a: common length of the two corner traction patches\",\n      \"issue\": \"figure_only\",\n      \"description\": \"The upward lower-left and downward upper-right tractions occupy short edge segments whose exact lengths are not dimensioned.\",\n      \"readings\": [\n        \"Apply uniform upward traction over the leftmost 0.10L of the bottom edge and uniform downward traction over the rightmost 0.10L of the top edge.\",\n        \"Apply the same tractions over corner segments of length 0.12L, treating the arrow footprints as schematic.\"\n      ],\n      \"effect\": \"layout\",\n      \"evidence\": \"Fig. 6a shows three arrows at each loaded corner without patch dimensions. Sec. 4.1 specifies |t| = 1000 N/m and L = 1 m, but supplies no exact endpoints for Gamma_t.\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "support_location_extent",
+    "entity": "Fig. 6a: common length of the upper and lower clamped segments",
+    "issue": "figure_only",
+    "description": "Both supports are centered on the horizontal edges, but their lengths are shown only by undimensioned bars.",
+    "readings": [
+     "Clamp both displacement components over a centered segment of length 0.10L on each edge.",
+     "Clamp both displacement components over a centered segment of length approximately 0.12L on each edge, following the drawn bar widths."
+    ],
+    "effect": "layout",
+    "evidence": "Sec. 4.1.1 refers to the supports in Fig. 6a. Eq. (39) specifies u = 0 on Gamma_u, but neither the text nor Fig. 6a dimensions the support spans."
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Fig. 6a: common length of the two corner traction patches",
+    "issue": "figure_only",
+    "description": "The upward lower-left and downward upper-right tractions occupy short edge segments whose exact lengths are not dimensioned.",
+    "readings": [
+     "Apply uniform upward traction over the leftmost 0.10L of the bottom edge and uniform downward traction over the rightmost 0.10L of the top edge.",
+     "Apply the same tractions over corner segments of length 0.12L, treating the arrow footprints as schematic."
+    ],
+    "effect": "layout",
+    "evidence": "Fig. 6a shows three arrows at each loaded corner without patch dimensions. Sec. 4.1 specifies |t| = 1000 N/m and L = 1 m, but supplies no exact endpoints for Gamma_t."
+   }
+  ]
+ },
+ "wall_s": 100.3271803855896,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "Reading prompt from stdin...\n",
+ "model_id": "gpt-6.1-sol",
+ "finished": "2026-10-22T18:11:32"
+}

@@ -1,0 +1,242 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"Point force at the midpoint of the right edge\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 specifies the application point but gives no force direction. The downward force in Sec. 4.2 belongs to a different example.\",\n      \"readings\": [\n        \"Vertical downward\",\n        \"Horizontal rightward\",\n        \"Oblique, 45 degrees downward from the positive x-axis\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"Point force at the midpoint of the right edge\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Sec. 4.1 nor the Fig. 7 caption supplies a dimensionless force magnitude.\",\n      \"readings\": [\n        \"Force magnitude 1\",\n        \"Force magnitude 2\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Two-dimensional elastic constitutive model\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 fixes E=1 and Poisson's ratio=0.3 but does not specify the two-dimensional constitutive assumption.\",\n      \"readings\": [\n        \"Plane stress\",\n        \"Plane strain\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Uniform out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"The 150 by 60 in-plane domain is specified in Sec. 4.1, but its thickness or equivalent depth normalization is not.\",\n      \"readings\": [\n        \"Uniform thickness 1 with a total resultant point force\",\n        \"Uniform thickness 2 with the same total resultant point force\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Solid attachment regions at the clamp and load\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 does not explicitly state whether cells adjoining the support or loaded node are protected as solid. Its explicit passive-void treatment concerns only the separate circular-hole model.\",\n      \"readings\": [\n        \"All rectangular-domain cells remain designable\",\n        \"Fix the entire leftmost element column as solid\",\n        \"Fix the two elements adjoining the right-edge midpoint node as solid\",\n        \"Fix both the leftmost column and the two load-adjacent elements as solid\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"Square finite-element formulation\",\n      \"issue\": \"missing\",\n      \"description\": \"The square-cell description and Table 3's 9000 elements determine the 150 by 60 grid, but not the interpolation order or integration rule defining the element stiffness matrix.\",\n      \"readings\": [\n        \"Four-node bilinear quadrilaterals with full 2 by 2 Gauss integration\",\n        \"Four-node bilinear quadrilaterals with stabilized one-point integration\",\n        \"Eight-node quadratic quadrilaterals with 3 by 3 Gauss integration\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Minimum numerical density and void stiffness\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. (4) gives only 0<rho<=1 and K_e=rho_e^3 K_e^0. It supplies no positive numerical density floor or treatment of the exact zeros described during binarization and removal.\",\n      \"readings\": [\n        \"Use rho_min=0.001, giving minimum relative stiffness 10^-9\",\n        \"Use rho_min=0.000001, giving minimum relative stiffness 10^-18\",\n        \"Permit exact physical zeros and remove inactive elements and unconstrained inactive degrees of freedom from the analysis\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Thickness-control density filter\",\n      \"issue\": \"vague\",\n      \"description\": \"Fig. 7 explicitly specifies 1.5, and Fig. 11(a) labels this r_min. Sec. 4.1.2 identifies a density filter but gives neither its weights nor a mathematical relationship to actual minimum member thickness.\",\n      \"readings\": [\n        \"Normalized cone weights max(0,1.5-d), where d is cell-center distance\",\n        \"Uniform averaging over cell centers with d<1.5\",\n        \"Normalized Gaussian weights with standard deviation 0.75, truncated at d=1.5\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Thickness-filter boundary treatment\",\n      \"issue\": \"missing\",\n      \"description\": \"The thickness filter's treatment of domain boundaries is unspecified. Sec. 3.2's explicit void padding applies to unsupported-element detection.\",\n      \"readings\": [\n        \"Clip the filter neighborhood to the rectangle and renormalize its weights\",\n        \"Pad outside the rectangle with zero density and retain the full-neighborhood normalization\",\n        \"Reflect interior densities across the rectangle boundaries\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Density fields used in stiffness, volume, and self-support calculations\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 2.3, 3.1 and 4.1.2 introduce density filtering and projection without specifying how raw, filtered and projected densities enter each term of Eq. (4).\",\n      \"readings\": [\n        \"Use filtered and projected physical densities in stiffness, volume, support detection and U\",\n        \"Use filtered densities in stiffness and volume, with projected densities in support detection and U\",\n        \"Use projected densities in stiffness, support detection and U, but raw design densities for the volume constraint\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Heaviside projection function and parameters\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 2.3 and 4.1.1 name a Heaviside projection but provide no equation, threshold or sharpness values.\",\n      \"readings\": [\n        \"Smooth tanh projection with threshold 0.5 and sharpness beta=8\",\n        \"Smooth tanh projection with threshold 0.5 and sharpness beta=64\",\n        \"Smooth tanh projection with threshold 0.4 and sharpness beta=64\",\n        \"Hard threshold at density 0.5 during binarization\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Projection continuation after the binarization stage\",\n      \"issue\": \"missing\",\n      \"description\": \"Fig. 9(c) places the black-white stage at iteration 45, but the text does not specify subsequent projection frequency or sharpness continuation.\",\n      \"readings\": [\n        \"Apply projection every iteration from iteration 45 with fixed sharpness\",\n        \"Apply projection every iteration from iteration 45 and double sharpness every 10 iterations\",\n        \"Apply projection every iteration and increase sharpness after five iterations with relative compliance change below 0.001\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initial density distribution for the preliminary unconstrained optimization\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.3 uses the preliminary optimized structure to initialize the self-supporting run, but does not specify the starting densities for that preliminary solve.\",\n      \"readings\": [\n        \"Uniform density 0.6\",\n        \"Uniform density 1\",\n        \"Alternating initial cell densities 0.59 and 0.61\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"MMA update parameters\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.3 specifies MMA but omits move limits and asymptote initialization and update constants.\",\n      \"readings\": [\n        \"Move limit 0.2; initial asymptote half-width 0.5; expansion factor 1.2; contraction factor 0.7\",\n        \"Move limit 0.05; initial asymptote half-width 0.1; expansion factor 1.05; contraction factor 0.8\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Final optimization stopping criterion\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 says to iterate until convergence. Fig. 9 ends at iteration 166, but no final numerical stopping rule or iteration cap is supplied.\",\n      \"readings\": [\n        \"After constraint feasibility, stop when maximum density change is below 0.001\",\n        \"After constraint feasibility, stop when relative compliance change is below 0.00001 for ten consecutive iterations\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Support-detection cutoff for continuous densities\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.2 explicitly says a specific value usually replaces zero in the sign test for continuous densities, but does not give that value.\",\n      \"readings\": [\n        \"Declare support when the supporting-density sum is strictly positive\",\n        \"Declare support when the supporting-density sum exceeds 0.001\",\n        \"Declare support when the supporting-density sum exceeds 0.5\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Final self-supporting tolerance epsilon_0\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 2.2 and 2.3 require a small final tolerance for U=sum(rho_e^2) over unsupported elements, but provide no numerical epsilon_0.\",\n      \"readings\": [\n        \"epsilon_0=10^-3\",\n        \"epsilon_0=10^-6\",\n        \"epsilon_0=10^-9\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Relaxation schedule for the self-supporting constraint\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2.3 says epsilon decreases from a relatively large value to epsilon_0, without specifying its initial value or decay law.\",\n      \"readings\": [\n        \"Start at epsilon=100 and multiply by 0.95 each iteration until epsilon_0\",\n        \"Start at epsilon=1000 and decrease linearly to epsilon_0 over 100 self-supporting iterations\",\n        \"Start at epsilon=100 and halve it every ten iterations until epsilon_0\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Final removal of unsupported elements\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2.3 removes residual unsupported elements when their count stops decreasing, but gives no plateau duration, deletion order, cascade rule or reoptimization policy.\",\n      \"readings\": [\n        \"After a five-iteration plateau, delete all currently unsupported elements together; repeat detection and deletion until none remain, without reoptimization\",\n        \"After a ten-iteration plateau, delete unsupported elements one at a time, updating support detection after each deletion\",\n        \"After a five-iteration plateau, delete unsupported elements, reoptimize under the remaining constraints, and repeat until none remain\"\n      ],\n      \"effect\": \"layout\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "load_direction",
+    "entity": "Point force at the midpoint of the right edge",
+    "issue": "missing",
+    "description": "Sec. 4.1 specifies the application point but gives no force direction. The downward force in Sec. 4.2 belongs to a different example.",
+    "readings": [
+     "Vertical downward",
+     "Horizontal rightward",
+     "Oblique, 45 degrees downward from the positive x-axis"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Point force at the midpoint of the right edge",
+    "issue": "missing",
+    "description": "Neither Sec. 4.1 nor the Fig. 7 caption supplies a dimensionless force magnitude.",
+    "readings": [
+     "Force magnitude 1",
+     "Force magnitude 2"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Two-dimensional elastic constitutive model",
+    "issue": "missing",
+    "description": "Sec. 4 fixes E=1 and Poisson's ratio=0.3 but does not specify the two-dimensional constitutive assumption.",
+    "readings": [
+     "Plane stress",
+     "Plane strain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "Uniform out-of-plane thickness",
+    "issue": "missing",
+    "description": "The 150 by 60 in-plane domain is specified in Sec. 4.1, but its thickness or equivalent depth normalization is not.",
+    "readings": [
+     "Uniform thickness 1 with a total resultant point force",
+     "Uniform thickness 2 with the same total resultant point force"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Solid attachment regions at the clamp and load",
+    "issue": "missing",
+    "description": "Sec. 4.1 does not explicitly state whether cells adjoining the support or loaded node are protected as solid. Its explicit passive-void treatment concerns only the separate circular-hole model.",
+    "readings": [
+     "All rectangular-domain cells remain designable",
+     "Fix the entire leftmost element column as solid",
+     "Fix the two elements adjoining the right-edge midpoint node as solid",
+     "Fix both the leftmost column and the two load-adjacent elements as solid"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "Square finite-element formulation",
+    "issue": "missing",
+    "description": "The square-cell description and Table 3's 9000 elements determine the 150 by 60 grid, but not the interpolation order or integration rule defining the element stiffness matrix.",
+    "readings": [
+     "Four-node bilinear quadrilaterals with full 2 by 2 Gauss integration",
+     "Four-node bilinear quadrilaterals with stabilized one-point integration",
+     "Eight-node quadratic quadrilaterals with 3 by 3 Gauss integration"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Minimum numerical density and void stiffness",
+    "issue": "missing",
+    "description": "Eq. (4) gives only 0<rho<=1 and K_e=rho_e^3 K_e^0. It supplies no positive numerical density floor or treatment of the exact zeros described during binarization and removal.",
+    "readings": [
+     "Use rho_min=0.001, giving minimum relative stiffness 10^-9",
+     "Use rho_min=0.000001, giving minimum relative stiffness 10^-18",
+     "Permit exact physical zeros and remove inactive elements and unconstrained inactive degrees of freedom from the analysis"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Thickness-control density filter",
+    "issue": "vague",
+    "description": "Fig. 7 explicitly specifies 1.5, and Fig. 11(a) labels this r_min. Sec. 4.1.2 identifies a density filter but gives neither its weights nor a mathematical relationship to actual minimum member thickness.",
+    "readings": [
+     "Normalized cone weights max(0,1.5-d), where d is cell-center distance",
+     "Uniform averaging over cell centers with d<1.5",
+     "Normalized Gaussian weights with standard deviation 0.75, truncated at d=1.5"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Thickness-filter boundary treatment",
+    "issue": "missing",
+    "description": "The thickness filter's treatment of domain boundaries is unspecified. Sec. 3.2's explicit void padding applies to unsupported-element detection.",
+    "readings": [
+     "Clip the filter neighborhood to the rectangle and renormalize its weights",
+     "Pad outside the rectangle with zero density and retain the full-neighborhood normalization",
+     "Reflect interior densities across the rectangle boundaries"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Density fields used in stiffness, volume, and self-support calculations",
+    "issue": "missing",
+    "description": "Secs. 2.3, 3.1 and 4.1.2 introduce density filtering and projection without specifying how raw, filtered and projected densities enter each term of Eq. (4).",
+    "readings": [
+     "Use filtered and projected physical densities in stiffness, volume, support detection and U",
+     "Use filtered densities in stiffness and volume, with projected densities in support detection and U",
+     "Use projected densities in stiffness, support detection and U, but raw design densities for the volume constraint"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Heaviside projection function and parameters",
+    "issue": "missing",
+    "description": "Secs. 2.3 and 4.1.1 name a Heaviside projection but provide no equation, threshold or sharpness values.",
+    "readings": [
+     "Smooth tanh projection with threshold 0.5 and sharpness beta=8",
+     "Smooth tanh projection with threshold 0.5 and sharpness beta=64",
+     "Smooth tanh projection with threshold 0.4 and sharpness beta=64",
+     "Hard threshold at density 0.5 during binarization"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Projection continuation after the binarization stage",
+    "issue": "missing",
+    "description": "Fig. 9(c) places the black-white stage at iteration 45, but the text does not specify subsequent projection frequency or sharpness continuation.",
+    "readings": [
+     "Apply projection every iteration from iteration 45 with fixed sharpness",
+     "Apply projection every iteration from iteration 45 and double sharpness every 10 iterations",
+     "Apply projection every iteration and increase sharpness after five iterations with relative compliance change below 0.001"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial density distribution for the preliminary unconstrained optimization",
+    "issue": "missing",
+    "description": "Sec. 2.3 uses the preliminary optimized structure to initialize the self-supporting run, but does not specify the starting densities for that preliminary solve.",
+    "readings": [
+     "Uniform density 0.6",
+     "Uniform density 1",
+     "Alternating initial cell densities 0.59 and 0.61"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "MMA update parameters",
+    "issue": "missing",
+    "description": "Sec. 2.3 specifies MMA but omits move limits and asymptote initialization and update constants.",
+    "readings": [
+     "Move limit 0.2; initial asymptote half-width 0.5; expansion factor 1.2; contraction factor 0.7",
+     "Move limit 0.05; initial asymptote half-width 0.1; expansion factor 1.05; contraction factor 0.8"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Final optimization stopping criterion",
+    "issue": "missing",
+    "description": "Sec. 4.1 says to iterate until convergence. Fig. 9 ends at iteration 166, but no final numerical stopping rule or iteration cap is supplied.",
+    "readings": [
+     "After constraint feasibility, stop when maximum density change is below 0.001",
+     "After constraint feasibility, stop when relative compliance change is below 0.00001 for ten consecutive iterations"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Support-detection cutoff for continuous densities",
+    "issue": "missing",
+    "description": "Sec. 3.2 explicitly says a specific value usually replaces zero in the sign test for continuous densities, but does not give that value.",
+    "readings": [
+     "Declare support when the supporting-density sum is strictly positive",
+     "Declare support when the supporting-density sum exceeds 0.001",
+     "Declare support when the supporting-density sum exceeds 0.5"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Final self-supporting tolerance epsilon_0",
+    "issue": "missing",
+    "description": "Secs. 2.2 and 2.3 require a small final tolerance for U=sum(rho_e^2) over unsupported elements, but provide no numerical epsilon_0.",
+    "readings": [
+     "epsilon_0=10^-3",
+     "epsilon_0=10^-6",
+     "epsilon_0=10^-9"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Relaxation schedule for the self-supporting constraint",
+    "issue": "vague",
+    "description": "Sec. 2.3 says epsilon decreases from a relatively large value to epsilon_0, without specifying its initial value or decay law.",
+    "readings": [
+     "Start at epsilon=100 and multiply by 0.95 each iteration until epsilon_0",
+     "Start at epsilon=1000 and decrease linearly to epsilon_0 over 100 self-supporting iterations",
+     "Start at epsilon=100 and halve it every ten iterations until epsilon_0"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Final removal of unsupported elements",
+    "issue": "vague",
+    "description": "Sec. 2.3 removes residual unsupported elements when their count stops decreasing, but gives no plateau duration, deletion order, cascade rule or reoptimization policy.",
+    "readings": [
+     "After a five-iteration plateau, delete all currently unsupported elements together; repeat detection and deletion until none remain, without reoptimization",
+     "After a ten-iteration plateau, delete unsupported elements one at a time, updating support detection after each deletion",
+     "After a five-iteration plateau, delete unsupported elements, reoptimize under the remaining constraints, and repeat until none remain"
+    ],
+    "effect": "layout"
+   }
+  ]
+ },
+ "wall_s": 860.7467849254608,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L05",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 1,
+ "locator": "Sec. 4.1, Fig. 7, the rectangular cantilever",
+ "finished": "2026-10-22T19:52:20"
+}

@@ -1,0 +1,128 @@
+{
+ "task": "L33",
+ "source": {
+  "arxiv": "2604.03276",
+  "position": 146,
+  "note": "borderline eligible: supplementary FEM baseline"
+ },
+ "dim": 3,
+ "slots": {
+  "load": [
+   "node",
+   "patch"
+  ],
+  "sup": [
+   "patches",
+   "nodes"
+  ]
+ },
+ "nominal": {
+  "load": "node",
+  "sup": "patches"
+ },
+ "mandatory": [],
+ "reasons": {
+  "load": "'center of the top surface'; single node vs patch not stated (Suppl. Note A.14)",
+  "sup": "clamped base corners: ~1/5-width patches (S17) or four corner nodes (adjudicator B)"
+ },
+ "recon": [
+  "40x40x100 in source; 16x40x16",
+  "force reading only: the prescribed-displacement reading is not representable in the force-loaded compliance solver",
+  "rmin 1.5 (2.549 at source resolution)",
+  "vf 20.25% on the designable region; the source's passive share is 1.96% of the box"
+ ],
+ "keys": [
+  "load=node|sup=patches",
+  "load=node|sup=nodes",
+  "load=patch|sup=patches",
+  "load=patch|sup=nodes"
+ ],
+ "C": [
+  [
+   1.320212238949038,
+   3.1297235747077385,
+   3.7435188918938644,
+   5.553052935540434
+  ],
+  [
+   1.4491739225026552,
+   2.807198089158603,
+   3.8560142276835867,
+   5.2140433553302765
+  ],
+  [
+   1.3257219663590916,
+   3.1571004335022455,
+   0.9844859585054251,
+   2.815857089708535
+  ],
+  [
+   1.4651127880419692,
+   2.8118398118971655,
+   1.1237150600581132,
+   2.4704421114281483
+  ]
+ ],
+ "ref": {
+  "load=node|sup=patches": 1.320212238949038,
+  "load=node|sup=nodes": 2.807198089158603,
+  "load=patch|sup=patches": 0.9844859585054251,
+  "load=patch|sup=nodes": 2.4704421114281483
+ },
+ "ref_gap_beaten": {
+  "load=node|sup=patches": 3.1086244689504383e-15,
+  "load=node|sup=nodes": 4.3076653355456074e-14,
+  "load=patch|sup=patches": 1.1102230246251565e-14,
+  "load=patch|sup=nodes": 6.350475700855895e-14
+ },
+ "noise": {
+  "load=node|sup=patches": 0.003009458914533382,
+  "load=node|sup=nodes": 6.311191968671994e-05,
+  "load=patch|sup=patches": 0.005918572841168414,
+  "load=patch|sup=nodes": 0.0022468173422563616
+ },
+ "meta": {
+  "load=node|sup=patches": {
+   "accepted": true,
+   "kkt": 0.1844484155745681,
+   "wall_s": 549.0335047999397,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "load=node|sup=nodes": {
+   "accepted": true,
+   "kkt": 0.10323672474343377,
+   "wall_s": 542.4127663999097,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "load=patch|sup=patches": {
+   "accepted": true,
+   "kkt": 0.5018071854163855,
+   "wall_s": 463.45467929996084,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "load=patch|sup=nodes": {
+   "accepted": true,
+   "kkt": 0.1667602162282968,
+   "wall_s": 520.3238290000008,
+   "n_iter": [
+    201,
+    201
+   ]
+  }
+ },
+ "counter": {
+  "optimizations": 0,
+  "factorizations": 8,
+  "backsubs": 16,
+  "opt_wall_s": 0.0
+ }
+}

@@ -1,0 +1,304 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Physical side length of the square domain\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 specifies a square with 36\u00d736 uniform cells, but gives no physical side length or pixel spacing.\",\n      \"readings\": [\n        \"Side length L=1 m; cell spacing h=L/36\",\n        \"Side length L=36 mm; cell spacing h=1 mm\",\n        \"Dimensionless unit square; cell spacing h=1/36\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"Out-of-plane thickness or reference depth\",\n      \"issue\": \"missing\",\n      \"description\": \"The examples are two-dimensional, but no plate thickness or per-unit-depth convention is stated.\",\n      \"readings\": [\n        \"Uniform thickness t=1 mm\",\n        \"Uniform thickness t=10 mm\",\n        \"Unit-thickness model with compliance reported per reference depth\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"Vertical position of the load in Fig. 7(a)\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.3 and the Fig. 7 caption specify only that the two designs share a loading condition. No load index or height is assigned to Fig. 7(a). Sec. 4.1 assigns index 8 specifically to Fig. 9.\",\n      \"readings\": [\n        \"Load index 1\",\n        \"Load index 2\",\n        \"Load index 3\",\n        \"Load index 4\",\n        \"Load index 5\",\n        \"Load index 6\",\n        \"Load index 7\",\n        \"Load index 8\",\n        \"Load index 9\",\n        \"Load index 10\",\n        \"Load index 11\",\n        \"Load index 12\",\n        \"Load index 13\",\n        \"Load index 14\",\n        \"Load index 15\",\n        \"Load index 16\",\n        \"Load index 17\",\n        \"Load index 18\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"Physical interpretation and nodal assembly of the distributed load\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2.1 describes loading along the right edge; Sec. 4.1 specifies a uniform force on a 2\u00d72-element area next to that edge. The equivalent FE force vector and the relationship between edge loading and the area representation are not defined.\",\n      \"readings\": [\n        \"Uniform area load integrated over the four cells using their FE shape functions\",\n        \"Equal vertical nodal forces at the nine Q4 nodes incident on the four loaded cells\",\n        \"Uniform traction on the two outer right-edge segments, with the 2\u00d72 patch serving as the load-image representation\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"Magnitude and normalization of the applied force\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 says the magnitude is fixed, but neither it nor Sec. 4.1 supplies a numerical magnitude, units, or total-versus-per-cell convention.\",\n      \"readings\": [\n        \"Total downward resultant F=1 N\",\n        \"Total downward resultant F=100 N\",\n        \"Downward force of 1 N per loaded cell, giving a total resultant of 4 N\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"Non-design material at the load and support attachments\",\n      \"issue\": \"missing\",\n      \"description\": \"No passive solid or void mask is specified for Fig. 7(a), including whether loaded cells or an attachment strip must remain solid.\",\n      \"readings\": [\n        \"All cells are designable; supports constrain displacement DOFs only\",\n        \"The 2\u00d72 loaded patch is passive solid\",\n        \"The loaded patch and the leftmost one-cell-wide attachment strip are passive solid\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Two-dimensional constitutive assumption\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 gives aluminum elastic constants, and the summary calls the examples two-dimensional linear problems, but plane stress versus plane strain is not specified.\",\n      \"readings\": [\n        \"Isotropic plane stress\",\n        \"Isotropic plane strain\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Units or normalization of the solid Young's modulus\",\n      \"issue\": \"vague\",\n      \"description\": \"The supplied text in Sec. 4.1 reports E0=69, but its unit is absent. The aluminum label does not specify the solver's unit convention.\",\n      \"readings\": [\n        \"E0=69 GPa in a dimensional model\",\n        \"E0=69 in a consistent normalized unit system\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Residual stiffness of void cells\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2 and Eq. (1) introduce a small void modulus to prevent singular stiffness matrices, without specifying its value or ratio to E0.\",\n      \"readings\": [\n        \"Emin/E0=1e-3\",\n        \"Emin/E0=1e-6\",\n        \"Emin/E0=1e-9\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"SIMP penalization exponent\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2 says p>1 and usually p=3; it does not explicitly select p for Fig. 7(a) or specify continuation.\",\n      \"readings\": [\n        \"Fixed p=3\",\n        \"Fixed p=2\",\n        \"Fixed p=4\",\n        \"Continue p from 2 to 3 during optimization\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Sensitivity-filter weights and density regularization\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2 fixes the radius at four pixels and cites a sensitivity-filtering technique, but does not print its kernel, density weighting, normalization, or treatment of zero densities.\",\n      \"readings\": [\n        \"Euclidean conical weights max(0,4-d), density-weighted sensitivities, denominator density floored at 1e-3\",\n        \"The same conical density-weighted filter with denominator density floored at 1e-6\",\n        \"Uniform weights within a four-pixel Euclidean disk, with density-weighted normalization\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Sensitivity-filter treatment at domain boundaries\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2 does not define how a four-pixel filter neighborhood is handled where it extends outside the square.\",\n      \"readings\": [\n        \"Truncate to cells inside the domain and renormalize their weights\",\n        \"Pad outside sensitivities with zero while retaining the full-stencil normalization\",\n        \"Reflect the density and sensitivity fields across the boundary\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Gradient terms subjected to sensitivity filtering\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2 discusses filtered sensitivities, while Eq. (6) contains both compliance and volume-penalty derivatives. It does not identify which terms are filtered.\",\n      \"readings\": [\n        \"Filter only the compliance derivative, then add the volume-penalty derivative\",\n        \"Filter the complete derivative of the penalized objective in Eq. (6)\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Density-projection function\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2 references a projection scheme and specifies its threshold and initial sharpness, but does not provide the projection map.\",\n      \"readings\": [\n        \"Normalized hyperbolic-tangent projection with threshold 0.5\",\n        \"Thresholded exponential Heaviside projection with threshold 0.5\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Projection-sharpness continuation\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2 specifies initial beta=1 and says it increases gradually, without an increment rule, trigger, interval, or final value.\",\n      \"readings\": [\n        \"Double beta every 25 iterations through 1,2,4,8,16\",\n        \"Double beta every 50 iterations through 1,2,4,8,16,32,64\",\n        \"Double beta after convergence at each level, stopping at beta=8\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Projection placement and differentiation in the density update\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2 does not distinguish persistent optimization variables from projected physical densities or explain how projection derivatives interact with sensitivity filtering.\",\n      \"readings\": [\n        \"Keep raw variables, project them for FE analysis, differentiate through the projection, then filter the resulting sensitivities\",\n        \"Filter sensitivities with respect to projected density before applying the projection derivative\",\n        \"Project and overwrite the density after each gradient update, then use that density directly in the next SIMP analysis\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Density field used to enforce the stated 0.3 volume fraction\",\n      \"issue\": \"vague\",\n      \"description\": \"The Fig. 7(a) target is explicitly 0.3, but Sec. 2 introduces projection without distinguishing the density fields in the volume constraint and stiffness interpolation.\",\n      \"readings\": [\n        \"Mean unprojected optimization density equals 0.3\",\n        \"Mean projected physical density equals 0.3\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Volume-penalty coefficient and its update\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1, Eqs. (5)-(6), introduces a multiplier for the volume-penalty term without its value, scaling relative to compliance, or update rule.\",\n      \"readings\": [\n        \"Normalize compliance and use a fixed quadratic-penalty coefficient of 1\",\n        \"Normalize compliance and use a fixed quadratic-penalty coefficient of 100\",\n        \"Start the normalized penalty coefficient at 1 and multiply it by 10 until the volume residual is below 1e-3\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Initial density distribution\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Sec. 2 nor Sec. 3.3 supplies the initial density field for the conventional optimization producing Fig. 7(a).\",\n      \"readings\": [\n        \"Uniform density 0.3\",\n        \"Uniform density 0.5\",\n        \"Density 0.3 with small random perturbations, rescaled to mean 0.3\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Gradient-descent step and bound enforcement\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2 identifies gradient descent but gives no step-size rule, gradient normalization, move limit, or procedure for enforcing density bounds.\",\n      \"readings\": [\n        \"Backtracking line search followed by projection onto the density bounds\",\n        \"Maximum-absolute-gradient normalization, fixed step 0.01, and clipping to [0,1]\",\n        \"Maximum-absolute-gradient normalization, fixed step 0.1, and a per-iteration density move limit of 0.1\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Optimization termination and volume tolerance\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2 says to iterate until convergence. Sec. 4.1 reports an average of 150 iterations, which does not specify the stopping rule or iteration count for Fig. 7(a).\",\n      \"readings\": [\n        \"Stop when maximum density change is below 0.01 and volume error is below 1e-3\",\n        \"Stop when relative compliance change is below 1e-4 for ten iterations and volume error is below 1e-4\",\n        \"Stop after 150 iterations\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"FE interpolation and integration on the structured grid\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4.1 specifies 36\u00d736 uniform elements/pixels but not displacement interpolation, element order, quadrature, or reduced-integration stabilization.\",\n      \"readings\": [\n        \"Four-node bilinear quadrilaterals with 2\u00d72 Gauss integration\",\n        \"Four-node bilinear quadrilaterals with one-point integration and hourglass stabilization\",\n        \"Eight-node serendipity quadrilaterals with 3\u00d73 Gauss integration\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"FE equilibrium-solve accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"The text identifies FEM equilibrium analyses but gives no linear-system solution method or residual tolerance.\",\n      \"readings\": [\n        \"Double-precision sparse direct solution\",\n        \"Preconditioned conjugate gradient with relative residual tolerance 1e-8\",\n        \"Preconditioned conjugate gradient with relative residual tolerance 1e-6\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "Physical side length of the square domain",
+    "issue": "missing",
+    "description": "Sec. 4.1 specifies a square with 36\u00d736 uniform cells, but gives no physical side length or pixel spacing.",
+    "readings": [
+     "Side length L=1 m; cell spacing h=L/36",
+     "Side length L=36 mm; cell spacing h=1 mm",
+     "Dimensionless unit square; cell spacing h=1/36"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "Out-of-plane thickness or reference depth",
+    "issue": "missing",
+    "description": "The examples are two-dimensional, but no plate thickness or per-unit-depth convention is stated.",
+    "readings": [
+     "Uniform thickness t=1 mm",
+     "Uniform thickness t=10 mm",
+     "Unit-thickness model with compliance reported per reference depth"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "load_position",
+    "entity": "Vertical position of the load in Fig. 7(a)",
+    "issue": "missing",
+    "description": "Sec. 3.3 and the Fig. 7 caption specify only that the two designs share a loading condition. No load index or height is assigned to Fig. 7(a). Sec. 4.1 assigns index 8 specifically to Fig. 9.",
+    "readings": [
+     "Load index 1",
+     "Load index 2",
+     "Load index 3",
+     "Load index 4",
+     "Load index 5",
+     "Load index 6",
+     "Load index 7",
+     "Load index 8",
+     "Load index 9",
+     "Load index 10",
+     "Load index 11",
+     "Load index 12",
+     "Load index 13",
+     "Load index 14",
+     "Load index 15",
+     "Load index 16",
+     "Load index 17",
+     "Load index 18"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "Physical interpretation and nodal assembly of the distributed load",
+    "issue": "vague",
+    "description": "Sec. 2.1 describes loading along the right edge; Sec. 4.1 specifies a uniform force on a 2\u00d72-element area next to that edge. The equivalent FE force vector and the relationship between edge loading and the area representation are not defined.",
+    "readings": [
+     "Uniform area load integrated over the four cells using their FE shape functions",
+     "Equal vertical nodal forces at the nine Q4 nodes incident on the four loaded cells",
+     "Uniform traction on the two outer right-edge segments, with the 2\u00d72 patch serving as the load-image representation"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "Magnitude and normalization of the applied force",
+    "issue": "missing",
+    "description": "Sec. 2.1 says the magnitude is fixed, but neither it nor Sec. 4.1 supplies a numerical magnitude, units, or total-versus-per-cell convention.",
+    "readings": [
+     "Total downward resultant F=1 N",
+     "Total downward resultant F=100 N",
+     "Downward force of 1 N per loaded cell, giving a total resultant of 4 N"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "Non-design material at the load and support attachments",
+    "issue": "missing",
+    "description": "No passive solid or void mask is specified for Fig. 7(a), including whether loaded cells or an attachment strip must remain solid.",
+    "readings": [
+     "All cells are designable; supports constrain displacement DOFs only",
+     "The 2\u00d72 loaded patch is passive solid",
+     "The loaded patch and the leftmost one-cell-wide attachment strip are passive solid"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Two-dimensional constitutive assumption",
+    "issue": "missing",
+    "description": "Sec. 4.1 gives aluminum elastic constants, and the summary calls the examples two-dimensional linear problems, but plane stress versus plane strain is not specified.",
+    "readings": [
+     "Isotropic plane stress",
+     "Isotropic plane strain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Units or normalization of the solid Young's modulus",
+    "issue": "vague",
+    "description": "The supplied text in Sec. 4.1 reports E0=69, but its unit is absent. The aluminum label does not specify the solver's unit convention.",
+    "readings": [
+     "E0=69 GPa in a dimensional model",
+     "E0=69 in a consistent normalized unit system"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Residual stiffness of void cells",
+    "issue": "missing",
+    "description": "Sec. 2 and Eq. (1) introduce a small void modulus to prevent singular stiffness matrices, without specifying its value or ratio to E0.",
+    "readings": [
+     "Emin/E0=1e-3",
+     "Emin/E0=1e-6",
+     "Emin/E0=1e-9"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "SIMP penalization exponent",
+    "issue": "vague",
+    "description": "Sec. 2 says p>1 and usually p=3; it does not explicitly select p for Fig. 7(a) or specify continuation.",
+    "readings": [
+     "Fixed p=3",
+     "Fixed p=2",
+     "Fixed p=4",
+     "Continue p from 2 to 3 during optimization"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Sensitivity-filter weights and density regularization",
+    "issue": "vague",
+    "description": "Sec. 2 fixes the radius at four pixels and cites a sensitivity-filtering technique, but does not print its kernel, density weighting, normalization, or treatment of zero densities.",
+    "readings": [
+     "Euclidean conical weights max(0,4-d), density-weighted sensitivities, denominator density floored at 1e-3",
+     "The same conical density-weighted filter with denominator density floored at 1e-6",
+     "Uniform weights within a four-pixel Euclidean disk, with density-weighted normalization"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Sensitivity-filter treatment at domain boundaries",
+    "issue": "missing",
+    "description": "Sec. 2 does not define how a four-pixel filter neighborhood is handled where it extends outside the square.",
+    "readings": [
+     "Truncate to cells inside the domain and renormalize their weights",
+     "Pad outside sensitivities with zero while retaining the full-stencil normalization",
+     "Reflect the density and sensitivity fields across the boundary"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Gradient terms subjected to sensitivity filtering",
+    "issue": "missing",
+    "description": "Sec. 2 discusses filtered sensitivities, while Eq. (6) contains both compliance and volume-penalty derivatives. It does not identify which terms are filtered.",
+    "readings": [
+     "Filter only the compliance derivative, then add the volume-penalty derivative",
+     "Filter the complete derivative of the penalized objective in Eq. (6)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Density-projection function",
+    "issue": "vague",
+    "description": "Sec. 2 references a projection scheme and specifies its threshold and initial sharpness, but does not provide the projection map.",
+    "readings": [
+     "Normalized hyperbolic-tangent projection with threshold 0.5",
+     "Thresholded exponential Heaviside projection with threshold 0.5"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Projection-sharpness continuation",
+    "issue": "vague",
+    "description": "Sec. 2 specifies initial beta=1 and says it increases gradually, without an increment rule, trigger, interval, or final value.",
+    "readings": [
+     "Double beta every 25 iterations through 1,2,4,8,16",
+     "Double beta every 50 iterations through 1,2,4,8,16,32,64",
+     "Double beta after convergence at each level, stopping at beta=8"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Projection placement and differentiation in the density update",
+    "issue": "missing",
+    "description": "Sec. 2 does not distinguish persistent optimization variables from projected physical densities or explain how projection derivatives interact with sensitivity filtering.",
+    "readings": [
+     "Keep raw variables, project them for FE analysis, differentiate through the projection, then filter the resulting sensitivities",
+     "Filter sensitivities with respect to projected density before applying the projection derivative",
+     "Project and overwrite the density after each gradient update, then use that density directly in the next SIMP analysis"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Density field used to enforce the stated 0.3 volume fraction",
+    "issue": "vague",
+    "description": "The Fig. 7(a) target is explicitly 0.3, but Sec. 2 introduces projection without distinguishing the density fields in the volume constraint and stiffness interpolation.",
+    "readings": [
+     "Mean unprojected optimization density equals 0.3",
+     "Mean projected physical density equals 0.3"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Volume-penalty coefficient and its update",
+    "issue": "missing",
+    "description": "Sec. 2.1, Eqs. (5)-(6), introduces a multiplier for the volume-penalty term without its value, scaling relative to compliance, or update rule.",
+    "readings": [
+     "Normalize compliance and use a fixed quadratic-penalty coefficient of 1",
+     "Normalize compliance and use a fixed quadratic-penalty coefficient of 100",
+     "Start the normalized penalty coefficient at 1 and multiply it by 10 until the volume residual is below 1e-3"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Initial density distribution",
+    "issue": "missing",
+    "description": "Neither Sec. 2 nor Sec. 3.3 supplies the initial density field for the conventional optimization producing Fig. 7(a).",
+    "readings": [
+     "Uniform density 0.3",
+     "Uniform density 0.5",
+     "Density 0.3 with small random perturbations, rescaled to mean 0.3"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Gradient-descent step and bound enforcement",
+    "issue": "missing",
+    "description": "Sec. 2 identifies gradient descent but gives no step-size rule, gradient normalization, move limit, or procedure for enforcing density bounds.",
+    "readings": [
+     "Backtracking line search followed by projection onto the density bounds",
+     "Maximum-absolute-gradient normalization, fixed step 0.01, and clipping to [0,1]",
+     "Maximum-absolute-gradient normalization, fixed step 0.1, and a per-iteration density move limit of 0.1"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Optimization termination and volume tolerance",
+    "issue": "missing",
+    "description": "Sec. 2 says to iterate until convergence. Sec. 4.1 reports an average of 150 iterations, which does not specify the stopping rule or iteration count for Fig. 7(a).",
+    "readings": [
+     "Stop when maximum density change is below 0.01 and volume error is below 1e-3",
+     "Stop when relative compliance change is below 1e-4 for ten iterations and volume error is below 1e-4",
+     "Stop after 150 iterations"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "FE interpolation and integration on the structured grid",
+    "issue": "missing",
+    "description": "Sec. 4.1 specifies 36\u00d736 uniform elements/pixels but not displacement interpolation, element order, quadrature, or reduced-integration stabilization.",
+    "readings": [
+     "Four-node bilinear quadrilaterals with 2\u00d72 Gauss integration",
+     "Four-node bilinear quadrilaterals with one-point integration and hourglass stabilization",
+     "Eight-node serendipity quadrilaterals with 3\u00d73 Gauss integration"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "FE equilibrium-solve accuracy",
+    "issue": "missing",
+    "description": "The text identifies FEM equilibrium analyses but gives no linear-system solution method or residual tolerance.",
+    "readings": [
+     "Double-precision sparse direct solution",
+     "Preconditioned conjugate gradient with relative residual tolerance 1e-8",
+     "Preconditioned conjugate gradient with relative residual tolerance 1e-6"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 636.8383331298828,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L22",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 2,
+ "locator": "Sec. 3.3, Fig. 7(a)",
+ "finished": "2026-10-22T22:43:49"
+}

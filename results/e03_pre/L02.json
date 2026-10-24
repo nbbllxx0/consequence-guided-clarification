@@ -1,0 +1,98 @@
+{
+ "task": "L02",
+ "source": {
+  "arxiv": "1909.11320",
+  "position": 5
+ },
+ "dim": 3,
+ "slots": {
+  "strip": [
+   "line",
+   "quarter",
+   "half"
+  ]
+ },
+ "nominal": {
+  "strip": "line"
+ },
+ "mandatory": [],
+ "reasons": {
+  "strip": "load drawn along the bottom edge of the end face with traction units; loaded height (edge line vs strip) not stated (figure)"
+ },
+ "recon": [
+  "36x12x12 mesh (source 3,000-192,000 variables)",
+  "full-width strip, raised-cosine in height"
+ ],
+ "keys": [
+  "strip=line",
+  "strip=quarter",
+  "strip=half"
+ ],
+ "C": [
+  [
+   13.941216641048293,
+   13.863278246978124,
+   33.06661610504371
+  ],
+  [
+   13.931534856949764,
+   13.845821661503399,
+   31.453337418818283
+  ],
+  [
+   14.278960219706832,
+   13.929232597174789,
+   13.690464500120923
+  ]
+ ],
+ "ref": {
+  "strip=line": 13.931534856949764,
+  "strip=quarter": 13.845821661503399,
+  "strip=half": 13.69046450011943
+ },
+ "ref_gap_beaten": {
+  "strip=line": 0.0006949545901249188,
+  "strip=quarter": 8.79296635503124e-14,
+  "strip=half": 0.0
+ },
+ "noise": {
+  "strip=line": 0.002642062996958557,
+  "strip=quarter": 0.003231709408006314,
+  "strip=half": 0.003777613199127153
+ },
+ "meta": {
+  "strip=line": {
+   "accepted": true,
+   "kkt": 0.6581107847874584,
+   "wall_s": 121.16654749994632,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "strip=quarter": {
+   "accepted": true,
+   "kkt": 0.8120822108866094,
+   "wall_s": 122.46665129996836,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "strip=half": {
+   "accepted": true,
+   "kkt": 0.6552952455971451,
+   "wall_s": 120.17609480000101,
+   "n_iter": [
+    201,
+    201
+   ]
+  }
+ },
+ "counter": {
+  "optimizations": 0,
+  "factorizations": 3,
+  "backsubs": 9,
+  "opt_wall_s": 0.0
+ }
+}

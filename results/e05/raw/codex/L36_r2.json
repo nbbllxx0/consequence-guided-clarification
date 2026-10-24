@@ -1,0 +1,355 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"design-domain outline and in-plane dimensions\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 2.1 names the domain \u03a9 and refers to Fig. 1, but its caption gives no outline, dimensions, or aspect ratio.\",\n      \"readings\": [\n        \"Unit square: [0,1] \u00d7 [0,1]\",\n        \"Rectangle: [0,2] \u00d7 [0,1]\",\n        \"Unit square with its upper-right quarter excluded\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"supported nodes and boundary segments\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 2.1 and the Fig. 1 caption do not identify the number, coordinates, or extent of the supports.\",\n      \"readings\": [\n        \"Every node on the left edge\",\n        \"Only the lower-left and lower-right corner nodes\",\n        \"The uppermost and lowermost 10% of the left edge\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"support_type\",\n      \"entity\": \"displacement constraints at supports\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 2.1 mentions displacement boundary conditions without specifying which displacement components are constrained.\",\n      \"readings\": [\n        \"Both in-plane displacement components fixed to zero at all supported nodes\",\n        \"One pinned support with ux=uy=0 and one roller support with uy=0\",\n        \"Normal displacement fixed along a supported edge, with tangential displacement additionally fixed at one anchor node\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"other\",\n      \"entity\": \"number of forces, load cases, and compliance aggregation\",\n      \"issue\": \"missing\",\n      \"description\": \"The generic references to loads in Sec. 2.1 and the Fig. 1 caption do not determine the force count or distinguish simultaneous forces from independent load cases.\",\n      \"readings\": [\n        \"One force in one load case\",\n        \"Two forces acting simultaneously in one load case\",\n        \"Two independent load cases with equally weighted summed compliance\",\n        \"Two independent load cases with compliance weights 1:2\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"loaded nodes\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 2.1 gives no coordinates for the illustrated loads. Sec. 4.1's random boundary-node selection does not identify the nodes used in Fig. 1.\",\n      \"readings\": [\n        \"Midpoint of the right edge\",\n        \"Lower-right corner\",\n        \"Midpoint of the top edge\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_extent_distribution\",\n      \"entity\": \"spatial distribution of each applied force\",\n      \"issue\": \"missing\",\n      \"description\": \"Loads are said to act on nodes, but Sec. 2.1 does not specify whether a resultant acts at one node or is distributed across several nodes.\",\n      \"readings\": [\n        \"Entire resultant applied at one node\",\n        \"Resultant split equally between two adjacent boundary nodes\",\n        \"Uniform boundary traction over a segment of length 0.1 times the edge length, converted to nodal forces\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"force-vector directions\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Neither Sec. 2.1 nor the Fig. 1 caption specifies force components. Sec. 4.1's angular sampling rule does not select a direction for this illustration.\",\n      \"readings\": [\n        \"Vertical downward: (Fx,Fy)=(0,-F)\",\n        \"Horizontal rightward: (Fx,Fy)=(F,0)\",\n        \"Diagonal downward-right: (Fx,Fy)=(F/\u221a2,-F/\u221a2)\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"common force-magnitude scale\",\n      \"issue\": \"missing\",\n      \"description\": \"No force magnitude or normalization is supplied for Fig. 1. A common force multiplier only scales compliance for the usual force-driven problem with homogeneous supports.\",\n      \"readings\": [\n        \"Unit resultant in normalized units\",\n        \"Resultant of 1 N\",\n        \"Resultant of 100 N\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"relative force magnitudes if several forces are present\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 supplies no amplitude ratios between forces. Unlike a common multiplier, these ratios can change the preferred load paths.\",\n      \"readings\": [\n        \"All forces have equal magnitude\",\n        \"Second force has twice the magnitude of the first\",\n        \"Second force has half the magnitude of the first\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"prescribed material-volume fraction\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 and the Fig. 1 caption mention a volume fraction without giving its value. Sec. 4.1 gives a dataset sampling range, not a selected value for Fig. 1.\",\n      \"readings\": [\n        \"0.30\",\n        \"0.40\",\n        \"0.50\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"non-design solid and void masks\",\n      \"issue\": \"missing\",\n      \"description\": \"No passive-region specification is given for Fig. 1. The load-violation metric in Sec. 4.2 does not establish that loaded elements are held solid during optimization.\",\n      \"readings\": [\n        \"All elements are designable\",\n        \"All elements incident to loaded or supported nodes are fixed solid\",\n        \"Support and load patches are fixed solid, and a centered rectangle of width 0.2 times the domain width and height 0.2 times the domain height is fixed void\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"volume accounting and density field used in the constraint\",\n      \"issue\": \"missing\",\n      \"description\": \"The text does not specify whether the volume constraint uses design or physical densities, or whether passive material is included in its budget and denominator.\",\n      \"readings\": [\n        \"Mean design density over the complete domain, including passive solids\",\n        \"Mean filtered or projected physical density over the complete domain, including passive solids\",\n        \"Volume fraction over designable elements only, excluding passive regions\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"solid Young's modulus\",\n      \"issue\": \"missing\",\n      \"description\": \"No Young's modulus is specified for Fig. 1. A uniform stiffness multiplier only scales compliance in the force-driven, homogeneous-support formulation.\",\n      \"readings\": [\n        \"E=1 in normalized units\",\n        \"E=70 GPa\",\n        \"E=210 GPa\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Poisson ratio\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1's SIMP discussion supplies no Poisson ratio for the illustrated material.\",\n      \"readings\": [\n        \"\u03bd=0.25\",\n        \"\u03bd=0.30\",\n        \"\u03bd=0.45\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"two-dimensional elastic constitutive assumption\",\n      \"issue\": \"missing\",\n      \"description\": \"The paper describes 2D images in Sec. 4.1 but does not specify plane stress or plane strain for Fig. 1.\",\n      \"readings\": [\n        \"Plane stress\",\n        \"Plane strain\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"uniform out-of-plane thickness for a 2D model\",\n      \"issue\": \"missing\",\n      \"description\": \"No thickness is supplied for converting the illustrated 2D domain into an elastic model with physical force and compliance units.\",\n      \"readings\": [\n        \"Unit thickness in normalized units\",\n        \"Uniform thickness of 1 mm\",\n        \"Uniform thickness of 10 mm\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"structured-grid resolution and image-to-mesh correspondence\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4.1 specifies 64\u00d764 dataset images, but does not assign that resolution to Fig. 1 or establish whether image entries correspond to elements or nodes.\",\n      \"readings\": [\n        \"64\u00d764 elements with 65\u00d765 corner nodes\",\n        \"64\u00d764 nodes defining 63\u00d763 elements\",\n        \"128\u00d7128 elements, with any displayed image obtained by resampling\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"finite-element interpolation and integration\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 mentions finite-element analysis without specifying the element formulation or quadrature.\",\n      \"readings\": [\n        \"Four-node bilinear quadrilaterals with 2\u00d72 Gauss integration\",\n        \"Eight-node quadratic quadrilaterals with 3\u00d73 Gauss integration\",\n        \"Two linear triangular elements per structured-grid cell\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"SIMP penalization exponent and continuation\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2.1 states only p>1 and does not give the exponent or a continuation schedule for Fig. 1.\",\n      \"readings\": [\n        \"Fixed p=2\",\n        \"Fixed p=3\",\n        \"Continuation from p=2 to p=3\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"density bounds and void-stiffness regularization\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 does not give the complete density-to-stiffness interpolation, minimum density, or residual void stiffness.\",\n      \"readings\": [\n        \"\u03c1\u2208[0,1], with E(\u03c1)/E0=10^-9+(1-10^-9)\u03c1^p\",\n        \"\u03c1\u2208[0,1], with E(\u03c1)/E0=10^-6+(1-10^-6)\u03c1^p\",\n        \"\u03c1\u2208[10^-3,1], with E(\u03c1)/E0=\u03c1^p\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"filter use, type, and kernel\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2.1 discusses filters generically without stating whether Fig. 1 uses one or identifying its operation and kernel.\",\n      \"readings\": [\n        \"No filter\",\n        \"Sensitivity filter with a conical distance-weighting kernel\",\n        \"Density filter with a conical distance-weighting kernel\",\n        \"Density filter with Gaussian weights\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"filter length scale\",\n      \"issue\": \"missing\",\n      \"description\": \"No filter radius, physical length scale, or mesh-relative radius is specified.\",\n      \"readings\": [\n        \"Radius of 1.5 element widths\",\n        \"Radius of 3 element widths\",\n        \"Radius of 0.05 times the domain height\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"filter treatment at domain and passive-region boundaries\",\n      \"issue\": \"missing\",\n      \"description\": \"The generic filter discussion in Sec. 2.1 does not define neighborhood extension or normalization near boundaries.\",\n      \"readings\": [\n        \"Truncate neighborhoods to included elements and renormalize weights\",\n        \"Extend exterior values as zero and retain the full kernel normalization\",\n        \"Reflect density values across the exterior boundary\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"density projection and its parameters\",\n      \"issue\": \"missing\",\n      \"description\": \"The discussion of encouraging binary densities does not establish whether a projection is used or specify its threshold, sharpness, or continuation.\",\n      \"readings\": [\n        \"No projection\",\n        \"Heaviside projection with threshold \u03b7=0.5 and fixed sharpness \u03b2=1\",\n        \"Heaviside projection with \u03b7=0.5 and fixed \u03b2=8\",\n        \"Heaviside projection with \u03b7=0.5 and \u03b2 continued from 1 to 16\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"optimization update method and step controls\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 reviews methods without assigning an update algorithm to Fig. 1. Sec. 4.1's reference to ToPy for the dataset does not supply this example's settings.\",\n      \"readings\": [\n        \"Optimality-criteria updates with density move limit 0.2 and damping exponent 0.5\",\n        \"Optimality-criteria updates with density move limit 0.05 and damping exponent 0.5\",\n        \"MMA updates with density move limit 0.1\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"initial design-density field\",\n      \"issue\": \"missing\",\n      \"description\": \"No initialization is specified. This matters because Sec. 2.1 explicitly notes non-convexity and convergence to local optima.\",\n      \"readings\": [\n        \"Uniform density equal to the target volume fraction\",\n        \"Initially solid designable domain\",\n        \"Target volume fraction plus an alternating \u00b10.01 checkerboard perturbation\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"optimization termination criteria\",\n      \"issue\": \"missing\",\n      \"description\": \"No convergence tolerance, iteration cap, or rule for completing continuation stages is given for Fig. 1.\",\n      \"readings\": [\n        \"Stop at maximum element-density change below 0.01 or 200 iterations\",\n        \"Stop at maximum element-density change below 0.001 or 1000 iterations\",\n        \"Stop when relative compliance change stays below 10^-5 for ten iterations, after all continuation stages\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"finite-element equilibrium-solve accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"The FEA references do not specify equilibrium-solver accuracy. Different approximate solves can affect sensitivities and the optimization path.\",\n      \"readings\": [\n        \"Direct linear-system solve\",\n        \"Iterative solve with relative residual tolerance 10^-8\",\n        \"Iterative solve with relative residual tolerance 10^-4\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "design-domain outline and in-plane dimensions",
+    "issue": "figure_only",
+    "description": "Sec. 2.1 names the domain \u03a9 and refers to Fig. 1, but its caption gives no outline, dimensions, or aspect ratio.",
+    "readings": [
+     "Unit square: [0,1] \u00d7 [0,1]",
+     "Rectangle: [0,2] \u00d7 [0,1]",
+     "Unit square with its upper-right quarter excluded"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "supported nodes and boundary segments",
+    "issue": "figure_only",
+    "description": "Sec. 2.1 and the Fig. 1 caption do not identify the number, coordinates, or extent of the supports.",
+    "readings": [
+     "Every node on the left edge",
+     "Only the lower-left and lower-right corner nodes",
+     "The uppermost and lowermost 10% of the left edge"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_type",
+    "entity": "displacement constraints at supports",
+    "issue": "figure_only",
+    "description": "Sec. 2.1 mentions displacement boundary conditions without specifying which displacement components are constrained.",
+    "readings": [
+     "Both in-plane displacement components fixed to zero at all supported nodes",
+     "One pinned support with ux=uy=0 and one roller support with uy=0",
+     "Normal displacement fixed along a supported edge, with tangential displacement additionally fixed at one anchor node"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "other",
+    "entity": "number of forces, load cases, and compliance aggregation",
+    "issue": "missing",
+    "description": "The generic references to loads in Sec. 2.1 and the Fig. 1 caption do not determine the force count or distinguish simultaneous forces from independent load cases.",
+    "readings": [
+     "One force in one load case",
+     "Two forces acting simultaneously in one load case",
+     "Two independent load cases with equally weighted summed compliance",
+     "Two independent load cases with compliance weights 1:2"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_position",
+    "entity": "loaded nodes",
+    "issue": "figure_only",
+    "description": "Sec. 2.1 gives no coordinates for the illustrated loads. Sec. 4.1's random boundary-node selection does not identify the nodes used in Fig. 1.",
+    "readings": [
+     "Midpoint of the right edge",
+     "Lower-right corner",
+     "Midpoint of the top edge"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "spatial distribution of each applied force",
+    "issue": "missing",
+    "description": "Loads are said to act on nodes, but Sec. 2.1 does not specify whether a resultant acts at one node or is distributed across several nodes.",
+    "readings": [
+     "Entire resultant applied at one node",
+     "Resultant split equally between two adjacent boundary nodes",
+     "Uniform boundary traction over a segment of length 0.1 times the edge length, converted to nodal forces"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "force-vector directions",
+    "issue": "figure_only",
+    "description": "Neither Sec. 2.1 nor the Fig. 1 caption specifies force components. Sec. 4.1's angular sampling rule does not select a direction for this illustration.",
+    "readings": [
+     "Vertical downward: (Fx,Fy)=(0,-F)",
+     "Horizontal rightward: (Fx,Fy)=(F,0)",
+     "Diagonal downward-right: (Fx,Fy)=(F/\u221a2,-F/\u221a2)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "common force-magnitude scale",
+    "issue": "missing",
+    "description": "No force magnitude or normalization is supplied for Fig. 1. A common force multiplier only scales compliance for the usual force-driven problem with homogeneous supports.",
+    "readings": [
+     "Unit resultant in normalized units",
+     "Resultant of 1 N",
+     "Resultant of 100 N"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "relative force magnitudes if several forces are present",
+    "issue": "missing",
+    "description": "Sec. 2.1 supplies no amplitude ratios between forces. Unlike a common multiplier, these ratios can change the preferred load paths.",
+    "readings": [
+     "All forces have equal magnitude",
+     "Second force has twice the magnitude of the first",
+     "Second force has half the magnitude of the first"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "prescribed material-volume fraction",
+    "issue": "missing",
+    "description": "Sec. 2.1 and the Fig. 1 caption mention a volume fraction without giving its value. Sec. 4.1 gives a dataset sampling range, not a selected value for Fig. 1.",
+    "readings": [
+     "0.30",
+     "0.40",
+     "0.50"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "non-design solid and void masks",
+    "issue": "missing",
+    "description": "No passive-region specification is given for Fig. 1. The load-violation metric in Sec. 4.2 does not establish that loaded elements are held solid during optimization.",
+    "readings": [
+     "All elements are designable",
+     "All elements incident to loaded or supported nodes are fixed solid",
+     "Support and load patches are fixed solid, and a centered rectangle of width 0.2 times the domain width and height 0.2 times the domain height is fixed void"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "volume accounting and density field used in the constraint",
+    "issue": "missing",
+    "description": "The text does not specify whether the volume constraint uses design or physical densities, or whether passive material is included in its budget and denominator.",
+    "readings": [
+     "Mean design density over the complete domain, including passive solids",
+     "Mean filtered or projected physical density over the complete domain, including passive solids",
+     "Volume fraction over designable elements only, excluding passive regions"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "solid Young's modulus",
+    "issue": "missing",
+    "description": "No Young's modulus is specified for Fig. 1. A uniform stiffness multiplier only scales compliance in the force-driven, homogeneous-support formulation.",
+    "readings": [
+     "E=1 in normalized units",
+     "E=70 GPa",
+     "E=210 GPa"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson ratio",
+    "issue": "missing",
+    "description": "Sec. 2.1's SIMP discussion supplies no Poisson ratio for the illustrated material.",
+    "readings": [
+     "\u03bd=0.25",
+     "\u03bd=0.30",
+     "\u03bd=0.45"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "two-dimensional elastic constitutive assumption",
+    "issue": "missing",
+    "description": "The paper describes 2D images in Sec. 4.1 but does not specify plane stress or plane strain for Fig. 1.",
+    "readings": [
+     "Plane stress",
+     "Plane strain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "uniform out-of-plane thickness for a 2D model",
+    "issue": "missing",
+    "description": "No thickness is supplied for converting the illustrated 2D domain into an elastic model with physical force and compliance units.",
+    "readings": [
+     "Unit thickness in normalized units",
+     "Uniform thickness of 1 mm",
+     "Uniform thickness of 10 mm"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "mesh",
+    "entity": "structured-grid resolution and image-to-mesh correspondence",
+    "issue": "vague",
+    "description": "Sec. 4.1 specifies 64\u00d764 dataset images, but does not assign that resolution to Fig. 1 or establish whether image entries correspond to elements or nodes.",
+    "readings": [
+     "64\u00d764 elements with 65\u00d765 corner nodes",
+     "64\u00d764 nodes defining 63\u00d763 elements",
+     "128\u00d7128 elements, with any displayed image obtained by resampling"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "finite-element interpolation and integration",
+    "issue": "missing",
+    "description": "Sec. 2.1 mentions finite-element analysis without specifying the element formulation or quadrature.",
+    "readings": [
+     "Four-node bilinear quadrilaterals with 2\u00d72 Gauss integration",
+     "Eight-node quadratic quadrilaterals with 3\u00d73 Gauss integration",
+     "Two linear triangular elements per structured-grid cell"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "SIMP penalization exponent and continuation",
+    "issue": "vague",
+    "description": "Sec. 2.1 states only p>1 and does not give the exponent or a continuation schedule for Fig. 1.",
+    "readings": [
+     "Fixed p=2",
+     "Fixed p=3",
+     "Continuation from p=2 to p=3"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "density bounds and void-stiffness regularization",
+    "issue": "missing",
+    "description": "Sec. 2.1 does not give the complete density-to-stiffness interpolation, minimum density, or residual void stiffness.",
+    "readings": [
+     "\u03c1\u2208[0,1], with E(\u03c1)/E0=10^-9+(1-10^-9)\u03c1^p",
+     "\u03c1\u2208[0,1], with E(\u03c1)/E0=10^-6+(1-10^-6)\u03c1^p",
+     "\u03c1\u2208[10^-3,1], with E(\u03c1)/E0=\u03c1^p"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "filter use, type, and kernel",
+    "issue": "vague",
+    "description": "Sec. 2.1 discusses filters generically without stating whether Fig. 1 uses one or identifying its operation and kernel.",
+    "readings": [
+     "No filter",
+     "Sensitivity filter with a conical distance-weighting kernel",
+     "Density filter with a conical distance-weighting kernel",
+     "Density filter with Gaussian weights"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "filter length scale",
+    "issue": "missing",
+    "description": "No filter radius, physical length scale, or mesh-relative radius is specified.",
+    "readings": [
+     "Radius of 1.5 element widths",
+     "Radius of 3 element widths",
+     "Radius of 0.05 times the domain height"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "filter treatment at domain and passive-region boundaries",
+    "issue": "missing",
+    "description": "The generic filter discussion in Sec. 2.1 does not define neighborhood extension or normalization near boundaries.",
+    "readings": [
+     "Truncate neighborhoods to included elements and renormalize weights",
+     "Extend exterior values as zero and retain the full kernel normalization",
+     "Reflect density values across the exterior boundary"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "density projection and its parameters",
+    "issue": "missing",
+    "description": "The discussion of encouraging binary densities does not establish whether a projection is used or specify its threshold, sharpness, or continuation.",
+    "readings": [
+     "No projection",
+     "Heaviside projection with threshold \u03b7=0.5 and fixed sharpness \u03b2=1",
+     "Heaviside projection with \u03b7=0.5 and fixed \u03b2=8",
+     "Heaviside projection with \u03b7=0.5 and \u03b2 continued from 1 to 16"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "optimization update method and step controls",
+    "issue": "missing",
+    "description": "Sec. 2.1 reviews methods without assigning an update algorithm to Fig. 1. Sec. 4.1's reference to ToPy for the dataset does not supply this example's settings.",
+    "readings": [
+     "Optimality-criteria updates with density move limit 0.2 and damping exponent 0.5",
+     "Optimality-criteria updates with density move limit 0.05 and damping exponent 0.5",
+     "MMA updates with density move limit 0.1"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "initial design-density field",
+    "issue": "missing",
+    "description": "No initialization is specified. This matters because Sec. 2.1 explicitly notes non-convexity and convergence to local optima.",
+    "readings": [
+     "Uniform density equal to the target volume fraction",
+     "Initially solid designable domain",
+     "Target volume fraction plus an alternating \u00b10.01 checkerboard perturbation"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "optimization termination criteria",
+    "issue": "missing",
+    "description": "No convergence tolerance, iteration cap, or rule for completing continuation stages is given for Fig. 1.",
+    "readings": [
+     "Stop at maximum element-density change below 0.01 or 200 iterations",
+     "Stop at maximum element-density change below 0.001 or 1000 iterations",
+     "Stop when relative compliance change stays below 10^-5 for ten iterations, after all continuation stages"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "finite-element equilibrium-solve accuracy",
+    "issue": "missing",
+    "description": "The FEA references do not specify equilibrium-solver accuracy. Different approximate solves can affect sensitivities and the optimization path.",
+    "readings": [
+     "Direct linear-system solve",
+     "Iterative solve with relative residual tolerance 10^-8",
+     "Iterative solve with relative residual tolerance 10^-4"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 617.720056772232,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L36",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 2,
+ "locator": "Sec. 2.1, Fig. 1",
+ "finished": "2026-10-22T23:18:20"
+}

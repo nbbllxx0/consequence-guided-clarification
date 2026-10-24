@@ -1,0 +1,249 @@
+{
+ "raw": "{\"items\": [{\"category\": \"domain_extent\", \"entity\": \"FEM-TO design domain (vertical extent / designable height)\", \"issue\": \"vague\", \"description\": \"Nanopillar Results paragraph gives the domain as 162.00 x 162.00 x 413.10 \\u00c5 (= 40 x 40 x 102 FCC cells), but this box includes the 12,800 passive 'clamped base' atoms. The base thickness is never stated (atom counts imply 2 cells = 8.10 \\u00c5). Supplementary Note A.14 (not provided) does not say whether the FEM domain is the full box with a non-design base layer or only the ~405 \\u00c5 active region.\", \"readings\": [\"Full 162 x 162 x 413.10 \\u00c5 box; bottom 8.10 \\u00c5 is non-design solid, so the designable region is 162 x 162 x 405.00 \\u00c5\", \"Full 162 x 162 x 413.10 \\u00c5 box, all designable (base represented only by boundary conditions)\", \"Only the active region 162 x 162 x 405.00 \\u00c5 is modeled; base omitted\"], \"effect\": \"layout\"}, {\"category\": \"passive_region\", \"entity\": \"passive anchored base (12,800 atoms)\", \"issue\": \"missing\", \"description\": \"Results gives only a count ('12,800 are passive atoms from the clamped base'). Methods says passive atoms stay real and represent the anchored base. Shape and thickness are not stated. 12,800 = 4 x 40 x 40 x 2 suggests a full-footprint slab 2 unit cells thick. The 11.25% surface fraction of the initial column also matches an 18x18x100-cell column whose bottom sits on that slab. But because the pillar is 'supported at the four corners', an engineer could instead model corner blocks, or leave out passive solid in the FEM model.\", \"readings\": [\"Full-footprint non-design solid slab 162 x 162 x 8.10 \\u00c5 at z = 0 to 8.10 \\u00c5\", \"Four non-design corner blocks with the same total volume (e.g., 40.5 x 40.5 x 32.4 \\u00c5 each = 10x10x8 cells)\", \"No passive solid region in the FEM model (supports applied directly to design-domain nodes)\"], \"effect\": \"layout\"}, {\"category\": \"support_location_extent\", \"entity\": \"supports at the pillar base\", \"issue\": \"conflicting\", \"description\": \"Results says 'The pillar is supported at the four corners of the base' and mentions 'four corner supports'; the Discussion says load is 'redirected into the four supports'. But the same Results paragraph calls the passive atoms 'the clamped base', and Methods says passive atoms are 'held fixed in all Cartesian directions', which would clamp the whole base. No size is given for the corner supports. The corner 'roots' and the 3.65x stiffness gain over a central column fit discrete corner supports.\", \"readings\": [\"Whole base / entire bottom face clamped (all 12,800 passive atoms fixed)\", \"Single nodes at the four bottom corners (point supports)\", \"Four square bottom-corner patches 4.05 x 4.05 \\u00c5 (1 cell, 0.025 of side)\", \"Four square bottom-corner patches 20.25 x 20.25 \\u00c5 (5 cells, 0.125 of side)\", \"Four square bottom-corner patches 40.5 x 40.5 \\u00c5 (10 cells, 0.25 of side)\", \"Nodes along the four vertical corner edges of the 8.10 \\u00c5 base slab\"], \"effect\": \"layout\"}, {\"category\": \"support_type\", \"entity\": \"four corner supports\", \"issue\": \"vague\", \"description\": \"'Supported at the four corners' does not say which displacement components are held. Methods' 'held fixed in all Cartesian directions' applies to passive atoms. If only the corner regions are supported, the FEM-TO (Note A.14, unavailable) could use either full fixity or vertical-only supports. That decides whether the supports can carry the horizontal thrust from splayed corner legs.\", \"readings\": [\"u_x = u_y = u_z = 0 at support nodes (clamped/pinned)\", \"u_z = 0 only at the corners, plus minimal in-plane restraints against rigid-body motion (rollers)\"], \"effect\": \"layout\"}, {\"category\": \"load_extent_distribution\", \"entity\": \"vertical load at center of top surface\", \"issue\": \"vague\", \"description\": \"Results/Methods say only that a vertical displacement of 1% of the height is applied 'at the center of the top surface' (Fig. 6a red arrow; the text also mentions a 'top contact'). Not stated: the number of loaded atoms or the patch size; whether the loaded atoms are held laterally; or how the displacement becomes a load in a force-driven minimum-compliance FEM-TO. For a patch, a uniform prescribed displacement and a uniform traction give different optima.\", \"readings\": [\"Concentrated vertical force at the single top-center node\", \"Uniform vertical force over a centered 4.05 x 4.05 \\u00c5 (1 cell) or 8.10 x 8.10 \\u00c5 (2x2 cells) patch\", \"Uniform prescribed vertical displacement (rigid punch) on such a patch, lateral DOFs free\", \"Rigid punch on such a patch with lateral DOFs also fixed\", \"Load spread over the whole 72.9 x 72.9 \\u00c5 top face of the initial column (0.45 of side)\"], \"effect\": \"layout\"}, {\"category\": \"load_magnitude\", \"entity\": \"top load magnitude\", \"issue\": \"vague\", \"description\": \"Methods: delta_pillar = 1% of 'the pillar height'. This could mean the 413.10 \\u00c5 domain height or the ~405 \\u00c5 active height. Note A.14 gives no force magnitude for the force-based FEM-TO.\", \"readings\": [\"Prescribed displacement 4.131 \\u00c5 (1% of 413.10 \\u00c5)\", \"Prescribed displacement 4.05 \\u00c5 (1% of 405.00 \\u00c5)\", \"Unit force F = 1 (force-controlled FEM-TO)\"], \"effect\": \"scale_only\"}, {\"category\": \"volume_fraction\", \"entity\": \"FEM-TO volume constraint\", \"issue\": \"vague\", \"description\": \"Results: target mass ratio 20.25%, and FEM-TO solved 'the same nanopillar problem'. 'Mass ratio' is never defined. The numbers imply it is relative to active atoms only (cantilever: 88,500/148,500 = 59.60%; pillar: 129,600/640,000 = 0.2025 = 0.45^2). Still, a FEM code with passive base elements may count those elements in the volume.\", \"readings\": [\"0.2025 of the designable (active) region only (129,600 of 640,000 active atoms)\", \"0.2025 of the whole domain including the passive base (about 0.1866 of the designable region)\"], \"effect\": \"layout\"}, {\"category\": \"material\", \"entity\": \"Young's modulus for FEM-TO\", \"issue\": \"missing\", \"description\": \"Only 'aluminum' (Mishin EAM potential, a0 = 4.05 \\u00c5) is given. No continuum modulus is stated for the FEM-TO in Note A.14.\", \"readings\": [\"E = 70 GPa (handbook aluminum)\", \"E = 1 (normalized)\", \"Isotropic modulus averaged from the Mishin-EAM cubic elastic constants\"], \"effect\": \"scale_only\"}, {\"category\": \"material\", \"entity\": \"Poisson's ratio / elastic symmetry for FEM-TO\", \"issue\": \"missing\", \"description\": \"Poisson's ratio is not given. The text calls Al 'nearly isotropic' but does not say whether FEM-TO used isotropic or cubic elasticity (Methods: cube edges aligned with x, y, z).\", \"readings\": [\"Isotropic, nu = 0.33\", \"Isotropic, nu = 0.3\", \"Cubic anisotropic Al stiffness with cube axes along x, y, z\"], \"effect\": \"layout\"}, {\"category\": \"mesh\", \"entity\": \"FEM-TO structured grid\", \"issue\": \"missing\", \"description\": \"Results says only that the FEM-TO layout is 'mapped onto the same FCC lattice' (Note A.14, Figs. S17-S18 unavailable). Element type, element size and grid dimensions are not given.\", \"readings\": [\"40 x 40 x 102 (or 40 x 40 x 100 without base) cubic 8-node hex elements of 4.05 \\u00c5, one per FCC unit cell\", \"80 x 80 x 204 (or 80 x 80 x 200) cubic elements of 2.025 \\u00c5, one per atomic-plane voxel\", \"20 x 20 x 51 cubic elements of 8.10 \\u00c5\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"FEM-TO regularization filter\", \"issue\": \"missing\", \"description\": \"The only filter described is the Nano-TO multi-shell atomistic sensitivity filter (Methods: r_min = 10.325 \\u00c5 'unless otherwise noted'). The FEM-TO filter type and radius are not given.\", \"readings\": [\"Density filter, r_min = 10.325 \\u00c5 (about 2.55 elements at 4.05 \\u00c5; about 5.1 elements at 2.025 \\u00c5)\", \"Sensitivity filter, r_min = 1.5 elements\", \"Density filter, r_min = 3 elements\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"FEM-TO material interpolation / penalization / projection\", \"issue\": \"missing\", \"description\": \"The comparison is described only as 'FEM-based TO'. SIMP penalty, void stiffness, continuation and projection are not given.\", \"readings\": [\"SIMP p = 3, E_min = 1e-9 E, no projection\", \"SIMP with penalty continuation p = 1 to 3\", \"SIMP p = 3 plus Heaviside projection with beta continuation\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"FEM-TO optimizer and stopping criterion\", \"issue\": \"missing\", \"description\": \"No update scheme or convergence criterion is given for FEM-TO. The period-two-cycle and 3,000-iteration rules in Methods apply to Nano-TO only.\", \"readings\": [\"Optimality criteria, move limit 0.2, stop when max density change < 0.01\", \"MMA with a fixed iteration budget (e.g., 200-300 iterations)\"], \"effect\": \"unsure\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"FEM-TO initial design\", \"issue\": \"missing\", \"description\": \"Results: Nano-TO starts from 'a uniform prismatic column at that mass ratio'. The column's size and position are not stated (0.45^2 implies a centered 72.9 \\u00c5, 18x18-cell square column). It is also not said whether FEM-TO started from this column or from a uniform density field.\", \"readings\": [\"Uniform density 0.2025 over the design region\", \"Centered 72.9 x 72.9 \\u00c5 solid square prismatic column through the design height, void elsewhere\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"symmetry constraint in FEM-TO\", \"issue\": \"missing\", \"description\": \"Mirror symmetry is stated only for the cantilevers. Nothing is said about symmetry for the pillar or its FEM-TO, although loads and supports are square-symmetric.\", \"readings\": [\"No symmetry imposed (full model)\", \"Mirror planes x = 81 \\u00c5 and y = 81 \\u00c5 (quarter model)\", \"Full square symmetry including diagonal mirrors (1/8 model)\"], \"effect\": \"unsure\"}, {\"category\": \"other\", \"entity\": \"conversion of FEM-TO densities to FCC atoms (design in Fig. S18)\", \"issue\": \"missing\", \"description\": \"Results says only that the FEM-TO layout 'is mapped onto the same FCC lattice'. The threshold rule, and whether the mapped design is trimmed to exactly 20.25%, are not stated. These decide the final binary design that is evaluated (3.44 normalized stiffness).\", \"readings\": [\"Threshold element density at 0.5; each atom inherits the density of its containing element\", \"Rank-order threshold keeping exactly 129,600 active atoms (20.25%)\", \"Threshold on nodal densities interpolated at atom positions\"], \"effect\": \"unsure\"}]}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "FEM-TO design domain (vertical extent / designable height)",
+    "issue": "vague",
+    "description": "Nanopillar Results paragraph gives the domain as 162.00 x 162.00 x 413.10 \u00c5 (= 40 x 40 x 102 FCC cells), but this box includes the 12,800 passive 'clamped base' atoms. The base thickness is never stated (atom counts imply 2 cells = 8.10 \u00c5). Supplementary Note A.14 (not provided) does not say whether the FEM domain is the full box with a non-design base layer or only the ~405 \u00c5 active region.",
+    "readings": [
+     "Full 162 x 162 x 413.10 \u00c5 box; bottom 8.10 \u00c5 is non-design solid, so the designable region is 162 x 162 x 405.00 \u00c5",
+     "Full 162 x 162 x 413.10 \u00c5 box, all designable (base represented only by boundary conditions)",
+     "Only the active region 162 x 162 x 405.00 \u00c5 is modeled; base omitted"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "passive anchored base (12,800 atoms)",
+    "issue": "missing",
+    "description": "Results gives only a count ('12,800 are passive atoms from the clamped base'). Methods says passive atoms stay real and represent the anchored base. Shape and thickness are not stated. 12,800 = 4 x 40 x 40 x 2 suggests a full-footprint slab 2 unit cells thick. The 11.25% surface fraction of the initial column also matches an 18x18x100-cell column whose bottom sits on that slab. But because the pillar is 'supported at the four corners', an engineer could instead model corner blocks, or leave out passive solid in the FEM model.",
+    "readings": [
+     "Full-footprint non-design solid slab 162 x 162 x 8.10 \u00c5 at z = 0 to 8.10 \u00c5",
+     "Four non-design corner blocks with the same total volume (e.g., 40.5 x 40.5 x 32.4 \u00c5 each = 10x10x8 cells)",
+     "No passive solid region in the FEM model (supports applied directly to design-domain nodes)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "supports at the pillar base",
+    "issue": "conflicting",
+    "description": "Results says 'The pillar is supported at the four corners of the base' and mentions 'four corner supports'; the Discussion says load is 'redirected into the four supports'. But the same Results paragraph calls the passive atoms 'the clamped base', and Methods says passive atoms are 'held fixed in all Cartesian directions', which would clamp the whole base. No size is given for the corner supports. The corner 'roots' and the 3.65x stiffness gain over a central column fit discrete corner supports.",
+    "readings": [
+     "Whole base / entire bottom face clamped (all 12,800 passive atoms fixed)",
+     "Single nodes at the four bottom corners (point supports)",
+     "Four square bottom-corner patches 4.05 x 4.05 \u00c5 (1 cell, 0.025 of side)",
+     "Four square bottom-corner patches 20.25 x 20.25 \u00c5 (5 cells, 0.125 of side)",
+     "Four square bottom-corner patches 40.5 x 40.5 \u00c5 (10 cells, 0.25 of side)",
+     "Nodes along the four vertical corner edges of the 8.10 \u00c5 base slab"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "support_type",
+    "entity": "four corner supports",
+    "issue": "vague",
+    "description": "'Supported at the four corners' does not say which displacement components are held. Methods' 'held fixed in all Cartesian directions' applies to passive atoms. If only the corner regions are supported, the FEM-TO (Note A.14, unavailable) could use either full fixity or vertical-only supports. That decides whether the supports can carry the horizontal thrust from splayed corner legs.",
+    "readings": [
+     "u_x = u_y = u_z = 0 at support nodes (clamped/pinned)",
+     "u_z = 0 only at the corners, plus minimal in-plane restraints against rigid-body motion (rollers)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "vertical load at center of top surface",
+    "issue": "vague",
+    "description": "Results/Methods say only that a vertical displacement of 1% of the height is applied 'at the center of the top surface' (Fig. 6a red arrow; the text also mentions a 'top contact'). Not stated: the number of loaded atoms or the patch size; whether the loaded atoms are held laterally; or how the displacement becomes a load in a force-driven minimum-compliance FEM-TO. For a patch, a uniform prescribed displacement and a uniform traction give different optima.",
+    "readings": [
+     "Concentrated vertical force at the single top-center node",
+     "Uniform vertical force over a centered 4.05 x 4.05 \u00c5 (1 cell) or 8.10 x 8.10 \u00c5 (2x2 cells) patch",
+     "Uniform prescribed vertical displacement (rigid punch) on such a patch, lateral DOFs free",
+     "Rigid punch on such a patch with lateral DOFs also fixed",
+     "Load spread over the whole 72.9 x 72.9 \u00c5 top face of the initial column (0.45 of side)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "top load magnitude",
+    "issue": "vague",
+    "description": "Methods: delta_pillar = 1% of 'the pillar height'. This could mean the 413.10 \u00c5 domain height or the ~405 \u00c5 active height. Note A.14 gives no force magnitude for the force-based FEM-TO.",
+    "readings": [
+     "Prescribed displacement 4.131 \u00c5 (1% of 413.10 \u00c5)",
+     "Prescribed displacement 4.05 \u00c5 (1% of 405.00 \u00c5)",
+     "Unit force F = 1 (force-controlled FEM-TO)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "FEM-TO volume constraint",
+    "issue": "vague",
+    "description": "Results: target mass ratio 20.25%, and FEM-TO solved 'the same nanopillar problem'. 'Mass ratio' is never defined. The numbers imply it is relative to active atoms only (cantilever: 88,500/148,500 = 59.60%; pillar: 129,600/640,000 = 0.2025 = 0.45^2). Still, a FEM code with passive base elements may count those elements in the volume.",
+    "readings": [
+     "0.2025 of the designable (active) region only (129,600 of 640,000 active atoms)",
+     "0.2025 of the whole domain including the passive base (about 0.1866 of the designable region)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Young's modulus for FEM-TO",
+    "issue": "missing",
+    "description": "Only 'aluminum' (Mishin EAM potential, a0 = 4.05 \u00c5) is given. No continuum modulus is stated for the FEM-TO in Note A.14.",
+    "readings": [
+     "E = 70 GPa (handbook aluminum)",
+     "E = 1 (normalized)",
+     "Isotropic modulus averaged from the Mishin-EAM cubic elastic constants"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson's ratio / elastic symmetry for FEM-TO",
+    "issue": "missing",
+    "description": "Poisson's ratio is not given. The text calls Al 'nearly isotropic' but does not say whether FEM-TO used isotropic or cubic elasticity (Methods: cube edges aligned with x, y, z).",
+    "readings": [
+     "Isotropic, nu = 0.33",
+     "Isotropic, nu = 0.3",
+     "Cubic anisotropic Al stiffness with cube axes along x, y, z"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "FEM-TO structured grid",
+    "issue": "missing",
+    "description": "Results says only that the FEM-TO layout is 'mapped onto the same FCC lattice' (Note A.14, Figs. S17-S18 unavailable). Element type, element size and grid dimensions are not given.",
+    "readings": [
+     "40 x 40 x 102 (or 40 x 40 x 100 without base) cubic 8-node hex elements of 4.05 \u00c5, one per FCC unit cell",
+     "80 x 80 x 204 (or 80 x 80 x 200) cubic elements of 2.025 \u00c5, one per atomic-plane voxel",
+     "20 x 20 x 51 cubic elements of 8.10 \u00c5"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "FEM-TO regularization filter",
+    "issue": "missing",
+    "description": "The only filter described is the Nano-TO multi-shell atomistic sensitivity filter (Methods: r_min = 10.325 \u00c5 'unless otherwise noted'). The FEM-TO filter type and radius are not given.",
+    "readings": [
+     "Density filter, r_min = 10.325 \u00c5 (about 2.55 elements at 4.05 \u00c5; about 5.1 elements at 2.025 \u00c5)",
+     "Sensitivity filter, r_min = 1.5 elements",
+     "Density filter, r_min = 3 elements"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "FEM-TO material interpolation / penalization / projection",
+    "issue": "missing",
+    "description": "The comparison is described only as 'FEM-based TO'. SIMP penalty, void stiffness, continuation and projection are not given.",
+    "readings": [
+     "SIMP p = 3, E_min = 1e-9 E, no projection",
+     "SIMP with penalty continuation p = 1 to 3",
+     "SIMP p = 3 plus Heaviside projection with beta continuation"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "FEM-TO optimizer and stopping criterion",
+    "issue": "missing",
+    "description": "No update scheme or convergence criterion is given for FEM-TO. The period-two-cycle and 3,000-iteration rules in Methods apply to Nano-TO only.",
+    "readings": [
+     "Optimality criteria, move limit 0.2, stop when max density change < 0.01",
+     "MMA with a fixed iteration budget (e.g., 200-300 iterations)"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "FEM-TO initial design",
+    "issue": "missing",
+    "description": "Results: Nano-TO starts from 'a uniform prismatic column at that mass ratio'. The column's size and position are not stated (0.45^2 implies a centered 72.9 \u00c5, 18x18-cell square column). It is also not said whether FEM-TO started from this column or from a uniform density field.",
+    "readings": [
+     "Uniform density 0.2025 over the design region",
+     "Centered 72.9 x 72.9 \u00c5 solid square prismatic column through the design height, void elsewhere"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "symmetry constraint in FEM-TO",
+    "issue": "missing",
+    "description": "Mirror symmetry is stated only for the cantilevers. Nothing is said about symmetry for the pillar or its FEM-TO, although loads and supports are square-symmetric.",
+    "readings": [
+     "No symmetry imposed (full model)",
+     "Mirror planes x = 81 \u00c5 and y = 81 \u00c5 (quarter model)",
+     "Full square symmetry including diagonal mirrors (1/8 model)"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "other",
+    "entity": "conversion of FEM-TO densities to FCC atoms (design in Fig. S18)",
+    "issue": "missing",
+    "description": "Results says only that the FEM-TO layout 'is mapped onto the same FCC lattice'. The threshold rule, and whether the mapped design is trimmed to exactly 20.25%, are not stated. These decide the final binary design that is evaluated (3.44 normalized stiffness).",
+    "readings": [
+     "Threshold element density at 0.5; each atom inherits the density of its containing element",
+     "Rank-order threshold keeping exactly 129,600 active atoms (20.25%)",
+     "Threshold on nodal densities interpolated at atom positions"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 519.6715083122253,
+ "returncode": 0,
+ "meta": {
+  "model": null,
+  "num_turns": 2,
+  "is_error": false,
+  "total_cost_usd": 1.3536548,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 26524,
+   "cache_read_input_tokens": 774,
+   "output_tokens": 57065,
+   "output_tokens_details": {
+    "thinking_tokens": 52621
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 26524,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 57065,
+     "cache_read_input_tokens": 774,
+     "cache_creation_input_tokens": 26524,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 26524
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard",
+   "fallback_credit": null
+  }
+ },
+ "stderr_tail": "",
+ "task": "L33",
+ "model": "claude",
+ "model_id": "claude-opus-5-5",
+ "rep": 1,
+ "locator": "Supplementary Note A.14, the nanopillar designed by FEM-TO (Fig. S18)",
+ "finished": "2026-10-22T21:09:05"
+}

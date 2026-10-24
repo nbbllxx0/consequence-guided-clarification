@@ -1,0 +1,135 @@
+{
+ "task": "L45",
+ "source": {
+  "arxiv": "2609.07149",
+  "position": 241
+ },
+ "dim": 2,
+ "slots": {
+  "pos": [
+   "corner",
+   "mid"
+  ],
+  "b": [
+   0.05,
+   0.1
+  ],
+  "volfrac": [
+   0.4
+  ]
+ },
+ "nominal": {
+  "pos": "corner",
+  "b": 0.1,
+  "volfrac": 0.4
+ },
+ "mandatory": [
+  "volfrac"
+ ],
+ "reasons": {
+  "pos": "text 'loaded at the bottom right' vs Fig. 6 block at mid-height (Sec. 4.1; Fig. 6)",
+  "b": "solid b x b load block drawn, b not stated (Fig. 6; Sec. 3.1); convention 0.05-0.1 H",
+  "volfrac": "swept along the nondominated curves; no single value: mandatory"
+ },
+ "recon": [
+  "200x100 in source; 100x50 with the filter radius halved (R = 25 -> 12.5 elements)",
+  "robust eroded/dilated projection replaced by nominal SIMP",
+  "vf fixed to 0.4 after asking",
+  "final move limit 0.01 (0.02 gives a 0.1% period-2 oscillation that fails the convergence window)",
+  "Poisson's ratio stated as 1/3 (Sec. 3.3) and 0.3 (Appendix A): 0.3 used"
+ ],
+ "keys": [
+  "b=0.05|pos=corner|volfrac=0.4",
+  "b=0.1|pos=corner|volfrac=0.4",
+  "b=0.05|pos=mid|volfrac=0.4",
+  "b=0.1|pos=mid|volfrac=0.4"
+ ],
+ "C": [
+  [
+   118.82880921850749,
+   Infinity,
+   Infinity,
+   Infinity
+  ],
+  [
+   118.86287609028463,
+   117.60273041422417,
+   Infinity,
+   Infinity
+  ],
+  [
+   Infinity,
+   Infinity,
+   135.53062154587113,
+   Infinity
+  ],
+  [
+   Infinity,
+   Infinity,
+   135.3779520434979,
+   135.12716433367015
+  ]
+ ],
+ "ref": {
+  "b=0.05|pos=corner|volfrac=0.4": 118.82880921850749,
+  "b=0.1|pos=corner|volfrac=0.4": 117.60273041422417,
+  "b=0.05|pos=mid|volfrac=0.4": 135.3779520434979,
+  "b=0.1|pos=mid|volfrac=0.4": 135.12716433367015
+ },
+ "ref_gap_beaten": {
+  "b=0.05|pos=corner|volfrac=0.4": 0.0,
+  "b=0.1|pos=corner|volfrac=0.4": 0.0,
+  "b=0.05|pos=mid|volfrac=0.4": 0.001127727965068992,
+  "b=0.1|pos=mid|volfrac=0.4": 0.0
+ },
+ "noise": {
+  "b=0.05|pos=corner|volfrac=0.4": 0.000116450293191865,
+  "b=0.1|pos=corner|volfrac=0.4": 6.0944499548927484e-05,
+  "b=0.05|pos=mid|volfrac=0.4": 1.8027330260448857e-05,
+  "b=0.1|pos=mid|volfrac=0.4": 7.716550862947504e-05
+ },
+ "meta": {
+  "b=0.05|pos=corner|volfrac=0.4": {
+   "accepted": true,
+   "kkt": 0.09592013216552797,
+   "wall_s": 93.64579510001931,
+   "n_iter": [
+    322,
+    322
+   ]
+  },
+  "b=0.1|pos=corner|volfrac=0.4": {
+   "accepted": true,
+   "kkt": 0.09432271014412319,
+   "wall_s": 93.28831059997901,
+   "n_iter": [
+    321,
+    322
+   ]
+  },
+  "b=0.05|pos=mid|volfrac=0.4": {
+   "accepted": true,
+   "kkt": 0.07207520264985781,
+   "wall_s": 95.68875999993179,
+   "n_iter": [
+    339,
+    337
+   ]
+  },
+  "b=0.1|pos=mid|volfrac=0.4": {
+   "accepted": true,
+   "kkt": 0.05999999999999994,
+   "wall_s": 94.9841776000103,
+   "n_iter": [
+    332,
+    332
+   ]
+  }
+ },
+ "counter": {
+  "optimizations": 0,
+  "factorizations": 16,
+  "backsubs": 16,
+  "opt_wall_s": 0.0
+ }
+}

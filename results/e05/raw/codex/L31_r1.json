@@ -1,0 +1,329 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"cantilever proportions and cell aspect ratio\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 5.2 specifies a 40-by-120 mesh, but gives no physical dimensions, square-cell assumption, or assignment of mesh directions to beam length and height.\",\n      \"readings\": [\n        \"120 cells along the beam and 40 across it, with square cells: L/H=3.\",\n        \"120 cells along the beam and 40 across it, with cell width/height=1/3: L/H=1.\",\n        \"40 cells along the beam and 120 across it, with square cells: L/H=1/3.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"absolute geometric scale\",\n      \"issue\": \"missing\",\n      \"description\": \"Neither Sec. 5.2 nor the Fig. 1 caption gives lengths or physical units. Overall scale remains unspecified even after choosing proportions.\",\n      \"readings\": [\n        \"For a 3:1 beam, use L=120 and H=40 in consistent units.\",\n        \"For the same proportions, use L=3 and H=1, scaling spatial filter and averaging radii proportionally.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"support_location_extent\",\n      \"entity\": \"placement of the fixed cantilever root in the grid\",\n      \"issue\": \"figure_only\",\n      \"description\": \"The Fig. 1 caption identifies a cantilever, but the supplied text does not locate its fixed root on a particular grid side; Sec. 5.2 refers to the unavailable Fig. 1a.\",\n      \"readings\": [\n        \"Clamp the entire left edge; the loaded tip is on the right.\",\n        \"Clamp the entire right edge; the loaded tip is on the left.\",\n        \"Orient the beam vertically and clamp its entire bottom edge.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"finite-element formulation\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 5.2 gives mesh dimensions, but neither it nor Sec. 3.2 specifies element interpolation or integration.\",\n      \"readings\": [\n        \"Four-node bilinear quadrilaterals with 2-by-2 Gauss integration.\",\n        \"Eight-node serendipity quadrilaterals with 3-by-3 Gauss integration.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"conversion from load angle to force components\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 5.2 and the Fig. 1 caption specify angles in [0, pi], but do not define the zero direction or positive angular sense. Sec. 5.3 supplies no component formula.\",\n      \"readings\": [\n        \"Measure counterclockwise from +x: Fx=F cos(theta), Fy=F sin(theta).\",\n        \"Measure clockwise from +x: Fx=F cos(theta), Fy=-F sin(theta).\",\n        \"Measure clockwise from +y: Fx=F sin(theta), Fy=F cos(theta).\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_direction\",\n      \"entity\": \"individual load angle represented by Fig. 1a\",\n      \"issue\": \"conflicting\",\n      \"description\": \"The Fig. 1 caption gives only a distribution. Sec. 5.4 attributes four specific angles to Fig. 1, although Fig. 4's caption describes the corresponding comparison of generated and ground-truth layouts.\",\n      \"readings\": [\n        \"Take Sec. 5.4 literally and run separate problems at 0.3pi, 0.4pi, 0.45pi, and 0.55pi for Fig. 1.\",\n        \"Treat those four angles as Fig. 4 settings; Fig. 1a is another unspecified draw, for example theta=0.5pi.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"load_magnitude\",\n      \"entity\": \"single nodal point force\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 5.2\u20135.3 specify the point load's angle and component representation, but never give its magnitude or force units.\",\n      \"readings\": [\n        \"Use a constant force magnitude F=1 in consistent solver units.\",\n        \"Use a constant force magnitude F=1000 in the same units.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"prescribed solid or void cells\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 5.2 and the Fig. 1 caption give no passive-region mask or explicit confirmation that attachment and loading cells are freely designable.\",\n      \"readings\": [\n        \"Optimize every cell; prescribe no passive regions.\",\n        \"Keep the entire root-adjacent cell column solid.\",\n        \"Keep the root-adjacent column and the two tip-adjacent cells incident on the middle loading node solid.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"shared global and local density threshold alpha\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.2 defines both density constraints using alpha, and Algorithm 2 requires alpha as input, but no Case 1 value is supplied.\",\n      \"readings\": [\n        \"Set alpha=0.3 for both constraints.\",\n        \"Set alpha=0.4 for both constraints.\",\n        \"Set alpha=0.5 for both constraints.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"solid material stiffness scale\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.2 introduces K without supplying Young's modulus or another numerical scale for the solid constitutive tensor.\",\n      \"readings\": [\n        \"Normalize the solid Young's modulus to E=1.\",\n        \"Use E=210000 N/mm^2 with consistent force and length units.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"constitutive tensor beyond its overall stiffness scale\",\n      \"issue\": \"missing\",\n      \"description\": \"The text supplies neither Poisson's ratio nor an explicit isotropy assumption or material-axis orientation.\",\n      \"readings\": [\n        \"Use an isotropic material with Poisson's ratio 0.\",\n        \"Use an isotropic material with Poisson's ratio 0.3.\",\n        \"Use an orthotropic material with E_parallel/E_transverse=2, nu_parallel_transverse=0.25, and G=0.4 E_transverse, aligned with the beam.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"two-dimensional elastic idealization\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 5.2 calls Case 1 a 2D structure, but does not specify plane stress or plane strain.\",\n      \"readings\": [\n        \"Use plane stress.\",\n        \"Use plane strain.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"uniform out-of-plane thickness\",\n      \"issue\": \"missing\",\n      \"description\": \"No thickness or per-unit-thickness convention is stated for assembling the 2D stiffness matrix and interpreting the point force.\",\n      \"readings\": [\n        \"Use unit thickness t=1.\",\n        \"Use uniform thickness t=0.1 in the selected length units.\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"mapping from physical density rho to element stiffness\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 3.2 specifies x-to-rho filtering and projection, but never defines rho-to-K interpolation. Its p=16 is the local-density norm exponent, not a stated stiffness penalization exponent.\",\n      \"readings\": [\n        \"Use linear stiffness interpolation proportional to rho.\",\n        \"Use SIMP interpolation proportional to rho^3.\",\n        \"Use SIMP interpolation proportional to rho^4.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"residual stiffness assigned to void\",\n      \"issue\": \"missing\",\n      \"description\": \"Although zero density is permitted, Sec. 3.2 gives no minimum stiffness or singular-stiffness regularization.\",\n      \"readings\": [\n        \"Use E_min=0.\",\n        \"Use E_min=10^-9 E_solid.\",\n        \"Use E_min=10^-3 E_solid.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"density-filter radius r_e\",\n      \"issue\": \"missing\",\n      \"description\": \"Eqs. (3)\u2013(4) and Algorithm 2 require r_e, but no Case 1 value or unit convention is supplied. Let h denote the smallest selected cell dimension.\",\n      \"readings\": [\n        \"Use r_e=1.5h everywhere.\",\n        \"Use r_e=3h everywhere.\",\n        \"Use r_e=0.05L everywhere.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"filter-neighborhood membership M_e\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 3.2 calls M_e the set of neighboring elements without explicitly defining membership or self-inclusion; the weight formula alone does not select that set.\",\n      \"readings\": [\n        \"Include the element itself and every element centroid within r_e.\",\n        \"Include every other element centroid within r_e, excluding the element itself.\",\n        \"Include the element itself and only its edge-sharing neighbors, using Eq. (4) weights.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"projection continuation endpoints\",\n      \"issue\": \"missing\",\n      \"description\": \"Algorithm 2 doubles beta, but neither the initial beta nor the stopping input beta_t is supplied for Case 1.\",\n      \"readings\": [\n        \"Start beta=1 and set beta_t=8.\",\n        \"Start beta=1 and set beta_t=32.\",\n        \"Start beta=2 and set beta_t=32.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"local-density averaging radius R_e\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 5.2 invokes (TO), which includes the local constraint, but no numerical R_e is given. Under the spatial-neighborhood interpretation, let h be the smallest cell dimension.\",\n      \"readings\": [\n        \"Use R_e=2h everywhere.\",\n        \"Use R_e=6h everywhere.\",\n        \"Use R_e at least as large as the domain diagonal, so every neighborhood contains all elements.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"meaning of the local-density neighborhood N_e\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Sec. 3.2 defines x_i as scalar design variables and z_i as element coordinates, but defines the supposedly spatial local neighborhood using distances between x_i and x_e.\",\n      \"readings\": [\n        \"Treat x in the neighborhood definition as a notation error and use centroid distances ||z_i-z_e||<=R_e.\",\n        \"Read the equation literally and select elements by scalar design-value proximity |x_i-x_e|<=R_e, updating membership as x changes.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"permitted global and local constraint violations\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Algorithm 2 continues while either g_i>0, implying zero positive feasibility tolerance. Sec. 5.4 instead attributes positive ground-truth violations to nonzero error thresholds without specifying those thresholds.\",\n      \"readings\": [\n        \"Require g_0<=0 and g_1<=0 literally.\",\n        \"Allow g_0<=10^-3 and g_1<=10^-3.\",\n        \"Allow g_0<=0.05 and g_1<=10^-3.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"final optimality stopping test\",\n      \"issue\": \"vague\",\n      \"description\": \"Algorithm 2 declares epsilon_opt=10^-3 but never uses it. Its inner loop instead uses epsilon=1, with no tightening rule, leaving the intended role of the optimality tolerance unclear.\",\n      \"readings\": [\n        \"Leave epsilon_opt unused and apply the listed direction-magnitude threshold epsilon=1.\",\n        \"Use epsilon_opt=10^-3 as the final direction-magnitude threshold.\",\n        \"Tighten epsilon from 1 toward 10^-3 between augmented-Lagrangian updates.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"enforcement of design-variable box bounds\",\n      \"issue\": \"conflicting\",\n      \"description\": \"(TO) requires x_e in [0,1], but Algorithm 2 clips only the increment to [-0.1,0.1]; its trial update contains no box projection or feasibility restriction.\",\n      \"readings\": [\n        \"Project every trial design component onto [0,1].\",\n        \"Restrict the line-search step length so every trial component remains in [0,1].\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"augmented-Lagrangian quadratic penalty coefficient\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Algorithm 2's merit function contains 0.5 g_i^2/r_i, whose derivative contributes g_i/r_i, while its search direction and multiplier update use 2g_i/r_i.\",\n      \"readings\": [\n        \"Keep the stated merit function and use the matching coefficient mu_i+g_i/r_i in its gradient.\",\n        \"Keep the stated search-direction coefficient and change the quadratic merit penalty to g_i^2/r_i.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"inequality activation and multiplier feasibility\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Algorithm 2 activates constraint-gradient terms only for g_i>0, but evaluates unconditional quadratic merit penalties. Its multiplier update can also produce negative multipliers, contrary to Eq. (5).\",\n      \"readings\": [\n        \"Use a consistent projected inequality augmented Lagrangian with nonnegative multiplier updates.\",\n        \"Use positive-part penalties max(g_i,0)^2 and update nonnegative multipliers only for violated constraints.\",\n        \"Follow the listed unconditional merit function and unprojected signed multiplier updates literally.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"line-search exit after an accepted trial\",\n      \"issue\": \"missing\",\n      \"description\": \"Algorithm 2 lines 11\u201322 contain an unconditional while loop, but no break or return after accepting a trial; a finite line-search exit must be supplied.\",\n      \"readings\": [\n        \"Exit immediately after the first trial satisfying L'<=L, promoting the accepted trial state.\",\n        \"Continue accepted steps along the current direction until max|Delta x|<=10^-3, then return to recompute the direction.\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"consistent compliance and sensitivity normalization\",\n      \"issue\": \"conflicting\",\n      \"description\": \"Sec. 3.2 defines f=0.5 u^T K u, but Eq. (5) uses the sensitivity -u^T(dK/dx)u, corresponding to full compliance rather than that half-compliance objective.\",\n      \"readings\": [\n        \"Use f=0.5 u^T K u with sensitivity -0.5 u^T(dK/dx)u.\",\n        \"Use f=u^T K u with sensitivity -u^T(dK/dx)u.\"\n      ],\n      \"effect\": \"scale_only\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "cantilever proportions and cell aspect ratio",
+    "issue": "vague",
+    "description": "Sec. 5.2 specifies a 40-by-120 mesh, but gives no physical dimensions, square-cell assumption, or assignment of mesh directions to beam length and height.",
+    "readings": [
+     "120 cells along the beam and 40 across it, with square cells: L/H=3.",
+     "120 cells along the beam and 40 across it, with cell width/height=1/3: L/H=1.",
+     "40 cells along the beam and 120 across it, with square cells: L/H=1/3."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "absolute geometric scale",
+    "issue": "missing",
+    "description": "Neither Sec. 5.2 nor the Fig. 1 caption gives lengths or physical units. Overall scale remains unspecified even after choosing proportions.",
+    "readings": [
+     "For a 3:1 beam, use L=120 and H=40 in consistent units.",
+     "For the same proportions, use L=3 and H=1, scaling spatial filter and averaging radii proportionally."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "support_location_extent",
+    "entity": "placement of the fixed cantilever root in the grid",
+    "issue": "figure_only",
+    "description": "The Fig. 1 caption identifies a cantilever, but the supplied text does not locate its fixed root on a particular grid side; Sec. 5.2 refers to the unavailable Fig. 1a.",
+    "readings": [
+     "Clamp the entire left edge; the loaded tip is on the right.",
+     "Clamp the entire right edge; the loaded tip is on the left.",
+     "Orient the beam vertically and clamp its entire bottom edge."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "finite-element formulation",
+    "issue": "missing",
+    "description": "Sec. 5.2 gives mesh dimensions, but neither it nor Sec. 3.2 specifies element interpolation or integration.",
+    "readings": [
+     "Four-node bilinear quadrilaterals with 2-by-2 Gauss integration.",
+     "Eight-node serendipity quadrilaterals with 3-by-3 Gauss integration."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "conversion from load angle to force components",
+    "issue": "vague",
+    "description": "Sec. 5.2 and the Fig. 1 caption specify angles in [0, pi], but do not define the zero direction or positive angular sense. Sec. 5.3 supplies no component formula.",
+    "readings": [
+     "Measure counterclockwise from +x: Fx=F cos(theta), Fy=F sin(theta).",
+     "Measure clockwise from +x: Fx=F cos(theta), Fy=-F sin(theta).",
+     "Measure clockwise from +y: Fx=F sin(theta), Fy=F cos(theta)."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "individual load angle represented by Fig. 1a",
+    "issue": "conflicting",
+    "description": "The Fig. 1 caption gives only a distribution. Sec. 5.4 attributes four specific angles to Fig. 1, although Fig. 4's caption describes the corresponding comparison of generated and ground-truth layouts.",
+    "readings": [
+     "Take Sec. 5.4 literally and run separate problems at 0.3pi, 0.4pi, 0.45pi, and 0.55pi for Fig. 1.",
+     "Treat those four angles as Fig. 4 settings; Fig. 1a is another unspecified draw, for example theta=0.5pi."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "single nodal point force",
+    "issue": "missing",
+    "description": "Secs. 5.2\u20135.3 specify the point load's angle and component representation, but never give its magnitude or force units.",
+    "readings": [
+     "Use a constant force magnitude F=1 in consistent solver units.",
+     "Use a constant force magnitude F=1000 in the same units."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "passive_region",
+    "entity": "prescribed solid or void cells",
+    "issue": "missing",
+    "description": "Sec. 5.2 and the Fig. 1 caption give no passive-region mask or explicit confirmation that attachment and loading cells are freely designable.",
+    "readings": [
+     "Optimize every cell; prescribe no passive regions.",
+     "Keep the entire root-adjacent cell column solid.",
+     "Keep the root-adjacent column and the two tip-adjacent cells incident on the middle loading node solid."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "shared global and local density threshold alpha",
+    "issue": "missing",
+    "description": "Sec. 3.2 defines both density constraints using alpha, and Algorithm 2 requires alpha as input, but no Case 1 value is supplied.",
+    "readings": [
+     "Set alpha=0.3 for both constraints.",
+     "Set alpha=0.4 for both constraints.",
+     "Set alpha=0.5 for both constraints."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "solid material stiffness scale",
+    "issue": "missing",
+    "description": "Sec. 3.2 introduces K without supplying Young's modulus or another numerical scale for the solid constitutive tensor.",
+    "readings": [
+     "Normalize the solid Young's modulus to E=1.",
+     "Use E=210000 N/mm^2 with consistent force and length units."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "constitutive tensor beyond its overall stiffness scale",
+    "issue": "missing",
+    "description": "The text supplies neither Poisson's ratio nor an explicit isotropy assumption or material-axis orientation.",
+    "readings": [
+     "Use an isotropic material with Poisson's ratio 0.",
+     "Use an isotropic material with Poisson's ratio 0.3.",
+     "Use an orthotropic material with E_parallel/E_transverse=2, nu_parallel_transverse=0.25, and G=0.4 E_transverse, aligned with the beam."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "two-dimensional elastic idealization",
+    "issue": "missing",
+    "description": "Sec. 5.2 calls Case 1 a 2D structure, but does not specify plane stress or plane strain.",
+    "readings": [
+     "Use plane stress.",
+     "Use plane strain."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "uniform out-of-plane thickness",
+    "issue": "missing",
+    "description": "No thickness or per-unit-thickness convention is stated for assembling the 2D stiffness matrix and interpreting the point force.",
+    "readings": [
+     "Use unit thickness t=1.",
+     "Use uniform thickness t=0.1 in the selected length units."
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "mapping from physical density rho to element stiffness",
+    "issue": "missing",
+    "description": "Sec. 3.2 specifies x-to-rho filtering and projection, but never defines rho-to-K interpolation. Its p=16 is the local-density norm exponent, not a stated stiffness penalization exponent.",
+    "readings": [
+     "Use linear stiffness interpolation proportional to rho.",
+     "Use SIMP interpolation proportional to rho^3.",
+     "Use SIMP interpolation proportional to rho^4."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "residual stiffness assigned to void",
+    "issue": "missing",
+    "description": "Although zero density is permitted, Sec. 3.2 gives no minimum stiffness or singular-stiffness regularization.",
+    "readings": [
+     "Use E_min=0.",
+     "Use E_min=10^-9 E_solid.",
+     "Use E_min=10^-3 E_solid."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "density-filter radius r_e",
+    "issue": "missing",
+    "description": "Eqs. (3)\u2013(4) and Algorithm 2 require r_e, but no Case 1 value or unit convention is supplied. Let h denote the smallest selected cell dimension.",
+    "readings": [
+     "Use r_e=1.5h everywhere.",
+     "Use r_e=3h everywhere.",
+     "Use r_e=0.05L everywhere."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "filter-neighborhood membership M_e",
+    "issue": "vague",
+    "description": "Sec. 3.2 calls M_e the set of neighboring elements without explicitly defining membership or self-inclusion; the weight formula alone does not select that set.",
+    "readings": [
+     "Include the element itself and every element centroid within r_e.",
+     "Include every other element centroid within r_e, excluding the element itself.",
+     "Include the element itself and only its edge-sharing neighbors, using Eq. (4) weights."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "projection continuation endpoints",
+    "issue": "missing",
+    "description": "Algorithm 2 doubles beta, but neither the initial beta nor the stopping input beta_t is supplied for Case 1.",
+    "readings": [
+     "Start beta=1 and set beta_t=8.",
+     "Start beta=1 and set beta_t=32.",
+     "Start beta=2 and set beta_t=32."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "local-density averaging radius R_e",
+    "issue": "missing",
+    "description": "Sec. 5.2 invokes (TO), which includes the local constraint, but no numerical R_e is given. Under the spatial-neighborhood interpretation, let h be the smallest cell dimension.",
+    "readings": [
+     "Use R_e=2h everywhere.",
+     "Use R_e=6h everywhere.",
+     "Use R_e at least as large as the domain diagonal, so every neighborhood contains all elements."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "meaning of the local-density neighborhood N_e",
+    "issue": "conflicting",
+    "description": "Sec. 3.2 defines x_i as scalar design variables and z_i as element coordinates, but defines the supposedly spatial local neighborhood using distances between x_i and x_e.",
+    "readings": [
+     "Treat x in the neighborhood definition as a notation error and use centroid distances ||z_i-z_e||<=R_e.",
+     "Read the equation literally and select elements by scalar design-value proximity |x_i-x_e|<=R_e, updating membership as x changes."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "permitted global and local constraint violations",
+    "issue": "conflicting",
+    "description": "Algorithm 2 continues while either g_i>0, implying zero positive feasibility tolerance. Sec. 5.4 instead attributes positive ground-truth violations to nonzero error thresholds without specifying those thresholds.",
+    "readings": [
+     "Require g_0<=0 and g_1<=0 literally.",
+     "Allow g_0<=10^-3 and g_1<=10^-3.",
+     "Allow g_0<=0.05 and g_1<=10^-3."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "final optimality stopping test",
+    "issue": "vague",
+    "description": "Algorithm 2 declares epsilon_opt=10^-3 but never uses it. Its inner loop instead uses epsilon=1, with no tightening rule, leaving the intended role of the optimality tolerance unclear.",
+    "readings": [
+     "Leave epsilon_opt unused and apply the listed direction-magnitude threshold epsilon=1.",
+     "Use epsilon_opt=10^-3 as the final direction-magnitude threshold.",
+     "Tighten epsilon from 1 toward 10^-3 between augmented-Lagrangian updates."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "enforcement of design-variable box bounds",
+    "issue": "conflicting",
+    "description": "(TO) requires x_e in [0,1], but Algorithm 2 clips only the increment to [-0.1,0.1]; its trial update contains no box projection or feasibility restriction.",
+    "readings": [
+     "Project every trial design component onto [0,1].",
+     "Restrict the line-search step length so every trial component remains in [0,1]."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "augmented-Lagrangian quadratic penalty coefficient",
+    "issue": "conflicting",
+    "description": "Algorithm 2's merit function contains 0.5 g_i^2/r_i, whose derivative contributes g_i/r_i, while its search direction and multiplier update use 2g_i/r_i.",
+    "readings": [
+     "Keep the stated merit function and use the matching coefficient mu_i+g_i/r_i in its gradient.",
+     "Keep the stated search-direction coefficient and change the quadratic merit penalty to g_i^2/r_i."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "inequality activation and multiplier feasibility",
+    "issue": "conflicting",
+    "description": "Algorithm 2 activates constraint-gradient terms only for g_i>0, but evaluates unconditional quadratic merit penalties. Its multiplier update can also produce negative multipliers, contrary to Eq. (5).",
+    "readings": [
+     "Use a consistent projected inequality augmented Lagrangian with nonnegative multiplier updates.",
+     "Use positive-part penalties max(g_i,0)^2 and update nonnegative multipliers only for violated constraints.",
+     "Follow the listed unconditional merit function and unprojected signed multiplier updates literally."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "line-search exit after an accepted trial",
+    "issue": "missing",
+    "description": "Algorithm 2 lines 11\u201322 contain an unconditional while loop, but no break or return after accepting a trial; a finite line-search exit must be supplied.",
+    "readings": [
+     "Exit immediately after the first trial satisfying L'<=L, promoting the accepted trial state.",
+     "Continue accepted steps along the current direction until max|Delta x|<=10^-3, then return to recompute the direction."
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "consistent compliance and sensitivity normalization",
+    "issue": "conflicting",
+    "description": "Sec. 3.2 defines f=0.5 u^T K u, but Eq. (5) uses the sensitivity -u^T(dK/dx)u, corresponding to full compliance rather than that half-compliance objective.",
+    "readings": [
+     "Use f=0.5 u^T K u with sensitivity -0.5 u^T(dK/dx)u.",
+     "Use f=u^T K u with sensitivity -u^T(dK/dx)u."
+    ],
+    "effect": "scale_only"
+   }
+  ]
+ },
+ "wall_s": 867.6686236858368,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L31",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 1,
+ "locator": "Sec. 5.2, Case 1, Fig. 1",
+ "finished": "2026-10-22T21:05:35"
+}

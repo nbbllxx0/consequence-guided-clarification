@@ -1,0 +1,86 @@
+{
+ "task": "L35",
+ "source": {
+  "arxiv": "2210.01315",
+  "position": 172
+ },
+ "dim": 3,
+ "slots": {
+  "load": [
+   "line",
+   "corners"
+  ],
+  "volfrac": [
+   0.3
+  ]
+ },
+ "nominal": {
+  "load": "line",
+  "volfrac": 0.3
+ },
+ "mandatory": [
+  "volfrac"
+ ],
+ "reasons": {
+  "load": "two arrows at the bottom corners of the end face; line load vs two corner point loads (Fig. 3(a))",
+  "volfrac": "V* a symbol only: mandatory"
+ },
+ "recon": [
+  "neural density field in source; SIMP",
+  "line load as raised-cosine strip across the depth",
+  "penalty p not stated: p=3 (solver setting)",
+  "vf fixed to 0.3 after asking"
+ ],
+ "keys": [
+  "load=line|volfrac=0.3",
+  "load=corners|volfrac=0.3"
+ ],
+ "C": [
+  [
+   12.989099091049106,
+   14.36352773120091
+  ],
+  [
+   59657.64601799166,
+   12.79371928030212
+  ]
+ ],
+ "ref": {
+  "load=line|volfrac=0.3": 12.989099091046892,
+  "load=corners|volfrac=0.3": 12.79371928030212
+ },
+ "ref_gap_beaten": {
+  "load=line|volfrac=0.3": 0.0,
+  "load=corners|volfrac=0.3": 4.440892098500626e-14
+ },
+ "noise": {
+  "load=line|volfrac=0.3": 0.025632878627412977,
+  "load=corners|volfrac=0.3": 0.040563588296794746
+ },
+ "meta": {
+  "load=line|volfrac=0.3": {
+   "accepted": true,
+   "kkt": 0.6713884823847397,
+   "wall_s": 177.2035550000146,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "load=corners|volfrac=0.3": {
+   "accepted": true,
+   "kkt": 0.20112261285777944,
+   "wall_s": 174.73470109992195,
+   "n_iter": [
+    209,
+    201
+   ]
+  }
+ },
+ "counter": {
+  "optimizations": 0,
+  "factorizations": 2,
+  "backsubs": 4,
+  "opt_wall_s": 0.0
+ }
+}

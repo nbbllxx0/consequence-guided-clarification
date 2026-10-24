@@ -1,0 +1,23 @@
+You are given the full text of a research paper (references removed; figure captions are kept,
+but the figure images are NOT available to you). Focus only on this example: {loc}.
+
+Goal: an engineer must re-run exactly this example on a structured-grid, single-material, linear-elastic,
+minimum-compliance (volume-constrained) topology-optimization solver.
+
+List every detail needed to set up that problem (design domain and its extent, supports, loads, passive
+regions, volume fraction, material, filter or solver settings, mesh) that the text does NOT determine
+uniquely: missing, vague, conflicting between places, or conveyed only by a figure you cannot see.
+For each detail give:
+- category (from the allowed list),
+- entity (what it applies to, e.g. 'load on right edge'),
+- issue type,
+- a short description with where in the text it arises,
+- the admissible readings: a finite list of concrete alternatives an engineer could reasonably adopt
+  (values, positions as fractions of a length, or short descriptions),
+- effect: 'layout' if the readings can change the optimal layout, 'scale_only' if they only scale the
+  compliance value (e.g. load magnitude, Young's modulus), 'unsure' otherwise.
+Do not list details that the text states unambiguously. Use only the text below; do not run commands,
+browse, or read any files. Answer with JSON that matches the provided schema.
+
+=== PAPER TEXT ===
+{text}

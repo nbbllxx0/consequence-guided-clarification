@@ -1,0 +1,310 @@
+{
+ "raw": "{\"items\": [{\"category\": \"load_position\", \"entity\": \"tip load on the free (right) edge\", \"issue\": \"vague\", \"description\": \"Sec. 3.5 says only 'cantilever beam (tip load, fixed left edge)'. The tip is the free right edge, but where on that edge the load acts is not stated. The figures that would show it (Figs. 6\\u20139) are not available.\", \"readings\": [\"mid-height of the right edge (y = 0.5\\u00b7H)\", \"bottom-right corner (y = 0; 99-line/top88 cantilever convention)\", \"top-right corner (y = H)\"], \"effect\": \"layout\"}, {\"category\": \"load_extent_distribution\", \"entity\": \"tip load\", \"issue\": \"missing\", \"description\": \"Sec. 3.5 does not say whether the tip load is one nodal force or is spread over several nodes or a segment of the right edge.\", \"readings\": [\"single nodal point force\", \"force spread over a few nodes (\\u22482\\u20135) around the load point\", \"uniform (or parabolic) shear traction over the whole right edge\"], \"effect\": \"layout\"}, {\"category\": \"load_direction\", \"entity\": \"tip load\", \"issue\": \"vague\", \"description\": \"'Tip load' (Sec. 3.5) gives no direction. A transverse (vertical) force is the usual convention. Its sign does not affect compliance or layout in linear elasticity.\", \"readings\": [\"vertical/transverse, downward (\\u2212y); sign immaterial for compliance and layout\", \"horizontal/axial tip force (unconventional)\"], \"effect\": \"layout\"}, {\"category\": \"load_magnitude\", \"entity\": \"tip load\", \"issue\": \"missing\", \"description\": \"No force magnitude is given anywhere. The compliance values in Table 5 (\\u224876\\u201381) suggest a normalized unit load with E0 = 1, but this is never stated.\", \"readings\": [\"|F| = 1 (normalized)\", \"a physical magnitude (e.g. 1 kN)\"], \"effect\": \"scale_only\"}, {\"category\": \"material\", \"entity\": \"solid Young's modulus E0\", \"issue\": \"missing\", \"description\": \"Sec. 3.5 gives only \\u03bd = 0.3 and the ratio Emin/E0 = 1e-9. The value of E0 itself is never stated.\", \"readings\": [\"E0 = 1 (normalized), Emin = 1e-9\", \"a physical modulus (e.g. 210 GPa or 70 GPa)\"], \"effect\": \"scale_only\"}, {\"category\": \"material\", \"entity\": \"2-D constitutive assumption\", \"issue\": \"missing\", \"description\": \"The paper does not say whether the 2-D problems are plane stress or plane strain. With \\u03bd = 0.3, plane strain is equivalent to plane stress with \\u03bd \\u2248 0.43, which changes the element stiffness non-proportionally.\", \"readings\": [\"plane stress (99-line/top88 element matrix)\", \"plane strain\"], \"effect\": \"layout\"}, {\"category\": \"domain_extent\", \"entity\": \"out-of-plane thickness of the 2-D domain\", \"issue\": \"missing\", \"description\": \"No thickness is given for the 2-D domain.\", \"readings\": [\"t = 1 (unit thickness)\", \"another thickness value\"], \"effect\": \"scale_only\"}, {\"category\": \"domain_extent\", \"entity\": \"design domain orientation, aspect ratio and physical size\", \"issue\": \"vague\", \"description\": \"Tables 4/5 give only '120\\u00d760' (elements). Nothing explicitly says that 120 runs along the beam axis (horizontal, away from the fixed left edge), that the elements are square, or what the physical L\\u00d7H is. A 2:1 domain of unit square elements is implied only by convention.\", \"readings\": [\"nelx = 120 along the beam axis \\u00d7 nely = 60 in height, unit square elements (L:H = 2:1)\", \"same 2:1 domain at a physical scale (e.g. 2 \\u00d7 1 with h = 1/60), rmin still counted in element widths\", \"60 wide \\u00d7 120 tall (reversed row/column convention)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"filter radius rmin units\", \"issue\": \"vague\", \"description\": \"The rmin values (fixed 1.5; Table 1 1.50\\u21921.20; tail 1.20; range [1.1, 4.0]) are given without units, and Eq. 3 uses distances between element centroids. They only make sense in element widths, but the element size is never stated.\", \"readings\": [\"rmin in element widths (h = 1): 1.5 \\u2192 3\\u00d73 stencil incl. diagonals, 1.2 \\u2192 5-point stencil\", \"rmin in physical length units of a non-unit element size (changes the stencil)\"], \"effect\": \"layout\"}, {\"category\": \"volume_fraction\", \"entity\": \"volume constraint Vf = 0.40\", \"issue\": \"missing\", \"description\": \"Vf = 0.40 is stated (Sec. 3.5, Table 4), but not which field the volume constraint and the OC bisection act on, or whether it is an equality or a \\u2264 constraint. With \\u03b2 up to 32 and \\u03b7 = 0.5, the volumes of \\u03c1, \\u03c1\\u0304 and \\u03c1\\u0303 differ substantially.\", \"readings\": [\"on the physical (projected) density \\u03c1\\u0303\", \"on the filtered density \\u03c1\\u0304\", \"on the raw design variables \\u03c1\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"initial density field / role of random seeds\", \"issue\": \"missing\", \"description\": \"The starting density is never given. Sec. 4.5 ('tail starts from uniform density') and \\u03c3 = 0.000 for the fixed and schedule-only controllers suggest a deterministic uniform start. But Sec. 1.2 speaks of runs 'perturbed by different random seeds', and Sec. 3.5 reports n = 5 'independent random seeds' without saying what is randomized.\", \"readings\": [\"uniform \\u03c1 = Vf = 0.40 (seeds affect only LLM sampling)\", \"uniform 0.40 plus a small seed-dependent random perturbation\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"OC update scheme\", \"issue\": \"missing\", \"description\": \"Sec. 3.1 says only 'OC method with move limit \\u03b4'. The damping exponent, the Lagrange-multiplier bisection range and tolerance, whether \\u03b4 is an absolute bound on the design variable, and the density bounds are not given.\", \"readings\": [\"top88-style OC: damping exponent 0.5, absolute move \\u00b1\\u03b4, bisection on \\u03bb to relative tol 1e-3, \\u03c1 \\u2208 [0,1]\", \"OC with a different damping exponent (e.g. 0.3) and/or a tighter bisection tolerance (e.g. 1e-6)\", \"\\u03b4 applied as a relative (proportional) move limit\"], \"effect\": \"layout\"}, {\"category\": \"passive_region\", \"entity\": \"passive solid/void elements\", \"issue\": \"missing\", \"description\": \"Sec. 3.5 mentions no passive regions for the cantilever. Nothing says whether the whole 120\\u00d760 domain is designable or whether a solid pad sits under the point load.\", \"readings\": [\"no passive elements (whole 120\\u00d760 domain designable)\", \"small passive solid patch at the load application point\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"best valid snapshot \\u03c1* entering the 40-iteration tail\", \"issue\": \"conflicting\", \"description\": \"Sec. 3.5 defines \\u03c1* as the field with the lowest compliance 'while satisfying the volume constraint'. The Table 7 footnote and Sec. 4.5 add a validity gate 'p \\u2265 3.0 and G < 0.25', stated only for the 3-D and tail-only runs. The volume tolerance, whether compliances evaluated at different p/\\u03b2 are compared directly, and whether \\u03c1, \\u03c1\\u0304 or \\u03c1\\u0303 is stored and reloaded for the tail are not stated.\", \"readings\": [\"valid = volume constraint satisfied only; snapshot stores the raw design field \\u03c1\", \"valid = volume satisfied AND p \\u2265 3.0 AND G < 0.25; snapshot stores \\u03c1\", \"same gate, but the snapshot stores and reloads the physical field \\u03c1\\u0303\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"schedule-only (ablation) controller timing\", \"issue\": \"conflicting\", \"description\": \"Sec. 3.4 says the schedule-only controller executes the Table 1 stages. At N = 300 that means \\u03b2 4\\u219216 over it. 150\\u2013225 and \\u03b2 = 32 only from it. 225. But Sec. 4.3 says it 'commits to \\u03b2 = 32 by iteration 80', and the Fig. 9 caption says \\u03b2 \\u2265 16 by iteration 80. The ramp shapes within stages are not stated, and Table 3 (PHASE.penal = 22, PHASE.sharp = 16, BETA_DOUBLE = 10) hints at phases counted in iterations instead.\", \"readings\": [\"Table 1 budget fractions of N = 300: boundaries at it. 24/150/225, linear p ramps (1\\u21922, 2\\u21924.5), \\u03b2 1\\u21924\\u219216 within stages 2\\u20133, \\u03b2 = 32 from it. 225, rmin/\\u03b4 stepped 1.50/0.20 \\u2192 1.35/0.15 \\u2192 1.25/0.08 \\u2192 1.20/0.05\", \"iteration-count phases from Table 3 (Stage 2 = 22 its, Stage 3 = 16 its), so \\u03b2 = 32 is reached at \\u2248 it. 60\\u201380\", \"fallback-style ramp (p over 12 its, then \\u03b2 doubling every 10 its up to 32), reaching \\u03b2 = 32 by \\u2248 it. 60\\u201380 as in Sec. 4.3\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"three-field continuation controller\", \"issue\": \"vague\", \"description\": \"Sec. 3.4 says only: 'p ramps linearly from 1.0 to 4.5 over 30 iterations; \\u03b2 doubles every 10 iterations after the ramp; rmin is tightened in the late stage'. The initial \\u03b2, the \\u03b2 cap, the start/end rmin and when it is tightened, \\u03b4, and any restart rule are not given.\", \"readings\": [\"\\u03b2 = 1 doubling at it. 40, 50, \\u2026 capped at 32; rmin 1.5 \\u2192 1.2 over the last \\u224825% of N; \\u03b4 = 0.2 constant\", \"\\u03b2 capped at 64 (Table 2 upper bound); rmin 1.5 \\u2192 1.2; \\u03b4 lowered to 0.05 late\", \"rmin stepped 1.5 \\u2192 1.35 \\u2192 1.25 \\u2192 1.20 and \\u03b4 0.2 \\u2192 0.05 following the Table 1 stage values\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"expert heuristic controller\", \"issue\": \"vague\", \"description\": \"Sec. 3.4 gives only 'step-wise p ramp (+0.75 per 10 iterations), \\u03b2 raised only once p \\u2265 3.0, restart when C > 1.12\\u00b7C*'. The starting and maximum p, the \\u03b2 increment rule/period/cap, the rmin and \\u03b4 schedules, and what a restart reloads or resets are not given.\", \"readings\": [\"p = 1.0 + 0.75 every 10 its capped at 4.5; \\u03b2 doubling every 10 its once p \\u2265 3 (\\u2248 it. 30) up to 32; rmin = 1.5, \\u03b4 = 0.2 constant; restart reloads \\u03c1* only\", \"p starting at 1.5; \\u03b2 doubling every 20 its capped at 16\\u201332; rmin/\\u03b4 lowered to 1.2/0.05 late\", \"\\u03b2, rmin and \\u03b4 following the Table 1 stage values once p \\u2265 3; restart also resets p/\\u03b2 to the snapshot's values\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"LLM agent controller (prompt, model, restart semantics)\", \"issue\": \"missing\", \"description\": \"The verbatim system prompt is withheld ('released upon publication'). The model is a preview build (gemini-3.1-flash-lite-preview), and run-to-run \\u03c3 = 0.021 shows the outputs are not deterministic. The parameters before the first call (it. 1\\u20134) and what a restart resets (density only, or also p/\\u03b2/rmin/\\u03b4) are not specified. Only the Table 1 scaffold, the Table 2 bounds and gate, k = 5 and temperature 0 are given.\", \"readings\": [\"replay the Table 6 excerpt as a piecewise-constant schedule (k = 5) with restarts to \\u03c1* at it. 165, 200, 225, 300\", \"re-run an available LLM at temperature 0 with a prompt rebuilt from Tables 1\\u20132 and the \\u03b2 \\u2264 8 (G > 0.20) gate, k = 5\", \"use the deterministic fallback ramp (Table 1 / Table 3 constants)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"LLM agent stage breakpoints and \\u03b2/gate trace\", \"issue\": \"conflicting\", \"description\": \"Table 1 puts Sharpening at 50\\u201375% and Converge at 75\\u2013100% of N (it. 150/225), but Table 6 uses 45\\u201355% and 67\\u2013100% (it. 135/200). Sec. 4.2 says the gate was active at it. 85\\u2013134 with requested \\u03b2 advances 'silently capped', but Table 6 shows the gate off at it. 85 and \\u03b2 = 4, which a \\u03b2 \\u2264 8 cap cannot produce. Sec. 4.1 and Fig. 8 put the G = 0.20 crossing at \\u2248 it. 150, while Table 6 shows the gate off from it. 135.\", \"readings\": [\"Table 1 breakpoints (it. 24/150/225 at N = 300)\", \"Table 6 breakpoints (\\u2248 it. 24/135/200)\", \"Table 6 \\u03b2 values taken literally (\\u03b2 = 4 until it. 135, 8 at 145, 16 at 155, 32 from \\u2248 it. 200)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"main-loop iteration budget / termination\", \"issue\": \"vague\", \"description\": \"Table 4 gives N = 300, but Fig. 1 says 'up to N main-loop iterations'. Sec. 5.3 mentions 'additional restart iterations' and a reduced 'effective run length' for an early-converged run. It is not stated whether there is an early-stop tolerance, or whether restarts consume or extend the 300-iteration budget.\", \"readings\": [\"exactly 300 main-loop iterations; restarts consume budget\", \"300 iterations plus extra iterations after each restart\", \"early termination on an unstated convergence tolerance (e.g. max |\\u0394\\u03c1| < 0.01)\"], \"effect\": \"layout\"}, {\"category\": \"filter_or_solver_setting\", \"entity\": \"Heaviside projection in the fixed (no-continuation) controller\", \"issue\": \"vague\", \"description\": \"Sec. 3.4 says the fixed controller runs with constant p = 3, \\u03b2 = 1, rmin = 1.5, \\u03b4 = 0.2. Eq. 4 at \\u03b2 = 1 is only 'nearly linear', so it is unclear whether the projection is applied or bypassed (\\u03c1\\u0303 = \\u03c1\\u0304).\", \"readings\": [\"apply Eq. 4 with \\u03b2 = 1, \\u03b7 = 0.5\", \"bypass the projection: \\u03c1\\u0303 = \\u03c1\\u0304 (standard density-filtered SIMP)\"], \"effect\": \"unsure\"}, {\"category\": \"mesh\", \"entity\": \"finite element type for the 120\\u00d760 grid\", \"issue\": \"missing\", \"description\": \"The 2-D element formulation is never stated; Sec. 3.5 only mentions direct sparse factorization (SciPy). The paper's only DOF count (\\u2248110,000 DOFs for the 40\\u00d720\\u00d710 3-D mesh, Sec. 5.3) does not match trilinear 8-node hexahedra (\\u224828,400 DOFs), so linear elements cannot be taken for granted.\", \"readings\": [\"4-node bilinear quadrilateral (Q4), 2\\u00d72 Gauss integration (99-line/top88 element)\", \"8-node serendipity quadrilateral (Q8)\"], \"effect\": \"unsure\"}]}",
+ "parsed": {
+  "items": [
+   {
+    "category": "load_position",
+    "entity": "tip load on the free (right) edge",
+    "issue": "vague",
+    "description": "Sec. 3.5 says only 'cantilever beam (tip load, fixed left edge)'. The tip is the free right edge, but where on that edge the load acts is not stated. The figures that would show it (Figs. 6\u20139) are not available.",
+    "readings": [
+     "mid-height of the right edge (y = 0.5\u00b7H)",
+     "bottom-right corner (y = 0; 99-line/top88 cantilever convention)",
+     "top-right corner (y = H)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_extent_distribution",
+    "entity": "tip load",
+    "issue": "missing",
+    "description": "Sec. 3.5 does not say whether the tip load is one nodal force or is spread over several nodes or a segment of the right edge.",
+    "readings": [
+     "single nodal point force",
+     "force spread over a few nodes (\u22482\u20135) around the load point",
+     "uniform (or parabolic) shear traction over the whole right edge"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_direction",
+    "entity": "tip load",
+    "issue": "vague",
+    "description": "'Tip load' (Sec. 3.5) gives no direction. A transverse (vertical) force is the usual convention. Its sign does not affect compliance or layout in linear elasticity.",
+    "readings": [
+     "vertical/transverse, downward (\u2212y); sign immaterial for compliance and layout",
+     "horizontal/axial tip force (unconventional)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "load_magnitude",
+    "entity": "tip load",
+    "issue": "missing",
+    "description": "No force magnitude is given anywhere. The compliance values in Table 5 (\u224876\u201381) suggest a normalized unit load with E0 = 1, but this is never stated.",
+    "readings": [
+     "|F| = 1 (normalized)",
+     "a physical magnitude (e.g. 1 kN)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "solid Young's modulus E0",
+    "issue": "missing",
+    "description": "Sec. 3.5 gives only \u03bd = 0.3 and the ratio Emin/E0 = 1e-9. The value of E0 itself is never stated.",
+    "readings": [
+     "E0 = 1 (normalized), Emin = 1e-9",
+     "a physical modulus (e.g. 210 GPa or 70 GPa)"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "2-D constitutive assumption",
+    "issue": "missing",
+    "description": "The paper does not say whether the 2-D problems are plane stress or plane strain. With \u03bd = 0.3, plane strain is equivalent to plane stress with \u03bd \u2248 0.43, which changes the element stiffness non-proportionally.",
+    "readings": [
+     "plane stress (99-line/top88 element matrix)",
+     "plane strain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "out-of-plane thickness of the 2-D domain",
+    "issue": "missing",
+    "description": "No thickness is given for the 2-D domain.",
+    "readings": [
+     "t = 1 (unit thickness)",
+     "another thickness value"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "design domain orientation, aspect ratio and physical size",
+    "issue": "vague",
+    "description": "Tables 4/5 give only '120\u00d760' (elements). Nothing explicitly says that 120 runs along the beam axis (horizontal, away from the fixed left edge), that the elements are square, or what the physical L\u00d7H is. A 2:1 domain of unit square elements is implied only by convention.",
+    "readings": [
+     "nelx = 120 along the beam axis \u00d7 nely = 60 in height, unit square elements (L:H = 2:1)",
+     "same 2:1 domain at a physical scale (e.g. 2 \u00d7 1 with h = 1/60), rmin still counted in element widths",
+     "60 wide \u00d7 120 tall (reversed row/column convention)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "filter radius rmin units",
+    "issue": "vague",
+    "description": "The rmin values (fixed 1.5; Table 1 1.50\u21921.20; tail 1.20; range [1.1, 4.0]) are given without units, and Eq. 3 uses distances between element centroids. They only make sense in element widths, but the element size is never stated.",
+    "readings": [
+     "rmin in element widths (h = 1): 1.5 \u2192 3\u00d73 stencil incl. diagonals, 1.2 \u2192 5-point stencil",
+     "rmin in physical length units of a non-unit element size (changes the stencil)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "volume constraint Vf = 0.40",
+    "issue": "missing",
+    "description": "Vf = 0.40 is stated (Sec. 3.5, Table 4), but not which field the volume constraint and the OC bisection act on, or whether it is an equality or a \u2264 constraint. With \u03b2 up to 32 and \u03b7 = 0.5, the volumes of \u03c1, \u03c1\u0304 and \u03c1\u0303 differ substantially.",
+    "readings": [
+     "on the physical (projected) density \u03c1\u0303",
+     "on the filtered density \u03c1\u0304",
+     "on the raw design variables \u03c1"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "initial density field / role of random seeds",
+    "issue": "missing",
+    "description": "The starting density is never given. Sec. 4.5 ('tail starts from uniform density') and \u03c3 = 0.000 for the fixed and schedule-only controllers suggest a deterministic uniform start. But Sec. 1.2 speaks of runs 'perturbed by different random seeds', and Sec. 3.5 reports n = 5 'independent random seeds' without saying what is randomized.",
+    "readings": [
+     "uniform \u03c1 = Vf = 0.40 (seeds affect only LLM sampling)",
+     "uniform 0.40 plus a small seed-dependent random perturbation"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "OC update scheme",
+    "issue": "missing",
+    "description": "Sec. 3.1 says only 'OC method with move limit \u03b4'. The damping exponent, the Lagrange-multiplier bisection range and tolerance, whether \u03b4 is an absolute bound on the design variable, and the density bounds are not given.",
+    "readings": [
+     "top88-style OC: damping exponent 0.5, absolute move \u00b1\u03b4, bisection on \u03bb to relative tol 1e-3, \u03c1 \u2208 [0,1]",
+     "OC with a different damping exponent (e.g. 0.3) and/or a tighter bisection tolerance (e.g. 1e-6)",
+     "\u03b4 applied as a relative (proportional) move limit"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "passive solid/void elements",
+    "issue": "missing",
+    "description": "Sec. 3.5 mentions no passive regions for the cantilever. Nothing says whether the whole 120\u00d760 domain is designable or whether a solid pad sits under the point load.",
+    "readings": [
+     "no passive elements (whole 120\u00d760 domain designable)",
+     "small passive solid patch at the load application point"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "best valid snapshot \u03c1* entering the 40-iteration tail",
+    "issue": "conflicting",
+    "description": "Sec. 3.5 defines \u03c1* as the field with the lowest compliance 'while satisfying the volume constraint'. The Table 7 footnote and Sec. 4.5 add a validity gate 'p \u2265 3.0 and G < 0.25', stated only for the 3-D and tail-only runs. The volume tolerance, whether compliances evaluated at different p/\u03b2 are compared directly, and whether \u03c1, \u03c1\u0304 or \u03c1\u0303 is stored and reloaded for the tail are not stated.",
+    "readings": [
+     "valid = volume constraint satisfied only; snapshot stores the raw design field \u03c1",
+     "valid = volume satisfied AND p \u2265 3.0 AND G < 0.25; snapshot stores \u03c1",
+     "same gate, but the snapshot stores and reloads the physical field \u03c1\u0303"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "schedule-only (ablation) controller timing",
+    "issue": "conflicting",
+    "description": "Sec. 3.4 says the schedule-only controller executes the Table 1 stages. At N = 300 that means \u03b2 4\u219216 over it. 150\u2013225 and \u03b2 = 32 only from it. 225. But Sec. 4.3 says it 'commits to \u03b2 = 32 by iteration 80', and the Fig. 9 caption says \u03b2 \u2265 16 by iteration 80. The ramp shapes within stages are not stated, and Table 3 (PHASE.penal = 22, PHASE.sharp = 16, BETA_DOUBLE = 10) hints at phases counted in iterations instead.",
+    "readings": [
+     "Table 1 budget fractions of N = 300: boundaries at it. 24/150/225, linear p ramps (1\u21922, 2\u21924.5), \u03b2 1\u21924\u219216 within stages 2\u20133, \u03b2 = 32 from it. 225, rmin/\u03b4 stepped 1.50/0.20 \u2192 1.35/0.15 \u2192 1.25/0.08 \u2192 1.20/0.05",
+     "iteration-count phases from Table 3 (Stage 2 = 22 its, Stage 3 = 16 its), so \u03b2 = 32 is reached at \u2248 it. 60\u201380",
+     "fallback-style ramp (p over 12 its, then \u03b2 doubling every 10 its up to 32), reaching \u03b2 = 32 by \u2248 it. 60\u201380 as in Sec. 4.3"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "three-field continuation controller",
+    "issue": "vague",
+    "description": "Sec. 3.4 says only: 'p ramps linearly from 1.0 to 4.5 over 30 iterations; \u03b2 doubles every 10 iterations after the ramp; rmin is tightened in the late stage'. The initial \u03b2, the \u03b2 cap, the start/end rmin and when it is tightened, \u03b4, and any restart rule are not given.",
+    "readings": [
+     "\u03b2 = 1 doubling at it. 40, 50, \u2026 capped at 32; rmin 1.5 \u2192 1.2 over the last \u224825% of N; \u03b4 = 0.2 constant",
+     "\u03b2 capped at 64 (Table 2 upper bound); rmin 1.5 \u2192 1.2; \u03b4 lowered to 0.05 late",
+     "rmin stepped 1.5 \u2192 1.35 \u2192 1.25 \u2192 1.20 and \u03b4 0.2 \u2192 0.05 following the Table 1 stage values"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "expert heuristic controller",
+    "issue": "vague",
+    "description": "Sec. 3.4 gives only 'step-wise p ramp (+0.75 per 10 iterations), \u03b2 raised only once p \u2265 3.0, restart when C > 1.12\u00b7C*'. The starting and maximum p, the \u03b2 increment rule/period/cap, the rmin and \u03b4 schedules, and what a restart reloads or resets are not given.",
+    "readings": [
+     "p = 1.0 + 0.75 every 10 its capped at 4.5; \u03b2 doubling every 10 its once p \u2265 3 (\u2248 it. 30) up to 32; rmin = 1.5, \u03b4 = 0.2 constant; restart reloads \u03c1* only",
+     "p starting at 1.5; \u03b2 doubling every 20 its capped at 16\u201332; rmin/\u03b4 lowered to 1.2/0.05 late",
+     "\u03b2, rmin and \u03b4 following the Table 1 stage values once p \u2265 3; restart also resets p/\u03b2 to the snapshot's values"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "LLM agent controller (prompt, model, restart semantics)",
+    "issue": "missing",
+    "description": "The verbatim system prompt is withheld ('released upon publication'). The model is a preview build (gemini-3.1-flash-lite-preview), and run-to-run \u03c3 = 0.021 shows the outputs are not deterministic. The parameters before the first call (it. 1\u20134) and what a restart resets (density only, or also p/\u03b2/rmin/\u03b4) are not specified. Only the Table 1 scaffold, the Table 2 bounds and gate, k = 5 and temperature 0 are given.",
+    "readings": [
+     "replay the Table 6 excerpt as a piecewise-constant schedule (k = 5) with restarts to \u03c1* at it. 165, 200, 225, 300",
+     "re-run an available LLM at temperature 0 with a prompt rebuilt from Tables 1\u20132 and the \u03b2 \u2264 8 (G > 0.20) gate, k = 5",
+     "use the deterministic fallback ramp (Table 1 / Table 3 constants)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "LLM agent stage breakpoints and \u03b2/gate trace",
+    "issue": "conflicting",
+    "description": "Table 1 puts Sharpening at 50\u201375% and Converge at 75\u2013100% of N (it. 150/225), but Table 6 uses 45\u201355% and 67\u2013100% (it. 135/200). Sec. 4.2 says the gate was active at it. 85\u2013134 with requested \u03b2 advances 'silently capped', but Table 6 shows the gate off at it. 85 and \u03b2 = 4, which a \u03b2 \u2264 8 cap cannot produce. Sec. 4.1 and Fig. 8 put the G = 0.20 crossing at \u2248 it. 150, while Table 6 shows the gate off from it. 135.",
+    "readings": [
+     "Table 1 breakpoints (it. 24/150/225 at N = 300)",
+     "Table 6 breakpoints (\u2248 it. 24/135/200)",
+     "Table 6 \u03b2 values taken literally (\u03b2 = 4 until it. 135, 8 at 145, 16 at 155, 32 from \u2248 it. 200)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "main-loop iteration budget / termination",
+    "issue": "vague",
+    "description": "Table 4 gives N = 300, but Fig. 1 says 'up to N main-loop iterations'. Sec. 5.3 mentions 'additional restart iterations' and a reduced 'effective run length' for an early-converged run. It is not stated whether there is an early-stop tolerance, or whether restarts consume or extend the 300-iteration budget.",
+    "readings": [
+     "exactly 300 main-loop iterations; restarts consume budget",
+     "300 iterations plus extra iterations after each restart",
+     "early termination on an unstated convergence tolerance (e.g. max |\u0394\u03c1| < 0.01)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Heaviside projection in the fixed (no-continuation) controller",
+    "issue": "vague",
+    "description": "Sec. 3.4 says the fixed controller runs with constant p = 3, \u03b2 = 1, rmin = 1.5, \u03b4 = 0.2. Eq. 4 at \u03b2 = 1 is only 'nearly linear', so it is unclear whether the projection is applied or bypassed (\u03c1\u0303 = \u03c1\u0304).",
+    "readings": [
+     "apply Eq. 4 with \u03b2 = 1, \u03b7 = 0.5",
+     "bypass the projection: \u03c1\u0303 = \u03c1\u0304 (standard density-filtered SIMP)"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "mesh",
+    "entity": "finite element type for the 120\u00d760 grid",
+    "issue": "missing",
+    "description": "The 2-D element formulation is never stated; Sec. 3.5 only mentions direct sparse factorization (SciPy). The paper's only DOF count (\u2248110,000 DOFs for the 40\u00d720\u00d710 3-D mesh, Sec. 5.3) does not match trilinear 8-node hexahedra (\u224828,400 DOFs), so linear elements cannot be taken for granted.",
+    "readings": [
+     "4-node bilinear quadrilateral (Q4), 2\u00d72 Gauss integration (99-line/top88 element)",
+     "8-node serendipity quadrilateral (Q8)"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 468.67793560028076,
+ "returncode": 0,
+ "meta": {
+  "model": null,
+  "num_turns": 2,
+  "is_error": false,
+  "total_cost_usd": 1.3051428,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 31275,
+   "cache_read_input_tokens": 774,
+   "output_tokens": 52739,
+   "output_tokens_details": {
+    "thinking_tokens": 47251
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 31275,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "global",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 52739,
+     "cache_read_input_tokens": 774,
+     "cache_creation_input_tokens": 31275,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 31275
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard",
+   "fallback_credit": null
+  }
+ },
+ "stderr_tail": "",
+ "task": "L15",
+ "model": "claude",
+ "model_id": "claude-opus-5-5",
+ "rep": 1,
+ "locator": "Sec. 3.5 'Benchmark problems' and Sec. 4.1, the cantilever beam, 120 x 60 'Long' preset",
+ "finished": "2026-10-22T20:18:34"
+}

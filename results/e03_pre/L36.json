@@ -1,0 +1,176 @@
+{
+ "task": "L36",
+ "source": {
+  "arxiv": "2208.09591",
+  "position": 164
+ },
+ "dim": 2,
+ "slots": {
+  "roller": [
+   "full",
+   "lower60"
+  ],
+  "load": [
+   0.12,
+   0.15,
+   0.18
+  ]
+ },
+ "nominal": {
+  "roller": "full",
+  "load": 0.15
+ },
+ "mandatory": [],
+ "reasons": {
+  "roller": "rollers along the whole left edge in the input panel, lower ~60% in the output panel (Fig. 1)",
+  "load": "arrow at about 0.15 of the width; node not stated (Fig. 1); convention +-0.03 W"
+ },
+ "recon": [
+  "ToPy filter/penalty not stated: rmin 1.5, p=3 (solver settings)",
+  "direction taken as drawn (up)"
+ ],
+ "keys": [
+  "load=0.12|roller=full",
+  "load=0.15|roller=full",
+  "load=0.18|roller=full",
+  "load=0.12|roller=lower60",
+  "load=0.15|roller=lower60",
+  "load=0.18|roller=lower60"
+ ],
+ "C": [
+  [
+   13.529842262534093,
+   13.182576875304084,
+   2233.4616044418353,
+   13.52984823896936,
+   13.18258286383364,
+   2233.4616105120103
+  ],
+  [
+   13.70796161280377,
+   13.093827717750807,
+   12.729753126756128,
+   13.707967269078566,
+   13.093833367007655,
+   12.72975873750609
+  ],
+  [
+   14.092942535065157,
+   13.211011676432989,
+   12.606364678382644,
+   14.092947472435029,
+   13.211016583844716,
+   12.606369518732906
+  ],
+  [
+   13.476280257536102,
+   13.14449232340414,
+   3916.985320927239,
+   13.476285340637137,
+   13.144497408860808,
+   3916.9853260739633
+  ],
+  [
+   13.63069713169426,
+   13.027747649795996,
+   12.677249659900886,
+   13.630701170938336,
+   13.027751741288146,
+   12.677253783245506
+  ],
+  [
+   14.04238410583758,
+   13.161788701702823,
+   12.566316040253517,
+   14.042387993626672,
+   13.161792626103926,
+   12.566319975985554
+  ]
+ ],
+ "ref": {
+  "load=0.12|roller=full": 13.476280257536102,
+  "load=0.15|roller=full": 13.027747649795996,
+  "load=0.18|roller=full": 12.566316040253517,
+  "load=0.12|roller=lower60": 13.47628534063713,
+  "load=0.15|roller=lower60": 13.027751741288146,
+  "load=0.18|roller=lower60": 12.566319975985554
+ },
+ "ref_gap_beaten": {
+  "load=0.12|roller=full": 0.003974539262645127,
+  "load=0.15|roller=full": 0.005072255752194055,
+  "load=0.18|roller=full": 0.003186983201826088,
+  "load=0.12|roller=lower60": 0.0,
+  "load=0.15|roller=lower60": 0.0,
+  "load=0.18|roller=lower60": 0.0
+ },
+ "noise": {
+  "load=0.12|roller=full": 0.0014544421127847581,
+  "load=0.15|roller=full": 0.0017520743047289649,
+  "load=0.18|roller=full": 8.591415333978375e-05,
+  "load=0.12|roller=lower60": 3.4983963341750724e-05,
+  "load=0.15|roller=lower60": 8.2617172882865e-05,
+  "load=0.18|roller=lower60": 0.0003629008878771902
+ },
+ "meta": {
+  "load=0.12|roller=full": {
+   "accepted": true,
+   "kkt": 0.0179557877919751,
+   "wall_s": 34.25773810001556,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "load=0.15|roller=full": {
+   "accepted": true,
+   "kkt": 0.024623341854926317,
+   "wall_s": 30.969724499969743,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "load=0.18|roller=full": {
+   "accepted": true,
+   "kkt": 0.03372459737768919,
+   "wall_s": 34.95429309993051,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "load=0.12|roller=lower60": {
+   "accepted": true,
+   "kkt": 0.06878067451220064,
+   "wall_s": 39.651522999978624,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "load=0.15|roller=lower60": {
+   "accepted": true,
+   "kkt": 0.025323715656187185,
+   "wall_s": 35.99318179988768,
+   "n_iter": [
+    201,
+    201
+   ]
+  },
+  "load=0.18|roller=lower60": {
+   "accepted": true,
+   "kkt": 0.0420231720245884,
+   "wall_s": 36.195081699988805,
+   "n_iter": [
+    201,
+    201
+   ]
+  }
+ },
+ "counter": {
+  "optimizations": 0,
+  "factorizations": 12,
+  "backsubs": 36,
+  "opt_wall_s": 0.0
+ }
+}

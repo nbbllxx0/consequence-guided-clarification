@@ -1,0 +1,315 @@
+{
+ "raw": "{\n  \"items\": [\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"in-plane design-domain dimensions\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 specifies a 20 \u00d7 60 finite-element grid, but gives no physical dimensions or element aspect ratio; grid counts alone do not establish L/H.\",\n      \"readings\": [\n        \"60 horizontal by 20 vertical cells on [0,3] \u00d7 [0,1], with square cells\",\n        \"60 horizontal by 20 vertical cells on [0,60] \u00d7 [0,20], with square cells\",\n        \"60 horizontal by 20 vertical cells on [0,6] \u00d7 [0,1], with rectangular cells\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"domain_extent\",\n      \"entity\": \"uniform out-of-plane thickness or depth normalization\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 2.1 and 4 do not specify thickness or whether compliance is evaluated per unit depth.\",\n      \"readings\": [\n        \"Unit thickness or unit depth\",\n        \"Uniform thickness 0.1 in the chosen length units\",\n        \"Uniform thickness 0.01 in the chosen length units\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"load_position\",\n      \"entity\": \"right-edge loaded node\",\n      \"issue\": \"figure_only\",\n      \"description\": \"Sec. 5.1 identifies right-edge loading, but supplies no vertical coordinate or node index for the setup illustrated in unavailable Fig. 5(c).\",\n      \"readings\": [\n        \"Single loaded node at (L,H/4)\",\n        \"Single loaded node at (L,H/2)\",\n        \"Single loaded node at (L,3H/4)\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"volume_fraction\",\n      \"entity\": \"Fig. 5(c) target volume fraction\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 gives the sampling interval [0.3,0.7]; Sec. 5.1 says the target is shared across rows without giving its value. Appendix A.5's 0.5 belongs to its separate intrusive-attack setup.\",\n      \"readings\": [\n        \"0.3\",\n        \"0.5\",\n        \"0.7\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"passive_region\",\n      \"entity\": \"non-design elements and load/support pads\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 2.1, 4, and 5.1 do not explicitly identify passive masks or confirm that every element remains designable, including elements next to the clamp and load.\",\n      \"readings\": [\n        \"No passive elements; all 1200 densities are optimized\",\n        \"Elements incident to the loaded node are fixed solid\",\n        \"The leftmost element column and elements incident to the loaded node are fixed solid\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"solid Young's modulus E0\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. 2 introduces E0 but provides no numerical value or normalization.\",\n      \"readings\": [\n        \"Normalized E0 = 1, holding Emin/E0 fixed\",\n        \"E0 = 1 GPa, holding Emin/E0 fixed\",\n        \"E0 = 210 GPa, holding Emin/E0 fixed\"\n      ],\n      \"effect\": \"scale_only\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"near-void stiffness ratio Emin/E0\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2.1 describes Emin only as a near-void minimum Young's modulus; its ratio to E0 is not specified.\",\n      \"readings\": [\n        \"Emin/E0 = 1e-9\",\n        \"Emin/E0 = 1e-6\",\n        \"Emin/E0 = 1e-3\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"Poisson's ratio\",\n      \"issue\": \"missing\",\n      \"description\": \"The elastic material description in Sec. 2.1 supplies no Poisson's ratio for constructing the element stiffness matrix.\",\n      \"readings\": [\n        \"Poisson's ratio 0.25\",\n        \"Poisson's ratio 0.30\",\n        \"Poisson's ratio 0.45\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"material\",\n      \"entity\": \"two-dimensional constitutive assumption\",\n      \"issue\": \"missing\",\n      \"description\": \"The grid-based elasticity formulation in Secs. 2.1 and 4 does not specify plane stress or plane strain.\",\n      \"readings\": [\n        \"Isotropic plane stress\",\n        \"Isotropic plane strain\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"mechanical finite-element interpolation\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 fixes the element-grid counts but does not identify the element type or displacement interpolation order for the main dataset.\",\n      \"readings\": [\n        \"Four-node bilinear quadrilateral elements\",\n        \"Eight-node quadratic quadrilateral elements\",\n        \"Nine-node biquadratic quadrilateral elements\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"mesh\",\n      \"entity\": \"element integration and stabilization\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 does not specify how element stiffness matrices are integrated or whether reduced-integration stabilization is used.\",\n      \"readings\": [\n        \"For four-node quadrilaterals, full 2 \u00d7 2 Gauss integration\",\n        \"For four-node quadrilaterals, one-point integration with hourglass stabilization\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"sensitivity-filter radius\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 specifies convolution filtering of sensitivities before OC updates, but gives no radius or length scale.\",\n      \"readings\": [\n        \"Radius 1.5 element spacings\",\n        \"Radius 2 element spacings\",\n        \"Radius 3 element spacings\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"sensitivity-filter kernel\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 2.1 calls the convolution filter standard without defining its weights or distance metric.\",\n      \"readings\": [\n        \"Euclidean cone weights max(0,r-d)\",\n        \"Uniform weights inside a Euclidean disk of radius r\",\n        \"Gaussian weights truncated at radius r\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"sensitivity-filter density weighting and normalization\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 does not give the filtering formula, including whether sensitivities are density weighted or how division near zero density is protected.\",\n      \"readings\": [\n        \"Normalized weighted average of sensitivities without density weighting\",\n        \"Average rho_j times sensitivity_j, divided by max(rho_i,0.001) times the weight sum\",\n        \"Average rho_j times sensitivity_j, divided by max(rho_i,1e-6) times the weight sum\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"sensitivity-filter treatment at domain boundaries\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 does not state how convolution neighborhoods crossing the domain boundary are handled.\",\n      \"readings\": [\n        \"Truncate the neighborhood and renormalize using existing elements\",\n        \"Zero-pad outside the domain while retaining the interior kernel normalization\",\n        \"Reflect the sensitivity and density fields at the boundary\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"clean initialization noise distribution and amplitude definition\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 4 specifies Gaussian-smoothed random variation with amplitude 0.05, but does not define the random distribution or whether amplitude refers to pre-smoothing standard deviation or post-smoothing peak magnitude.\",\n      \"readings\": [\n        \"Smooth Gaussian white noise with pre-smoothing standard deviation 0.05, without subsequent amplitude normalization\",\n        \"Smooth independent uniform noise on [-0.05,0.05], without subsequent amplitude normalization\",\n        \"Smooth Gaussian white noise and normalize its maximum absolute value to 0.05\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Gaussian smoothing of the clean initialization\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 4 gives no Gaussian width, kernel truncation, or boundary treatment for generating the initial density variation.\",\n      \"readings\": [\n        \"Standard deviation 0.5 cells, truncation at three standard deviations, reflected boundaries\",\n        \"Standard deviation 1 cell, truncation at three standard deviations, reflected boundaries\",\n        \"Standard deviation 2 cells, truncation at four standard deviations, zero-padded boundaries\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"Fig. 5(c) clean initialization realization\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 5.1 says the initialization is shared across rows, but supplies neither its density array nor a reproducible random state. Sec. 4's seed-0 split does not specify the initialization generator.\",\n      \"readings\": [\n        \"Generate the initialization variation with PCG64 and seed 0\",\n        \"Generate the initialization variation with PCG64 and seed 1\",\n        \"Generate the initialization variation with MT19937 and seed 0\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"OC density move limit\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 identifies optimality-criteria updates but does not state the maximum density change per iteration.\",\n      \"readings\": [\n        \"Move limit 0.05\",\n        \"Move limit 0.1\",\n        \"Move limit 0.2\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"OC update damping\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 does not give the OC update equation or its damping exponent.\",\n      \"readings\": [\n        \"Multiplicative OC update with exponent 0.5\",\n        \"Multiplicative OC update with exponent 0.3\",\n        \"Multiplicative OC update with exponent 1\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"OC volume-multiplier search\",\n      \"issue\": \"missing\",\n      \"description\": \"Sec. 2.1 does not specify the multiplier search, its bracket, or its numerical tolerance for enforcing the volume constraint.\",\n      \"readings\": [\n        \"Bisection on [0,1e9] until relative bracket width is below 1e-3\",\n        \"Adaptively bracket the multiplier and bisect until relative bracket width is below 1e-6\",\n        \"Search until mean-density volume error is below 1e-6\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"reference optimization convergence criterion\",\n      \"issue\": \"missing\",\n      \"description\": \"Secs. 2.1 and 4 describe optimized SIMP targets without giving a stopping criterion or convergence tolerance.\",\n      \"readings\": [\n        \"Stop when maximum element-density change is below 0.01\",\n        \"Stop when maximum element-density change is below 0.001\",\n        \"Stop when relative compliance change stays below 1e-4 for five iterations and the volume constraint is satisfied\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"reference optimization iteration cap\",\n      \"issue\": \"missing\",\n      \"description\": \"No iteration cap is given for the main dataset's SIMP references. Appendix A.5's iteration counts concern its separate intrusive-attack runs.\",\n      \"readings\": [\n        \"Maximum 100 iterations\",\n        \"Maximum 200 iterations\",\n        \"Maximum 1000 iterations\"\n      ],\n      \"effect\": \"layout\"\n    },\n    {\n      \"category\": \"filter_or_solver_setting\",\n      \"entity\": \"finite-element equilibrium solution accuracy\",\n      \"issue\": \"missing\",\n      \"description\": \"Eq. 1 specifies equilibrium but not the numerical linear solver or residual tolerance used to obtain displacements and sensitivities.\",\n      \"readings\": [\n        \"Double-precision sparse direct solve\",\n        \"Conjugate-gradient solve with relative residual tolerance 1e-8\",\n        \"Conjugate-gradient solve with relative residual tolerance 1e-6\"\n      ],\n      \"effect\": \"unsure\"\n    },\n    {\n      \"category\": \"other\",\n      \"entity\": \"SIMP reference density convention for display and compliance\",\n      \"issue\": \"vague\",\n      \"description\": \"Sec. 5.1 and Fig. 5 mention thresholded prediction-to-SIMP compliance ratios without specifying whether the SIMP reference itself is continuous or binarized, or giving a reference cutoff.\",\n      \"readings\": [\n        \"Use the final continuous SIMP densities for the reference and its compliance\",\n        \"Binarize the SIMP reference at density 0.5 before display and compliance evaluation\",\n        \"Binarize by density ranking to match the target volume fraction before display and compliance evaluation\"\n      ],\n      \"effect\": \"unsure\"\n    }\n  ]\n}",
+ "parsed": {
+  "items": [
+   {
+    "category": "domain_extent",
+    "entity": "in-plane design-domain dimensions",
+    "issue": "missing",
+    "description": "Sec. 4 specifies a 20 \u00d7 60 finite-element grid, but gives no physical dimensions or element aspect ratio; grid counts alone do not establish L/H.",
+    "readings": [
+     "60 horizontal by 20 vertical cells on [0,3] \u00d7 [0,1], with square cells",
+     "60 horizontal by 20 vertical cells on [0,60] \u00d7 [0,20], with square cells",
+     "60 horizontal by 20 vertical cells on [0,6] \u00d7 [0,1], with rectangular cells"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "domain_extent",
+    "entity": "uniform out-of-plane thickness or depth normalization",
+    "issue": "missing",
+    "description": "Secs. 2.1 and 4 do not specify thickness or whether compliance is evaluated per unit depth.",
+    "readings": [
+     "Unit thickness or unit depth",
+     "Uniform thickness 0.1 in the chosen length units",
+     "Uniform thickness 0.01 in the chosen length units"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "load_position",
+    "entity": "right-edge loaded node",
+    "issue": "figure_only",
+    "description": "Sec. 5.1 identifies right-edge loading, but supplies no vertical coordinate or node index for the setup illustrated in unavailable Fig. 5(c).",
+    "readings": [
+     "Single loaded node at (L,H/4)",
+     "Single loaded node at (L,H/2)",
+     "Single loaded node at (L,3H/4)"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "volume_fraction",
+    "entity": "Fig. 5(c) target volume fraction",
+    "issue": "missing",
+    "description": "Sec. 4 gives the sampling interval [0.3,0.7]; Sec. 5.1 says the target is shared across rows without giving its value. Appendix A.5's 0.5 belongs to its separate intrusive-attack setup.",
+    "readings": [
+     "0.3",
+     "0.5",
+     "0.7"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "passive_region",
+    "entity": "non-design elements and load/support pads",
+    "issue": "missing",
+    "description": "Secs. 2.1, 4, and 5.1 do not explicitly identify passive masks or confirm that every element remains designable, including elements next to the clamp and load.",
+    "readings": [
+     "No passive elements; all 1200 densities are optimized",
+     "Elements incident to the loaded node are fixed solid",
+     "The leftmost element column and elements incident to the loaded node are fixed solid"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "solid Young's modulus E0",
+    "issue": "missing",
+    "description": "Eq. 2 introduces E0 but provides no numerical value or normalization.",
+    "readings": [
+     "Normalized E0 = 1, holding Emin/E0 fixed",
+     "E0 = 1 GPa, holding Emin/E0 fixed",
+     "E0 = 210 GPa, holding Emin/E0 fixed"
+    ],
+    "effect": "scale_only"
+   },
+   {
+    "category": "material",
+    "entity": "near-void stiffness ratio Emin/E0",
+    "issue": "vague",
+    "description": "Sec. 2.1 describes Emin only as a near-void minimum Young's modulus; its ratio to E0 is not specified.",
+    "readings": [
+     "Emin/E0 = 1e-9",
+     "Emin/E0 = 1e-6",
+     "Emin/E0 = 1e-3"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "Poisson's ratio",
+    "issue": "missing",
+    "description": "The elastic material description in Sec. 2.1 supplies no Poisson's ratio for constructing the element stiffness matrix.",
+    "readings": [
+     "Poisson's ratio 0.25",
+     "Poisson's ratio 0.30",
+     "Poisson's ratio 0.45"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "material",
+    "entity": "two-dimensional constitutive assumption",
+    "issue": "missing",
+    "description": "The grid-based elasticity formulation in Secs. 2.1 and 4 does not specify plane stress or plane strain.",
+    "readings": [
+     "Isotropic plane stress",
+     "Isotropic plane strain"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "mechanical finite-element interpolation",
+    "issue": "missing",
+    "description": "Sec. 4 fixes the element-grid counts but does not identify the element type or displacement interpolation order for the main dataset.",
+    "readings": [
+     "Four-node bilinear quadrilateral elements",
+     "Eight-node quadratic quadrilateral elements",
+     "Nine-node biquadratic quadrilateral elements"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "mesh",
+    "entity": "element integration and stabilization",
+    "issue": "missing",
+    "description": "Sec. 2.1 does not specify how element stiffness matrices are integrated or whether reduced-integration stabilization is used.",
+    "readings": [
+     "For four-node quadrilaterals, full 2 \u00d7 2 Gauss integration",
+     "For four-node quadrilaterals, one-point integration with hourglass stabilization"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "sensitivity-filter radius",
+    "issue": "missing",
+    "description": "Sec. 2.1 specifies convolution filtering of sensitivities before OC updates, but gives no radius or length scale.",
+    "readings": [
+     "Radius 1.5 element spacings",
+     "Radius 2 element spacings",
+     "Radius 3 element spacings"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "sensitivity-filter kernel",
+    "issue": "vague",
+    "description": "Sec. 2.1 calls the convolution filter standard without defining its weights or distance metric.",
+    "readings": [
+     "Euclidean cone weights max(0,r-d)",
+     "Uniform weights inside a Euclidean disk of radius r",
+     "Gaussian weights truncated at radius r"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "sensitivity-filter density weighting and normalization",
+    "issue": "missing",
+    "description": "Sec. 2.1 does not give the filtering formula, including whether sensitivities are density weighted or how division near zero density is protected.",
+    "readings": [
+     "Normalized weighted average of sensitivities without density weighting",
+     "Average rho_j times sensitivity_j, divided by max(rho_i,0.001) times the weight sum",
+     "Average rho_j times sensitivity_j, divided by max(rho_i,1e-6) times the weight sum"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "sensitivity-filter treatment at domain boundaries",
+    "issue": "missing",
+    "description": "Sec. 2.1 does not state how convolution neighborhoods crossing the domain boundary are handled.",
+    "readings": [
+     "Truncate the neighborhood and renormalize using existing elements",
+     "Zero-pad outside the domain while retaining the interior kernel normalization",
+     "Reflect the sensitivity and density fields at the boundary"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "clean initialization noise distribution and amplitude definition",
+    "issue": "vague",
+    "description": "Sec. 4 specifies Gaussian-smoothed random variation with amplitude 0.05, but does not define the random distribution or whether amplitude refers to pre-smoothing standard deviation or post-smoothing peak magnitude.",
+    "readings": [
+     "Smooth Gaussian white noise with pre-smoothing standard deviation 0.05, without subsequent amplitude normalization",
+     "Smooth independent uniform noise on [-0.05,0.05], without subsequent amplitude normalization",
+     "Smooth Gaussian white noise and normalize its maximum absolute value to 0.05"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Gaussian smoothing of the clean initialization",
+    "issue": "missing",
+    "description": "Sec. 4 gives no Gaussian width, kernel truncation, or boundary treatment for generating the initial density variation.",
+    "readings": [
+     "Standard deviation 0.5 cells, truncation at three standard deviations, reflected boundaries",
+     "Standard deviation 1 cell, truncation at three standard deviations, reflected boundaries",
+     "Standard deviation 2 cells, truncation at four standard deviations, zero-padded boundaries"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "Fig. 5(c) clean initialization realization",
+    "issue": "missing",
+    "description": "Sec. 5.1 says the initialization is shared across rows, but supplies neither its density array nor a reproducible random state. Sec. 4's seed-0 split does not specify the initialization generator.",
+    "readings": [
+     "Generate the initialization variation with PCG64 and seed 0",
+     "Generate the initialization variation with PCG64 and seed 1",
+     "Generate the initialization variation with MT19937 and seed 0"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "OC density move limit",
+    "issue": "missing",
+    "description": "Sec. 2.1 identifies optimality-criteria updates but does not state the maximum density change per iteration.",
+    "readings": [
+     "Move limit 0.05",
+     "Move limit 0.1",
+     "Move limit 0.2"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "OC update damping",
+    "issue": "missing",
+    "description": "Sec. 2.1 does not give the OC update equation or its damping exponent.",
+    "readings": [
+     "Multiplicative OC update with exponent 0.5",
+     "Multiplicative OC update with exponent 0.3",
+     "Multiplicative OC update with exponent 1"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "OC volume-multiplier search",
+    "issue": "missing",
+    "description": "Sec. 2.1 does not specify the multiplier search, its bracket, or its numerical tolerance for enforcing the volume constraint.",
+    "readings": [
+     "Bisection on [0,1e9] until relative bracket width is below 1e-3",
+     "Adaptively bracket the multiplier and bisect until relative bracket width is below 1e-6",
+     "Search until mean-density volume error is below 1e-6"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "reference optimization convergence criterion",
+    "issue": "missing",
+    "description": "Secs. 2.1 and 4 describe optimized SIMP targets without giving a stopping criterion or convergence tolerance.",
+    "readings": [
+     "Stop when maximum element-density change is below 0.01",
+     "Stop when maximum element-density change is below 0.001",
+     "Stop when relative compliance change stays below 1e-4 for five iterations and the volume constraint is satisfied"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "reference optimization iteration cap",
+    "issue": "missing",
+    "description": "No iteration cap is given for the main dataset's SIMP references. Appendix A.5's iteration counts concern its separate intrusive-attack runs.",
+    "readings": [
+     "Maximum 100 iterations",
+     "Maximum 200 iterations",
+     "Maximum 1000 iterations"
+    ],
+    "effect": "layout"
+   },
+   {
+    "category": "filter_or_solver_setting",
+    "entity": "finite-element equilibrium solution accuracy",
+    "issue": "missing",
+    "description": "Eq. 1 specifies equilibrium but not the numerical linear solver or residual tolerance used to obtain displacements and sensitivities.",
+    "readings": [
+     "Double-precision sparse direct solve",
+     "Conjugate-gradient solve with relative residual tolerance 1e-8",
+     "Conjugate-gradient solve with relative residual tolerance 1e-6"
+    ],
+    "effect": "unsure"
+   },
+   {
+    "category": "other",
+    "entity": "SIMP reference density convention for display and compliance",
+    "issue": "vague",
+    "description": "Sec. 5.1 and Fig. 5 mention thresholded prediction-to-SIMP compliance ratios without specifying whether the SIMP reference itself is continuous or binarized, or giving a reference cutoff.",
+    "readings": [
+     "Use the final continuous SIMP densities for the reference and its compliance",
+     "Binarize the SIMP reference at density 0.5 before display and compliance evaluation",
+     "Binarize by density ranking to match the target volume fraction before display and compliance evaluation"
+    ],
+    "effect": "unsure"
+   }
+  ]
+ },
+ "wall_s": 498.13826513290405,
+ "returncode": 0,
+ "executed_command_events": 0,
+ "stderr_tail": "",
+ "task": "L21",
+ "model": "codex",
+ "model_id": "gpt-6.1-sol",
+ "rep": 1,
+ "locator": "Sec. 5.1, Fig. 5(c), 'SIMP reference'",
+ "finished": "2026-10-22T20:38:18"
+}
