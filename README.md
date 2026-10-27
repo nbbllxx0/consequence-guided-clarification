@@ -4,6 +4,8 @@ Code and data for the manuscript "Consequence-guided clarification: releasing mi
 topology-optimized designs from incomplete specifications" by S. Yang and J. Wang (Santa Clara
 University), submitted to Computer Methods in Applied Mechanics and Engineering. Preprint:
 arXiv:2610.34957 (https://arxiv.org/abs/2610.34957, https://doi.org/10.48550/arXiv.2610.34957).
+Archived release: Zenodo, https://doi.org/10.5281/zenodo.23682520 (v1.0.0; all versions:
+https://doi.org/10.5281/zenodo.23682519).
 
 The repository holds the solver, the experiment and analysis scripts, the frozen literature frame,
 the screening and adjudication records, the stored optimization runs, and the figure and table
@@ -57,6 +59,20 @@ Please cite the manuscript when you use the code or the data:
   archivePrefix = {arXiv},
   primaryClass  = {cs.CE},
   doi           = {10.48550/arXiv.2610.34957}
+}
+```
+
+To cite the archived code and data:
+
+```bibtex
+@misc{yang2026consequencedata,
+  author       = {Yang, Shaoliang and Wang, Jun},
+  title        = {Code and data for: Consequence-guided clarification: releasing minimum-compliance
+                  topology-optimized designs from incomplete specifications},
+  howpublished = {Zenodo},
+  version      = {v1.0.0},
+  year         = {2026},
+  doi          = {10.5281/zenodo.23682520}
 }
 ```
 
