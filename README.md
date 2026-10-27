@@ -2,7 +2,8 @@
 
 Code and data for the manuscript "Consequence-guided clarification: releasing minimum-compliance
 topology-optimized designs from incomplete specifications" by S. Yang and J. Wang (Santa Clara
-University), submitted to Computer Methods in Applied Mechanics and Engineering.
+University), submitted to Computer Methods in Applied Mechanics and Engineering. Preprint:
+arXiv:2610.34957 (https://arxiv.org/abs/2610.34957, https://doi.org/10.48550/arXiv.2610.34957).
 
 The repository holds the solver, the experiment and analysis scripts, the frozen literature frame,
 the screening and adjudication records, the stored optimization runs, and the figure and table
@@ -44,7 +45,20 @@ without new optimization.
   `tables/out/`, `tables/out_pre/` and `v4/prompts/`. The frame's paper metadata comes from the arXiv API,
   and arXiv's terms for that metadata still apply.
 
-Please cite the manuscript when you use the code or the data.
+Please cite the manuscript when you use the code or the data:
+
+```bibtex
+@misc{yang2026consequence,
+  author        = {Yang, Shaoliang and Wang, Jun},
+  title         = {Consequence-guided clarification: releasing minimum-compliance topology-optimized
+                   designs from incomplete specifications},
+  year          = {2026},
+  eprint        = {2610.34957},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CE},
+  doi           = {10.48550/arXiv.2610.34957}
+}
+```
 
 ## Abbreviations in the adjudication records
 
